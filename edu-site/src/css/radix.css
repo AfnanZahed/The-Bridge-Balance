@@ -1,0 +1,52 @@
+/**
+ * Radix Colors import — primitive scales for stage identity and status.
+ *
+ * The TBB color system was migrated to Apple Pro "Silver & Black" (OKLCH)
+ * for all surfaces, neutrals, borders, and the primary accent. Radix scales
+ * are retained ONLY for the muted categorical stage accents (Stage 1–4)
+ * and the destructive/status red — the label-first identity layer that the
+ * Apple Pro token set does not opine on.
+ *
+ *   - Teal:   Stage 1 (Foundations)
+ *   - Amber:  Stage 2 (Credentials)
+ *   - Indigo: Stage 3 (Mastery)
+ *   - Plum:   Stage 4 (Autonomy)
+ *   - Red:    status / danger
+ *
+ * Dark-mode mirrors of the stage scales live in `custom.css` under
+ * `:root[data-theme="dark"]` so `var(--teal-9)` resolves per theme.
+ *
+ * Loaded BEFORE `custom.css`.
+ * Reference: https://www.radix-ui.com/colors
+ */
+
+@import "@radix-ui/colors/gray.css";
+@import "@radix-ui/colors/indigo.css";
+@import "@radix-ui/colors/teal.css";
+@import "@radix-ui/colors/amber.css";
+@import "@radix-ui/colors/plum.css";
+@import "@radix-ui/colors/red.css";
+
+/* ─── Apple Pro Blue Primitive Tokens (003 migration) ──────────────────── */
+/* Deeper, more saturated than Apple-system blue — the exact OKLCH values
+   from the habit-tracker-app theme (`oklch(0.5 0.21 264)` light,
+   `oklch(0.68 0.18 264)` dark). */
+:root {
+  --apple-blue-light: oklch(0.5 0.21 264);
+  --apple-blue-light-hover: oklch(0.42 0.2 264);
+  --apple-blue-light-subtle: oklch(0.5 0.21 264 / 0.08);
+  --apple-blue-light-ring: 0 0 0 3px oklch(0.5 0.21 264 / 0.35);
+
+  --apple-blue-dark: oklch(0.68 0.18 264);
+  --apple-blue-dark-hover: oklch(0.75 0.17 264);
+  --apple-blue-dark-subtle: oklch(0.68 0.18 264 / 0.14);
+  --apple-blue-dark-ring: 0 0 0 3px oklch(0.68 0.18 264 / 0.45);
+
+  /* Stage background assets (kept for backward compat; decorative grain
+     textures are no longer applied at the component layer). */
+  --tbb-stage-bg-1: url("/img/stage-bg-1.svg");
+  --tbb-stage-bg-2: url("/img/stage-bg-2.svg");
+  --tbb-stage-bg-3: url("/img/stage-bg-3.svg");
+  --tbb-stage-bg-4: url("/img/stage-bg-4.svg");
+  --tbb-texture-grain: url("/img/texture-grain.svg");
+}

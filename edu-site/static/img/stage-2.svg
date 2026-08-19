@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Stage 2 — Credentials">
+  <title>Stage 2 — Credentials</title>
+  <desc>Badge seal with ribbon tails: rosette representing certification and achievement.</desc>
+  <defs>
+    <linearGradient id="s2-bg" x1="0" y1="0" x2="400" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="100%" stop-color="#fef3c7"/>
+    </linearGradient>
+    <linearGradient id="s2-stroke" x1="0" y1="0" x2="0" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="s2-medal" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#fcd34d"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <radialGradient id="s2-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="s2-grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M20 0H0V20" fill="none" stroke="#f59e0b" stroke-opacity="0.10" stroke-width="0.6"/>
+    </pattern>
+  </defs>
+
+  <!-- background card -->
+  <rect x="0" y="0" width="400" height="300" rx="14" fill="url(#s2-bg)"/>
+  <rect x="0" y="0" width="400" height="300" rx="14" fill="url(#s2-grid)"/>
+
+  <!-- soft halo behind badge -->
+  <circle cx="200" cy="135" r="105" fill="url(#s2-glow)"/>
+
+  <!-- ribbon tails (behind rosette) -->
+  <g>
+    <!-- left tail -->
+    <path d="M170 195 L155 270 L185 252 L200 270 L200 195 Z"
+          fill="#f59e0b" fill-opacity="0.22" stroke="url(#s2-stroke)" stroke-width="1.6" stroke-linejoin="round"/>
+    <line x1="170" y1="200" x2="158" y2="262" stroke="#f59e0b" stroke-opacity="0.5" stroke-width="0.8"/>
+    <!-- right tail -->
+    <path d="M230 195 L245 270 L215 252 L200 270 L200 195 Z"
+          fill="#f59e0b" fill-opacity="0.22" stroke="url(#s2-stroke)" stroke-width="1.6" stroke-linejoin="round"/>
+    <line x1="230" y1="200" x2="242" y2="262" stroke="#f59e0b" stroke-opacity="0.5" stroke-width="0.8"/>
+  </g>
+
+  <!-- outer scalloped rosette (12 points) -->
+  <g transform="translate(200 135)">
+    <g stroke="url(#s2-stroke)" stroke-width="1.6" fill="#fffbeb">
+      <path d="M0,-78 L10.5,-73 5,-65 16,-58 8,-52 19,-44 10,-40 21,-30 11,-29 21,-18 11,-19 19,-7 9,-11 15,3 5,0 9,15 -1,8 1,23 -10,12 -10,28 -19,14 -22,30 -28,13 -34,28 -34,10 -44,22 -38,6 -50,12 -39,-2 -52,-4 -36,-11 -50,-19 -33,-18 -46,-32 -29,-23 -40,-41 -23,-26 -32,-46 -16,-26 -22,-48 -8,-24 -10,-48 -1,-23 0,-48 Z"
+            fill-opacity="1"/>
+    </g>
+    <!-- inner ring -->
+    <circle cx="0" cy="0" r="52" fill="url(#s2-medal)" stroke="#d97706" stroke-width="1.6"/>
+    <circle cx="0" cy="0" r="42" fill="none" stroke="#fffbeb" stroke-width="1.2" stroke-opacity="0.85"/>
+    <!-- star inside -->
+    <path d="M0,-22 L6.5,-7 22,-7 9.5,3 14.5,18 0,9 -14.5,18 -9.5,3 -22,-7 -6.5,-7 Z"
+          fill="#fffbeb" stroke="#d97706" stroke-width="1.4" stroke-linejoin="round"/>
+    <!-- center dot -->
+    <circle cx="0" cy="0" r="2.6" fill="#d97706"/>
+  </g>
+
+  <!-- laurels (left & right) -->
+  <g stroke="url(#s2-stroke)" stroke-width="1.4" fill="#fcd34d" fill-opacity="0.35">
+    <!-- left laurel -->
+    <path d="M82 135 Q70 110 90 95 Q80 120 92 138 Z"/>
+    <path d="M70 158 Q56 142 70 122 Q66 148 80 162 Z"/>
+    <path d="M76 180 Q60 174 64 152 Q70 178 86 184 Z"/>
+    <!-- right laurel -->
+    <path d="M318 135 Q330 110 310 95 Q320 120 308 138 Z"/>
+    <path d="M330 158 Q344 142 330 122 Q334 148 320 162 Z"/>
+    <path d="M324 180 Q340 174 336 152 Q330 178 314 184 Z"/>
+  </g>
+
+  <!-- corner stars (sparkles) -->
+  <g fill="#f59e0b">
+    <path d="M48 48 L50 54 56 56 50 58 48 64 46 58 40 56 46 54 Z" fill-opacity="0.55"/>
+    <path d="M348 60 L349.5 64.5 354 66 349.5 67.5 348 72 346.5 67.5 342 66 346.5 64.5 Z" fill-opacity="0.45"/>
+    <path d="M56 250 L57.5 254.5 62 256 57.5 257.5 56 262 54.5 257.5 50 256 54.5 254.5 Z" fill-opacity="0.45"/>
+    <path d="M350 244 L352 250 358 252 352 254 350 260 348 254 342 252 348 250 Z" fill-opacity="0.5"/>
+  </g>
+</svg>

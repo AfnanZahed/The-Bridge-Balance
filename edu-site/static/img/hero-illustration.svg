@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 480" width="1440" height="480" fill="none" role="img" aria-label="A level deck carried by four stage hangers beneath a span that meets at a keystone">
+  <title>The Bridge Balance — the span</title>
+  <!--
+    Hero backdrop. The brand mark at wall scale.
+
+    Reading: two halves of a tied arch climb from opposite banks and meet at
+    the keystone. Beneath them a perfectly level deck is carried by four hangers —
+    one per curriculum stage, in that stage's color — with the inner and outer
+    pairs at matching heights, so the structure is literally in balance. Two
+    opposing chevrons on the deck mark the forces it resolves.
+
+    Long spans run flatter than short ones; the arch is shallower here than in
+    the 32px mark for the same reason a real bridge is.
+  -->
+  <defs>
+    <linearGradient id="tbbSpan" x1="200" y1="0" x2="1240" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#06b6d4"/>
+      <stop offset=".3" stop-color="#5b4cf6"/>
+      <stop offset=".5" stop-color="#7c5cff"/>
+      <stop offset=".7" stop-color="#a855f7"/>
+      <stop offset="1" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="tbbDeckGrad" x1="150" y1="0" x2="1290" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5b4cf6" stop-opacity="0"/>
+      <stop offset=".18" stop-color="#5b4cf6" stop-opacity="1"/>
+      <stop offset=".82" stop-color="#a855f7" stop-opacity="1"/>
+      <stop offset="1" stop-color="#a855f7" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="tbbVeil" x1="0" y1="0" x2="0" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".18"/>
+      <stop offset=".45" stop-color="#ffffff" stop-opacity=".62"/>
+      <stop offset=".82" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".35"/>
+    </linearGradient>
+    <mask id="tbbVeilMask">
+      <rect width="1440" height="480" fill="url(#tbbVeil)"/>
+    </mask>
+  </defs>
+
+  <style>
+    .flow { animation: tbbFlow 16s linear infinite; }
+    .beat { transform-box: fill-box; transform-origin: center; animation: tbbBeat 5.2s cubic-bezier(.16,1,.3,1) infinite; }
+    @keyframes tbbFlow { to { stroke-dashoffset: -1280; } }
+    @keyframes tbbBeat { 0% { transform: scale(.8); opacity: .45; } 65%, 100% { transform: scale(2.6); opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .flow { animation: none; opacity: 0; }
+      .beat { animation: none; opacity: .1; }
+    }
+  </style>
+
+  <g mask="url(#tbbVeilMask)">
+    <!-- The tied arch: it springs below the deck, crosses it, and meets at the crown -->
+    <path d="M200 450Q720 -18 1240 450" stroke="url(#tbbSpan)" stroke-width="2.75" stroke-linecap="round" opacity=".72"/>
+
+    <!-- Stage hangers: 01 cyan, 02 amber, 03 violet, 04 pink -->
+    <g stroke-width="2" stroke-linecap="round" opacity=".55">
+      <path d="M400 304.62V392" stroke="#06b6d4"/>
+      <path d="M560 238.15V392" stroke="#f59e0b"/>
+      <path d="M880 238.15V392" stroke="#a855f7"/>
+      <path d="M1040 304.62V392" stroke="#ec4899"/>
+    </g>
+    <g opacity=".85">
+      <circle cx="400" cy="392" r="4.5" fill="#06b6d4"/>
+      <circle cx="560" cy="392" r="4.5" fill="#f59e0b"/>
+      <circle cx="880" cy="392" r="4.5" fill="#a855f7"/>
+      <circle cx="1040" cy="392" r="4.5" fill="#ec4899"/>
+    </g>
+
+    <!-- The level deck, with a slow current running across it -->
+    <path d="M150 392H1290" stroke="url(#tbbDeckGrad)" stroke-width="2.75" stroke-linecap="round" opacity=".8"/>
+    <path class="flow" d="M150 392H1290" stroke="#06b6d4" stroke-width="2.75" stroke-linecap="round"
+          stroke-dasharray="140 1140" opacity=".6"/>
+
+    <!-- Opposing forces the deck resolves -->
+    <g stroke="url(#tbbSpan)" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" opacity=".45">
+      <path d="M292 383.5L300.5 392L292 400.5"/>
+      <path d="M1148 383.5L1139.5 392L1148 400.5"/>
+    </g>
+
+    <!-- Keystone -->
+    <circle class="beat" cx="720" cy="216" r="10" fill="#ff7849" opacity=".5"/>
+    <circle cx="720" cy="216" r="10" fill="#ff7849" opacity=".95"/>
+    <circle cx="720" cy="216" r="21" stroke="#ff7849" stroke-width="1.5" opacity=".35"/>
+  </g>
+</svg>

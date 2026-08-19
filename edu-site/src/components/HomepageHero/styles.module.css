@@ -1,0 +1,78 @@
+/**
+ * HomepageHero styles — 005 redesign.
+ *
+ * Replaces the wall-scale arch artwork with a pure-CSS Apple-style soft
+ * mesh gradient: layered OKLCH radial gradients in a `::before` pseudo-
+ * element behind the deck content. No raster assets. No external images.
+ * Stays within the existing Apple Pro token system.
+ *
+ * The deck (mark, eyebrow, headline, subtitle, CTAs, meta) is unchanged in
+ * copy but restyled for tighter spacing and a redesigned CTA pair.
+ */
+
+.mesh.mesh {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* Light-mode mesh: three soft OKLCH layers over the page background */
+  background-image:
+    radial-gradient(at 12% 8%, oklch(0.7 0.12 264 / 0.18) 0px, transparent 55%),
+    radial-gradient(at 88% 12%, oklch(0.68 0.08 280 / 0.14) 0px, transparent 55%),
+    radial-gradient(at 50% 95%, oklch(0.62 0.18 240 / 0.16) 0px, transparent 65%);
+  background-color: var(--tbb-bg);
+}
+
+.mesh.mesh::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* Subtle vertical fade so the mesh blends into the page below */
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 60%,
+    var(--tbb-bg) 100%
+  );
+}
+
+:global(:root[data-theme="dark"]) .mesh {
+  background-image:
+    radial-gradient(at 12% 8%, oklch(0.42 0.18 264 / 0.55) 0px, transparent 55%),
+    radial-gradient(at 88% 12%, oklch(0.4 0.14 280 / 0.45) 0px, transparent 55%),
+    radial-gradient(at 50% 95%, oklch(0.35 0.18 240 / 0.55) 0px, transparent 65%);
+  background-color: var(--tbb-bg);
+}
+
+:global(:root[data-theme="dark"]) .mesh::after {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 60%,
+    var(--tbb-bg) 100%
+  );
+}
+
+/* ── Brand mark ─────────────────────────────────────────────────────────── */
+.markWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 14px 30px oklch(0.5 0.21 264 / 0.32));
+}
+
+:global(:root[data-theme="dark"]) .markWrap {
+  filter: drop-shadow(0 14px 34px oklch(0.68 0.18 264 / 0.42));
+}
+
+@media (max-width: 996px) {
+  .markWrap {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mesh {
+    /* static — no animations needed */
+  }
+}
