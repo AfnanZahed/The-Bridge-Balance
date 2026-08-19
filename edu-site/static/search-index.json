@@ -18,13 +18,6 @@
     "excerpt": "The Bridge Between Code and Engineering > 30 min read · ~7,200 words · updated 2026-08-19 > This is not a coding tutorial. It is an engineering education — for the AI era. You are about to read a…"
   },
   {
-    "title": "Introduction — Why This Book Exists",
-    "route": "/introduction",
-    "headings": [],
-    "content": "Introduction: The Bridge Between Code and Engineering > This is not a coding tutorial. It is an engineering education — for the AI era. --- The Moment Everything Changed February 2025. Andrej Karpathy — founding member of OpenAI, former Director of AI at Tesla — publishes a short essay describing how he now builds software: he describes what he wants in plain English, an AI writes the code, he copies it, runs it, and iterates. He calls it \"vibe coding.\" By November 2025, Collins Dictionary names vibe coding the Word of the Year. In ten months, a phrase coined by one of AI's architects became the defining label for how an entire generation of developers now works. Not how they might work someday — how they work today. --- What Nobody Told You About the Shortcut The appeal is obvious. Why wrestle with syntax, memory management, or database normalization when an AI can produce working code in seconds? Why spend months learning system design when a prompt can generate a microservice architecture before your coffee cools? Because the shortcut has a price tag — and the bill is coming due. A 2025 METR study found that AI tools made even experienced developers 19% slower on complex tasks — despite the process feeling easier. 63% of developers report spending more time debugging AI-generated code than they would have spent writing it manually. This is the vibe coding hangover: the downstream cost of delegating intent to AI without the foundational knowledge to specify, evaluate, or correct it. --- The Security Crisis You're Not Hearing About Veracode tested over 100 LLMs across 80 coding tasks in 2025. The results should stop you cold: - AI-generated code introduces security vulnerabilities in 45% of cases - Java applications failed at over 70% - AI-generated code carries 2.7× higher vulnerability density than human-written code - AI-assisted commits expose hardcoded credentials at more than twice the rate of human-only commits Between December 2024 and June 2025, Fortune 50",
-    "excerpt": "Introduction: The Bridge Between Code and Engineering > This is not a coding tutorial. It is an engineering education — for the AI era. --- The Moment Everything Changed February 2025. Andrej Karpathy…"
-  },
-  {
     "title": "Performance & Accessibility Targets",
     "route": "/perf-targets",
     "headings": [],
