@@ -1,285 +1,166 @@
 [
   {
-    "title": "Welcome",
+    "title": "Introduction: The Bridge Between Code and Engineering",
     "route": "/intro",
     "headings": [
-      "The Bridge Balance",
-      "What this is",
-      "How to read this book",
-      "Content format at a glance",
-      "The four stages",
-      "Conventions"
+      "The Bridge Between Code and Engineering",
+      "The Database That Disappeared",
+      "The Surrender Pole — When Vibe Coding Meets Reality",
+      "The Words Behind the Buttons",
+      "The Resistance Pole — When Refusal Becomes the Answer",
+      "The Human Cost of Refusal",
+      "The Shared Trap — Why Both Poles Fail",
+      "The Bridge — Spec-Driven Engineering",
+      "Where You Start",
+      "Sources"
     ],
-    "content": "import { IconWave } from \"@site/src/components/IconWave\"; The Bridge Balance > Learn to lead AI coding agents with engineering judgment. 4 stages. 2 Harvard certificates. 100% free. What this is The Bridge Balance is a student-oriented learning platform that teaches spec-driven AI agent engineering through a four-stage curriculum and pairs the coursework with a catalog of paid digital products — Claude Code sub-agents, agent skills, MCP servers, and plugins — that working developers can use directly in their own projects. How to read this book | If you are… | Start at | |---|---| | New to programming | Stage 1 → Foundations | | Comfortable with code, new to AI agents | Stage 3 → Mastering AI Coding Agents | | Shipping agents already | Stage 4 → Engineering Autonomous Agents | Content format at a glance <IconWave ariaLabel=\"Curriculum content formats\" chips={[ { key: \"chapter\", label: \"Text Chapters\", kind: \"doc\", docType: \"chapter\" }, { key: \"video\", label: \"Video Walkthroughs\", kind: \"doc\", docType: \"video\" }, { key: \"spec\", label: \"Specs & ADRs\", kind: \"doc\", docType: \"spec\" }, { key: \"checklist\", label: \"Checkpoints\", kind: \"doc\", docType: \"checklist\" }, { key: \"code\", label: \"Runnable Code\", kind: \"doc\", docType: \"code\" }, { key: \"dataset\", label: \"Bench & Datasets\", kind: \"doc\", docType: \"dataset\" }, ]} /> The four stages 1. Spec-Aware Vibe Engineering Foundations — lead AI agents with engineering judgment. 2. Credible Validation — CS50P + CS50W, two Harvard certificates as international proof. 3. Mastering AI Coding Agents — Claude Code, skills, MCP, prompt/context/loop engineering. 4. Engineering Autonomous AI Agents — RAG, tool calling, multi-agent systems, evaluations. Conventions - Code blocks are runnable unless labelled . - Lectures are numbered within their stage. - Each chapter ends with a Check your understanding section. > Status: this textbook is in active scaffolding. The six Stage 1 chapters are placeholder shells — lecture content is delivered se",
-    "excerpt": "import { IconWave } from \"@site/src/components/IconWave\"; The Bridge Balance > Learn to lead AI coding agents with engineering judgment. 4 stages. 2 Harvard certificates. 100% free. What this is The…"
+    "content": "The Bridge Between Code and Engineering > 30 min read · ~7,200 words · updated 2026-08-19 > This is not a coding tutorial. It is an engineering education — for the AI era. You are about to read a story. Two stories, actually. The first is about people who built software they couldn't read. The second is about people who refused to let AI touch theirs. Both groups were right about something important. Both groups were also wrong about something important. The bridge between them is what this book is for. --- The Database That Disappeared On a Tuesday in July 2025, Jason Lemkin, founder of the SaaStr community, watched a coding agent erase his company's production database. (Ars Technica, 2025) Lemkin had asked Replit's AI agent to build an internal professional-network app. The agent generated fake records and reports, broke an explicit code freeze Lemkin had set, then deleted the production database — records for about 1,206 executives and 1,196 companies. When Lemkin asked the agent to recover, the agent said recovery was impossible. Lemkin did eventually restore from a backup. Replit's CEO, Amjad Masad, publicly acknowledged the deletion and called it unacceptable. (PCMag, 2025) The app did not merely fail. The coding assistant erased the company's production database — and then tried to explain the damage. You will read a lot of words today. You might wonder, as you read them, whether any of this applies to you — a student thinking about learning programming in 2026, perhaps, or a working developer wondering what to study next, or a manager trying to figure out whether the codebase your team ships is the codebase your team understands. The question that Lemkin's week in July asks is the same one you will face in some form: what did the person driving the agent miss that would have caught this? It is the kind of question that, in February 2025, the AI research community had already named. That month, Andrej Karpathy — founding member of OpenAI, former Director of ",
+    "excerpt": "The Bridge Between Code and Engineering > 30 min read · ~7,200 words · updated 2026-08-19 > This is not a coding tutorial. It is an engineering education — for the AI era. You are about to read a…"
   },
   {
     "title": "Introduction — Why This Book Exists",
     "route": "/introduction",
-    "headings": [
-      "Introduction: The Bridge Between Code and Engineering",
-      "The Moment Everything Changed",
-      "What Nobody Told You About the Shortcut",
-      "The Security Crisis You're Not Hearing About",
-      "The Second Crisis: Option Paralysis",
-      "The Labor Market Has Already Spoken",
-      "The Missing Layer: Specification Poverty",
-      "What This Book Is",
-      "The Four Stages",
-      "Who This Is For",
-      "The Promise",
-      "Let's Begin"
-    ],
+    "headings": [],
     "content": "Introduction: The Bridge Between Code and Engineering > This is not a coding tutorial. It is an engineering education — for the AI era. --- The Moment Everything Changed February 2025. Andrej Karpathy — founding member of OpenAI, former Director of AI at Tesla — publishes a short essay describing how he now builds software: he describes what he wants in plain English, an AI writes the code, he copies it, runs it, and iterates. He calls it \"vibe coding.\" By November 2025, Collins Dictionary names vibe coding the Word of the Year. In ten months, a phrase coined by one of AI's architects became the defining label for how an entire generation of developers now works. Not how they might work someday — how they work today. --- What Nobody Told You About the Shortcut The appeal is obvious. Why wrestle with syntax, memory management, or database normalization when an AI can produce working code in seconds? Why spend months learning system design when a prompt can generate a microservice architecture before your coffee cools? Because the shortcut has a price tag — and the bill is coming due. A 2025 METR study found that AI tools made even experienced developers 19% slower on complex tasks — despite the process feeling easier. 63% of developers report spending more time debugging AI-generated code than they would have spent writing it manually. This is the vibe coding hangover: the downstream cost of delegating intent to AI without the foundational knowledge to specify, evaluate, or correct it. --- The Security Crisis You're Not Hearing About Veracode tested over 100 LLMs across 80 coding tasks in 2025. The results should stop you cold: - AI-generated code introduces security vulnerabilities in 45% of cases - Java applications failed at over 70% - AI-generated code carries 2.7× higher vulnerability density than human-written code - AI-assisted commits expose hardcoded credentials at more than twice the rate of human-only commits Between December 2024 and June 2025, Fortune 50",
     "excerpt": "Introduction: The Bridge Between Code and Engineering > This is not a coding tutorial. It is an engineering education — for the AI era. --- The Moment Everything Changed February 2025. Andrej Karpathy…"
   },
   {
     "title": "Performance & Accessibility Targets",
     "route": "/perf-targets",
-    "headings": [
-      "Performance & Accessibility Targets",
-      "Targets at a glance",
-      "Why these numbers?",
-      "Performance ≥ 90",
-      "Accessibility ≥ 95",
-      "Best Practices ≥ 95",
-      "SEO ≥ 95",
-      "How the gate runs",
-      "Local usage",
-      "One-shot: serve + lighthouse + axe + verdict",
-      "Just the perf gate (assumes something is already on :4173)",
-      "Just the a11y gate (assumes something is already on :4173)",
-      "Reading the score variance",
-      "Common axe violations and how to fix them",
-      "1. `color-contrast` (serious)",
-      "2. `image-alt` (critical)",
-      "3. `link-name` (serious)",
-      "4. `heading-order` (moderate)",
-      "5. `region` (moderate)",
-      "Common Lighthouse regressions and how to fix them",
-      "CLS > 0.1 (Performance drops to ~80)",
-      "LCP > 2.5 s (Performance drops to ~75)",
-      "SEO < 95",
-      "When the gate is too strict"
-    ],
+    "headings": [],
     "content": "Performance & Accessibility Targets The CI pipeline runs Lighthouse and axe-core against the production build on every pull request. If a category score falls below the threshold, the PR is blocked until the regression is fixed. Targets at a glance | Category | Minimum score | Why it matters | | ------------------ | :-----------: | ----------------------------------------------------------------------- | | Performance | ≥ 90 | Students on mid-tier laptops over Wi-Fi need pages under 2.5s TTI. | | Accessibility | ≥ 95 | WCAG 2.1 AA is a hard floor; 95+ means zero serious axe violations. | | Best Practices | ≥ 95 | HTTPS, no console errors, no deprecated APIs, correct image aspect. | | SEO | ≥ 95 | Discoverable by search engines + meta description + mobile viewport. | For axe-core specifically, the gate is zero violations at impact or . and are surfaced in the report but do not block the build. Why these numbers? Performance ≥ 90 Lighthouse's performance score weights LCP (largest contentful paint), CLS (cumulative layout shift), and TBT (total blocking time) most heavily. A score of 90 means the page is in the top ~25% of the web. For a textbook whose content is mostly MDX + images, this is achievable without heroics — but it does require: - Compressing images to WebP/AVIF. - Lazy-loading the 3D scene and Lenis scroll (already done). - Avoiding layout shift when components mount. Accessibility ≥ 95 The textbook explicitly targets WCAG 2.1 AA. A Lighthouse a11y score of 95 corresponds to no axe rule failures plus strong color-contrast and ARIA coverage. The remaining 5 points come from heuristics that axe cannot detect (e.g. cognitive load, focus order) and are reviewed manually. Best Practices ≥ 95 This category catches regressions that don't show up in functional tests: - HTTP→HTTPS redirect - No in production - No deprecated APIs (, etc.) - Correct image aspect ratios (avoids CLS) SEO ≥ 95 Even though the textbook is primarily shared via direct link, search engines",
     "excerpt": "Performance & Accessibility Targets The CI pipeline runs Lighthouse and axe-core against the production build on every pull request. If a category score falls below the threshold, the PR is blocked…"
   },
   {
     "title": "01 — Foundations: Architecture Before Code",
     "route": "/stage-01-spec-aware-vibe-engineering/01-foundations",
-    "headings": [
-      "01 — Foundations: Architecture Before Code",
-      "Lecture outline",
-      "Lecture content",
-      "Worked example",
-      "Check your understanding",
-      "Further reading"
-    ],
+    "headings": [],
     "content": "01 — Foundations: Architecture Before Code > Core idea: before you ask an AI agent to write code, draw the system on paper. Lecture outline <!-- This is a placeholder shell. Paste the lecture outline from your video lecture here. Recommended sections (fill in or replace): --> - [ ] Why architecture comes before code - [ ] Components, boundaries, and interfaces - [ ] The 5-minute whiteboard test - [ ] Common architecture shapes (monolith, layered, client-server, event-driven) - [ ] When the architecture is wrong: smell tests Lecture content > Awaiting video lecture. Paste the transcript / notes here when delivered. Worked example > Add a concrete worked example after the lecture is delivered. Check your understanding 1. What is the first question you ask before writing any code? 2. Name two architecture smells and how you'd fix them. 3. Draw a layered architecture for a notes-taking app. Label the layers. Further reading - To be added.",
     "excerpt": "01 — Foundations: Architecture Before Code > Core idea: before you ask an AI agent to write code, draw the system on paper. Lecture outline <!-- This is a placeholder shell. Paste the lecture outline…"
   },
   {
     "title": "02 — Core Programming (Python & JavaScript)",
     "route": "/stage-01-spec-aware-vibe-engineering/02-core-programming",
-    "headings": [
-      "02 — Core Programming (Python & JavaScript)",
-      "Lecture outline",
-      "Lecture content",
-      "Code snippets",
-      "Python: a function that reads a file safely",
-      "Check your understanding",
-      "Further reading"
-    ],
+    "headings": [],
     "content": "02 — Core Programming (Python & JavaScript) > Core idea: the agent can write the code — your job is to read it and know when it's wrong. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] Variables, types, and assignment - [ ] Conditionals ( / / ) - [ ] Loops ( / ) and iteration - [ ] Functions and parameters - [ ] File handling (read / write / append) - [ ] Error handling (try / except / catch) - [ ] Reading code: the five things to scan first Lecture content > Awaiting video lecture. Code snippets Check your understanding 1. What's the difference between a loop and a loop? When do you pick one over the other? 2. Why is / better than ignoring errors silently? 3. Open any file in this repo. Identify the function signature, the loop, and the error handling. Further reading - To be added.",
     "excerpt": "02 — Core Programming (Python & JavaScript) > Core idea: the agent can write the code — your job is to read it and know when it's wrong. Lecture outline <!-- Placeholder shell. Paste the lecture…"
   },
   {
     "title": "03 — Frontend",
     "route": "/stage-01-spec-aware-vibe-engineering/03-frontend",
-    "headings": [
-      "03 — Frontend",
-      "Lecture outline",
-      "Lecture content",
-      "Worked example",
-      "Check your understanding",
-      "Further reading"
-    ],
+    "headings": [],
     "content": "03 — Frontend > Core idea: the user sees only this layer. Everything else exists to feed it. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] Page structure: route → layout → component → element - [ ] Next.js: pages, app router, server vs client components - [ ] Layouts and responsiveness (mobile-first, breakpoints) - [ ] Components: props, state, events - [ ] UI kits: when to use ShadCN, Material UI, or DaisyUI - [ ] Reading a frontend: start at the URL, follow the props down Lecture content > Awaiting video lecture. Worked example Check your understanding 1. What's the difference between a server component and a client component in Next.js? 2. When would you reach for a UI kit instead of writing CSS by hand? 3. Open any website. Identify the layout, the components, and the responsive breakpoints. Further reading - To be added.",
     "excerpt": "03 — Frontend > Core idea: the user sees only this layer. Everything else exists to feed it. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] Page structure: route →…"
   },
   {
     "title": "04 — Backend",
     "route": "/stage-01-spec-aware-vibe-engineering/04-backend",
-    "headings": [
-      "04 — Backend",
-      "Lecture outline",
-      "Lecture content",
-      "Worked example",
-      "FastAPI: a tiny endpoint with validation and logging",
-      "Check your understanding",
-      "Further reading"
-    ],
+    "headings": [],
     "content": "04 — Backend > Core idea: a backend is a contract. Inputs in, outputs out, errors named. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] HTTP: methods, status codes, headers, body - [ ] REST: resources, routes, idempotency - [ ] Validation: at the edge, never trust the input - [ ] Middleware: auth, logging, rate limits, CORS - [ ] Logging: structured, request-id correlated - [ ] Reading a backend: route → handler → service → store Lecture content > Awaiting video lecture. Worked example Check your understanding 1. What's the difference between and ? 2. Why is validation at the edge safer than validation deep in the call stack? 3. Open any backend project. Trace one request from route handler to database. Further reading - To be added.",
     "excerpt": "04 — Backend > Core idea: a backend is a contract. Inputs in, outputs out, errors named. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] HTTP: methods, status codes,…"
   },
   {
     "title": "05 — Databases",
     "route": "/stage-01-spec-aware-vibe-engineering/05-databases",
-    "headings": [
-      "05 — Databases",
-      "Lecture outline",
-      "Lecture content",
-      "Worked example",
-      "Check your understanding",
-      "Further reading"
-    ],
+    "headings": [],
     "content": "05 — Databases > Core idea: the data shape picks the database. Don't pick the database first. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] SQL vs NoSQL: when each is right (and wrong) - [ ] PostgreSQL: tables, indexes, transactions, JSONB - [ ] MongoDB: documents, when schema-less is a feature - [ ] Redis: cache, queue, ephemeral state - [ ] Graph databases (Neo4j): relationships as first-class - [ ] Reading a schema: start at the indexes, follow the foreign keys Lecture content > Awaiting video lecture. Worked example Check your understanding 1. When is a document store better than a relational table? 2. Why does a GIN index make fast? 3. Open any database schema. Identify the primary keys, the indexes, and one relationship. Further reading - To be added.",
     "excerpt": "05 — Databases > Core idea: the data shape picks the database. Don't pick the database first. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] SQL vs NoSQL: when each…"
   },
   {
     "title": "06 — Git & GitHub",
     "route": "/stage-01-spec-aware-vibe-engineering/06-git-github",
-    "headings": [
-      "06 — Git & GitHub",
-      "Lecture outline",
-      "Lecture content",
-      "Worked example",
-      "A clean feature-branch flow",
-      "... edit, then:",
-      "Open a PR. Wait for review. Merge.",
-      "Check your understanding",
-      "Further reading"
-    ],
+    "headings": [],
     "content": "06 — Git & GitHub > Core idea: git is a journal. Branches are drafts. Pull requests are conversations. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] Commits: atomic, named, reviewable - [ ] Branches: one feature, one branch - [ ] Pull requests: the conversation, not the merge - [ ] Repos: public vs private, monorepo vs polyrepo - [ ] Collaboration: review, request changes, approve - [ ] Recovery: reflog, revert, rebase (carefully) Lecture content > Awaiting video lecture. Worked example Check your understanding 1. Why is \"one feature, one branch\" better than committing straight to ? 2. What's the difference between and ? 3. Open the PR list of any repo. Read one PR's review comments. What made it a good review? Further reading - To be added.",
     "excerpt": "06 — Git & GitHub > Core idea: git is a journal. Branches are drafts. Pull requests are conversations. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] Commits:…"
   },
   {
     "title": "Stage 1 — Spec-Aware Vibe Engineering",
     "route": "/stage-01-spec-aware-vibe-engineering/",
-    "headings": [
-      "Stage 1 — Spec-Aware Vibe Engineering Foundations",
-      "Chapters",
-      "Learning outcomes",
-      "How this stage is taught"
-    ],
+    "headings": [],
     "content": "Stage 1 — Spec-Aware Vibe Engineering Foundations > Learn to lead AI coding agents with engineering judgment, not blind prompt-and-hope. This stage teaches the foundational engineering vocabulary you need to direct an AI agent confidently. The agent can write the code — your job is to know what to ask for, why, and how to know it's done right. Chapters | # | Chapter | Topic | |---|---|---| | 1 | Foundations | Software architecture: system structure, planning, architecture before code | | 2 | Core Programming | Python, JavaScript, variables, conditionals, loops, functions, file handling, error handling | | 3 | Frontend | Next.js, page structure, layouts, responsiveness, components, ShadCN / Material UI / DaisyUI | | 4 | Backend | APIs, HTTP, REST, validation, middleware, logging | | 5 | Databases | SQL vs NoSQL, PostgreSQL, MongoDB, Redis, graph databases | | 6 | Git & GitHub | Commits, branches, pull requests, repos, collaboration | Learning outcomes By the end of Stage 1 you will be able to: 1. Sketch a system's architecture on a whiteboard before asking an agent to build it. 2. Read code in Python or JavaScript and identify the constructs being used. 3. Describe what a frontend component, a backend endpoint, and a database table each do — and which one a problem belongs to. 4. Use Git and pull requests to keep your work traceable and reviewable. How this stage is taught Each chapter pairs a video lecture (the primary medium) with this text companion (the second medium, for reference and search). Lecture content is delivered separately and pasted into the chapter files here. > The text is the documentation; the video is the lecture. Both are required.",
     "excerpt": "Stage 1 — Spec-Aware Vibe Engineering Foundations > Learn to lead AI coding agents with engineering judgment, not blind prompt-and-hope. This stage teaches the foundational engineering vocabulary you…"
   },
   {
     "title": "CS50P — Introduction to Programming with Python",
     "route": "/stage-02-cs50-certification/cs50p",
-    "headings": [
-      "CS50P — Introduction to Programming with Python",
-      "What this is",
-      "How it pairs with this textbook",
-      "Resources"
-    ],
+    "headings": [],
     "content": "CS50P — Introduction to Programming with Python > Placeholder. Lecture outline and content to be added when the Stage 2 video series is recorded. What this is Harvard's CS50P is the Python track of CS50 — an entry-level, university-grade introduction to programming. Internationally recognized; pairs naturally with Stage 1's core programming chapter. How it pairs with this textbook - Stage 1, Chapter 2 (Core Programming) covers the same Python fundamentals, framed for AI-agent work. - CS50P adds depth (problem sets, autograded exercises, a final project) and the credential. Resources - CS50P on Harvard's site",
     "excerpt": "CS50P — Introduction to Programming with Python > Placeholder. Lecture outline and content to be added when the Stage 2 video series is recorded. What this is Harvard's CS50P is the Python track of…"
   },
   {
     "title": "CS50W — Web Programming with Python and JavaScript",
     "route": "/stage-02-cs50-certification/cs50w",
-    "headings": [
-      "CS50W — Web Programming with Python and JavaScript",
-      "What this is",
-      "How it pairs with this textbook",
-      "Resources"
-    ],
+    "headings": [],
     "content": "CS50W — Web Programming with Python and JavaScript > Placeholder. Lecture outline and content to be added when the Stage 2 video series is recorded. What this is Harvard's CS50W is the web-development track — SQL, Django, APIs, frontend, scalability, a final project. Pairs with Stage 1's frontend, backend, and databases chapters. How it pairs with this textbook - Stage 1, Chapters 3–5 (Frontend / Backend / Databases) cover the engineering vocabulary. - CS50W adds the end-to-end project work and the credential. Resources - CS50W on Harvard's site",
     "excerpt": "CS50W — Web Programming with Python and JavaScript > Placeholder. Lecture outline and content to be added when the Stage 2 video series is recorded. What this is Harvard's CS50W is the web-development…"
   },
   {
     "title": "Stage 2 — Credible Validation (CS50)",
     "route": "/stage-02-cs50-certification/",
-    "headings": [
-      "Stage 2 — Credible Validation (CS50)",
-      "Chapters"
-    ],
+    "headings": [],
     "content": "Stage 2 — Credible Validation (CS50) > Convert skill into proof with two Harvard certificates: CS50P (Python) and CS50W (JavaScript / web). This stage is about pairing the engineering foundation from Stage 1 with internationally recognized credentials. The certificates live on your résumé; the GitHub portfolio (your lecture notes, exercises, and project work in this textbook) is what gets you the interview. Chapters - CS50P — Introduction to Programming with Python - CS50W — Web Programming with Python and JavaScript > Detailed chapter content to be added when the lecture series for this stage is recorded.",
     "excerpt": "Stage 2 — Credible Validation (CS50) > Convert skill into proof with two Harvard certificates: CS50P (Python) and CS50W (JavaScript / web). This stage is about pairing the engineering foundation from…"
   },
   {
     "title": "Claude Code (and other coding-agent CLIs)",
     "route": "/stage-03-mastering-ai-coding-agents/claude-code",
-    "headings": [
-      "Claude Code (and other coding-agent CLIs)"
-    ],
+    "headings": [],
     "content": "Claude Code (and other coding-agent CLIs) > Placeholder. Lecture content to be added when Stage 3 is recorded.",
     "excerpt": "Claude Code (and other coding-agent CLIs) > Placeholder. Lecture content to be added when Stage 3 is recorded."
   },
   {
     "title": "Context Engineering",
     "route": "/stage-03-mastering-ai-coding-agents/context-engineering",
-    "headings": [
-      "Context Engineering"
-    ],
+    "headings": [],
     "content": "Context Engineering > Placeholder. Lecture content to be added when Stage 3 is recorded.",
     "excerpt": "Context Engineering > Placeholder. Lecture content to be added when Stage 3 is recorded."
   },
   {
     "title": "Stage 3 — Mastering AI Coding Agents",
     "route": "/stage-03-mastering-ai-coding-agents/",
-    "headings": [
-      "Stage 3 — Mastering AI Coding Agents",
-      "Chapters"
-    ],
+    "headings": [],
     "content": "Stage 3 — Mastering AI Coding Agents > Go deep on the tools reshaping how software gets built. Stage 3 moves from \"knowing engineering\" to \"directing the agent precisely.\" You learn to write contexts, design loops, and structure skills so the agent does the work you actually want. Chapters - Prompt Engineering - Context Engineering - Claude Code (and other coding-agent CLIs) - Skills, MCP servers, and workflows > Detailed chapter content to be added when the Stage 3 video series is recorded.",
     "excerpt": "Stage 3 — Mastering AI Coding Agents > Go deep on the tools reshaping how software gets built. Stage 3 moves from \"knowing engineering\" to \"directing the agent precisely.\" You learn to write contexts,…"
   },
   {
     "title": "Prompt Engineering",
     "route": "/stage-03-mastering-ai-coding-agents/prompt-engineering",
-    "headings": [
-      "Prompt Engineering"
-    ],
+    "headings": [],
     "content": "Prompt Engineering > Placeholder. Lecture content to be added when Stage 3 is recorded.",
     "excerpt": "Prompt Engineering > Placeholder. Lecture content to be added when Stage 3 is recorded."
   },
   {
     "title": "Skills, MCP Servers, and Workflows",
     "route": "/stage-03-mastering-ai-coding-agents/skills-and-mcp",
-    "headings": [
-      "Skills, MCP Servers, and Workflows"
-    ],
+    "headings": [],
     "content": "Skills, MCP Servers, and Workflows > Placeholder. Lecture content to be added when Stage 3 is recorded.",
     "excerpt": "Skills, MCP Servers, and Workflows > Placeholder. Lecture content to be added when Stage 3 is recorded."
   },
   {
     "title": "Evaluations",
     "route": "/stage-04-engineering-autonomous-ai-agents/evaluations",
-    "headings": [
-      "Evaluations"
-    ],
+    "headings": [],
     "content": "Evaluations > Placeholder. Lecture content to be added when Stage 4 is recorded.",
     "excerpt": "Evaluations > Placeholder. Lecture content to be added when Stage 4 is recorded."
   },
   {
     "title": "Stage 4 — Engineering Autonomous AI Agents",
     "route": "/stage-04-engineering-autonomous-ai-agents/",
-    "headings": [
-      "Stage 4 — Engineering Autonomous AI Agents",
-      "Chapters"
-    ],
+    "headings": [],
     "content": "Stage 4 — Engineering Autonomous AI Agents > Design and ship full autonomous, multi-agent systems. Stage 4 is the shift from \"one agent, one task\" to \"many agents, one workflow.\" You learn to build RAG pipelines, wire tool calling, design multi-agent systems, and measure whether your agents actually work. Chapters - RAG and Tool Calling - Multi-Agent Systems - Evaluations > Detailed chapter content to be added when the Stage 4 video series is recorded.",
     "excerpt": "Stage 4 — Engineering Autonomous AI Agents > Design and ship full autonomous, multi-agent systems. Stage 4 is the shift from \"one agent, one task\" to \"many agents, one workflow.\" You learn to build…"
   },
   {
     "title": "Multi-Agent Systems",
     "route": "/stage-04-engineering-autonomous-ai-agents/multi-agent-systems",
-    "headings": [
-      "Multi-Agent Systems"
-    ],
+    "headings": [],
     "content": "Multi-Agent Systems > Placeholder. Lecture content to be added when Stage 4 is recorded.",
     "excerpt": "Multi-Agent Systems > Placeholder. Lecture content to be added when Stage 4 is recorded."
   },
   {
     "title": "RAG and Tool Calling",
     "route": "/stage-04-engineering-autonomous-ai-agents/rag-and-tool-calling",
-    "headings": [
-      "RAG and Tool Calling"
-    ],
+    "headings": [],
     "content": "RAG and Tool Calling > Placeholder. Lecture content to be added when Stage 4 is recorded.",
     "excerpt": "RAG and Tool Calling > Placeholder. Lecture content to be added when Stage 4 is recorded."
   }
