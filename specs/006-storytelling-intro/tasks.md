@@ -106,8 +106,8 @@
 
 - [x] T017 Run `cd edu-site && npm run build` and confirm exit 0; verify frontmatter validation passes; verify no broken Markdown / missing-image / broken-internal-link warnings; verify `edu-site/static/search-index.json` was regenerated and includes the rewritten Introduction; verify the generated route is still `/intro` (SC-006, Navigation Contract §8)
 - [x] T018 [P] Reader panel — draft the survey instrument at `specs/006-storytelling-intro/verification/reader-panel-survey.md` (questions: total reading time, can-they-name-both-extremes, can-they-state-bridge-thesis, did-it-feel-like-a-story-or-list, which-scene-or-transition-remembered); recruit n ≥ 5 first-time readers; collect responses; record results at `specs/006-storytelling-intro/verification/reader-panel.md`. Pass when ≥ 4/5 can name both extremes + the bridge AND ≥ 4/5 describe the page as a story/narrative rather than a list AND ≥ 4/5 finish in ≤ 32 minutes (SC-005, SC-011). If the panel fails, revise the prose and re-run Pass 3 → Pass 5
-- [ ] T019 [P] Final commit — stage `edu-site/docs/intro.md` + the four verification artifacts; commit with the message `feat(intro): rewrite as story-driven 30-minute narrative (006-storytelling-intro)`; verify `git status` is clean
-- [ ] T020 PHR for `/sp.implement` — write `history/prompts/006-storytelling-intro/0003-implement-storytelling-intro.green.prompt.md` capturing the final implementation summary, what was actually shipped, and any deviations from the plan
+- [x] T019 [P] Final commit — stage `edu-site/docs/intro.md` + the four verification artifacts; commit with the message `feat(intro): rewrite as story-driven 30-minute narrative (006-storytelling-intro)`; verify `git status` is clean
+- [x] T020 PHR for `/sp.implement` — write `history/prompts/006-storytelling-intro/0004-implement-storytelling-intro.green.prompt.md` capturing the final implementation summary, what was actually shipped, and any deviations from the plan
 
 **Checkpoint**: Build is green, reader panel passes, commit lands, PHR is recorded.
 
