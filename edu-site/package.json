@@ -1,0 +1,67 @@
+{
+  "name": "the-bridge-balance",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The Bridge Balance — student-oriented platform for spec-driven AI agent engineering",
+  "scripts": {
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "build": "npm run check:frontmatter && node scripts/generate-search-index.mjs && docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids",
+    "typecheck": "tsc",
+    "check:frontmatter": "node scripts/check-frontmatter.mjs",
+    "test:audit": "node scripts/serve-and-test.mjs",
+    "test:a11y": "node scripts/axe.mjs",
+    "test:perf": "node scripts/lighthouse.mjs",
+    "lint": "biome check src scripts",
+    "lint:fix": "biome check --write src scripts",
+    "format": "biome format src scripts",
+    "format:fix": "biome format --write src scripts"
+  },
+  "dependencies": {
+    "@docusaurus/core": "^3.7.0",
+    "@docusaurus/preset-classic": "^3.7.0",
+    "@mdx-js/react": "^3.0.0",
+    "@phosphor-icons/react": "^2.1.10",
+    "@radix-ui/colors": "^3.0.0",
+    "@tabler/icons-react": "^3.46.0",
+    "clsx": "^2.0.0",
+    "lucide-react": "^1.31.0",
+    "motion": "^11.18.2",
+    "open-props": "^1.7.23",
+    "prism-react-renderer": "^2.3.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "recharts": "^3.10.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@biomejs/biome": "^2.5.8",
+    "@docusaurus/module-type-aliases": "^3.7.0",
+    "@docusaurus/tsconfig": "^3.7.0",
+    "@docusaurus/types": "^3.7.0",
+    "axe-core": "^4.13.0",
+    "lighthouse": "^12.8.2",
+    "typescript": "~5.5.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=18.0"
+  }
+}

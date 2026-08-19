@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" fill="none" role="img" aria-label="The Bridge Balance — lead AI agents with engineering judgment">
+  <title>The Bridge Balance — lead AI agents with engineering judgment</title>
+  <defs>
+    <linearGradient id="ogTile" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6d5cff"/>
+      <stop offset=".52" stop-color="#5b4cf6"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="ogInk" x1="72" y1="180" x2="900" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e6e2ff"/>
+    </linearGradient>
+    <linearGradient id="ogAccent" x1="72" y1="270" x2="820" y2="310" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#b0a8ff"/>
+      <stop offset=".55" stop-color="#a855f7"/>
+      <stop offset="1" stop-color="#ff7849"/>
+    </linearGradient>
+    <linearGradient id="ogSpan" x1="200" y1="0" x2="1240" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#06b6d4"/>
+      <stop offset=".3" stop-color="#5b4cf6"/>
+      <stop offset=".5" stop-color="#7c5cff"/>
+      <stop offset=".7" stop-color="#a855f7"/>
+      <stop offset="1" stop-color="#06b6d4"/>
+    </linearGradient>
+    <radialGradient id="ogGlowA" cx="0" cy="0" r="1"
+      gradientTransform="translate(180 60) rotate(38) scale(760 520)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5b4cf6" stop-opacity=".38"/>
+      <stop offset="1" stop-color="#5b4cf6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ogGlowB" cx="0" cy="0" r="1"
+      gradientTransform="translate(1050 220) rotate(150) scale(620 460)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a855f7" stop-opacity=".30"/>
+      <stop offset="1" stop-color="#a855f7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ogGlowC" cx="0" cy="0" r="1"
+      gradientTransform="translate(600 560) rotate(-90) scale(300 700)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#06b6d4" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#06b6d4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0a0a12"/>
+  <rect width="1200" height="630" fill="url(#ogGlowA)"/>
+  <rect width="1200" height="630" fill="url(#ogGlowB)"/>
+  <rect width="1200" height="630" fill="url(#ogGlowC)"/>
+
+  <!-- Lockup -->
+  <g transform="translate(72 56) scale(2.125)">
+    <rect width="32" height="32" rx="8" fill="url(#ogTile)"/>
+    <g stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none">
+      <path d="M3.6 17H28.4"/>
+      <path d="M7 22.5Q11.5 11 16 11"/>
+      <path d="M25 22.5Q20.5 11 16 11"/>
+    </g>
+    <circle cx="16" cy="11" r="2.1" fill="#ff7849"/>
+    <rect x=".6" y=".6" width="30.8" height="30.8" rx="7.4" fill="none" stroke="#ffffff" stroke-opacity=".16"/>
+  </g>
+
+  <g font-family="Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+    <text x="164" y="90" font-size="21" font-weight="700" letter-spacing="5.4" fill="#f4f4f5">THE BRIDGE BALANCE</text>
+    <text x="166" y="118" font-size="15" font-weight="500" letter-spacing="1.6" fill="#8b8b9c">SPEC-DRIVEN AI AGENT ENGINEERING</text>
+
+    <!-- Free-forever marker, top right -->
+    <rect x="1002" y="62" width="126" height="38" rx="19" fill="#ffffff" fill-opacity=".05" stroke="#ffffff" stroke-opacity=".12"/>
+    <circle cx="1028" cy="81" r="5" fill="#ff7849"/>
+    <text x="1042" y="87" font-size="16" font-weight="600" fill="#d4d4d8">100% free</text>
+
+    <!-- Thesis -->
+    <text x="72" y="238" font-size="62" font-weight="800" letter-spacing="-2.2" fill="url(#ogInk)">Lead AI agents with</text>
+    <text x="72" y="308" font-size="62" font-weight="800" letter-spacing="-2.2" fill="url(#ogAccent)">engineering judgment.</text>
+    <text x="74" y="358" font-size="21" font-weight="500" letter-spacing=".2" fill="#a1a1aa">Four stages · Two Harvard certificates · Built to ship agents, not chase prompts.</text>
+  </g>
+
+  <!-- The span: two arcs, a keystone, a level deck on four stage hangers -->
+  <g transform="translate(-19 223) scale(.86)">
+    <g stroke="url(#ogSpan)" stroke-width="3" stroke-linecap="round" opacity=".9">
+      <path d="M200 450Q720 -18 1240 450"/>
+    </g>
+    <g stroke-width="2.2" stroke-linecap="round" opacity=".7">
+      <path d="M400 304.62V392" stroke="#06b6d4"/>
+      <path d="M560 238.15V392" stroke="#f59e0b"/>
+      <path d="M880 238.15V392" stroke="#a855f7"/>
+      <path d="M1040 304.62V392" stroke="#ec4899"/>
+    </g>
+    <path d="M150 392H1290" stroke="url(#ogSpan)" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+    <g>
+      <circle cx="400" cy="392" r="6" fill="#06b6d4"/>
+      <circle cx="560" cy="392" r="6" fill="#f59e0b"/>
+      <circle cx="880" cy="392" r="6" fill="#a855f7"/>
+      <circle cx="1040" cy="392" r="6" fill="#ec4899"/>
+    </g>
+    <circle cx="720" cy="216" r="24" stroke="#ff7849" stroke-width="1.6" opacity=".35"/>
+    <circle cx="720" cy="216" r="11" fill="#ff7849"/>
+  </g>
+
+  <!-- Stage labels, seated on the deck -->
+  <g font-family="Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="17" font-weight="600"
+     text-anchor="middle" fill="#a1a1aa">
+    <text x="325" y="598">01 Foundations</text>
+    <text x="463" y="598">02 Credentials</text>
+    <text x="738" y="598">03 Mastery</text>
+    <text x="875" y="598">04 Autonomy</text>
+  </g>
+</svg>

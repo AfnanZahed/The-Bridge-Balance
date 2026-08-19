@@ -1,0 +1,302 @@
+/**
+ * DataViz — Scoped styling for the "Curriculum at a Glance" visualization section.
+ *
+ * Adheres to The Bridge Balance design tokens:
+ *   - Semantic surfaces, borders, typography, and Radix color variables
+ *   - Accessible high-contrast text and interactive states
+ *   - Light/Dark theme responsiveness
+ *   - Prefers-reduced-motion safety
+ */
+
+.tbb-dataviz-section {
+  padding: 4.5rem 0 5.5rem;
+  background: var(--tbb-bg);
+  border-top: 1px solid var(--tbb-border);
+  position: relative;
+}
+
+.tbb-dataviz-container {
+  width: 100%;
+  max-width: var(--ifm-container-width-xl, 1320px);
+  margin: 0 auto;
+  padding: 0 var(--ifm-spacing-horizontal, 1.5rem);
+}
+
+/* ─── KPI Big Numbers Grid ────────────────────────────────────────────── */
+.tbb-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .tbb-kpi-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .tbb-kpi-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.tbb-kpi-card {
+  background: var(--tbb-surface);
+  border: 1px solid var(--tbb-border);
+  border-radius: var(--tbb-radius-lg);
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: transform var(--tbb-duration) var(--tbb-ease),
+              box-shadow var(--tbb-duration) var(--tbb-ease),
+              border-color var(--tbb-duration) var(--tbb-ease);
+  box-shadow: var(--tbb-shadow-xs);
+  position: relative;
+  overflow: hidden;
+}
+
+.tbb-kpi-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--kpi-accent, var(--ifm-color-primary));
+  opacity: 0.85;
+}
+
+.tbb-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--tbb-shadow-md);
+  border-color: var(--tbb-border-strong);
+}
+
+.tbb-kpi-card__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--tbb-text-muted);
+  margin-bottom: 0.375rem;
+}
+
+.tbb-kpi-card__value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.tbb-kpi-card__value {
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--tbb-text);
+  letter-spacing: -0.03em;
+  font-feature-settings: "pnum";
+}
+
+.tbb-kpi-card__suffix {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--tbb-text-muted);
+}
+
+.tbb-kpi-card__subtext {
+  font-size: 0.75rem;
+  color: var(--tbb-text-subtle);
+  line-height: 1.35;
+}
+
+/* ─── Charts Layout Grid ──────────────────────────────────────────────── */
+.tbb-dataviz-charts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .tbb-dataviz-charts {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
+.tbb-chart-card {
+  background: var(--tbb-surface);
+  border: 1px solid var(--tbb-border);
+  border-radius: var(--tbb-radius-xl);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--tbb-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--tbb-duration) var(--tbb-ease);
+}
+
+.tbb-chart-card:hover {
+  border-color: var(--tbb-border-strong);
+}
+
+.tbb-chart-card__header {
+  margin-bottom: 1.5rem;
+}
+
+.tbb-chart-card__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.25rem;
+}
+
+.tbb-chart-card__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--tbb-text);
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.02em;
+}
+
+.tbb-chart-card__description {
+  font-size: 0.875rem;
+  color: var(--tbb-text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.tbb-chart-card__body {
+  width: 100%;
+  height: 290px;
+  position: relative;
+}
+
+/* ─── Custom Tooltip (Dataviz discipline) ──────────────────────────────── */
+.tbb-chart-tooltip {
+  background: var(--tbb-surface-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--tbb-border-strong);
+  border-radius: var(--tbb-radius-md);
+  padding: 0.625rem 0.875rem;
+  box-shadow: var(--tbb-shadow-md);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--tbb-text);
+  pointer-events: none;
+  min-width: 140px;
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .tbb-chart-tooltip {
+    background: var(--tbb-surface-solid);
+  }
+}
+
+:root[data-theme="dark"] .tbb-chart-tooltip {
+  background: var(--tbb-surface-glass);
+  border-color: var(--tbb-border);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  :root[data-theme="dark"] .tbb-chart-tooltip {
+    background: var(--tbb-surface-solid);
+  }
+}
+
+.tbb-chart-tooltip__header {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-weight: 600;
+  margin-bottom: 0.375rem;
+  padding-bottom: 0.375rem;
+  border-bottom: 1px solid var(--tbb-border);
+}
+
+.tbb-chart-tooltip__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tbb-chart-tooltip__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tbb-chart-tooltip__metric {
+  color: var(--tbb-text-muted);
+}
+
+.tbb-chart-tooltip__val {
+  font-weight: 700;
+  color: var(--tbb-text);
+  font-feature-settings: "tnum";
+}
+
+.tbb-chart-tooltip__sub {
+  margin-top: 0.25rem;
+  font-size: 0.6875rem;
+  color: var(--tbb-text-subtle);
+}
+
+/* ─── Legend Strip ────────────────────────────────────────────────────── */
+.tbb-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.25rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--tbb-border);
+}
+
+.tbb-chart-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--tbb-text-muted);
+  cursor: default;
+  transition: color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.tbb-chart-legend__item:hover {
+  color: var(--tbb-text);
+}
+
+.tbb-chart-legend__swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--tbb-radius-sm);
+  flex-shrink: 0;
+}
+
+/* ─── Screen Reader Only Table for Dataviz A11y ────────────────────────── */
+.tbb-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ─── Reduced motion safety ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .tbb-kpi-card {
+    transition: none !important;
+    transform: none !important;
+  }
+}
