@@ -13,6 +13,17 @@ import React, { useEffect, useRef } from "react";
 import MDXComponents from "@theme-original/MDXComponents";
 import ChapterState from "@site/src/components/ChapterState";
 import Callout from "@site/src/components/Callout";
+import ReaderControls from "@site/src/components/ReaderControls";
+import {
+  Beginner,
+  Intermediate,
+  Advanced,
+  Summary,
+  Balanced,
+  Detailed,
+  Version,
+  Shared,
+} from "@site/src/components/ReaderControls/AdaptiveAuthoring";
 import { useDoc } from "@docusaurus/plugin-content-docs/client";
 
 function ChapterHeading({ children, ...props }: { children?: React.ReactNode }) {
@@ -25,6 +36,7 @@ function ChapterHeading({ children, ...props }: { children?: React.ReactNode }) 
   return (
     <>
       {state ? <ChapterState state={state} /> : null}
+      <ReaderControls />
       <h1 {...(props as React.HTMLAttributes<HTMLHeadingElement>)}>{children}</h1>
     </>
   );
@@ -76,4 +88,12 @@ export default {
   ul: AccessibleUnorderedList,
   Callout,
   StageBanner,
+  Beginner,
+  Intermediate,
+  Advanced,
+  Summary,
+  Balanced,
+  Detailed,
+  Version,
+  Shared,
 };

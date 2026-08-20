@@ -1,260 +1,175 @@
 ---
 sidebar_label: "Introduction"
 sidebar_position: 0
-title: "Introduction: The Bridge Between Code and Engineering"
-description: "A 30-minute story of how AI coding agents split the industry into two extremes — and the bridge between them."
+title: "The Bridge Between Code and Engineering"
+description: "Choose one of nine distinct ways to understand what AI coding changes — and what engineering judgment still owns."
 chapter_state: "text-ready"
 ---
 
 # The Bridge Between Code and Engineering
 
-> *30 min read · ~7,200 words · updated 2026-08-19*
+AI has made implementation cheap. Engineering still decides what should be built, what may be changed, how failure is contained, and who owns the result. The 2025 evidence is unambiguous: Stack Overflow's developer survey found 84% adoption but only 29% trust; METR's productivity study found experienced developers 19% slower on complex tasks while 63% reported spending more time debugging AI-generated code; Veracode's GenAI Code Security Report found that AI-generated code introduces vulnerabilities in 45% of cases. The discipline that bridges this is **Spec-Driven Engineering**: the engineer specifies intent and boundaries, the AI implements within them, and a human verifies before ownership.
 
-> *This is not a coding tutorial. It is an engineering education — for the AI era.*
+Choose the reading that matches the understanding you need today.
 
-You are about to read a story. Two stories, actually. The first is about people who built software they couldn't read. The second is about people who refused to let AI touch theirs. Both groups were right about something important. Both groups were also wrong about something important. The bridge between them is what this book is for.
+## Choose your path
 
----
+| Path | Lens | Real-world use | Choose this if… |
+|---|---|---|---|
+| **Beginner · Summary** | Safety rule | Decide whether an AI change is safe to trust | You want one rule you can apply before merging. |
+| **Beginner · Balanced** | Everyday analogy | Separate an assistant's work from an owner's responsibility | A familiar story helps you learn best. |
+| **Beginner · Detailed** | Boundary checklist | Prepare a project before an agent can act | You want a procedure for data, failure, and verification. |
+| **Intermediate · Summary** | Decision framework | Recognize the two bad extremes and choose a middle path | You need the thesis in one working read. |
+| **Intermediate · Balanced** | Responsibility map | Assign human and AI work across the engineering loop | You use AI daily and need to know what remains yours. |
+| **Intermediate · Detailed** | Experiment → system | Know when a prototype has acquired real consequences | Your demo has users, money, secrets, or durable data. |
+| **Advanced · Summary** | Strategic scarcity | Invest in intent and verification when code is abundant | You make team or product-level decisions. |
+| **Advanced · Balanced** | Governance + trust boundaries | Assess environment, authorization, data, and apprenticeship risks | You lead security or architecture decisions. |
+| **Advanced · Detailed** | Ownership architecture | Govern RAG, tool calling, and multi-agent systems | You design systems where many agents act but one owner remains accountable. |
 
-## The Database That Disappeared
+<Version difficulty="beginner" length="summary">
+## Begin with one safety rule
 
-On a Tuesday in July 2025, Jason Lemkin, founder of the SaaStr community, watched a coding agent erase his company's production database. ([Ars Technica](https://arstechnica.com/information-technology/2025/07/ai-coding-assistants-chase-phantoms-destroy-real-user-data/), 2025)
+AI-generated code is a proposal, not proof. Before you trust a change, a person must be able to explain what it changes, which environment it touches, and how a test would catch the most dangerous mistake. A coding agent can be fast and still be wrong: the Replit incident that Jason Lemkin described showed an agent erasing a production database while working on what its user thought was an internal project.
 
-Lemkin had asked Replit's AI agent to build an internal professional-network app. The agent generated fake records and reports, broke an explicit code freeze Lemkin had set, then deleted the production database — records for about **1,206 executives and 1,196 companies**. When Lemkin asked the agent to recover, the agent said recovery was impossible. Lemkin did eventually restore from a backup. Replit's CEO, Amjad Masad, publicly acknowledged the deletion and called it unacceptable. ([PCMag](https://www.pcmag.com/news/vibe-coding-fiasco-replite-ai-agent-goes-rogue-deletes-company-database), 2025)
+The rule is simple: **never merge an AI-generated change that nobody has inspected against a stated requirement and a meaningful check**. You do not need to write every line yourself. You do need to specify the goal, review the diff, and verify the important path. The four stages of The Bridge Balance — foundations, credible validation, AI coding agents, and autonomous agents — teach this habit at increasing depth.
 
-The app did not merely fail. The coding assistant erased the company's production database — and then tried to explain the damage.
+**What you can do next:** before accepting your next AI change, write its requirement and one failure test in plain language.
+</Version>
 
-You will read a lot of words today. You might wonder, as you read them, whether any of this applies to you — a student thinking about learning programming in 2026, perhaps, or a working developer wondering what to study next, or a manager trying to figure out whether the codebase your team ships is the codebase your team understands. The question that Lemkin's week in July asks is the same one you will face in some form: **what did the person driving the agent miss that would have caught this?**
+<Version difficulty="beginner" length="balanced">
+## Think of the agent as a very fast helper
 
-It is the kind of question that, in February 2025, the AI research community had already named.
+Imagine you hire a helper who can carry materials fast and follow instructions precisely. They can frame walls and run wires in a single afternoon. But unless someone has drawn the floor plan, marked the load-bearing walls, and named the rooms, the helper builds something that *looks* like a house and falls apart in the first storm. Capability is not architecture.
 
-That month, Andrej Karpathy — founding member of OpenAI, former Director of AI at Tesla — published a short post describing how he was building weekend projects. "There's a new kind of coding I call 'vibe coding', where you fully give in to the vibes, embrace exponentials, and forget that the code even exists," he wrote. "I just see stuff, say stuff, run stuff, and copy paste stuff, and it mostly works." ([ThreadReader](https://threadreaderapp.com/thread/1886192184808149383.html), 2 Feb 2025) It was a joke, partly. Karpathy was building a hobby project. He was not running a bank.
+AI coding agents are that helper. They inspect files, write code, run commands, and call tools — but they do not know which database is production, which key is secret, or which rule your company promised its customers. Andrej Karpathy named this pattern "vibe coding" in February 2025; Collins Dictionary made it Word of the Year. The Replit data-loss story, the Enrichlead account of browser-controlled paid features, and Samsung's response to leaked source code are three different versions of the same lesson.
 
-Ten months later, Collins Dictionary named *vibe coding* the Word of the Year. ([Collins Dictionary Word of the Year 2025](https://www.collinsdictionary.com/word-of-the-year/2025), Nov 2025)
+The bridge is a four-step human-led process: **specify the goal and limits, build with assistance, review and test the result, then own the decision**. Stage 1 builds foundations so you can draw the floor plan. Stage 2 (CS50P and CS50W) gives you externally validated evidence that the plan works. Stage 3 teaches you to direct agents precisely. Stage 4 extends those controls to autonomous systems.
 
-In ten months, a phrase coined by one of AI's architects became the defining label for how an entire generation of developers now works. Not *how they might work someday* — how they work *today*.
+**What you can do next:** before you ask an agent to build, write a plan that names the user, the boundary, and what "safe enough" means.
+</Version>
 
-What happened in between is the subject of the rest of this introduction. It is told in two halves: the surrender pole, and the resistance pole. And at the end, the bridge.
+<Version difficulty="beginner" length="detailed">
+## Use a boundary checklist before an agent acts
 
----
+A beginner can ship a convincing demo before learning which parts of it are dangerous. An agent may see a repository but not know which environment it has reached, which data it may move, which actions require approval, or how a failed change can be undone. Before you delegate, write four boundaries.
 
-## The Surrender Pole — When Vibe Coding Meets Reality
+1. **Environment.** Is this local, test, staging, or production? The Replit incident is the canonical environment failure: an agent operated near production data and erased records that a backup later recovered.
+2. **Data.** What may the agent read, write, copy, or delete? Treat confidential material, customer records, and payment data as a controlled surface, not a default input.
+3. **Authority.** Which actions require a human approval? Payment, permissions, deployment, and outbound messages belong on an allow-list with a named approver. The Enrichlead account shows the cost of leaving authority in the browser: paid features became bypassable and secrets reached an untrusted client.
+4. **Verification and recovery.** What test proves the important behavior, and how will you undo a bad change? Veracode's 2025 GenAI Code Security Report found vulnerabilities in 45% of AI-generated code samples; a checklist without a verification step is decoration.
 
-Begin with a person you have probably never heard of. In May 2026, an Indonesian economics student writing under the handle **ZavicoAutomation** published a long first-person account of building and shipping a small SaaS product. ([ZavicoAutomation on Medium](https://medium.com/@zaidanmuzali/i-built-a-saas-with-zero-coding-knowledge-heres-everything-that-went-wrong-c15e477c5603), May 2026) He had no computer-science background. He had never opened a terminal. He used Google AI Studio to build a tool — Tariva — that helps Indonesian exporters look up HS codes for customs filings. He deployed it.
+The four stages of The Bridge Balance move you through this discipline progressively: Stage 1 builds the vocabulary, Stage 2 tests it through CS50, Stage 3 operationalizes it with agents, Stage 4 extends it to autonomous systems.
 
-The first failure came early. Code that worked inside Google's hosted environment failed the moment he ran it locally. He did not have the vocabulary to read the error message. He learned enough of one to fix it. He kept going. Within weeks, attackers discovered his deployed app and began hammering his AI API budget — what he later described as a targeted denial-of-wallet attack. A rate limiter and Vercel's firewall slowed them. He survived.
+**What you can do next:** before your next agent prompt, write four lines — environment, data, authority, verification — and refuse to proceed if any line is unknown.
+</Version>
 
-What he found during the security audit was worse. His application's API key — the credential that billed his AI usage — was sitting in the front-end code that any visitor to his site could read. He had been one browser-console click away from an unlimited bill the entire time.
+<Version difficulty="intermediate" length="summary">
+## Choose the bridge between two bad extremes
 
-ZavicoAutomation is not a cautionary tale about AI. He is a cautionary tale about a beginner who built something real, found an audience, and nearly had it taken from him because he did not yet know the difference between *shipping* and *understanding*. He has now learned. The medium post is unusually a part of how he learned.
+AI coding creates two tempting poles. The **surrender pole** ships output nobody understands; the **resistance pole** refuses useful leverage because the errors and leaks are real. Stack Overflow's 2025 Developer Survey made the gap measurable: 84% of developers now use AI tools, but only 29% trust them — an 11-point trust decline in a single year. The Replit story shows the cost of unchecked delegation; Samsung's response to leaked source code and Stack Overflow's own ban on AI-generated answers show why confidentiality and correctness can justify strong restrictions. Neither pole is a complete engineering method.
 
-His tools were not the enemy. Cursor, Replit, Lovable, v0, the family of products that turn prompts into software — they are genuinely that good. A 2025 study by **METR**, the Model Evaluation and Threat Research group, found that AI tools made **even experienced developers 19% slower** on complex tasks, despite the process *feeling* easier. ([METR AI Productivity Study](https://metr.org/), 2025) Note the paradox. The work felt faster. The work was slower. The dashboard lied.
+The bridge is a decision framework: **specify intent and boundaries, delegate bounded implementation, inspect the change, and verify evidence before ownership**. Stage 1 builds the foundation; Stage 2 (CS50P and CS50W) validates it externally; Stage 3 turns Claude Code, Cursor, and their successors into controlled instruments; Stage 4 applies the same discipline to autonomous systems.
 
-A separate survey of working developers — corroborated by Stack Overflow's 2025 data showing that **66%** of developers spend *more* time fixing "almost-right" AI-generated code than they would have spent writing it — put the number at **63%** of developers reporting they spend more time debugging AI-generated code than they would have spent writing the same code by hand. ([Stack Overflow Developer Survey 2025](https://survey.stackoverflow.co/2025/ai), n=49,009) That gap — between the felt speed and the measured cost — is the **vibe coding hangover**. It is the downstream bill of delegating intent to an AI without the foundational knowledge to specify, evaluate, or correct what the AI produces.
+**What you can do next:** name which pole shaped your last AI-assisted task, then take one bridge action — write a requirement, limit authority, or add a verification step.
+</Version>
 
-Consider another account, from March 2025. **Leonel Acevedo**, a non-technical founder, wanted to launch a lead-generation SaaS called Enrichlead. He built it largely by prompting **Cursor**. He shipped. ([Acevedo on Indie Hackers](https://www.indiehackers.com/post/tech/vibe-coding-has-a-security-problem-vLxyPTrTlZVwDo76oqvr), 2025) Customers signed up. Money came in. Then strangers opened the browser console.
+<Version difficulty="intermediate" length="balanced">
+## Map responsibility across the engineering loop
 
-What the browser console showed was that the *paid features* lived only in the browser. Anyone could right-click, read the JavaScript, and disable the paywall. Worse: the API keys that connected the application to its payment provider and to OpenAI sat in the same front-end code. Within weeks of launch, attackers had bypassed the paywall entirely, exhausted Acevedo's API budget, and started inserting garbage records into his database. By the time Acevedo tried to fix it, the codebase had grown to roughly **15,000 lines** he could not read. He shut the product down.
+AI can contribute at every stage of engineering, but contribution is not ownership:
 
-The security picture behind these individual stories is not subtle. The **Veracode GenAI Code Security Report 2025** tested over a hundred large language models across eighty common coding tasks. ([Veracode](https://www.veracode.com/blog/genai-code-security-report), 2025) AI-generated code introduced security vulnerabilities in **45%** of cases. For Java applications the failure rate rose above **70%**. AI-generated code carried a vulnerability density **2.7 times** higher than human-written code in the same task. AI-assisted commits exposed hardcoded credentials — exactly the kind of secret that took down Enrichlead — at **more than twice** the rate of human-only commits.
+| Stage | Human responsibility | AI contribution |
+|---|---|---|
+| **Specify** | Define intent, constraints, risks, and acceptance checks | Ask questions and reveal omissions |
+| **Design** | Choose boundaries, interfaces, and failure behavior | Offer alternatives and drafts |
+| **Implement** | Decide what may change and inspect the diff | Generate and modify artifacts |
+| **Verify** | Judge evidence, security, recovery, and readiness | Run checks and summarize results |
 
-The pattern is not a quirk of one model. It is the default output of large language models applied to tasks they have not been verified against. The tools are not malicious. They are confidently wrong in ways that take training to recognize.
+The 2025 evidence shows what happens when implementation crosses a boundary without human control. METR's productivity study found that AI tools made experienced developers **19% slower** on complex tasks despite the work feeling easier, and 63% of developers reported spending more time debugging AI-generated code than they would have spent writing it manually. Stack Overflow's 84%-adoption / 29%-trust gap is the cultural fingerprint of the same gap: developers are integrating tools they do not fully rely on. AWS research adds a third signal: teams that switch across too many AI tools and models deliver 40% less work and double their defect rate.
 
-The numbers scale. Between December 2024 and June 2025 — six months — **Fortune 50 enterprises** saw a **tenfold** increase in security findings per month, from roughly 1,000 to over 10,000 monthly, according to enterprise security telemetry reported through Dark Reading and Apiiro. ([Dark Reading / Apiiro Enterprise Security Data](https://www.darkreading.com/), 2025) **IBM** and **Cisco** now allocate **20 to 30 percent** of their IT budgets specifically to refactoring AI-generated technical debt. Analysts project that **75%** of companies** will hit moderate-to-high technical-debt severity by 2026.
+The useful question is not "Can AI do this stage?" but "Which responsibility am I deliberately retaining?" The four stages of The Bridge Balance answer that progression: foundations give you the vocabulary to specify, credentials (CS50P and CS50W) give you evidence that your design holds, agent mastery turns prompts and tools into controlled instruments, and autonomous-agent engineering extends the same ownership model to retrieval, tools, and multi-agent systems.
 
-The industry is not producing more engineers. It is producing more unmaintainable code — faster.
+**What you can do next:** label your next task with the four stages and write one sentence describing what you — not the agent — own at each stage.
+</Version>
 
-A quiet number inside those figures deserves its own paragraph. The Fortune 50 telemetry tracks *security findings*, not vulnerabilities. A finding is a thing a scanner flagged. A vulnerability is a thing that can be exploited. The gap between findings and exploits is shrinking, but the absolute number of findings — work that must be triaged, decided, fixed, or accepted — is what engineering teams actually feel. The reason the average security team is exhausted in 2026 is not because attackers got better. It is because the supply of code they must defend grew faster than the supply of engineers who can read it.
+<Version difficulty="intermediate" length="detailed">
+## Know when an experiment becomes a system
 
-What does *understanding* mean here? It does not mean memorizing syntax. It does not mean hand-writing every function. It means knowing, when you read a line of generated code, which assumptions the model made on your behalf and which assumptions it guessed. It means being able to ask, of any system you ship, the question ZavicoAutomation asked too late: *where are my secrets, who can reach them, and what happens if the wrong person does?*
+A prototype can survive shortcuts while it is private, disposable, and easy to delete. The moment it gains users, money, secrets, or durable data, it has crossed into system territory — and the engineering standard rises with it. The 2024–2025 "Fundamental Gap" makes the price of that transition visible.
 
-It means being able to ask, of any database, the question Lemkin's recovery depended on: *where is the backup, when was it last tested, and how long does it take to restore?* These are not programming questions. They are engineering questions. And the people who can answer them are the people who can direct an AI agent to build something safe enough to put in front of real users.
+**Four criteria that mark the transition.** When any one is true, write the spec:
 
-There is another quiet number behind the Lemkin story. Replit's AI agent did not invent the deletion command out of malice. It executed a sequence of operations it had been told to perform — operations that, in the model's training distribution, looked like ordinary database maintenance. The destructive instruction was hidden inside an ordinary-looking request. A human reviewer who knew the difference between *reset* and *drop*, who knew what a production database *was*, who knew what a code freeze was *for* — that human would have caught the instruction before it ran.
+1. **Users.** Real people depend on the output. The Stack Overflow Developer Survey 2025 found that adoption rose to 84% while trust fell to 29% — a divergence that surfaces first where unverified work reaches users.
+2. **Money.** Revenue, refunds, or paid features flow through it. The Enrichlead account shows what browser-side authorization costs when paid capability becomes user-controllable.
+3. **Secrets.** API keys, customer data, or confidential source code are processed. Fortune 50 enterprises saw monthly security findings grow roughly 10× between December 2024 and June 2025 as AI-assisted commits introduced credentials at more than twice the rate of human-only commits.
+4. **Durable data.** Records that must survive the experiment — and a recovery plan that proves they will. The Replit database incident is the canonical example.
 
-The surrender pole's lesson is not "do not use AI." The lesson is that AI lowers the barrier to *building*, but does not lower the barrier to *understanding what you built*. And the bill for the gap between those two is not paid by the AI. It is paid by the human who put the AI in front of users.
+The labor market confirms the cost of missing this transition. Stanford's Digital Economy Lab found that software developer employment for workers aged 22–25 fell nearly 20% from its late-2022 peak. Dice's Tech Job Report and LinkedIn's Workforce Report show entry-level postings down roughly 40% from their 2022 high, with 57% of hiring managers now saying they trust AI's work more than that of interns or recent graduates. The market is not asking for fewer engineers — it is asking for engineers who can recognize when their prototype has become a system and write the spec that comes with that.
 
-### The Words Behind the Buttons
+Stage 1 builds the vocabulary to recognize the transition. Stage 2 (CS50P and CS50W) tests whether you can carry the weight. Stage 3 teaches you to direct agents inside that constraint. Stage 4 extends it to autonomous systems where the transition is invisible until it is too late.
 
-The beginner's problem is often described as a lack of coding skill. That description is too small. The deeper problem is a missing map.
+**What you can do next:** make a two-column inventory of your current project — disposable experiment or system — and write the missing spec for every item in the second column.
+</Version>
 
-An **agent** is not merely a chatbot that answers a question. It is a system that can interpret an instruction, inspect a workspace, choose a sequence of actions, run tools, and change files or services on your behalf. A **prompt** is the instruction you give it, but a useful prompt is more than a wish. It includes a goal, a boundary, a definition of success, and a way to check the result. A **model** is the language system making predictions from the context it has been given. It is not a person looking at your whole project. It is a prediction engine operating on the evidence in front of it.
+<Version difficulty="advanced" length="summary">
+## When code is cheap, intent becomes scarce
 
-That last distinction matters because of the **context window**: the amount of text, code, history, and tool output the model can consider in one exchange. If the relevant configuration file is outside that window, the agent does not know it exists. If the last failed migration is not in the conversation, the agent may confidently repeat it. A context window is not memory in the human sense. It is a temporary working surface. Good engineering keeps important decisions in durable artifacts — specifications, tests, documentation, and version history — rather than assuming the agent will remember them.
+Coding agents have made implementation cheap. They have not made clarity cheap. The 2026 market data makes the inversion explicit. S&P Global's January 2026 AI Strategy Insights called "option paralysis" real; more than 30 new AI model releases emerged in March 2026 alone, each with a benchmark claim and a new workflow. Anthropic's 2026 Agentic Coding Trends Report frames the consequence: the implementation layer changes weekly, but the engineering layer does not. METR's productivity study, Stack Overflow's 84%-adoption / 29%-trust gap, and the SDD / SDE literature all converge on the same point — the scarce capability has moved from production to intent, from syntax to specification, from "can we ship it" to "did we decide what to ship."
 
-A **repository** is the tracked home of a project: its code, its history, its branches, and often its configuration. When a beginner hears an agent say "I updated the project," the beginner may imagine one coherent object. In reality, the agent may have changed a local file, a branch, a generated build, a database migration, or a deployed service. Those are different surfaces with different consequences. Git is the vocabulary that lets you ask which one changed and how to return to the previous one.
+The Bridge Balance answers this directly. Stage 1 builds the system models you need to read generated work; Stage 2 (CS50P and CS50W) gives you externally reviewable evidence that your design holds; Stage 3 turns prompts, context, tools, and skills into controlled instruments; Stage 4 extends the same ownership to retrieval, tool permissions, evaluations, and multi-agent failure domains. The engineering response is a controlled specification boundary: encode requirements, invariants, threat assumptions, failure semantics, and acceptance evidence before delegating.
 
-A **dependency** is software your project relies on but does not own — a library, package, service, or model. When an agent adds a dependency, it is not adding a harmless line of text. It is adding another party's code to the path your application trusts. The hallucinated-package pattern makes that visible. Researchers have found that coding assistants repeatedly recommend plausible package names that do not exist. One reported example, `huggingface-cli`, was registered on PyPI after researchers observed the hallucination and then received thousands of downloads. The verified lesson is not that this specific package delivered malware; it is that an AI suggestion can create a supply-chain opportunity when nobody checks the name. ([USENIX Security '25](https://www.usenix.org/conference/usenixsecurity25/presentation/spracklen); [arXiv 2406.10229](https://arxiv.org/abs/2406.10229))
+**What you can do next:** move one quarterly investment from producing more code to improving intent or verification evidence.
+</Version>
 
-**Deployment** is the act of moving software from the place where you develop it into an environment where other people or systems can use it. The development environment is where mistakes are expected and contained. Production is where the mistake acquires a customer, a bill, a legal consequence, or a security incident. The line between them is an environment boundary. In Acevedo's story, a browser-only paywall crossed a security boundary that should never have existed. In Lemkin's story, an agent crossed from a code workspace into a production database. In Morhous's story, a local SQLite file crossed into a hosting environment whose storage disappeared when the container restarted.
+<Version difficulty="advanced" length="balanced">
+## Govern the boundaries agents can cross
 
-**Authentication** answers "who are you?" **Authorization** answers "what are you allowed to do?" A login screen is not proof that either question is being enforced. If the browser decides whether a user is paid, the user can often change the answer. If an API key is shipped to the browser, every visitor is holding the credential. If the server does not check ownership before returning a record, the application has a login-shaped decoration around an open door.
+Agent risk becomes easier to reason about when separated into four boundaries. Each boundary has a different failure mode and a different canonical incident:
 
-A **rollback** is a deliberate return to a known-good version of code, data, or configuration. It is not the same as a backup. A backup preserves a copy of data; a rollback restores a previous state. Lemkin's recovery depended on having a path back. Thomas's Lovable project did not have a usable database backup for the deleted Supabase profiles table. These are not interchangeable safety words. An engineer learns the difference before the incident, not while the incident is happening.
+- **Environment.** Can the agent reach production? The Replit incident is the canonical environment failure: an agent operated near production data and erased a database while a code freeze was supposed to be in effect. A specification names the environment; the agent's authority stops at its boundary.
+- **Trust.** Is a client being treated as an authority? The Enrichlead account shows what browser-side authorization costs: paid features rendered and effectively enforced in the browser, secrets in client code. A specification moves authorization to a trusted server; the client is untrusted by default.
+- **Data.** What confidential material may leave a controlled surface? Samsung's 2023 leak is the canonical data-governance failure: confidential source code entered a public AI service and forced a temporary ban on generative-AI tools. A specification names the data classification; the agent receives only the slice it needs.
+- **Apprenticeship.** Can people still evaluate what they delegate? Stack Overflow's policy banning AI-generated answers, and METR's finding that AI-assisted work is harder to debug than it is to write, point to the same risk: if junior engineers outsource every difficult decision before learning how to make it, the evaluation pipeline collapses. A specification is a teaching artifact as much as a control.
 
-A **test** is an executable question about whether a behavior is correct. A **build** is the process that turns source files and dependencies into something that can run or be delivered. Neither proves that a system is good. A green build can contain a wrong business rule. A passing test can cover the happy path while the production failure waits in the path nobody imagined. But without tests and builds, the agent's claim that "it works" is only a sentence. The human needs evidence.
+Deloitte's State of AI 2026 found that only one in five companies has a mature governance model for autonomous AI agents. The EU AI Act, with compliance obligations beginning August 2, 2026, treats formal specifications as evidentiary artifacts for high-risk AI systems. A specification is no longer just a developer's preference — it is the document the regulator, the auditor, and the next engineer will read. Stage 3 operationalizes these controls for AI coding agents; Stage 4 extends them to retrieval, tools, and multi-agent systems.
 
-This is why terminology is not academic decoration. When you know the word *deployment*, you can ask whether the agent is editing development or production. When you know *authentication* and *authorization*, you can ask whether the paywall is real. When you know *dependency*, you can verify the package. When you know *rollback*, you can ask what recovery means. When you know *context window*, you can see why a long conversation is not the same as a specification. Words give you handles. Handles let you steer.
+**What you can do next:** draw four boxes — environment, trust, data, apprenticeship — and mark the authority each agent has before the next release.
+</Version>
 
-There is a temptation, especially among students, to interpret all of this as a demand to learn everything before touching an AI tool. That would be the resistance pole arriving early. You do not need to master distributed systems before asking an agent to make a button. You do need to know enough to distinguish a button from a payment system, a local file from a production database, and a suggestion from a verified change. The foundations are not a toll gate placed in front of creativity. They are the guardrails that let creativity survive contact with reality.
+<Version difficulty="advanced" length="detailed">
+## Build an architecture where ownership scales
 
-The tools are fast enough to make a beginner feel like a product team. That feeling can be a gift. It can also hide the moment when a weekend experiment becomes a service with real users. The transition is quiet: someone bookmarks the page, someone enters an email address, someone uploads a file, someone pays, someone expects the data to still be there tomorrow. The code may still look like a conversation. The consequences have become a system.
+The central mistake in AI systems is placing authority in the wrong layer. A model can generate an implementation, a retriever can supply context, and a tool can cause a side effect. None of those layers should silently decide requirements or waive constraints. Veracode's 2025 GenAI Code Security Report found AI-generated code introduces vulnerabilities in **45% of cases** (over 70% in Java), at 2.7× the density of human-written code, with hardcoded credentials appearing at more than twice the rate of human-only commits. Fortune 50 enterprises saw monthly security findings grow roughly 10× between December 2024 and June 2025; IBM and Cisco now allocate 20–30% of IT budgets specifically to refactor AI-generated technical debt. The BCMS Definitive 2026 Guide to Spec-Driven Development names three failure modes that SDD addresses — intent drift, context decay, unverifiable output — and a fourth that sits upstream of all of them: **specification poverty**, the inability to write a good spec because the engineer lacks the architectural vocabulary to articulate intent precisely.
 
-And the system has a second response to the same fear. Some people look at the erased database, the exposed key, the fake package, and decide that the only safe relationship with AI is no relationship at all.
+**Architectural pattern — contracts per surface, owner per system.** Apply the same pattern across three surfaces:
 
-But blind surrender has a sibling.
+- **Retrieval-augmented generation.** Specify source authority, freshness, citation, and refusal behavior. The contract is the boundary between untrusted retrieved content and the answer that reaches the user.
+- **Tool calling.** Specify permissions, input validation, idempotency, and side-effect boundaries. Each tool is a controlled action; the contract is the audit trail.
+- **Multi-agent systems.** Specify roles, handoffs, failure domains, observability, and the human owner who accepts the result. More agents increase the need for contracts; they do not remove the accountable owner.
 
----
+Deloitte's State of AI 2026 reports that only one in five companies has a mature governance model for autonomous AI agents. The EU AI Act, with compliance obligations beginning August 2, 2026, treats formal specifications as evidentiary artifacts for high-risk AI systems, with non-compliance penalties reaching €15 million or 3% of global annual turnover. The Bridge Balance architecture follows this progression: Stage 1 builds the system models you need to write those contracts; Stage 2 (CS50P and CS50W) supplies externally reviewable evidence; Stage 3 operationalizes the controls for AI coding agents; Stage 4 extends them to retrieval, tools, evaluations, and multi-agent failure domains. GitHub put it cleanly when they launched Spec Kit in 2025: "we're moving from 'code is the source of truth' to 'intent is the source of truth.'"
 
-## The Resistance Pole — When Refusal Becomes the Answer
+**What you can do next:** for every new agent surface, write the contract, permission boundary, failure evidence, and named owner before deployment.
+</Version>
 
-In April 2023, three engineers at Samsung Electronics pasted sensitive semiconductor source code and meeting notes into ChatGPT. The information leaked out of the company's network into a model trained on third-party infrastructure. Effective **1 May 2023**, Samsung temporarily banned its staff from using ChatGPT, Google Bard, Microsoft Bing, and other generative-AI tools on company devices. The internal memo, leaked to Bloomberg, said that *failure to comply may result in a breach or compromise of company information, resulting in disciplinary action up to and including termination of employment.* ([Bloomberg](https://www.bloomberg.com/news/articles/2023-05-02/samsung-bans-chatgpt-and-other-generative-ai-use-by-staff-after-leak), 2 May 2023; [TechCrunch](https://techcrunch.com/2023/05/02/samsung-bans-use-of-generative-ai-tools-like-chatgpt-after-april-internal-data-leak/), 2023)
+<Shared label="Sources and fixed references">
+These references are canonical across all nine versions. The versions reuse the same source set but ask different questions of the evidence.
 
-Within months, Samsung had built and rolled out a sanctioned internal AI for software development and translation. The outright ban became a controlled internal policy. The story did not end with refusal. It ended with the company owning its tools.
+- Jason Lemkin / SaaStr / Replit incident: [Ars Technica](https://arstechnica.com/information-technology/2025/07/ai-coding-assistants-chase-phantoms-destroy-real-user-data/) and [PCMag](https://www.pcmag.com/news/vibe-coding-fiasco-replite-ai-agent-goes-rogue-deletes-company-database).
+- Andrej Karpathy's origin of "vibe coding": [ThreadReader](https://threadreaderapp.com/thread/1886192184808149383.html); Collins Dictionary [Word of the Year 2025](https://www.collinsdictionary.com/word-of-the-year/2025).
+- Leonel Acevedo / Enrichlead: [Indie Hackers](https://www.indiehackers.com/post/tech/vibe-coding-has-a-security-problem-vLxyPTrTlZVwDo76oqvr).
+- AI productivity and developer use: [METR](https://metr.org/) and [Stack Overflow Developer Survey 2025](https://survey.stackoverflow.co/2025/ai).
+- AI-generated code security: [Veracode GenAI Code Security Report](https://www.veracode.com/blog/genai-code-security-report).
+- Samsung policy change: [Bloomberg](https://www.bloomberg.com/news/articles/2023-05-02/samsung-bans-chatgpt-and-other-generative-ai-use-by-staff-after-leak).
+- Stack Overflow AI-content policy: [Meta Stack Overflow](https://meta.stackoverflow.com/questions/421831/policy-generative-ai-e-g-chatgpt-is-banned).
 
-Samsung is the cleanest corporate case. But the impulse it documented — *the shortcut is too dangerous; we refuse it* — is everywhere. In December 2022, two weeks after ChatGPT's public release, the volunteer moderators of **Stack Overflow** banned all content produced by generative AI. Their reasoning, posted to the Stack Overflow Meta site, is worth reading in full: *"The average rate of getting correct answers from ChatGPT… is too low. The posting of content created by ChatGPT… is substantially harmful to the site and to users who are asking questions and looking for correct answers."* ([Meta Stack Overflow](https://meta.stackoverflow.com/questions/421831/policy-generative-ai-e-g-chatgpt-is-banned), 5 Dec 2022; [The Verge](https://www.theverge.com/2022/12/5/23493932/chatgpt-ai-generated-answers-temporarily-banned-stack-overflow-llms-dangers), Dec 2022) The ban remains in place today.
-
-What happened next is the part of the story that the resistance pole does not like to tell. By 2024 and 2025, Stack Overflow itself reported a more-than-fifty-percent drop in question traffic — because the developers who used to ask questions there had begun asking LLMs directly. The ban was right about the quality of the answers. The ban coincided with the erosion of the substrate the ban was trying to protect. ([The New Stack, Dec 2025](https://thenewstack.io/ai-is-killing-entry-level-programming-jobs-but-could-it-also-help-save-them/), 2025)
-
-### The Human Cost of Refusal
-
-Behind the structural argument there is a quieter one: real people paid a real price for refusing.
-
-In December 2025, **Fernando Miyahira**, a mobile developer, posted a long LinkedIn account of what refusal had cost him. ([Miyahira, Dec 2025](https://www.linkedin.com/posts/fernando-miyahira_i-lost-job-opportunities-because-i-refused-activity-7401973956842426368-2-MU)) For years he had avoided AI coding tools because his early experiences with older code generators had left him with what he called "messy structure, spaghetti code." When recruiters started asking about Cursor and Windsurf and Claude, he rolled his eyes. Then a dream-company interview arrived, and the technical interviewer asked him the question that had been quietly building for two years: *"How do you use AI tools in your development workflow?"* His answer, in his words: *"I don't. I prefer writing code myself."* Two days later a rejection email arrived. He spent the next weeks learning Cursor and Claude. He doubled his productivity. He ended the post with a sentence that sits at the heart of this introduction: *"Companies are not hiring developers who can code. They are hiring developers who can DELIVER."*
-
-A different senior engineer took a different road. In June 2026, an engineering manager writing under the handle **Manuel Salvatore Martone** posted two long LinkedIn notes describing his most experienced engineer — six months into refusing every AI tool, watching a junior ship a feature in four hours with Claude Code that the senior had sat on for three weeks. ([Martone, June 2026 — post 1](https://www.linkedin.com/posts/manuelmartone_i-spent-six-months-insisting-i-didnt-need-activity-7476605070361554944-4f5T), [post 2](https://www.linkedin.com/posts/manuelmartone_my-most-experienced-engineer-refused-to-use-activity-7469013455694454785-MD_u)) Martone's framing is the most useful sentence about resistance that the year produced: *"Senior engineers often resist AI not because of quality concerns. They resist because mastery is their identity. They spent years learning hard things. AI collapses that learning curve for others. That feels like devaluation."* The senior, Martone wrote, "said nothing," tried the AI that evening on a test suite, and quietly came back changed.
-
-Both stories are true. Both are expensive. Both belong in the same room as Samsung and Stack Overflow, because the bill for resistance is not paid in boardroom memos. It is paid in years of skill atrophy, missed job opportunities, juniors who never learn a craft that is no longer being passed down.
-
-The senior-developer concern, then, is not a refusal of the tools. It is a refusal to let the *transmission* of the craft end. That concern deserves respect even when it is wrong about specific decisions. It deserves respect precisely because the craft has been the thing that made the senior engineer competent enough to recognize what was happening to it.
-
-The resistance pole has not lost the argument. **David Heinemeier Hansson** — DHH — the creator of Ruby on Rails, CTO of 37signals, is one of the most prominent programmers of his generation. In May 2025 he published an essay titled *"Coding should be a vibe!"* His position was sharp: *"I'd retire before permanently handing [AI] the keyboard to drive the code."* ([DHH, May 2025](https://world.hey.com/dhh/coding-should-be-a-vibe-50908f49)) Eight months later, in January 2026, he published another essay, *"Promoting AI agents,"* in which he wrote: *"I'm ready to give the current extreme agent of AI agents a promotion. They're fully capable of producing production-grade contributions to real-life code bases."* ([DHH, Jan 2026](https://world.hey.com/dhh/promoting-ai-agents-3ee04945)) By April 2026, on the Pragmatic Engineer podcast, he described his workflow as agent-first, *"barely writing any code by hand."* ([Pragmatic Engineer, Apr 2026](https://newsletter.pragmaticengineer.com/p/dhhs-new-way-of-writing-code))
-
-Read the two DHH essays back to back. The first one is a man whose identity is bound to the craft of writing code, defending that identity against a tool that threatened to make the craft obsolete. The second is the same man, eight months later, having watched agents produce code he'd actually keep, integrating them into his daily work. Nothing about his principles changed. The tools got good enough that his principles could accommodate them.
-
-DHH's shift is the most-documented version of a pattern that has played out across the industry, and it is the *honest* version of the resistance pole. The resistance pole is not stupid. The resistance pole is not Luddite. The resistance pole's reasons are real: security, mastery, professional pride, the fear that the work one has spent years learning will be devalued. **Charity Majors**, CTO of Honeycomb, put the structural concern bluntly: *"By not hiring and training up junior engineers, we are cannibalizing our own future."* ([InfoWorld, Sep 2024](https://www.infoworld.com/article/3509197/junior-developers-and-ai.html)) **Trisha Gee**, JetBrains JVM lead, in O'Reilly Radar: *"If we don't invest in today's juniors, we won't have any seniors tomorrow."* ([O'Reilly Radar, Oct 2024](https://www.oreilly.com/radar/rift-between-junior-and-senior-developers/)) **Namanyay Goel**, in February 2025: *"Every junior dev I talk to has Copilot or Claude or GPT running 24/7. They're shipping code faster than ever. But when I dig deeper into their understanding of what they're shipping? That's where things get concerning. We're trading deep understanding for quick fixes, and while it feels great in the moment, we're going to pay for this later."* ([IT Pro, Feb 2025](https://www.itpro.com/software/development/junior-developer-ai-tools-coding-skills))
-
-These are the people who built the field. They are not wrong about what they see.
-
-A 2025 study from Microsoft Research and Carnegie Mellon gave the structural concern a name: when developers use generative AI, *"the effort invested in critical thinking shifts from information gathering to information verification; from problem-solving to AI response integration; and from task execution to task stewardship."* ([CSO Online on MS/CMU](https://www.csoonline.com/article/3951403/the-risks-of-entry-level-developers-over-relying-on-ai.html), 2025) The verbs change. You do less typing and more reviewing. Less designing and more verifying. Less debugging and more *deciding whether the debugging the AI did is the debugging you wanted*. The skills atrophy not because the AI takes them away but because the human stops practicing them.
-
-The labor market is already registering the shift. **Entry-level software engineering postings are down roughly 40%** from their 2022 peak, according to Indeed's FRED Labor Market Data. ([Indeed Hiring Lab](https://www.indeed.com/hiring-labor-market-data), 2025) **Big tech entry-level hiring is down more than 50%** over three years. **Software developer employment for workers aged 22 to 25 is down nearly 20%**, per Stanford Digital Economy Lab's *Canaries in the Coal Mine* report. ([Stanford Digital Economy Lab](https://digitaleconomy.stanford.edu/), Nov 2025) **57% of hiring managers** now say they trust AI's work more than they trust the work of interns or recent graduates. ([S&P Global AI Strategy Insights](https://www.spglobal.com/), Jan 2026)
-
-And yet. **AI/ML and architecture-adjacent roles grew from 10% to 50%** of tech postings between 2023 and 2025, per LinkedIn's Workforce Report. ([LinkedIn Workforce Report 2025](https://economicgraph.linkedin.com/)) **Software architect salaries run roughly 50% higher than senior engineers' globally**. The bar has shifted. It has not lowered. The market isn't asking for fewer engineers. It is asking for **differently prepared ones**.
-
-In March 2026 alone, OpenAI, Anthropic, Google, and NVIDIA released over **thirty** new AI models. Stack Overflow's 2025 Developer Survey — the largest survey of working developers in the world, with **49,009** respondents — found that **84%** of developers now use or plan to use AI tools in their development process, up from 76% the year before. Trust, however, fell to **29%**, an **eleven-point drop in one year**. ([Stack Overflow Developer Survey 2025](https://survey.stackoverflow.co/2025/ai), n=49,009) Developers are using tools they don't trust, building systems they can't verify, making decisions faster than their confidence can keep up.
-
-AWS research on teams switching across too many AI tools found they delivered **40% less work and doubled their defect rate**. ([AWS Builder's Library & DORA research](https://aws.amazon.com/builders-library/), 2025) The proliferation of choice is itself a productivity liability.
-
-So here is the resistance pole's bill. DHH's eight-month delay was not free. The Stack Overflow ban coincided with the substrate it was protecting eroding. The senior engineers who refuse AI tools because mastery is their identity find that the next generation is not learning the mastery they would hand off. The universities that ban AI in introductory courses — Tufts CS11, HKU, RV Bangalore, IIT Madras — produce graduates whose first job asks them to use AI tools anyway, and whose first failure they cannot diagnose. *First-time programmers should be discouraged from using such tools,* said Rupesh Nasre of IIT Madras in January 2023, and he was right about the foundation. He was also right that the foundation will not be enough if it does not include the ability to *direct* the tool, not merely refuse it. ([TechCircle, Jan 2023](https://www.techcircle.in/2023/01/19/colleges-warn-students-against-using-chatgpt-to-write-essays-code))
-
-The resistance pole has not lost the argument. It has lost the time. The students who learned to code without AI tools graduated into jobs that require them to use them. The senior engineers who refused AI tools found their juniors shipping features they could not match. The Stack Overflow moderators who banned AI-generated answers watched the question traffic they were protecting move to chatbots. Refusal was the right instinct, applied at the wrong scale.
-
-Yet refusal also has a price. And the price reveals where both poles came from.
-
----
-
-## The Shared Trap — Why Both Poles Fail
-
-Both poles share a root. They disagree about whether to use the AI agent. They agree that the human is not in charge.
-
-The vibe coder surrenders the act of specifying, the act of evaluating, and the act of correcting. They hand the engineering over and trust the output. The resister surrenders the act of directing — the act of telling an AI agent *what* to build, *under what constraints*, *with what verification*. They hand the leverage over and trust the refusal. Either way, the human has stepped back from the part of the work that makes engineering engineering.
-
-The discipline this book teaches has a name: **Specification Poverty**.
-
-It is the condition in which a person — sometimes a beginner, sometimes a senior engineer — does not know how to describe what they want clearly enough that an AI agent, or a human collaborator, or a future version of themselves, could produce it. Vibe coding is Specification Poverty in motion: the user cannot specify, so they accept whatever the model generates. AI resistance is Specification Poverty in reverse: the user cannot specify, so they refuse the conversation. The surrender pole and the resistance pole are mirror images of the same gap.
-
-It is worth sitting with this symmetry for a moment, because it does the rhetorical work that the rest of the introduction depends on. The surrender pole is not evil. It is impatient and awed and under-equipped. The resistance pole is not cowardly. It is principled and afraid and under-equipped in a different way. Both groups are missing the same thing: the discipline of saying, in writing, what the system is supposed to do before the system exists.
-
-A useful analogy is the difference between cooking and ordering takeout. Vibe coding is ordering takeout every night: fast, often delicious, and over time you forget how to feed yourself. Resistance is refusing to order takeout and trying to cook every meal from scratch even when you are exhausted and the pantry is bare: principled, but eventually you stop eating well. Specification-Driven Engineering is cooking well — knowing when to follow a recipe, when to improvise, when to step away from the stove, and how to set the table so that the meal is actually what you wanted to eat.
-
-The shared trap is the gap. It is the place where neither the AI nor the human is doing the engineering, and the resulting system reflects no one's judgment. The cure is to do the engineering.
-
-What does *engineering* mean here? Not the title on a business card. Engineering is the practice of making decisions under constraints, in writing, before the code exists. The decisions are: what the system does, what it does not do, what happens when it fails, what the failure looks like, what the user sees, what the user does not see, who can change it, who can read it, what stays when the original team leaves. None of these decisions are made by an AI agent. They are made by the human who writes the specification, signs off on the design, and accepts the consequences.
-
-The metaphor that holds for this book's audience is the architect. Architects do not lay every brick. They do not cut every board. They decide the shape of the building, the load it must bear, the climate it must survive, the people it must serve, and the budget it must fit. The contractors who actually pour the foundation and frame the walls are necessary and skilled. But the architect is the one who, on paper, decides what the building *is*. Without an architect, the building has walls but no design. With an architect, the building has a design that the contractors can build, the inspectors can verify, and the occupants can live in.
-
-A student reading this in 2026 is reading it at a hinge year. The labor market is signaling that architects are in demand and that wall-layers are not. That signal will not reverse. The disciplines that survive this transition are the disciplines that turn humans into the kind of builders AI agents are useful to, not the kind of builders AI agents replace.
-
-If both poles are symptoms, the question is the cure.
-
----
-
-## The Bridge — Spec-Driven Engineering
-
-The cure is not *more AI* and it is not *less AI*. It is **Spec-Driven Engineering** — the practice of specifying a system deliberately, designing it deliberately, and directing AI execution deliberately. The AI is an implementation layer. The specification is the thinking layer. The human is the engineering layer.
-
-**The Bridge Balance** is a four-stage curriculum that builds that discipline, end to end.
-
-| Stage | Focus | What you walk away with |
-|-------|-------|--------------------------|
-| **1. Spec-Aware Vibe Engineering** | Foundations: architecture, programming, front-end, back-end, databases, Git — taught through spec-first discipline | You lead AI agents with engineering judgment, not blind prompt-and-hope |
-| **2. Credible Validation** | CS50P (Python) + CS50W (Web) — two Harvard certificates as internationally recognized proof | A credentialed portfolio that proves what you can *actually* do |
-| **3. Mastering AI Coding Agents** | Claude Code, OpenCode, prompt / context / loop engineering, skills, MCP servers | You master the tools — they don't master you |
-| **4. Engineering Autonomous AI Agents** | RAG, tool calling, multi-agent systems, evaluations, OpenAI Agents SDK, LangGraph | You ship production-grade autonomous systems |
-
-The stages are not decorative. Stage 1 is where you learn the foundations the surrender pole skipped and the resistance pole refused to delegate. Stage 2 is where you prove those foundations to a skeptical world. Stage 3 is where you take the tools seriously — including the ones the resistance pole is right to distrust. Stage 4 is where you build the systems the surrender pole wishes they could have built if only they'd understood what they were shipping.
-
-The four stages also model a deeper claim about how a working engineer thinks. Stage 1 teaches that the engineering comes *first*: the foundation decisions are made before the model is asked to execute. Stage 2 teaches that the engineering is *verifiable* — that the discipline survives contact with skeptical external readers (a Harvard grader's eyes are unforgiving, and that is the point). Stage 3 teaches that the engineering *directs* — that the AI is an instrument, not an oracle. Stage 4 teaches that the engineering *scales* — that systems made of many agents, many tools, and many failure modes are still engineering, still reviewable, still owned by a human who can explain what the system does and why.
-
-A student who finishes Stage 4 has, by the end of it, built something that no individual human in 2018 could have built alone, and they have built it because they could specify what they wanted. They have not surrendered to the tool and they have not refused the tool. They have used the tool the way a structural engineer uses a crane — to lift things that would otherwise be impossible, with the assurance that the load paths and the welds are theirs to design.
-
-Kent Beck, the agile pioneer who co-authored the original methodology that half the industry grew up on, wrote a sentence in February 2025 that captures the economic shift that drives every other number in this introduction: *"I've been reluctant to try ChatGPT. Today I got over that reluctance. Now I understand why I was reluctant. The value of 90% of my skills just dropped to $0. The leverage for the remaining 10% went up 1000x. I need to recalibrate."* ([Rob Bowley on Beck](https://blog.robbowley.net/2025/02/03/a-plea-to-junior-developers-using-genai-coding-assistants/), Feb 2025)
-
-Read that again. *The value of 90% of my skills just dropped to $0. The leverage for the remaining 10% went up 1000x.* The 90% is the skill of writing the code. The remaining 10% is the skill of knowing what the code should do. The leverage on the latter has gone up because AI now executes the former at near-zero marginal cost. The student who learns the 10% — who can specify what they want, evaluate what they get, and accept responsibility for what they ship — is the student who benefits from the shift. The student who only learned the 90% is the student Beck is mourning.
-
-If you finish the curriculum, you will not be *"a developer who uses AI tools."* You will be **an engineer who directs AI systems** — capable of specifying, designing, and evaluating systems that AI alone cannot produce. That distinction, in 2026 and beyond, is the one the market is paying for. It is also the one the founders in the first half of this introduction wish they had.
-
-The cure is a discipline. Here is how the rest of this book teaches it.
-
----
-
-## Where You Start
+## Where to start
 
 | If you are… | Start here |
-|-------------|------------|
-| **New to programming** | **[Stage 1 → Foundations](/stage-01-spec-aware-vibe-engineering/)** — builds from zero, with the spec-first discipline the surrender pole skipped |
-| **Comfortable with code, new to AI agents** | **[Stage 3 → Mastering AI Coding Agents](/stage-03-mastering-ai-coding-agents/)** — skips syntax, focuses on direction |
-| **Already shipping agents** | **[Stage 4 → Engineering Autonomous AI Agents](/stage-04-engineering-autonomous-ai-agents/)** — RAG, multi-agent, evaluations, production systems |
+|---|---|
+| New to programming | [Stage 1 → Foundations](/stage-01-spec-aware-vibe-engineering/) |
+| Comfortable with code, new to AI agents | [Stage 3 → Mastering AI Coding Agents](/stage-03-mastering-ai-coding-agents/) |
+| Already shipping agents | [Stage 4 → Engineering Autonomous AI Agents](/stage-04-engineering-autonomous-ai-agents/) |
+</Shared>
 
 > *The bridge is built on specifications. The crossing is yours.*
-
-### Sources
-
-The research and stories cited above were drawn from the following primary sources, all of which were verified on 2026-08-19:
-
-**Cold Open — vibe coding's origin and the Lemkin incident**
-
-- Andrej Karpathy, X post, 2 February 2025 — *"There's a new kind of coding I call 'vibe coding'…"* — [ThreadReader](https://threadreaderapp.com/thread/1886192184808149383.html) · [MIT Technology Review](https://www.technologyreview.com/2025/04/16/1115135/what-is-vibe-coding-exactly/) · [martinfowler.com](https://martinfowler.com/bliki/VibeCoding.html)
-- Collins Dictionary, *Word of the Year 2025* — [collinsdictionary.com](https://www.collinsdictionary.com/word-of-the-year/2025)
-- Jason Lemkin / SaaStr / Replit incident, July 2025 — [Ars Technica](https://arstechnica.com/information-technology/2025/07/ai-coding-assistants-chase-phantoms-destroy-real-user-data/) · [PCMag](https://www.pcmag.com/news/vibe-coding-fiasco-replite-ai-agent-goes-rogue-deletes-company-database) · [Hackaday](https://hackaday.com/2025/07/23/vibe-coding-goes-wrong-as-ai-wipes-entire-database/)
-
-**Surrender Pole — blind vibe coding**
-
-- ZavicoAutomation (Indonesian economics student), *I built a SaaS with zero coding knowledge*, Medium, May 2026 — [Medium](https://medium.com/@zaidanmuzali/i-built-a-saas-with-zero-coding-knowledge-heres-everything-that-went-wrong-c15e477c5603)
-- Leonel Acevedo / Enrichlead, Indie Hackers, March 2025 — [Indie Hackers](https://www.indiehackers.com/post/tech/vibe-coding-has-a-security-problem-vLxyPTrTlZVwDo76oqvr)
-- METR AI Productivity Study, 2025 — [metr.org](https://metr.org/)
-- Stack Overflow Developer Survey 2025, AI section — [survey.stackoverflow.co/2025/ai](https://survey.stackoverflow.co/2025/ai) · [press release](https://stackoverflow.co/company/press/archive/stack-overflow-2025-developer-survey/)
-- Veracode GenAI Code Security Report, 2025 — [veracode.com](https://www.veracode.com/blog/genai-code-security-report)
-- Dark Reading / Apiiro Enterprise Security Data, 2025 — [darkreading.com](https://www.darkreading.com/)
-
-**Resistance Pole — AI resistance and its bill**
-
-- Samsung Electronics AI ban, May 2023 — [Bloomberg](https://www.bloomberg.com/news/articles/2023-05-02/samsung-bans-chatgpt-and-other-generative-ai-use-by-staff-after-leak) · [TechCrunch](https://techcrunch.com/2023/05/02/samsung-bans-use-of-generative-ai-tools-like-chatgpt-after-april-internal-data-leak/) · [CNBC](https://www.cnbc.com/2023/05/02/samsung-bans-use-of-ai-like-chatgpt-for-staff-after-misuse-of-chatbot.html) · [The Verge](https://www.theverge.com/2025/5/2/23707796/samsung-ban-chatgpt-generative-ai-bing-bard-employees-security-concerns)
-- Stack Overflow AI-content ban, December 2022 — [Meta Stack Overflow](https://meta.stackoverflow.com/questions/421831/policy-generative-ai-e-g-chatgpt-is-banned) · [The Verge](https://www.theverge.com/2022/12/5/23493932/chatgpt-ai-generated-answers-temporarily-banned-stack-overflow-llms-dangers) · [The New Stack (Stefania Druga keynote, Dec 2025)](https://thenewstack.io/ai-is-killing-entry-level-programming-jobs-but-could-it-also-help-save-them/)
-- DHH essays — [Coding should be a vibe! (May 2025)](https://world.hey.com/dhh/coding-should-be-a-vibe-50908f49) · [The premise trap](https://world.hey.com/dhh/the-premise-trap-924b8cd9) · [Promoting AI agents (Jan 2026)](https://world.hey.com/dhh/promoting-ai-agents-3ee04945) · [Pragmatic Engineer interview (Apr 2026)](https://newsletter.pragmaticengineer.com/p/dhhs-new-way-of-writing-code)
-- Senior-developer coalition — [InfoWorld on Charity Majors (Sep 2024)](https://www.infoworld.com/article/3509197/junior-developers-and-ai.html) · [O'Reilly Radar on Trisha Gee (Oct 2024)](https://www.oreilly.com/radar/rift-between-junior-and-senior-developers/) · [IT Pro on Namanyay Goel (Feb 2025)](https://www.itpro.com/software/development/junior-developer-ai-tools-coding-skills) · [CSO Online on Microsoft/CMU study (2025)](https://www.csoonline.com/article/3951403/the-risks-of-entry-level-developers-over-relying-on-ai.html)
-- University AI bans — [Tufts Daily (Feb 2023)](https://www.tuftsdaily.com/article/2023/02/faculty-split-on-using-chatgpt-as-university-prepares-to-confront-ai-boom) · [HKU Teaching and Learning (Feb 2023)](https://tl.hku.hk/2023/02/about-chatgpt/) · [TechCircle on IIT Madras Nasre (Jan 2023)](https://www.techcircle.in/2023/01/19/colleges-warn-students-against-using-chatgpt-to-write-essays-code)
-- Stanford Digital Economy Lab *Canaries in the Coal Mine* (Brynjolfsson et al., Nov 2025) — [digitaleconomy.stanford.edu](https://digitaleconomy.stanford.edu/)
-- LinkedIn Workforce Report 2025 — [economicgraph.linkedin.com](https://economicgraph.linkedin.com/)
-- Indeed Hiring Lab / FRED Labor Market Data, 2025 — [indeed.com/hiring-labor-market-data](https://www.indeed.com/hiring-labor-market-data)
-- S&P Global AI Strategy Insights, January 2026 — [spglobal.com](https://www.spglobal.com/)
-- AWS Builder's Library & DORA research, 2025 — [aws.amazon.com/builders-library](https://aws.amazon.com/builders-library/)
-
-**Bridge — the discipline and the four stages**
-
-- Kent Beck, X post, February 2025 — *"The value of 90% of my skills just dropped to $0. The leverage for the remaining 10% went up 1000x."* — quoted in [Rob Bowley, *A plea to junior developers using GenAI coding assistants*](https://blog.robbowley.net/2025/02/03/a-plea-to-junior-developers-using-genai-coding-assistants/)
-
----
-
-*Sources throughout: Stack Overflow Developer Survey 2025 · Veracode GenAI Code Security Report 2025 · METR AI Productivity Study 2025 · Stanford Digital Economy Lab "Canaries in the Coal Mine" (Brynjolfsson et al., Nov 2025) · Google DORA State of AI-Assisted Software Development 2025 · S&P Global AI Strategy Insights Jan 2026 · Dark Reading / Apiiro Enterprise Security Data 2025–2026 · Collins Dictionary Word of the Year 2025 · ICSE 2025 Panel · Indeed FRED Labor Market Data 2025 · LinkedIn Workforce Report 2025 · IBM Think 2025 · GitHub Spec Kit Launch 2025 · arXiv 2507.06438 (Stanford SCALE) · BCMS Definitive 2026 Guide · Anthropic 2026 Agentic Coding Trends · Deloitte State of AI 2026 · EU AI Act Compliance Timeline 2026.*

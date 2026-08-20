@@ -1,0 +1,29 @@
+/* Adaptive Reader Controls — complete version presentation (feature 008). */
+
+/* Active version is a direct reading section, not a second dropdown. */
+article[data-arc-hydrated="true"] details[data-arc-block][data-arc-visible="true"] {
+  display: block;
+}
+
+article[data-arc-hydrated="true"] details[data-arc-block][data-arc-visible="true"] > summary {
+  display: none;
+}
+
+/* Shared fixed references remain visible once across all modes. */
+.arc-shared {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--tbb-text-muted) 35%, transparent);
+}
+
+.arc-shared__label {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* Hide inactive blocks only after JavaScript marks the article hydrated. This
+   leaves native <details> reachable when scripting is unavailable. */
+article[data-arc-hydrated="true"] details[data-arc-block]:not([data-arc-visible]),
+article[data-arc-hydrated="true"] details[data-arc-block][data-arc-visible="false"] {
+  display: none;
+}

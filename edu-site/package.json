@@ -15,6 +15,7 @@
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
     "check:frontmatter": "node scripts/check-frontmatter.mjs",
+    "check:reader-versions": "node scripts/check-reader-versions.mjs",
     "test:audit": "node scripts/serve-and-test.mjs",
     "test:a11y": "node scripts/axe.mjs",
     "test:perf": "node scripts/lighthouse.mjs",

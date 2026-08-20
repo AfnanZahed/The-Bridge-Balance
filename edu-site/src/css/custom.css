@@ -27,6 +27,7 @@
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500;600&display=swap");
+@import "./reader-controls.css";
 
 /* ─── Apple Pro token layer (light mode) ─────────────────────────────────── */
 :root {
@@ -72,6 +73,7 @@
   --tbb-surface-glass: oklch(1 0 0 / 0.72);
   --tbb-surface-solid: oklch(1 0 0);
   --tbb-navbar-glass: oklch(1 0 0 / 0.8);
+  --tbb-apple-frost: saturate(180%) blur(24px);
 
   /* Borders — Apple Pro hairline first, strong variant for emphasis */
   --hairline: oklch(0.13 0.002 250 / 0.08);
@@ -266,6 +268,7 @@
   --tbb-surface-glass: oklch(0.09 0 0 / 0.72);
   --tbb-surface-solid: oklch(0.12 0 0);
   --tbb-navbar-glass: oklch(0.07 0 0 / 0.8);
+  --tbb-apple-frost: saturate(180%) blur(24px);
 
   --hairline: oklch(1 0 0 / 0.08);
   --tbb-border: color-mix(in srgb, var(--hairline) 90%, transparent);
@@ -925,7 +928,10 @@ pre {
 .tbb-stage-card__desc {
   font-size: 0.9375rem;
   line-height: 1.55;
-  color: var(--tbb-text-muted);
+  /* Darkened from --tbb-text-muted for AA contrast on the card's white
+     surface (axe: 4.5:1). The mix keeps the muted feel while satisfying
+     the 4.5:1 floor for body text. */
+  color: color-mix(in srgb, var(--tbb-text) 75%, transparent);
   margin: 0 0 1.5rem;
   flex-grow: 1;
 }
@@ -936,7 +942,10 @@ pre {
   gap: 0.375rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--stage-color, var(--ifm-color-primary));
+  /* Stage color darkened against --tbb-text so the link text meets AA 4.5:1
+     against the card's white background regardless of which stage token is
+     applied (amber/teal/indigo/plum). */
+  color: color-mix(in srgb, var(--stage-color, var(--ifm-color-primary)) 55%, var(--tbb-text) 45%);
   margin-top: auto;
 }
 
@@ -1416,16 +1425,163 @@ article hr {
   color: var(--tbb-text);
 }
 
-/* ─── Mobile navbar drawer ───────────────────────────────────────────────── */
-.navbar-sidebar {
-  background: var(--tbb-surface-glass);
-  backdrop-filter: var(--tbb-apple-frost, saturate(180%) blur(32px));
-  -webkit-backdrop-filter: var(--tbb-apple-frost, saturate(180%) blur(32px));
+/* ─── SiteMenu — rebuilt hamburger drawer ─────────────────────────────────── */
+
+/* The hook toggles this attribute instead of mutating body styles. Keeping
+   scroll lock on the root also works when the body is a Docusaurus wrapper. */
+html[data-drawer-open="true"] {
+  overflow: hidden;
 }
 
-.navbar-sidebar__backdrop {
-  background: rgba(0, 0, 0, 0.4);
+.site-menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  margin-right: 0.25rem;
+  color: var(--tbb-text);
+  border-radius: var(--tbb-radius-md);
 }
+
+.site-menu-button:hover {
+  color: var(--tbb-accent);
+  background: var(--tbb-accent-subtle);
+}
+
+.site-menu-button:focus-visible,
+.site-drawer__close:focus-visible,
+.site-drawer__link:focus-visible {
+  /* `--tbb-focus-ring` is a box-shadow list, not a color, so it cannot be
+     passed to `outline`. Use a 2 px solid outline in the accent color and
+     add the glow as a box-shadow. */
+  outline: 2px solid var(--tbb-accent);
+  outline-offset: 2px;
+  box-shadow: var(--tbb-focus-ring);
+}
+
+.site-drawer__backdrop {
+  /* This element is mounted outside the filtered navbar, so fixed geometry
+     resolves against the viewport. The open navbar gets a higher stacking
+     context below so its hamburger remains clickable above the backdrop. */
+  position: fixed;
+  inset: 0;
+  z-index: 199;
+  background: color-mix(in srgb, #000 42%, transparent);
+  cursor: pointer;
+  opacity: 1;
+}
+
+.navbar.navbar-sidebar--show {
+  position: relative;
+  z-index: 202;
+}
+
+.site-drawer {
+  position: fixed;
+  left: 0;
+  z-index: 201;
+  display: flex;
+  flex-direction: column;
+  width: min(20rem, 82vw);
+  height: calc(100vh - var(--site-drawer-navbar-height, var(--ifm-navbar-height)));
+  height: calc(100dvh - var(--site-drawer-navbar-height, var(--ifm-navbar-height)));
+  overflow: hidden;
+  color: var(--tbb-text);
+  background: var(--tbb-surface-glass);
+  border-right: 1px solid var(--tbb-border);
+  box-shadow: var(--tbb-shadow-lg);
+  transform: translateX(0);
+  isolation: isolate;
+  backdrop-filter: var(--tbb-apple-frost);
+  -webkit-backdrop-filter: var(--tbb-apple-frost);
+}
+
+.site-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.75rem 0.75rem 0;
+}
+
+.site-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  width: 44px;
+  height: 44px;
+  margin: 0.75rem 0.75rem 0;
+  color: var(--tbb-text-muted);
+  background: transparent;
+  border: 0;
+  border-radius: var(--tbb-radius-md);
+  cursor: pointer;
+}
+
+.site-drawer__close:hover {
+  color: var(--tbb-text);
+  background: var(--tbb-accent-subtle);
+}
+
+.site-drawer__panel {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.75rem 1rem 2rem;
+}
+
+.site-drawer__list {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-drawer__link {
+  display: block;
+  padding: 0.875rem 1rem;
+  color: var(--tbb-text);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--tbb-radius-md);
+}
+
+.site-drawer__link:hover,
+.site-drawer__link[data-active="true"] {
+  color: var(--tbb-accent);
+  background: var(--tbb-accent-subtle);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-drawer {
+    background: var(--tbb-surface-solid);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-drawer,
+  .site-drawer__backdrop {
+    transition: transform 200ms ease, opacity 200ms ease;
+  }
+}
+
+@media (max-width: 767px) {
+  .site-drawer {
+    width: min(20rem, 88vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-drawer,
+  .site-drawer__backdrop {
+    transition: none;
+  }
+}
+
 
 /* ─── Native form controls ──────────────────────────────────────────────── */
 input[type="checkbox"],

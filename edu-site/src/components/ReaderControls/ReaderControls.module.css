@@ -1,0 +1,214 @@
+.anchor {
+  margin: 0 0 1rem;
+  max-width: 100%;
+}
+
+.card {
+  position: relative;
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem 1.1rem;
+  color: var(--tbb-text);
+  background: var(--tbb-surface-glass);
+  border-radius: var(--tbb-radius-lg);
+  box-shadow: var(--tbb-shadow-md);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .card {
+    background: var(--tbb-surface-solid);
+  }
+}
+
+.headerRow,
+.groups,
+.pills {
+  display: flex;
+  align-items: center;
+}
+
+.headerRow {
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.eyebrow,
+.modeLabel,
+.groupLabel,
+.cue,
+.substitution {
+  margin: 0;
+}
+
+.eyebrow,
+.groupLabel {
+  color: var(--tbb-text-muted);
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.modeLabel {
+  margin-top: 0.15rem;
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+.groups {
+  flex-wrap: wrap;
+  gap: 1rem 1.25rem;
+}
+
+.group {
+  display: grid;
+  gap: 0.35rem;
+  min-width: min(100%, 18rem);
+}
+
+.pills {
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.pill,
+.reset {
+  min-height: 2rem;
+  border: 0;
+  border-radius: var(--tbb-radius-pill);
+  font: inherit;
+  cursor: pointer;
+  transition: background-color var(--tbb-duration-fast) var(--tbb-ease),
+    color var(--tbb-duration-fast) var(--tbb-ease), opacity var(--tbb-duration-fast) var(--tbb-ease),
+    transform var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.pill {
+  padding: 0.3rem 0.75rem;
+  color: var(--tbb-text-muted);
+  background: var(--tbb-surface-emphasis);
+}
+
+.pill:hover {
+  color: var(--tbb-text);
+  transform: translateY(-1px);
+}
+
+.pillSelected {
+  color: var(--tbb-text-inverse);
+  background: var(--tbb-accent);
+}
+
+.pillUnavailable {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.pillUnavailable:hover {
+  transform: none;
+}
+
+.reset {
+  padding: 0.3rem 0.75rem;
+  color: var(--tbb-accent);
+  background: transparent;
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.reset:hover {
+  background: var(--tbb-accent-subtle);
+}
+
+.pill:focus-visible,
+.reset:focus-visible {
+  outline: 3px solid var(--tbb-focus-ring);
+  outline-offset: 2px;
+}
+
+.cue,
+.substitution {
+  color: var(--tbb-text-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.substitution {
+  color: var(--tbb-accent);
+}
+
+/* Per-combination description: live popover-style note anchored to the
+   current effective combination (FR-011, SC-003). Restrained typography
+   per Principle VII. */
+.combinationDescription {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0.55rem 0.7rem;
+  color: var(--tbb-text);
+  background: var(--tbb-surface-emphasis);
+  border-radius: var(--tbb-radius-md);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.descriptionLens {
+  color: var(--tbb-text-muted);
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.descriptionDivider {
+  color: var(--tbb-text-faint, var(--tbb-text-muted));
+}
+
+.descriptionUse {
+  color: var(--tbb-text);
+}
+
+.descriptionChooseIf {
+  color: var(--tbb-text-muted);
+  font-size: 0.78rem;
+}
+
+.descriptionChooseIf strong {
+  color: var(--tbb-text);
+  font-weight: 650;
+}
+
+.tooltip {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.effectiveState {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .groups,
+  .group {
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .pill {
+    flex: 1 1 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pill,
+  .reset {
+    transition: none;
+  }
+}
