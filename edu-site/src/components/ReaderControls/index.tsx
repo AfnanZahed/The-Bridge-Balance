@@ -7,6 +7,7 @@
  */
 
 import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
+import { useDoc } from "@docusaurus/plugin-content-docs/client";
 import {
   combinationKey,
   DIFFICULTIES,
@@ -99,6 +100,16 @@ export default function ReaderControls(): React.ReactElement {
   const difficultyGroupId = useId();
   const lengthGroupId = useId();
   const tooltipId = useId();
+
+  // Gate the per-chapter completeness indicator (FR-005, SC-004) on
+  // chapter_state === "text-ready" so overview / placeholder pages don't
+  // show it. Source of truth: the same frontmatter ChapterState reads via
+  // MDXComponents.tsx — kept local here to avoid prop-drilling.
+  const { frontMatter } = useDoc();
+  const fm = frontMatter as unknown as {
+    chapter_state?: "placeholder" | "text-ready" | "video-published";
+  };
+  const isTextReady = fm?.chapter_state === "text-ready";
 
   useEffect(() => {
     rootRef.current = getArticleRoot(anchorRef.current);
@@ -263,6 +274,11 @@ export default function ReaderControls(): React.ReactElement {
             <span className={styles.descriptionChooseIf}>
               <strong>Choose this if:</strong> {effectiveDescription.chooseIf}
             </span>
+          </p>
+        ) : null}
+        {hydrated && isTextReady && authored.combinations.size > 0 ? (
+          <p className={styles.completeness} role="status">
+            {authored.combinations.size}/9 modes available
           </p>
         ) : null}
         {substitutionNote ? <p className={styles.substitution} role="status">{substitutionNote}</p> : null}

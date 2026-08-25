@@ -129,7 +129,8 @@
 }
 
 .cue,
-.substitution {
+.substitution,
+.completeness {
   color: var(--tbb-text-muted);
   font-size: 0.78rem;
   line-height: 1.45;
@@ -137,6 +138,26 @@
 
 .substitution {
   color: var(--tbb-accent);
+}
+
+/* Per-chapter authored-mode count (FR-005/FR-006/FR-009). Shares the
+   muted typography of .cue but is visually distinct via a leading dot in
+   the soft accent color, separating it from no-dot .cue and the
+   full-accent .substitution. See specs/012-chapter-state-transparency. */
+.completeness {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+}
+
+.completeness::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--tbb-accent-subtle);
 }
 
 /* Per-combination description: live popover-style note anchored to the

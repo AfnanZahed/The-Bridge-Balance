@@ -31,7 +31,7 @@ const REQUIRED_KEYS = [
   "title",
   "description",
 ];
-const STAGE_FILES = ["intro.md", "llm-providers.md"]; // not chapter_state required
+const STAGE_FILES = ["intro.md", "llm-providers.md", "glossary.md", "choose-your-path.md"]; // not chapter_state required
 const VALID_STATES = ["placeholder", "text-ready", "video-published"];
 
 /** @type {string[]} */
@@ -60,13 +60,13 @@ async function* walk(dir) {
  * @param {string} text
  */
 function parseFrontmatter(text) {
-  const match = text.match(/^---\n([\s\S]*?)\n---\n/);
+  const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
   if (!match) return null;
   const yaml = match[1];
   /** @type {Record<string, string>} */
   const result = {};
-  for (const line of yaml.split("\n")) {
-    const m = line.match(/^([a-zA-Z_][\w-]*):\s*(.*)$/);
+  for (const line of yaml.split(/\r?\n/)) {
+    const m = line.match(/^([a-zA-Z_][\w-]*):\s*(.*?)\r?$/);
     if (m) {
       let v = m[2].trim();
       // strip surrounding quotes
