@@ -3,7 +3,6 @@ sidebar_label: "Performance & Accessibility Targets"
 sidebar_position: 99
 title: "Performance & Accessibility Targets"
 description: "Lighthouse + axe-core score thresholds that gate the CI pipeline. What we measure, why we measure it, and how to fix the most common regressions."
-chapter_state: "text-ready"
 ---
 
 # Performance & Accessibility Targets

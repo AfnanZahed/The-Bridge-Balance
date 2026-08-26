@@ -31,7 +31,7 @@ const REQUIRED_KEYS = [
   "title",
   "description",
 ];
-const STAGE_FILES = ["intro.md", "llm-providers.md", "glossary.md", "choose-your-path.md"]; // not chapter_state required
+const STAGE_FILES = ["intro.md", "llm-providers.md", "glossary.md", "choose-your-path.md", "perf-targets.md"]; // not chapter_state required
 const VALID_STATES = ["placeholder", "text-ready", "video-published"];
 
 /** @type {string[]} */
