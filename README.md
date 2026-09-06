@@ -17,6 +17,7 @@
   <img alt="Spec-Driven Development" src="https://img.shields.io/badge/Spec--Driven-Development-ec4899?style=flat-square">
   <img alt="Free tier" src="https://img.shields.io/badge/Free%20Tier-Only-f59e0b?style=flat-square">
   <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-Welcome-ff7849?style=flat-square">
+  <img alt="License" src="https://img.shields.io/badge/License-All%20Rights%20Reserved-6b7280?style=flat-square">
 </p>
 
 <p align="center">
@@ -152,7 +153,7 @@ Issues and PRs are welcome — see [`CONTRIBUTING.md`](./CONTRIBUTING.md) for th
 
 ## 📄 License
 
-TBD — a license will be added once the split between the open curriculum and the paid product catalog is finalized.
+**All rights reserved.** This repository is proprietary — see [`LICENSE`](./LICENSE). Nothing here may be copied, redistributed, or reused without permission.
 
 ## 🌉 Free-forever guarantee
 
