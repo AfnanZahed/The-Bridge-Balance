@@ -1,0 +1,127 @@
+# Concept ledger — every term, defined once, tracked forever.
+#
+# Purpose: stop a later chapter redefining what an earlier one established, and
+# stop a term being used before it has ever been glossed.
+#
+# Schema per entry:
+#   term:            the term as it appears in prose
+#   status:          defined | used-undefined | proposed
+#   canonical:       the one definition. Reused verbatim wherever it appears.
+#   registers:       optional alternative wordings of the SAME definition, for
+#                    a different context - never a different meaning
+#   first_defined:   chapter path where it is introduced
+#   used_in:         chapters that rely on it (append as the book grows)
+#   notes:           anything an author needs to know before touching it
+#
+# Rules:
+#   - One canonical definition per term. Register variants live under it, never
+#     as a second entry.
+#   - Every term is glossed inline at first use, in twelve words or fewer, in
+#     EVERY chapter, every time - first use is counted per chapter, because a
+#     reader arriving from a search result has no earlier chapter. A term used
+#     without a gloss is a defect. Record it as status: used-undefined so it
+#     gets fixed, not forgotten.
+
+version: 1
+seeded: 2026-08-23
+seeded_from: edu-site/docs/intro.md
+
+concepts:
+
+  - term: Spec-Driven Engineering
+    status: defined
+    canonical: >-
+      The discipline in which the engineer specifies intent and boundaries, the
+      AI implements within them, and a human verifies before taking ownership.
+    first_defined: docs/intro.md
+    used_in: [docs/intro.md]
+    notes: >-
+      Curriculum-coined. Must be defined once on first use in EVERY chapter
+      that uses it, however late in the book - field expertise does not cover
+      this project's own vocabulary.
+
+  - term: vibe coding
+    status: defined
+    canonical: >-
+      Building software entirely through iterative AI prompts without
+      understanding the underlying code. Coined by Andrej Karpathy, February
+      2025; Collins Dictionary Word of the Year 2025.
+    first_defined: docs/intro.md
+    used_in: [docs/intro.md]
+    notes: Always attributed. Never presented as this project's own coinage.
+
+  - term: agent
+    status: defined
+    canonical: >-
+      A program that can read your files, write new code, edit existing code,
+      and run commands on a computer — on its own, in a sequence, without
+      asking you to approve every single step.
+    registers:
+      analogy: >-
+        A very fast, very capable helper — not an architect, and not the owner
+        of the result. It can read your files, write new code, edit what's
+        already there, and run commands, all without you approving every
+        single step.
+    first_defined: docs/intro.md
+    used_in: [docs/intro.md]
+    notes: >-
+      Canonical wording above is what shipped. Gloss it at first use in every
+      chapter that uses it - no exceptions by stage.
+
+  - term: specification (spec)
+    status: defined
+    canonical: >-
+      A written statement of what you want built and what shouldn't change,
+      agreed before you start.
+    first_defined: docs/intro.md
+    used_in: [docs/intro.md]
+    notes: >-
+      Glossed inline on
+      first use ("Not a full specification — a written statement of what you
+      want built and what shouldn't change, agreed before you start — just a
+      plain sentence..."). Wording is a light simplification of the earlier
+      framework-draft proposal, adapted to read naturally inline rather than as
+      a standalone definition; substance is unchanged (intent + boundaries,
+      agreed before implementation starts).
+
+  - term: blast radius
+    status: defined
+    canonical: >-
+      How much can break, and how far the damage reaches, if a change goes
+      wrong.
+    first_defined: docs/intro.md
+    used_in: [docs/intro.md]
+    notes: >-
+      Introduced in the tool-calling worked example, glossed inline on first
+      use ("the blast radius of an error ... how much can break, and how far
+      the damage reaches"), then reused unglossed later in the same chapter
+      ("every system's blast radius") - acceptable reuse once a term has been
+      glossed once in that chapter. The intro also covers adjacent ground
+      (the four-criteria experiment-to-system transition) in different
+      vocabulary; that was deliberate, not an oversight.
+
+  - term: verification gate
+    status: proposed
+    canonical: >-
+      The check a change must pass before a human accepts ownership of it.
+    first_defined: null
+    used_in: []
+    notes: >-
+      Not shipped anywhere yet. The concept it names is present throughout the
+      intro ("verify before ownership transfers," the three-surface contract
+      architecture) but never coined as this specific standalone term.
+      Available for whichever future lesson names it first.
+
+  - term: RAG (Retrieval-Augmented Generation)
+    status: used-undefined
+    canonical: null
+    first_defined: null
+    used_in: [docs/intro.md]
+    notes: >-
+      Stage 4 material appearing in the intro. Acceptable there
+      (that reader has it). UPDATE 2026-08-24: the acronym is now expanded on
+      first use, via the "Surface 1 — Retrieval-augmented generation" heading
+      immediately preceding the first bare use of "RAG" - so the
+      first-use-expansion requirement is now satisfied. Status stays
+      used-undefined because no formal one-sentence canonical definition has
+      shipped yet; that full definition is still Stage 4's job.

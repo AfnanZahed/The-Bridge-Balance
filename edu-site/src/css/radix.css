@@ -1,0 +1,63 @@
+/**
+ * Radix Colors import — neutral primitive scale only.
+ *
+ * The TBB color system is built on the monochrome silver ramp below: every
+ * surface, border, and stage identity is lightness-only. Radix's categorical
+ * scales (indigo/teal/amber/plum for the four stages, red for status) were
+ * removed with the old blue/violet accent system — stage identity is now a
+ * position on the silver ramp. Two narrow chromatic exceptions exist,
+ * declared directly in `custom.css`: status color (hand-picked, see the
+ * note there) and a single scoped accent hue for docs-chrome wayfinding
+ * (`--tbb-accent`, ADR-0005 — links, active sidebar/TOC item, focus ring,
+ * and a short named list of nav surfaces; everything else stays neutral).
+ * Only `gray.css` is retained, for `--gray-*` steps still used by a couple
+ * of components independent of the silver ramp.
+ *
+ * Loaded BEFORE `custom.css`.
+ * Reference: https://www.radix-ui.com/colors
+ */
+
+@import "@radix-ui/colors/gray.css";
+
+/* ─── Metallic silver ramp — the only palette this site has ────────────────
+   Ten steps, pure white (silver-0) to pure black (silver-9). This replaced
+   the blue/violet accent system outright: there is no brand hue any more,
+   and nothing in `src/` may introduce one. Depth is carried by lightness,
+   elevation, specular highlight and shadow — never by color.
+
+   Why not chroma 0: dead-neutral grey reads as newsprint. Real silver and
+   anodized aluminium carry a faint cool cast, so the mid-tones lift to a
+   maximum chroma of 0.008 at hue 250 and fall back to 0 at both ends. For
+   scale, the blue accent this replaced sat at chroma 0.21 — 26x higher.
+   At 0.008 the eye reads "cold metal", not "blue". Do not raise it.
+
+   Both ends stay absolute: silver-0 is #ffffff, silver-9 is #000000.
+   Spacing is near-linear, tightened slightly at the white end where
+   light-mode surfaces must separate without going grey.
+
+   All ten steps are meant to be in active use across the site rather than
+   two or three doing all the work — see the usage note in `custom.css`.
+
+   A flat fill of any of these will still look like paint. What makes a
+   surface read as machined metal is the specular set below it:
+   `--tbb-metal-*` in `custom.css`. Use those for anything raised. */
+:root {
+  --tbb-silver-0: oklch(1 0 0);           /* #ffffff — pure white, specular */
+  --tbb-silver-1: oklch(0.965 0.002 250);
+  --tbb-silver-2: oklch(0.91 0.004 250);
+  --tbb-silver-3: oklch(0.82 0.006 250);
+  --tbb-silver-4: oklch(0.68 0.008 250);  /* cast peaks through the mids */
+  --tbb-silver-5: oklch(0.53 0.008 250);
+  --tbb-silver-6: oklch(0.4 0.007 250);
+  --tbb-silver-7: oklch(0.27 0.006 250);
+  --tbb-silver-8: oklch(0.15 0.004 250);
+  --tbb-silver-9: oklch(0 0 0);           /* #000000 — pure black */
+
+  /* Stage background assets (kept for backward compat; decorative grain
+     textures are no longer applied at the component layer). */
+  --tbb-stage-bg-1: url("/img/stage-bg-1.svg");
+  --tbb-stage-bg-2: url("/img/stage-bg-2.svg");
+  --tbb-stage-bg-3: url("/img/stage-bg-3.svg");
+  --tbb-stage-bg-4: url("/img/stage-bg-4.svg");
+  --tbb-texture-grain: url("/img/texture-grain.svg");
+}

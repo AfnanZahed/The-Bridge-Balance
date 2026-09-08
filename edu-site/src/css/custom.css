@@ -1,0 +1,2600 @@
+/**
+ * The Bridge Balance — Design System
+ *
+ * "Silver & Black" token layer (monochrome migration 2026-09-03, replacing
+ * the earlier Apple Pro Blue accent system entirely). Industrial premium:
+ * pure silver/black backgrounds, OKLCH color space, hairline borders,
+ * frosted glass, a neutral atmospheric mesh, platinum text gradients, and a
+ * ten-step metallic silver ramp (`--tbb-silver-0..9`, white to black) as the
+ * base palette for nearly everything. Two deliberate chromatic exceptions
+ * exist, both narrow: status feedback (`--tbb-danger`/`--tbb-success`, see
+ * the note beside those tokens) and a single scoped accent hue (ADR-0005,
+ * `--tbb-accent`) confined to links, active sidebar/TOC items, the focus
+ * ring, and a handful of named navigation surfaces — see the token-table
+ * comment above the light-mode block for the exact scope. Everything else
+ * — surfaces, text, callouts, code, cards, charts, the homepage — reads
+ * `--ifm-color-primary` or a named silver/stage step and stays strictly
+ * neutral; that token no longer aliases `--tbb-accent`.
+ *
+ * This file is the single source of truth for design tokens. Components
+ * consume them via CSS custom properties.
+ *
+ * Token architecture:
+ *   1. PRIMITIVE  — the silver ramp + retained Radix `--gray-*` scale,
+ *                   loaded by `radix.css`.
+ *   2. SEMANTIC   — `--tbb-*` tokens expressing intent (surface, text,
+ *                   accent, border, stage) and `--ifm-*` Infima overrides.
+ *   3. COMPONENT  — Infima/`--ifm-*` values consumed by Docusaurus built-ins
+ *                   plus the Apple Pro utility classes defined below.
+ *
+ * Dark mode (:root[data-theme="dark"]) mirrors the same tokens inverted.
+ *
+ * Typography: SF Pro-first stack (native on Apple) with Inter as the
+ * cross-platform webfont stand-in, Instrument Serif for display italics,
+ * Geist Mono for code. Loaded via Google Fonts in `docusaurus.config.ts`.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500;600&display=swap");
+
+/* ─── The ten-step ramp, given explicit jobs ────────────────────────────────
+   Every step below is meant to be visibly doing real work somewhere in the
+   docs chrome — not just the two ends. Dark mode is the same ramp read in
+   the opposite direction (raised = lighter, per how light actually falls on
+   a surface), not a separate palette.
+
+   Step │ Light-mode job                          │ Dark-mode job
+   ─────┼─────────────────────────────────────────┼──────────────────────────
+     0  │ Reading-column ground (--tbb-bg)         │ Display text, highlights
+     1  │ Sidebar/TOC ground (--tbb-bg-alt)        │ Body/display text (alt)
+     2  │ Surface-emphasis, code-block ground      │ Secondary/caption text
+     3  │ Raised-card gradient base, table header  │ Muted text, strong hairline
+     4  │ Text-subtle, stage-1 (dark variant)       │ Stage-4 surface, raised tint
+     5  │ Text-muted, stage-1                       │ Stage-3 surface
+     6  │ Stage-2                                    │ Stage-2 surface, TOC/code ground
+     7  │ Stage-3, sidebar collapsed-category tone  │ Stage-1 surface, sidebar ground
+     8  │ Stage-3-dark, deep metal gradient stop    │ bg-alt, surface (unchanged)
+     9  │ Text, display text, stage-4, ink          │ Page ground (unchanged)
+
+   Hairlines stay alpha-over-background (oklch(0 0 0 / 0.1) etc.) rather than
+   a discrete step — that's the deliberate, correct technique since it
+   adapts to whatever ground it's drawn over. The ramp's job here is fills
+   and text, not borders.
+
+   Accent token scope (ADR-0005): --tbb-accent is a real hue again, but it is
+   NOT a general-purpose brand color. Permitted consumers ONLY: article
+   links, active sidebar/TOC item (leaf + category), the focus ring, footer
+   link hover, the active search-result row, the top-nav active-section
+   pill, the mobile drawer's active link, and the reading-progress bar.
+   Everything else — callouts, inline code, pagination, the chapter-state
+   badge, stage cards, the homepage hero/timeline — reads --ifm-color-primary
+   or a named silver/stage step, which stays strictly neutral. */
+
+/* ─── Apple Pro token layer (light mode) ─────────────────────────────────── */
+:root {
+  --radius: 1rem;
+  /* Reserve the scrollbar gutter so theme transitions cannot change the
+     viewport width and shift centered content. */
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+
+  /* Brand — a single scoped accent hue (ADR-0005), steel-blue at chroma
+     0.08 (roughly half of real Apple system blue's), scoped to a short,
+     named list of surfaces — see the token-table comment above. Everything
+     that isn't in that list reads --ifm-color-primary, which no longer
+     aliases this token, so it stays neutral regardless of what this value is. */
+  --tbb-accent: oklch(0.40 0.08 245);
+  --tbb-accent-hover: oklch(0.32 0.075 245);
+  --tbb-accent-subtle: oklch(0.40 0.08 245 / 0.08);
+  --tbb-focus-ring: 0 0 0 3px oklch(0.40 0.08 245 / 0.35);
+
+  --ifm-color-primary: var(--tbb-silver-9); /* neutral; no longer aliases --tbb-accent — ADR-0005 */
+  --ifm-color-primary-dark: var(--tbb-silver-9);
+  --ifm-color-primary-darker: var(--tbb-silver-9);
+  --ifm-color-primary-darkest: var(--tbb-silver-9);
+  --ifm-color-primary-light: var(--tbb-silver-7);
+  --ifm-color-primary-lighter: var(--tbb-silver-6);
+  --ifm-color-primary-lightest: var(--tbb-silver-5);
+
+  /* Stage identity — no longer hue-coded. The four stages read as a descent
+     down the ramp (Foundations lightest → Autonomy pure black), so the
+     curriculum's progression is the visual metaphor. Differentiation is
+     label-first (R-001, R-005); lightness only reinforces it. All four
+     steps clear AA on white. */
+  --tbb-stage-1: var(--tbb-silver-5);  /* Foundations  */
+  --tbb-stage-2: var(--tbb-silver-6);  /* Credentials  */
+  --tbb-stage-3: var(--tbb-silver-7);  /* Mastery      */
+  --tbb-stage-4: var(--tbb-silver-9);  /* Autonomy     */
+
+  /* Stage dark variants (for text-on-light contexts) */
+  --tbb-stage-1-dark: var(--tbb-silver-6);
+  --tbb-stage-2-dark: var(--tbb-silver-7);
+  --tbb-stage-3-dark: var(--tbb-silver-8);
+  --tbb-stage-4-dark: var(--tbb-silver-9);
+
+  /* Surfaces — the page ground is pure white; everything raised or receded
+     now sits on a genuinely different step (previously bg/surface/raised
+     were all silver-0 — the light-mode flatness bug this table fixes). */
+  --tbb-bg: var(--tbb-silver-0);
+  --tbb-bg-alt: var(--tbb-silver-1);
+  --tbb-surface: var(--tbb-silver-1);
+  --tbb-surface-raised: var(--tbb-silver-0);
+  --tbb-surface-emphasis: var(--tbb-silver-2);
+  --tbb-surface-glass: oklch(1 0 0 / 0.72);
+  --tbb-surface-solid: var(--tbb-silver-0);
+  --tbb-navbar-glass: oklch(1 0 0 / 0.8);
+  --tbb-apple-frost: saturate(140%) blur(24px);
+
+  /* Docs-chrome grounds — sidebar and TOC recede one step behind the
+     reading column, TOC a notch further since it's the least important
+     chrome on the page. Code gets its own tone, distinct from callouts
+     and tables, which both stay on --tbb-bg-alt. */
+  --tbb-sidebar-bg: var(--tbb-silver-1);
+  --tbb-toc-bg: var(--tbb-silver-1);
+  --tbb-code-bg: var(--tbb-silver-2);
+
+  /* Borders — hairline first, strong variant for emphasis */
+  --hairline: oklch(0 0 0 / 0.1);
+  --tbb-border: color-mix(in srgb, var(--hairline) 90%, transparent);
+  --tbb-border-strong: oklch(0 0 0 / 0.2);
+
+  /* Text — pure black ink down the ramp */
+  --tbb-text: var(--tbb-silver-9);
+  --tbb-text-muted: var(--tbb-silver-5);
+  --tbb-text-subtle: var(--tbb-silver-4);
+  --tbb-text-inverse: var(--tbb-silver-0);
+
+  /* Status — the ONLY chromatic exception in the system. Kept because an
+     error rendered in silver is not recognisable as an error; removing hue
+     here would be an accessibility regression, not a purity win. Used for
+     state feedback only, never for decoration or emphasis. */
+  --tbb-danger: oklch(0.55 0.22 25);
+  --tbb-success: oklch(0.5 0.17 155);
+
+  /* Charts — five ramp steps, spaced far enough apart to separate as series
+     without hue. Consumed by Recharts via resolved values. */
+  --chart-1: var(--tbb-silver-9);
+  --chart-2: var(--tbb-silver-7);
+  --chart-3: var(--tbb-silver-5);
+  --chart-4: var(--tbb-silver-4);
+  --chart-5: var(--tbb-silver-3);
+
+  /* ── Specular set — what makes a surface read as machined metal ──────────
+     A flat ramp fill looks like paint. Metal needs a vertical light ramp,
+     a bright top rim where the bevel catches light, and a diagonal sheen.
+     Compose: background: var(--tbb-metal-face); box-shadow: var(--tbb-metal-rim). */
+  --tbb-metal-face: linear-gradient(
+    180deg,
+    var(--tbb-silver-0) 0%,
+    var(--tbb-silver-1) 42%,
+    var(--tbb-silver-3) 100%
+  );
+  --tbb-metal-face-deep: linear-gradient(
+    180deg,
+    var(--tbb-silver-6) 0%,
+    var(--tbb-silver-8) 55%,
+    var(--tbb-silver-9) 100%
+  );
+  --tbb-metal-rim: inset 0 1px 0 0 oklch(1 0 0 / 0.9),
+    inset 0 -1px 0 0 oklch(0 0 0 / 0.06);
+  --tbb-metal-rim-deep: inset 0 1px 0 0 oklch(1 0 0 / 0.18),
+    inset 0 -1px 0 0 oklch(0 0 0 / 0.5);
+  --tbb-metal-sheen: linear-gradient(
+    105deg,
+    transparent 28%,
+    oklch(1 0 0 / 0.5) 47%,
+    transparent 63%
+  );
+  /* Fine anisotropic grain — brushed, not polished. Overlay at low alpha. */
+  --tbb-metal-brush: repeating-linear-gradient(
+    92deg,
+    oklch(1 0 0 / 0.05) 0px,
+    oklch(0 0 0 / 0.035) 1px,
+    oklch(1 0 0 / 0.05) 2px
+  );
+
+  /* Typography — SF Pro first (native/silent on Apple), Inter webfont stand-in */
+  --ifm-font-family-base: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "SF Pro", Inter, "Helvetica Neue", system-ui, sans-serif;
+  --ifm-font-family-monospace: "Geist Mono", ui-monospace, SFMono-Regular,
+    Menlo, Consolas, monospace;
+  --ifm-heading-font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "SF Pro", Inter, "Helvetica Neue", system-ui, sans-serif;
+  --ifm-heading-font-weight: 600;
+  --ifm-font-weight-semibold: 600;
+  --ifm-font-weight-bold: 700;
+  --tbb-font-display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --ifm-code-font-size: 90%;
+  --ifm-line-height-base: 1.65;
+  --ifm-heading-line-height: 1.15;
+
+  /* Spacing & layout */
+  --ifm-spacing-horizontal: 1.5rem;
+  --ifm-container-width: 1180px;
+  --ifm-container-width-xl: 1320px;
+
+  /* Radii — Apple Pro */
+  --ifm-global-radius: var(--radius);
+  --tbb-radius-sm: calc(var(--radius) - 6px);
+  --tbb-radius-md: calc(var(--radius) - 3px);
+  --tbb-radius-lg: var(--radius);
+  --tbb-radius-xl: calc(var(--radius) + 4px);
+  --tbb-radius-pill: 999px;
+
+  /* Motion */
+  --tbb-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --tbb-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --tbb-duration-fast: 150ms;
+  --tbb-duration: 250ms;
+  --tbb-duration-slow: 450ms;
+
+  /* Infima overrides */
+  --docusaurus-highlight-navbar-bg: oklch(0 0 0 / 0.05);
+
+  /* Surface shadows — inset top-highlight + drop stack. With hue gone, depth
+     is the whole vocabulary, so these run deeper than the old Pro scale:
+     a tight contact shadow reads the bevel, a wide ambient one reads the lift. */
+  --tbb-shadow-xs: inset 0 1px 0 0 oklch(1 0 0 / 1);
+  --tbb-shadow-sm: inset 0 1px 0 0 oklch(1 0 0 / 1),
+    0 1px 2px -1px oklch(0 0 0 / 0.14);
+  --tbb-shadow-md: 0 2px 4px -2px oklch(0 0 0 / 0.16),
+    0 1px 1px -0.5px oklch(0 0 0 / 0.1),
+    inset 0 1px 0 0 oklch(1 0 0 / 1);
+  --tbb-shadow-lg: 0 8px 16px -4px oklch(0 0 0 / 0.18),
+    0 3px 6px -3px oklch(0 0 0 / 0.14),
+    inset 0 1px 0 0 oklch(1 0 0 / 1);
+  --tbb-shadow-xl: 0 24px 48px -12px oklch(0 0 0 / 0.26),
+    0 10px 24px -8px oklch(0 0 0 / 0.18),
+    inset 0 1px 0 0 oklch(1 0 0 / 1);
+  --tbb-shadow-glow: 0 0 0 1px oklch(0 0 0 / 0.22),
+    0 10px 36px -10px oklch(0 0 0 / 0.4);
+
+  color-scheme: light;
+}
+
+/* ─── Apple Pro dark mode ────────────────────────────────────────────────── */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Mirror Radix dark-mode gray scale — the only Radix scale still in use
+     (indigo/teal/amber/plum/red were removed with the blue accent system;
+     see the note in radix.css). */
+  --gray-1: #111111;
+  --gray-2: #191919;
+  --gray-3: #222222;
+  --gray-4: #2a2a2a;
+  --gray-5: #313131;
+  --gray-6: #3a3a3a;
+  --gray-7: #484848;
+  --gray-8: #606060;
+  --gray-9: #6e6e6e;
+  --gray-10: #7b7b7b;
+  --gray-11: #b4b4b4;
+  --gray-12: #eeeeee;
+
+  /* Brand — the same scoped steel-blue accent (ADR-0005), lightened/brightened
+     so it holds the same ~9:1+ contrast against a near-black ground that the
+     light-mode value holds against near-white. */
+  --tbb-accent: oklch(0.75 0.085 245);
+  --tbb-accent-hover: oklch(0.82 0.08 245);
+  --tbb-accent-subtle: oklch(0.75 0.085 245 / 0.14);
+  --tbb-focus-ring: 0 0 0 3px oklch(0.75 0.085 245 / 0.45);
+
+  --ifm-color-primary: var(--tbb-silver-0); /* neutral; no longer aliases --tbb-accent — ADR-0005 */
+  --ifm-color-primary-dark: var(--tbb-silver-2);
+  --ifm-color-primary-darker: var(--tbb-silver-3);
+  --ifm-color-primary-darkest: var(--tbb-silver-4);
+  --ifm-color-primary-light: var(--tbb-silver-0);
+  --ifm-color-primary-lighter: var(--tbb-silver-0);
+  --ifm-color-primary-lightest: var(--tbb-silver-0);
+
+  /* Stage identity — the same descent, inverted: Foundations sits mid-ramp,
+     Autonomy resolves to pure white. Label-first differentiation holds. */
+  --tbb-stage-1: var(--tbb-silver-4);
+  --tbb-stage-2: var(--tbb-silver-3);
+  --tbb-stage-3: var(--tbb-silver-2);
+  --tbb-stage-4: var(--tbb-silver-0);
+
+  --tbb-stage-1-dark: var(--tbb-silver-4);
+  --tbb-stage-2-dark: var(--tbb-silver-3);
+  --tbb-stage-3-dark: var(--tbb-silver-2);
+  --tbb-stage-4-dark: var(--tbb-silver-0);
+
+  /* Surfaces — pure black ground so raised metal genuinely floats off it.
+     Four distinct dark steps, not a wash: bg → surface → raised → emphasis. */
+  --tbb-bg: var(--tbb-silver-9);
+  --tbb-bg-alt: var(--tbb-silver-8);
+  --tbb-surface: var(--tbb-silver-8);
+  --tbb-surface-raised: var(--tbb-silver-7);
+  --tbb-surface-emphasis: var(--tbb-silver-6);
+  --tbb-surface-glass: oklch(0.15 0.004 250 / 0.72);
+  --tbb-surface-solid: var(--tbb-silver-8);
+  --tbb-navbar-glass: oklch(0 0 0 / 0.8);
+  --tbb-apple-frost: saturate(140%) blur(24px);
+
+  /* Docs-chrome grounds — mirrors the light-mode intent (sidebar/TOC recede
+     from the page) but "recede" means lighter in dark mode, matching how
+     the rest of this block already separates bg(9)/surface(8)/raised(7). */
+  --tbb-sidebar-bg: var(--tbb-silver-7);
+  --tbb-toc-bg: var(--tbb-silver-8);
+  --tbb-code-bg: var(--tbb-silver-6);
+
+  --hairline: oklch(1 0 0 / 0.1);
+  --tbb-border: color-mix(in srgb, var(--hairline) 90%, transparent);
+  --tbb-border-strong: oklch(1 0 0 / 0.2);
+
+  --tbb-text: var(--tbb-silver-0);
+  --tbb-text-muted: var(--tbb-silver-4);
+  --tbb-text-subtle: var(--tbb-silver-5);
+  --tbb-text-inverse: var(--tbb-silver-9);
+
+  /* Status — the only chromatic exception; see the light block. */
+  --tbb-danger: oklch(0.68 0.22 25);
+  --tbb-success: oklch(0.72 0.18 155);
+
+  --chart-1: var(--tbb-silver-0);
+  --chart-2: var(--tbb-silver-2);
+  --chart-3: var(--tbb-silver-4);
+  --chart-4: var(--tbb-silver-5);
+  --chart-5: var(--tbb-silver-6);
+
+  /* Specular set inverts: the face darkens, the rim stays the light catch */
+  --tbb-metal-face: var(--tbb-metal-face-deep);
+  --tbb-metal-rim: var(--tbb-metal-rim-deep);
+  --tbb-metal-sheen: linear-gradient(
+    105deg,
+    transparent 28%,
+    oklch(1 0 0 / 0.16) 47%,
+    transparent 63%
+  );
+
+  --tbb-shadow-xs: inset 0 1px 0 0 oklch(1 0 0 / 0.07);
+  --tbb-shadow-sm: inset 0 1px 0 0 oklch(1 0 0 / 0.07),
+    0 1px 2px -1px oklch(0 0 0 / 0.8);
+  --tbb-shadow-md: 0 2px 6px -2px oklch(0 0 0 / 0.85),
+    0 1px 1px -0.5px oklch(0 0 0 / 0.7),
+    inset 0 1px 0 0 oklch(1 0 0 / 0.07);
+  --tbb-shadow-lg: 0 10px 22px -6px oklch(0 0 0 / 0.9),
+    0 4px 8px -4px oklch(0 0 0 / 0.8),
+    inset 0 1px 0 0 oklch(1 0 0 / 0.07);
+  --tbb-shadow-xl: 0 28px 56px -12px oklch(0 0 0 / 0.95),
+    0 12px 28px -10px oklch(0 0 0 / 0.85),
+    inset 0 1px 0 0 oklch(1 0 0 / 0.08);
+  --tbb-shadow-glow: 0 0 0 1px oklch(1 0 0 / 0.24),
+    0 10px 36px -10px oklch(1 0 0 / 0.12);
+
+  --ifm-background-color: var(--tbb-bg);
+  --ifm-background-surface-color: var(--tbb-surface);
+  --ifm-toc-border-color: var(--tbb-border);
+  --docusaurus-highlight-navbar-bg: oklch(1 0 0 / 0.08);
+}
+
+/* ─── Apple Pro Mesh — monochrome atmospheric gradients ────────────────────
+   Frosted-glass + hairline surfaces sit over this. Applied to hero + stages */
+.tbb-apple-mesh {
+  background-image:
+    radial-gradient(at 12% 8%, oklch(0.5 0.01 250 / 0.04) 0px, transparent 45%),
+    radial-gradient(at 88% 12%, oklch(0.45 0.01 250 / 0.03) 0px, transparent 45%),
+    radial-gradient(at 50% 100%, oklch(0.4 0.01 250 / 0.04) 0px, transparent 55%);
+}
+
+:root[data-theme="dark"] .tbb-apple-mesh {
+  background-image:
+    radial-gradient(at 12% 8%, oklch(0.5 0.01 250 / 0.15) 0px, transparent 45%),
+    radial-gradient(at 88% 12%, oklch(0.45 0.01 250 / 0.12) 0px, transparent 45%),
+    radial-gradient(at 50% 100%, oklch(0.4 0.01 250 / 0.18) 0px, transparent 55%),
+    radial-gradient(at 50% 50%, oklch(0 0 0 / 0.4) 0px, transparent 70%);
+}
+
+/* ─── Global typography ──────────────────────────────────────────────────── */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-feature-settings: "ss01", "cv11", "rlig" 1, "calt" 1;
+  letter-spacing: -0.011em;
+  background: var(--tbb-bg);
+  color: var(--tbb-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.022em;
+  font-weight: 600;
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--ifm-font-family-monospace);
+  font-feature-settings: "ss03", "cv11";
+}
+
+::selection {
+  background: color-mix(in srgb, var(--ifm-color-primary) 24%, transparent);
+}
+
+/* ─── Type scale ─────────────────────────────────────────────────────────────
+   Hierarchy comes from tone + weight + size together, never size alone.
+   Each level below is defined at its real consuming selector (article h1-h4,
+   the lead paragraph, sidebar/TOC items, code, table cells) rather than as
+   unused utility classes — this table is the reference; grep the tone column
+   to find where each one lives.
+
+   Level              │ Size              │ Weight │ Line  │ Tracking │ Tone
+   ───────────────────┼───────────────────┼────────┼───────┼──────────┼──────
+   h1 (display)       │ clamp(2.5-3.5rem) │ 400 ser│ 1.1   │ -.035em  │ 9
+   lead (h1+p dek)     │ 1.125rem          │ 400    │ 1.55  │ -.011em  │ 5
+   h2                  │ 1.625rem          │ 600    │ 1.25  │ -.025em  │ 9
+   h3                  │ 1.25rem           │ 600    │ 1.35  │ -.02em   │ 9
+   h4                  │ 1.0625rem         │ 600    │ 1.4   │ -.015em  │ 9
+   body (p/li)         │ 1rem              │ 400    │ 1.75  │ -.011em  │ 9
+   secondary (cards,   │ 0.9375rem         │ 400    │ 1.55  │ -.011em  │ 6
+     table cells)      │                   │        │       │          │
+   caption (eyebrows)  │ 0.75rem, upper    │ 650    │ 1.3   │ .06em    │ 5
+   code                │ 0.875rem block    │ 400    │ 1.65  │ 0        │ 8 on code-bg
+   sidebar-item (leaf) │ 0.875rem          │ 500    │ 1.4   │ -.005em  │ 7, 9 active
+   sidebar-category    │ 0.9375rem         │ 700    │ 1.3   │ -.01em   │ 9
+   toc-item            │ 0.8125rem         │ 400    │ 1.5   │ 0        │ 6, 9/accent active */
+
+h4 {
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+}
+
+h5 {
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+
+h6 {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Navbar — frosted glass ─────────────────────────────────────────────── */
+.navbar {
+  border-bottom: 1px solid var(--tbb-border);
+  background: var(--tbb-navbar-glass);
+  backdrop-filter: var(--tbb-apple-frost, saturate(180%) blur(24px));
+  -webkit-backdrop-filter: var(--tbb-apple-frost, saturate(180%) blur(24px));
+  padding: 0.875rem 0;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .navbar {
+    background: var(--tbb-surface-solid);
+  }
+}
+
+/* ─── Navbar alignment + parity (T003-T005) ─────────────────────────────── */
+/* Force shared baseline: brand, left items, right items all inline-flex centered */
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+/* Centered-brand arrangement (005 T004, FR-001, FR-012) — the brand floats
+   dead-center over the inner container; left nav and right actions split the
+   remaining space symmetrically via auto margins. Removed from flow so it
+   never collides with either group. */
+.navbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(196.25px, 48vw);
+  box-sizing: border-box;
+  max-width: 48vw;
+  justify-content: center;
+}
+.theme-layout-navbar-left {
+  margin-right: auto;
+}
+.navbar__items,
+.navbar__items--right {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+/* Color-mode toggle wrapper is a block div — align it with the flex row */
+.navbar__items--right [class*="colorModeToggle"] {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* GitHub + color-mode + search controls share one action geometry (FR-004) */
+.navbar__items--right > .navbar__link,
+.navbar__items--right [class*="colorModeToggle"] > .clean-btn,
+.navbar__items--right [class*="SearchBar"] > .clean-btn,
+.navbar__items--right > [type="search"],
+.navbar__items--right > .navbar__search {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--tbb-a11y-touch-target);
+  min-block-size: var(--tbb-a11y-touch-target);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--tbb-radius-md);
+  background: var(--tbb-surface-glass);
+  backdrop-filter: var(--tbb-apple-frost, saturate(180%) blur(16px));
+  -webkit-backdrop-filter: var(--tbb-apple-frost, saturate(180%) blur(16px));
+}
+
+/* Search trigger visual parity — same 44px pill as GitHub + theme toggle */
+.navbar__search-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.navbar__items--right > .navbar__search,
+.navbar__search-container .navbar__search {
+  border: none;
+  color: var(--tbb-text);
+  font: inherit;
+  line-height: 1;
+  outline: none;
+}
+.navbar__search-container .navbar__search {
+  width: 9rem;
+}
+.navbar__search-container .navbar__search::placeholder {
+  color: var(--tbb-text-muted);
+}
+.navbar__search-panel {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 20;
+  width: min(24rem, 80vw);
+  max-height: min(28rem, calc(100vh - 6rem));
+  overflow-y: auto;
+  padding: 0.375rem;
+  border: 1px solid var(--tbb-border);
+  border-radius: var(--tbb-radius-lg);
+  background: var(--tbb-surface-glass);
+  backdrop-filter: var(--tbb-apple-frost, saturate(180%) blur(24px));
+  -webkit-backdrop-filter: var(--tbb-apple-frost, saturate(180%) blur(24px));
+  box-shadow: var(--tbb-shadow-lg);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .navbar__search-panel { background: var(--tbb-surface-solid); }
+}
+.navbar__search-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  min-height: var(--tbb-a11y-touch-target);
+  gap: 0.125rem;
+  padding: 0.5rem 0.75rem;
+  border: 0;
+  border-radius: var(--tbb-radius-md);
+  background: transparent;
+  color: var(--tbb-text);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+.navbar__search-item:hover,
+.navbar__search-item--active {
+  background: var(--tbb-accent-subtle);
+}
+.navbar__search-item-title { font-weight: 600; }
+.navbar__search-item-heading,
+.navbar__search-item-snippet,
+.navbar__search-status {
+  color: var(--tbb-text-muted);
+  font-size: 0.75rem;
+}
+.navbar__search-item-snippet {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.navbar__search-status { padding: 0.75rem; }
+
+/* Active-state indication (T017, SC-009) — the Curriculum link in the
+   left group gets a distinct pill treatment when its route is active. */
+.theme-layout-navbar-left > .navbar__link[aria-current="page"],
+.theme-layout-navbar-left > .navbar__link--active,
+.theme-layout-navbar-left > a.navbar__item.navbar__link.navbar__link--active {
+  color: var(--tbb-accent);
+  font-weight: 600;
+}
+.theme-layout-navbar-left > .navbar__link[aria-current="page"]::before,
+.theme-layout-navbar-left > .navbar__link--active::before {
+  content: "";
+  display: inline-block;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 999px;
+  background: var(--tbb-accent);
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tbb-accent) 18%, transparent);
+}
+
+@media (max-width: 996px) {
+  .navbar__brand {
+    max-width: 48vw;
+  }
+  .navbar__search-container .navbar__search {
+    width: 2.75rem;
+    padding-inline: 0.5rem;
+    color: transparent;
+  }
+  .navbar__search-container .navbar__search::placeholder {
+    color: transparent;
+  }
+  .navbar__search-panel {
+    position: fixed;
+    top: calc(var(--ifm-navbar-height) + 0.5rem);
+    left: 0.75rem;
+    right: 0.75rem;
+    width: auto;
+  }
+}
+
+/* Title truncation: ellipsis without pushing/wrapping (FR-010) */
+.navbar__inner .navbar__brand {
+  min-width: 0;
+}
+.navbar__inner .navbar__title {
+  min-width: 0;
+  max-width: 28ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Single hairline border — no double render across themes (FR-009) */
+.navbar {
+  border-bottom: 1px solid var(--tbb-border);
+}
+
+/* Theme transition no-reflow guard: prevent dimension changes during toggle (FR-008) */
+.navbar *,
+.navbar__brand,
+.navbar__link,
+.navbar__items .clean-btn {
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Mobile drawer: hamburger aligns to brand baseline and meets the full
+   44×44 target (FR-006, FR-007) */
+.navbar__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: var(--tbb-a11y-touch-target);
+}
+
+/* ─── Hero ───────────────────────────────────────────────────────────────── */
+.tbb-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 7rem 0 6rem;
+  text-align: center;
+  background: var(--tbb-bg);
+}
+
+.tbb-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(at 12% 8%, oklch(0.5 0.01 250 / 0.05) 0px, transparent 45%),
+    radial-gradient(at 88% 12%, oklch(0.45 0.01 250 / 0.04) 0px, transparent 45%),
+    radial-gradient(at 50% 100%, oklch(0.4 0.01 250 / 0.05) 0px, transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+:root[data-theme="dark"] .tbb-hero::before {
+  background-image:
+    radial-gradient(at 12% 8%, oklch(0.5 0.01 250 / 0.15) 0px, transparent 45%),
+    radial-gradient(at 88% 12%, oklch(0.45 0.01 250 / 0.12) 0px, transparent 45%),
+    radial-gradient(at 50% 100%, oklch(0.4 0.01 250 / 0.18) 0px, transparent 55%),
+    radial-gradient(at 50% 50%, oklch(0 0 0 / 0.4) 0px, transparent 70%);
+}
+
+.tbb-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.tbb-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.375rem;
+  border-radius: var(--tbb-radius-pill);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--tbb-surface-glass) 100%, transparent) 0%,
+    color-mix(in srgb, var(--tbb-surface-glass) 92%, var(--tbb-bg-alt)) 100%
+  );
+  backdrop-filter: var(--tbb-apple-frost);
+  -webkit-backdrop-filter: var(--tbb-apple-frost);
+  border: 1px solid var(--tbb-border);
+  box-shadow: var(--tbb-shadow-md), 0 6px 16px -10px oklch(0.13 0.002 250 / 0.35);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--tbb-text-muted);
+  letter-spacing: -0.01em;
+  margin-bottom: 2rem;
+}
+
+:root[data-theme="dark"] .tbb-hero__eyebrow {
+  box-shadow: var(--tbb-shadow-md), 0 6px 20px -10px oklch(0 0 0 / 0.6);
+}
+
+.tbb-hero__eyebrow-item {
+  padding: 0 0.75rem;
+  white-space: nowrap;
+}
+
+.tbb-hero__eyebrow-item strong {
+  /* Neutral, not the scoped accent (ADR-0005) — the homepage stays strictly
+     monochrome; the accent is a docs-chrome wayfinding signal only. */
+  color: var(--ifm-color-primary);
+  font-weight: 700;
+}
+
+.tbb-hero__eyebrow-divider {
+  width: 1px;
+  height: 0.75rem;
+  flex: none;
+  background: var(--tbb-border-strong);
+}
+
+@media (max-width: 480px) {
+  .tbb-hero__eyebrow {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 0.375rem;
+  }
+
+  .tbb-hero__eyebrow-divider {
+    display: none;
+  }
+}
+
+.tbb-hero__title {
+  font-family: var(--ifm-heading-font-family);
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  margin: 0 auto 1.5rem;
+  max-width: 18ch;
+  color: var(--tbb-text);
+}
+
+.tbb-hero__title-accent {
+  font-family: var(--tbb-font-display);
+  font-style: italic;
+  font-weight: 400;
+  background: linear-gradient(135deg, var(--tbb-silver-9) 0%, var(--tbb-silver-6) 55%, var(--tbb-silver-4) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+:root[data-theme="dark"] .tbb-hero__title-accent {
+  background: linear-gradient(135deg, var(--tbb-silver-0) 0%, var(--tbb-silver-2) 55%, var(--tbb-silver-4) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tbb-hero__subtitle {
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--tbb-text-muted);
+  max-width: 38rem;
+  margin: 0 auto 2.5rem;
+}
+
+.tbb-hero__cta-row {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3.5rem;
+}
+
+.tbb-hero__cta-primary,
+.tbb-hero__cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--tbb-radius-md);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+  transition: transform var(--tbb-duration) var(--tbb-ease),
+    box-shadow var(--tbb-duration) var(--tbb-ease),
+    border-color var(--tbb-duration) var(--tbb-ease);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Primary CTA — a machined billet. Light mode mills it from black stock,
+   dark mode from white; either way it is the single highest-contrast object
+   on the page, which is what the accent used to buy with hue. */
+.tbb-hero__cta-primary {
+  background: var(--tbb-metal-face-deep);
+  color: var(--tbb-silver-0);
+  border: 1px solid oklch(0 0 0 / 0.85);
+  box-shadow:
+    var(--tbb-metal-rim-deep),
+    0 8px 18px -6px oklch(0 0 0 / 0.45);
+}
+
+.tbb-hero__cta-primary:hover {
+  background: linear-gradient(
+    180deg,
+    var(--tbb-silver-5) 0%,
+    var(--tbb-silver-7) 55%,
+    var(--tbb-silver-8) 100%
+  );
+  border-color: oklch(0 0 0 / 0.85);
+  color: var(--tbb-silver-0);
+  transform: translateY(-1px);
+  box-shadow:
+    var(--tbb-metal-rim-deep),
+    0 12px 26px -6px oklch(0 0 0 / 0.55);
+  text-decoration: none;
+}
+
+:root[data-theme="dark"] .tbb-hero__cta-primary {
+  background: linear-gradient(
+    180deg,
+    var(--tbb-silver-0) 0%,
+    var(--tbb-silver-2) 55%,
+    var(--tbb-silver-3) 100%
+  );
+  color: var(--tbb-silver-9);
+  border-color: oklch(1 0 0 / 0.55);
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 0.9),
+    inset 0 -1px 0 0 oklch(0 0 0 / 0.14),
+    0 8px 22px -6px oklch(0 0 0 / 0.9);
+}
+
+:root[data-theme="dark"] .tbb-hero__cta-primary:hover {
+  background: linear-gradient(
+    180deg,
+    var(--tbb-silver-0) 0%,
+    var(--tbb-silver-1) 55%,
+    var(--tbb-silver-2) 100%
+  );
+  color: var(--tbb-silver-9);
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 0.95),
+    inset 0 -1px 0 0 oklch(0 0 0 / 0.14),
+    0 12px 30px -6px oklch(0 0 0 / 0.95);
+}
+
+.tbb-hero__cta-secondary {
+  background: var(--tbb-metal-face);
+  color: var(--tbb-text);
+  border: 1px solid var(--tbb-border-strong);
+  box-shadow: var(--tbb-metal-rim), 0 2px 5px -2px oklch(0 0 0 / 0.14);
+}
+
+:root[data-theme="dark"] .tbb-hero__cta-secondary {
+  background: linear-gradient(
+    180deg,
+    var(--tbb-silver-6) 0%,
+    var(--tbb-silver-7) 55%,
+    var(--tbb-silver-8) 100%
+  );
+  box-shadow: var(--tbb-metal-rim-deep), 0 4px 12px -4px oklch(0 0 0 / 0.8);
+}
+
+.tbb-hero__cta-secondary:hover {
+  transform: translateY(-1px);
+  color: var(--tbb-text);
+  text-decoration: none;
+}
+
+.tbb-hero__arrow {
+  transition: transform var(--tbb-duration) var(--tbb-ease);
+}
+
+.tbb-hero__cta-primary:hover .tbb-hero__arrow,
+.tbb-hero__cta-secondary:hover .tbb-hero__arrow {
+  transform: translateX(3px);
+}
+
+.tbb-hero__meta {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  color: var(--tbb-text-muted);
+  font-size: 0.875rem;
+}
+
+.tbb-hero__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tbb-hero__meta-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--ifm-color-primary);
+}
+
+/* ─── Section headings ───────────────────────────────────────────────────── */
+.tbb-section-heading {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.tbb-section-heading__eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.75rem;
+}
+
+.tbb-section-heading__title {
+  font-family: var(--ifm-heading-font-family);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  margin: 0 auto 0.75rem;
+  max-width: 22ch;
+  color: var(--tbb-text);
+}
+
+.tbb-section-heading__subtitle {
+  font-size: 1.0625rem;
+  color: var(--tbb-text-muted);
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+/* ─── Stage cards — silver surfaces ──────────────────────────────────────── */
+.tbb-stages {
+  padding: 5rem 0 6rem;
+  position: relative;
+}
+
+.tbb-stage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.tbb-stage-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem 1.5rem 1.5rem;
+  border-radius: var(--tbb-radius-lg);
+  background: linear-gradient(180deg, oklch(1 0 0) 0%, oklch(0.98 0.001 250) 100%);
+  border: 1px solid var(--tbb-border);
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 1),
+    inset 0 -1px 0 0 oklch(0.5 0.005 250 / 0.05);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition:
+    transform var(--tbb-duration) var(--tbb-ease),
+    box-shadow var(--tbb-duration) var(--tbb-ease),
+    border-color var(--tbb-duration) var(--tbb-ease);
+  isolation: isolate;
+}
+
+:root[data-theme="dark"] .tbb-stage-card {
+  background: linear-gradient(180deg, oklch(0.16 0 0) 0%, oklch(0.12 0 0) 100%);
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 0.05),
+    inset 0 -1px 0 0 oklch(0 0 0 / 0.4);
+}
+
+.tbb-stage-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--stage-color, var(--ifm-color-primary)) 0%,
+    transparent 50%
+  );
+  opacity: 0.05;
+  z-index: -1;
+  transition: opacity var(--tbb-duration) var(--tbb-ease);
+}
+
+.tbb-stage-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--tbb-shadow-glow);
+  border-color: var(--stage-color, var(--tbb-border-strong));
+  text-decoration: none;
+  color: inherit;
+}
+
+.tbb-stage-card:hover::before {
+  opacity: 0.12;
+}
+
+.tbb-stage-card__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.tbb-stage-card__num {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stage-color, var(--ifm-color-primary));
+}
+
+.tbb-stage-card__chip {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--tbb-radius-md);
+  background: color-mix(in srgb, var(--stage-color, var(--ifm-color-primary)) 14%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--stage-color, var(--ifm-color-primary));
+  font-weight: 700;
+  font-size: 0.9375rem;
+  font-feature-settings: "tnum";
+}
+
+.tbb-stage-card__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+  color: var(--tbb-text);
+}
+
+.tbb-stage-card__desc {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  /* Darkened from --tbb-text-muted for AA contrast on the card's white
+     surface (axe: 4.5:1). The mix keeps the muted feel while satisfying
+     the 4.5:1 floor for body text. */
+  color: color-mix(in srgb, var(--tbb-text) 75%, transparent);
+  margin: 0 0 1.5rem;
+  flex-grow: 1;
+}
+
+.tbb-stage-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  /* Stage color darkened against --tbb-text so the link text meets AA 4.5:1
+     against the card's white background regardless of which stage token is
+     applied (amber/teal/indigo/plum). */
+  color: color-mix(in srgb, var(--stage-color, var(--ifm-color-primary)) 55%, var(--tbb-text) 45%);
+  margin-top: auto;
+}
+
+.tbb-stage-card__cta-arrow {
+  transition: transform var(--tbb-duration) var(--tbb-ease);
+}
+
+.tbb-stage-card:hover .tbb-stage-card__cta-arrow {
+  transform: translateX(3px);
+}
+
+/* ─── Chapter state badge ────────────────────────────────────────────────── */
+/* Spec 013 — Lesson Reading Page Redesign: badge is now a soft-blue rounded
+   card with subtle elevation, no animated dot. The card sits directly above
+   the chapter title. */
+.tbb-chapter-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.95rem;
+  border-radius: var(--tbb-radius-md);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  box-shadow: var(--tbb-shadow-sm);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .tbb-chapter-state {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* The quiet tone is scoped rather than read straight off --tbb-text-muted:
+   that token is calibrated against --tbb-surface, but this badge darkens its
+   own ground by 8% gray, which drops the pairing to 4.43:1 in light mode —
+   just under AA, and the state axe flagged. One step down the ramp restores
+   the margin. Dark mode inverts the mix (--gray-9 is light there) and already
+   measures 6.45:1, so it keeps the muted tone. */
+.tbb-chapter-state--placeholder {
+  --tbb-chapter-state-quiet: var(--tbb-silver-6);
+  background: color-mix(in srgb, var(--gray-9) 8%, var(--tbb-surface));
+  color: var(--tbb-chapter-state-quiet);
+  border-color: color-mix(in srgb, var(--gray-9) 16%, transparent);
+}
+
+:root[data-theme="dark"] .tbb-chapter-state--placeholder {
+  --tbb-chapter-state-quiet: var(--tbb-text-muted);
+}
+
+/* Re-homed off --tbb-accent (ADR-0005): a status badge isn't a link, active
+   nav item, or focus ring, so it stays neutral like the other three states. */
+.tbb-chapter-state--text-ready {
+  background: color-mix(in srgb, var(--ifm-color-primary) 10%, var(--tbb-surface));
+  color: var(--tbb-text);
+  border-color: color-mix(in srgb, var(--ifm-color-primary) 24%, transparent);
+}
+
+.tbb-chapter-state--video-published {
+  background: color-mix(in srgb, var(--tbb-stage-4) 10%, var(--tbb-surface));
+  color: var(--tbb-text);
+  border-color: color-mix(in srgb, var(--tbb-stage-4) 24%, transparent);
+}
+
+.tbb-chapter-state--unknown {
+  background: color-mix(in srgb, var(--tbb-danger) 10%, var(--tbb-surface));
+  color: var(--tbb-danger);
+  border-color: color-mix(in srgb, var(--tbb-danger) 24%, transparent);
+}
+
+/* Static status dot (per the reference design) — no animation/pulse per
+   Principle VII's motion restraint; color communicates state at a glance. */
+.tbb-chapter-state__dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Derived from the badge's own text tone rather than --gray-9, which measured
+   2.79:1 against this ground — under the 3:1 floor for non-text UI
+   (WCAG 1.4.11). Tying the two together means the dot can never drift below
+   the floor while the label passes. */
+.tbb-chapter-state--placeholder .tbb-chapter-state__dot {
+  background: var(--tbb-chapter-state-quiet);
+}
+
+.tbb-chapter-state--text-ready .tbb-chapter-state__dot {
+  background: var(--ifm-color-primary);
+}
+
+.tbb-chapter-state--video-published .tbb-chapter-state__dot {
+  background: var(--tbb-stage-4);
+}
+
+.tbb-chapter-state--unknown .tbb-chapter-state__dot {
+  background: var(--tbb-danger);
+}
+
+/* ─── Chapter prose ──────────────────────────────────────────────────────── */
+article {
+  font-size: 1rem;
+  line-height: 1.75;
+  max-width: 72ch;
+}
+
+article h1 {
+  font-family: var(--tbb-font-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 4.5vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  margin-bottom: 0.5rem;
+}
+
+article h1 + p {
+  font-size: 1.125rem;
+  line-height: 1.55;
+  letter-spacing: -0.011em;
+  color: var(--tbb-text-muted);
+  margin-bottom: 2.5rem;
+}
+
+article h2 {
+  font-size: 1.625rem;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--tbb-border);
+}
+
+article h3 {
+  font-size: 1.25rem;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+article p,
+article li {
+  color: var(--tbb-text);
+}
+
+/* Links — one of the few surfaces permitted the scoped accent hue
+   (ADR-0005); everything else in this block stays on --ifm-color-primary,
+   which is neutral. */
+article a {
+  color: var(--tbb-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--tbb-accent) 30%,
+    transparent
+  );
+  transition: color var(--tbb-duration-fast) var(--tbb-ease),
+    text-decoration-color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+article a:hover {
+  color: var(--tbb-accent-hover);
+  text-decoration-color: var(--tbb-accent-hover);
+}
+
+article blockquote {
+  border-left: 3px solid var(--tbb-border-strong);
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  margin: 1.5rem 0;
+  color: var(--tbb-text-muted);
+  font-style: italic;
+}
+
+article ul,
+article ol {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+article li {
+  margin: 0.375rem 0;
+}
+
+/* Code gets its own surface tone (--tbb-code-bg), distinct from callouts
+   and tables, which both stay on --tbb-bg-alt — three different "structured
+   content" surfaces no longer collide on one shared tint. */
+article code:not(pre code) {
+  background: var(--tbb-code-bg);
+  border: 1px solid var(--tbb-border);
+  padding: 0.125rem 0.375rem;
+  border-radius: var(--tbb-radius-sm);
+  font-size: 0.875em;
+  color: var(--ifm-color-primary);
+  font-family: var(--ifm-font-family-monospace);
+}
+
+:root[data-theme="dark"] article code:not(pre code) {
+  color: var(--ifm-color-primary-lighter);
+  background: var(--tbb-code-bg);
+}
+
+article pre {
+  border-radius: var(--tbb-radius-md);
+  border: 1px solid var(--tbb-border);
+  box-shadow: var(--tbb-shadow-sm);
+  margin: 1.25rem 0;
+  background: var(--tbb-code-bg);
+}
+
+article pre code {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9375rem;
+}
+
+article th,
+article td {
+  text-align: left;
+  padding: 0.625rem 0.875rem;
+  border-bottom: 1px solid var(--tbb-border);
+}
+
+/* Table header gets its own tone too — one step stronger than --tbb-bg-alt
+   so it doesn't collide with code's --tbb-code-bg (both are "structured
+   content" surfaces that need to read as separate things). */
+article th {
+  font-weight: 600;
+  color: var(--tbb-text);
+  background: var(--tbb-silver-3);
+}
+
+:root[data-theme="dark"] article th {
+  background: var(--tbb-silver-5);
+}
+
+article hr {
+  border: none;
+  height: 1px;
+  background: var(--tbb-border);
+  margin: 2.5rem 0;
+}
+
+/* ─── Callouts (custom MDX component) ────────────────────────────────────── */
+.tbb-callout {
+  display: flex;
+  gap: 0.875rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--tbb-radius-md);
+  margin: 1.5rem 0;
+  border: 1px solid;
+  border-left-width: 3px;
+  background: var(--callout-bg);
+  border-color: var(--callout-border);
+  color: var(--tbb-text);
+  /* A callout is its own surface step, same as code/tables — a soft inset
+     highlight is enough to read as "raised" without the heavier specular
+     gradient treatment large cards use, which would fight the tint colors. */
+  box-shadow: var(--tbb-shadow-sm);
+}
+
+.tbb-callout--info {
+  --callout-bg: color-mix(in srgb, var(--ifm-color-primary) 6%, transparent);
+  --callout-border: color-mix(in srgb, var(--ifm-color-primary) 22%, transparent);
+  --callout-border-left: var(--ifm-color-primary);
+}
+
+.tbb-callout--tip {
+  --callout-bg: color-mix(in srgb, var(--tbb-stage-1) 6%, transparent);
+  --callout-border: color-mix(in srgb, var(--tbb-stage-1) 22%, transparent);
+  --callout-border-left: var(--tbb-stage-1);
+}
+
+.tbb-callout--important {
+  --callout-bg: color-mix(in srgb, var(--tbb-stage-2) 8%, transparent);
+  --callout-border: color-mix(in srgb, var(--tbb-stage-2) 28%, transparent);
+  --callout-border-left: var(--tbb-stage-2);
+}
+
+/* Re-homed off --tbb-accent (ADR-0005): warning is not one of the accent's
+   permitted surfaces, so it takes the fourth ramp rung instead — distinct
+   from tip (stage-1) and important (stage-2), still strictly neutral. */
+.tbb-callout--warning {
+  --callout-bg: color-mix(in srgb, var(--tbb-stage-3) 8%, transparent);
+  --callout-border: color-mix(in srgb, var(--tbb-stage-3) 26%, transparent);
+  --callout-border-left: var(--tbb-stage-3);
+}
+
+.tbb-callout--danger {
+  --callout-bg: color-mix(in srgb, var(--tbb-danger) 7%, transparent);
+  --callout-border: color-mix(in srgb, var(--tbb-danger) 24%, transparent);
+  --callout-border-left: var(--tbb-danger);
+}
+
+.tbb-callout__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  color: var(--callout-border-left);
+}
+
+.tbb-callout__body {
+  flex-grow: 1;
+}
+
+.tbb-callout__title {
+  font-weight: 700;
+  margin: 0 0 0.375rem;
+  font-size: 0.9375rem;
+  color: var(--callout-border-left);
+}
+
+.tbb-callout__body > :last-child {
+  margin-bottom: 0;
+}
+
+.tbb-callout__body p {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────────────── */
+.footer {
+  background: var(--ifm-footer-background-color, var(--tbb-bg));
+  border-top: 1px solid var(--tbb-border);
+  padding: 4rem 0 2rem;
+}
+
+.footer--dark {
+  --ifm-footer-background-color: oklch(0.07 0 0);
+  --ifm-footer-title-color: oklch(0.97 0 0);
+  --ifm-footer-link-color: oklch(0.72 0.005 250);
+  --ifm-footer-link-hover-color: var(--tbb-silver-0);
+  --ifm-footer-color: oklch(0.68 0.005 250);
+  border-top-color: oklch(1 0 0 / 0.08);
+}
+
+.footer__title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ifm-footer-title-color, var(--tbb-text));
+  margin-bottom: 1rem;
+}
+
+.footer__item {
+  font-size: 0.875rem;
+}
+
+.footer__link-item:hover {
+  color: var(--ifm-footer-link-hover-color, var(--ifm-color-primary));
+}
+
+.footer--dark .footer__copyright,
+:root[data-theme="dark"] .footer__copyright {
+  color: oklch(0.82 0.005 250) !important;
+}
+
+.footer__bottom {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--tbb-border);
+  font-size: 0.8125rem;
+  color: var(--ifm-footer-color, var(--tbb-text-muted));
+}
+
+/* ─── Sidebar ────────────────────────────────────────────────────────────── */
+/* The doc sidebar is a designed panel, not a link list: a fixed frosted header
+   over a scrolling tree whose chapter rows read [rail | ordinal | label | state]
+   and whose stage rows read [glyph | eyebrow + title | caret].
+
+   The markup comes from four components ejected into src/theme/DocSidebar* and
+   src/theme/DocSidebarItem* — see each file's header for what was forked from
+   Docusaurus 3.7.0 and why.
+
+   Every rule below is namespaced to `.tbb-sb`, a class carried by both the
+   desktop shell and the mobile drawer, so one system serves both surfaces. */
+
+/* `html:root` (0,1,1) outranks the plain `:root` (0,1,0) in Docusaurus's own
+   DocRoot/Layout/Sidebar module whatever order the two are injected in. */
+html:root {
+  --doc-sidebar-width: 312px;
+
+  /* Chevron-up, deliberately the same orientation as Infima's own glyph, so
+     Infima's collapsed/expanded rotations keep working untouched. Painted via
+     `mask` + `currentColor` rather than Infima's background-image plus an
+     invert() filter, which is what makes it theme cleanly in both modes. */
+  --tbb-sb-caret: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z'/%3E%3C/svg%3E");
+}
+
+/* Receded one step behind the reading column (--tbb-sidebar-bg = silver-1
+   light / silver-7 dark) instead of sharing the page's own ground. */
+.theme-doc-sidebar-container {
+  background: var(--tbb-sidebar-bg);
+  border-right: 1px solid var(--tbb-border);
+}
+
+/* ── Panel shell ─────────────────────────────────────────────────────────── */
+
+.tbb-sb {
+  position: relative;
+
+  /* The panel's "quiet" tone — chapter labels, ordinals, eyebrows, carets,
+     state dots. It has to be a panel-scoped token rather than plain
+     --tbb-text-muted because --tbb-sidebar-bg *rises* to silver-7 in dark mode
+     while the page ground falls to silver-9: silver-4 on silver-7 measures
+     2.84:1, under AA. Light mode keeps --tbb-text-muted (4.77:1); dark mode
+     steps up to silver-3. Same pattern BrandMark uses. */
+  --tbb-sb-quiet: var(--tbb-text-muted);
+}
+
+:root[data-theme="dark"] .tbb-sb {
+  --tbb-sb-quiet: var(--tbb-silver-3);
+}
+
+/* Outside the scroll container, so it holds the top of the flex column without
+   needing `position: sticky`. */
+.tbb-sb__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  flex-shrink: 0;
+  padding: 0.875rem 1rem 0.75rem;
+  background: color-mix(in srgb, var(--tbb-sidebar-bg) 72%, transparent);
+  backdrop-filter: var(--tbb-apple-frost);
+  -webkit-backdrop-filter: var(--tbb-apple-frost);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+@supports not (
+  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+) {
+  .tbb-sb__header {
+    background: var(--tbb-surface-solid);
+  }
+}
+
+/* The hairline earns its place only once the tree has scrolled under it.
+   `data-scrolled` is set on the shell by the ejected DocSidebar/Desktop — a
+   plain descendant selector rather than `:has()` on the nav, because Chrome
+   did not reliably re-evaluate the ancestor when that attribute changed. */
+.tbb-sb[data-scrolled] .tbb-sb__header {
+  border-bottom-color: var(--tbb-border);
+}
+
+/* Small text uses --tbb-sb-quiet, never --tbb-text-subtle: on the sidebar
+   ground subtle measures only 2.58:1. Size and weight carry the hierarchy
+   instead of contrast. */
+.tbb-sb__eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tbb-sb-quiet);
+}
+
+.tbb-sb__context {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: var(--tbb-text);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+/* Own the scroll explicitly rather than relying on an ancestor, so the header
+   above stays put and `data-scrolled` has something to observe. */
+.tbb-sb__nav {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.5rem 0.5rem 1.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.tbb-sb__nav:hover,
+.tbb-sb__nav:focus-within {
+  scrollbar-color: var(--tbb-border-strong) transparent;
+}
+
+.tbb-sb__nav::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tbb-sb__nav::-webkit-scrollbar-thumb {
+  background: transparent;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: var(--tbb-radius-pill);
+}
+
+.tbb-sb__nav:hover::-webkit-scrollbar-thumb,
+.tbb-sb__nav:focus-within::-webkit-scrollbar-thumb {
+  background: var(--tbb-border-strong);
+  background-clip: padding-box;
+}
+
+/* ── Rows, shared ────────────────────────────────────────────────────────── */
+
+.tbb-sb .menu__link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: var(--tbb-sb-quiet);
+  border-radius: var(--tbb-radius-sm);
+  padding: 0.375rem 0.5rem;
+  /* Permanent transparent rail so turning the active colour on never shifts
+     the row's width. */
+  border-left: 3px solid transparent;
+  transition:
+    background var(--tbb-duration-fast) var(--tbb-ease),
+    color var(--tbb-duration-fast) var(--tbb-ease),
+    border-color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.tbb-sb .menu__link:hover {
+  background: var(--tbb-surface-emphasis);
+  color: var(--tbb-text);
+}
+
+/* `:visited` is deliberately NOT styled here. It used to paint a grey rail on
+   every seen link, which accumulated into a wall of bars competing with the
+   accent active rail. The ordinal marker and the state dot carry strictly more
+   information without the noise. */
+
+/* Active chapter (leaf) — full accent treatment: text, weight, rail, tint.
+   `background` must live on the `:not(.menu__link--sublist)` selector, not the
+   bare `.menu__link--active` class: Infima's own default.css ships
+   `.menu__link--active:not(.menu__link--sublist) { background-color:
+   var(--ifm-hover-overlay) }` at two-class specificity, which silently wins
+   over a plain one-class `.menu__link--active` background rule regardless of
+   source order. Matching Infima's selector shape is what makes source order
+   decide it in our favour instead. */
+.tbb-sb .menu__link--active {
+  color: var(--tbb-accent);
+  font-weight: 600;
+}
+
+.tbb-sb .menu__link--active:not(.menu__link--sublist) {
+  background: var(--tbb-accent-subtle);
+  border-left-color: var(--tbb-accent);
+}
+
+/* ── Chapter row: [rail | ordinal | label | state] ───────────────────────── */
+
+.tbb-sb .tbb-sb-link {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr) 0.75rem;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+/* Explicit column placement, so a row without an ordinal (the Reference group)
+   keeps the same gutter and stays aligned with its numbered siblings. */
+.tbb-sb .tbb-sb-link__ordinal {
+  grid-column: 1;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  color: var(--tbb-sb-quiet);
+  transition: color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.tbb-sb .tbb-sb-link__label {
+  grid-column: 2;
+}
+
+.tbb-sb .tbb-sb-link__state {
+  grid-column: 3;
+  justify-self: end;
+  inline-size: 6px;
+  block-size: 6px;
+  box-sizing: border-box;
+  border-radius: var(--tbb-radius-pill);
+}
+
+.tbb-sb .menu__link--active .tbb-sb-link__ordinal {
+  color: var(--tbb-accent);
+}
+
+/* Authoring state (Constitution Principle III). Monochrome by design — the
+   silver ramp, not --tbb-success/--tbb-danger, which would break the
+   no-brand-hue rule in radix.css. Hollow vs filled carries the distinction, so
+   both dots can sit at a tone that clears the 3:1 floor for non-text UI
+   (WCAG 1.4.11); --tbb-text-subtle would not. */
+.tbb-sb [data-chapter-state="placeholder"] .tbb-sb-link__state {
+  border: 1.5px solid var(--tbb-sb-quiet);
+}
+
+.tbb-sb [data-chapter-state="text-ready"] .tbb-sb-link__state {
+  background: var(--tbb-sb-quiet);
+}
+
+.tbb-sb [data-chapter-state="video-published"] .tbb-sb-link__state {
+  background: var(--tbb-text);
+}
+
+/* The eye should land on chapters that actually have text. Done by *promoting*
+   the ready ones rather than dimming the placeholders: dimming to
+   --tbb-text-subtle measured 2.58:1 on this ground, well under AA, and it would
+   have applied to most rows in the book. Every row now sits at 4.77:1 or
+   better, and readiness reads as extra weight plus a filled dot. */
+.tbb-sb
+  .tbb-sb-item[data-chapter-state="text-ready"]
+  > .menu__link:not(.menu__link--active),
+.tbb-sb
+  .tbb-sb-item[data-chapter-state="video-published"]
+  > .menu__link:not(.menu__link--active) {
+  color: var(--tbb-text);
+  font-weight: 600;
+}
+
+/* ── Stage row: [glyph | eyebrow + title | caret] ────────────────────────── */
+
+.tbb-sb .tbb-sb-cat__row {
+  border-radius: var(--tbb-radius-sm);
+  transition: background var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.tbb-sb .tbb-sb-cat__row:hover {
+  background: var(--tbb-surface-emphasis);
+}
+
+.tbb-sb .tbb-sb-cat__link {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  align-items: center;
+  column-gap: 0.5rem;
+  padding-block: 0.5rem;
+}
+
+.tbb-sb .tbb-sb-cat__glyph {
+  grid-column: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tbb-sb-quiet);
+  transition: color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+/* Beats the ejected module's `.categoryLinkLabel` (0,1,0), which sets the
+   -webkit-box line clamp the two-line header must not inherit. */
+.tbb-sb .tbb-sb-cat__text {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  overflow: visible;
+}
+
+.tbb-sb .tbb-sb-cat__eyebrow {
+  font-size: 0.625rem;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--tbb-sb-quiet);
+  transition: color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.tbb-sb .tbb-sb-cat__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.011em;
+  line-height: 1.3;
+  color: var(--tbb-text);
+}
+
+/* Collapsed stage recedes, so a glance down the panel shows which stages are
+   open without reading caret rotation. */
+.tbb-sb .menu__list-item--collapsed > .tbb-sb-cat__row .tbb-sb-cat__title {
+  color: var(--tbb-sb-quiet);
+}
+
+.tbb-sb .menu__list-item--collapsed > .tbb-sb-cat__row .tbb-sb-cat__glyph {
+  color: var(--tbb-sb-quiet);
+}
+
+/* Active stage — the header is "active" because a descendant chapter is
+   current. Deliberately lighter than the leaf: a tinted band plus an accent
+   eyebrow, title left neutral. "You're in this stage" reads as related to but
+   distinct from "this is the exact page".
+
+   The band has to sit on the row, not the link: Infima ships
+   `.menu__list-item-collapsible .menu__link--active { background: none
+   !important }`, so a category link can never carry its own background. */
+.tbb-sb
+  .theme-doc-sidebar-item-category-level-1
+  > .menu__list-item-collapsible:has(> .menu__link--active) {
+  background: var(--tbb-accent-subtle);
+}
+
+.tbb-sb
+  .theme-doc-sidebar-item-category-level-1
+  > .menu__list-item-collapsible:has(> .menu__link--active)
+  .tbb-sb-cat__eyebrow,
+.tbb-sb
+  .theme-doc-sidebar-item-category-level-1
+  > .menu__list-item-collapsible:has(> .menu__link--active)
+  .tbb-sb-cat__glyph {
+  color: var(--tbb-accent);
+}
+
+/* ── Caret ───────────────────────────────────────────────────────────────── */
+/* Two shapes exist: a category WITH a link renders a separate `menu__caret`
+   button, one WITHOUT renders a `menu__link--sublist-caret` pseudo-element.
+   Repainting both through the same mask keeps them identical. Rotation is left
+   to Infima, which already flips the glyph on `--collapsed`. */
+
+.tbb-sb .menu__caret {
+  border-radius: var(--tbb-radius-sm);
+  padding-inline: 0.5rem;
+  transition: background var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.tbb-sb .menu__caret:hover {
+  background: var(--tbb-surface-emphasis);
+}
+
+.tbb-sb .menu__caret::before,
+.tbb-sb .menu__link--sublist-caret::after {
+  background: currentColor;
+  -webkit-mask: var(--tbb-sb-caret) center / 13px 13px no-repeat;
+  mask: var(--tbb-sb-caret) center / 13px 13px no-repeat;
+  filter: none;
+  color: var(--tbb-sb-quiet);
+  transition: transform var(--tbb-duration) var(--tbb-ease);
+}
+
+/* ── Nested group spine ──────────────────────────────────────────────────── */
+/* One hairline bracketing a stage's chapters — the cheapest way to make depth
+   legible without indenting the label off the panel. `ul` in the selector beats
+   Infima's own `.menu__list .menu__list` padding at equal class count. */
+
+.tbb-sb ul.tbb-sb-sublist {
+  position: relative;
+  margin-top: 0.125rem;
+  margin-left: 1.25rem;
+  padding-left: 0.5rem;
+}
+
+.tbb-sb ul.tbb-sb-sublist::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  width: 1px;
+  background: var(--tbb-border);
+}
+
+/* ─── TOC ────────────────────────────────────────────────────────────────── */
+/* Receded a notch further than the sidebar (--tbb-toc-bg = silver-1 light /
+   silver-6 dark) — the least important chrome on the page. */
+.table-of-contents {
+  background: var(--tbb-toc-bg);
+  border-left: 1px solid var(--tbb-border);
+  border-radius: 0 var(--tbb-radius-md) var(--tbb-radius-md) 0;
+  padding: 0.875rem 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+/* Spec 013 — "ON THIS PAGE" eyebrow above the right-rail TOC. Docusaurus
+   renders the TOC inside `nav.theme-doc-toc` (or the older `.table-of-contents`
+   wrapper); we attach the eyebrow to whichever ancestor wraps a TOC list.
+   No JSX change — pure CSS so the upgrade path is unaffected. */
+nav.theme-doc-toc > .table-of-contents::before,
+.theme-doc-toc-layout > .table-of-contents::before,
+.table-of-contents::before {
+  content: "ON THIS PAGE";
+  display: block;
+  margin-bottom: 0.6rem;
+  color: var(--tbb-text-muted);
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.table-of-contents__link {
+  display: block;
+  color: var(--tbb-text);
+  border-left: 2px solid transparent;
+  border-radius: var(--tbb-radius-sm);
+  padding-left: 0.625rem;
+  margin-left: -0.625rem;
+  transition: color var(--tbb-duration-fast) var(--tbb-ease),
+    background var(--tbb-duration-fast) var(--tbb-ease),
+    border-color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+/* Nesting depth expressed tonally, not just by Infima's existing indent —
+   a nested (child-heading) link dims relative to its top-level parent.
+   (Deliberately not dimmed further than --tbb-text-muted: on the receded
+   --tbb-toc-bg ground, the next step down falls under 4.5:1 — verified.) */
+.table-of-contents ul .table-of-contents__link {
+  color: var(--tbb-text-muted);
+}
+
+.table-of-contents__link:hover {
+  background: var(--tbb-surface-emphasis);
+  color: var(--tbb-text);
+}
+
+/* Active heading — scroll-tracked by Docusaurus's built-in TOCHighlight,
+   already wired via `linkActiveClassName` in the default TOC component; this
+   is styling only. Accent text + rail, matching the sidebar's rail language,
+   distinct from the neutral hover above ("where you are" vs "where you
+   might go"). */
+.table-of-contents__link--active {
+  color: var(--tbb-accent);
+  border-left-color: var(--tbb-accent);
+  font-weight: 500;
+}
+
+/* ─── Native Docusaurus admonitions ──────────────────────────────────────── */
+.alert {
+  border: 1px solid var(--tbb-border);
+  border-left-width: 3px;
+  border-radius: var(--tbb-radius-md);
+  background: var(--tbb-surface);
+  box-shadow: var(--tbb-shadow-sm);
+}
+
+.alert--info {
+  border-left-color: var(--ifm-color-primary);
+}
+
+.alert--success {
+  border-left-color: var(--tbb-success);
+}
+
+.alert--warning {
+  border-left-color: var(--tbb-stage-2);
+}
+
+.alert--danger {
+  border-left-color: var(--tbb-danger);
+}
+
+/* ─── Footer columns polish ──────────────────────────────────────────────── */
+.footer__col {
+  margin-bottom: 1.25rem;
+}
+
+.footer__brand {
+  max-width: 24rem;
+}
+
+.footer__brand-tagline {
+  font-size: 0.875rem;
+  color: var(--tbb-text-muted);
+  line-height: 1.6;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.footer__social {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.footer__social-link {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--tbb-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tbb-surface);
+  border: 1px solid var(--tbb-border);
+  color: var(--tbb-text-muted);
+  transition: all var(--tbb-duration-fast) var(--tbb-ease);
+  text-decoration: none;
+}
+
+.footer__social-link:hover {
+  color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+/* ─── Doc pagination ─────────────────────────────────────────────────────── */
+.pagination-nav__link {
+  border: 1px solid var(--tbb-border);
+  border-radius: var(--tbb-radius-md);
+  padding: 1rem 1.25rem;
+  transition: all var(--tbb-duration) var(--tbb-ease);
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--ifm-color-primary);
+  background: var(--tbb-surface);
+  box-shadow: var(--tbb-shadow-sm);
+  color: var(--ifm-color-primary);
+}
+
+.pagination-nav__sublabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--tbb-text-muted);
+}
+
+.pagination-nav__label {
+  font-weight: 600;
+  color: var(--tbb-text);
+}
+
+/* ─── SiteMenu — rebuilt hamburger drawer ─────────────────────────────────── */
+
+/* The hook toggles this attribute instead of mutating body styles. Keeping
+   scroll lock on the root also works when the body is a Docusaurus wrapper. */
+html[data-drawer-open="true"] {
+  overflow: hidden;
+}
+
+.site-menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  margin-right: 0.25rem;
+  color: var(--tbb-text);
+  border-radius: var(--tbb-radius-md);
+}
+
+.site-menu-button:hover {
+  color: var(--tbb-accent);
+  background: var(--tbb-accent-subtle);
+}
+
+.site-menu-button:focus-visible,
+.site-drawer__close:focus-visible,
+.site-drawer__link:focus-visible {
+  /* `--tbb-focus-ring` is a box-shadow list, not a color, so it cannot be
+     passed to `outline`. Use a 2 px solid outline in the accent color and
+     add the glow as a box-shadow. */
+  outline: 2px solid var(--tbb-accent);
+  outline-offset: 2px;
+  box-shadow: var(--tbb-focus-ring);
+}
+
+.site-drawer__backdrop {
+  /* This element is mounted outside the filtered navbar, so fixed geometry
+     resolves against the viewport. The open navbar gets a higher stacking
+     context below so its hamburger remains clickable above the backdrop. */
+  position: fixed;
+  inset: 0;
+  z-index: 199;
+  background: color-mix(in srgb, #000 42%, transparent);
+  cursor: pointer;
+  opacity: 1;
+}
+
+.navbar.navbar-sidebar--show {
+  position: relative;
+  z-index: 202;
+}
+
+.site-drawer {
+  position: fixed;
+  left: 0;
+  z-index: 201;
+  display: flex;
+  flex-direction: column;
+  width: min(20rem, 82vw);
+  height: calc(100vh - var(--site-drawer-navbar-height, var(--ifm-navbar-height)));
+  height: calc(100dvh - var(--site-drawer-navbar-height, var(--ifm-navbar-height)));
+  overflow: hidden;
+  color: var(--tbb-text);
+  background: var(--tbb-surface-glass);
+  border-right: 1px solid var(--tbb-border);
+  box-shadow: var(--tbb-shadow-lg);
+  transform: translateX(0);
+  isolation: isolate;
+  backdrop-filter: var(--tbb-apple-frost);
+  -webkit-backdrop-filter: var(--tbb-apple-frost);
+}
+
+.site-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.75rem 0.75rem 0;
+}
+
+.site-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  width: 44px;
+  height: 44px;
+  margin: 0.75rem 0.75rem 0;
+  color: var(--tbb-text-muted);
+  background: transparent;
+  border: 0;
+  border-radius: var(--tbb-radius-md);
+  cursor: pointer;
+}
+
+.site-drawer__close:hover {
+  color: var(--tbb-text);
+  background: var(--tbb-accent-subtle);
+}
+
+.site-drawer__panel {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.75rem 1rem 2rem;
+}
+
+.site-drawer__list {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Site-level entries sitting under the curriculum tree on doc routes — the
+   tree covers every stage, these cover what it can't. */
+.site-drawer__list--secondary {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--tbb-border);
+}
+
+.site-drawer__link {
+  display: block;
+  padding: 0.875rem 1rem;
+  color: var(--tbb-text);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--tbb-radius-md);
+}
+
+.site-drawer__link:hover,
+.site-drawer__link[data-active="true"] {
+  color: var(--tbb-accent);
+  background: var(--tbb-accent-subtle);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-drawer {
+    background: var(--tbb-surface-solid);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-drawer,
+  .site-drawer__backdrop {
+    transition: transform 200ms ease, opacity 200ms ease;
+  }
+}
+
+@media (max-width: 767px) {
+  .site-drawer {
+    width: min(20rem, 88vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-drawer,
+  .site-drawer__backdrop {
+    transition: none;
+  }
+}
+
+
+/* ─── Native form controls ──────────────────────────────────────────────── */
+input[type="checkbox"],
+input[type="radio"],
+input[type="range"] {
+  /* Neutral, not the scoped accent (ADR-0005) — a checked checkbox isn't a
+     link, active nav item, or focus ring. */
+  accent-color: var(--ifm-color-primary);
+}
+
+/* ─── Apple Pro utility classes ─────────────────────────────────────────────
+   Ported 1:1 from the habit-tracker-app theme (pure CSS, no Tailwind). */
+
+/* Screen-reader-only text. Neither Infima nor Docusaurus ships this class, but
+   SiteDrawer's dialog title already relied on it, so the heading was rendering
+   visibly. Clip rather than `display: none`, which would hide it from assistive
+   tech too. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Hairline — ultra-fine 0.5px internal border */
+.tbb-hairline {
+  box-shadow: inset 0 0 0 0.5px var(--hairline);
+}
+
+/* Frosted glass */
+.tbb-frosted {
+  backdrop-filter: saturate(180%) blur(24px);
+  -webkit-backdrop-filter: saturate(180%) blur(24px);
+}
+
+.tbb-frosted-strong {
+  backdrop-filter: saturate(200%) blur(40px);
+  -webkit-backdrop-filter: saturate(200%) blur(40px);
+}
+
+/* Platinum text gradient (editorial moments) */
+.tbb-text-platinum {
+  background: linear-gradient(135deg, oklch(0.25 0.002 250) 0%, oklch(0.55 0.005 250) 50%, oklch(0.78 0.005 250) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+:root[data-theme="dark"] .tbb-text-platinum {
+  background: linear-gradient(135deg, oklch(0.95 0 0) 0%, oklch(0.75 0.005 250) 50%, oklch(0.5 0.005 250) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Graphite surface — hero / dark editorial elements */
+.tbb-surface-graphite {
+  background: linear-gradient(180deg, oklch(0.18 0 0) 0%, oklch(0.1 0 0) 100%);
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 0.08),
+    inset 0 -1px 0 0 oklch(0 0 0 / 0.5);
+}
+
+/* Pro glow — electric-blue aura for active states */
+.tbb-glow-pro,
+.tbb-glow-pro:focus-visible {
+  box-shadow:
+    0 0 0 1px oklch(0 0 0 / 0.35),
+    0 0 24px -4px oklch(0 0 0 / 0.28);
+}
+
+:root[data-theme="dark"] .tbb-glow-pro,
+:root[data-theme="dark"] .tbb-glow-pro:focus-visible {
+  box-shadow:
+    0 0 0 1px oklch(1 0 0 / 0.45),
+    0 0 32px -4px oklch(1 0 0 / 0.18);
+}
+
+/* Silver-shine shimmer */
+@keyframes tbb-silver-shine {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.tbb-animate-silver-shine {
+  background: linear-gradient(
+    110deg,
+    oklch(0.95 0.001 250) 0%,
+    oklch(0.85 0.005 250) 25%,
+    oklch(0.95 0.001 250) 50%,
+    oklch(0.85 0.005 250) 75%,
+    oklch(0.95 0.001 250) 100%
+  );
+  background-size: 200% 100%;
+  animation: tbb-silver-shine 4s linear infinite;
+}
+
+:root[data-theme="dark"] .tbb-animate-silver-shine {
+  background: linear-gradient(
+    110deg,
+    oklch(0.18 0 0) 0%,
+    oklch(0.28 0 0) 25%,
+    oklch(0.18 0 0) 50%,
+    oklch(0.28 0 0) 75%,
+    oklch(0.18 0 0) 100%
+  );
+  background-size: 200% 100%;
+}
+
+/* Scrollbar — thin */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--tbb-border-strong) transparent;
+}
+
+/* ─── Marquee — infinite chip band ───────────────────────────────────────── */
+.tbb-marquee {
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
+  --marquee-gap: 1rem;
+}
+
+.tbb-marquee__track {
+  display: flex;
+  gap: var(--marquee-gap);
+  width: max-content;
+}
+
+.tbb-marquee__group {
+  display: flex;
+  gap: var(--marquee-gap);
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.tbb-marquee--pause-on-hover:hover .tbb-marquee__track {
+  animation-play-state: paused;
+}
+
+.tbb-marquee__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  padding: 0.5rem 1.125rem;
+  border-radius: var(--tbb-radius-pill);
+  background: var(--tbb-surface);
+  border: 1px solid var(--tbb-border);
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 0.6),
+    inset 0 0 0 0.5px var(--hairline);
+  color: var(--tbb-text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color var(--tbb-duration-fast) var(--tbb-ease),
+    border-color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.tbb-marquee__badge svg {
+  color: var(--ifm-color-primary);
+}
+
+.tbb-marquee__badge:hover {
+  color: var(--tbb-text);
+  border-color: var(--tbb-border-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tbb-marquee__track {
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ─── Timeline — static spine, alternating entries ───────────────────────── */
+.tbb-timeline-spine {
+  padding: 1rem 0 0.5rem;
+}
+
+.tbb-timeline {
+  position: relative;
+}
+
+.tbb-timeline__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.tbb-timeline__heading {
+  font-family: var(--ifm-heading-font-family);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  margin: 0 auto 0.75rem;
+  max-width: 22ch;
+  color: var(--tbb-text);
+}
+
+.tbb-timeline__subheading {
+  font-size: 1.0625rem;
+  color: var(--tbb-text-muted);
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.tbb-timeline__track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* This section is homepage-only (MagicUI/Timeline.tsx, used solely by
+   src/pages/index.tsx) — kept strictly neutral, not the scoped docs-chrome
+   accent (ADR-0005), so the homepage's monochrome treatment is undisturbed. */
+.tbb-timeline__spine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--ifm-color-primary) 35%, transparent) 0%,
+    color-mix(in srgb, var(--ifm-color-primary) 12%, transparent) 100%
+  );
+}
+
+.tbb-timeline-entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.tbb-timeline-entry__dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--tbb-surface);
+  border: 2px solid var(--ifm-color-primary);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ifm-color-primary) 15%, transparent);
+}
+
+.tbb-timeline-entry__dot-inner {
+  display: block;
+  width: 6px;
+  height: 6px;
+  margin: 2px;
+  border-radius: 50%;
+  background: var(--ifm-color-primary);
+}
+
+.tbb-timeline-entry__card {
+  border-radius: var(--tbb-radius-lg);
+  border: 1px solid var(--tbb-border);
+  background: var(--tbb-surface);
+  padding: 1.5rem 1.75rem;
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 1),
+    inset 0 0 0 0.5px var(--hairline);
+}
+
+.tbb-timeline-entry--left .tbb-timeline-entry__card {
+  grid-column: 1;
+  text-align: right;
+}
+
+.tbb-timeline-entry--right .tbb-timeline-entry__card {
+  grid-column: 2;
+  text-align: left;
+}
+
+.tbb-timeline-entry__step {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.375rem;
+}
+
+.tbb-timeline-entry__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--tbb-text);
+  margin: 0 0 0.375rem;
+}
+
+.tbb-timeline-entry__body {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--tbb-text-muted);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .tbb-timeline__spine {
+    left: 14px;
+    transform: none;
+  }
+
+  .tbb-timeline-entry {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-left: 2.5rem;
+  }
+
+  .tbb-timeline-entry--left,
+  .tbb-timeline-entry--right {
+    grid-template-columns: 1fr;
+  }
+
+  .tbb-timeline-entry--left .tbb-timeline-entry__card,
+  .tbb-timeline-entry--right .tbb-timeline-entry__card {
+    grid-column: 1;
+    text-align: left;
+  }
+
+  .tbb-timeline-entry__dot {
+    left: 14px;
+    transform: translateY(-50%);
+  }
+}
+
+/* ─── Reading Progress bar ───────────────────────────────────────────────── */
+.tbb-reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.tbb-reading-progress[data-active="true"] {
+  opacity: 1;
+}
+
+.tbb-reading-progress__bar {
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+  transform: scaleX(0);
+  background: linear-gradient(
+    90deg,
+    var(--tbb-silver-6) 0%,
+    var(--tbb-accent) 100%
+  );
+  box-shadow: 0 0 12px 1px oklch(0 0 0 / 0.3);
+}
+
+/* ─── Reduce motion ──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

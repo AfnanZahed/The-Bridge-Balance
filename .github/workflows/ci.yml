@@ -1,0 +1,118 @@
+name: ci
+
+on:
+  pull_request:
+    branches: [main, "00*-*"]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: edu-site/package-lock.json
+
+      - name: Install dependencies
+        working-directory: edu-site
+        run: npm ci
+
+      - name: Lint (Biome)
+        working-directory: edu-site
+        run: npx @biomejs/biome ci src
+
+      - name: Frontmatter check
+        working-directory: edu-site
+        run: npm run check:frontmatter
+
+      - name: Typecheck
+        working-directory: edu-site
+        run: npm run typecheck
+
+      - name: Build (with broken-link gate via onBrokenLinks: "throw")
+        working-directory: edu-site
+        run: npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: edu-site/build/
+          retention-days: 7
+          if: always()
+
+  audit:
+    name: Audit (Lighthouse + axe)
+    runs-on: ubuntu-latest
+    needs: build
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: edu-site/package-lock.json
+
+      - name: Install dependencies
+        working-directory: edu-site
+        run: npm ci
+
+      # Download the build artifact produced by the `build` job so we don't
+      # pay a second `npm run build` cost. ~50-100MB transfer.
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: edu-site/build
+
+      # Chromium is already in @axe-core/playwright's npm tree, but the
+      # browser binary itself lives in ~/.cache/ms-playwright and must be
+      # installed per-runner. --with-deps pulls OS libs on Linux.
+      - name: Install Playwright browsers
+        working-directory: edu-site
+        run: npx playwright install --with-deps chromium
+
+      - name: Run audit (Lighthouse + axe)
+        working-directory: edu-site
+        run: npm run test:audit
+
+      - name: Upload Lighthouse report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: edu-site/lighthouse-report.json
+          retention-days: 14
+
+      - name: Upload axe report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: axe-report
+          path: edu-site/axe-report.json
+          retention-days: 14
+
+      - name: Upload audit summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-summary
+          path: edu-site/audit-summary.json
+          retention-days: 14

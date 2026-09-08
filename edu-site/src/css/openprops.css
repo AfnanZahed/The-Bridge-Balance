@@ -1,0 +1,39 @@
+/**
+ * Open Props — curated primitives for the TBB design system.
+ *
+ * Reduced set after the Apple Pro theme migration. We keep radius, ease,
+ * and size aliases that components still reference, and re-point shadows
+ * to the Apple Pro silver inset-highlight stack from custom.css.
+ */
+
+:root {
+  /* Open Props radius primitives */
+  --radius-2: 5px;
+  --radius-3: 1rem;
+  --radius-round: 1e5px;
+
+  /* Open Props ease primitives */
+  --ease-out-3: cubic-bezier(0, 0, 0.3, 1);
+  --ease-in-out-2: cubic-bezier(0.3, 0, 0.7, 1);
+
+  /* Open Props size primitives */
+  --size-content-2: 45ch;
+  --size-fluid-3: max(1.5rem, min(3vw, 2rem));
+  --size-7: 2rem;
+
+  /* Semantic --op-* aliases — consumed by DataViz and other components. */
+  --op-radius-card: var(--radius-3);
+  --op-radius-control: var(--radius-2);
+  --op-radius-round: var(--radius-round);
+
+  --op-shadow-subtle: var(--tbb-shadow-sm);
+  --op-shadow-raised: var(--tbb-shadow-md);
+  --op-shadow-floating: var(--tbb-shadow-lg);
+
+  --op-ease-out: var(--ease-out-3);
+  --op-ease-in-out: var(--ease-in-out-2);
+
+  --op-size-content: var(--size-content-2);
+  --op-size-section-gap: var(--size-fluid-3);
+  --op-size-control: var(--size-7);
+}

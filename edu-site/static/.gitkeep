@@ -1,0 +1,7 @@
+# Static assets root.
+
+This directory is the Docusaurus convention for files served as-is under `/`.
+
+Empty subdirectories below are tracked by `.gitkeep` files so they survive
+commits. Replace the `.gitkeep` with the actual asset (image, favicon, etc.)
+when you have content for that chapter.

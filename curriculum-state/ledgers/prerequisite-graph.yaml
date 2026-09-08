@@ -1,0 +1,174 @@
+# Prerequisite graph - lesson order, dependencies, and authoring state.
+#
+# Purpose: an author writing chapter 4 needs to know what chapters 1-3 taught
+# and what chapter 5 will need. This file is that knowledge. It also drives the
+# "you are here" block every chapter carries.
+#
+# Status vocabulary matches the site's own chapter_state frontmatter:
+#   placeholder | text-ready | video-published
+# plus:  planned  (in this graph, no file yet)
+
+version: 1
+seeded: 2026-08-23
+seeded_from: edu-site/docs/ (actual files on disk, 2026-08-23)
+
+# ---------------------------------------------------------------------------
+# THIS FILE IS NOT A PLAN - read before treating any row below as settled.
+#
+# The official curriculum (curriculum_1.md) fixes four STAGES. It does not fix
+# a chapter list. Every `id`, `path`, `title`, and `teaches` value below is a
+# snapshot of what happens to exist on disk right now (placeholder scaffolding
+# from earlier site-building work, mostly) or what has actually shipped - none
+# of it is a commitment to write that chapter, with that title, covering
+# exactly that content. The author decides a chapter's real scope and shape at
+# the moment they sit down to research and write it, per lesson, at runtime -
+# not by reading this file as a syllabus to fulfill. Expect entries to be
+# retitled, split, merged, dropped, or added as that happens. Update this file
+# when it happens; do not treat a mismatch between this file and a freshly-
+# authored chapter as an error in the chapter.
+#
+# Concretely, for Stage 1: it currently has six placeholder files, while the
+# official curriculum's Stage 1 focus line names roughly fifteen distinct topic
+# areas (software architecture, development environment, core programming,
+# packages and project management, OOP and software modeling, Git and GitHub,
+# frontend engineering, UI/UX and branding, visual effects and deployment,
+# backend engineering, authentication and authorization, frontend-backend
+# integration, async and realtime systems, databases, personal branding and
+# earning). That gap is not a to-do list to mechanically fill - it's one
+# example of why this file can only ever describe the current state, never the
+# final one. Reconciling a stage's chapter list against the curriculum's topic
+# areas, when and if that's wanted, is `curriculum-architect`'s eventual job,
+# and even its output there would be a proposal to revise this file, not a
+# fixed target this file is measured against.
+# ---------------------------------------------------------------------------
+
+lessons:
+
+  - id: intro
+    path: docs/intro.md
+    title: "The Bridge Between Code and Engineering"
+    stage: 0
+    position: 0
+    status: text-ready
+    scope_multiplier: 1.0
+    requires: []
+    teaches: [Spec-Driven Engineering, vibe coding, the two failure poles (surrender and resistance), the specify-delegate-inspect-verify framework, the four safety boundaries (environment, data, authority, verification and recovery), the specify-design-implement-verify responsibility loop, the experiment-to-system transition (users, money, secrets, durable data), agent governance boundaries (environment, trust, data, apprenticeship), the RAG / tool-calling / multi-agent ownership architecture]
+    notes: >-
+      The live chapter is a single continuous read, ~3,000 words, and is the
+      anchor at scope_multiplier 1.0 (contracts/calibration.md). It is the only
+      text-ready chapter in the book today.
+      Revised 2026-08-24 for readability and text hierarchy against
+      canon/voice.md and canon/audience.md.
+
+  # --- Intro sequence (no official "Stage 0" - the curriculum fixes stages
+  # 1-4 only; `stage: 0` here is only this file's own pre-existing internal
+  # bucket for intro-level content, same value docs/intro.md already used,
+  # not a claimed official stage) --------------------------------------------
+  # Live-lecture "SDE Intro" series, Parts 2-4 (Part 1 was a syllabus
+  # discussion, not curriculum content, so it has no row here). Authored as
+  # real docs 2026-09-03 at the user's explicit request, after they
+  # confirmed the candidates sketched in
+  # curriculum-state/proposals/stage-00-sde-intro-2026-09-03.md (filename
+  # predates the "no Stage 0" correction; content still current). `status:
+  # placeholder` because real files now exist at these paths but haven't
+  # cleared chapter_state: text-ready - the user is reviewing on localhost
+  # first.
+  - id: intro-2
+    path: docs/intro-2-binary-to-language.md
+    title: "From Electricity to English: Binary, Assembly, and High-Level Languages"
+    stage: 0
+    position: 1
+    status: placeholder
+    scope_multiplier: null
+    requires: []
+    teaches: [bits and binary, machine code, assembly language, high-level languages, abstraction]
+    notes: >-
+      Live-lecture "SDE Intro, Part 2," now authored as a real single-
+      version chapter. Sketch/reasoning in
+      curriculum-state/proposals/stage-00-sde-intro-2026-09-03.md.
+
+  - id: intro-3
+    path: docs/intro-3-architecture-map.md
+    title: "Let's Build One Thing Together: The Complete Architecture Story"
+    stage: 0
+    position: 2
+    status: placeholder
+    scope_multiplier: null
+    requires: [intro-2]
+    teaches: [platform, frontend, components, responsiveness, backend, API, HTTP, REST, validation, middleware, logging, databases, SQL vs NoSQL, relationships, authentication, authorization, Git, GitHub, commits, branches, pull requests, deployment]
+    notes: >-
+      Live-lecture "SDE Intro, Part 3" - the most heavily revised of the
+      three after user feedback (2026-09-03): one continuous "build one
+      thing together" narrative, sequenced to mirror s1-03/s1-04/s1-05/
+      s1-06 in that exact order so Stage 1 is literally built on this
+      chapter's discussions. Sketch/reasoning in
+      curriculum-state/proposals/stage-00-sde-intro-2026-09-03.md.
+
+  - id: intro-4
+    path: docs/intro-4-two-extremes-and-sde.md
+    title: "Two Ways to Fail, and the Bridge Between Them"
+    stage: 0
+    position: 3
+    status: placeholder
+    scope_multiplier: null
+    requires: [intro-3]
+    teaches: [vibe coding, the two extremes (over-caution and over-trust), Spec-Driven Engineering, the specify-design-implement-verify loop]
+    notes: >-
+      Live-lecture "SDE Intro, Part 4" - closes the promise made in the
+      already-delivered live "Part 1" syllabus lecture. Reuses
+      docs/intro.md's own evidence (metr-productivity, veracode-genai,
+      karpathy-vibe-coding, collins-woty-2025 in evidence-ledger.yaml) as a
+      backward callback, not a new citation. Sketch/reasoning in
+      curriculum-state/proposals/stage-00-sde-intro-2026-09-03.md.
+
+  # --- Stage 1 -------------------------------------------------------------
+  - {id: s1-index,    path: docs/stage-01-spec-aware-vibe-engineering/index.md,             title: "Stage 1 Overview",                 stage: 1, position: 1, status: text-ready,  scope_multiplier: null, requires: [intro],       teaches: []}
+  - {id: s1-01,       path: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md,    title: "Foundations: Architecture Before Code", stage: 1, position: 2, status: placeholder, scope_multiplier: null, requires: [intro],       teaches: [architecture, components, boundaries, interfaces]}
+  - {id: s1-02,       path: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md, title: "Core Programming",               stage: 1, position: 3, status: placeholder, scope_multiplier: null, requires: [s1-01],       teaches: [variables, conditionals, loops, functions, file handling, error handling]}
+  - {id: s1-03,       path: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md,       title: "Frontend",                         stage: 1, position: 4, status: placeholder, scope_multiplier: null, requires: [s1-02],       teaches: [Next.js, components, layouts, responsiveness]}
+  - {id: s1-04,       path: docs/stage-01-spec-aware-vibe-engineering/04-backend.md,        title: "Backend",                          stage: 1, position: 5, status: placeholder, scope_multiplier: null, requires: [s1-02],       teaches: [APIs, HTTP, REST, validation, middleware, logging]}
+  - {id: s1-05,       path: docs/stage-01-spec-aware-vibe-engineering/05-databases.md,      title: "Databases",                        stage: 1, position: 6, status: placeholder, scope_multiplier: null, requires: [s1-04],       teaches: [SQL vs NoSQL, PostgreSQL, MongoDB, Redis, relationships]}
+  - {id: s1-06,       path: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md,     title: "Git and GitHub",                   stage: 1, position: 7, status: placeholder, scope_multiplier: null, requires: [s1-02],       teaches: [commits, branches, pull requests, collaboration]}
+
+  # --- Stage 2 -------------------------------------------------------------
+  - {id: s2-index,    path: docs/stage-02-cs50-certification/index.md,                      title: "Stage 2 Overview",                 stage: 2, position: 1, status: text-ready,  scope_multiplier: null, requires: [s1-06],       teaches: []}
+  - {id: s2-cs50p,    path: docs/stage-02-cs50-certification/cs50p.md,                      title: "CS50P - Python",                   stage: 2, position: 2, status: placeholder, scope_multiplier: null, requires: [s1-02],       teaches: []}
+  - {id: s2-cs50w,    path: docs/stage-02-cs50-certification/cs50w.md,                      title: "CS50W - JavaScript",               stage: 2, position: 3, status: placeholder, scope_multiplier: null, requires: [s2-cs50p],    teaches: []}
+
+  # --- Stage 3 -------------------------------------------------------------
+  - {id: s3-index,    path: docs/stage-03-mastering-ai-coding-agents/index.md,              title: "Stage 3 Overview",                 stage: 3, position: 1, status: text-ready,  scope_multiplier: null, requires: [s2-cs50w],    teaches: []}
+  - {id: s3-prompt,   path: docs/stage-03-mastering-ai-coding-agents/prompt-engineering.md, title: "Prompt Engineering",               stage: 3, position: 2, status: placeholder, scope_multiplier: null, requires: [intro],       teaches: []}
+  - {id: s3-context,  path: docs/stage-03-mastering-ai-coding-agents/context-engineering.md, title: "Context Engineering",             stage: 3, position: 3, status: placeholder, scope_multiplier: null, requires: [s3-prompt],   teaches: []}
+  - {id: s3-cc,       path: docs/stage-03-mastering-ai-coding-agents/claude-code.md,        title: "Claude Code and coding-agent CLIs", stage: 3, position: 4, status: placeholder, scope_multiplier: null, requires: [s3-context, s1-06], teaches: []}
+  - {id: s3-skills,   path: docs/stage-03-mastering-ai-coding-agents/skills-and-mcp.md,     title: "Skills and MCP",                   stage: 3, position: 5, status: placeholder, scope_multiplier: null, requires: [s3-cc],       teaches: []}
+
+  # --- Stage 4 -------------------------------------------------------------
+  - {id: s4-index,    path: docs/stage-04-engineering-autonomous-ai-agents/index.md,        title: "Stage 4 Overview",                 stage: 4, position: 1, status: text-ready,  scope_multiplier: null, requires: [s3-skills],   teaches: []}
+  - {id: s4-rag,      path: docs/stage-04-engineering-autonomous-ai-agents/rag-and-tool-calling.md, title: "RAG and Tool Calling",     stage: 4, position: 2, status: placeholder, scope_multiplier: null, requires: [s4-index, s1-05], teaches: [RAG, tool calling]}
+  - {id: s4-multi,    path: docs/stage-04-engineering-autonomous-ai-agents/multi-agent-systems.md,  title: "Multi-Agent Systems",      stage: 4, position: 3, status: placeholder, scope_multiplier: null, requires: [s4-rag],      teaches: []}
+  - {id: s4-evals,    path: docs/stage-04-engineering-autonomous-ai-agents/evaluations.md,  title: "Evaluations",                      stage: 4, position: 4, status: placeholder, scope_multiplier: null, requires: [s4-rag],      teaches: []}
+
+# ---------------------------------------------------------------------------
+# Not a lesson. Listed so a coherence audit does not treat it as one.
+# ---------------------------------------------------------------------------
+non_lessons:
+  - {path: docs/perf-targets.md, note: "Internal performance targets. chapter_state is text-ready but it is not curriculum content."}
+  - {path: docs/glossary.md, note: "Generated reference page (concept-ledger.yaml, status: defined only). No chapter_state - deliberately excluded from the chapter contract; not curriculum content."}
+
+# ---------------------------------------------------------------------------
+# Authoring progress. Update on every completed chapter.
+# ---------------------------------------------------------------------------
+progress:
+  total_lesson_files: 19          # excludes the 4 stage index pages and the intro
+  authored: 1
+  authored_to_current_contract: 1
+  note: >-
+    intro.md was re-authored 2026-08-24,
+    so it now counts as authored under BOTH the old and current standard.
+    total_lesson_files counts placeholder rows that exist right now - it is
+    a count of this file's current entries, not a target or a promise about
+    the book's eventual size. It will change as chapters are added, split,
+    merged, or dropped; do not cite it as "the number of chapters in the
+    book." intro-2/intro-3/intro-4 (added 2026-09-03) are real single-
+    version files pending the user's own review on localhost before any
+    are flipped to text-ready - see their own notes fields.

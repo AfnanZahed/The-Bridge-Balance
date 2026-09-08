@@ -1,0 +1,285 @@
+# Evidence ledger - every canonical source, and which question each chapter
+# asks of it.
+#
+# Purpose:
+#   1. Reuse is allowed; paraphrase is not. Two chapters may cite the same
+#      incident only if each asks a genuinely different question of it. This
+#      file is where that is checked.
+#   2. When a number is updated or retracted, this turns "which chapters
+#      mention it" from a memory problem into a lookup.
+#
+# Rules:
+#   - No cap on reuse. The test is whether a NEW question is being asked. If
+#     you reach for a source again and cannot name a question no other chapter
+#     is asking, you have over-used it - at the second reuse or the fifth.
+#   - Rotate through: what happened -> why it happened -> what changed because
+#     of it -> what would you do differently knowing it.
+#   - expires: Stage 3/4 tool claims get 90 days. Industry reports get 12
+#     months. Named historical incidents do not expire but their framing does.
+#   - status (optional field, per source): absent means canonical - confirmed,
+#     citable normally, which is why none of the entries seeded below carry it.
+#     `chapter-production` sets `status: proposed` on any NEW entry
+#     it adds during research, since that skill proposes sources for an editor
+#     (human or the sibling skill) to confirm, not to add unilaterally. A
+#     human or the chapter-shipping skill promotes a proposed source to
+#     canonical by deleting the status field once it's actually cited in a
+#     shipped chapter - do not leave `status: proposed` sitting on a source a
+#     chapter already cites, since that would make an already-shipped citation
+#     look unconfirmed to the next author who reads this file.
+#   - A passage that only points backward ("the METR and Veracode findings
+#     elsewhere in this curriculum") without restating the evidence or asking
+#     it a fresh question is NOT a new use and gets no questions_asked row
+#     here - it is deferring to the chapter where the citation lives.
+
+version: 1
+seeded: 2026-08-23
+seeded_from: edu-site/docs/intro.md
+
+sources:
+
+  - id: replit-lemkin
+    name: Replit agent production-database deletion (Jason Lemkin / SaaStr)
+    url: https://arstechnica.com/information-technology/2025/07/ai-coding-assistants-chase-phantoms-destroy-real-user-data/
+    also: https://www.pcmag.com/news/vibe-coding-fiasco-replite-ai-agent-goes-rogue-deletes-company-database
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro.md, question: "Can capability outrun accountability?"}
+      - {chapter: docs/intro.md, question: "What does the full anatomy of an unenforced instruction look like, told as a story rather than analyzed as a boundary?"}
+      - {chapter: docs/intro.md, question: "What does an environment boundary failure look like?"}
+      - {chapter: docs/intro.md, question: "What does the surrender pole look like as a concrete instance, not just a description?"}
+      - {chapter: docs/intro.md, question: "Which criterion (durable data) does this incident make concrete, and what made the loss recoverable that time?"}
+      - {chapter: docs/intro.md, question: "Where exactly did the authority boundary fail?"}
+    notes: >-
+      Each logged use asks a different question, per the no-cap-on-reuse rule
+      above. Bare backward callbacks ("the Enrichlead pattern discussed
+      elsewhere") are not new uses and get no row.
+
+  - id: veracode-genai
+    name: Veracode GenAI Code Security Report
+    url: https://www.veracode.com/blog/genai-code-security-report
+    last_verified: 2026-08-20
+    expires: 2027-03-01
+    questions_asked:
+      - {chapter: docs/intro.md, question: "Why is a checklist without verification decoration?"}
+      - {chapter: docs/intro.md, question: "What share of AI-generated code carries a security vulnerability, and what does that mean for a leader who hasn't changed how rigorously the team specifies or verifies?"}
+      - {chapter: docs/intro.md, question: "What does the density figure imply for gate design?"}
+    notes: >-
+      CAUTION - figure drift, unresolved. problem_statement.md cites 45% (2025
+      report) and says the rate held flat through a March 2026 update.
+      Framework drafts cite a 2026 restatement at 44% / 56% pass rate. These
+      have NOT been reconciled against the primary source. Verify the current
+      figure and its year before citing it again, and always state the year
+      inline. A bare backward callback ("the METR and Veracode findings
+      elsewhere in this curriculum") is not a new use and gets no row.
+
+  - id: stackoverflow-survey-2025
+    name: Stack Overflow Developer Survey 2025 (84% adoption / 29% trust)
+    url: https://survey.stackoverflow.co/2025/ai
+    last_verified: 2026-08-20
+    expires: 2026-12-01
+    questions_asked:
+      - {chapter: docs/intro.md, question: "Does refusing AI actually buy safety, or just fall behind for no offsetting benefit?"}
+      - {chapter: docs/intro.md, question: "Is opting out of AI tools entirely still a defensible choice, adoption-wise?"}
+      - {chapter: docs/intro.md, question: "What does the adoption/trust gap reveal about the two poles?"}
+      - {chapter: docs/intro.md, question: "What is the cultural fingerprint of unowned responsibility?"}
+      - {chapter: docs/intro.md, question: "Where does the gap surface first?"}
+      - {chapter: docs/intro.md, question: "What does the adoption/trust gap signal about where organizational judgment hasn't kept pace with tool adoption?"}
+    notes: >-
+      Superseded when the 2026 survey lands. Check before Stage 3 authoring.
+      NOTE: Stack Overflow's content-moderation policy is a DIFFERENT source -
+      see stackoverflow-ai-policy below. The two are not to be conflated even
+      though both cite "Stack Overflow."
+
+  - id: metr-productivity
+    name: METR AI productivity study (19% slower on complex tasks; 63% debug more)
+    url: https://metr.org/
+    last_verified: 2026-08-20
+    expires: 2026-12-01
+    questions_asked:
+      - {chapter: docs/intro.md, question: "What happens when implementation crosses a boundary uncontrolled?"}
+      - {chapter: docs/intro.md, question: "Where has the scarce capability moved to?"}
+      - {chapter: docs/intro.md, question: "Is verifying someone else's reasoning a harder skill than producing your own, and is that skill measurably atrophying?"}
+    notes: >-
+      URL is the org root, not the study. Replace with the direct paper link
+      before next use - a citation that does not resolve to the claim is not a
+      citation. A bare backward callback is not a new use and gets no row.
+
+  - id: karpathy-vibe-coding
+    name: Andrej Karpathy, origin of "vibe coding" (Feb 2025)
+    url: https://threadreaderapp.com/thread/1886192184808149383.html
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro.md, question: "What is this pattern actually called, and by whom?"}
+
+  - id: collins-woty-2025
+    name: Collins Dictionary Word of the Year 2025 - "vibe coding"
+    url: https://www.collinsdictionary.com/word-of-the-year/2025
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro.md, question: "How mainstream has this become?"}
+
+  - id: enrichlead-acevedo
+    name: Leonel Acevedo / Enrichlead - browser-side authorization and secrets
+    url: https://www.indiehackers.com/post/tech/vibe-coding-has-a-security-problem-vLxyPTrTlZVwDo76oqvr
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro.md, question: "What does a quieter, design-level failure look like, next to Replit's loud one?"}
+      - {chapter: docs/intro.md, question: "What does leaving authority in the client cost?"}
+      - {chapter: docs/intro.md, question: "What marks the money threshold of an experiment becoming a system?"}
+      - {chapter: docs/intro.md, question: "What is a trust boundary failure specifically?"}
+    notes: >-
+      The intro's "two stories" narrative pairs this with Replit. A bare
+      backward callback is not a new use and gets no row.
+
+  - id: samsung-leak
+    name: Samsung confidential source-code leak and generative-AI ban (2023)
+    url: https://www.bloomberg.com/news/articles/2023-05-02/samsung-bans-chatgpt-and-other-generative-ai-use-by-staff-after-leak
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro.md, question: "What is the confidentiality version of this lesson?"}
+      - {chapter: docs/intro.md, question: "When can strong restriction be the correct engineering answer?"}
+      - {chapter: docs/intro.md, question: "What is a data-classification boundary failure?"}
+
+  - id: stackoverflow-ai-policy
+    name: Stack Overflow generative-AI content policy
+    url: https://meta.stackoverflow.com/questions/421831/policy-generative-ai-e-g-chatgpt-is-banned
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro.md, question: "What happens to the apprenticeship pipeline?"}
+
+  - id: aws-tool-sprawl
+    name: AWS research on AI-tool switching costs (40% less completed work, 2x defect rate)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro.md, question: "Why does switching tools specifically erode the verify-stage habit?"}
+    notes: >-
+      No independently verified URL found - locate the primary AWS report
+      before the next new use.
+
+  - id: stanford-canaries-2025
+    name: Stanford Digital Economy Lab, "Canaries in the Coal Mine" (Brynjolfsson et al., Nov 2025)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro.md, question: "Does the labor market confirm the cost of missing the experiment-to-system transition?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: dice-linkedin-2025
+    name: Dice Tech Job Report 2025 / LinkedIn Workforce Report 2025 (entry-level postings -40%, 57% hiring managers trust AI over interns)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro.md, question: "What does the labor market say about missing the four criteria?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: fortune50-security-findings
+    name: Fortune 50 enterprise security-finding growth, Dec 2024-Jun 2025 (~10x), via SecurityWeek/Apiiro
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro.md, question: "What does crossing the secrets criterion cost at enterprise scale?"}
+      - {chapter: docs/intro.md, question: "Is the strategic mistake's cost measured, or merely argued?"}
+      - {chapter: docs/intro.md, question: "What does skipping governance actually cost, at a scale that dwarfs the up-front investment?"}
+      - {chapter: docs/intro.md, question: "Is unconstrained agent risk a hypothetical concern, or already measured?"}
+    notes: >-
+      URL not reverified. Check it before the next new use.
+
+  - id: sp-global-jan-2026
+    name: S&P Global AI Strategy Insights, January 2026 ("option paralysis is real"; 30+ model releases in March 2026)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro.md, question: "Is the velocity problem structural, or a temporary immaturity that resolves on its own?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: anthropic-2026-trends
+    name: Anthropic, 2026 Agentic Coding Trends Report
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro.md, question: "What is the implementation-layer vs. engineering-layer distinction, stated by a frontier lab?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: deloitte-state-of-ai-2026
+    name: Deloitte, State of AI 2026 (one in five companies has mature autonomous-agent governance)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro.md, question: "What is the regulatory/governance maturity gap across the four boundaries?"}
+      - {chapter: docs/intro.md, question: "What is the governance gap this architecture pattern actually closes?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: eu-ai-act-2026
+    name: EU AI Act compliance timeline (obligations from 2026-08-02; penalties EUR 15m or 3% global turnover)
+    url: null
+    last_verified: null
+    expires: null
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro.md, question: "What legal weight now sits behind treating a specification as evidentiary?"}
+      - {chapter: docs/intro.md, question: "What legal weight now sits behind the contract-per-surface pattern?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: ibm-cisco-tech-debt
+    name: IBM and Cisco technical-debt budget allocation (20-30% of IT budget toward AI-generated technical debt)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro.md, question: "What does the strategic mistake of chasing implementation speed actually cost?"}
+      - {chapter: docs/intro.md, question: "What does the IBM/Cisco technical-debt figure add to the Fortune 50 finding-rate data as a second, independent cost signal?"}
+      - {chapter: docs/intro.md, question: "What is the measured downstream cost of unconstrained agent architecture?"}
+    notes: >-
+      URL not reverified. Check it before the next new use.
+
+  - id: bcms-sdd-guide-2026
+    name: BCMS, Definitive 2026 Guide to Spec-Driven Development (three SDD failure modes; "specification poverty")
+    url: null
+    last_verified: null
+    expires: null
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro.md, question: "What failure mode sits upstream of intent drift, context decay, and unverifiable output?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: github-spec-kit-2025
+    name: GitHub Blog, Spec Kit launch 2025 ("code is the source of truth" -> "intent is the source of truth")
+    url: null
+    last_verified: null
+    expires: null
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro.md, question: "How has the industry itself articulated the code-to-intent inversion?"}
+    notes: URL not reverified. Check it before the next new use.
+
+# ---------------------------------------------------------------------------
+# Unresolved citations - none outstanding.
+# ---------------------------------------------------------------------------
+# Every claim the intro makes is now a proper `sources:` entry above and is
+# cited inline in the prose. Several still carry
+# `status: needs-url-verification` - check those before the next new use.
+# Kept as an explicit empty list rather than deleted, so the next author can
+# see the check exists and was run.
+unresolved_citations: []

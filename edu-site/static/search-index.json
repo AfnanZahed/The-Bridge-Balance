@@ -1,0 +1,222 @@
+[
+  {
+    "title": "Glossary",
+    "route": "/glossary",
+    "headings": [],
+    "content": "Glossary This page is generated from — specifically, from every entry whose is . A term still marked or in that ledger is a known debt, not a settled definition, and does not appear here yet. If a later chapter reuses one of the words below, it reuses this exact wording — that consistency is the entire point of tracking terms in one place. Agent A program that can read your files, write new code, edit existing code, and run commands on a computer — on its own, in a sequence, without asking you to approve every single step. First defined in Introduction, Beginner · Summary. An everyday-language version of the same idea also appears in Beginner · Balanced: a very fast, very capable helper — not an architect, and not the owner of the result. Blast radius How much can break, and how far the damage reaches, if a change goes wrong. First defined in Introduction, Advanced · Detailed (Surface 2 — Tool calling). Specification (spec) A written statement of what you want built and what shouldn't change, agreed before you start. First defined in Introduction, Beginner · Summary. Spec-Driven Engineering The discipline in which the engineer specifies intent and boundaries, the AI implements within them, and a human verifies before taking ownership. First defined in Introduction (all cells — this is the book's thesis). Curriculum-coined; must be defined on first use in every cell that relies on it, including Advanced cells, because this is this project's own vocabulary rather than field-standard terminology. Vibe coding Building software entirely through iterative AI prompts without understanding the underlying code. Coined by Andrej Karpathy, February 2025; named Collins Dictionary's Word of the Year for 2025. First defined in Introduction, Beginner · Balanced. Always attributed — never presented as this curriculum's own coinage.",
+    "excerpt": "Glossary This page is generated from — specifically, from every entry whose is . A term still marked or in that ledger is a known debt, not a settled definition, and does not appear here yet. If a…"
+  },
+  {
+    "title": "From Electricity to English: Binary, Assembly, and High-Level Languages",
+    "route": "/intro-2-binary-to-language",
+    "headings": [
+      "From Electricity to English: Binary, Assembly, and High-Level Languages",
+      "The only thing a machine actually understands",
+      "The pain of talking directly to the machine",
+      "Giving the numbers names",
+      "A language built for you, not the machine",
+      "Naming the idea that just happened four times"
+    ],
+    "content": "From Electricity to English: Binary, Assembly, and High-Level Languages > Four translations stand between you and the machine. Every one of them exists because the layer before it was too painful to use — and every one of them is still working, right now, underneath whatever you're reading this on. Look at any screen near you right now — this page, a phone, whatever is closest. Everything happening on it, no matter how advanced it looks, comes down to one microscopic fact: somewhere inside that device, a switch is either on, or off. Nothing subtler than that. Not \"a little bit on.\" On, or off. That switch is called a transistor, and a modern chip holds billions of them — the processor in an ordinary laptop today carries somewhere north of ten billion. Each one only has to do one job reliably: hold a clear \"on\" or \"off\" state, at a specific voltage threshold, and report it back correctly, every time, at a scale of billions of times per second. Engineers could, in principle, have tried to build switches with three or five reliable states instead of two. It isn't something you can build to work correctly at that scale, with that little room for electrical noise to blur one state into the next. Two states, told apart with certainty, is the deal computing has run on since the very first electronic computers, and nothing since has needed to change it. The only thing a machine actually understands One transistor's state — on or off — is called a bit, short for \"binary digit.\" It's the smallest unit of information a computer can hold, and it's the floor everything else in this chapter is built on. A single bit isn't very expressive on its own — it can only ever mean one of two things. So bits get grouped. Eight of them make a byte, and a byte can represent 256 different patterns (every combination of eight 0s and 1s, from to ). That's enough range to give every letter, digit, and punctuation mark on a standard keyboard its own unique pattern — a scheme called ASCII does exa",
+    "excerpt": "From Electricity to English: Binary, Assembly, and High-Level Languages > Four translations stand between you and the machine. Every one of them exists because the layer before it was too painful to…"
+  },
+  {
+    "title": "Let's Build One Thing Together: The Complete Architecture Story",
+    "route": "/intro-3-architecture-map",
+    "headings": [
+      "Let's Build One Thing Together: The Complete Architecture Story",
+      "Where does this thing even live?",
+      "What the student actually sees and touches",
+      "The trap",
+      "Something the student can't see or touch",
+      "How the two even talk",
+      "The goldfish problem",
+      "Who's allowed to do what",
+      "More than one builder",
+      "From your laptop to the real world",
+      "What just got built",
+      "The same map, wearing different clothes"
+    ],
+    "content": "Let's Build One Thing Together: The Complete Architecture Story > Every term in this chapter exists because the story hit a wall that needed it. None of them are here just to be defined. You're about to build something — not on a laptop, not yet, just in your head, one decision at a time. By the end of this chapter, the entire shape of Stage 1 will have assembled itself in front of you, one wall at a time, in exactly the order Stage 1 itself teaches it. The thing you're building: a page where students sign up for a club. The AI club, say — capped at thirty seats. Where does this thing even live? Before anything else, one decision: does this live as a phone app, an installed desktop program, or a website anyone can open in a browser? Each of those is a different platform — the environment a piece of software actually runs inside — and each one needs different tools to build for. This course builds for the web, and it's worth being precise about why a browser is even capable of running someone else's program safely. A browser is itself a kind of interpreter — the exact idea from the previous chapter, one level up. It reads HTML (the page's structure), CSS (its appearance), and JavaScript (its behaviour), and turns all three into pixels and interactions on your screen, on the fly, regardless of whether you're on Windows, macOS, Linux, or a phone. That's the specific power a website has that an installed app doesn't: write it once, and any browser, on any device, can run it — the same \"translate once, run anywhere\" promise a high-level language makes to a chip, made again by a browser to an entire class of devices. Worth saying plainly, though, before going any further: everything in the rest of this chapter is the same map even if you built this as a phone app instead. Only the tools change — a phone app usually can't run inside a browser sandbox the way a website does, so it needs to be installed and given permission directly. The shape underneath — what has to exist,",
+    "excerpt": "Let's Build One Thing Together: The Complete Architecture Story > Every term in this chapter exists because the story hit a wall that needed it. None of them are here just to be defined. You're about…"
+  },
+  {
+    "title": "Two Ways to Fail, and the Bridge Between Them",
+    "route": "/intro-4-two-extremes-and-sde",
+    "headings": [
+      "Two Ways to Fail, and the Bridge Between Them",
+      "Over-trust: building on a map you never look at",
+      "Over-caution: refusing to use the map at all",
+      "The bridge",
+      "Why this had to wait"
+    ],
+    "content": "Two Ways to Fail, and the Bridge Between Them > Both extremes below have the same root cause: a relationship failure with the map from the last chapter, in opposite directions. Every box from the previous chapter — frontend, backend, API, database, auth, deployment — a coding AI agent can now generate in minutes, without the person typing the prompt understanding a single one of those boxes. Ask an agent to \"add a signup form with a cap,\" and it can produce a frontend, a backend endpoint, a database write, and something that looks like an auth check, in one pass, before you've finished your coffee. That fact is new enough that the industry hasn't fully absorbed it yet, and it's the reason this chapter exists at all. Two mistakes are available once that's true, and they sit at opposite ends of the same rope. Over-trust: building on a map you never look at The first mistake has a name, and it's worth knowing exactly where it came from: vibe coding — building software entirely through iterative AI prompts, without understanding the underlying code. Andrej Karpathy coined the term in February 2025; Collins Dictionary named it its 2025 Word of the Year a few months later. It's tempting for a specific, honest reason: it feels fast. Every wall from the previous chapter — the frontend trap, the goldfish problem, who's-allowed-to-do-what — seems to just quietly vanish, because the agent handles all of it without being asked to. Prompt, accept whatever comes back, ship it, repeat. No specification written down first. Nobody reading the diff closely enough to know what actually changed, box by box, against the map you now have. The cost of that isn't hypothetical, and it isn't small. Veracode's 2025 GenAI Code Security Report found that AI-generated code introduces a security vulnerability in 45% of cases it tested — and given the previous chapter's map, it's worth asking which box those vulnerabilities tend to cluster in: unreviewed auth checks and validation logic are exactl",
+    "excerpt": "Two Ways to Fail, and the Bridge Between Them > Both extremes below have the same root cause: a relationship failure with the map from the last chapter, in opposite directions. Every box from the…"
+  },
+  {
+    "title": "The Bridge Between Code and Engineering",
+    "route": "/intro",
+    "headings": [
+      "The Bridge Between Code and Engineering",
+      "Map responsibility across the engineering loop",
+      "The four-stage loop, and who does what",
+      "A common misreading of this table",
+      "What each row looks like when it goes wrong",
+      "Why tool-switching specifically erodes the loop",
+      "A worked example: the loop applied to one real change",
+      "A second worked example, where the decision lives in Verify",
+      "The question this table is actually answering",
+      "The map when you are the reviewer, not the author",
+      "The same table at team scale",
+      "What this table is not",
+      "Where this sits in the curriculum",
+      "Sources and fixed references"
+    ],
+    "content": "The Bridge Between Code and Engineering AI has made implementation cheap. Engineering still decides what should be built, what may be changed, how failure is contained, and who owns the result. The 2025 evidence is unambiguous: Stack Overflow's developer survey found 84% adoption but only 29% trust; METR's productivity study found experienced developers 19% slower on complex tasks while 63% reported spending more time debugging AI-generated code; Veracode's GenAI Code Security Report found that AI-generated code introduces vulnerabilities in 45% of cases. The discipline that bridges this is Spec-Driven Engineering: the engineer specifies intent and boundaries, the AI implements within them, and a human verifies before ownership. Map responsibility across the engineering loop A 2025 study from METR — a research organisation measuring AI capability and its real-world effects — found something the industry absorbed far too calmly. AI tools made experienced developers 19% slower on complex tasks. Not slower-feeling. Slower, measured — while the work felt easier as they did it. The same study found 63% of developers reported spending more time debugging AI-generated code than they estimated writing it from scratch would have taken. Read those two numbers together and a pattern appears that either one alone would hide. AI contributes real value at some parts of a task and quietly imposes real cost at others. Fail to track which is which, and the feeling of speed masks an actual net slowdown. This version gives you the tracking tool: a map of which responsibilities stay yours however capable your assistant becomes — and which are genuinely safe to hand over. The four-stage loop, and who does what Strip software work to its skeleton and it moves through four stages, AI or no AI. You specify what needs to happen. You design how it will happen. You implement the design. You verify that what you built does what you specified. AI can contribute at every one of those stages. Con",
+    "excerpt": "The Bridge Between Code and Engineering AI has made implementation cheap. Engineering still decides what should be built, what may be changed, how failure is contained, and who owns the result. The…"
+  },
+  {
+    "title": "Performance & Accessibility Targets",
+    "route": "/perf-targets",
+    "headings": [
+      "Performance & Accessibility Targets",
+      "Performance and accessibility targets, explained",
+      "Commands and fixed thresholds"
+    ],
+    "content": "Performance & Accessibility Targets Performance and accessibility targets, explained The Bridge Balance runs a quality gate on every pull request so regressions are caught before they reach students. The gate has two tools. Lighthouse scores four categories: Performance (≥ 90), Accessibility (≥ 95), Best Practices (≥ 95), and SEO (≥ 95). The first covers the loading experience; the second covers WCAG 2.1 AA conformance; the third covers HTTPS, console health, deprecated APIs, and image sizing; the fourth covers discoverability. axe-core supplies rule-level accessibility findings: the blocking rule is zero serious or critical violations, while moderate and minor findings are recorded but do not block. Running locally is straightforward: Understanding variance matters. Simulated throttling and paint timing make scores drift by a few points. Re-run a borderline gate before acting on it; a consistent failure is a real regression. The common fixes are stable across projects: ensure colour contrast, add image alt text, give links accessible names, keep heading order, use semantic landmarks, and set explicit image dimensions to avoid layout shift. Content authors usually prevent most failures by adding a page description, describing images, and keeping the layout simple. When a PR must legitimately ship below target, update the thresholds in both and , and document the rationale. Never change only one copy or the two will drift. Commands and fixed thresholds Thresholds: Performance ≥ 90 · Accessibility ≥ 95 · Best Practices ≥ 95 · SEO ≥ 95 · axe-core zero serious/critical (/ recorded, non-blocking). Local audit commands: Reports produced: , , (uploaded as CI artifacts, 90-day retention). Threshold locations: () and (). Update both together when a threshold changes.",
+    "excerpt": "Performance & Accessibility Targets Performance and accessibility targets, explained The Bridge Balance runs a quality gate on every pull request so regressions are caught before they reach students.…"
+  },
+  {
+    "title": "01 — Foundations: Architecture Before Code",
+    "route": "/stage-01-spec-aware-vibe-engineering/01-foundations",
+    "headings": [],
+    "content": "01 — Foundations: Architecture Before Code > Core idea: before you ask an AI agent to write code, draw the system on paper. Lecture outline <!-- This is a placeholder shell. Paste the lecture outline from your video lecture here. Recommended sections (fill in or replace): --> - [ ] Why architecture comes before code - [ ] Components, boundaries, and interfaces - [ ] The 5-minute whiteboard test - [ ] Common architecture shapes (monolith, layered, client-server, event-driven) - [ ] When the architecture is wrong: smell tests Lecture content > Awaiting video lecture. Paste the transcript / notes here when delivered. Worked example > Add a concrete worked example after the lecture is delivered. Check your understanding 1. What is the first question you ask before writing any code? 2. Name two architecture smells and how you'd fix them. 3. Draw a layered architecture for a notes-taking app. Label the layers. Further reading - To be added.",
+    "excerpt": "01 — Foundations: Architecture Before Code > Core idea: before you ask an AI agent to write code, draw the system on paper. Lecture outline <!-- This is a placeholder shell. Paste the lecture outline…"
+  },
+  {
+    "title": "02 — Core Programming (Python & JavaScript)",
+    "route": "/stage-01-spec-aware-vibe-engineering/02-core-programming",
+    "headings": [],
+    "content": "02 — Core Programming (Python & JavaScript) > Core idea: the agent can write the code — your job is to read it and know when it's wrong. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] Variables, types, and assignment - [ ] Conditionals ( / / ) - [ ] Loops ( / ) and iteration - [ ] Functions and parameters - [ ] File handling (read / write / append) - [ ] Error handling (try / except / catch) - [ ] Reading code: the five things to scan first Lecture content > Awaiting video lecture. Code snippets Check your understanding 1. What's the difference between a loop and a loop? When do you pick one over the other? 2. Why is / better than ignoring errors silently? 3. Open any file in this repo. Identify the function signature, the loop, and the error handling. Further reading - To be added.",
+    "excerpt": "02 — Core Programming (Python & JavaScript) > Core idea: the agent can write the code — your job is to read it and know when it's wrong. Lecture outline <!-- Placeholder shell. Paste the lecture…"
+  },
+  {
+    "title": "03 — Frontend",
+    "route": "/stage-01-spec-aware-vibe-engineering/03-frontend",
+    "headings": [],
+    "content": "03 — Frontend > Core idea: the user sees only this layer. Everything else exists to feed it. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] Page structure: route → layout → component → element - [ ] Next.js: pages, app router, server vs client components - [ ] Layouts and responsiveness (mobile-first, breakpoints) - [ ] Components: props, state, events - [ ] UI kits: when to use ShadCN, Material UI, or DaisyUI - [ ] Reading a frontend: start at the URL, follow the props down Lecture content > Awaiting video lecture. Worked example Check your understanding 1. What's the difference between a server component and a client component in Next.js? 2. When would you reach for a UI kit instead of writing CSS by hand? 3. Open any website. Identify the layout, the components, and the responsive breakpoints. Further reading - To be added.",
+    "excerpt": "03 — Frontend > Core idea: the user sees only this layer. Everything else exists to feed it. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] Page structure: route →…"
+  },
+  {
+    "title": "04 — Backend",
+    "route": "/stage-01-spec-aware-vibe-engineering/04-backend",
+    "headings": [],
+    "content": "04 — Backend > Core idea: a backend is a contract. Inputs in, outputs out, errors named. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] HTTP: methods, status codes, headers, body - [ ] REST: resources, routes, idempotency - [ ] Validation: at the edge, never trust the input - [ ] Middleware: auth, logging, rate limits, CORS - [ ] Logging: structured, request-id correlated - [ ] Reading a backend: route → handler → service → store Lecture content > Awaiting video lecture. Worked example Check your understanding 1. What's the difference between and ? 2. Why is validation at the edge safer than validation deep in the call stack? 3. Open any backend project. Trace one request from route handler to database. Further reading - To be added.",
+    "excerpt": "04 — Backend > Core idea: a backend is a contract. Inputs in, outputs out, errors named. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] HTTP: methods, status codes,…"
+  },
+  {
+    "title": "05 — Databases",
+    "route": "/stage-01-spec-aware-vibe-engineering/05-databases",
+    "headings": [],
+    "content": "05 — Databases > Core idea: the data shape picks the database. Don't pick the database first. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] SQL vs NoSQL: when each is right (and wrong) - [ ] PostgreSQL: tables, indexes, transactions, JSONB - [ ] MongoDB: documents, when schema-less is a feature - [ ] Redis: cache, queue, ephemeral state - [ ] Graph databases (Neo4j): relationships as first-class - [ ] Reading a schema: start at the indexes, follow the foreign keys Lecture content > Awaiting video lecture. Worked example Check your understanding 1. When is a document store better than a relational table? 2. Why does a GIN index make fast? 3. Open any database schema. Identify the primary keys, the indexes, and one relationship. Further reading - To be added.",
+    "excerpt": "05 — Databases > Core idea: the data shape picks the database. Don't pick the database first. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] SQL vs NoSQL: when each…"
+  },
+  {
+    "title": "06 — Git & GitHub",
+    "route": "/stage-01-spec-aware-vibe-engineering/06-git-github",
+    "headings": [],
+    "content": "06 — Git & GitHub > Core idea: git is a journal. Branches are drafts. Pull requests are conversations. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] Commits: atomic, named, reviewable - [ ] Branches: one feature, one branch - [ ] Pull requests: the conversation, not the merge - [ ] Repos: public vs private, monorepo vs polyrepo - [ ] Collaboration: review, request changes, approve - [ ] Recovery: reflog, revert, rebase (carefully) Lecture content > Awaiting video lecture. Worked example Check your understanding 1. Why is \"one feature, one branch\" better than committing straight to ? 2. What's the difference between and ? 3. Open the PR list of any repo. Read one PR's review comments. What made it a good review? Further reading - To be added.",
+    "excerpt": "06 — Git & GitHub > Core idea: git is a journal. Branches are drafts. Pull requests are conversations. Lecture outline <!-- Placeholder shell. Paste the lecture outline here. --> - [ ] Commits:…"
+  },
+  {
+    "title": "Stage 1 — Spec-Aware Vibe Engineering",
+    "route": "/stage-01-spec-aware-vibe-engineering/",
+    "headings": [],
+    "content": "Stage 1 — Spec-Aware Vibe Engineering Foundations > Learn to lead AI coding agents with engineering judgment, not blind prompt-and-hope. This stage teaches the foundational engineering vocabulary you need to direct an AI agent confidently. The agent can write the code — your job is to know what to ask for, why, and how to know it's done right. Chapters | # | Chapter | Topic | |---|---|---| | 1 | Foundations | Software architecture: system structure, planning, architecture before code | | 2 | Core Programming | Python, JavaScript, variables, conditionals, loops, functions, file handling, error handling | | 3 | Frontend | Next.js, page structure, layouts, responsiveness, components, ShadCN / Material UI / DaisyUI | | 4 | Backend | APIs, HTTP, REST, validation, middleware, logging | | 5 | Databases | SQL vs NoSQL, PostgreSQL, MongoDB, Redis, graph databases | | 6 | Git & GitHub | Commits, branches, pull requests, repos, collaboration | Learning outcomes By the end of Stage 1 you will be able to: 1. Sketch a system's architecture on a whiteboard before asking an agent to build it. 2. Read code in Python or JavaScript and identify the constructs being used. 3. Describe what a frontend component, a backend endpoint, and a database table each do — and which one a problem belongs to. 4. Use Git and pull requests to keep your work traceable and reviewable. How this stage is taught Each chapter pairs a video lecture (the primary medium) with this text companion (the second medium, for reference and search). Lecture content is delivered separately and pasted into the chapter files here. > The text is the documentation; the video is the lecture. Both are required.",
+    "excerpt": "Stage 1 — Spec-Aware Vibe Engineering Foundations > Learn to lead AI coding agents with engineering judgment, not blind prompt-and-hope. This stage teaches the foundational engineering vocabulary you…"
+  },
+  {
+    "title": "CS50P — Introduction to Programming with Python",
+    "route": "/stage-02-cs50-certification/cs50p",
+    "headings": [],
+    "content": "CS50P — Introduction to Programming with Python > Placeholder. Lecture outline and content to be added when the Stage 2 video series is recorded. What this is Harvard's CS50P is the Python track of CS50 — an entry-level, university-grade introduction to programming. Internationally recognized; pairs naturally with Stage 1's core programming chapter. How it pairs with this textbook - Stage 1, Chapter 2 (Core Programming) covers the same Python fundamentals, framed for AI-agent work. - CS50P adds depth (problem sets, autograded exercises, a final project) and the credential. Resources - CS50P on Harvard's site",
+    "excerpt": "CS50P — Introduction to Programming with Python > Placeholder. Lecture outline and content to be added when the Stage 2 video series is recorded. What this is Harvard's CS50P is the Python track of…"
+  },
+  {
+    "title": "CS50W — Web Programming with Python and JavaScript",
+    "route": "/stage-02-cs50-certification/cs50w",
+    "headings": [],
+    "content": "CS50W — Web Programming with Python and JavaScript > Placeholder. Lecture outline and content to be added when the Stage 2 video series is recorded. What this is Harvard's CS50W is the web-development track — SQL, Django, APIs, frontend, scalability, a final project. Pairs with Stage 1's frontend, backend, and databases chapters. How it pairs with this textbook - Stage 1, Chapters 3–5 (Frontend / Backend / Databases) cover the engineering vocabulary. - CS50W adds the end-to-end project work and the credential. Resources - CS50W on Harvard's site",
+    "excerpt": "CS50W — Web Programming with Python and JavaScript > Placeholder. Lecture outline and content to be added when the Stage 2 video series is recorded. What this is Harvard's CS50W is the web-development…"
+  },
+  {
+    "title": "Stage 2 — Credible Validation (CS50)",
+    "route": "/stage-02-cs50-certification/",
+    "headings": [],
+    "content": "Stage 2 — Credible Validation (CS50) > Convert skill into proof with two Harvard certificates: CS50P (Python) and CS50W (JavaScript / web). This stage is about pairing the engineering foundation from Stage 1 with internationally recognized credentials. The certificates live on your résumé; the GitHub portfolio (your lecture notes, exercises, and project work in this textbook) is what gets you the interview. Chapters - CS50P — Introduction to Programming with Python - CS50W — Web Programming with Python and JavaScript > Detailed chapter content to be added when the lecture series for this stage is recorded.",
+    "excerpt": "Stage 2 — Credible Validation (CS50) > Convert skill into proof with two Harvard certificates: CS50P (Python) and CS50W (JavaScript / web). This stage is about pairing the engineering foundation from…"
+  },
+  {
+    "title": "Claude Code (and other coding-agent CLIs)",
+    "route": "/stage-03-mastering-ai-coding-agents/claude-code",
+    "headings": [],
+    "content": "Claude Code (and other coding-agent CLIs) > Placeholder. Lecture content to be added when Stage 3 is recorded.",
+    "excerpt": "Claude Code (and other coding-agent CLIs) > Placeholder. Lecture content to be added when Stage 3 is recorded."
+  },
+  {
+    "title": "Context Engineering",
+    "route": "/stage-03-mastering-ai-coding-agents/context-engineering",
+    "headings": [],
+    "content": "Context Engineering > Placeholder. Lecture content to be added when Stage 3 is recorded.",
+    "excerpt": "Context Engineering > Placeholder. Lecture content to be added when Stage 3 is recorded."
+  },
+  {
+    "title": "Stage 3 — Mastering AI Coding Agents",
+    "route": "/stage-03-mastering-ai-coding-agents/",
+    "headings": [],
+    "content": "Stage 3 — Mastering AI Coding Agents > Go deep on the tools reshaping how software gets built. Stage 3 moves from \"knowing engineering\" to \"directing the agent precisely.\" You learn to write contexts, design loops, and structure skills so the agent does the work you actually want. Chapters - Prompt Engineering - Context Engineering - Claude Code (and other coding-agent CLIs) - Skills, MCP servers, and workflows > Detailed chapter content to be added when the Stage 3 video series is recorded.",
+    "excerpt": "Stage 3 — Mastering AI Coding Agents > Go deep on the tools reshaping how software gets built. Stage 3 moves from \"knowing engineering\" to \"directing the agent precisely.\" You learn to write contexts,…"
+  },
+  {
+    "title": "Prompt Engineering",
+    "route": "/stage-03-mastering-ai-coding-agents/prompt-engineering",
+    "headings": [],
+    "content": "Prompt Engineering > Placeholder. Lecture content to be added when Stage 3 is recorded.",
+    "excerpt": "Prompt Engineering > Placeholder. Lecture content to be added when Stage 3 is recorded."
+  },
+  {
+    "title": "Skills, MCP Servers, and Workflows",
+    "route": "/stage-03-mastering-ai-coding-agents/skills-and-mcp",
+    "headings": [],
+    "content": "Skills, MCP Servers, and Workflows > Placeholder. Lecture content to be added when Stage 3 is recorded.",
+    "excerpt": "Skills, MCP Servers, and Workflows > Placeholder. Lecture content to be added when Stage 3 is recorded."
+  },
+  {
+    "title": "Evaluations",
+    "route": "/stage-04-engineering-autonomous-ai-agents/evaluations",
+    "headings": [],
+    "content": "Evaluations > Placeholder. Lecture content to be added when Stage 4 is recorded.",
+    "excerpt": "Evaluations > Placeholder. Lecture content to be added when Stage 4 is recorded."
+  },
+  {
+    "title": "Stage 4 — Engineering Autonomous AI Agents",
+    "route": "/stage-04-engineering-autonomous-ai-agents/",
+    "headings": [],
+    "content": "Stage 4 — Engineering Autonomous AI Agents > Design and ship full autonomous, multi-agent systems. Stage 4 is the shift from \"one agent, one task\" to \"many agents, one workflow.\" You learn to build RAG pipelines, wire tool calling, design multi-agent systems, and measure whether your agents actually work. Chapters - RAG and Tool Calling - Multi-Agent Systems - Evaluations > Detailed chapter content to be added when the Stage 4 video series is recorded.",
+    "excerpt": "Stage 4 — Engineering Autonomous AI Agents > Design and ship full autonomous, multi-agent systems. Stage 4 is the shift from \"one agent, one task\" to \"many agents, one workflow.\" You learn to build…"
+  },
+  {
+    "title": "Multi-Agent Systems",
+    "route": "/stage-04-engineering-autonomous-ai-agents/multi-agent-systems",
+    "headings": [],
+    "content": "Multi-Agent Systems > Placeholder. Lecture content to be added when Stage 4 is recorded.",
+    "excerpt": "Multi-Agent Systems > Placeholder. Lecture content to be added when Stage 4 is recorded."
+  },
+  {
+    "title": "RAG and Tool Calling",
+    "route": "/stage-04-engineering-autonomous-ai-agents/rag-and-tool-calling",
+    "headings": [],
+    "content": "RAG and Tool Calling > Placeholder. Lecture content to be added when Stage 4 is recorded.",
+    "excerpt": "RAG and Tool Calling > Placeholder. Lecture content to be added when Stage 4 is recorded."
+  }
+]

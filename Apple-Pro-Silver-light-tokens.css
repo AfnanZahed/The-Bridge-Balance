@@ -1,0 +1,183 @@
+/**
+ * Apple Pro — Silver & Black
+ * Light-theme design tokens, extracted from The Bridge Balance (thebridgebalance.app)
+ * for reuse in another project.
+ *
+ * Source: edu-site/src/css/custom.css + radix.css + a11y.css (light-mode blocks only —
+ * dark mode, curriculum-specific tokens like --stage-*/--chapter-state, and component
+ * CSS were intentionally left out. This file is tokens only.)
+ *
+ * Everything is prefixed `--ap-` (Apple Pro) instead of the original `--tbb-` —
+ * find/replace `--ap-` to match your own naming if you want something else.
+ * Nothing here references a brand name, so it's safe to drop straight into a new project.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500;600&display=swap");
+
+:root {
+  color-scheme: light;
+
+  /* ─── 1. Primitive — ten-step metallic silver ramp (white → black) ────────
+     OKLCH, near-zero chroma so it stays perfectly neutral at any lightness.
+     0 = pure white/paper, 9 = pure black/ink. */
+  --ap-silver-0: oklch(1 0 0);            /* #ffffff — pure white, specular   */
+  --ap-silver-1: oklch(0.965 0.002 250);
+  --ap-silver-2: oklch(0.91 0.004 250);
+  --ap-silver-3: oklch(0.82 0.006 250);
+  --ap-silver-4: oklch(0.68 0.008 250);
+  --ap-silver-5: oklch(0.53 0.008 250);
+  --ap-silver-6: oklch(0.4 0.007 250);
+  --ap-silver-7: oklch(0.27 0.006 250);
+  --ap-silver-8: oklch(0.15 0.004 250);
+  --ap-silver-9: oklch(0 0 0);            /* #000000 — pure black             */
+
+  /* ─── 2. Accent — the one deliberate hue, kept narrow ──────────────────────
+     A muted steel-blue at low chroma (0.08). Scope it to links, the active
+     nav/TOC item, the focus ring, and little else — everything else should
+     read a neutral silver step instead, so the accent stays meaningful. */
+  --ap-accent: oklch(0.40 0.08 245);
+  --ap-accent-hover: oklch(0.32 0.075 245);
+  --ap-accent-subtle: oklch(0.40 0.08 245 / 0.08);
+  --ap-focus-ring: 0 0 0 3px oklch(0.40 0.08 245 / 0.35);
+
+  /* Neutral "primary" — this is what most UI (headings accents, active icons,
+     borders-on-emphasis) should read instead of the accent, per the ramp. */
+  --ap-primary: var(--ap-silver-9);
+  --ap-primary-light: var(--ap-silver-7);
+  --ap-primary-lighter: var(--ap-silver-6);
+  --ap-primary-lightest: var(--ap-silver-5);
+
+  /* ─── 3. Surfaces ───────────────────────────────────────────────────────── */
+  --ap-bg: var(--ap-silver-0);              /* page ground                    */
+  --ap-bg-alt: var(--ap-silver-1);          /* sidebar / secondary chrome     */
+  --ap-surface: var(--ap-silver-1);
+  --ap-surface-raised: var(--ap-silver-0);
+  --ap-surface-emphasis: var(--ap-silver-2);
+  --ap-surface-glass: oklch(1 0 0 / 0.72);  /* frosted-glass panels           */
+  --ap-surface-solid: var(--ap-silver-0);   /* fallback when backdrop-filter is unsupported */
+  --ap-navbar-glass: oklch(1 0 0 / 0.8);
+  --ap-frost-filter: saturate(140%) blur(24px);
+  --ap-code-bg: var(--ap-silver-2);
+
+  /* ─── 4. Borders ────────────────────────────────────────────────────────── */
+  --ap-hairline: oklch(0 0 0 / 0.1);
+  --ap-border: color-mix(in srgb, var(--ap-hairline) 90%, transparent);
+  --ap-border-strong: oklch(0 0 0 / 0.2);
+
+  /* ─── 5. Text ───────────────────────────────────────────────────────────── */
+  --ap-text: var(--ap-silver-9);
+  --ap-text-muted: var(--ap-silver-5);
+  --ap-text-subtle: var(--ap-silver-4);
+  --ap-text-inverse: var(--ap-silver-0);
+
+  /* ─── 6. Status — the only other chromatic exception ───────────────────── */
+  --ap-danger: oklch(0.55 0.22 25);
+  --ap-success: oklch(0.5 0.17 155);
+
+  /* ─── 7. Charts / data series — ramp steps spaced for separation ──────── */
+  --ap-chart-1: var(--ap-silver-9);
+  --ap-chart-2: var(--ap-silver-7);
+  --ap-chart-3: var(--ap-silver-5);
+  --ap-chart-4: var(--ap-silver-4);
+  --ap-chart-5: var(--ap-silver-3);
+
+  /* ─── 8. Specular / "machined metal" set ───────────────────────────────
+     Compose: background: var(--ap-metal-face); box-shadow: var(--ap-metal-rim); */
+  --ap-metal-face: linear-gradient(
+    180deg,
+    var(--ap-silver-0) 0%,
+    var(--ap-silver-1) 42%,
+    var(--ap-silver-3) 100%
+  );
+  --ap-metal-face-deep: linear-gradient(
+    180deg,
+    var(--ap-silver-6) 0%,
+    var(--ap-silver-8) 55%,
+    var(--ap-silver-9) 100%
+  );
+  --ap-metal-rim: inset 0 1px 0 0 oklch(1 0 0 / 0.9),
+    inset 0 -1px 0 0 oklch(0 0 0 / 0.06);
+  --ap-metal-rim-deep: inset 0 1px 0 0 oklch(1 0 0 / 0.18),
+    inset 0 -1px 0 0 oklch(0 0 0 / 0.5);
+  --ap-metal-sheen: linear-gradient(
+    105deg,
+    transparent 28%,
+    oklch(1 0 0 / 0.5) 47%,
+    transparent 63%
+  );
+  --ap-metal-brush: repeating-linear-gradient(
+    92deg,
+    oklch(1 0 0 / 0.05) 0px,
+    oklch(0 0 0 / 0.035) 1px,
+    oklch(1 0 0 / 0.05) 2px
+  );
+
+  /* ─── 9. Shadows — inset top-highlight + drop stack ────────────────────── */
+  --ap-shadow-xs: inset 0 1px 0 0 oklch(1 0 0 / 1);
+  --ap-shadow-sm: inset 0 1px 0 0 oklch(1 0 0 / 1),
+    0 1px 2px -1px oklch(0 0 0 / 0.14);
+  --ap-shadow-md: 0 2px 4px -2px oklch(0 0 0 / 0.16),
+    0 1px 1px -0.5px oklch(0 0 0 / 0.1),
+    inset 0 1px 0 0 oklch(1 0 0 / 1);
+  --ap-shadow-lg: 0 8px 16px -4px oklch(0 0 0 / 0.18),
+    0 3px 6px -3px oklch(0 0 0 / 0.14),
+    inset 0 1px 0 0 oklch(1 0 0 / 1);
+  --ap-shadow-xl: 0 24px 48px -12px oklch(0 0 0 / 0.26),
+    0 10px 24px -8px oklch(0 0 0 / 0.18),
+    inset 0 1px 0 0 oklch(1 0 0 / 1);
+  --ap-shadow-glow: 0 0 0 1px oklch(0 0 0 / 0.22),
+    0 10px 36px -10px oklch(0 0 0 / 0.4);
+
+  /* ─── 10. Typography — SF Pro-first, Inter web-fallback ────────────────── */
+  --ap-font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "SF Pro", Inter, "Helvetica Neue", system-ui, sans-serif;
+  --ap-font-mono: "Geist Mono", ui-monospace, SFMono-Regular,
+    Menlo, Consolas, monospace;
+  --ap-font-heading: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "SF Pro", Inter, "Helvetica Neue", system-ui, sans-serif;
+  --ap-font-display: "Instrument Serif", "Iowan Old Style", Georgia, serif; /* italic display accents */
+  --ap-heading-weight: 600;
+  --ap-weight-semibold: 600;
+  --ap-weight-bold: 700;
+  --ap-line-height-base: 1.65;
+  --ap-line-height-heading: 1.15;
+  --ap-letter-spacing-body: -0.011em;
+  --ap-letter-spacing-heading: -0.022em;
+
+  /* ─── 11. Radii ─────────────────────────────────────────────────────────── */
+  --ap-radius: 1rem;
+  --ap-radius-sm: calc(var(--ap-radius) - 6px);
+  --ap-radius-md: calc(var(--ap-radius) - 3px);
+  --ap-radius-lg: var(--ap-radius);
+  --ap-radius-xl: calc(var(--ap-radius) + 4px);
+  --ap-radius-pill: 999px;
+
+  /* ─── 12. Motion ────────────────────────────────────────────────────────── */
+  --ap-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ap-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ap-duration-fast: 150ms;
+  --ap-duration: 250ms;
+  --ap-duration-slow: 450ms;
+
+  /* ─── 13. Accessibility ─────────────────────────────────────────────────── */
+  --ap-focus-color: var(--ap-accent);
+  --ap-focus-width: 2px;
+  --ap-focus-offset: 2px;
+  --ap-focus-shadow-color: oklch(0 0 0 / 0.35);
+  --ap-touch-target: 44px;
+}
+
+/* Base coat — optional, delete if your reset already handles this */
+body {
+  background: var(--ap-bg);
+  color: var(--ap-text);
+  font-family: var(--ap-font-sans);
+  line-height: var(--ap-line-height-base);
+  letter-spacing: var(--ap-letter-spacing-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--ap-primary) 24%, transparent);
+}

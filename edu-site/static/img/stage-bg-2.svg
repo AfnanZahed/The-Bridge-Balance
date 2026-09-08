@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+  <title>Stage 2 — Credentials background (rosettes in amber)</title>
+  <defs>
+    <linearGradient id="s2-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fffbeb" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="s2-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#f59e0b" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="s2-rosettes" x="0" y="0" width="180" height="180" patternUnits="userSpaceOnUse">
+      <g transform="translate(90 90)" stroke="#f59e0b" stroke-opacity="0.22" stroke-width="1" fill="none">
+        <circle r="22"/>
+        <circle r="32"/>
+        <g stroke-linecap="round">
+          <line x1="0" y1="-44" x2="0" y2="-30"/>
+          <line x1="0" y1="44" x2="0" y2="30"/>
+          <line x1="-44" y1="0" x2="-30" y2="0"/>
+          <line x1="44" y1="0" x2="30" y2="0"/>
+          <line x1="-31" y1="-31" x2="-21" y2="-21"/>
+          <line x1="31" y1="-31" x2="21" y2="-21"/>
+          <line x1="-31" y1="31" x2="-21" y2="21"/>
+          <line x1="31" y1="31" x2="21" y2="21"/>
+        </g>
+      </g>
+      <g transform="translate(0 0)" stroke="#f59e0b" stroke-opacity="0.16" stroke-width="1" fill="none">
+        <circle r="6"/>
+      </g>
+      <g transform="translate(180 0)" stroke="#f59e0b" stroke-opacity="0.16" stroke-width="1" fill="none">
+        <circle r="6"/>
+      </g>
+      <g transform="translate(0 180)" stroke="#f59e0b" stroke-opacity="0.16" stroke-width="1" fill="none">
+        <circle r="6"/>
+      </g>
+      <g transform="translate(180 180)" stroke="#f59e0b" stroke-opacity="0.16" stroke-width="1" fill="none">
+        <circle r="6"/>
+      </g>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#s2-bg)"/>
+  <rect width="1600" height="900" fill="url(#s2-rosettes)"/>
+  <ellipse cx="380" cy="320" rx="280" ry="220" fill="url(#s2-glow)"/>
+  <ellipse cx="1220" cy="600" rx="320" ry="240" fill="url(#s2-glow)"/>
+  <g stroke="#f59e0b" stroke-opacity="0.55" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <g transform="translate(280 180)">
+      <circle r="18"/>
+      <circle r="26"/>
+      <line x1="0" y1="-36" x2="0" y2="-24"/>
+      <line x1="0" y1="36" x2="0" y2="24"/>
+      <line x1="-36" y1="0" x2="-24" y2="0"/>
+      <line x1="36" y1="0" x2="24" y2="0"/>
+      <line x1="-25.5" y1="-25.5" x2="-17" y2="-17"/>
+      <line x1="25.5" y1="-25.5" x2="17" y2="-17"/>
+      <line x1="-25.5" y1="25.5" x2="-17" y2="17"/>
+      <line x1="25.5" y1="25.5" x2="17" y2="17"/>
+    </g>
+    <g transform="translate(1320 220)">
+      <circle r="14"/>
+      <circle r="20"/>
+      <line x1="0" y1="-28" x2="0" y2="-18"/>
+      <line x1="0" y1="28" x2="0" y2="18"/>
+      <line x1="-28" y1="0" x2="-18" y2="0"/>
+      <line x1="28" y1="0" x2="18" y2="0"/>
+    </g>
+    <g transform="translate(1260 740)">
+      <circle r="22"/>
+      <circle r="32"/>
+      <line x1="0" y1="-44" x2="0" y2="-30"/>
+      <line x1="0" y1="44" x2="0" y2="30"/>
+      <line x1="-44" y1="0" x2="-30" y2="0"/>
+      <line x1="44" y1="0" x2="30" y2="0"/>
+    </g>
+  </g>
+  <g fill="#f59e0b" fill-opacity="0.5">
+    <circle cx="160" cy="500" r="2.5"/>
+    <circle cx="520" cy="700" r="2"/>
+    <circle cx="860" cy="180" r="2.5"/>
+    <circle cx="1080" cy="480" r="2"/>
+    <circle cx="1440" cy="440" r="2.5"/>
+    <circle cx="1480" cy="780" r="2"/>
+  </g>
+</svg>
