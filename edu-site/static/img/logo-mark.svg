@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" role="img" aria-label="The Bridge Balance mark">
+  <title>The Bridge Balance mark</title>
+  <!--
+    Icon-only mark: no tile, no wordmark.
+    Strokes read `var(--tbb-mark-glyph, #5b4cf6)`: define that token (to a color
+    or to `currentColor`) to theme the mark when this file is inlined; standalone,
+    it falls back to brand indigo. Only the keystone keeps the brand accent.
+  -->
+  <g stroke="var(--tbb-mark-glyph, #5b4cf6)" stroke-width="2.75" stroke-linecap="round">
+    <path d="M2.36 17.1H29.64"/>
+    <path d="M6.1 23.15Q11.05 10.5 16 10.5"/>
+    <path d="M25.9 23.15Q20.95 10.5 16 10.5"/>
+  </g>
+  <circle cx="16" cy="10.5" r="2.31" fill="#ff7849"/>
+</svg>

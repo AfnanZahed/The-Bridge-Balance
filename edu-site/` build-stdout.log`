@@ -1,0 +1,7 @@
+[INFO] [en] Creating an optimized production build...
+[webpackbar] i Compiling Client
+[webpackbar] i Compiling Server
+[webpackbar] √ Server: Compiled successfully in 5.60s
+[webpackbar] √ Client: Compiled successfully in 12.85s
+[SUCCESS] Generated static files in "build".
+[INFO] Use `npm run serve` command to test your build locally.

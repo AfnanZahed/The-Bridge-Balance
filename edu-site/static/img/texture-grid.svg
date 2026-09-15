@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-hidden="true">
+  <title>Subtle grid texture for hero backdrops</title>
+  <defs>
+    <pattern id="grid-minor" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+      <path d="M0 0L0 8" stroke="currentColor" stroke-opacity="0.04" stroke-width="0.5" fill="none"/>
+    </pattern>
+    <pattern id="grid-major" x="0" y="0" width="64" height="64" patternUnits="userSpaceOnUse">
+      <rect width="64" height="64" fill="url(#grid-minor)"/>
+      <path d="M0 0L64 0M0 0L0 64" stroke="currentColor" stroke-opacity="0.08" stroke-width="0.8" fill="none"/>
+    </pattern>
+  </defs>
+  <rect width="64" height="64" fill="url(#grid-major)"/>
+</svg>

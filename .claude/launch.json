@@ -1,0 +1,53 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "edu-site",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "start",
+        "--prefix",
+        "edu-site"
+      ],
+      "port": 3000,
+      "autoPort": true
+    },
+    {
+      "name": "lesson-mockup",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "--yes",
+        "serve",
+        "-l",
+        "4600",
+        "."
+      ],
+      "port": 4600
+    },
+    {
+      "name": "scratchpad-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "--yes",
+        "serve",
+        "-l",
+        "4601",
+        "C:\\Users\\Dell\\AppData\\Local\\Temp\\claude\\C--Users-Dell-Desktop-Book\\b395102c-8c00-43dd-9bc6-1609d0fef9d6\\scratchpad"
+      ],
+      "port": 4601
+    },
+    {
+      "name": "figure-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "--yes",
+        "serve",
+        "-l",
+        "4602",
+        "edu-site/.preview"
+      ],
+      "port": 4602
+    }
+  ]
+}

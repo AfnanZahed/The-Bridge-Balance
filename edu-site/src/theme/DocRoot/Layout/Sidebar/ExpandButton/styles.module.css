@@ -1,0 +1,90 @@
+/**
+ * The collapsed rail's knob — the panel's handle in its folded state. See
+ * index.tsx for why it looks the way it does.
+ *
+ * The rail itself is painted by custom.css (`.theme-doc-sidebar-container`), and
+ * its width comes from `--doc-sidebar-hidden-width`, which custom.css retargets
+ * at the project's 44px touch-target constant.
+ */
+
+@media (min-width: 997px) {
+  .expandButton {
+    /* The whole rail, at every height, is the hit target. Its width is the
+       containing block's, so this needs no measurement of its own. */
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    /* ...but nothing of it paints. Clear the navbar the rail runs under — the
+       container carries `margin-top: calc(-1 * var(--ifm-navbar-height))` — and
+       land the knob on the same line the panel's own header eyebrow occupies. */
+    padding: calc(var(--ifm-navbar-height) + 0.5rem) 0 0;
+
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  .expandButtonKnob {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 2.25rem;
+    block-size: 2.25rem;
+
+    border-radius: var(--tbb-radius-md);
+    background: var(--tbb-sb-handle-bg);
+    /* Same layering as the panel's handle — see the CollapseButton module for
+       why this is a shadow step and not a tone step. */
+    box-shadow: var(--tbb-shadow-md);
+    color: var(--tbb-sb-handle-ink);
+
+    transition:
+      color var(--tbb-duration-fast) var(--tbb-ease),
+      box-shadow var(--tbb-duration-fast) var(--tbb-ease),
+      transform var(--tbb-duration-fast) var(--tbb-ease);
+  }
+
+  /* Hovering anywhere on the rail lights the knob. That is the whole lesson
+     that the strip, not just the knob, is the control. */
+  .expandButton:hover .expandButtonKnob {
+    box-shadow: var(--tbb-shadow-lg);
+    color: var(--tbb-text);
+  }
+
+  .expandButton:active .expandButtonKnob {
+    box-shadow: var(--tbb-shadow-xs);
+    transform: translateY(0.5px);
+  }
+
+  /* The ring moves to the knob. Suppressing the button's own outline is the
+     point: left on, it would draw a ring around the full-height rail the user
+     never sees as a control. The replacement is the same 2px accent ring at the
+     same offset the navbar controls use. */
+  .expandButton:focus-visible {
+    outline: none;
+  }
+
+  .expandButton:focus-visible .expandButtonKnob {
+    outline: 2px solid var(--tbb-accent);
+    outline-offset: 2px;
+    box-shadow: var(--tbb-focus-ring);
+  }
+}
+
+/* The panel clips shut and the knob arrives, rather than popping into an empty
+   strip. Collapses entirely under reduced motion. */
+@media (min-width: 997px) and (prefers-reduced-motion: no-preference) {
+  @keyframes tbb-sb-knob-in {
+    from {
+      opacity: 0;
+      transform: translateX(-0.375rem);
+    }
+  }
+
+  .expandButtonKnob {
+    animation: tbb-sb-knob-in var(--tbb-duration-fast) var(--tbb-ease-out) both;
+  }
+}

@@ -1,0 +1,93 @@
+/**
+ * The panel's handle, at the foot of the open panel. See index.tsx for why it
+ * looks the way it does. Hidden below 997px: Docusaurus only renders a
+ * `hideable` sidebar at desktop widths, so there is nothing to collapse in the
+ * drawer.
+ *
+ * The Infima `button button--secondary button--outline` classes upstream puts on
+ * this element are gone. Every one of their contributions (border, radius,
+ * background, hover) had to be overridden anyway, and dropping them is what lets
+ * the rules below win on plain source order with no `!important`.
+ */
+
+.collapseSidebarButton {
+  display: none;
+  margin: 0;
+}
+
+@media (min-width: 997px) {
+  .collapseSidebarButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    /* Centred on the panel's axis rather than stretched across it — the whole
+       visible difference between a designed handle and a leftover bar is that
+       this one is the size of its content. */
+    align-self: center;
+    flex: 0 0 auto;
+
+    /* 44px is the project's own touch-target constant and the height of every
+       control in the navbar, so the handle reads as a member of that family.
+       The block margins then make the panel's foot exactly 60px, matching
+       --ifm-navbar-height and the panel's own header. */
+    min-block-size: var(--tbb-a11y-touch-target);
+    box-sizing: border-box;
+    margin-block: 0.5rem;
+    padding-inline: 0.875rem;
+
+    border: 0;
+    border-radius: var(--tbb-radius-md);
+    background: var(--tbb-sb-handle-bg);
+    /* Depth from a layering of soft shadows, never a hairline: the design
+       contract asks for elevation over borders — and in light mode depth is the
+       only option available, because the ramp has no step above silver-1 for the
+       handle to separate from the panel by tone (white on silver-1 measures
+       1.11:1). What makes the control findable at rest is its label, which sits
+       at 5.29:1; the shadow is what makes it read as a surface. */
+    box-shadow: var(--tbb-shadow-md);
+    color: var(--tbb-sb-handle-ink);
+
+    /* Buttons do not inherit type, and Infima's `.button` class — which used to
+       supply it — is no longer on this element. */
+    font-family: var(--ifm-font-family-base);
+    font-size: calc(0.9375rem * var(--tbb-text-scale));
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    line-height: 1;
+    cursor: pointer;
+
+    transition:
+      color var(--tbb-duration-fast) var(--tbb-ease),
+      box-shadow var(--tbb-duration-fast) var(--tbb-ease),
+      transform var(--tbb-duration-fast) var(--tbb-ease);
+  }
+
+  /* The handle comes forward and its ink promotes — the same two moves the
+     panel's own rows make on hover. The ground deliberately does not change:
+     white is already the top of the ramp, and changing a state's ground without
+     a matching move in the other theme is how the two modes drift apart. */
+  .collapseSidebarButton:hover {
+    box-shadow: var(--tbb-shadow-lg);
+    color: var(--tbb-text);
+  }
+
+  /* The machined key: half a pixel down, the shadow pulled back in. Direct
+     manipulation, not decoration, so it survives reduced motion. */
+  .collapseSidebarButton:active {
+    box-shadow: var(--tbb-shadow-xs);
+    transform: translateY(0.5px);
+  }
+
+  /* The same ring the navbar controls draw (.site-menu-button in custom.css). */
+  .collapseSidebarButton:focus-visible {
+    outline: 2px solid var(--tbb-accent);
+    outline-offset: 2px;
+    box-shadow: var(--tbb-focus-ring);
+  }
+
+  .collapseSidebarButtonIcon {
+    flex: 0 0 auto;
+  }
+}

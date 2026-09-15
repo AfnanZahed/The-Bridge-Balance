@@ -1,0 +1,931 @@
+# Evidence ledger - every canonical source, and which question each chapter
+# asks of it.
+#
+# Purpose:
+#   1. Reuse is allowed; paraphrase is not. Two chapters may cite the same
+#      incident only if each asks a genuinely different question of it. This
+#      file is where that is checked.
+#   2. When a number is updated or retracted, this turns "which chapters
+#      mention it" from a memory problem into a lookup.
+#
+# Rules:
+#   - No cap on reuse. The test is whether a NEW question is being asked. If
+#     you reach for a source again and cannot name a question no other chapter
+#     is asking, you have over-used it - at the second reuse or the fifth.
+#   - Rotate through: what happened -> why it happened -> what changed because
+#     of it -> what would you do differently knowing it.
+#   - expires: Stage 3/4 tool claims get 90 days. Industry reports get 12
+#     months. Named historical incidents do not expire but their framing does.
+#   - status (optional field, per source): absent means canonical - confirmed,
+#     citable normally, which is why none of the entries seeded below carry it.
+#     `chapter-production` sets `status: proposed` on any NEW entry
+#     it adds during research, since that skill proposes sources for an editor
+#     (human or the sibling skill) to confirm, not to add unilaterally. A
+#     human or the chapter-shipping skill promotes a proposed source to
+#     canonical by deleting the status field once it's actually cited in a
+#     shipped chapter - do not leave `status: proposed` sitting on a source a
+#     chapter already cites, since that would make an already-shipped citation
+#     look unconfirmed to the next author who reads this file.
+#   - A passage that only points backward ("the METR and Veracode findings
+#     elsewhere in this curriculum") without restating the evidence or asking
+#     it a fresh question is NOT a new use and gets no questions_asked row
+#     here - it is deferring to the chapter where the citation lives.
+
+version: 1
+seeded: 2026-08-23
+seeded_from: edu-site/docs/intro-5-spec-driven-engineering.md
+# REPOINTED 2026-09-10: every `questions_asked` row that named docs/intro.md
+# now names docs/intro-5-spec-driven-engineering.md, its merge-and-rewrite
+# successor in the intro resequence. The questions are unchanged; only the
+# chapter they are filed against moved. See
+# curriculum-state/proposals/stage-00-intro-resequence-2026-09-10.md.
+
+sources:
+
+  - id: replit-lemkin
+    name: Replit agent production-database deletion (Jason Lemkin / SaaStr)
+    url: https://arstechnica.com/information-technology/2025/07/ai-coding-assistants-chase-phantoms-destroy-real-user-data/
+    also: https://www.pcmag.com/news/vibe-coding-fiasco-replite-ai-agent-goes-rogue-deletes-company-database
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Can capability outrun accountability?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does the full anatomy of an unenforced instruction look like, told as a story rather than analyzed as a boundary?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does an environment boundary failure look like?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does the surrender pole look like as a concrete instance, not just a description?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Which criterion (durable data) does this incident make concrete, and what made the loss recoverable that time?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Where exactly did the authority boundary fail?"}
+    notes: >-
+      Each logged use asks a different question, per the no-cap-on-reuse rule
+      above. Bare backward callbacks ("the Enrichlead pattern discussed
+      elsewhere") are not new uses and get no row.
+
+  - id: veracode-genai
+    name: Veracode GenAI Code Security Report
+    url: https://www.veracode.com/blog/genai-code-security-report
+    last_verified: 2026-08-20
+    expires: 2027-03-01
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Why is a checklist without verification decoration?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What share of AI-generated code carries a security vulnerability, and what does that mean for a leader who hasn't changed how rigorously the team specifies or verifies?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does the density figure imply for gate design?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the measured cost of treating verification as optional?"}
+    notes: >-
+      RESOLVED 2026-09-08: figure drift reconciled against primary source. The
+      2025 report's 45% (100+ models, 80 tasks, Java/Python/C#/JS, Java worst
+      at 72%) and the Spring 2026 update's 44% task-failure rate / 56% average
+      pass rate (was 55%) are sequential readings of the same flat trend, not
+      contradictory figures - cite both with their year, not one in isolation.
+      A bare backward callback is not a new use and gets no row.
+
+  - id: stackoverflow-survey-2025
+    name: Stack Overflow Developer Survey 2025 (84% adoption / 29% trust)
+    url: https://survey.stackoverflow.co/2025/ai
+    last_verified: 2026-08-20
+    expires: 2026-12-01
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Does refusing AI actually buy safety, or just fall behind for no offsetting benefit?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Is opting out of AI tools entirely still a defensible choice, adoption-wise?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does the adoption/trust gap reveal about the two poles?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the cultural fingerprint of unowned responsibility?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Where does the gap surface first?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does the adoption/trust gap signal about where organizational judgment hasn't kept pace with tool adoption?"}
+      - {chapter: docs/intro-3-editors-and-ides.md, question: "Which editors do working developers actually use, and are the new AI editors a majority or a minority?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the shape of the two extremes in one year of data - adopted and distrusted at once?"}
+    notes: >-
+      Superseded when the 2026 survey lands. Check before Stage 3 authoring.
+      REUSED 2026-09-10 and asked two new questions: intro-3 reads it for
+      editor market share (VS Code first for the fifth year, about 49,000
+      respondents; Cursor 18 per cent, Claude Code 10 per cent, Windsurf 5 per
+      cent), and intro-5 reads the same 84/29 split as the shape of the
+      adoption/trust gap rather than as an adoption argument. Both differ from
+      the six existing questions; neither is a bare backward callback.
+      NOTE: Stack Overflow's content-moderation policy is a DIFFERENT source -
+      see stackoverflow-ai-policy below. The two are not to be conflated even
+      though both cite "Stack Overflow."
+
+  - id: metr-productivity
+    name: METR AI productivity study (19% slower on complex tasks; 63% debug more)
+    url: https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/
+    also: https://arxiv.org/abs/2507.09089
+    last_verified: 2026-09-08
+    expires: 2026-12-01
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What happens when implementation crosses a boundary uncontrolled?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Where has the scarce capability moved to?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Is verifying someone else's reasoning a harder skill than producing your own, and is that skill measurably atrophying?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Does the measured effect of AI on experienced developers match how fast the work felt, and does the study still describe current tools?"}
+    notes: >-
+      RESOLVED 2026-09-08: direct paper link found and verified (16 developers,
+      246 tasks, Feb-June 2025 AI frontier, forecast -24%/felt -20%/measured
+      +19% slower) - the org-root-only issue flagged above is fixed. A bare
+      backward callback is not a new use and gets no row.
+
+  - id: karpathy-vibe-coding
+    name: Andrej Karpathy, origin of "vibe coding" (Feb 2025)
+    url: https://threadreaderapp.com/thread/1886192184808149383.html
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is this pattern actually called, and by whom?"}
+
+  - id: collins-woty-2025
+    name: Collins Dictionary Word of the Year 2025 - "vibe coding"
+    url: https://www.collinsdictionary.com/word-of-the-year/2025
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "How mainstream has this become?"}
+
+  - id: enrichlead-acevedo
+    name: Leonel Acevedo / Enrichlead - browser-side authorization and secrets
+    url: https://www.indiehackers.com/post/tech/vibe-coding-has-a-security-problem-vLxyPTrTlZVwDo76oqvr
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does a quieter, design-level failure look like, next to Replit's loud one?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does leaving authority in the client cost?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What marks the money threshold of an experiment becoming a system?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is a trust boundary failure specifically?"}
+    notes: >-
+      The intro's "two stories" narrative pairs this with Replit. A bare
+      backward callback is not a new use and gets no row.
+
+  - id: samsung-leak
+    name: Samsung confidential source-code leak and generative-AI ban (2023)
+    url: https://www.bloomberg.com/news/articles/2023-05-02/samsung-bans-chatgpt-and-other-generative-ai-use-by-staff-after-leak
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the confidentiality version of this lesson?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "When can strong restriction be the correct engineering answer?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is a data-classification boundary failure?"}
+
+  - id: stackoverflow-ai-policy
+    name: Stack Overflow generative-AI content policy
+    url: https://meta.stackoverflow.com/questions/421831/policy-generative-ai-e-g-chatgpt-is-banned
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What happens to the apprenticeship pipeline?"}
+
+  - id: aws-tool-sprawl
+    name: AWS research on AI-tool switching costs (40% less completed work, 2x defect rate)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Why does switching tools specifically erode the verify-stage habit?"}
+    notes: >-
+      No independently verified URL found - locate the primary AWS report
+      before the next new use.
+
+  - id: stanford-canaries-2025
+    name: Stanford Digital Economy Lab, "Canaries in the Coal Mine" (Brynjolfsson et al., Nov 2025)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Does the labor market confirm the cost of missing the experiment-to-system transition?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: dice-linkedin-2025
+    name: Dice Tech Job Report 2025 / LinkedIn Workforce Report 2025 (entry-level postings -40%, 57% hiring managers trust AI over interns)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does the labor market say about missing the four criteria?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: dice-report-jul-2026
+    name: Dice Tech Job Report, July 2026 edition (traditional dev postings -22% YoY Q1 2026; AI-titled postings +173% YoY)
+    url: https://www.ciodive.com/news/dice-report-tech-hiring-AI/824893/
+    last_verified: 2026-09-09
+    expires: 2026-12-01
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Does the hiring market back up the claim that producing syntax fast is no longer the scarce skill?"}
+    notes: >-
+      NEW 2026-09-09. Verified via CIO Dive's 9 July 2026 write-up of the Dice
+      report (Dice analysed 7 million US tech job postings). Distinct from
+      dice-linkedin-2025 above, which is a different (2025) report edition
+      covering different figures (entry-level postings, hiring-manager trust)
+      and remains needs-url-verification - do not conflate the two. This
+      entry replaces an earlier draft intention to cite a "10% to 50% AI/ML
+      role share" figure attributed to Dice via
+      The Bridge Balance/Official docs/solution_statement.md - that specific
+      figure could not be verified against any live Dice report during this
+      session's research and was dropped in favour of this independently
+      verified one. Proposed by the 2026-09-09 canon + intro "Development
+      versus Engineering" addition; an editor should confirm before wider
+      reuse, per this file's usual proposed -> canonical promotion rule.
+
+  - id: fortune50-security-findings
+    name: Fortune 50 enterprise security-finding growth, Dec 2024-Jun 2025 (~10x), via SecurityWeek/Apiiro
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does crossing the secrets criterion cost at enterprise scale?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Is the strategic mistake's cost measured, or merely argued?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does skipping governance actually cost, at a scale that dwarfs the up-front investment?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Is unconstrained agent risk a hypothetical concern, or already measured?"}
+    notes: >-
+      URL not reverified. Check it before the next new use.
+
+  - id: sp-global-jan-2026
+    name: S&P Global AI Strategy Insights, January 2026 ("option paralysis is real"; 30+ model releases in March 2026)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Is the velocity problem structural, or a temporary immaturity that resolves on its own?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: anthropic-2026-trends
+    name: Anthropic, 2026 Agentic Coding Trends Report
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the implementation-layer vs. engineering-layer distinction, stated by a frontier lab?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: deloitte-state-of-ai-2026
+    name: Deloitte, State of AI 2026 (one in five companies has mature autonomous-agent governance)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the regulatory/governance maturity gap across the four boundaries?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the governance gap this architecture pattern actually closes?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: eu-ai-act-2026
+    name: EU AI Act compliance timeline (obligations from 2026-08-02; penalties EUR 15m or 3% global turnover)
+    url: null
+    last_verified: null
+    expires: null
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What legal weight now sits behind treating a specification as evidentiary?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What legal weight now sits behind the contract-per-surface pattern?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: ibm-cisco-tech-debt
+    name: IBM and Cisco technical-debt budget allocation (20-30% of IT budget toward AI-generated technical debt)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does the strategic mistake of chasing implementation speed actually cost?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does the IBM/Cisco technical-debt figure add to the Fortune 50 finding-rate data as a second, independent cost signal?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the measured downstream cost of unconstrained agent architecture?"}
+    notes: >-
+      URL not reverified. Check it before the next new use.
+
+  - id: bcms-sdd-guide-2026
+    name: BCMS, Definitive 2026 Guide to Spec-Driven Development (three SDD failure modes; "specification poverty")
+    url: null
+    last_verified: null
+    expires: null
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What failure mode sits upstream of intent drift, context decay, and unverifiable output?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Why can no specification format close the gap, if the format is not the problem?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: github-spec-kit-2025
+    name: GitHub Blog, Spec Kit launch 2025 ("code is the source of truth" -> "intent is the source of truth")
+    url: https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai-get-started-with-a-new-open-source-toolkit/
+    last_verified: 2026-09-08
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "How has the industry itself articulated the code-to-intent inversion?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the shortest statement of the SDD position, in the words of the people who shipped the tooling?"}
+    notes: >-
+      RESOLVED 2026-09-08: verified. Published 2 September 2025, author Den
+      Delimarsky (Principal PM, GitHub). Names it "Spec-Driven Development,"
+      not this curriculum's "Spec-Driven Engineering" - a deliberate wording
+      difference (Development = writing it; Engineering = also answering for
+      it), worth stating explicitly rather than treating the two terms as
+      interchangeable.
+
+  # ADDED 2026-09-10 by the docs/intro-1-binary-to-programming.md authoring
+  # run (the real spine treatment of the retired intro-2 pilot). Canonical
+  # because the chapter is gate-passing and cites them - per the usual rule
+  # that a proposed source is promoted once a shipped chapter relies on it.
+
+  - id: etymonline-program
+    name: Etymonline / Wiktionary - origin of "program" (Greek programma, "a written public notice")
+    url: https://www.etymonline.com/word/program
+    also: https://en.wiktionary.org/wiki/program
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-1-binary-to-programming.md, question: "What did the word 'program' mean before computing, and does the origin predict what programming is?"}
+    notes: >-
+      Establishes that "program" entered English in the 1630s from Late Latin
+      programma, from Greek programma (a written public notice), from
+      prographein "to write publicly" (pro- "forth" + graphein "to write") -
+      nothing already on the list covers word origins. Two independent
+      non-circular sources (Etymonline and Wiktionary) agree, satisfying the
+      name-registers verification protocol. Historical claim, does not expire.
+
+  - id: kathleen-booth-assembly-1947
+    name: Kathleen Booth - first assembly language and assembler (Birkbeck ARC, late 1940s)
+    url: https://en.wikipedia.org/wiki/Kathleen_Booth
+    also: https://www.computinghistory.org.uk/det/32489/Kathleen-Booth/
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-1-binary-to-programming.md, question: "Who wrote the first assembly language and assembler, and why did the idea spread?"}
+    notes: >-
+      Establishes the named origin of assembly, which nothing else on the list
+      covers. Sources say Booth co-wrote the first assembly language and
+      co-designed the assembler for the ARC at Birkbeck College; the chapter
+      says "Kathleen Booth and her colleagues", which matches "co-wrote".
+
+  - id: a0-system-hopper-compiler-nuance
+    name: Grace Hopper - A-0 System, 1952 (first automatic translation of a written notation into machine code)
+    url: https://en.wikipedia.org/wiki/Grace_Hopper
+    also: https://www.computinghistory.org.uk/det/5487/GraceHoppercompletestheA-0compiler
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-1-binary-to-programming.md, question: "What was the first program that turned a written notation into machine code automatically, and who built it?"}
+    notes: >-
+      Establishes the named origin of the compiler. Careful wording: Hopper's
+      A-0 (1952) is the first automatic translation system, but it was a
+      linker/compiler in the 1950s sense and Hopper did not originate the idea
+      of compilation - the chapter says "the first program that turned a
+      written notation into machine code automatically", which is accurate and
+      avoids the popular-lore claim that she invented the compiler outright.
+
+  - id: apple-m4-newsroom-2024
+    name: Apple Newsroom - M4 chip, 2024 (28 billion transistors)
+    url: https://www.apple.com/newsroom/2024/05/apple-introduces-m4-chip/
+    last_verified: 2026-09-10
+    expires: 2026-12-10
+    questions_asked:
+      - {chapter: docs/intro-1-binary-to-programming.md, question: "How many transistors does a current laptop processor actually hold?"}
+    notes: >-
+      Establishes a dated real magnitude for the chapter's Station 7. The
+      chapter says "north of ten billion", which the M4's 28 billion supports
+      with margin - deliberately conservative so it does not rot. Hardware
+      figure; re-check before the next use.
+
+  - id: ascii-1963-standardisation
+    name: ASCII first edition, ASA X3.4-1963 (approved 17 June 1963)
+    url: https://www.computinghistory.org.uk/det/5942/First-edition-of-the-ASCII-standard-was-published/
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-1-binary-to-programming.md, question: "How did the byte-to-character mapping come to be fixed, and by whom?"}
+    notes: >-
+      Supports the chapter's claim that the letter-to-byte mapping exists "by
+      agreement" rather than by nature. The chapter does not state the 1963
+      date in prose; it is recorded here.
+
+  # STILL REMOVED 2026-09-10: scott-logic-spec-kit-critique-2025,
+  # cui-et-al-genai-field-experiments-2025, etymonline-spec-engineer-roots,
+  # etymonline-code-binary-roots, and rosetta2-apple-silicon-2020 were
+  # proposed exclusively by the two deleted lesson-spine-authoring pilot
+  # chapters and are still cited nowhere in the live book. apple-m4-newsroom-
+  # 2024, ascii-1963-standardisation, kathleen-booth-assembly-1947, and
+  # a0-system-hopper-compiler-nuance were also introduced by the
+  # intro-2 pilot and are now re-added above, cited for real by intro-1. The
+  # remaining five stay recoverable by re-running the same lookups when a
+  # chapter needs them. See prerequisite-graph.yaml's progress note.
+
+  # ADDED 2026-09-10 (Phase 2) by the parallel authoring run that shipped
+  # docs/intro-2 through docs/intro-5. Canonical, because each chapter is
+  # gate-passing and cites them - per the usual rule that a source is promoted
+  # once a shipped chapter relies on it. Expiry follows this file's rule: 90
+  # days for tool-behaviour and pricing claims (2026-12-09), 12 months for
+  # industry reports and surveys (2027-09-10), null for named historical facts.
+
+  - id: crux-round-trip-2026
+    name: Chrome UX Report - median network round-trip time, aggregated August 2026 (92 ms desktop / 145 ms mobile / 270 ms Pakistan)
+    url: https://developer.chrome.com/docs/crux
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-2-architecture-map.md, question: "What does a check that runs on the user's own device actually save, measured?"}
+    notes: >-
+      Supplies intro-2's Station 7 magnitude for the client-side/server-side
+      split. Aggregated across the top 50,000 websites for August 2026. The
+      Pakistan median is cited deliberately - it is the anchor region for this
+      curriculum's audience, and it is roughly three times the desktop figure,
+      which is the point. Network figures drift; re-measure before the next use.
+
+  - id: owasp-password-storage-cheatsheet
+    name: OWASP Password Storage Cheat Sheet (Argon2id baseline)
+    url: https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-2-architecture-map.md, question: "Why does a hash have to be slow and memory-hungry, and what does that cost per login?"}
+    notes: >-
+      The chapter's hashing magnitude: Argon2id baseline about 19 MB per hash
+      and two passes, single hash under one second. The chapter explicitly
+      tells the reader to check this page rather than trust the fixed number in
+      the prose, which is the right framing for advice that changes over time.
+
+  - id: upstash-redis-free-tier
+    name: Upstash Redis free tier (256 MB, 500,000 commands/month), 2026
+    url: https://upstash.com/pricing
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-2-architecture-map.md, question: "What does a cache cost, concretely, when it is the shortcut in front of the main store?"}
+    notes: >-
+      A real free-tier limit for the cache discussion. Prices and limits in
+      this category change often; re-check before reuse.
+
+  - id: saltzer-schroeder-1975
+    name: Saltzer and Schroeder, "The Protection of Information in Computer Systems" (1975) - complete mediation
+    url: https://web.mit.edu/Saltzer/www/publications/protection/
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-2-architecture-map.md, question: "Where does the rule that a client cannot be trusted actually come from?"}
+    notes: >-
+      Establishes the lineage of intro-2's spine sentence - "never trust the
+      client" - through the 1975 design principle of complete mediation (every
+      access checked for authority). Named historical source; framing may age,
+      the fact does not.
+
+  - id: fielding-rest-2000
+    name: Roy Fielding, doctoral dissertation (2000) - Representational State Transfer
+    url: https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-2-architecture-map.md, question: "Who named REST, and when?"}
+    notes: >-
+      Attribution for the REST house style. The same dissertation is the
+      origin of HTTP's design vocabulary the chapter uses.
+
+  - id: vscode-announcement-2015
+    name: Visual Studio Code announcement, Microsoft (29 April 2015)
+    url: https://code.visualstudio.com/blogs/2015/04/29/introducing-visual-studio-code
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-3-editors-and-ides.md, question: "When did the editor that became the default appear, and from whom?"}
+    notes: >-
+      Also supports the chapter's claim that VS Code's core is open source and
+      that it is built on Electron and uses the Monaco editor.
+
+  - id: atom-end-of-life-2022
+    name: GitHub - sunsetting Atom (announced 8 June 2022, archived 15 December 2022)
+    url: https://github.blog/news-insights/product-news/github-sunsetting-atom/
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-3-editors-and-ides.md, question: "Can an editor a beginner learns today be gone in three years, and what does that imply about dating a tool?"}
+    notes: >-
+      The chapter's cautionary example, used to teach that the date on a tool
+      matters as much as the tool. Named historical incident.
+
+  - id: zed-1-0-2026
+    name: Zed 1.0 release (29 April 2026), Zed Industries
+    url: https://zed.dev/blog/zed-1-0
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-3-editors-and-ides.md, question: "What does a deliberate rejection of the Electron foundation look like, and who is making that argument?"}
+    notes: >-
+      Supports the Zed section - not built on VS Code or Electron, written in
+      Rust, drawn with the graphics card, made by people who built Atom.
+
+  - id: anthropic-claude-code-costs
+    name: Anthropic - Claude Code cost documentation (~$13/developer/active day; $150-250/developer/month)
+    url: https://docs.anthropic.com/en/docs/claude-code/costs
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "What does a CLI coding agent actually cost per developer, and what does a subscription buy instead?"}
+    notes: >-
+      Enterprise-deployment estimate; 90 per cent of users stay below $30 per
+      active day. The chapter records that this replaced an earlier ~$6/day
+      estimate the company raised in April 2026, which is itself the reason the
+      date is stated inline. Read 10 September 2026.
+
+  - id: claude-code-release-2025
+    name: Claude Code - research preview 24 February 2025, generally available 22 May 2025 (Anthropic)
+    url: https://www.anthropic.com/news/claude-3-7-sonnet
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "When did the CLI-agent category begin, and which tool arrived first?"}
+    notes: >-
+      Also establishes that it is not open source and is distributed as a
+      closed npm package.
+
+  - id: claude-code-permissions
+    name: Claude Code settings and permissions documentation (allow / ask / deny; scope; bypassPermissions)
+    url: https://docs.anthropic.com/en/docs/claude-code/settings
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "How does a CLI agent decide what it may do without asking, and where is the boundary the human actually controls?"}
+    notes: >-
+      The chapter's permission system, worked as a concrete example: reads
+      inside the launch folder run without asking, file changes ask first, deny
+      beats ask beats allow. Anthropic's own documentation says
+      `--dangerously-skip-permissions` is for isolated environments only -
+      cited as the maker's own warning, not the chapter's opinion.
+
+  - id: codex-cli-release-2025
+    name: Codex CLI, OpenAI (16 April 2025)
+    url: https://openai.com/index/introducing-codex/
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "What is the second of the three tools that defined the category, and is it open source?"}
+    notes: >-
+      Open source under Apache 2.0; later rewritten in Rust. Also ships as an
+      editor extension and a non-open-source desktop app.
+
+  - id: gemini-cli-antigravity-2025-2026
+    name: Gemini CLI (Google, 25 June 2025) and its 2026 fold into Antigravity CLI
+    url: https://developers.googleblog.com/en/introducing-gemini-cli-open-source-ai-agent/
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "What does it look like when a tool's status changes under the people using it, and why must a reader check the current landscape?"}
+    notes: >-
+      THE reason intro-4's "Current as of writing" callout is not decorative:
+      Google announced on 19 May 2026 that it was folding the tool into a new
+      closed-source Antigravity CLI, and stopped serving Gemini CLI to
+      individual developers on 18 June 2026. It began open source under Apache
+      2.0 with a generous free tier (60 requests/minute, 1,000/day). The
+      open-source-to-closed reversal is the chapter's live-disagreement case.
+
+  - id: jetbrains-devecosystem-2026
+    name: JetBrains Developer Ecosystem Survey 2026 (15,000+ professional developers, May-July 2026)
+    url: https://www.jetbrains.com/lp/devecosystem-2026/
+    last_verified: 2026-09-10
+    expires: 2027-09-10
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "Which coding agent is actually most widely used, and can that be answered without inventing a market-share figure?"}
+    notes: >-
+      Weighted survey. 90 per cent of professional developers using AI coding
+      agents at work at least weekly, 68 per cent daily. Claude Code most
+      widely adopted at about 39 per cent (up from 18 per cent in January 2026;
+      about 47 per cent in the United States); Codex 3 per cent to 16 per cent;
+      GitHub Copilot 21 per cent and falling. The chapter explicitly refuses to
+      state a market-share figure and labels this as current practice with a
+      date attached - the correct handling for an unaudited market.
+
+  - id: powershell-monad-manifesto
+    name: Jeffrey Snover, Monad Manifesto (the design argument behind PowerShell)
+    url: https://www.jsnover.com/Docs/MonadManifesto.pdf
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "Why do PowerShell's commands look unlike Bash's?"}
+    notes: >-
+      Supports the chapter's lineage section - a shell should pass objects
+      rather than text.
+
+  - id: etymonline-terminal
+    name: Online Etymology Dictionary - "terminal" (1831 last letter or sound; 1838 electrical sense; Latin terminus)
+    url: https://www.etymonline.com/word/terminal
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "What did the word 'terminal' mean before computing, and does the origin predict what a reader is looking at?"}
+    notes: >-
+      intro-4's Station 0 and its verification-protocol case - the name points
+      at a position (the end of a line), not at a computer. The chapter also
+      records the computing sense by 1954. Companion to the computing-history
+      sources for the Teletype Model 33 and the DEC VT100 (1978), whose escape
+      sequences programs still speak today. Historical; does not expire.
+
+  - id: bash-release-1989
+    name: Bash (Bourne Again SHell) - Brian Fox for the GNU Project, 1989; Bourne shell 1979
+    url: https://www.gnu.org/software/bash/
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "Where does the shell of the Unix world come from, and what is it a replacement for?"}
+    notes: >-
+      Also supports the Windows-default material: a fresh Windows machine has
+      no Bash, which is why a tutorial written on a Mac fails with
+      "'ls' is not recognized as an internal or external command". Apple's
+      switch of its own macOS default to zsh in 2019 is recorded in the chapter
+      prose; treat as current practice.
+
+  - id: sd-paper-feb-2026
+    name: "Spec-Driven Development: From Code to Contract in the Age of AI Coding Assistants (February 2026)"
+    url: null
+    last_verified: null
+    expires: 2026-12-09
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What gave the SDD movement its academic form, and when?"}
+    notes: >-
+      Cited by intro-5 as the formalisation of SDD, with its February 2026 date
+      stated inline. No URL reverified in this session - locate the paper
+      before the next new use. Note this is a DIFFERENT work from the BCMS 2026
+      guide (bcms-sdd-guide-2026), which is a practitioner guide; do not
+      conflate the two.
+
+  - id: aws-kiro-2025
+    name: Amazon Kiro - spec-driven AI IDE, 2025
+    url: https://kiro.dev/
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Which tools had already adopted the specification-first workflow, alongside Spec Kit and Claude Code?"}
+    notes: >-
+      Named alongside GitHub's Spec Kit and Anthropic's Claude Code as the
+      tools that adopted SDD from 2025. Product status moves; re-check before
+      reuse.
+
+  # ---------------------------------------------------------------------------
+  # REUSED 2026-09-10 (Phase 2). Existing canonical sources, each asked a
+  # genuinely new question by a newly-shipped chapter - the test this file
+  # applies is whether a NEW question is being asked, not whether the source has
+  # been used before.
+  # ---------------------------------------------------------------------------
+
+  # stackoverflow-survey-2025 gains two new questions from intro-3 and intro-5.
+  # Both differ from the six adoption/trust questions already filed: intro-3 asks
+  # it about editor market share, intro-5 asks it about the adoption/trust gap as
+  # the shape of the two extremes.
+  #
+  # github-spec-kit-2025 gains intro-5's question about the intent quote.
+  # veracode-genai, metr-productivity and dice-report-jul-2026 are reused by
+  # intro-5 as recorded on those entries below.
+
+# ---------------------------------------------------------------------------
+# STAGE 1 SOURCES — added 2026-09-11, when all six Stage 1 chapters shipped.
+# ---------------------------------------------------------------------------
+#
+# Per the rule at the top of this file, entries added by an authoring run carry
+# `status: proposed` unless a human or the shipping skill promotes them. All six
+# chapters SHIPPED with these citations in their prose, so promoting them is the
+# correct follow-up rather than leaving them marked unconfirmed. They are left
+# `proposed` here only because promotion is an editor's act, and recorded so the
+# decision is visible instead of assumed.
+#
+# VERIFICATION CAVEATS are recorded per source. Two are load-bearing and must
+# be read before reuse: stripe-idempotency and stripe-rate-limits were taken from
+# search results quoting Stripe's own pages because the direct fetches timed out.
+
+  - id: etymonline-architecture
+    name: Online Etymology Dictionary — "architecture"
+    url: https://www.etymonline.com/word/architecture
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md, question: "What does the word decompose into, and when did it enter English?"}
+    notes: "S0's decomposition. Greek arkhitekton, chief builder; English from the 1560s."
+
+  - id: parnas-1972
+    name: D. L. Parnas, "On the Criteria To Be Used in Decomposing Systems into Modules", Communications of the ACM, December 1972
+    url: https://dl.acm.org/doi/10.1145/361598.361623
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md, question: "Where did information hiding and the criteria for splitting a system into modules originate?"}
+    notes: "The primary source of the boundary idea. Also anchors intro's lineage elsewhere; a second use must ask a new question."
+
+  - id: uptime-institute-2026
+    name: Uptime Institute, Annual Outage Analysis (2025 survey basis)
+    url: https://uptimeinstitute.com/about-ui/press-releases/uptime-announces-annual-outage-analysis-report-2026
+    last_verified: 2026-09-11
+    expires: 2027-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md, question: "What fraction of major outages cost more than 100,000 US dollars, and more than a million?"}
+    notes: "57% above US$100k; one in five above US$1M, second year running. Industry report — 12-month expiry."
+
+  - id: facebook-outage-2021
+    name: Facebook/Instagram/WhatsApp global outage, 4 October 2021
+    url: https://techcrunch.com/2021/10/04/facebook-messenger-instagram-whatsapp-are-all-down/
+    also: https://www.cnn.com/2021/10/06/world/facebook-whatsapp-instagram-down-cec
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md, question: "What is the blast radius of one shared component, at a scale a reader can feel?"}
+    notes: "About six hours, 2.9bn monthly users, one backbone configuration change."
+
+  - id: prime-video-monolith-2023
+    name: Amazon Prime Video VQA team moves from distributed serverless back to a monolith, 2023
+    url: https://thenewstack.io/return-of-the-monolith-amazon-dumps-microservices-for-video-monitoring/
+    also: https://www.infoq.com/news/2023/05/prime-ec2-ecs-saves-costs/
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md, question: "What is the counter-argument to splitting everything — what happens when a team moves the other way, and by how much did it cut cost?"}
+    notes: "About 90% cost reduction. Used inside s1-01's depth block."
+
+  - id: etymonline-read
+    name: Online Etymology Dictionary — "read", corroborated by Wiktionary
+    url: https://www.etymonline.com/word/read
+    also: https://en.wiktionary.org/wiki/read
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md, question: "Did English 'read' originally mean advise, counsel or interpret rather than decode letters?"}
+    notes: "Old English rǣdan. Two independent sources, per the etymology protocol."
+
+  - id: ariane-501
+    name: Ariane 5 Flight 501 failure, 4 June 1996 — ESA Inquiry Board report
+    url: https://www.esa.int/Newsroom/Press_Releases/Ariane_501_-_Presentation_of_Inquiry_Board_report
+    also: https://en.wikipedia.org/wiki/Ariane_flight_V88
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md, question: "What does an unverified value reused in a new context actually cost, with a date and a figure?"}
+    notes: "Lost 37 seconds after lift-off, ended at 39s; over US$370 million, payload uninsured. The loss figure comes from postmortem write-ups rather than ESA directly — flagged for a second check before any reuse."
+
+  - id: naur-1985
+    name: Peter Naur, "Programming as Theory Building" (1985)
+    url: https://gist.github.com/onlurking/fc5c81d18cfce9ff81bc968a7f342fb1
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md, question: "Why is reading someone else's code hard in principle rather than merely inconvenient?"}
+    notes: "The program is a theory held in heads; the text survives, the theory does not."
+
+  - id: nextjs-2026
+    name: Next.js release and support lines
+    url: https://nextjs.org/blog/july-2026-security-release
+    last_verified: 2026-09-11
+    expires: 2027-01-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md, question: "What is the current Next.js version line, and which is LTS?"}
+    notes: "v16.2.11 Active LTS, v15.5.21 maintenance LTS, dated 20 July 2026. Tool claim — 90-day expiry."
+
+  - id: webaim-million-2026
+    name: WebAIM Million annual accessibility report (February 2026 scan)
+    url: https://webaim.org/projects/million/
+    last_verified: 2026-09-11
+    expires: 2027-03-30
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md, question: "How accessible are the web's top million home pages, and how do they commonly fail?"}
+    notes: >-
+      56,114,377 errors; 56.1 per page; 95.9% of pages with at least one WCAG
+      failure; 51% missing form labels; 83.9% low contrast. The ARIA paradox
+      (59.1 errors on ARIA pages against 42 without) is the report's own
+      finding, and the chapter records the report's caution about cause.
+      First rise in six years — worth noting if reused as a trend.
+      Next.js pages averaged 40.9 against the 56.1 average.
+
+  - id: web-vitals-inp
+    name: web.dev — Core Web Vitals thresholds
+    url: https://web.dev/articles/vitals
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md, question: "What is the interactivity budget a page has to meet, and at which percentile?"}
+    notes: "LCP 2.5s, INP 200ms, CLS 0.1, all at p75. INP replaced FID in 2024."
+
+  - id: rfc9110
+    name: RFC 9110 — HTTP Semantics (IETF, June 2022)
+    url: https://www.rfc-editor.org/rfc/rfc9110.html
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/04-backend.md, question: "Which HTTP methods are safe and which are idempotent, and what do 401, 403, 409 and 422 actually mean?"}
+    notes: >-
+      The standard the method and status tables rest on. Also the source of a
+      correction: 422 was renamed "Unprocessable Content" in 2022. Verified from
+      search results quoting the sections rather than a full read of the RFC.
+
+  - id: stripe-idempotency
+    name: Stripe — Idempotent requests
+    url: https://docs.stripe.com/api/idempotent_requests
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/04-backend.md, question: "What does a payment platform store for an idempotency key, and how long are keys kept?"}
+    notes: >-
+      CAVEAT — DIRECT FETCH TIMED OUT TWICE (504). Content was taken from search
+      results quoting Stripe's own page verbatim, corroborated by two independent
+      write-ups. Claims: the first response is replayed regardless of success or
+      failure, including 500s; keys pruned once at least 24 hours old. Re-verify
+      before reuse.
+
+  - id: github-rate-limits
+    name: GitHub REST API rate limits
+    url: https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/04-backend.md, question: "What are a large platform's published primary and secondary rate limits, and what does it return when they are exceeded?"}
+    notes: "60/hour unauthenticated, 5,000/hour authenticated, 100 concurrent. Fetched in full."
+
+  - id: body-parser-limits
+    name: body-parser (Express middleware) — default request body limits
+    url: https://expressjs.com/en/resources/middleware/body-parser/
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/04-backend.md, question: "What is the default request body limit, what status does exceeding it produce, and does the library itself call the body untrusted?"}
+    notes: "v2.3.0; default 100kb; entity.too.large produces 413; parameterLimit 1000; docs say the body should be validated before trusting. Fetched in full."
+
+  - id: codd-1970
+    name: E. F. Codd, "A Relational Model of Data for Large Shared Data Banks" (1970)
+    url: https://dl.acm.org/doi/10.1145/362384.362685
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/05-databases.md, question: "What forced the relational model into existence?"}
+
+  - id: postgres-docs
+    name: PostgreSQL documentation (current release line)
+    url: https://www.postgresql.org/docs/current/transaction-iso.html
+    also: https://www.postgresql.org/docs/current/indexes-types.html
+    last_verified: 2026-09-11
+    expires: 2027-03-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/05-databases.md, question: "What is the default isolation level, and why does a locked row get re-checked?"}
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/05-databases.md, question: "How does FOR UPDATE lock rows, and what is the default index type?"}
+    notes: >-
+      Two genuinely different questions, so two rows per the reuse rule. Read
+      Committed is the default and re-checks; B-tree is the default index type.
+      Version 18.6 stable, 19 Beta 3 (13 Aug 2026). Tool claim — 90-day expiry.
+
+  - id: git-scm-about
+    name: git-scm.com — About (repository size and history figures)
+    url: https://git-scm.com/about
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md, question: "How big is the Linux kernel repository, and how much does Git compress it?"}
+    notes: "1.7 GB tree; 1.4 million commits in 5.5 GB. The page states 'as of 2025'."
+
+  - id: git-request-pull
+    name: git-scm.com — git-request-pull documentation
+    url: https://git-scm.com/docs/git-request-pull
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md, question: "What does the 'pull' in pull request actually name?"}
+    notes: >-
+      THE source for s1-06's central claim: the command generates a request
+      asking your upstream project to pull changes into their tree. The name
+      describes the maintainer's action, not the requester's.
+
+  - id: smartbear-cisco-review-2006
+    name: SmartBear/Cisco peer code review case study (2006)
+    url: https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md, question: "At what change size and review rate does review stop finding defects?"}
+    notes: "200-400 LOC over 60-90 minutes finds 70-90% of defects; efficiency drops past 400 LOC and above roughly 500 LOC/hour; formal inspection about 9 hours per 200 LOC."
+
+  - id: google-icse-seip-2018
+    name: "Sadowski et al., 'Modern Code Review: A Case Study at Google' (ICSE-SEIP 2018)"
+    url: https://www.sback.it/publications/icse2018seip.pdf
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md, question: "What does measured code review look like at industrial scale?"}
+    notes: "About 9 million changes 2014-2016; median 24 lines; median 1 reviewer; 70% reviewed within 24 hours; median 2.6 hours per week reviewing."
+
+  - id: github-protected-branches
+    name: GitHub Docs — protected branches and merge methods
+    url: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches
+    also: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/about-merge-methods-on-github
+    last_verified: 2026-09-11
+    status: proposed
+    questions_asked:
+      - {chapter: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md, question: "What do branch protection rules enforce by default, and do they bind administrators?"}
+    notes: >-
+      Records a dangerous default the chapter names: rules skip administrators
+      unless bypass is explicitly disabled. GitHub's own docs also name the
+      disadvantages of squashing, which the chapter uses as its live disagreement.
+
+# ---------------------------------------------------------------------------
+# Unresolved citations - none outstanding.
+# ---------------------------------------------------------------------------
+# Every claim in the five shipped intro chapters is now a proper `sources:`
+# entry above and is cited inline in the prose. Several still carry
+# `status: needs-url-verification` - check those before the next new use.
+# Kept as an explicit empty list rather than deleted, so the next author can
+# see the check exists and was run.
+#
+# STAGE 1 (2026-09-11): the same check was run for the six Stage 1 chapters.
+# Nothing is unresolved. Two sources carry a fetch caveat rather than a missing
+# one (stripe-idempotency, stripe-rate-limits) and are recorded above with it.
+unresolved_citations: []

@@ -1,0 +1,407 @@
+# Example ledger - worked examples and scenarios already spent.
+#
+# Purpose: stop the to-do app appearing in five chapters, and stop two chapters
+# reaching independently for the same scenario. Record rejections too - an
+# example considered and dropped is as useful to the next author as one used.
+#
+# Default rule: ONE worked example carries a chapter, chosen for how much
+# explanatory work it does rather than for how impressive it looked in research.
+# Every example is real and named - no foo, no bar, no Acme Corp, no to-do app.
+
+version: 1
+seeded: 2026-08-23
+# REPOINTED 2026-09-10: the `intro-no-single-example` and
+# `intro-worked-examples` entries now name
+# docs/intro-5-spec-driven-engineering.md, the merge-and-rewrite successor to
+# docs/intro.md in the intro resequence. The spent examples are unchanged. See
+# curriculum-state/proposals/stage-00-intro-resequence-2026-09-10.md.
+
+examples:
+
+  - id: intro-no-single-example
+    chapter: docs/intro-5-spec-driven-engineering.md
+    object: null
+    status: resolved-by-deviation
+    notes: >-
+      RESOLVED 2026-08-24. The intro uses several distinct named scenarios
+      rather than one traced object - a beginner's first AI-assisted change, a
+      team's CSV export, a five-agent production pipeline - because its job is
+      breadth across the whole curriculum's territory, not depth on one example.
+      A single to-do-app scenario could not also carry the multi-agent
+      architecture material without trivialising it.
+      todo-app-trace stays reserved and unspent - see below - because the
+      intro's re-authoring is the one lesson it was reserved for that has now
+      shipped without it; it remains available for the Stage 1 "What is an AI
+      coding agent?" lesson it was also reserved for.
+      See intro-worked-examples below for the actual set and the
+      question each one answers.
+
+  - id: intro-worked-examples
+    chapter: docs/intro-5-spec-driven-engineering.md
+    object: "Multiple distinct named scenarios rather than one shared object (see intro-no-single-example)"
+    status: spent
+    notes: >-
+      Breakdown, each with the question the chapter asks of it:
+      The opening sections use the two real-world incidents
+      already tracked in evidence-ledger.yaml (Replit, Lemkin) rather than
+      invented scenarios - no new example entry needed for those. From
+      Later sections:
+      (1) rate-limiting an internal API endpoint hammered by a misbehaving
+      client [worked example] - asks: what does the four-part
+      specify/delegate/inspect/verify framework look like applied start to
+      finish on one small, concrete task?
+      (2) adding a CSV data-export endpoint [worked example] - asks:
+      what does the specify/design/implement/verify table look like applied
+      to a request that sounds simple but has real judgment calls hiding in
+      it (which fields, what row-count strategy)?
+      (3) an agent-assisted refactor of a payment-processing function that
+      passes every existing test [second worked
+      example] - asks: what does the verify stage catch that "tests pass"
+      doesn't, when the interesting judgment call is at verify rather than
+      specify or implement?
+      (3b) a relative's small delivery service, and a request to add a
+      cancel-order page [shared across two sections] - the one genuinely shared
+      object in the intro. It is asked two different questions: what is
+      invisible from a page that looks finished (driver notification,
+      confirmation, double-cancel)? and what do the four boundaries -
+      environment, data, authority, verification - actually answer for this
+      specific task, traced start to finish?
+      (4) an admin dashboard that grew from a weekend hack - its CSV export,
+      its login flow, a subscription-cancellation webhook handler
+      [worked inventory] - asks, per feature: has this
+      specific piece crossed the users/money/secrets/durable-data line from
+      experiment into system, and when?
+      (5) an internal support-ticket agent that reads the company wiki and
+      drafts customer responses pending review [worked example] - asks:
+      how do the four governance boundaries (environment, trust, data,
+      apprenticeship) apply to one concrete, currently-plausible agent
+      surface?
+      (6) a five-agent production pipeline (planning, retrieval,
+      implementation, testing, deployment agents) and, within it, a
+      refund-issuing tool call [worked example] - asks: how do
+      role/handoff/failure-domain contracts and a permission/idempotency
+      contract actually get specified across a multi-agent system rather than
+      a single coding agent?
+      None of these six reuses a reserved example below; none is reserved for
+      future use elsewhere, since each is scoped tightly enough to its own
+      teaching point that reuse would likely mean re-litigating the same
+      scenario rather than asking it something new.
+      REMOVED 2026-09-10: docs/intro-spine-experiment.md, a lesson-spine-
+      authoring pilot chapter that had reused example (2) (the CSV-export
+      endpoint), run twice - once clean, once deliberately broken - was
+      deleted after the pilot succeeded, ahead of applying the same treatment
+      to intro.md itself. The CSV-export endpoint is unencumbered by that
+      reuse again now; if the real transformation reuses the same break
+      (internal_notes column leaking past a stale hardcoded field filter),
+      log it here fresh rather than assuming the old note still applies.
+
+      CORRECTED 2026-09-10 (Phase 2): docs/intro-5-spec-driven-engineering.md
+      was merge-and-rewritten through lesson-spine-authoring, and the shipped
+      chapter KEPT only two of the six scenarios above: (2) the CSV data-export
+      endpoint and (3) the agent-assisted payment-refactor that passes every
+      existing test. Examples (1) rate-limiting a hammered internal endpoint,
+      (3b) the relative's delivery-service cancel-order page, (4) the admin
+      dashboard that grew from a weekend hack, (5) the internal support-ticket
+      agent, and (6) the five-agent production pipeline were DROPPED - the
+      re-authoring judged the four safety boundaries, the experiment-to-system
+      transition, the agent governance boundaries and the multi-agent ownership
+      architecture to be Stage 3-4 territory rather than finale material, now
+      that the sequence runs binary -> architecture -> editors -> terminals ->
+      SDE. Those four scenarios are therefore UNSPENT again and available, but
+      they have no reservation - if a Stage 3 or Stage 4 lesson wants one, it
+      is free to take it, and should log which questions it asks. The CSV
+      export is now genuinely re-spent by a shipped chapter, and it kept the
+      same break the deleted pilot used (a field filter that leaks an
+      internal-only column), so that break is now spent too.
+
+  - id: club-signup-shared-object
+    chapter: docs/intro-2-architecture-map.md
+    object: "A school AI club sign-up page, capped at thirty seats"
+    status: spent
+    notes: >-
+      NEW 2026-09-10 (Phase 2), and a change of shape worth flagging: the
+      resequenced intro now has ONE genuinely shared object, where the old
+      intro deliberately had none (see intro-no-single-example above). It is
+      built once in intro-2 ("build one thing together, one wall at a time")
+      and then returned to by every later chapter, each asking it a different
+      question:
+      intro-2 asks: what does each box in a real system exist to fix, and where
+      must a rule be enforced so the user cannot reach it? Beats: the frontend
+      trap (developer tools let any student delete the seat check), the
+      goldfish problem (memory lost on restart), who is allowed to cancel whose
+      signup, two builders colliding on the same code, and the laptop-to-live
+      gap.
+      intro-3 asks: what does an AI-driven tool do to a rule it does not
+      understand? (the deliberately broken diff below).
+      intro-4 asks: how wide is an agent's reach, depending on the folder you
+      launched it from? (the scope example).
+      intro-5 asks: which stage owns the seat cap, and who owes the three
+      stages an agent does not own?
+      Reuse here is deliberate and additive - each chapter asks a question no
+      other asks. Do not add a fifth use without one.
+
+  - id: intro-3-broken-diff
+    chapter: docs/intro-3-editors-and-ides.md
+    object: "An agent removing the thirty-seat check from the club sign-up page"
+    status: spent
+    notes: >-
+      The chapter's deliberately broken example: you ask a driven tool to
+      "refuse a signup when the club is full", and it returns a diff that
+      removes the guard entirely, leaving the club uncapped. Nothing crashes,
+      the page still saves, and the bug is silent until the thirty-first student
+      signs up. Asks: what exactly does an AI-driven tool fail at, and why can
+      it not ask? Answer the chapter gives: it failed at knowing what the code
+      was for, not at writing code. This is the chapter's argument for the
+      review discipline that intro-5 then formalises.
+
+  - id: intro-4-shell-mismatch
+    chapter: docs/intro-4-terminals-and-cli-agents.md
+    object: "`ls` typed into Command Prompt on a fresh Windows machine"
+    status: spent
+    notes: >-
+      The chapter's deliberately broken example, and the most common beginner
+      failure in the field: a tutorial written on a Mac says `ls`, the shell in
+      front of you answers "'ls' is not recognized as an internal or external
+      command". Asks: when a command fails, is the command wrong or is the
+      shell wrong? The message says the shell has never heard of the name,
+      which sends the reader to ask which shell they are in - the chapter's
+      whole point about terminal types. Paired with the working version (`pwd`,
+      then `dir`).
+
+  - id: intro-5-one-stage-cut
+    chapter: docs/intro-5-spec-driven-engineering.md
+    object: "Four short scenarios, one per stage of the specify/design/implement/verify loop, each with that stage skipped"
+    status: spent
+    notes: >-
+      Four miniature failures rather than one traced object: a cache whose
+      time-to-live nobody chose (Specify skipped), a queue whose failure mode
+      nobody decided (Design skipped), a large diff accepted unread (Implement
+      over-delegated), and a change shipped because the obvious case worked
+      (Verify treated as optional). Asks: what does each stage actually
+      prevent, shown by its absence? Recorded as an omission-style entry - the
+      chapter's point is the missing judgment, so these are deliberately
+      negative examples.
+
+  - id: todo-app-trace
+    chapter: null
+    object: "A one-line request ('build me a to-do app') traced end to end"
+    status: reserved
+    reserved_for: "Stage 1 \"What is an AI coding agent?\" (no longer reserved for docs/intro-5-spec-driven-engineering.md - the intro shipped without it; see intro-no-single-example)"
+    notes: >-
+      Named in the founding brief and in framework drafts, never shipped.
+      Reserve it for exactly one lesson. Chosen because it stays legible whether
+      a chapter examines it in one sentence or in a full step-by-step trace.
+      If used, log which questions each chapter asks of it here.
+
+  - id: feature-add-ticket
+    chapter: null
+    object: "A real feature-add ticket: write a 3-line spec, prompt, review the diff against it"
+    status: reserved
+    reserved_for: a Stage 1 or Stage 3 lesson
+    notes: >-
+      Framework draft example. Unspent. Not used by the intro
+      - the intro's own rate-limiting/CSV-export scenarios cover similar
+      ground with different specifics, leaving this one genuinely free rather
+      than redundant.
+
+  # RE-OPENED 2026-09-10: binary-to-language-arithmetic-trace (2 + 2 traced
+  # across all four translation layers, then broken across a chip-architecture
+  # boundary) was spent only by the deleted intro-2 pilot. The real
+  # transformation, docs/intro-1-binary-to-programming.md, chose NOT to use it
+  # - see intro-1-no-worked-example below. It remains unspent.
+
+  - id: intro-1-no-worked-example
+    chapter: docs/intro-1-binary-to-programming.md
+    object: null
+    status: resolved-by-deviation
+    notes: >-
+      Deliberate omission, recorded so it is visible rather than silent.
+      intro-1 is a Concept lesson whose spine is the four-rung ladder itself.
+      It carries one anchor (a printed exam timetable - the literal original
+      sense of "program") and one named mechanism (the bit patterns behind
+      ASCII) instead of a worked example. The reserved
+      binary-to-language-arithmetic-trace was available and was deliberately
+      not spent: the ladder is the chapter's single illustration, and adding a
+      2 + 2 trace would have given the reader two competing pictures of the
+      same idea. A reader would not have gained from more.
+
+  - id: welcome-no-worked-example
+    chapter: docs/welcome.md
+    object: null
+    status: resolved-by-deviation
+    notes: >-
+      Deliberate omission, recorded so it is visible rather than silent. Welcome
+      is a front-door page, not a teaching chapter: its job is to state the
+      book's founding position and point to the first chapter, not to trace a
+      worked example. It carries one rhetorical analogy - an agent's answer as a
+      courier tracking page, with the point where the comparison breaks named
+      explicitly - rather than a worked example in this project's technical
+      sense. No reserved entry fits it: todo-app-trace is reserved for a Stage 1
+      agent lesson, feature-add-ticket for Stage 1/3, repo-permission-contract
+      for Stage 3/4, and spending one here would rob the lesson it is reserved
+      for. A reader would not have gained from more.
+
+  - id: repo-permission-contract
+    chapter: null
+    object: "Designing a permission and verification contract for an agent on a real repository"
+    status: reserved
+    reserved_for: a Stage 3 or Stage 4 lesson
+    notes: >-
+      Too heavy for Stage 1. Not used by the intro revision - the intro used a
+      five-agent pipeline example instead (see intro-worked-examples), which
+      covers multi-agent contract design rather than single-repository
+      permission design; this example stays free for the more targeted lesson
+      it was reserved for.
+      STILL RESERVED after the 2026-09-11 Stage 1 run. None of the six Stage 1
+      chapters reached for it. Its reservation holds.
+
+  # =========================================================================
+  # STAGE 1 - added 2026-09-11, when all six Stage 1 chapters shipped.
+  # =========================================================================
+  #
+  # The stage continued the intro's shared object rather than introducing a new
+  # one, and did NOT spend anything reserved. The entries below record the one
+  # shared object, the per-chapter questions asked of it, the supporting named
+  # examples, and every rejection the authoring agents reported.
+
+  - id: stage1-club-signup-continuation
+    chapter: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
+    object: "The same school AI club sign-up page capped at thirty seats — continued from intro-2, not replaced"
+    status: spent
+    also_used_in:
+      - docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
+      - docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
+      - docs/stage-01-spec-aware-vibe-engineering/03-frontend.md
+      - docs/stage-01-spec-aware-vibe-engineering/04-backend.md
+      - docs/stage-01-spec-aware-vibe-engineering/05-databases.md
+      - docs/stage-01-spec-aware-vibe-engineering/06-git-github.md
+    notes: >-
+      THE central decision of the Stage 1 run, recorded on its own entry because
+      it governs all six chapters: the stage returned to the intro's shared
+      object and asked it one new question per layer, rather than inventing a
+      second teaching object. No chapter introduced a to-do app, a notes app or
+      a blog. Each chapter's question, in order:
+      s1-01 - where does each box live, and which boundary must the thirty-seat
+      rule sit behind so a student cannot reach around it?
+      s1-02 - the cap as readable code: a variable, a conditional, then a
+      function the system calls; then broken by an off-by-one and by a check
+      that is present and wrong.
+      s1-03 - the form a student actually clicks, in three acts (before, during,
+      after a tap), and why neither the number on screen nor the disabled button
+      can decide admission.
+      s1-04 - the endpoint that must refuse, and two students tapping submit for
+      the last seat in the same instant. States the race; deliberately does NOT
+      solve it.
+      s1-05 - the row written to the database and the thirty-first sign-up that
+      must not get in. Solves the race the previous chapter stated.
+      s1-06 - how work on this page is recorded, branched, reviewed and merged,
+      and what changes when an agent wrote the diff.
+      THE STAGE'S ARC DEPENDS ON THIS: s1-04 states a problem it refuses to
+      solve and s1-05 resolves it. A future edit that changes either chapter's
+      handling of the race breaks the other.
+
+  - id: s1-01-facebook-outage-2021
+    chapter: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
+    object: "Facebook/Instagram/WhatsApp outage, 4 October 2021"
+    status: spent
+    notes: >-
+      S6 blast radius at a scale a reader can feel: about six hours, 2.9 billion
+      monthly users, one routine configuration change to the routers carrying
+      Facebook's traffic, and the internal tools staff would have used to fix it
+      taken down inside the same failure.
+
+  - id: s1-01-prime-video-monolith-2023
+    chapter: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
+    object: "Amazon Prime Video's 2023 move from distributed serverless back to a single program"
+    status: spent
+    notes: >-
+      The depth block's counter-argument to splitting everything: about a 90%
+      cost reduction from moving the other way. Used to show that a boundary
+      earns its place only when the two sides genuinely change apart.
+
+  - id: s1-02-ariane-501
+    chapter: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
+    object: "Ariane 5 Flight 501, 4 June 1996"
+    status: spent
+    notes: >-
+      S7's real magnitude: lost 37 seconds after lift-off, over US$370 million,
+      guidance software reused unchanged from the smaller Ariane 4 and never
+      re-read against the machine it now ran on. The chapter's point is that the
+      code did its job correctly for years.
+
+  - id: s1-02-break-guard-present-and-wrong
+    chapter: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
+    object: "The thirty-seat guard broken three ways: the >= that becomes >, the deleted empty-name check, and a check that is present and wrong"
+    status: spent
+    notes: >-
+      ADDITIVE, NOT A REUSE, and worth recording because it sits close to a
+      spent example. intro-3 already spent "an agent deletes the thirty-seat
+      check". This chapter's break is deliberately different in kind: the guard
+      is STILL THERE and still wrong, which makes it a reading failure rather
+      than an omission failure. The third variant - `name is None` missing an
+      empty string - is the sharpest, because the line reads as a correct check.
+
+  - id: s1-04-last-seat-interleaving
+    chapter: docs/stage-01-spec-aware-vibe-engineering/04-backend.md
+    object: "The millisecond interleaving where two sign-ups both read 29 seats free and both answer 201"
+    status: spent
+    notes: >-
+      The stage's pivotal example and the reason s1-05 exists. Deliberately
+      stopped short of the fix - no SQL, no transaction, no constraint appears in
+      s1-04 - so the databases chapter can close it. Verified by inspection
+      after the run: s1-04 contains no BEGIN/COMMIT/constraint teaching.
+
+  - id: s1-05-constraint-and-transaction-fix
+    chapter: docs/stage-01-spec-aware-vibe-engineering/05-databases.md
+    object: "The same race resolved: a CHECK constraint plus a conditional UPDATE inside a transaction"
+    status: spent
+    notes: >-
+      Pays off s1-04's open question. Shows the failing check-count-then-insert
+      honestly first, then the fix, and explains why the row lock and Read
+      Committed's re-check make it hold. This is the only place in the book that
+      closes the last-seat race; do not re-solve it elsewhere.
+
+  - id: s1-06-agent-diff-review
+    chapter: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md
+    object: "A pull request against the club page whose diff was written by an agent, with no human author"
+    status: spent
+    notes: >-
+      The SDE thesis made concrete: the reviewer may not have written a line of
+      what they are approving. The S10 retrieval diff is `<` changed to `<=` on
+      the seat check - the off-by-one at the boundary, reviewed rather than
+      authored, which is a different failure from intro-3's deletion.
+
+  - id: s1-rejections-2026-09-11
+    chapter: null
+    object: "Examples each Stage 1 chapter considered and rejected"
+    status: rejected
+    notes: >-
+      Recorded because a rejection is worth as much as a use, and because these
+      remain available. All six agents were asked to report rejections.
+      Therac-25 (s1-02, considered for S7) - rejected: involves patient deaths,
+      heavier than a syntax-level reading lesson needs; Ariane 5 carries the
+      same "reused code, changed context, unverified" lesson with a cleaner
+      quotable cost.
+      "Code is read far more than it is written" (s1-02) - rejected: could not
+      be pinned to a primary, non-circular source in session.
+      Knight Capital, 1 August 2012 (s1-04) - rejected: a deployment-consistency
+      failure (new code on seven of eight servers), not an endpoint-enforcement
+      failure. Belongs to a deployment lesson.
+      nginx client_max_body_size default (s1-04) - rejected: could not be
+      confirmed from nginx's own documentation in session; body-parser's 100 KB
+      is primary-sourced.
+      A REAL public duplicate-sign-up or double-charge incident (s1-04) -
+      rejected as UNVERIFIABLE, and recorded as an honest gap: the chapter's
+      evidence is a named platform's documented behaviour plus an expired draft
+      instead of a half-remembered story.
+      A mobile-vs-desktop traffic split figure (s1-03) - rejected: sources
+      disagree month to month, so a single number would be a dated snapshot
+      masquerading as a fact.
+      A specific component-library bundle-size figure (s1-03) - rejected: only
+      secondary comparison blogs carried numbers, which is the charm-to-trust
+      risk the brief warns about.
+      A bank passbook as the s1-06 anchor - rejected in favour of the
+      numbered-copies habit ("signup-page-v4-final.js"), which is closer to
+      something a first-time reader has personally done.
+      The old placeholder's notes-table-with-JSONB example (s1-05) - rejected:
+      would introduce a second object and duplicate the MongoDB beat.

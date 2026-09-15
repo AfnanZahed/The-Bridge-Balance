@@ -1,0 +1,88 @@
+/*
+ * SearchResultRow — the shared result card.
+ *
+ * Ground and hover are the reference paste's pair (a receding panel that
+ * lightens under the row) read through the silver ramp: the card sits on its
+ * parent panel's ground and lifts to the raised step with a soft shadow. Both
+ * modes are defined; --tbb-text-muted carries the description in each.
+ */
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+  /* The 44 × 44 contract: the visual card may be shorter, the target may not. */
+  min-height: 44px;
+  padding: 0.5rem;
+  border: 0;
+  border-radius: var(--tbb-radius-md);
+  background: transparent;
+  color: var(--tbb-text);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    background-color var(--tbb-duration-fast) var(--tbb-ease),
+    box-shadow var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.row:hover,
+.rowActive {
+  background: var(--tbb-surface-raised);
+  box-shadow: var(--tbb-shadow-md);
+}
+
+/* The reference reveals the chevron on hover; focus-visible joins it so the
+   affordance is not hover-only (WCAG 1.4.13). */
+.chevron {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  opacity: 0;
+  transition: opacity var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.row:hover .chevron,
+.rowActive .chevron,
+.row:focus-visible .chevron {
+  opacity: 1;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  color: var(--tbb-text);
+}
+
+.icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.label {
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.description {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--tbb-text-muted);
+  /* One line, like the reference cards. */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

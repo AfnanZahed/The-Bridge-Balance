@@ -1,0 +1,675 @@
+/**
+ * The Bridge Balance — Accessibility Stylesheet
+ *
+ * Single source of truth for non-visual, accessibility-critical CSS.
+ * Loaded after custom.css so it can override where needed.
+ *
+ * Philosophy
+ *  - WCAG 2.2 AA baseline, AAA aspirations for text and focus.
+ *  - Visible focus indicators on every interactive element.
+ *  - Color is never the sole conveyor of meaning (ChapterState badges,
+ *    callouts, links).
+ *  - Respect prefers-reduced-motion and prefers-contrast: more.
+ *  - Every interactive element meets the 44 × 44 CSS px touch-target minimum
+ *    on a coarse pointer, and WCAG 2.2 SC 2.5.8's 24 × 24 on a fine one.
+ *  - Skip link + screen-reader-only utilities live here so any future
+ *    page can opt in by adding a class.
+ *
+ * Last revised: 2026-08-17.
+ */
+
+/* ─── 1. Tokens ───────────────────────────────────────────────────────────── */
+
+/* Focus ring tokens — 2px ring with 2px offset. These track `--tbb-accent`
+   (ADR-0003's scoped steel-blue hue) so the ring automatically follows
+   whatever the active theme's accent is, without a separate token to keep
+   in sync. */
+:root {
+  --tbb-a11y-focus-color: var(--tbb-accent);
+  --tbb-a11y-focus-color-dark: var(--tbb-accent);
+  --tbb-a11y-focus-width: 2px;
+  --tbb-a11y-focus-offset: 2px;
+  --tbb-a11y-focus-shadow-color: oklch(0 0 0 / 0.35);
+  --tbb-a11y-focus-shadow-color-dark: oklch(1 0 0 / 0.45);
+  --tbb-a11y-touch-target: 44px;
+}
+
+:root[data-theme="dark"] {
+  --tbb-a11y-focus-color: var(--tbb-accent);
+  --tbb-a11y-focus-shadow-color: oklch(1 0 0 / 0.45);
+}
+
+/* ─── 2. Global focus indicator ─────────────────────────────────────────────
+ *
+ * `:focus-visible` (not `:focus`) means the ring shows up on keyboard / switch /
+ * voice navigation — but NOT on a mouse click — so it never clutters the visual
+ * design while still being available to anyone who needs it.
+ *
+ * The ring is a 2px solid outline + a 2px transparent offset + a soft shadow
+ * for elements that need a halo to stay legible on a busy surface (hero CTAs,
+ * cards with gradients).
+ */
+
+:where(
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  summary,
+  [role="button"],
+  [role="link"],
+  [role="checkbox"],
+  [role="menuitem"],
+  [role="option"],
+  [role="tab"],
+  [tabindex]:not([tabindex="-1"])
+):focus-visible {
+  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
+  outline-offset: var(--tbb-a11y-focus-offset);
+  border-radius: inherit;
+  box-shadow: 0 0 0 4px var(--tbb-a11y-focus-shadow-color);
+}
+
+/* Remove the redundant box-shadow on native form controls (input, select, etc.)
+ * because the outline is already enough and the shadow can clip the spin buttons. */
+:where(input, textarea, select):focus-visible {
+  box-shadow: none;
+}
+
+/* ─── 3. Component-level focus rings ───────────────────────────────────────
+ *
+ * Each interactive surface gets an explicit ring because the global selector
+ * above is broad by design — these rules are the override layer for tricky
+ * surfaces that already have shadows / hover-translates that would visually
+ * fight the global ring.
+ */
+
+/* Navbar links — small targets need a bright ring. */
+.navbar__link:focus-visible,
+.navbar__brand:focus-visible,
+.navbar__title:focus-visible {
+  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
+  outline-offset: 4px;
+  border-radius: var(--tbb-radius-sm);
+  box-shadow: none;
+}
+
+/* Sidebar items — menu__link is the main interactive atom here. */
+.menu__link:focus-visible,
+.menu__link--sublist:focus-visible,
+.menu__caret:focus-visible {
+  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
+  outline-offset: 2px;
+  background: color-mix(in srgb, var(--ifm-color-primary) 8%, transparent);
+  box-shadow: none;
+}
+
+.menu__list-item-collapsible:focus-visible {
+  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
+  outline-offset: 2px;
+  border-radius: var(--tbb-radius-sm);
+}
+
+/* TOC items. */
+.table-of-contents__link:focus-visible {
+  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
+  outline-offset: 4px;
+  border-radius: var(--tbb-radius-sm);
+  box-shadow: none;
+}
+
+/* Hero CTAs — clean Apple-blue outline and offset; preserve elevation. */
+.tbb-hero__cta-primary:focus-visible,
+.tbb-hero__cta-secondary:focus-visible {
+  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
+  outline-offset: 3px;
+  box-shadow:
+    0 0 0 5px var(--tbb-a11y-focus-shadow-color),
+    var(--tbb-shadow-md);
+  transform: none;
+}
+
+:root[data-theme="dark"] .tbb-hero__cta-primary:focus-visible,
+:root[data-theme="dark"] .tbb-hero__cta-secondary:focus-visible {
+  outline-color: var(--tbb-a11y-focus-color);
+}
+
+/* Stage cards — must be focusable because they're large clickable surfaces. */
+.tbb-stage-card:focus-visible {
+  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
+  outline-offset: 3px;
+  box-shadow:
+    0 0 0 4px var(--tbb-a11y-focus-shadow-color),
+    var(--tbb-shadow-lg);
+  transform: none;
+}
+
+/* Doc pagination */
+.pagination-nav__link:focus-visible {
+  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
+  outline-offset: 2px;
+  border-color: var(--ifm-color-primary);
+  box-shadow: none;
+}
+
+/* Footer links. */
+.footer__link-item:focus-visible,
+.footer__social-link:focus-visible,
+.footer__copyright:focus-visible {
+  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
+  outline-offset: 2px;
+  border-radius: var(--tbb-radius-sm);
+  box-shadow: none;
+}
+
+/* "Edit this page" + theme / search toggle buttons. */
+.theme-edit-this-page:focus-visible,
+.navbar__items .clean-btn:focus-visible,
+button[class*="colorModeToggle"]:focus-visible {
+  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
+  outline-offset: 2px;
+  border-radius: var(--tbb-radius-md);
+  box-shadow: none;
+}
+
+/* Right-group action parity: GitHub link shares the same focus ring
+   (offset, radius, width, color) as the theme toggle. */
+.navbar__items--right > .navbar__link:focus-visible {
+  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
+  outline-offset: 2px;
+  border-radius: var(--tbb-radius-md);
+  box-shadow: none;
+}
+
+/* Search (007 — home Spotlight + chapter ExpandableSearchBar). The retired
+   navbar input's rules were removed with it. Focus rings and hit areas for
+   the new surfaces live with their components instead of here: the trigger in
+   custom.css (.tbb-search-trigger), the bar, input, and shortcut circles in
+   their CSS modules — CSS-module hashing makes those unstylable from this
+   file. Result rows carry no outline of their own, so they pick up the global
+   :focus-visible ring above, and every row is at least 44px tall. */
+
+/* Article inline links — bright ring because they're inline in prose. */
+article a:focus-visible {
+  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
+  outline-offset: 2px;
+  border-radius: var(--tbb-radius-xs, 2px);
+  background: color-mix(in srgb, var(--ifm-color-primary) 12%, transparent);
+  box-shadow: none;
+}
+
+/* Callout title — has interactive region semantics. */
+.tbb-callout__title:focus-visible {
+  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
+  outline-offset: 4px;
+  border-radius: var(--tbb-radius-sm);
+}
+
+/* 404 CTAs. */
+.tbb-hero__cta-primary:not([class*="footer"]) { /* anchor specificity safety */
+  /* intentionally empty — actual rule above */
+}
+
+/* Code blocks / scroll-to-top — keep accessible. */
+.theme-back-to-top-button:focus-visible,
+a[class*="backToTop"]:focus-visible {
+  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
+  outline-offset: 3px;
+  border-radius: var(--tbb-radius-pill);
+  box-shadow: none;
+}
+
+/* ─── 4. Skip link ──────────────────────────────────────────────────────────
+ *
+ * The first focusable element on every page. Hidden by default; only
+ * appears on focus.
+ */
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 10000;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.125rem;
+  background: var(--tbb-text);
+  color: var(--tbb-text-inverse);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  border-radius: var(--tbb-radius-md);
+  text-decoration: none;
+  box-shadow: var(--tbb-shadow-lg);
+  /* Hide visually but keep screen-reader accessible. */
+  transform: translateY(calc(-100% - 1rem));
+  clip-path: inset(50%);
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: transform var(--tbb-duration) var(--tbb-ease);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  clip-path: none;
+  clip: auto;
+  width: auto;
+  height: auto;
+  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
+  outline-offset: 3px;
+  color: var(--tbb-text-inverse);
+  text-decoration: none;
+}
+
+/* ─── 5. Screen-reader-only utility ───────────────────────────────────────── */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Like .sr-only but allows the element to become visible when it gains focus
+ * (used for "Skip to content"-style links that should be readable when focused
+ * but otherwise hidden). */
+.sr-only-focusable:focus,
+.sr-only-focusable:focus-within {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Visually hide an element until something happens (e.g. live region update).
+ * Reserves space so the surrounding layout doesn't reflow. */
+.sr-only-reserve {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ─── 6. Touch target sizing ────────────────────────────────────────────────
+ *
+ * WCAG 2.2 SC 2.5.8 (Level AA, new in 2.2): every interactive element must be
+ * at least 24 × 24 CSS px. We go further and enforce the 44 × 44 Material /
+ * older-WCAG guideline on coarse pointers, because the difference is
+ * noticeable for users with motor difficulties on touch devices.
+ *
+ * `:where()` keeps specificity at zero so we don't fight component CSS.
+ *
+ * Watch where this lands. On an element with no background of its own it does
+ * grow only the hit area — that is what it does for the badges and dots below.
+ * On an `a` that paints its own hover and active state it grows the VISIBLE
+ * box too, so it belongs on controls that are meant to be 44px tall, never on
+ * a dense list row. See the nav-list exception in the media query below.
+ */
+
+:where(
+  .navbar__link,
+  .navbar__brand,
+  .navbar__toggle,
+  .footer__link-item,
+  .footer__social-link,
+  .menu__caret,
+  .pagination-nav__link,
+  .theme-edit-this-page,
+  .theme-back-to-top-button,
+  .clean-btn
+) {
+  min-block-size: var(--tbb-a11y-touch-target);
+  display: inline-flex;
+  align-items: center;
+}
+
+/* The two long nav lists — the doc sidebar and the right-rail ToC — are the
+ * exception, and for a reason the rule above doesn't cover: on an `a` that
+ * carries its own hover and active backgrounds, `min-block-size` grows the
+ * VISIBLE box, not just an invisible hit area. At a 12–14px label that left
+ * every sidebar row two thirds empty and every ToC item 52px from the next.
+ *
+ * On a fine pointer those rows keep the padding they already ship — 30px tall
+ * in the sidebar, 24px in the ToC, both clearing SC 2.5.8 (AA) — and the full
+ * 44px target returns on a coarse pointer, which is where the figure comes
+ * from in the first place.
+ */
+@media (pointer: coarse) {
+  .table-of-contents__link {
+    min-block-size: var(--tbb-a11y-touch-target);
+    display: flex;
+    align-items: center;
+  }
+
+  :where(.menu__link, .menu__link--sublist) {
+    min-block-size: var(--tbb-a11y-touch-target);
+  }
+}
+
+/* Primary CTAs already render at 44+ px high because of their padding — this
+ * just guarantees they don't shrink if a future redesign reduces padding. */
+:where(
+  .tbb-hero__cta-primary,
+  .tbb-hero__cta-secondary,
+  .tbb-stage-card,
+  button[type="submit"],
+  button[type="button"]
+) {
+  min-block-size: var(--tbb-a11y-touch-target);
+}
+
+/* On hover-tiny sidebar icons — pad the click area. */
+.menu__list-item-collapsible {
+  padding-inline: 0.25rem;
+}
+
+/* Sidebar caret toggle — needs an enlarged target. */
+.menu__caret {
+  padding-inline: 0.5rem;
+}
+
+/* ─── 7. Color-blind / non-color state for ChapterState ─────────────────────
+ *
+ * The existing badge relies on hue to distinguish states. We add
+ * (1) a leading shape glyph via ::before that is unique per state, and
+ * (2) a border-style pattern overlay, so the state is recoverable without
+ * color — meeting WCAG SC 1.4.1 "Use of Color".
+ *
+ * The icons are inline SVG masks so they inherit the badge text color
+ * and scale with font-size.
+ */
+
+.tbb-chapter-state {
+  position: relative;
+  padding-inline-start: 1.875rem; /* leave room for the ::before glyph */
+}
+
+.tbb-chapter-state::before {
+  content: "";
+  position: absolute;
+  left: 0.625rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.875rem;
+  height: 0.875rem;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-size: contain;
+          mask-size: contain;
+}
+
+/* Placeholder — hollow circle with slash (draft / unscheduled). */
+.tbb-chapter-state--placeholder::before {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round'><circle cx='12' cy='12' r='9'/><line x1='6' y1='18' x2='18' y2='6'/></svg>");
+          mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round'><circle cx='12' cy='12' r='9'/><line x1='6' y1='18' x2='18' y2='6'/></svg>");
+}
+
+/* Text-ready — document with a check mark (text approved, video pending). */
+.tbb-chapter-state--text-ready::before {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M5 4h11l3 3v13H5z'/><polyline points='9 12 11.5 14.5 16 10'/></svg>");
+          mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M5 4h11l3 3v13H5z'/><polyline points='9 12 11.5 14.5 16 10'/></svg>");
+}
+
+/* Video-published — play triangle inside a frame (this state is normally
+ * hidden by the component, but if it ever renders, keep parity). */
+.tbb-chapter-state--video-published::before {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linejoin='round'><rect x='3' y='5' width='18' height='14' rx='2'/><polygon points='11 9 16 12 11 15' fill='black'/></svg>");
+          mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linejoin='round'><rect x='3' y='5' width='18' height='14' rx='2'/><polygon points='11 9 16 12 11 15' fill='black'/></svg>");
+}
+
+/* Unknown — warning triangle. */
+.tbb-chapter-state--unknown::before {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M12 3 22 20H2z'/><line x1='12' y1='10' x2='12' y2='14'/><line x1='12' y1='17' x2='12' y2='17.01'/></svg>");
+          mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M12 3 22 20H2z'/><line x1='12' y1='10' x2='12' y2='14'/><line x1='12' y1='17' x2='12' y2='17.01'/></svg>");
+}
+
+/* Secondary visual aid: dashed left edge for "draft" state so even when the
+ * dot/icon is partially obscured the user can read the state. */
+.tbb-chapter-state--placeholder {
+  border-left-style: dashed !important;
+  border-left-width: 3px !important;
+}
+
+.tbb-chapter-state--text-ready {
+  border-left-style: solid !important;
+  border-left-width: 3px !important;
+}
+
+.tbb-chapter-state--video-published {
+  border-left-style: double !important;
+  border-left-width: 4px !important;
+}
+
+.tbb-chapter-state--unknown {
+  border-left-style: dotted !important;
+  border-left-width: 3px !important;
+}
+
+/* ─── 8. prefers-reduced-motion ─────────────────────────────────────────────
+ *
+ * Beyond the duration clamp in custom.css, also:
+ *  - remove parallax / scroll-triggered transforms
+ *  - kill pulsing dots
+ *  - freeze auto-playing carousels
+ *  - preserve focus indicators (don't remove transitions on the focus ring)
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Cancel translate-on-hover effects (they cause vestibular issues). */
+  .tbb-hero__cta-primary:hover,
+  .tbb-hero__cta-secondary:hover,
+  .tbb-stage-card:hover {
+    transform: none;
+  }
+
+  /* Stop the indicator pulses. */
+  .tbb-hero__eyebrow-dot,
+  .tbb-chapter-state__dot {
+    animation: none;
+  }
+
+  /* Focus ring should still animate in fast — it's how keyboard users find
+   * their cursor. Use a 50ms ease so the ring fades in. */
+  :focus-visible {
+    transition: outline-color 50ms linear, box-shadow 50ms linear;
+  }
+}
+
+/* ─── 9. prefers-contrast: more ─────────────────────────────────────────────
+ *
+ * High-contrast mode (Windows accessibility setting) — bump borders and
+ * strengthen background colors so every edge is visible.
+ */
+
+@media (prefers-contrast: more) {
+  :root {
+    --tbb-border: rgba(0, 0, 0, 0.4);
+    --tbb-border-strong: rgba(0, 0, 0, 0.6);
+  }
+
+  :root[data-theme="dark"] {
+    --tbb-border: rgba(255, 255, 255, 0.45);
+    --tbb-border-strong: rgba(255, 255, 255, 0.65);
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  .menu__link:focus-visible,
+  .table-of-contents__link:focus-visible {
+    outline-width: 3px;
+    outline-offset: 3px;
+  }
+
+  /* Force a visible text-underline on every link inside the article. */
+  article a {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+
+  /* Borders double up on cards. */
+  .tbb-stage-card,
+  .tbb-hero__cta-primary,
+  .tbb-hero__cta-secondary,
+  .pagination-nav__link {
+    border-width: 2px;
+  }
+
+  /* ChapterState: thicker border so the state is unmistakable. */
+  .tbb-chapter-state {
+    border-width: 2px !important;
+    border-left-width: 5px !important;
+  }
+}
+
+/* ─── 10. Forced colors (Windows High Contrast) ────────────────────────────
+ *
+ * Edge-case: user has "Use high contrast" on AND the OS theme is forced.
+ * Honor system colors instead of our tokens so the page is usable.
+ */
+
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 3px solid CanvasText !important;
+    outline-offset: 2px !important;
+  }
+
+  .tbb-hero__cta-primary,
+  .tbb-hero__cta-secondary,
+  .tbb-stage-card {
+    border: 1px solid CanvasText;
+  }
+
+  .tbb-chapter-state {
+    border: 1px solid CanvasText !important;
+  }
+}
+
+/* ─── 11. 404 page helpers ────────────────────────────────────────────────── */
+
+.tbb-notfound__live {
+  /* Visually unused; semantic only. Holds the live region that screen
+   * readers announce on arrival. */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.tbb-notfound__go-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  border-radius: var(--tbb-radius-md);
+  background: transparent;
+  color: var(--tbb-text-muted);
+  border: 1px solid var(--tbb-border-strong);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 1.25rem;
+  transition: color var(--tbb-duration-fast) var(--tbb-ease),
+    border-color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.tbb-notfound__go-back:hover {
+  color: var(--tbb-text);
+  border-color: var(--tbb-text);
+}
+
+.tbb-notfound__go-back:focus-visible {
+  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
+  outline-offset: 3px;
+  border-radius: var(--tbb-radius-md);
+  box-shadow: 0 0 0 4px var(--tbb-a11y-focus-shadow-color);
+}
+
+/* The 404 "go back" button uses the existing ArrowRight icon rotated 180°
+ * to point left — no new icon needed. */
+.tbb-notfound__go-back-icon {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tbb-notfound__go-back {
+    transition: none;
+  }
+}
+
+/* ─── 12. Misc small tweaks ───────────────────────────────────────────────── */
+
+/* Targets inside prose must still have an obvious hit area. */
+article a {
+  /* Add a 4px transparent band above + below each prose link so a
+   * near-miss tap/click still lands on the link. */
+  padding-block: 2px;
+  margin-block: -2px;
+}
+
+/* The body link style only underlines on hover — for keyboard users
+ * we want an underline AT ALL TIMES so the link is recognizable
+ * from scanning. */
+article a {
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--ifm-color-primary) 50%,
+    transparent
+  );
+}
+
+/* Ensure the "edit this page" link has a target size. */
+.theme-edit-this-page {
+  padding-inline: 0.625rem;
+  border-radius: var(--tbb-radius-sm);
+}
+
+/* Ensure all `<details>` / `<summary>` elements — used in Docusaurus TOC —
+ * show a focus ring. */
+details summary:focus-visible {
+  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
+  outline-offset: 2px;
+  border-radius: var(--tbb-radius-sm);
+}
+
+/* Color-block badges inside 404 must remain contrast-safe in dark mode. */
+:root[data-theme="dark"] [style*="color-mix"][style*="--ifm-color-primary"] {
+  color: var(--ifm-color-primary-lighter);
+}

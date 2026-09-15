@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(npm:*)",
+      "Shell(node scripts/check-chapter.mjs --chapter docs/intro-1-binary-to-programming.md)",
+      "Shell(npx docusaurus start --no-open --port 3000)",
+      "powershell",
+      "Shell(node scripts/check-chapter.mjs --chapter docs/intro-2-architecture-map.md)",
+      "Shell(node scripts/check-chapter.mjs --chapter docs/intro-4-terminals-and-cli-agents.md)"
+    ],
+    "deny": [],
+    "defaultMode": "default"
+  }
+}
