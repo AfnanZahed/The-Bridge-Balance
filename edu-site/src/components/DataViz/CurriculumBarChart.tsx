@@ -75,8 +75,8 @@ export const BAR_CHART_DATA: CurriculumBarDatum[] = [
   {
     stage: "Spec-Aware Vibe Engineering",
     short: "Stage 1",
-    status: "live",
-    statusWeight: LIVE_WEIGHT,
+    status: "in-development",
+    statusWeight: IN_DEVELOPMENT_WEIGHT,
     description:
       "Foundations. Architecture, programming, frontend, backend, databases, Git. Learn to lead AI coding agents with engineering judgment, not blind prompt-and-hope.",
     fill: "var(--tbb-accent, oklch(0 0 0))",

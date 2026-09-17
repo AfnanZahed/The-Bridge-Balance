@@ -70,7 +70,7 @@ export const DONUT_DATA: DonutDatum[] = [
   {
     name: "Spec-Aware Vibe Engineering",
     short: "Stage 1",
-    status: "live",
+    status: "in-development",
     description:
       "Foundations. Architecture, programming, frontend, backend, databases, Git. Learn to lead AI coding agents with engineering judgment, not blind prompt-and-hope.",
     sliceWeight: SLICE_WEIGHT,

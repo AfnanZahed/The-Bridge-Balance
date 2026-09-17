@@ -24,17 +24,19 @@ Book/
 ├── PROJECT-MAP.md         this file
 ├── README.md              human-facing overview, current phase status table
 ├── stack.md               the stack, phased rollout, free-tier ceilings, do-not-add list
-├── INSTALL.md             how the curriculum-state + quality-gate pieces were installed
-├── The Bridge Balance - Platform Spec.docx   original platform spec (reference)
+├── design-reference/      standalone design-token exports, made for reuse outside this repo
+├── reference-material/    non-code reference artifacts — recordings, mockups, the original
+│                       platform-spec docx, old screenshots
+├── _scratch/              harmless stray tool output, not part of the project
 ├── curriculum-state/      the book's shared memory — canon, contracts, ledgers, proposals
 ├── .claude/skills/        bridge-balance-project-guide (+ 4 bundled protocols)
 │                       and lesson-spine-authoring (peer skill, the teaching framework)
 ├── edu-site/              the actual website: textbook frontend + FastAPI backend
 ├── specs/<NNN-feature>/   Spec-Kit Plus feature specs (spec.md, plan.md, tasks.md)
 ├── history/prompts/       Prompt History Records, routed by feature (or general/constitution)
-├── history/adr/           Architecture Decision Records (0001–0003 so far)
-├── .specify/              Spec-Kit Plus templates, scripts, and memory/constitution.md
-└── _to_delete/            leftover files staged for manual deletion — safe to ignore
+├── history/adr/           Architecture Decision Records (0001–0005 so far)
+├── history/reports/       one-off plain-English write-ups of past work — not a PHR, not an ADR
+└── .specify/              Spec-Kit Plus templates, scripts, and memory/constitution.md
 ```
 
 ## Content & curriculum system
@@ -82,7 +84,8 @@ This skill writes the lesson, start to finish. `chapter-production` delegates to
 | Path | What it is | Read it when… |
 |---|---|---|
 | `edu-site/docs/` | The live MDX chapters — see inventory below | Working on chapter content directly |
-| `edu-site/src/components/` | React components: `Aceternity/`, `AnimatedNumber/`, `BrandMark/`, `Callout/`, `ChapterState/`, `DataViz/`, `HomepageHero/`, `IconWave/`, `MagicUI/`, `ReadingProgress/`, `SiteMenu/`, `StageCard/`, `icons/`, `motion/`, `stage-icons/`, `topic-icons/` | Frontend component work |
+| `edu-site/src/components/` | React components: `Aceternity/`, `AnimatedNumber/`, `BrandMark/`, `Callout/`, `ChapterState/`, `DataViz/`, `HomepageHero/`, `IconWave/`, `MagicUI/`, `ReadingProgress/`, `Search/`, `SiteMenu/`, `StageCard/`, `icons/`, `motion/`, `stage-icons/`, `topic-icons/` | Frontend component work |
+| `edu-site/src/lib/` | Shared non-component modules: `search.ts` (the engine both search surfaces use), `stages.ts` (the five stage labels + routes, shared by the drawer) | Search or stage-link work |
 | `edu-site/src/css/` | Theme tokens — the Apple-Design Purity implementation | Any styling work |
 | `edu-site/src/pages/`, `edu-site/src/theme/` | Custom pages, Docusaurus theme swizzles | Site-structure or layout work |
 | `edu-site/docusaurus.config.ts`, `edu-site/sidebars.ts` | Site config, nav and sidebar structure | Adding a section, changing navigation |
@@ -100,7 +103,7 @@ This skill writes the lesson, start to finish. `chapter-production` delegates to
 
 - The Stage 0 sequence at the docs root — `intro-1-binary-to-programming.md` through `intro-5-spec-driven-engineering.md` — is `text-ready` today (all five authored and gate-clean), but mid-redesign into an officially-promoted, from-scratch chronological Stage 0, so its current text should not be treated as final (see `curriculum-state/proposals/whole-book-redesign-record-2026-09-14.md`).
 - `docs/perf-targets.md` — a reference doc, not a chapter.
-- `stage-01-spec-aware-vibe-engineering/` — index + 6 chapters, all `text-ready`: foundations, core-programming, frontend, backend, databases, git-github.
+- `stage-01-spec-aware-vibe-engineering/` — index + 6 chapters, all `placeholder`: foundations, core-programming, frontend, backend, databases, git-github. (Shipped `text-ready` 2026-09-11, reverted 2026-09-17 on owner instruction — see CLAUDE.md's "Real stage folders today" line.)
 - `stage-02-cs50-certification/` — index + 2 placeholder shells: cs50p, cs50w.
 - `stage-03-mastering-ai-coding-agents/` — index + 4 placeholder shells: claude-code, context-engineering, prompt-engineering, skills-and-mcp.
 - `stage-04-engineering-autonomous-ai-agents/` — index + 3 placeholder shells: evaluations, multi-agent-systems, rag-and-tool-calling.

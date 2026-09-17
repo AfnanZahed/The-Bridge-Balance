@@ -8,7 +8,7 @@ keywords: [cs50, harvard, certification, validation]
 
 # Stage 2 — Credible Validation (CS50)
 
-This stage is about pairing the engineering foundation from Stage 1 with internationally recognized credentials. The certificates live on your résumé; the GitHub portfolio (your lecture notes, exercises, and project work in this textbook) is what gets you the interview.
+**This stage is about pairing the engineering foundation Stage 1 builds with internationally recognized credentials.** The certificates live on your résumé; the GitHub portfolio (your lecture notes, exercises, and project work in this textbook) is what gets you the interview.
 
 ## Chapters
 

@@ -42,7 +42,7 @@ concepts:
       The discipline in which the engineer specifies intent and boundaries, the
       AI implements within them, and a human verifies before taking ownership.
     first_defined: docs/intro-5-spec-driven-engineering.md
-    used_in: [docs/intro-5-spec-driven-engineering.md, docs/welcome.md]
+    used_in: [docs/intro-5-spec-driven-engineering.md, docs/welcome.md, docs/ch00-introduction.md]
     notes: >-
       Curriculum-coined. Must be defined once on first use in EVERY chapter
       that uses it, however late in the book - field expertise does not cover
@@ -58,6 +58,19 @@ concepts:
       the limits down before code is generated") without carrying the canonical
       definition above. first_defined stays intro-5: Welcome glosses, it does not
       define properly.
+      GLOSSED 2026-09-17 by docs/ch00-introduction.md, the new Stage 0 front
+      door, which now sits ahead of everything else in the stage. It glosses to
+      twelve words ("state what you want and what can't change, then check the
+      result"), links the glossary anchor, and names Stage 0's last chapter as
+      where the practice actually gets taught rather than teaching it here. Same
+      pattern as Welcome again, so first_defined stays intro-5 and no second
+      entry is created.
+      RE-ALIGNED 2026-09-17 (full Name-First pass on ch00): the file as found
+      carried only the four bare steps, unglossed and unlinked, while this
+      note described the gloss, the anchor and the last-chapter pointer. The
+      bullet was brought back into line with the note, so text and ledger
+      agree again; the /glossary#spec-driven-engineering anchor was
+      re-validated by check-references after the restore.
 
   - term: Development (vs. Engineering)
     status: defined
@@ -138,7 +151,7 @@ concepts:
       How much can break, and how far the damage reaches, if a change goes
       wrong.
     first_defined: docs/intro-5-spec-driven-engineering.md
-    used_in: [docs/intro-5-spec-driven-engineering.md, docs/stage-01-spec-aware-vibe-engineering/01-foundations.md]
+    used_in: [docs/intro-5-spec-driven-engineering.md]
     notes: >-
       Introduced in the tool-calling worked example, glossed inline on first
       use ("the blast radius of an error ... how much can break, and how far
@@ -147,11 +160,10 @@ concepts:
       glossed once in that chapter. The intro also covers adjacent ground
       (the four-criteria experiment-to-system transition) in different
       vocabulary; that was deliberate, not an oversight.
-      REUSED 2026-09-11 by s1-01, which re-glosses it ("the set of things that
-      break when one part breaks") and applies it to the club page's own boxes,
-      with the 2021 Facebook outage as the felt example. s1-02 reuses it for the
-      seat check's reach and s1-04 for an endpoint failure's, both re-glossing
-      per chapter. Append each new chapter to used_in as it relies on the term.
+      RESET 2026-09-17: Stage 1's six chapters were reverted to placeholder
+      (owner instruction) and their re-glosses removed from used_in. This
+      entry, and all Stage 1 reuse below, is preserved as a record only - the
+      terms are no longer live on the site.
 
   - term: verification gate
     status: proposed
@@ -215,7 +227,16 @@ concepts:
     status: defined
     canonical: "A tiny electrical switch with exactly two stable states: on or off."
     first_defined: docs/intro-1-binary-to-programming.md
-    used_in: [docs/intro-1-binary-to-programming.md]
+    used_in: [docs/intro-1-binary-to-programming.md, docs/ch01-foundations.md]
+    notes: >-
+      REUSED 2026-09-16 by docs/ch01-foundations.md, the new Stage 0 ladder's
+      chapter 1 (see prerequisite-graph.yaml's ch01-foundations row). Re-glosses
+      per chapter via the name's actual etymology (Pierce's "transresistance",
+      not the folk "transfer + resistor" story) rather than restating the
+      functional definition above - both are true, different emphasis, per the
+      register-variant rule. intro-1 stays first_defined until the owner decides
+      whether/when to retire it; see ch02-programming-is-born's notes below for
+      the open retirement question.
 
   - term: bit
     status: defined
@@ -223,7 +244,11 @@ concepts:
       One switch's state, on or off; short for binary digit. The smallest unit
       of information a machine can hold.
     first_defined: docs/intro-1-binary-to-programming.md
-    used_in: [docs/intro-1-binary-to-programming.md]
+    used_in: [docs/intro-1-binary-to-programming.md, docs/ch01-foundations.md]
+    notes: >-
+      REUSED 2026-09-16 by docs/ch01-foundations.md, which re-glosses it inline
+      via Tukey's January 1947 memo and adds the 2003 Belgian election bit-flip
+      as a concrete illustration of what one flipped bit actually costs.
 
   - term: byte
     status: defined
@@ -249,7 +274,12 @@ concepts:
       The raw binary a processor executes directly; the only language the
       processor reads natively.
     first_defined: docs/intro-1-binary-to-programming.md
-    used_in: [docs/intro-1-binary-to-programming.md]
+    used_in: [docs/intro-1-binary-to-programming.md, docs/ch02-programming-is-born.md]
+    notes: >-
+      REUSED 2026-09-16 by docs/ch02-programming-is-born.md, the new Stage 0
+      ladder's chapter 2, which re-glosses it through the pain of writing and
+      reading numeric operation codes by hand rather than restating the
+      definition above.
 
   - term: register (processor)
     status: defined
@@ -275,7 +305,12 @@ concepts:
       A stiff paper card with holes at set positions, used to feed early
       computers one instruction pattern at a time.
     first_defined: docs/intro-1-binary-to-programming.md
-    used_in: [docs/intro-1-binary-to-programming.md]
+    used_in: [docs/intro-1-binary-to-programming.md, docs/ch01-foundations.md]
+    notes: >-
+      REUSED 2026-09-16 by docs/ch01-foundations.md, which pushes the term's
+      own history earlier and wider than intro-1 did - Jacquard's loom (1801),
+      Babbage's design (1837) and Hollerith's census tabulator (1890) - rather
+      than re-defining it from scratch.
 
   - term: assembly language
     status: defined
@@ -283,11 +318,14 @@ concepts:
       Short human-readable commands that map almost one-to-one onto a
       processor's machine instructions.
     first_defined: docs/intro-1-binary-to-programming.md
-    used_in: [docs/intro-1-binary-to-programming.md]
+    used_in: [docs/intro-1-binary-to-programming.md, docs/ch02-programming-is-born.md]
     notes: >-
       First written, with its assembler, by Kathleen Booth and colleagues at
       Birkbeck College in the late 1940s (evidence-ledger:
       kathleen-booth-assembly-1947).
+      REUSED 2026-09-16 by docs/ch02-programming-is-born.md, which names Booth
+      and the 1947 date explicitly (intro-1 did not) and re-glosses via the
+      `ADD`/`LOAD`/`STORE` example.
 
   - term: assembler
     status: defined
@@ -295,7 +333,7 @@ concepts:
       The program that translates assembly language into the machine code of
       one specific processor family.
     first_defined: docs/intro-1-binary-to-programming.md
-    used_in: [docs/intro-1-binary-to-programming.md]
+    used_in: [docs/intro-1-binary-to-programming.md, docs/ch02-programming-is-born.md]
 
   - term: high-level language
     status: defined
@@ -311,10 +349,15 @@ concepts:
       A program that translates a whole program into machine code before any of
       it runs. C and Java work this way.
     first_defined: docs/intro-1-binary-to-programming.md
-    used_in: [docs/intro-1-binary-to-programming.md]
+    used_in: [docs/intro-1-binary-to-programming.md, docs/ch02-programming-is-born.md]
     notes: >-
       The first was Grace Hopper's A-0 system, completed 1952
       (evidence-ledger: a0-system-hopper-compiler-nuance).
+      REUSED 2026-09-16 by docs/ch02-programming-is-born.md, which re-glosses it
+      through FORTRAN (April 1957) specifically, including the same careful
+      wording that A-0 was "more like a loader" than a full modern compiler -
+      consistent with, not duplicating, the a0-system-hopper-compiler-nuance
+      evidence-ledger caveat.
 
   - term: interpreter
     status: defined
@@ -408,13 +451,16 @@ concepts:
     registers:
       architectural: "One part of the system that does a single job." 
     first_defined: docs/intro-2-architecture-map.md
-    used_in: [docs/intro-2-architecture-map.md, docs/stage-01-spec-aware-vibe-engineering/01-foundations.md, docs/stage-01-spec-aware-vibe-engineering/03-frontend.md]
+    used_in: [docs/intro-2-architecture-map.md]
     notes: >-
       TWO SENSES, one word, recorded here rather than as a second entry per the
-      one-definition rule. intro-2 and s1-03 use the INTERFACE sense (a
-      reusable piece of UI); s1-01 uses the ARCHITECTURAL sense (any part of a
-      system doing one job), and s1-01 explicitly says which sense it means.
-      A chapter using the word must disambiguate on first use.
+      one-definition rule. intro-2 uses the INTERFACE sense (a reusable piece
+      of UI); a later architectural sense (any part of a system doing one job)
+      was used by s1-01. A chapter using the word must disambiguate on first
+      use.
+      RESET 2026-09-17: s1-01 and s1-03 reverted to placeholder (owner
+      instruction); removed from used_in. The two-senses note is kept for
+      whichever chapter reuses the architectural sense next.
 
   - term: DOM (Document Object Model)
     status: defined
@@ -432,26 +478,31 @@ concepts:
     status: defined
     canonical: "A size threshold where the layout deliberately changes shape rather than only shrinking."
     first_defined: docs/intro-2-architecture-map.md
-    used_in: [docs/intro-2-architecture-map.md, docs/stage-01-spec-aware-vibe-engineering/03-frontend.md]
+    used_in: [docs/intro-2-architecture-map.md]
     notes: >-
-      s1-03 re-glosses it ("a screen width where the layout deliberately changes
-      shape") and adds the mechanism the intro left standing: the media query
-      underneath, Tailwind's five named defaults (640/768/1024/1280/1536 px),
-      and that all of them are MINIMUMS - which is the mobile-first rule and the
-      most common misreading.
+      RESET 2026-09-17: s1-03 reverted to placeholder (owner instruction);
+      removed from used_in. It had re-glossed this term ("a screen width where
+      the layout deliberately changes shape") and added the mechanism the
+      intro left standing - the media query underneath, Tailwind's five named
+      defaults (640/768/1024/1280/1536 px), and that all of them are MINIMUMS.
+      That material is no longer live; a future chapter re-teaching breakpoints
+      should still cover the mobile-first MINIMUMS point.
 
   - term: Next.js
-    status: defined
+    status: used-undefined
     canonical: "The framework this curriculum builds the frontend with, made by Vercel."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md
-    used_in: [docs/intro-2-architecture-map.md, docs/stage-01-spec-aware-vibe-engineering/03-frontend.md]
+    first_defined: null
+    used_in: [docs/intro-2-architecture-map.md]
     notes: >-
-      STAGED INTRODUCTION, now complete. intro-2 named it only, deliberately,
-      saying "worth knowing the name now even though what it does belongs to its
-      own chapter." s1-03 is that chapter and defines it, so this moves from
-      status: used-undefined to defined. Version claims live in the evidence
-      ledger (nextjs-2026) and expire on a 90-day clock - do not restate a
-      version here.
+      STAGED INTRODUCTION, incomplete again. intro-2 named it only,
+      deliberately, saying "worth knowing the name now even though what it
+      does belongs to its own chapter." s1-03 was that chapter and had moved
+      this to status: defined.
+      RESET 2026-09-17: s1-03 reverted to placeholder (owner instruction).
+      status and first_defined reverted to used-undefined / null until a
+      chapter defines it again. Version claims live in the evidence ledger
+      (nextjs-2026) and expire on a 90-day clock - do not restate a version
+      here.
 
   - term: client-side
     status: defined
@@ -510,11 +561,13 @@ concepts:
     status: defined
     canonical: "A backend keeping no memory between requests."
     first_defined: docs/intro-2-architecture-map.md
-    used_in: [docs/intro-2-architecture-map.md, docs/stage-01-spec-aware-vibe-engineering/04-backend.md]
+    used_in: [docs/intro-2-architecture-map.md]
     notes: >-
       Introduced as a convenience ("what lets many copies of the same backend
       run at once"), then re-used as a problem in "the goldfish problem" - the
       chapter's deliberate two-pass structure.
+      RESET 2026-09-17: s1-04 reverted to placeholder (owner instruction);
+      removed from used_in.
 
   - term: API (Application Programming Interface)
     status: defined
@@ -546,13 +599,16 @@ concepts:
     status: defined
     canonical: "The address naming exactly which thing at the API is being asked for."
     first_defined: docs/intro-2-architecture-map.md
-    used_in: [docs/intro-2-architecture-map.md, docs/intro-5-spec-driven-engineering.md, docs/stage-01-spec-aware-vibe-engineering/04-backend.md]
+    used_in: [docs/intro-2-architecture-map.md, docs/intro-5-spec-driven-engineering.md]
     notes: >-
       intro-5 re-glosses it ("one address the backend answers at") per the
-      per-chapter first-use rule. s1-04 re-glosses it once more and extends the
-      idea materially: an endpoint is "a method and a path that a server
-      promises to answer", and the promise includes every named refusal. The
-      intro's sense is the address; s1-04's is the address PLUS its contract.
+      per-chapter first-use rule.
+      RESET 2026-09-17: s1-04 reverted to placeholder (owner instruction);
+      removed from used_in. It had re-glossed the term further, extending it
+      materially: an endpoint is "a method and a path that a server promises
+      to answer", and the promise includes every named refusal - the address
+      PLUS its contract. Kept here as a pointer for whoever re-authors the
+      chapter.
 
   - term: REST (Representational State Transfer)
     status: defined
@@ -573,12 +629,13 @@ concepts:
     status: defined
     canonical: "Code that sits in a request's path, running a checklist of jobs before the real logic runs."
     first_defined: docs/intro-2-architecture-map.md
-    used_in: [docs/intro-2-architecture-map.md, docs/stage-01-spec-aware-vibe-engineering/04-backend.md]
+    used_in: [docs/intro-2-architecture-map.md]
     notes: >-
-      s1-04 re-glosses it and takes it further than the intro could: which
-      attached values may be trusted, and what order middleware must run in -
-      a rate limiter placed before authentication counts a school's shared
-      address as one caller.
+      RESET 2026-09-17: s1-04 reverted to placeholder (owner instruction);
+      removed from used_in. It had re-glossed the term and taken it further
+      than the intro could: which attached values may be trusted, and what
+      order middleware must run in - a rate limiter placed before
+      authentication counts a school's shared address as one caller.
 
   - term: logging
     status: defined
@@ -669,22 +726,24 @@ concepts:
     status: defined
     canonical: "The folder holding a project's complete history of saved changes."
     first_defined: docs/intro-2-architecture-map.md
-    used_in: [docs/intro-2-architecture-map.md, docs/intro-3-editors-and-ides.md, docs/intro-4-terminals-and-cli-agents.md, docs/stage-01-spec-aware-vibe-engineering/06-git-github.md]
+    used_in: [docs/intro-2-architecture-map.md, docs/intro-3-editors-and-ides.md, docs/intro-4-terminals-and-cli-agents.md]
     notes: >-
-      s1-06 re-glosses it more precisely as "the folder Git watches", which
-      separates the working tree (the files on disk now) from the record, and
-      that split is what the chapter's staging-area material rests on.
+      RESET 2026-09-17: s1-06 reverted to placeholder (owner instruction);
+      removed from used_in. It had re-glossed the term more precisely as "the
+      folder Git watches", separating the working tree (the files on disk now)
+      from the record - the split its staging-area material rested on.
 
   - term: commit
     status: defined
     canonical: "A labelled, timestamped record of exactly what changed and why."
     first_defined: docs/intro-2-architecture-map.md
-    used_in: [docs/intro-2-architecture-map.md, docs/stage-01-spec-aware-vibe-engineering/06-git-github.md]
+    used_in: [docs/intro-2-architecture-map.md]
     notes: >-
-      s1-06 re-glosses it ("one recorded snapshot, with a written reason and a
-      link to the commit before it") and adds the mechanism the intro left out:
-      the author field is free text Git does not verify. That correction is
-      load-bearing for the chapter's review material.
+      RESET 2026-09-17: s1-06 reverted to placeholder (owner instruction);
+      removed from used_in. It had re-glossed the term ("one recorded
+      snapshot, with a written reason and a link to the commit before it") and
+      added the mechanism the intro left out: the author field is free text
+      Git does not verify.
 
   - term: GitHub
     status: defined
@@ -696,40 +755,42 @@ concepts:
     status: defined
     canonical: "A separate copy of the work, so two people or agents do not collide."
     first_defined: docs/intro-2-architecture-map.md
-    used_in: [docs/intro-2-architecture-map.md, docs/stage-01-spec-aware-vibe-engineering/06-git-github.md]
+    used_in: [docs/intro-2-architecture-map.md]
     notes: >-
-      s1-06 CORRECTS the intro's framing, and the correction matters: a branch
-      is not a copy of the work. It is one small file holding one hash, naming
-      one commit, which is why branching is cheap. The intro's "separate copy"
-      is a usable first approximation; a later chapter must not build on it as
-      though files are duplicated.
+      RESET 2026-09-17: s1-06 reverted to placeholder (owner instruction);
+      removed from used_in. It had corrected the intro's framing, and the
+      correction matters: a branch is not a copy of the work. It is one small
+      file holding one hash, naming one commit, which is why branching is
+      cheap. The intro's "separate copy" is a usable first approximation; a
+      later chapter must not build on it as though files are duplicated.
 
   - term: pull request
     status: defined
     canonical: "A formal 'here is what I changed, please review it before it joins the real project'."
     first_defined: docs/intro-2-architecture-map.md
-    used_in: [docs/intro-2-architecture-map.md, docs/intro-5-spec-driven-engineering.md, docs/stage-01-spec-aware-vibe-engineering/06-git-github.md]
+    used_in: [docs/intro-2-architecture-map.md, docs/intro-5-spec-driven-engineering.md]
     notes: >-
       intro-5 re-glosses it ("the formal proposal to merge a change") per the
       per-chapter rule, and asks it a different question - the reviewer's three
       questions, not what a pull request is.
-      s1-06 is where the NAME itself is examined, and it is a MISLEADING name
-      (register 4): the pull is the maintainer's action, per the git request-pull
-      documentation, and the name omits the review conversation the feature
-      exists for. DELIBERATE EXCEPTION to the twelve-word gloss rule, recorded
-      by the authoring agent: s1-06 DECOMPOSES this term rather than glossing it,
-      because it is the chapter's Station 0 name, and a separate twelve-word
-      gloss alongside would duplicate the station. Do not add one.
+      RESET 2026-09-17: s1-06 reverted to placeholder (owner instruction);
+      removed from used_in. It had examined the NAME itself, as a MISLEADING
+      name (register 4): the pull is the maintainer's action, per the git
+      request-pull documentation, and the name omits the review conversation
+      the feature exists for. Worth reusing that Station-0 decomposition
+      whenever this chapter is re-authored.
 
   - term: merge conflict
     status: defined
     canonical: "When two branches change the same lines in incompatible ways, Git asks a human to decide which version wins. It will not guess."
     first_defined: docs/intro-2-architecture-map.md
-    used_in: [docs/intro-2-architecture-map.md, docs/stage-01-spec-aware-vibe-engineering/06-git-github.md]
+    used_in: [docs/intro-2-architecture-map.md]
     notes: >-
-      s1-06 re-glosses it in three words ("Git declining to guess") and adds the
-      part the intro could not: the marker syntax a reader actually meets, and
-      that resolving one is a normal step rather than an error.
+      RESET 2026-09-17: s1-06 reverted to placeholder (owner instruction);
+      removed from used_in. It had re-glossed the term in three words ("Git
+      declining to guess") and added the part the intro could not: the marker
+      syntax a reader actually meets, and that resolving one is a normal step
+      rather than an error.
 
   - term: deployment
     status: defined
@@ -983,7 +1044,7 @@ concepts:
     status: defined
     canonical: "A program that reads your files, writes and edits code, and runs commands, mostly without stopping to ask you about each step."
     first_defined: docs/intro-1-binary-to-programming.md
-    used_in: [docs/intro-1-binary-to-programming.md, docs/intro-4-terminals-and-cli-agents.md, docs/welcome.md]
+    used_in: [docs/intro-1-binary-to-programming.md, docs/intro-4-terminals-and-cli-agents.md, docs/welcome.md, docs/ch00-introduction.md]
     notes: >-
       Distinct from the `agent` entry above - this is the term intro-1 coins and
       intro-4 re-glosses. Both point at the same concept; keep the two canonical
@@ -994,6 +1055,15 @@ concepts:
       reading order and glosses it ("a program that writes and edits code for
       you") without the full canonical wording above. first_defined stays
       intro-1: Welcome glosses, it does not define properly.
+      GLOSSED 2026-09-17 by docs/ch00-introduction.md, which is now the book's
+      first chapter. It needs the term before the safety-floor callout, because
+      the floor's fixed wording says "the agent" and the book's first page
+      cannot use a word it has never introduced; the chapter glosses it in the
+      paragraph immediately before the callout ("software that writes and edits
+      code and runs commands for you"). The link points at the `agent` anchor,
+      because that is the heading docs/glossary.md actually carries - the link
+      is to the entry's anchor, not to a second entry. Third chapter to gloss
+      this term without defining it; first_defined stays intro-1.
 
   - term: CLI agent
     status: defined
@@ -1120,363 +1190,75 @@ concepts:
   # evidence-ledger.yaml under the same ids.
   # ---------------------------------------------------------------------------
 
-  # === STAGE 1 ===============================================================
-  #
-  # ADDED 2026-09-11: all six Stage 1 chapters authored in one parallel run.
-  # The entries below are the terms each chapter is FIRST to define properly,
-  # with the canonical wording taken from the shipped prose.
-  #
-  # AUDIENCE NOTE: Stage 1 is the book's standard MIXED audience, not the
-  # intro's beginner-only exception. The per-chapter first-use gloss rule still
-  # applies in full, so several terms below are RE-GLOSSED in Stage 1 although
-  # the intro named them - that is correct behaviour, not duplication. Those
-  # carry a note saying so rather than a second entry.
 
-  # --- s1-01 Foundations -----------------------------------------------------
+  # === STAGE 1 (REMOVED 2026-09-17) ==========================================
+  # All Stage 1 concept entries were deleted here. The six Stage 1 chapters
+  # (docs/stage-01-spec-aware-vibe-engineering/*.md) were reverted to
+  # chapter_state: placeholder on 2026-09-17 (owner instruction - see
+  # prerequisite-graph.yaml's progress note for the full record), so none of
+  # the terms they defined are live on the site any more. Deleting the block
+  # rather than leaving it marks the terms genuinely undefined again, so a
+  # future author does not skip defining one on the strength of a stale entry
+  # here. Re-add these entries fresh when Stage 1 is re-authored; do not
+  # restore this exact block from history and assume it still matches the
+  # eventual prose.
+  # ---------------------------------------------------------------------------
+  # ===========================================================================
+  # NEW STAGE 0 LADDER — added 2026-09-16, chapters 1-2 of the chronological
+  # 20-chapter Stage 0 redesign approved in
+  # curriculum-state/proposals/whole-book-redesign-record-2026-09-14.md §18 and
+  # planned in full in curriculum-state/stage-0-drafting-plan.md. These two
+  # chapters coexist on disk with the OLD intro-1..intro-5 sequence, which the
+  # drafting plan marks for full retirement but which has not been retired yet -
+  # see prerequisite-graph.yaml's new rows for the open question this leaves.
+  # Terms these two chapters share with intro-1 (transistor, bit, punched card,
+  # machine code, assembly language, assembler, compiler) were NOT re-entered
+  # here — see the notes appended to each of those entries above instead, per
+  # the one-canonical-definition rule.
+  # ===========================================================================
 
-  - term: boundary
+  - term: binary
     status: defined
-    canonical: "The wall around a component — what the rest of the system may see, and what stays hidden inside."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/01-foundations.md]
-
-  - term: interface
-    status: defined
-    canonical: "The agreed way to talk across a boundary: the exact questions one component may ask another, and the answers it will get."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/01-foundations.md]
-
-  - term: architecture
-    status: defined
-    canonical: "The whole arrangement of components, boundaries and interfaces, plus the rules about who may change which part."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/01-foundations.md]
-
-  - term: cohesion
-    status: defined
-    canonical: "How much the parts inside one box belong together — how strongly they serve a single purpose."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/01-foundations.md]
-
-  - term: coupling
-    status: defined
-    canonical: "How much one box depends on another."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/01-foundations.md]
-
-  - term: information hiding
-    status: defined
-    canonical: "A part of a system should hide a decision and reveal only what others must know."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/01-foundations.md]
+    canonical: >-
+      A system built entirely from two states, on or off — the fewest states
+      that still survive being sent down a long or noisy wire.
+    first_defined: docs/ch01-foundations.md
+    used_in: [docs/ch01-foundations.md]
     notes: >-
-      Named by David Parnas in December 1972. The chapter's S2/S9 lineage
-      anchor, so the attribution is load-bearing and must travel with the term.
+      From Latin bini, "two together" (evidence-ledger: etymonline-binary).
+      Curiously, intro-1's title names "binary" but the concept-ledger shows no
+      prior entry defining the word itself - only its consequences (bit, byte,
+      transistor). This chapter is the first to define the word properly.
 
-  - term: architecture smells
+  - term: relay (electromechanical)
     status: defined
-    canonical: "Patterns in a system that suggest a boundary sits in the wrong place."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/01-foundations.md]
+    canonical: >-
+      A switch worked by an electromagnet pulling a metal contact open or
+      shut - the first physical body the two-state switch idea wore.
+    first_defined: docs/ch01-foundations.md
+    used_in: [docs/ch01-foundations.md]
 
-  - term: distributed monolith
+  - term: vacuum tube
     status: defined
-    canonical: "Services split apart on paper that still rise and fall as one."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/01-foundations.md]
+    canonical: >-
+      A switch made of glass and a controlled beam of electrons instead of
+      metal contacts - faster than a relay, with nothing to wear down, but
+      prone to burning out from its own heat.
+    first_defined: docs/ch01-foundations.md
+    used_in: [docs/ch01-foundations.md]
 
-  # --- s1-02 Core Programming ------------------------------------------------
-
-  - term: reading code
+  - term: FORTRAN
     status: defined
-    canonical: "Tracing values."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md]
+    canonical: >-
+      Short for Formula Translation - the first widely used high-level
+      language, delivered by John Backus's team at IBM in April 1957, letting
+      a scientist write something close to ordinary algebra and have a
+      compiler turn it into machine code automatically.
+    first_defined: docs/ch02-programming-is-born.md
+    used_in: [docs/ch02-programming-is-born.md]
     notes: >-
-      The chapter's S0 name and its whole thesis. The canonical wording is
-      deliberately two words: the chapter's move is to strip the reading
-      metaphor away, so a longer definition would undercut it.
-
-  - term: variable
-    status: defined
-    canonical: "A name you give a value so you can use it later."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md]
-
-  - term: conditional
-    status: defined
-    canonical: "Runs one block of code if a condition is true and another block if it is not."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md]
-
-  - term: loop
-    status: defined
-    canonical: "Runs the same lines once for each item in a collection, or while a condition holds."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md]
-
-  - term: function
-    status: defined
-    canonical: "A named job you can call from anywhere else in the program."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md]
-
-  - term: scope
-    status: defined
-    canonical: "The region of a program where a given name is visible."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md]
-
-  - term: off-by-one
-    status: defined
-    canonical: "A count that is wrong by exactly one because a comparison sits on the wrong side of a boundary."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md]
-
-  - term: boundary value
-    status: defined
-    canonical: "The value exactly at the limit."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md]
-    notes: >-
-      The chapter's whole verification move: trace the boundary value and the
-      empty value before accepting a rule. A later chapter wanting this habit
-      should reuse this term rather than coining another.
-
-  - term: traceback
-    status: defined
-    canonical: "The report that names what went wrong and where."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md]
-    notes: >-
-      Already glossed by intro-1 for the beginner exception. Re-glossed here
-      per chapter, which is correct.
-
-  - term: exception
-    status: defined
-    canonical: "An error that stops the program partway."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md]
-
-  - term: call stack
-    status: defined
-    canonical: "The chain of calls each waiting on the next."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md]
-
-  # --- s1-03 Frontend --------------------------------------------------------
-
-  - term: props
-    status: defined
-    canonical: "Values handed down from the component's parent — read-only, one-way, like the arguments to a function."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/03-frontend.md]
-
-  - term: state
-    status: defined
-    canonical: "A value the component owns and can change."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/03-frontend.md]
-
-  - term: hydration
-    status: defined
-    canonical: "The step where the browser attaches interactivity to markup the server already sent — the moment a printed page becomes a live one."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/03-frontend.md]
-
-  - term: server components (vs client components)
-    status: defined
-    canonical: "Server components run on the machine you control and send finished markup to the browser; client components run on the student's device, in JavaScript."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/03-frontend.md]
-
-  - term: page / route / layout
-    status: defined
-    canonical: "A page is one screen at one address; a route is the address itself; a layout is the frame that wraps many pages without changing between them."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/03-frontend.md]
-
-  - term: container query
-    status: defined
-    canonical: "Lets a component react to the size of its own box rather than the whole screen."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/03-frontend.md]
-
-  - term: controlled input
-    status: defined
-    canonical: "Keeps the text a field shows in state, and updates that state on every keystroke."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/03-frontend.md]
-
-  - term: courtesy (frontend validation)
-    status: defined
-    canonical: "A check written in the page is a courtesy: it gives an honest student fast feedback without a round trip to the server."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/03-frontend.md]
-    notes: >-
-      The term that lets the book say "the frontend may validate" without
-      contradicting "never trust the client". Reuse it rather than restating
-      the distinction.
-
-  - term: design system
-    status: defined
-    canonical: "The shared set of components, colours and rules that keeps forty screens looking like one product."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/03-frontend.md]
-
-  - term: Interaction to Next Paint (INP)
-    status: defined
-    canonical: "Measures the delay between a tap and the screen's response."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/03-frontend.md]
-
-  # --- s1-04 Backend ---------------------------------------------------------
-
-  - term: safe (HTTP method)
-    status: defined
-    canonical: "Reading, changing nothing."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/04-backend.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/04-backend.md]
-
-  - term: idempotent
-    status: defined
-    canonical: "Sending it twice leaves the server as one send would."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/04-backend.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/04-backend.md]
-
-  - term: check-then-act race
-    status: defined
-    canonical: "Deciding on a value, then acting on a value that may have moved."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/04-backend.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/04-backend.md]
-
-  - term: time-of-check to time-of-use (TOCTOU)
-    status: defined
-    canonical: "The gap between deciding and doing."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/04-backend.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/04-backend.md]
-
-  - term: rate limiting
-    status: defined
-    canonical: "Caps how often one identity may call you in a window of time, and its purpose is availability rather than correctness."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/04-backend.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/04-backend.md]
-
-  - term: structured logging
-    status: defined
-    canonical: "Each event written as named fields rather than a sentence, so a query can count refusals by reason instead of reading prose."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/04-backend.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/04-backend.md]
-
-  - term: request id
-    status: defined
-    canonical: "A value created when the request arrives, echoed in a response header, and written on every line the request produces."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/04-backend.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/04-backend.md]
-
-  # --- s1-05 Databases -------------------------------------------------------
-
-  - term: constraint
-    status: defined
-    canonical: "A rule the storage engine checks at the moment of writing, inside the database itself."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/05-databases.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/05-databases.md]
-
-  - term: primary key
-    status: defined
-    canonical: "The column, or set of columns, that uniquely names each row; no two rows may share one, and it may never be empty."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/05-databases.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/05-databases.md]
-
-  - term: foreign key
-    status: defined
-    canonical: "A column whose values must match a primary key in another table."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/05-databases.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/05-databases.md]
-
-  - term: transaction
-    status: defined
-    canonical: null
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/05-databases.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/05-databases.md]
-    notes: >-
-      GAP, RECORDED RATHER THAN PAPERED OVER: this term ships WITHOUT a
-      standalone one-sentence definition. It is glossed as a clause ("wrap the
-      check and the write in a transaction, so they happen as one step") and
-      reinforced by the BEGIN/COMMIT framing, but no canonical sentence exists.
-      The authoring agent flagged it. Any later chapter that needs to define it
-      properly should write one and promote it here.
-
-  - term: ACID
-    status: defined
-    canonical: "Atomicity: all the statements happen, or none do. Consistency: the database moves only between states that obey its constraints. Isolation: concurrent transactions do not see each other's half-finished work. Durability: once committed, the change survives a crash."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/05-databases.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/05-databases.md]
-
-  - term: Read Committed
-    status: defined
-    canonical: "Re-reads a row that changed since the statement began."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/05-databases.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/05-databases.md]
-
-  - term: index
-    status: defined
-    canonical: "A separate, sorted structure the database keeps beside a table, so it can find rows without reading every one."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/05-databases.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/05-databases.md]
-
-  - term: sequential scan
-    status: defined
-    canonical: "The database reads all one million rows to find the match."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/05-databases.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/05-databases.md]
-
-  - term: migration (schema)
-    status: defined
-    canonical: "A recorded, ordered change to the schema, kept as a file alongside the code."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/05-databases.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/05-databases.md]
-
-  - term: key-value store
-    status: defined
-    canonical: "Held entirely in memory, so it answers in microseconds and forgets everything on restart unless it is told to persist."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/05-databases.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/05-databases.md]
-
-  - term: graph database
-    status: defined
-    canonical: "It stores data as nodes and the named edges between them."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/05-databases.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/05-databases.md]
-
-  - term: relational model
-    status: defined
-    canonical: "Data held as tables of rows and columns, described by its own logic rather than by a file layout."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/05-databases.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/05-databases.md]
-
-  # --- s1-06 Git and GitHub --------------------------------------------------
-
-  - term: staging area
-    status: defined
-    canonical: "The set of changes you have marked for the next commit."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/06-git-github.md]
-
-  - term: force push
-    status: defined
-    canonical: "Replaces the remote's branch with yours, discarding anything on the remote that your copy does not have."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/06-git-github.md]
-
-  - term: protected branch
-    status: defined
-    canonical: "A rule on the remote that limits what may happen to a named branch."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/06-git-github.md]
-
-  - term: push protection
-    status: defined
-    canonical: "Part of GitHub's secret scanning feature: it blocks a push whose contents match the shape of a known credential."
-    first_defined: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md
-    used_in: [docs/stage-01-spec-aware-vibe-engineering/06-git-github.md]
+      Chapter 2 deliberately does not survey languages after FORTRAN - that is
+      Chapter 3's ("One Language Was Never Enough") job per
+      stage-0-drafting-plan.md. Do not extend this entry's canonical wording to
+      cover later languages; add separate entries for those when that chapter
+      drafts.

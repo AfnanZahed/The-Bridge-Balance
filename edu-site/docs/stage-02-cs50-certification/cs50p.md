@@ -12,11 +12,11 @@ video_url: ""
 
 ## What this is
 
-Harvard's CS50P is the Python track of CS50 — an entry-level, university-grade introduction to programming. Internationally recognized; pairs naturally with Stage 1's core programming chapter.
+**Harvard's CS50P is the Python track of CS50 — an entry-level, university-grade introduction to programming.** Internationally recognized; pairs naturally with Stage 1's core programming chapter.
 
 ## How it pairs with this textbook
 
-- Stage 1, Chapter 2 (Core Programming) covers the same Python fundamentals, framed for AI-agent work.
+- Stage 1's Core Programming chapter will cover the same Python fundamentals, framed for AI-agent work.
 - CS50P adds depth (problem sets, autograded exercises, a final project) and the credential.
 
 ## Resources

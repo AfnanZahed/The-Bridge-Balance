@@ -348,6 +348,7 @@ sources:
     expires: null
     questions_asked:
       - {chapter: docs/intro-1-binary-to-programming.md, question: "Who wrote the first assembly language and assembler, and why did the idea spread?"}
+      - {chapter: docs/ch02-programming-is-born.md, question: "What did assembly language let a programmer read back that raw machine code did not, and what limit did it not remove?"}
     notes: >-
       Establishes the named origin of assembly, which nothing else on the list
       covers. Sources say Booth co-wrote the first assembly language and
@@ -362,6 +363,7 @@ sources:
     expires: null
     questions_asked:
       - {chapter: docs/intro-1-binary-to-programming.md, question: "What was the first program that turned a written notation into machine code automatically, and who built it?"}
+      - {chapter: docs/ch02-programming-is-born.md, question: "What cost problem, not a technical one, made translating notation automatically worth pursuing further after A-0?"}
     notes: >-
       Establishes the named origin of the compiler. Careful wording: Hopper's
       A-0 (1952) is the first automatic translation system, but it was a
@@ -670,251 +672,242 @@ sources:
   # veracode-genai, metr-productivity and dice-report-jul-2026 are reused by
   # intro-5 as recorded on those entries below.
 
+
 # ---------------------------------------------------------------------------
-# STAGE 1 SOURCES — added 2026-09-11, when all six Stage 1 chapters shipped.
+# STAGE 1 SOURCES (REMOVED 2026-09-17) — all citations for the six Stage 1
+# chapters were deleted here. The chapters were reverted to
+# chapter_state: placeholder on 2026-09-17 (owner instruction - see
+# prerequisite-graph.yaml's progress note for the full record). None of these
+# sources were reused by a non-Stage-1 chapter (each id appeared exactly
+# once), so deleting the whole block is clean. Re-verify and re-add sources
+# fresh when Stage 1 is re-authored rather than restoring this block from
+# history - a source's freshness clock (last_verified / expires) will have
+# moved on by then.
 # ---------------------------------------------------------------------------
-#
-# Per the rule at the top of this file, entries added by an authoring run carry
-# `status: proposed` unless a human or the shipping skill promotes them. All six
-# chapters SHIPPED with these citations in their prose, so promoting them is the
-# correct follow-up rather than leaving them marked unconfirmed. They are left
-# `proposed` here only because promotion is an editor's act, and recorded so the
-# decision is visible instead of assumed.
-#
-# VERIFICATION CAVEATS are recorded per source. Two are load-bearing and must
-# be read before reuse: stripe-idempotency and stripe-rate-limits were taken from
-# search results quoting Stripe's own pages because the direct fetches timed out.
 
-  - id: etymonline-architecture
-    name: Online Etymology Dictionary — "architecture"
-    url: https://www.etymonline.com/word/architecture
-    last_verified: 2026-09-11
-    status: proposed
-    questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md, question: "What does the word decompose into, and when did it enter English?"}
-    notes: "S0's decomposition. Greek arkhitekton, chief builder; English from the 1560s."
+# ---------------------------------------------------------------------------
+# NEW STAGE 0 LADDER SOURCES — added 2026-09-16 by ch01-foundations.md and
+# ch02-programming-is-born.md, drawn from curriculum-state/research/stage-0/
+# cluster-1-foundations.md (researched 2026-09-16 via DeepSeek/Command Code,
+# --effort high, per the owner's standing instruction that this session use
+# the already-completed research rather than re-running it). Every URL below
+# is copied directly from that dossier's own Sources section, not re-searched.
+# ---------------------------------------------------------------------------
 
-  - id: parnas-1972
-    name: D. L. Parnas, "On the Criteria To Be Used in Decomposing Systems into Modules", Communications of the ACM, December 1972
-    url: https://dl.acm.org/doi/10.1145/361598.361623
-    last_verified: 2026-09-11
-    status: proposed
+  - id: boole-1854
+    name: George Boole, "An Investigation of the Laws of Thought" (1854)
+    url: https://www.britannica.com/topic/history-of-logic/Boole-and-De-Morgan
+    last_verified: 2026-09-16
+    expires: null
     questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md, question: "Where did information hiding and the criteria for splitting a system into modules originate?"}
-    notes: "The primary source of the boundary idea. Also anchors intro's lineage elsewhere; a second use must ask a new question."
-
-  - id: uptime-institute-2026
-    name: Uptime Institute, Annual Outage Analysis (2025 survey basis)
-    url: https://uptimeinstitute.com/about-ui/press-releases/uptime-announces-annual-outage-analysis-report-2026
-    last_verified: 2026-09-11
-    expires: 2027-09-11
-    status: proposed
-    questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md, question: "What fraction of major outages cost more than 100,000 US dollars, and more than a million?"}
-    notes: "57% above US$100k; one in five above US$1M, second year running. Industry report — 12-month expiry."
-
-  - id: facebook-outage-2021
-    name: Facebook/Instagram/WhatsApp global outage, 4 October 2021
-    url: https://techcrunch.com/2021/10/04/facebook-messenger-instagram-whatsapp-are-all-down/
-    also: https://www.cnn.com/2021/10/06/world/facebook-whatsapp-instagram-down-cec
-    last_verified: 2026-09-11
-    status: proposed
-    questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md, question: "What is the blast radius of one shared component, at a scale a reader can feel?"}
-    notes: "About six hours, 2.9bn monthly users, one backbone configuration change."
-
-  - id: prime-video-monolith-2023
-    name: Amazon Prime Video VQA team moves from distributed serverless back to a monolith, 2023
-    url: https://thenewstack.io/return-of-the-monolith-amazon-dumps-microservices-for-video-monitoring/
-    also: https://www.infoq.com/news/2023/05/prime-ec2-ecs-saves-costs/
-    last_verified: 2026-09-11
-    status: proposed
-    questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md, question: "What is the counter-argument to splitting everything — what happens when a team moves the other way, and by how much did it cut cost?"}
-    notes: "About 90% cost reduction. Used inside s1-01's depth block."
-
-  - id: etymonline-read
-    name: Online Etymology Dictionary — "read", corroborated by Wiktionary
-    url: https://www.etymonline.com/word/read
-    also: https://en.wiktionary.org/wiki/read
-    last_verified: 2026-09-11
-    status: proposed
-    questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md, question: "Did English 'read' originally mean advise, counsel or interpret rather than decode letters?"}
-    notes: "Old English rǣdan. Two independent sources, per the etymology protocol."
-
-  - id: ariane-501
-    name: Ariane 5 Flight 501 failure, 4 June 1996 — ESA Inquiry Board report
-    url: https://www.esa.int/Newsroom/Press_Releases/Ariane_501_-_Presentation_of_Inquiry_Board_report
-    also: https://en.wikipedia.org/wiki/Ariane_flight_V88
-    last_verified: 2026-09-11
-    status: proposed
-    questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md, question: "What does an unverified value reused in a new context actually cost, with a date and a figure?"}
-    notes: "Lost 37 seconds after lift-off, ended at 39s; over US$370 million, payload uninsured. The loss figure comes from postmortem write-ups rather than ESA directly — flagged for a second check before any reuse."
-
-  - id: naur-1985
-    name: Peter Naur, "Programming as Theory Building" (1985)
-    url: https://gist.github.com/onlurking/fc5c81d18cfce9ff81bc968a7f342fb1
-    last_verified: 2026-09-11
-    status: proposed
-    questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md, question: "Why is reading someone else's code hard in principle rather than merely inconvenient?"}
-    notes: "The program is a theory held in heads; the text survives, the theory does not."
-
-  - id: nextjs-2026
-    name: Next.js release and support lines
-    url: https://nextjs.org/blog/july-2026-security-release
-    last_verified: 2026-09-11
-    expires: 2027-01-11
-    status: proposed
-    questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md, question: "What is the current Next.js version line, and which is LTS?"}
-    notes: "v16.2.11 Active LTS, v15.5.21 maintenance LTS, dated 20 July 2026. Tool claim — 90-day expiry."
-
-  - id: webaim-million-2026
-    name: WebAIM Million annual accessibility report (February 2026 scan)
-    url: https://webaim.org/projects/million/
-    last_verified: 2026-09-11
-    expires: 2027-03-30
-    status: proposed
-    questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md, question: "How accessible are the web's top million home pages, and how do they commonly fail?"}
+      - {chapter: docs/ch01-foundations.md, question: "Who first wrote true-and-false reasoning down as algebra, and did anyone at the time think it would touch a machine?"}
     notes: >-
-      56,114,377 errors; 56.1 per page; 95.9% of pages with at least one WCAG
-      failure; 51% missing form labels; 83.9% low contrast. The ARIA paradox
-      (59.1 errors on ARIA pages against 42 without) is the report's own
-      finding, and the chapter records the report's caution about cause.
-      First rise in six years — worth noting if reused as a trend.
-      Next.js pages averaged 40.9 against the 56.1 average.
+      Dossier flags Boole's 1847 pamphlet as the work with the deeper impact on
+      contemporaries, versus the more commonly cited 1854 book. The chapter
+      cites the 1854 book without claiming it was his first or only work on the
+      subject, which stays accurate either way.
 
-  - id: web-vitals-inp
-    name: web.dev — Core Web Vitals thresholds
-    url: https://web.dev/articles/vitals
-    last_verified: 2026-09-11
-    status: proposed
+  - id: shannon-1937-thesis
+    name: Claude Shannon, "A Symbolic Analysis of Relay and Switching Circuits" (MIT master's thesis, submitted 10 Aug 1937)
+    url: https://en.wikipedia.org/wiki/A_Symbolic_Analysis_of_Relay_and_Switching_Circuits
+    also: https://historyofinformation.com/detail.php?id=622
+    last_verified: 2026-09-16
+    expires: null
     questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md, question: "What is the interactivity budget a page has to meet, and at which percentile?"}
-    notes: "LCP 2.5s, INP 200ms, CLS 0.1, all at p75. INP replaced FID in 2024."
-
-  - id: rfc9110
-    name: RFC 9110 — HTTP Semantics (IETF, June 2022)
-    url: https://www.rfc-editor.org/rfc/rfc9110.html
-    last_verified: 2026-09-11
-    status: proposed
-    questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/04-backend.md, question: "Which HTTP methods are safe and which are idempotent, and what do 401, 403, 409 and 422 actually mean?"}
+      - {chapter: docs/ch01-foundations.md, question: "Who first showed that a switch behaves exactly like one of Boole's true-or-false values, and when?"}
     notes: >-
-      The standard the method and status tables rest on. Also the source of a
-      correction: 422 was renamed "Unprocessable Content" in 2022. Verified from
-      search results quoting the sections rather than a full read of the RFC.
+      The chapter calls this "one of the most consequential student papers of
+      the century" as a hedged, reputational framing ("now remembered as"), not
+      as a claim of an actual prize - the dossier flags "most important
+      master's thesis of the 20th century" as popular attribution, not an
+      award, and the chapter does not name the real 1939 Alfred Noble Prize at
+      all, avoiding the conflation risk entirely.
 
-  - id: stripe-idempotency
-    name: Stripe — Idempotent requests
-    url: https://docs.stripe.com/api/idempotent_requests
-    last_verified: 2026-09-11
-    status: proposed
+  - id: jacquard-babbage-lovelace-hollerith
+    name: Jacquard's punch-card loom (1801), Babbage's card-fed engines (1837), Lovelace's 1843 program, and Hollerith's census tabulator (1890)
+    url: https://www.computerhistory.org/storageengine/punched-cards-control-jacquard-loom/
+    also: https://en.wikipedia.org/wiki/Jacquard_machine
+    last_verified: 2026-09-16
+    expires: null
     questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/04-backend.md, question: "What does a payment platform store for an idempotency key, and how long are keys kept?"}
+      - {chapter: docs/ch01-foundations.md, question: "When did an instruction first become a physical, storable, shareable object, and where did that idea go next?"}
     notes: >-
-      CAVEAT — DIRECT FETCH TIMED OUT TWICE (504). Content was taken from search
-      results quoting Stripe's own page verbatim, corroborated by two independent
-      write-ups. Claims: the first response is replayed regardless of success or
-      failure, including 500s; keys pruned once at least 24 hours old. Re-verify
-      before reuse.
+      The chapter deliberately does not state a specific hand-tallying-versus-
+      Hollerith speedup figure or an 1890 population count, since neither
+      appears in cluster-1's own dossier text and the session's standing
+      instruction was to use the completed research rather than verify new
+      numbers - the claim stays qualitative ("cutting that count down
+      dramatically") rather than asserting an unverified statistic.
 
-  - id: github-rate-limits
-    name: GitHub REST API rate limits
-    url: https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api
-    last_verified: 2026-09-11
-    status: proposed
+  - id: transistor-1947-bardeen-brattain-pierce
+    name: Transistor invention (Bardeen and Brattain, Bell Labs, 16 December 1947) and its naming (John Pierce)
+    url: https://www.computerhistory.org/siliconengine/invention-of-the-point-contact-transistor/
+    also: https://www-tc.pbs.org/transistor/album1/pierce/naming.html
+    last_verified: 2026-09-16
+    expires: null
     questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/04-backend.md, question: "What are a large platform's published primary and secondary rate limits, and what does it return when they are exceeded?"}
-    notes: "60/hour unauthenticated, 5,000/hour authenticated, 100 concurrent. Fetched in full."
-
-  - id: body-parser-limits
-    name: body-parser (Express middleware) — default request body limits
-    url: https://expressjs.com/en/resources/middleware/body-parser/
-    last_verified: 2026-09-11
-    status: proposed
-    questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/04-backend.md, question: "What is the default request body limit, what status does exceeding it produce, and does the library itself call the body untrusted?"}
-    notes: "v2.3.0; default 100kb; entity.too.large produces 413; parameterLimit 1000; docs say the body should be validated before trusting. Fetched in full."
-
-  - id: codd-1970
-    name: E. F. Codd, "A Relational Model of Data for Large Shared Data Banks" (1970)
-    url: https://dl.acm.org/doi/10.1145/362384.362685
-    last_verified: 2026-09-11
-    status: proposed
-    questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/05-databases.md, question: "What forced the relational model into existence?"}
-
-  - id: postgres-docs
-    name: PostgreSQL documentation (current release line)
-    url: https://www.postgresql.org/docs/current/transaction-iso.html
-    also: https://www.postgresql.org/docs/current/indexes-types.html
-    last_verified: 2026-09-11
-    expires: 2027-03-11
-    status: proposed
-    questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/05-databases.md, question: "What is the default isolation level, and why does a locked row get re-checked?"}
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/05-databases.md, question: "How does FOR UPDATE lock rows, and what is the default index type?"}
+      - {chapter: docs/ch01-foundations.md, question: "Which date is correct for the transistor's invention, and what did the name 'transistor' actually point at?"}
     notes: >-
-      Two genuinely different questions, so two rows per the reuse rule. Read
-      Committed is the default and re-checks; B-tree is the default index type.
-      Version 18.6 stable, 19 Beta 3 (13 Aug 2026). Tool claim — 90-day expiry.
+      Dossier explicitly confirms 16 December (first working device) over the
+      more commonly cited 23 December (management demonstration) as the correct
+      date for "invention" in this chapter's sense. On naming: the dossier
+      flags the popular "transfer + resistor" gloss as a simplification Pierce
+      did not actually give: he described the device's transresistance,
+      paired with the tube's transconductance. The chapter's final wording
+      avoids restating the folk version by naming the property Pierce pointed
+      at ("the electrical property it controlled") without asserting the
+      transresistance/transconductance jargon itself, which would have been an
+      unglossed heavy term for a Stage 0 reader.
 
-  - id: git-scm-about
-    name: git-scm.com — About (repository size and history figures)
-    url: https://git-scm.com/about
-    last_verified: 2026-09-11
-    status: proposed
+  - id: belgian-2003-bitflip
+    name: 2003 Belgian election single-event upset (Schaerbeek, candidate Maria Vindevoghel, +4,096 votes)
+    url: https://en.wikipedia.org/wiki/Single-event_upset
+    also: https://en.wikipedia.org/wiki/Electronic_voting_in_Belgium
+    last_verified: 2026-09-16
+    expires: null
     questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md, question: "How big is the Linux kernel repository, and how much does Git compress it?"}
-    notes: "1.7 GB tree; 1.4 million commits in 5.5 GB. The page states 'as of 2025'."
-
-  - id: git-request-pull
-    name: git-scm.com — git-request-pull documentation
-    url: https://git-scm.com/docs/git-request-pull
-    last_verified: 2026-09-11
-    status: proposed
-    questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md, question: "What does the 'pull' in pull request actually name?"}
+      - {chapter: docs/ch01-foundations.md, question: "What does one flipped switch actually cost, made concrete rather than abstract?"}
     notes: >-
-      THE source for s1-06's central claim: the command generates a request
-      asking your upstream project to pull changes into their tree. The name
-      describes the maintainer's action, not the requester's.
+      Dossier flags the cosmic-ray mechanism as a documented FINDING (presented
+      by Bhuva at AAAS 2017), not a proof. The chapter's wording ("a 2017
+      presentation suggested... could, in rare cases") preserves that hedge
+      rather than stating cosmic-ray causation as settled fact.
 
-  - id: smartbear-cisco-review-2006
-    name: SmartBear/Cisco peer code review case study (2006)
-    url: https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/
-    last_verified: 2026-09-11
-    status: proposed
+  - id: eniac-1945-and-programmers
+    name: ENIAC (finished 1945, ~17,468 vacuum tubes) and its six original programmers
+    url: https://en.wikipedia.org/wiki/ENIAC
+    also: https://eniacprogrammers.org/
+    last_verified: 2026-09-16
+    expires: null
     questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md, question: "At what change size and review rate does review stop finding defects?"}
-    notes: "200-400 LOC over 60-90 minutes finds 70-90% of defects; efficiency drops past 400 LOC and above roughly 500 LOC/hour; formal inspection about 9 hours per 200 LOC."
-
-  - id: google-icse-seip-2018
-    name: "Sadowski et al., 'Modern Code Review: A Case Study at Google' (ICSE-SEIP 2018)"
-    url: https://www.sback.it/publications/icse2018seip.pdf
-    last_verified: 2026-09-11
-    status: proposed
-    questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md, question: "What does measured code review look like at industrial scale?"}
-    notes: "About 9 million changes 2014-2016; median 24 lines; median 1 reviewer; 70% reviewed within 24 hours; median 2.6 hours per week reviewing."
-
-  - id: github-protected-branches
-    name: GitHub Docs — protected branches and merge methods
-    url: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches
-    also: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/about-merge-methods-on-github
-    last_verified: 2026-09-11
-    status: proposed
-    questions_asked:
-      - {chapter: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md, question: "What do branch protection rules enforce by default, and do they bind administrators?"}
+      - {chapter: docs/ch01-foundations.md, question: "How many switches did the machine that closes this chapter's hardware thread actually run on, and how reliable were they?"}
+      - {chapter: docs/ch02-programming-is-born.md, question: "Who physically did the work called 'programming' before any language existed, and what did that work actually involve?"}
     notes: >-
-      Records a dangerous default the chapter names: rules skip administrators
-      unless bypass is explicitly disabled. GitHub's own docs also name the
-      disadvantages of squashing, which the chapter uses as its live disagreement.
+      Dossier explicitly flags the popular "a tube failed every few minutes"
+      legend as FALSE (real rate closer to one every two days, per Eckert's own
+      1989 interview) - both chapters avoid restating that legend; ch01 says
+      only that the crew "spent real time most weeks" on failures, which is
+      compatible with the correct rate and does not repeat the debunked one.
+      Programmers named in the primary source: Kay McNulty, Betty Jennings,
+      Betty Snyder, Marlyn Wescoff, Fran Bilas, Ruth Lichterman - used by name
+      in ch02, without the later married surnames (Bartik, Holberton) the
+      dossier also lists, since the chapter refers to them as they'd have been
+      known at the time.
+
+  - id: von-neumann-edvac-1945
+    name: John von Neumann, "First Draft of a Report on the EDVAC" (distributed 30 June 1945)
+    url: https://en.wikipedia.org/wiki/First_Draft_of_a_Report_on_the_EDVAC
+    last_verified: 2026-09-16
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch01-foundations.md, question: "Who first described a machine that could hold its own instructions in the same memory as its data?"}
+    notes: >-
+      Dossier records a real credit dispute (the report bore von Neumann's name
+      alone; Eckert and Mauchly's contribution was erased and the open
+      circulation helped void their patent). The chapter deliberately does not
+      litigate this dispute - it says von Neumann "circulated a report
+      describing" the idea, which does not claim sole invention and stays
+      accurate without importing a controversy this early chapter has no room
+      to handle responsibly.
+
+  - id: tukey-bit-1947
+    name: John Tukey coins "bit" (Bell Labs memo, 9 January 1947)
+    url: https://en.wikipedia.org/wiki/Bit
+    last_verified: 2026-09-16
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch01-foundations.md, question: "Who coined the word 'bit', and is it the same person usually credited with putting it into print?"}
+    notes: >-
+      Dossier distinguishes Tukey (coiner, Jan 1947 memo) from Shannon (put it
+      in print in 1948, crediting Tukey by name) - a common conflation. The
+      chapter correctly attributes coinage to Tukey alone.
+
+  - id: relay-computers-z3-mark1
+    name: Konrad Zuse's Z3 (1941, ~2,300-2,600 relays) and Harvard Mark I (1944)
+    url: https://en.wikipedia.org/wiki/Z3_(computer)
+    also: https://www.computerhistory.org/timeline/1941/
+    last_verified: 2026-09-16
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch01-foundations.md, question: "What did a computer actually look like when it was built from relays rather than tubes or transistors, and at what scale?"}
+    notes: >-
+      Dossier flags that sources differ on the Z3's exact relay count
+      (~2,300-2,600); the chapter uses the rounded, hedged "around 2,500" rather
+      than a false-precise figure. Mark I's own relay count is not asserted by
+      the chapter (only "thousands more"), since no specific figure for it
+      appears in the dossier text this session worked from.
+
+  - id: wheeler-edsac-1949
+    name: David Wheeler, EDSAC "Initial Orders" (completed May 1949)
+    url: https://www.cl.cam.ac.uk/~mr10/edsacposter.pdf
+    also: https://royalsocietypublishing.org/rspa/article/202/1071/573/8294/Programme-organization-and-initial-orders-for-the
+    last_verified: 2026-09-16
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch02-programming-is-born.md, question: "What was the first system that let a machine translate short symbolic commands into its own numeric codes, sparing a person that translation?"}
+    notes: >-
+      Dossier describes this as "the first assembler-like system" - the chapter
+      does not call it "assembly language" itself (that credit stays with
+      Kathleen Booth, 1947, in the following section) and instead frames
+      Wheeler's contribution as the translation mechanism, which is the
+      accurate reading.
+
+  - id: fortran-1957-backus
+    name: FORTRAN, delivered by John Backus's team at IBM, April 1957
+    url: https://www.ibm.com/history/fortran
+    also: https://en.wikipedia.org/wiki/Fortran
+    last_verified: 2026-09-16
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch02-programming-is-born.md, question: "What was the real argument for a compiled high-level language, and how was the doubt that it could ever be fast enough actually resolved?"}
+    notes: >-
+      Dossier's structural recommendation frames the argument as economic, not
+      aesthetic (programmer cost exceeded computer cost by the mid-1950s), and
+      supplies Backus's own "hand-to-hand combat with the machine" quote, which
+      the chapter uses. The chapter does not assert a specific benchmark
+      percentage for how compiled code compared to hand-written code - no such
+      figure appears in the dossier text this session worked from - and instead
+      says only that it "held up well enough to change most doubters' minds",
+      a qualitative claim the dossier's framing supports without inventing a
+      number.
+
+  - id: bug-edison-not-the-moth
+    name: The engineering sense of "bug" predates the 1947 Harvard Mark II moth — Edison, 1870s
+    url: https://en.wikipedia.org/wiki/Bug_(engineering)
+    also: https://www.juncture-digital.org/edisonpapers/edison-and-the-bug
+    last_verified: 2026-09-17
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch00-introduction.md, question: "Where does the word 'bug' actually come from, and why does the moth story survive when it isn't the origin?"}
+    notes: >-
+      Verified FOR ch00-introduction and NOT CURRENTLY USED BY IT - recorded so
+      the check is not repeated and the source is not lost. The chapter's first
+      draft staged this as its Station 0 demonstration, and the owner rejected
+      that draft's whole structure before any of it shipped (see
+      prerequisite-graph.yaml's ch00-introduction row for the rebuild). The
+      claim itself stands and is available to whichever chapter wants a worked
+      example of checking a confident story against the record. Two independent
+      non-circular sources
+      support the correction: Wikipedia's Bug (engineering) entry traces the
+      defect sense to engineering jargon "at least as far back as the 1870s"
+      and quotes Edison's own 1878 letter; the Edison Papers project records
+      Edison's laboratory using it in fall 1878, including his nephew's
+      notebook. The Mark II logbook caption - "first actual case of a bug being
+      found" - is real, is dated 9 September 1947, and is held by the
+      Smithsonian; the caption's own wording is what marks it as a joke about an
+      existing term rather than a coinage.
+      DELIBERATE HEDGE, recorded so it is not later "corrected": the chapter
+      says Edison was writing about bugs "in the 1870s" rather than naming 1878.
+      Sources place the usage across the decade and disagree on which single
+      document is first, so a specific year would be false precision of exactly
+      the kind cluster-1 flags elsewhere (see the `ed`-circa-1969 row and the
+      transistor's two real dates).
+      REJECTED SOURCE, recorded because it is the top search result for this
+      question: IEEE Spectrum's "Did You Know? Edison Coined the Term 'Bug'"
+      presents the 1947 moth as the origin, which is the claim the chapter
+      exists to correct. It is a charming story, and name-registers.md §4
+      already flags that class as suspect in proportion to its charm. Do not
+      cite it here.
 
 # ---------------------------------------------------------------------------
 # Unresolved citations - none outstanding.
@@ -925,7 +918,21 @@ sources:
 # Kept as an explicit empty list rather than deleted, so the next author can
 # see the check exists and was run.
 #
-# STAGE 1 (2026-09-11): the same check was run for the six Stage 1 chapters.
-# Nothing is unresolved. Two sources carry a fetch caveat rather than a missing
-# one (stripe-idempotency, stripe-rate-limits) and are recorded above with it.
+# STAGE 1: removed 2026-09-17 along with its whole source block above - see
+# the note there. No longer applicable to unresolved_citations below.
+#
+# NEW STAGE 0 LADDER (2026-09-16): the same check was run for ch01-foundations
+# and ch02-programming-is-born. Nothing is unresolved - every claim traces to a
+# URL already present in cluster-1-foundations.md's own Sources section, and
+# every number the dossier itself flagged as disputed, unverified, or a popular
+# misconception (the Z3's exact relay count, the transistor's "invention" date,
+# the "transfer + resistor" folk etymology, the ENIAC tube-failure-rate legend,
+# the Belgian bit-flip's causal mechanism) was either hedged in the prose to
+# match the dossier's own caveat, or left out where no safely citable figure
+# existed - see each new source's notes above for the specific handling.
+#
+# ch00-introduction (2026-09-17): the same check was run for the new Stage 0
+# front door. Its one historical claim is recorded above as
+# bug-edison-not-the-moth, including the source it rejects and why. Nothing is
+# unresolved.
 unresolved_citations: []

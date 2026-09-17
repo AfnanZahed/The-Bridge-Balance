@@ -12,11 +12,11 @@ video_url: ""
 
 ## What this is
 
-Harvard's CS50W is the web-development track — SQL, Django, APIs, frontend, scalability, a final project. Pairs with Stage 1's frontend, backend, and databases chapters.
+**Harvard's CS50W is the web-development track — SQL, Django, APIs, frontend, scalability, a final project.** Pairs with Stage 1's frontend, backend, and databases chapters.
 
 ## How it pairs with this textbook
 
-- Stage 1, Chapters 3–5 (Frontend / Backend / Databases) cover the engineering vocabulary.
+- Stage 1's Frontend / Backend / Databases chapters will cover the engineering vocabulary.
 - CS50W adds the end-to-end project work and the credential.
 
 ## Resources
