@@ -44,6 +44,30 @@ This document captures the technical decisions for the book-foundation feature. 
 
 **Source:** Vercel docs (https://vercel.com/docs/frameworks/docusaurus).
 
+**Amendment — 2026-09-16 (first real deploy).** The decision above is correct only
+for the Git-integration route it implicitly assumes. It says "no custom
+`vercel.json» required" because framework detection needs none — and that holds
+when Vercel checks out the whole repository and the project's Root Directory is
+set to `edu-site». It does **not** hold for a CLI upload, which is how this
+project deploys (there is no version control in the working process, so there is
+no push to build from).
+
+A CLI upload from `edu-site» sends only that directory, so at build time
+`path.resolve(cwd, "..")» — the `REPO» root that `edu-site/scripts/check-references.mjs»
+reads its ledgers and scanned paths from — does not exist. The gate then reports
+ten `scan-root-missing» findings plus one real `backticked-path», and `npm run build»
+exits 1. Verified by running the gate against a simulated `edu-site»-only tree:
+108 findings, of which 11 are this cause and 97 were artifacts of the simulation
+lacking `node_modules».
+
+So `vercel.json» now exists at the repo root, with `framework: null»,
+`installCommand: cd edu-site && npm ci», `buildCommand: cd edu-site && npm run build»
+and `outputDirectory: edu-site/build». The repo root is the Vercel project root,
+which is what keeps the parent directory present and every gate passing. The
+alternative in the rejected list — a `vercel.json» with an explicit `buildCommand» —
+was rejected as unnecessary; it is now necessary, but for the subdirectory reason
+above, not because framework detection failed.
+
 ---
 
 ## R-003: MDX image handling

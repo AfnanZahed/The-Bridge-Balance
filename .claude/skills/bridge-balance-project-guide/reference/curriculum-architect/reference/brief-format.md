@@ -16,8 +16,10 @@ STAGE & POSITION:       [0-4, and a rough sequence position. If this doesn't hav
                         prerequisite-graph.yaml entry yet, say so explicitly rather than
                         implying one exists]
 SCOPE / ANGLE:          [One or two sentences: what this lesson is actually about,
-                        specific enough that a researcher isn't left guessing the
-                        thesis-tie-in from a bare noun. This is the part a bare topic
+                        specific enough that a researcher isn't left guessing what the
+                        lesson is for from a bare noun. A lesson does not need a
+                        thesis tie-in to be valid — the six invariants are stage-level
+                        (canon/thesis.md). This is the part a bare topic
                         name ("databases") always lacks and a lesson ("choosing between
                         PostgreSQL and MongoDB for a first backend") always has]
 LIKELY PREREQUISITES:  [What this lesson probably assumes, cross-checked against
@@ -30,6 +32,31 @@ EVIDENCE RISK NOTE:     [Optional. Only if a source this lesson will obviously r
                         look for a different angle or source, not a restriction]
 WHY THIS ORDER:         [One sentence on why this position, if it's not obvious —
                         skip this field rather than pad it if the position is self-evident]
+WHY IT IS IN THE CURRICULUM:
+                        [REQUIRED, AND SUPPLIED BY THE OWNER. Not what the subject did
+                        for the world — what THIS STEP gives a reader on the way to
+                        specifying, bounding, verifying and owning AI-built work. The
+                        curriculum designer decides this and says it in their own words;
+                        quote them. It changes completely for every topic.
+                        If it has not been supplied, STOP AND ASK — do not infer it,
+                        reconstruct it from the stage table, or write a plausible one.
+                        canon/naming.md Rule 3, canon/corrections.md §18]
+WHY IT MATTERS:         [REQUIRED. The line above, turned into the words the chapter's
+                        own opening will use. canon/corrections.md §7]
+EVERYDAY EXAMPLE:       [REQUIRED for Stages 0-2. The concrete thing a beginner can
+                        picture, that this lesson can return to. Real or invented —
+                        both are legitimate. Check example-ledger.yaml first and say
+                        whether reusing a familiar one beats introducing a new one.
+                        "The subject is its own example" is not an answer]
+OPENING NOTE:           [Optional. Problem-first or story-first, and the welcome style
+                        to avoid because a chapter in the last four used it]
+NAME CHECK:             [Does the working title obey all three rules of canon/naming.md?
+                        R1 self-explaining to someone who has not read it; R2 reads like
+                        an international, professional course; R3 carries the WHY from the
+                        slot above - the curriculum's reason, not the subject's own
+                        significance. Name which of the three it was weakest on. If it
+                        fails any, propose one that passes. If the owner's why is missing,
+                        this slot reads "BLOCKED - awaiting the owner's why"]
 STATUS:                 PROPOSAL — not a commitment. Written by curriculum-architect on
                         [date]. Confirm, edit, or discard before treating it as settled.
 ```

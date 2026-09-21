@@ -71,8 +71,9 @@ const UNSCANNED_AS_SOURCE = ["curriculum-state/proposals"];
 
 /** Files and directories whose references ARE checked. */
 const SCANNED = [
-  "CLAUDE.md", "README.md", "PROJECT-MAP.md", "PROJECT-REPORT.md",
-  "INSTALL.md", "stack.md",
+  "CLAUDE.md", "README.md", "PROJECT-MAP.md",
+  "history/reports/PROJECT-REPORT.md",
+  "history/reports/INSTALL.md", "stack.md",
   ".claude/skills/bridge-balance-project-guide",
   ".claude/skills/lesson-spine-authoring",
   "curriculum-state",

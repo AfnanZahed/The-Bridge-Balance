@@ -59,7 +59,7 @@ function statusLabel(status: StageStatus): string {
 
 export const DONUT_DATA: DonutDatum[] = [
   {
-    name: "Orientation Through Computing History",
+    name: "Introduction to Computing: From Switches to AI Agents",
     short: "Stage 0",
     status: "live",
     description:
@@ -70,7 +70,7 @@ export const DONUT_DATA: DonutDatum[] = [
   {
     name: "Spec-Aware Vibe Engineering",
     short: "Stage 1",
-    status: "live",
+    status: "in-development",
     description:
       "Foundations. Architecture, programming, frontend, backend, databases, Git. Learn to lead AI coding agents with engineering judgment, not blind prompt-and-hope.",
     sliceWeight: SLICE_WEIGHT,

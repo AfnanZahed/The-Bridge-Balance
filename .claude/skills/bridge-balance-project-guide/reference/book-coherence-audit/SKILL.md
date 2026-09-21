@@ -43,7 +43,18 @@ Read `evidence-ledger.yaml`. For each source, count how many chapters cite it. A
 
 *(There is no mechanical check behind this one. Read it off the prose directly.)*
 
-Read the opening paragraph of every `text-ready` chapter, back to back. Do multiple chapters converge — same sentence shape, same opening move, same rhetorical setup — to where a reader who has seen two could predict the third? Individually each opening may be fine; the corpus-level problem is a pattern only visible reading several side by side.
+Read the opening of every `text-ready` chapter, back to back.
+
+**What is meant to be the same, and is not a finding.** Every chapter opens with the same *structure* — a greeting, a link backwards, what this chapter covers, why it matters — because `canon/corrections.md` §7 requires it. **Do not report that as monotony.** A session that flags the house opening as a defect will get it removed again, and that is precisely the loop this book has already been round three times.
+
+**What is a real finding:** the same *wording*. The owner's rule is that a given style of welcome may not reappear until four or five chapters later, and never in the wording of the chapter before it. So check:
+
+- Do consecutive chapters greet the reader with the same sentence, or a near-copy of it?
+- Does the same phrase open the "what this covers" list every time?
+- Does every chapter's first teaching sentence use the same move — all analogies, or all historical scenes, or all rhetorical questions?
+- Does every chapter use the same everyday-example *type*?
+
+Individually each opening may be fine; the corpus-level problem is a pattern only visible reading several side by side.
 
 ## Step 5 — Prerequisite sanity
 
@@ -53,7 +64,7 @@ For a **stage-index page**, the same check means something different and is *not
 
 ## Step 6 — Contradiction detection
 
-Check every `text-ready` chapter's treatment of the six corpus-wide invariants (`canon/thesis.md`) against canon and against each other: does every chapter's safety-floor wording still match its register variant in `thesis.md`? Does any chapter state a stage's focus or the five-stage table differently than `thesis.md` quotes it? Does any statistic contradict what `evidence-ledger.yaml` currently records as the latest-verified figure?
+Check the six invariants **at stage level, not per chapter** (`canon/thesis.md`, revised 2026-09-20): does each stage satisfy each invariant somewhere, rather than every chapter carrying all six? **A chapter carrying an invariant it has no business carrying is itself a finding.** Then: does every chapter's safety-floor wording match the right variant in `thesis.md` — the plain wording in Stages 0–2, the original in Stages 3–4? Does any chapter state a stage's focus or the five-stage table differently than `thesis.md` quotes it? Does any statistic contradict what `evidence-ledger.yaml` currently records as the latest-verified figure?
 
 ## Step 7 — Read straight through
 
@@ -61,7 +72,7 @@ Read the opening of every `text-ready` chapter back to back — the corpus as a 
 
 ## Reporting
 
-Organize by check (term drift, evidence concentration, tonal monotony, prerequisite sanity, contradictions, the straight-through read), not by chapter — the point is patterns visible only across chapters, and a per-chapter report buries that. Name every chapter a finding involves, not just the most visible one. State the corpus size checked up front, so a reader can calibrate how much a "found nothing" result is worth — nothing found across three chapters means less than nothing found across fifteen.
+Organize by check (term drift, evidence concentration, opening variety, prerequisite sanity, contradictions, the straight-through read), not by chapter — the point is patterns visible only across chapters, and a per-chapter report buries that. Name every chapter a finding involves, not just the most visible one. State the corpus size checked up front, so a reader can calibrate how much a "found nothing" result is worth — nothing found across three chapters means less than nothing found across fifteen.
 
 This skill never edits a chapter, a ledger, or canon. A term-drift finding might be best fixed by updating `concept-ledger.yaml`'s canonical wording rather than rewriting prose — even that smaller fix belongs to a separate, deliberate pass.
 

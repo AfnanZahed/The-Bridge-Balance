@@ -2,7 +2,7 @@
 
 > **Scope**: Document decision clusters, not individual technology choices. Group related decisions that work together (e.g., "Frontend Stack" not separate ADRs for framework, styling, deployment).
 
-- **Status:** Accepted
+- **Status:** Accepted · amended 2026-09-07 · **superseded in part 2026-09-20 by [ADR-0007](./0007-lesson-spine-becomes-book-specific.md)**, which ends this record's deliberate genericness of `lesson-spine-authoring`. The two-skill split itself stands unchanged.
 - **Date:** 2026-09-06
 - **Feature:** none — repo-wide content-track architecture
 - **Context:** See below.

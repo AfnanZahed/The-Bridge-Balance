@@ -19,11 +19,9 @@ The textbook is free forever. The business that funds it is a separate, optional
 
 ## Who is it for?
 
-Two readers share one document. One already works as a senior engineer; the other last week struggled to finish a signup form. There is no separate edition and no "basics" section, because the two readers quit for different reasons: the senior stops at a paragraph that gives them nothing new, and the other stops at the first term used without being defined. Writing that hands the first something they did not already have, and leaves nothing unexplained for the second, serves both at once.
+Anyone who has never programmed. The book starts from zero: nothing is skipped, and nothing is left for you to guess.
 
-The founding brief names five readers, all on one spine rather than five tracks: a computer-science undergraduate, a junior developer, a working professional, a career-switcher, and someone starting from scratch.
-
-No prior programming experience is required to begin. Every technical term is defined where it first appears in a chapter — counted per chapter, not per book — so a reader arriving from a search result is never expected to have read an earlier page.
+No experience is needed to begin. A new word is explained the first two or three times you meet it. After that it becomes a link to the glossary, so a reminder is one tap away. A word that is too big for one sentence gets a short passage of its own before it is used.
 
 ## Is it really free?
 
@@ -39,7 +37,7 @@ Both courses are free to audit. You can watch every lecture and do the work at n
 
 ## What are the five stages?
 
-- **[Stage 0 — Orientation Through Computing History](/intro-1-binary-to-programming).** The history of computing and software, read in the order it happened, from binary through today's AI-coding-agent era, plus the Spec-Driven Engineering and reading habits the rest of the book depends on.
+- **[Stage 0 — Introduction to Computing: From Switches to AI Agents](/intro-1-binary-to-programming).** The history of computing and software, read in the order it happened, from binary through today's AI-coding-agent era, plus the Spec-Driven Engineering and reading habits the rest of the book depends on.
 - **[Stage 1 — Spec-Aware Vibe Engineering](/stage-01-spec-aware-vibe-engineering/).** Foundations: architecture, programming, frontend, backend, databases, and Git, so you can lead a coding agent with engineering judgment rather than prompt and hope.
 - **[Stage 2 — Credible Validation](/stage-02-cs50-certification/).** The two Harvard certificates, paired with the GitHub portfolio your work builds.
 - **[Stage 3 — Mastering AI Coding Agents](/stage-03-mastering-ai-coding-agents/).** Claude Code, OpenCode, and other coding-agent CLIs; prompt, context, and loop engineering; skills, MCP servers, and workflows.

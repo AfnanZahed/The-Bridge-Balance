@@ -1,0 +1,207 @@
+/**
+ * The right rail's shell, header and handle — and its folded state. See
+ * index.tsx for why this fork exists.
+ *
+ * Deliberately NOT here:
+ *  - The link rules and the list's own ground, which stay in custom.css's TOC
+ *    section so every TOC on the site — this rail, the mobile collapsible, the
+ *    inline one — keeps reading from one place. The ground is repeated onto this
+ *    shell so the new header row is carried by it too, and switched off inside
+ *    the shell; see .panel.
+ *  - The rail's width, the article column's cap and the prose measure. All three
+ *    live in custom.css keyed on <html data-tbb-toc-collapsed>, because all three
+ *    are outside this component's subtree.
+ */
+
+.tableOfContents {
+  /* Upstream's sticky geometry, kept: the rail is still a panel parked under the
+     navbar that scrolls its own overflow rather than the page's.
+     `overflow-x: hidden` is added so a rail folded to 44px clips its own rows
+     instead of handing the page a horizontal scrollbar mid-transition. */
+  max-height: calc(100vh - (var(--ifm-navbar-height) + 2rem));
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: sticky;
+  top: calc(var(--ifm-navbar-height) + 1rem);
+
+  /* The panel's ground, raised above the page's. Repeated from
+     `.table-of-contents` in custom.css so the header row below sits on it too;
+     the list's own copy is neutralised in .panel. */
+  background: var(--tbb-toc-bg);
+  border-left: 1px solid var(--tbb-border);
+  border-radius: 0 var(--tbb-radius-md) var(--tbb-radius-md) 0;
+
+  /* The handle's ground/ink pair, mirroring --tbb-sb-handle-* on the sidebar.
+     Scoped here rather than shared because the two panels do not share a
+     ground: light takes the raised step above --tbb-toc-bg, and dark has to
+     invert that direction for exactly the reason the sidebar's pair does — the
+     dark panel ground is silver-7, so "raised" is the lighter step, and
+     --tbb-surface-raised would paint an invisible handle. */
+  --tbb-toc-handle-bg: var(--tbb-surface-raised);
+  --tbb-toc-handle-ink: var(--tbb-text-muted);
+
+  /* No width transition of its own. The column containing this element is what
+     animates (custom.css) and this simply fills it — which is also why the
+     prose reflows in step rather than after. */
+}
+
+:global(:root[data-theme="dark"]) .tableOfContents {
+  --tbb-toc-handle-bg: var(--tbb-surface-emphasis);
+  --tbb-toc-handle-ink: var(--tbb-silver-2);
+}
+
+/* One row: the eyebrow, then the handle. Also supplies the top padding the list
+   gave up in .panel below. */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  /* Matches the list's inline padding (.table-of-contents in custom.css), so the
+     eyebrow sits on the same axis as the links underneath it. */
+  padding: 0.875rem 1rem 0.375rem;
+}
+
+.eyebrow {
+  color: var(--tbb-toc-quiet);
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* The list itself. TOCItems renders it with the global `.table-of-contents`. */
+.panel :global(.table-of-contents) {
+  /* The list carried this when the eyebrow was a ::before inside it. The
+     eyebrow is a header row now, so the list would double the gap. Scoped to
+     this shell on purpose: the mobile collapsible TOC renders the same list and
+     keeps its own padding. */
+  padding-top: 0;
+  /* The ground and the hairline moved up to the shell so the header row shares
+     them. Neutralised rather than removed, so the mobile and inline TOCs — which
+     have no shell — keep theirs. */
+  background: transparent;
+  border-left: 0;
+  border-radius: 0;
+}
+
+.handle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+
+  /* The same 2.25rem square as the sidebar's rail knob, so the two handles are
+     the same object at the same size rather than two opinions about a handle. */
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  position: relative;
+
+  padding: 0;
+  border: 0;
+  border-radius: var(--tbb-radius-md);
+  background: var(--tbb-toc-handle-bg);
+  /* Elevation over borders, as the design contract asks — and here the shadow is
+     doing the same job it does for the sidebar's handle: making a control on a
+     panel ground read as a surface. */
+  box-shadow: var(--tbb-shadow-md);
+  color: var(--tbb-toc-handle-ink);
+  cursor: pointer;
+
+  transition:
+    color var(--tbb-duration-fast) var(--tbb-ease),
+    box-shadow var(--tbb-duration-fast) var(--tbb-ease),
+    transform var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+/* 2.25rem is under the project's 44px touch-target constant. The sidebar gets
+   away with a 36px knob because the whole 44px rail is its hit target; while
+   this panel is open there is no rail to lean on, so the button's own hit area is
+   grown to the constant without changing what is drawn. 36 + 2 x 4 = 44. */
+.handle::after {
+  content: "";
+  position: absolute;
+  inset: -0.25rem;
+}
+
+/* Forward and its ink promotes — the same two moves the sidebar's handle makes.
+   The ground deliberately does not change: it is already the raised step, and
+   changing a state's ground without a matching move in the other theme is how
+   the two modes drift apart. */
+.handle:hover {
+  box-shadow: var(--tbb-shadow-lg);
+  color: var(--tbb-text);
+}
+
+/* The machined key: half a pixel down, shadow pulled back in. Direct
+   manipulation, not decoration, so it survives reduced motion. */
+.handle:active {
+  box-shadow: var(--tbb-shadow-xs);
+  transform: translateY(0.5px);
+}
+
+/* The same ring the navbar controls and the sidebar handles draw. */
+.handle:focus-visible {
+  outline: 2px solid var(--tbb-accent);
+  outline-offset: 2px;
+  box-shadow: var(--tbb-focus-ring);
+}
+
+.handleIcon {
+  flex: 0 0 auto;
+}
+
+/* ── Folded ─────────────────────────────────────────────────────────────── */
+
+/* The rail keeps the panel's ground and hairline, so it reads as the panel
+   folded rather than as a hole in the page — and so the two edges of the reading
+   column match when both rails are in. */
+.collapsed .header {
+  justify-content: center;
+  padding-inline: 0;
+}
+
+/* `display: none`, NOT `visibility: hidden`. A visibility-hidden eyebrow still
+   occupies its ~70px of layout, which in a 43px rail made the flex row ~114px
+   wide and pushed the 36px handle out past the rail's own right edge — measured
+   at x=1437 in a rail spanning 1387-1430, off the viewport and clipped by the
+   shell's own overflow-x, so the control vanished. The eyebrow is also the one
+   piece here that needs no fade: it is replaced by the handle arriving at the
+   rail's centre, so it can leave the flow outright. */
+.collapsed .eyebrow {
+  display: none;
+}
+
+.collapsed .panel {
+  /* Here `visibility` IS the right tool, unlike above: the rows must stay mounted
+     for their fade to run, and visibility is what takes them out of the tab order
+     and the accessibility tree. Delayed to the end of the fade so they are still
+     visible while they dim. */
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    visibility 0s linear var(--ifm-transition-fast),
+    opacity var(--ifm-transition-fast) ease;
+}
+
+/* Upstream hides the desktop rail below 997px, where the collapsible mobile TOC
+   takes over. Kept. The other half of upstream's rule — a `.docItemContainer`
+   padding tweak — is dropped on purpose: it targets a class in theme-classic's
+   own CSS module, and a same-named class here would hash differently and never
+   match anything. Carrying it would be dead code pretending to be parity. */
+@media (max-width: 996px) {
+  .tableOfContents {
+    display: none;
+  }
+}
+
+/* a11y.css zeroes every transition-DURATION but not transition-DELAY, and the
+   visibility handoff above is driven entirely by a delay. Zero it explicitly, so
+   a reduced-motion reader does not wait 200ms for a hidden list to leave the tab
+   order. */
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    transition: none;
+  }
+}

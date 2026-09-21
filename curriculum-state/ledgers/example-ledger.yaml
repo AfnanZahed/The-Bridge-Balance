@@ -1,12 +1,26 @@
 # Example ledger - worked examples and scenarios already spent.
 #
-# Purpose: stop the to-do app appearing in five chapters, and stop two chapters
-# reaching independently for the same scenario. Record rejections too - an
-# example considered and dropped is as useful to the next author as one used.
+# Purpose: keep a record of every example the book has used, so the next author
+# chooses deliberately instead of blindly. Record rejections too - an example
+# considered and dropped is as useful to the next author as one used.
 #
 # Default rule: ONE worked example carries a chapter, chosen for how much
 # explanatory work it does rather than for how impressive it looked in research.
-# Every example is real and named - no foo, no bar, no Acme Corp, no to-do app.
+#
+# REUSE IS ALLOWED AND OFTEN BETTER (changed 2026-09-20). An example is LOGGED,
+# not SPENT. Before choosing one, read what is already here and decide: would a
+# new example teach better, or would returning to one the reader already has a
+# picture for? An idea the reader already owns costs them nothing to pick up.
+# The old "already spent" rule caused a slow drift toward rarer examples -
+# which, in a history stage, means named historical ones.
+#
+# INVENTED EXAMPLES ARE LEGITIMATE (changed 2026-09-20). "Imagine you can only
+# signal a friend across the street with a torch: on, or off" is a good example.
+# The old rule read "every example is real and named", and it was read as "attach
+# a real person, place and year to everything" - a main source of Stage 0's
+# density. What is still banned is the EMPTY PLACEHOLDER: foo, bar, Acme Corp,
+# the generic to-do app. Examples with nothing in them to picture.
+# canon/voice.md §"Analogies, examples and stories"; corrections.md §4.
 
 version: 1
 seeded: 2026-08-23
@@ -255,153 +269,108 @@ examples:
       STILL RESERVED after the 2026-09-11 Stage 1 run. None of the six Stage 1
       chapters reached for it. Its reservation holds.
 
+
   # =========================================================================
-  # STAGE 1 - added 2026-09-11, when all six Stage 1 chapters shipped.
+  # STAGE 1 (REMOVED 2026-09-17) — all worked-example and rejection entries
+  # for the six Stage 1 chapters were deleted here. The chapters were
+  # reverted to chapter_state: placeholder on 2026-09-17 (owner instruction -
+  # see prerequisite-graph.yaml's progress note for the full record), so the
+  # shared club-signup object and its six per-chapter questions are no longer
+  # spent on the live site. Re-add fresh entries when Stage 1 is re-authored -
+  # the shared object is a strong reuse candidate again, not still "spent".
   # =========================================================================
-  #
-  # The stage continued the intro's shared object rather than introducing a new
-  # one, and did NOT spend anything reserved. The entries below record the one
-  # shared object, the per-chapter questions asked of it, the supporting named
-  # examples, and every rejection the authoring agents reported.
+  # =========================================================================
+  # NEW STAGE 0 LADDER - added 2026-09-16, ch01-foundations and
+  # ch02-programming-is-born, the first two chapters of the approved
+  # chronological Stage 0 redesign (curriculum-state/stage-0-drafting-plan.md).
+  # =========================================================================
 
-  - id: stage1-club-signup-continuation
-    chapter: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
-    object: "The same school AI club sign-up page capped at thirty seats — continued from intro-2, not replaced"
-    status: spent
-    also_used_in:
-      - docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
-      - docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
-      - docs/stage-01-spec-aware-vibe-engineering/03-frontend.md
-      - docs/stage-01-spec-aware-vibe-engineering/04-backend.md
-      - docs/stage-01-spec-aware-vibe-engineering/05-databases.md
-      - docs/stage-01-spec-aware-vibe-engineering/06-git-github.md
+  - id: ch01-torch-across-the-street
+    chapter: docs/ch01-foundations.md
+    object: "A torch signalled across a dark street to a friend"
+    status: in-use
+    introduced: 2026-09-20
+    notes_current: >-
+      THE CHAPTER'S EVERYDAY THREAD, added in the 2026-09-20 rewrite. Invented,
+      not historical, and that is deliberate.
+      It carries three separate jobs in sequence, which is why it was chosen
+      over a new example per section: (1) two agreed states can carry any
+      message; (2) why TWO and not ten - dim and medium blur across a dark
+      street, on and off do not, which is the noise argument made physical;
+      (3) two torches wired so the second lights only when both are on - the
+      move from carrying a signal to working one out.
+      It then hands over deliberately: a torch signal disappears when you let
+      go of the button, a punched card does not. That is the bridge into the
+      chapter's second section.
+      REUSABLE. A later chapter returning to the torch is a good choice, not a
+      repetition - the reader already has the picture.
+    superseded_entry: >-
+      This row replaced `ch01-no-worked-example`, whose reasoning is kept below
+      because the mistake is instructive.
     notes: >-
-      THE central decision of the Stage 1 run, recorded on its own entry because
-      it governs all six chapters: the stage returned to the intro's shared
-      object and asked it one new question per layer, rather than inventing a
-      second teaching object. No chapter introduced a to-do app, a notes app or
-      a blog. Each chapter's question, in order:
-      s1-01 - where does each box live, and which boundary must the thirty-seat
-      rule sit behind so a student cannot reach around it?
-      s1-02 - the cap as readable code: a variable, a conditional, then a
-      function the system calls; then broken by an off-by-one and by a check
-      that is present and wrong.
-      s1-03 - the form a student actually clicks, in three acts (before, during,
-      after a tap), and why neither the number on screen nor the disabled button
-      can decide admission.
-      s1-04 - the endpoint that must refuse, and two students tapping submit for
-      the last seat in the same instant. States the race; deliberately does NOT
-      solve it.
-      s1-05 - the row written to the database and the thirty-first sign-up that
-      must not get in. Solves the race the previous chapter stated.
-      s1-06 - how work on this page is recorded, branched, reviewed and merged,
-      and what changes when an agent wrote the diff.
-      THE STAGE'S ARC DEPENDS ON THIS: s1-04 states a problem it refuses to
-      solve and s1-05 resolves it. A future edit that changes either chapter's
-      handling of the race breaks the other.
+      REVERSED 2026-09-20 - this entry is kept as the record of a decision the
+      owner has since rejected, and ch01 is scheduled for a rewrite that fixes
+      it.
+      The original reasoning was: "Chapter 1 is a Concept-shape history chapter
+      whose spine IS its real named incidents (Jacquard's loom, Babbage and
+      Lovelace, Hollerith's tabulator, the relay/tube/transistor sequence, the
+      2003 Belgian election bit-flip) ... A reader would not have gained from
+      inventing one."
+      Why that was wrong: it treats a chain of named historical people as the
+      thing a beginner holds on to. It is not. A reader who has never
+      programmed needs ONE everyday object they can picture, returned to with a
+      new question each time - the way the old intro chapters used a school
+      sign-up page capped at thirty seats. The history then hangs on that
+      thread instead of being the thread.
+      "The subject is its own example" is not an acceptable answer for a
+      Stage 0-2 chapter. If nothing real fits, invent something concrete.
 
-  - id: s1-01-facebook-outage-2021
-    chapter: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
-    object: "Facebook/Instagram/WhatsApp outage, 4 October 2021"
-    status: spent
+  - id: ch02-literal-helper
+    chapter: docs/ch02-programming-is-born.md
+    object: "A tireless, very fast helper with no judgment at all"
+    status: in-use
+    introduced: 2026-09-20
+    notes_current: >-
+      THE CHAPTER'S EVERYDAY THREAD, added in the 2026-09-20 rewrite. Invented.
+      Given its own short section before the history starts, then returned to
+      at every step: told the wrong direction they walk until they reach the
+      sea; directed in numeric codes it gets worse; given short words it gets
+      bearable; given FORTRAN it gets pleasant - and they still have no
+      judgment, which is the chapter's real closing point.
+      DELIBERATELY BUILT TO CARRY FORWARD. This is the same helper a reader
+      will meet again as an AI coding assistant in Stages 3-4: fast, tireless,
+      confident, no judgment. Seeded here on purpose so the later chapters can
+      call back to something the reader already owns rather than arguing from
+      scratch. Do not spend it on a minor point in between.
+    superseded_entry: >-
+      This row replaced `ch02-no-worked-example`, whose reasoning is kept below
+      because the mistake is instructive.
     notes: >-
-      S6 blast radius at a scale a reader can feel: about six hours, 2.9 billion
-      monthly users, one routine configuration change to the routers carrying
-      Facebook's traffic, and the internal tools staff would have used to fix it
-      taken down inside the same failure.
+      REVERSED 2026-09-20, same as ch01-no-worked-example above, and for the
+      same reason.
+      The original reasoning was that the chapter's spine is four real
+      historical steps (ENIAC's plugboards, machine code, Kathleen Booth's
+      assembly language, Grace Hopper's A-0 and Backus's FORTRAN), each already
+      a concrete named object, so "inventing a separate toy example on top would
+      compete with, not clarify, the real history".
+      Why that was wrong: named and dated is not the same as picturable. A
+      beginner has no image for a plugboard. One everyday thread - something
+      they already understand being given to someone who follows instructions
+      exactly and literally - carries all four steps and makes the history
+      land instead of replacing it.
 
-  - id: s1-01-prime-video-monolith-2023
-    chapter: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
-    object: "Amazon Prime Video's 2023 move from distributed serverless back to a single program"
-    status: spent
+  - id: ch00-no-worked-example
+    chapter: docs/ch00-introduction.md
+    object: null
+    status: resolved-by-deviation
     notes: >-
-      The depth block's counter-argument to splitting everything: about a 90%
-      cost reduction from moving the other way. Used to show that a boundary
-      earns its place only when the two sides genuinely change apart.
-
-  - id: s1-02-ariane-501
-    chapter: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
-    object: "Ariane 5 Flight 501, 4 June 1996"
-    status: spent
-    notes: >-
-      S7's real magnitude: lost 37 seconds after lift-off, over US$370 million,
-      guidance software reused unchanged from the smaller Ariane 4 and never
-      re-read against the machine it now ran on. The chapter's point is that the
-      code did its job correctly for years.
-
-  - id: s1-02-break-guard-present-and-wrong
-    chapter: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
-    object: "The thirty-seat guard broken three ways: the >= that becomes >, the deleted empty-name check, and a check that is present and wrong"
-    status: spent
-    notes: >-
-      ADDITIVE, NOT A REUSE, and worth recording because it sits close to a
-      spent example. intro-3 already spent "an agent deletes the thirty-seat
-      check". This chapter's break is deliberately different in kind: the guard
-      is STILL THERE and still wrong, which makes it a reading failure rather
-      than an omission failure. The third variant - `name is None` missing an
-      empty string - is the sharpest, because the line reads as a correct check.
-
-  - id: s1-04-last-seat-interleaving
-    chapter: docs/stage-01-spec-aware-vibe-engineering/04-backend.md
-    object: "The millisecond interleaving where two sign-ups both read 29 seats free and both answer 201"
-    status: spent
-    notes: >-
-      The stage's pivotal example and the reason s1-05 exists. Deliberately
-      stopped short of the fix - no SQL, no transaction, no constraint appears in
-      s1-04 - so the databases chapter can close it. Verified by inspection
-      after the run: s1-04 contains no BEGIN/COMMIT/constraint teaching.
-
-  - id: s1-05-constraint-and-transaction-fix
-    chapter: docs/stage-01-spec-aware-vibe-engineering/05-databases.md
-    object: "The same race resolved: a CHECK constraint plus a conditional UPDATE inside a transaction"
-    status: spent
-    notes: >-
-      Pays off s1-04's open question. Shows the failing check-count-then-insert
-      honestly first, then the fix, and explains why the row lock and Read
-      Committed's re-check make it hold. This is the only place in the book that
-      closes the last-seat race; do not re-solve it elsewhere.
-
-  - id: s1-06-agent-diff-review
-    chapter: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md
-    object: "A pull request against the club page whose diff was written by an agent, with no human author"
-    status: spent
-    notes: >-
-      The SDE thesis made concrete: the reviewer may not have written a line of
-      what they are approving. The S10 retrieval diff is `<` changed to `<=` on
-      the seat check - the off-by-one at the boundary, reviewed rather than
-      authored, which is a different failure from intro-3's deletion.
-
-  - id: s1-rejections-2026-09-11
-    chapter: null
-    object: "Examples each Stage 1 chapter considered and rejected"
-    status: rejected
-    notes: >-
-      Recorded because a rejection is worth as much as a use, and because these
-      remain available. All six agents were asked to report rejections.
-      Therac-25 (s1-02, considered for S7) - rejected: involves patient deaths,
-      heavier than a syntax-level reading lesson needs; Ariane 5 carries the
-      same "reused code, changed context, unverified" lesson with a cleaner
-      quotable cost.
-      "Code is read far more than it is written" (s1-02) - rejected: could not
-      be pinned to a primary, non-circular source in session.
-      Knight Capital, 1 August 2012 (s1-04) - rejected: a deployment-consistency
-      failure (new code on seven of eight servers), not an endpoint-enforcement
-      failure. Belongs to a deployment lesson.
-      nginx client_max_body_size default (s1-04) - rejected: could not be
-      confirmed from nginx's own documentation in session; body-parser's 100 KB
-      is primary-sourced.
-      A REAL public duplicate-sign-up or double-charge incident (s1-04) -
-      rejected as UNVERIFIABLE, and recorded as an honest gap: the chapter's
-      evidence is a named platform's documented behaviour plus an expired draft
-      instead of a half-remembered story.
-      A mobile-vs-desktop traffic split figure (s1-03) - rejected: sources
-      disagree month to month, so a single number would be a dated snapshot
-      masquerading as a fact.
-      A specific component-library bundle-size figure (s1-03) - rejected: only
-      secondary comparison blogs carried numbers, which is the charm-to-trust
-      risk the brief warns about.
-      A bank passbook as the s1-06 anchor - rejected in favour of the
-      numbered-copies habit ("signup-page-v4-final.js"), which is closer to
-      something a first-time reader has personally done.
-      The old placeholder's notes-table-with-JSONB example (s1-05) - rejected:
-      would introduce a second object and duplicate the MongoDB beat.
+      Same judgment again, and after the rebuild it is forced rather than
+      chosen: an introduction to a stage has no mechanism to trace and nothing
+      to run, so there is no object it could carry. The chapter names one real
+      object - the reader's own computer, which the last few chapters of the
+      stage actually walk them through - and links out to ch01-foundations
+      rather than opening a worked example of its own. An earlier draft of this
+      chapter used the moth taped into the Harvard Mark II's logbook as its
+      demonstration; that draft's structure was rejected and no longer exists,
+      and evidence-ledger:bug-edison-not-the-moth is retained as unused
+      research.

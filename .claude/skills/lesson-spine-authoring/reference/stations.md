@@ -2,6 +2,14 @@
 
 The full definition of the Prime–Build–Close spine. `SKILL.md` is the workflow that runs on this; this file is the specification.
 
+> **Swept 20 September 2026.** The two-reader model was withdrawn by Constitution
+> v3.0.0 and `corrections.md` §8, and `SKILL.md` recorded that at its steps 1 and
+> 5 — but this file kept nine live instructions built on it, including the station
+> sheet in §5. They are corrected below, each marked where it stood. **No rule in
+> this file may assume a reader who already knows the subject.** Stages 0–2 are
+> written for someone who has never programmed; the audience for Stages 3–4 is
+> undecided, so it may not be assumed either.
+
 ## Contents
 
 1. [Origin and mapping to 5W2H](#1-origin-and-mapping-to-5w2h)
@@ -37,6 +45,15 @@ Three phases: **Prime** (S0–S2, before any explanation), **Build** (S3–S8), 
 
 ## 2. The stations
 
+**Scope note on dates and sources — strengthened 20 September 2026.** S2, S7 and S9 ask for dates, figures and named origins. **Every one of those is found in research and recorded in the ledgers. Almost none of it reaches the reader.**
+
+- The station is satisfied by **knowing** the fact and letting it shape the explanation — not by printing it.
+- `curriculum-state/canon/corrections.md` §4 and §11 outrank all three stations in every stage, and bind hardest in Stages 0–2.
+- A date, a full name or a source reaches the prose only when it is **load-bearing to the sentence carrying it**. Where the story works without the year, the year is furniture.
+- A statistic reaches the prose as a plain sentence with its source attached at the end — `canon/thesis.md` §"Statistics and their sources".
+
+The earlier version of this note scoped the exception to Stages 0–2 and called the stations "right" for the rest. That framing is what let the density back in.
+
 ### PRIME
 
 Everything in Prime happens before the reader receives a single explanation. Its whole purpose is to make the explanation land on prepared ground rather than flat.
@@ -53,7 +70,9 @@ Everything in Prime happens before the reader receives a single explanation. Its
 
 **Failure mode it prevents:** the reader treating technical vocabulary as a wall of arbitrary tokens signalling that they don't belong. This is the beginner's most common reason for quitting, and it is dissolved almost entirely by showing that the words have parts.
 
-**Why it also serves the senior:** name origins are a near-universal blind spot. An engineer who has run Kubernetes for six years has usually never registered that the name means *helmsman* and shares a root with *cybernetics* — or that this predicts the reconciliation-loop architecture exactly.
+**The decomposition has to predict something.** *Kubernetes* means *helmsman* and shares a root with *cybernetics*, and that predicts the reconciliation-loop architecture exactly. A decomposition that predicts the design earns the station; one that only produces trivia does not.
+
+*(The senior-reward rationale that stood here — "why it also serves the senior... an engineer who has run Kubernetes for six years" — is withdrawn with the two-reader model. Constitution v3.0.0, `corrections.md` §8.)*
 
 **Never:** open with a definition instead. Once the definition is read there is nothing left to predict.
 
@@ -65,7 +84,7 @@ Everything in Prime happens before the reader receives a single explanation. Its
 
 **Procedure:** name one thing the reader plausibly already holds. Then state the relationship — this is like that, except for one specific difference.
 
-**The mixed-audience constraint bites hardest here**, because the two readers hold completely different priors. Three strategies, in order of preference:
+**Priors are the hard part of this station**, because a beginner's are the only ones that count and they are easy to overestimate. Three strategies, in order of preference:
 
 1. **Find the shared anchor.** Something both readers own: waiting in a queue, a restaurant kitchen during a rush, a building's fire doors, a new hire's first week. Preferred, because it is one anchor rather than two.
 2. **Anchor to the lesson's own earlier material.** Works when the curriculum has already established something. Costs nothing and serves everyone.
@@ -73,7 +92,11 @@ Everything in Prime happens before the reader receives a single explanation. Its
 
 **Anchor tiers are defined in `language-register.md` §4** — universal anchors first, Pakistani anchors that stay legible to an outsider second.
 
-**Never:** anchor to something only one reader has. An anchor a beginner lacks is a silent assumption — the exact thing that makes them quit — and an anchor only a beginner needs is an unrewarded sentence for the senior.
+**Never:** anchor to something the reader does not already have. An anchor a beginner lacks is a silent assumption — the exact thing that makes them quit.
+
+*(The second half of this rule — "an anchor only a beginner needs is an unrewarded sentence for the senior" — is withdrawn. An anchor a beginner needs is the point of the station. `corrections.md` §8.)*
+
+**And check it travels.** An anchor has to land for a Pakistani reader and an international reader at the same time. Morse code and Braille are good teaching objects in principle and bad anchors in practice here — both are unfamiliar words for most of this book's readers, so each would need teaching before it could anchor anything.
 
 ---
 
@@ -81,7 +104,7 @@ Everything in Prime happens before the reader receives a single explanation. Its
 
 **Delivers:** who made this, whether it is alive, and where the canonical account lives. Thirty seconds. A gate, not a stage.
 
-**Procedure:** name the origin, the current maintainer or steward, the version or era being described, and the one authoritative source. State the date of the information.
+**Procedure — backstage.** Establish the origin, the current maintainer or steward, the version or era being described, and the one authoritative source, and record them in `evidence-ledger.yaml`. **What reaches the reader is the consequence, not the citation:** that a tool is still maintained, or that an idea came out of a specific problem, said in a plain sentence. Only name the source in prose where the reader needs it to judge something themselves.
 
 **Why it is a gate:** it decides whether the remaining stations are worth the reader's time. A tool abandoned in 2023 needs a different lesson from one shipping weekly.
 
@@ -103,7 +126,9 @@ Everything in Prime happens before the reader receives a single explanation. Its
 
 **The ordering claim:** a tool met before its problem is memorized; a tool met after its problem is understood. Where you can make the reader feel the pain in two or three sentences before naming the cure, do — attempting a problem before receiving the solution improves transfer even when the attempt fails.
 
-**Why this is the senior's station.** They have the scar tissue. A senior who has hand-deployed forty containers reads the *why* of an orchestrator with recognition, and recognition is engagement. It is also frequently new to them: engineers usually know a tool well and its originating problem barely at all, because they arrived after the problem was already solved.
+**The originating problem is the part that is almost never told.** A tool is normally met long after the problem it answered was solved, so the problem has to be reconstructed deliberately or it is simply absent.
+
+*(The senior-reward rationale that stood here — "this is the senior's station... they have the scar tissue" — is withdrawn with the two-reader model. The ordering claim above does not depend on who is reading: a tool whose originating problem is never shown can only be memorised. Constitution v3.0.0, `corrections.md` §8.)*
 
 **For Register 3 names** (eponyms and accidents), this is where the name pays out. *Bayesian* tells you nothing; "Bayes was attacking inverse probability — reasoning backwards from effects to causes" tells you most of the concept.
 
@@ -131,7 +156,9 @@ Everything in Prime happens before the reader receives a single explanation. Its
 
 **Procedure:** the minimum viable demonstration, complete and runnable, with nothing decorative. Then break it on purpose and show the failure. The break is not optional — it is where the mechanism becomes visible, and it is the difference between a reader who can run the example and one who can debug it.
 
-**This station is where the audience gap is widest**, and therefore where the three-layer architecture does the most work. A beginner needs every keystroke, every prerequisite, every "you should now see." A senior needs none of it and will skim the entire block. Resolution: the spine states what the demonstration establishes and what breaking it reveals; the keystroke-level walkthrough goes in a **foothold**. See `mixed-audience.md` §3.
+**This station is where a beginner is most easily lost.** Every keystroke, every prerequisite, every "you should now see" is load-bearing for a reader who has never programmed.
+
+**The walkthrough belongs in the spine.** *(The resolution that stood here — the spine states what the demonstration establishes, and the keystroke-level walkthrough goes in a foothold — is **withdrawn**. It existed so a senior could skim the block, and it demoted into an optional layer precisely the material a beginners-only book needs most. Constitution v3.0.0, `corrections.md` §8.)* A foothold at this station still has to pass the delete test like any other: if removing it leaves the reader unable to run the example, it was never a foothold.
 
 **For Procedure-shape lessons, this station is the whole lesson** — and the failure branch is where the value is. Anyone can follow a happy path. What defeats a beginner is step 4 not looking like the screenshot. Budget more words for what to do when it goes wrong than for when it goes right.
 
@@ -145,7 +172,7 @@ Everything in Prime happens before the reader receives a single explanation. Its
 
 **Why *where* and not *when*:** for a physical event these are distinct questions; for an abstract object like gradient descent they blur into each other, and the blurred version gets answered with a shrug. Splitting them by definition — *where* is structural position, *when* is applicability — keeps both answerable.
 
-**Blast radius is the part authors skip and readers need most.** It is also natively both-audience: a beginner can understand "if this goes down, nobody can log in" and a senior rarely has the specific dependency map for a tool they haven't operated.
+**Blast radius is the part authors skip and readers need most.** It also states cleanly at a beginner's level — "if this goes down, nobody can log in" is the whole idea, and it needs no prior operational experience to land.
 
 ---
 
@@ -157,9 +184,9 @@ Everything in Prime happens before the reader receives a single explanation. Its
 
 **This is the most-skipped station and the most diagnostic.** Experts store quantities attached to their concepts — an L1 cache hit is roughly a nanosecond, a cross-region round trip is tens of milliseconds, this model costs that much per million tokens. Novices store only qualitative shape. The gap between the two groups is, to a surprising degree, just this: the expert's concepts have numbers stapled to them.
 
-**Both-audience by construction.** A senior rarely has current figures memorized and will read them with genuine interest. A beginner needs no prior knowledge to understand a number with a comparison attached. Few kinds of content reward both readers this reliably.
+**A number with a comparison attached needs no prior knowledge.** That is why this station works for a beginner: not the figure itself, but the scale it gives them.
 
-**Date every figure and name its source.** Prices and benchmarks rot fast. An undated number becomes a wrong number.
+**Date every figure and name its source — in `evidence-ledger.yaml`.** Prices and benchmarks rot fast, and an undated number becomes a wrong number. **That dating belongs in the ledger, not inside the sentence the reader is reading.** In the prose, give the magnitude in a form they can feel — "about a second, where the other takes a minute" — and attach the source at the end of the sentence where one is needed.
 
 **Never:** substitute an adjective. "It can get expensive" is not this station. Expensive compared to what, at what scale, crossing what threshold.
 
@@ -187,7 +214,9 @@ Everything in Prime happens before the reader receives a single explanation. Its
 
 **Delivers:** the intellectual thread — the paper, the debate, the disagreement that is still open, and who to read next.
 
-**Procedure:** the originating work where one exists. The live disagreement, stated fairly from both sides. Two or three people or sources worth following, named.
+**Procedure:** the originating work where one exists, and two or three sources worth following.
+
+**Disagreements, in Stages 0–2:** mostly they stay backstage. If a dispute does not change the point being taught, it belongs in `evidence-ledger.yaml` and the prose simply avoids asserting the contested detail. If it does change the point, teach it properly — both positions and why it matters — rather than dropping in a hedging clause. `canon/integrity-floor.md`.
 
 **Purpose:** to leave the topic open rather than closed. A lesson that ends in resolution teaches that the field is settled. Naming a live disagreement teaches that it isn't, and gives the motivated reader somewhere to go.
 
@@ -215,7 +244,7 @@ Everything in Prime happens before the reader receives a single explanation. Its
 
 **The recap ending is the most common way a good lesson is ruined in its last paragraph.** "In this lesson we learned that…" is not a weak version of this station; it is the station replaced by its own opposite. Delete it wherever it appears.
 
-**Calibration for a mixed audience:** make the prompt open enough that a beginner can produce a partial answer and a senior can produce a deep one. "Reconstruct the mechanism in three sentences" scales naturally. "Which of these four options" does not.
+**Calibrate the prompt to scale with how much the reader actually absorbed:** open enough that someone who got half of it still produces a partial answer, and someone who got all of it produces a fuller one. "Reconstruct the mechanism in three sentences" scales naturally. "Which of these four options" does not.
 
 ---
 
@@ -261,6 +290,29 @@ Three rules for Procedure lessons:
 2. **No condescension and no apology.** Write the steps plainly. Do not preface them with "this is very simple," which converts a stuck reader's problem into a personal failing.
 3. **State the end state up front**, so the reader can tell whether it worked. "When this is done, running `git status` prints a line about a branch." Without this a beginner cannot distinguish success from partial failure.
 
+**FrontDoor** — the fifth shape, added 17 September 2026 after four lesson shapes between them failed to describe a stage's opening page. A FrontDoor teaches none of its stage's material. What it carries is the stage's shape and its promise. It is short, and it never opens on or hangs from a dated artifact.
+
+*(This used to read "the one place in the book where warmth and orientation outrank density". Withdrawn on 20 September 2026 — warmth is the house register everywhere, including the middle of a teaching chapter. `corrections.md` §13.)*
+
+| Station | FrontDoor |
+|---|---|
+| S0 NAME | Dropped. A welcome has no name to decompose, and forcing the station produces a demonstration the position does not need. |
+| S1 ANCHOR | The reader's own situation: what they came for, and what they will have at the end. |
+| S2 SOURCE | Which stage this is, of how many, and what it is called. |
+| S3 WHY | Why this stage comes first, and why it is ordered the way it is. This is the one place a short version of the argument belongs. |
+| S4 WHAT | What the stage covers, as groups rather than a list — never a chapter count, and never a promise the stage cannot keep. |
+| S5 HOW | Dropped. There is nothing to run. |
+| S6 WHERE | Where the stage sits in the whole book, and what it hands to the next one. |
+| S7 COST | What it asks of the reader. Usually nothing but reading, and worth saying plainly. |
+| S8 WHEN | How to read it — in order, at whatever pace, coming back whenever. |
+| S9 LINEAGE | Dropped. |
+| S10 RETRIEVE | Dropped, or replaced by the single action the reader takes next. |
+| S11 SPIRAL | The handoff to the first real chapter, named, and the reason that chapter opens where it does. |
+
+**A FrontDoor still carries the safety floor** wherever the topic warrants one, still hands forwards, and may never state a chapter count (locked decision D5). See `curriculum-state/canon/corrections.md` §1 for the rule this shape exists to enforce, and §2 for how a reference structure gets mapped into it.
+
+**All ten comprehension-audit angles run on a FrontDoor**, unchanged, and its findings log is presented the same way. Two of them matter more here than anywhere else. **Angle 1 (cold landing)** is the whole risk, because a front door is the page a reader is most likely to meet with nothing behind them. **Angle 8 (false fluency)** is the one that fails quietly: a front door that promises more than its stage delivers — a build, a skill, a credential — leaves the reader feeling they understood what they were signing up for, and they did not. Nothing on a FrontDoor may promise anything the stage does not actually carry.
+
 ---
 
 ## 4. Sequencing rules and legal deviations
@@ -280,6 +332,25 @@ Three rules for Procedure lessons:
 
 **Legal omissions:** any station can be dropped when the lesson has nothing real to put in it. Log each with a one-clause reason. Manufacturing a number for S7 or an origin story for S9 is strictly worse than dropping the station.
 
+### Lesson boundaries — the open and the close
+
+**Two rules bind every lesson at its edges, and neither is one of the twelve stations.** They govern where a lesson sits in a sequence, not what happens inside it. `SKILL.md`'s sixth hard constraint is the full statement; this is the spec.
+
+**The lesson opens by connecting backwards.** Before any teaching happens, the opening carries the reader in from where they already are: what came before, what it left unresolved, and why this subject arrives now. **S1 is where this lives, and S1's job is narrower than the requirement** — a lesson can have a real anchor and still open cold on its own subject. The test is whether the first paragraph answers a question the reader is already holding, not whether an analogy is present. The opening is content in the lesson's own voice, never a preamble announcing that a lesson is about to begin.
+
+**The lesson closes by handing forwards.** Once S10's retrieval prompt has been answered, and alongside S11's forward pointer, the closing names what this lesson deliberately left unresolved and walks the reader to the next one: what it will ask, and why that is the next question. **S11 points at a sign; the handoff walks them to the door.** Both are required, the handoff comes last, and nothing follows it.
+
+**A stage's first position introduces the stage itself** — what it is, what it covers, in what order, why that order, what it costs the reader, and where it ends. It teaches none of the stage's own material.
+
+**It is the `FrontDoor` shape and uses the FrontDoor weighting table above. It never borrows Concept's.**
+
+> **Corrected 20 September 2026.** This paragraph used to say a stage's first
+> position "has no weighting row of its own: it borrows Concept's" — fifty lines
+> after the FrontDoor table was added precisely so it would not have to. A
+> drafting session that reached this line instead of the table would rebuild the
+> exact draft the owner rejected on sight: a stage introduction written as a
+> Concept lesson, opening on a dated artifact.
+
 ---
 
 ## 5. The station sheet
@@ -292,7 +363,7 @@ SHAPE:             [Concept | Tool | Practice | Procedure]
 NAME REGISTER:     [1 Compositional | 2 Metaphorical | 3 Eponymous | 4 Misleading]
 PREDICTION GAP:    [what the name promises vs. what the thing is — sizes the lesson]
 CENTER OF GRAVITY: [the 2-3 stations carrying the weight]
-BOTH-AUDIENCE SET: [content new to a senior AND accessible to a beginner — this is the spine]
+BEGINNER-LANDING SET: [what will carry this for someone meeting it the first time — this is the spine]
 
 S0  NAME      | delivers:                          |
 S1  ANCHOR    | delivers:                          |
@@ -301,15 +372,16 @@ S3  WHY       | delivers:                          |
 S4  WHAT      | delivers:              | scores S0: |
 S5  HOW       | delivers:              | breaks by: |
 S6  WHERE     | delivers:              | blast radius: |
-S7  COST      | delivers:              | figure + date + source: |
+S7  COST      | delivers:              | magnitude the reader can feel: |
+              | (figure + date + source go in evidence-ledger.yaml, not the prose) |
 S8  WHEN      | delivers:              | counter-indication: |
-S9  LINEAGE   | delivers:              | live disagreement: |
+S9  LINEAGE   | delivers:              | where to go next: |
 S10 RETRIEVE  | the reader must produce:           |
 S11 SPIRAL    | returns at:                        |
 
-FOOTHOLDS:         [beginner-only blocks — must pass delete test]
-DEPTH BLOCKS:      [senior-only blocks — must pass delete test]
+FOOTHOLDS:         [concrete mechanics: commands, click paths, expected output — must pass delete test]
+DEPTH BLOCKS:      [optional “why does it work like this?” extras for a curious beginner — must pass delete test]
 DROPPED STATIONS:  [station: one-clause reason]
 ```
 
-If two stations' "delivers" lines say nearly the same thing, one of them is not earning its place. If every "delivers" line serves the same reader, the lesson has a center-of-gravity problem before it has a prose problem.
+If two stations' "delivers" lines say nearly the same thing, one of them is not earning its place. If every "delivers" line delivers the same *kind* of thing — all definition, or all procedure — the lesson has a center-of-gravity problem before it has a prose problem.

@@ -42,7 +42,7 @@ What it cannot do is judge whether the chapter is worth reading, whether the mis
 
 ## Step 1 — Read, narrowly
 
-Read, in order: the chapter MDX; `curriculum-state/canon/thesis.md`, `audience.md`, `voice.md` (what the chapter is supposed to honor); all four `curriculum-state/ledgers/*.yaml` (what the rest of the book has already committed to, that this chapter must not contradict); The ledgers are the evidence trail: `evidence-ledger.yaml` carries each source, what it establishes, and every question already asked of it.
+Read, in order: the chapter MDX; **`curriculum-state/canon/corrections.md` — first, and in full** (the standing rules the owner has already had to give more than once; a review that has not read it will pass exactly the chapters that get rejected); then `canon/thesis.md`, `audience.md`, `voice.md`, `naming.md` (what the chapter is supposed to honor); all four `curriculum-state/ledgers/*.yaml` (what the rest of the book has already committed to, that this chapter must not contradict); The ledgers are the evidence trail: `evidence-ledger.yaml` carries each source, what it establishes, and every question already asked of it.
 
 **Do not read:** the master lesson's Reasoning Trace, any PHR or ADR discussion of this chapter, any conversation where it was drafted or discussed. If any of it surfaces anyway, don't let it change a finding — judge the file.
 
@@ -73,7 +73,9 @@ Straight through, then back over the seams. The question is never "can I see why
 
 **Evidence reuse, against the whole ledger, not just this lesson.** For every reused source, does `evidence-ledger.yaml` show this cell's exact question already asked by a different chapter? The incident-sharing rule is book-wide — a chapter can pass its own internal check and still repeat another chapter's question.
 
-**Staleness.** Any source past its `evidence-ledger.yaml` `expires` date, cited as current? Any statistic missing its year inline, so a reader can't tell it's aging?
+**Staleness.** Any source past its `evidence-ledger.yaml` `expires` date, cited as current? Any statistic in the prose whose source is not recorded in the ledger with a year?
+
+*(This check used to ask for "any statistic missing its year inline", which pushed years back into the prose. The year lives in the ledger and in the source attached to the sentence — not inside the sentence. `corrections.md` §11.)*
 
 **Alt text, as a blind reader needs it.** Not "is it present" (the script checks that) — "does it convey what a sighted reader gets, or just name the image's type ('a diagram')?"
 
@@ -100,3 +102,36 @@ If nothing survives hostile scrutiny — genuinely nothing — say so. A review 
 ---
 
 *A finished-looking chapter and a finished chapter are not the same claim. This skill only ever tests the second one.*
+
+## The beginner checks — added 2026-09-20
+
+A chapter can pass every check above and still be the chapter the owner rejects.
+These five run on every Stage 0–2 review, and each one has a rejected draft
+behind it.
+
+1. **The opening.** Does the chapter welcome the reader, connect backwards with a
+   link, say what it covers **and why it matters**, then move gradually into the
+   teaching? Or does a heading and a cold first sentence arrive? Is the welcome
+   style different from the previous chapters'? `corrections.md` §7.
+2. **Every section's first sentence, not only the chapter's.** A warm opening
+   followed by cold sections is the same failure, moved down the page.
+3. **Density.** Count the dates, full names and institutions in the reader-facing
+   prose. For each one ask: is it load-bearing to the sentence carrying it? Where
+   the story works without it, it is furniture. `corrections.md` §4.
+4. **Vocabulary.** Any hard word the idea did not need? Any sentence that needs a
+   second read? Read the chapter aloud. `corrections.md` §12 and §16.
+5. **The page itself.** Bullets, tables, short sections, callouts — or a wall of
+   prose? Is bold on what matters, or mechanically on every paragraph's first
+   sentence? `corrections.md` §14.
+
+Also check that **no internal rule or internal vocabulary reaches the reader**
+(`corrections.md` §9), and that every name obeys `canon/naming.md`.
+
+**The three-second name test.** Take the chapter's title and each section heading *on its own*, with none of the page around it, as a beginner meets them in a sidebar or a search result. For each one, answer two questions: **what is this?** and **why is someone learning spec-driven AI engineering reading it?** A heading that answers only the first is a finding (`canon/naming.md` Rule 3, `corrections.md` §18).
+
+Two failures to separate, because they look alike and only one is obvious:
+
+- **No why at all.** "Short Words Instead of Numbers" — accurate, and no reason to go on.
+- **The wrong why.** A name carrying the *subject's* significance instead of the *reader's* reason — "The Switch That Made Computers Small Enough to Own". This one reads well, which is what makes it worth catching here.
+
+Excitement, urgency and a claim that the subject is important are not whys. The gate's `heading-no-why` warning catches only bare noun phrases; this test catches the rest, and it is the only check that catches the wrong-why case at all.

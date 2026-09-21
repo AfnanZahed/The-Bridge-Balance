@@ -24,12 +24,12 @@ import Timeline, { type TimelineEntryData } from "../components/MagicUI/Timeline
 import FeatureGrid, { type FeatureItem } from "../components/Aceternity/FeatureGrid";
 import BackgroundGradient from "../components/Aceternity/BackgroundGradient";
 import DataVizSection from "../components/DataViz";
-import { BookOpen, Zap, Github, Sparkles, ArrowRight, GitBranch, Check } from "../components/icons";
+import { BookOpen, Zap, Sparkles, ArrowRight, GitBranch, Check } from "../components/icons";
 
 const STAGES = [
   {
     number: "00",
-    title: "Orientation Through Computing History",
+    title: "Introduction to Computing: From Switches to AI Agents",
     description:
       "The history of computing and software, read in the order it happened — binary through today's AI-coding-agent era — plus the Spec-Driven Engineering and Reading & Understanding Literacy philosophy Stage 1 depends on.",
     href: "/intro-1-binary-to-programming",
@@ -74,14 +74,18 @@ const STAGES = [
   },
 ];
 
-// 4-pillar feature grid — single-stage accent + label-first identity.
+// 4-pillar feature grid — label-first identity. The accent is a RAMP STEP, not
+// a hue: the four plates descend the silver ramp exactly as the five stages do,
+// so the visual metaphor holds across the page. Card 3 previously read
+// `--tbb-accent`, which ADR-0003 scopes to a named list of surfaces that does
+// not include cards — a stage step is the token that belongs here.
 const FEATURE_PILLARS: FeatureItem[] = [
   {
     icon: <BookOpen size={22} aria-hidden="true" />,
     title: "Video + text, paired",
     body:
       "Every chapter ships twice: a video lecture from the project owner and a detailed text companion co-authored with Claude Code. Neither stands alone.",
-    accent: "var(--ifm-color-primary)",
+    accent: "var(--tbb-stage-1)",
   },
   {
     icon: <Check size={22} aria-hidden="true" />,
@@ -95,14 +99,14 @@ const FEATURE_PILLARS: FeatureItem[] = [
     title: "Free-tier, forever",
     body:
       "Docusaurus on Vercel. Neon Postgres, Qdrant Cloud, Resend, Stripe, R2 — all on their free tiers. The textbook never charges for content.",
-    accent: "var(--tbb-accent)",
+    accent: "var(--tbb-stage-3)",
   },
   {
     icon: <GitBranch size={22} aria-hidden="true" />,
     title: "Specs, not prompts",
     body:
       "Every chapter opens with a spec.md that defines contracts, interfaces, and acceptance criteria before any code is generated. Engineering judgment first.",
-    accent: "var(--tbb-stage-3)",
+    accent: "var(--tbb-stage-4)",
   },
 ];
 
@@ -165,7 +169,6 @@ export default function Home(): React.ReactElement {
             provider: {
               "@type": "Organization",
               name: "The Bridge Balance",
-              sameAs: "https://github.com/the-bridge-balance/the-bridge-balance",
             },
           })}
         </script>
@@ -249,25 +252,6 @@ export default function Home(): React.ReactElement {
                   heading="Built with Claude Code, in the open."
                   subheading="The textbook is co-authored. Every workflow step is open source — read the spec, watch the video, ship the chapter."
                 />
-              </div>
-            </RevealOnScroll>
-
-            <RevealOnScroll as="div" delay={0.15}>
-              <div style={{ textAlign: "center", marginTop: "2.5rem" }}>
-                <a
-                  href="https://github.com/the-bridge-balance/the-bridge-balance"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    fontWeight: 600,
-                    color: "var(--ifm-color-primary)",
-                    textDecoration: "none",
-                  }}
-                >
-                  <Github size={18} aria-hidden="true" />
-                  View on GitHub
-                </a>
               </div>
             </RevealOnScroll>
           </div>

@@ -2,6 +2,15 @@
 
 *The mandatory pass between a finished draft and a presented draft. Ten angles, each run end to end over the whole thing. Nothing is written blind.*
 
+> **This audit checks understanding. It does not check whether the reader will
+> stay.** It has no angle for tone, warmth, pace, formatting or the opening, and
+> it never had one. Both the rejected Stage 0 introduction and the cold
+> `ch01-foundations.md` passed this audit clean and were rejected on sight.
+>
+> **`beginner-experience-audit.md` is the second required pass** — ten more
+> angles, on whether a beginner keeps reading. Required on every Stage 0–2
+> draft. Run this one first, then that one. *(Added 2026-09-20.)*
+
 ## Contents
 
 1. [Why this exists](#1-why-this-exists)
@@ -28,6 +37,8 @@ Not "is this correct." Not "is this covered." **Where does a real person lose it
 **The standard the draft has to reach:** a reader finishes each section holding the concept, its context, and its place in the chapter — enough that the structure assembles itself in their head as they read, without being told to take notes. Anything short of that is a finding, not a matter of taste.
 
 **No content is exempt.** Not a heading, not a callout, not a link's wording, not a sentence the author is sure is obvious. Obviousness is the author's state, never the reader's, and every silent assumption in the history of this book looked obvious to the person who wrote it.
+
+**And the reader this audit imagines is an absolute beginner.** In Stages 0–2 they have never programmed. Running these angles as a competent reader who merely lacks the topic will pass material that a real beginner cannot use. `canon/audience.md`.
 
 ---
 
@@ -67,9 +78,9 @@ Each angle is a full pass. Each has a question, a target, and a fix.
 
 ### Angle 2 — The unsorted term
 
-**Question:** every term of art on this page — was it put through the two-minute test, and did it get the treatment that test demands?
+**Question:** every term of art on this page — was it first checked for whether the lesson needs it at all, then put through the **one-minute** test, and did it get the treatment that test demands? *(One minute, measured against a reader who has never programmed — `canon/audience.md`.)*
 
-**Look for:** a term used with no gloss. A term glossed weakly — buried in a subordinate clause, after a colon, or so far from its use that the reader has to carry it. A heavy term glossed in twelve words when it needed a passage. A Tier 1 term the glossary carries that was never marked and linked.
+**Look for:** a term used with no gloss. A term glossed weakly — buried in a subordinate clause, after a colon, or so far from its use that the reader has to carry it. A heavy term glossed in twelve words when it needed a passage. A Tier 1 term the glossary carries that was never marked and linked. A hard ordinary English word that stayed in the prose and was not explained and linked (`corrections.md` §27).
 
 **Fix:** `mixed-audience.md` §4. Sort it, then give it the treatment its tier requires.
 

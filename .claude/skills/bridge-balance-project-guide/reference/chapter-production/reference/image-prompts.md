@@ -1,31 +1,45 @@
-# Image prompts
+# Images and diagrams
 
-**Load only when the user explicitly asks for image prompts. Never by default.**
+**Load only when the user explicitly asks for an image prompt or a diagram. Never by default.**
 
-This skill does not make images. It does not draw diagrams, write `.fig.mjs` modules, generate SVG, or emit Mermaid. That decision is settled: repeated attempts to have Claude Code produce genuinely professional imagery did not reach the bar, and externally generated images did. **Images are the project owner's, made in ChatGPT or MiniMax.** Claude Code's contribution to a chapter is text — all of it, and only it.
+Two different jobs live in this file, for two different tools, because they solve different problems:
 
-The one image-adjacent thing this skill does, *on request*, is write the **prompt**: a precise, self-contained brief the owner can paste into an image generator and get something usable on the first or second try. That is a writing job, which is why it belongs here.
+- **An atmospheric or photographic image** — a mood, a scene, a texture — is generated externally, by the project owner, from a *prompt* this skill writes on request. **Images are still the project owner's**, made in ChatGPT or MiniMax. Claude Code's contribution here is the prompt, not the picture.
+- **A structural or conceptual diagram** — boxes, arrows, a labelled sequence, an architecture map — is built by Claude Code directly, on request, via a diagramming connector (Eraser, Excalidraw, draw.io, or Mermaid rendered to a static image), reopened 2026-09-16 (Constitution Principle III, step 3). The reasons these stay two different tools are below.
 
-Two things follow, and both matter:
+Two things follow for both, and both matter regardless of which one applies:
 
-- **Unasked, produce nothing.** No prompt blocks appended to a chapter "in case they're useful", no "here's where an image would go" sections, no placeholder image references in the MDX. The owner generates images from their own prompts most of the time; unrequested prompts are noise in the deliverable.
+- **Unasked, produce neither.** No prompt blocks appended to a chapter "in case they're useful," no diagrams built speculatively, no "here's where an image would go" sections in the chapter (that recommendation belongs in the step 9 report: `corrections.md` §28), no placeholder image references in the MDX. Unrequested output of either kind is noise in the deliverable.
 - **Never reference an image that does not exist.** A chapter ships with the images it actually has. Do not write `![…](/img/…)` pointing at a file nobody has made, and do not leave a TODO in prose.
 
-## The one hard constraint: generators cannot spell
+## Why these are two different tools, not one
 
-This is the single most important thing on this page, and it determines what you may ask for at all.
+This is the fact that makes the whole split make sense, so it belongs first.
 
-Diffusion image models render text as convincing-looking gibberish. A prompt asking for "a flowchart with four boxes labelled Specify, Design, Implement, Verify" returns a handsome picture containing `Speclfy`, `Desgin`, `lmplcment`. This does not improve with better prompting — it is what the tool is.
+Diffusion image models (ChatGPT, MiniMax) render text as convincing-looking gibberish. A prompt asking for "a flowchart with four boxes labelled Specify, Design, Implement, Verify" returns a handsome picture containing `Speclfy`, `Desgin`, `lmplcment`. This does not improve with better prompting — it is what the tool is, and it is why the earlier version of this rule banned diagrams outright: the only image-making tool available was a generator, and generators cannot spell.
 
-So:
+A diagramming connector (Eraser, Excalidraw, draw.io, Mermaid) is a structurally different tool — it renders actual typed labels, actual boxes, actual arrows, because it is laying out real text and shapes rather than generating pixels from a description. That is the tool for anything a labelled diagram would teach. It was never available to this skill before 2026-09-16; now it is.
 
-**Never request an image whose meaning depends on legible text.** No labelled diagrams, no flowcharts, no annotated architecture maps, no charts with axis labels, no UI mockups with readable copy, no code on a screen, no tables.
+**The rule this produces:** if the image's meaning depends on legible text — a flowchart, an annotated architecture map, a labelled sequence, axis labels on a chart — it is a diagram job, built via a connector, not a prompt job. If its meaning survives having no text at all — a scene, an object, a metaphor, an atmosphere — it is a prompt job, for the owner's generator.
 
-**Request images whose meaning survives having no text at all.** A scene, an object, a metaphor, a texture, an atmosphere, a moment. Something that sets a tone or anchors a concept emotionally, while the prose carries every precise claim.
+## Diagrams — built via a connector, delivered as a static image
 
-If a concept genuinely needs a labelled structural diagram to teach it, **say so plainly and stop** — that is not an image-prompt job, and inventing a prompt for it produces a beautiful, misspelled, unusable picture. Tell the owner it needs a hand-built diagram, and let them decide.
+On explicit request:
 
-## What a good prompt contains
+1. Build the diagram in whichever connector fits the content (a flowchart or sequence → Mermaid or Eraser; a freeform architecture sketch → Excalidraw or draw.io).
+2. Export it as a static image file (PNG, or SVG treated as a static image asset — not inline SVG markup).
+3. Save it under `edu-site/static/img/<chapter-slug>/`, matching how an owner-supplied image is already stored.
+4. Reference it in the MDX as a plain markdown image, `![alt text](/img/<chapter-slug>/<name>.png)` — write real, descriptive alt text; the gate checks it.
+
+**Never deliver a diagram as inline Mermaid, raw SVG, or a `.fig.mjs`/JSX module inside the chapter body.** Inline markup in a chapter body is ruled out (Constitution Principle III, step 3, as amended in v3.0.1); the component registry in `src/theme/MDXComponents.tsx` is a separate matter and is open to growth (ADR-0008). A diagram is always a file on disk, referenced the same way any other image is, never live code in the MDX.
+
+Hold every diagram to real scrutiny before it ships: the 2026-09-06 restriction this reopens existed because earlier Claude-authored imagery, via a now-deleted compiled pipeline, did not reach a usable bar. A connector-rendered diagram with legible labels solves the specific problem that broke last time (generators can't spell) — it does not automatically clear every other quality bar a diagram has to meet (clarity, correct proportions, actually matching what the prose says). Look at the rendered result before shipping it, the same way any other claim in a chapter gets checked before it ships.
+
+## Prompts — for the owner's generator, when a diagram isn't the right tool
+
+The one image-adjacent thing this skill writes for the owner to run themselves is the **prompt**: a precise, self-contained brief pasted into ChatGPT or MiniMax, for the atmospheric or photographic half of the split above.
+
+### What a good prompt contains
 
 Six parts, in this order. Write it as flowing instruction, not a labelled form — generators respond better to a coherent description than to a spec sheet.
 
@@ -40,13 +54,13 @@ Then, separately from the prompt: **the aspect ratio** and **the alt text you'd 
 
 ## The house visual identity
 
-Chapters live on a site built to a strict Apple-design standard, so an image that ignores it looks imported. Encode this into every prompt:
+Applies to both a generated image and a connector-built diagram — a diagram that ignores it looks imported the same way a mismatched image would.
 
 - **A near-monochrome base.** Cool greys and silvers, soft neutral whites, deep near-blacks. The site's own ramp is almost entirely desaturated.
 - **One accent, used sparingly.** A single colour carrying meaning, on a small fraction of the frame — never a multi-colour palette competing for attention.
 - **Soft, diffuse, directional light.** Blur and elevation over hard borders. Shallow depth of field reads correctly here; harsh flat lighting does not.
 - **Restraint over spectacle.** No lens flare, no glow, no neon, no "epic", no chrome, no circuit-board-brain clichés, no glowing blue holograms. The visual register is a well-shot editorial photograph or a quiet, precise illustration — not tech-marketing art.
-- **Works in light and dark.** The site is theme-aware. An image with a hard white background lands badly in dark mode. Prefer a subject on a soft, mid-tone, or transparent-feeling ground.
+- **Works in light and dark.** The site is theme-aware. A hard white background lands badly in dark mode. Prefer a subject on a soft, mid-tone, or transparent-feeling ground.
 
 ## Shape of the deliverable
 
@@ -68,6 +82,8 @@ Filename:   <lesson-slug>/<image-slug>.png
 
 Keep prompts to 40–120 words. Shorter loses control of the composition; longer starts contradicting itself, and generators weight early words most heavily — so the subject goes first.
 
+When asked for a diagram, the equivalent deliverable is the connector file's exported image plus the same `Placement` / `Alt text` / `Filename` information — there is no prompt to hand over, since the diagram is built directly rather than requested from a generator.
+
 ## Per-tool notes
 
 **ChatGPT image generation** follows long natural-language prompts closely and handles compositional instructions ("shot from above", "generous negative space") well. Conversational refinement works: it is reasonable to write a prompt expecting one follow-up adjustment. It is also the more literal of the two — if the prompt says a specific object, expect that object.
@@ -78,16 +94,16 @@ Where a prompt would differ meaningfully between the two, write the ChatGPT vers
 
 ## Anti-patterns
 
-**Producing image prompts nobody asked for.** The default is no images and no prompts. Wait to be asked.
+**Producing an image, prompt, or diagram nobody asked for.** The default is still none of the three. Wait to be asked.
 
-**Prompting for anything whose meaning depends on legible text.** Generators cannot spell. Say the concept needs a hand-built diagram and stop.
+**Reaching for a generator prompt when the content needs legible text.** Generators cannot spell — that is a diagram job via a connector, not a prompt job. Say so and build the diagram instead of forcing a prompt that will misspell every label.
 
-**A prompt that would suit any chapter on this topic.** The same test the prose gets: if it could illustrate a different lesson unchanged, it is decoration. An image earns its place by doing something the paragraph beside it cannot.
+**Delivering a diagram as inline Mermaid, raw SVG, or a `.fig.mjs`/JSX module in the chapter body.** A diagram is a static image file, exported from a connector and referenced by a plain markdown image — always, no exceptions, regardless of how small or convenient the inline version would be.
+
+**A prompt or diagram that would suit any chapter on this topic.** The same test the prose gets: if it could illustrate a different lesson unchanged, it is decoration. An image or diagram earns its place by doing something the paragraph beside it cannot.
 
 **Tech-marketing clichés.** Glowing brains, circuit boards, blue holograms, humanoid robots at keyboards, floating binary. They signal the opposite of the credibility this book is built on.
 
-**Ignoring the house identity** and producing a saturated, high-contrast image that cannot sit on the site.
+**Ignoring the house identity** and producing a saturated, high-contrast image or diagram that cannot sit on the site.
 
-**Referencing an image that does not exist yet.** A prompt is a prompt. The MDX gets an image reference only once there is a file behind it.
-
-**Drifting back into drawing.** If you find yourself writing SVG, Mermaid, a `.fig.mjs` module, or ASCII art to "show" something — stop. That is not this skill's job any more, in any form.
+**Referencing an image or diagram that does not exist yet.** A prompt is a prompt, and a diagram spec is not a diagram. The MDX gets a reference only once there is a file behind it.

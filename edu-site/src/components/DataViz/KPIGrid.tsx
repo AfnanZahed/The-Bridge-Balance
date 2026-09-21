@@ -2,7 +2,7 @@
  * KPIGrid — Displays high-level curriculum headline figures.
  *
  * Real figures from The Bridge Balance platform spec:
- *   - 5 Stages (Orientation, Foundations, Credentials, Coding Agents, Autonomous Systems)
+ *   - 5 Stages (Intro to Computing, Foundations, Credentials, Coding Agents, Autonomous Systems)
  *   - Free Forever — the textbook costs nothing, forever (Constitution Principle VI).
  *     No chapter count: the curriculum never fixes one (locked decision D5).
  *   - 2 Harvard Certificates (CS50P Python + CS50W Web)
@@ -28,7 +28,7 @@ export const KPI_ITEMS: KPICardData[] = [
   {
     label: "Stages",
     value: 5,
-    subtext: "Orientation to Autonomy",
+    subtext: "Switches to Autonomy",
     accent: "var(--tbb-accent, oklch(0 0 0))",
   },
   {

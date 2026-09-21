@@ -14,7 +14,7 @@ description: Use when the user wants help thinking through The Bridge Balance's 
 
 This skill helps think through structure before any lesson gets written — what a stage's lessons could be, what order they make sense in, what one specific lesson needs to say before research starts. It does not decide any of that itself. **Every output is a proposal, written as a proposal, that the user is free to accept whole, edit, partially use, or ignore.** That is the actual job, not a caveat bolted on. The Bridge Balance has no fixed chapter list and no fixed count (`curriculum-state/README.md`, `prerequisite-graph.yaml`'s own header, locked decision D5): the official curriculum fixes five stages, 0 through 4, and nothing below that level, and the user decides each chapter's topic, title, and scope when they actually sit down to it, changing their mind as often as they want. A skill that quietly started treating its own suggestions as settled would recreate the mistake this project already caught and fixed once. Don't repeat it.
 
-**Before doing anything:** read `curriculum-state/canon/thesis.md` for the five stages' real focus lines, and `curriculum-state/ledgers/prerequisite-graph.yaml` in full, including its own header.
+**Before doing anything:** read `curriculum-state/canon/thesis.md` for the five stages' real focus lines, `curriculum-state/canon/course-structure.md` for the levels, the naming decisions and what is still open, and `curriculum-state/ledgers/prerequisite-graph.yaml` in full, including its own header.
 
 ## When this skill does not apply
 

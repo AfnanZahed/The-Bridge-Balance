@@ -17,7 +17,7 @@ export type StageLink = {
 export const STAGE_LINKS: StageLink[] = [
   {
     number: 0,
-    label: "Stage 0 — Orientation",
+    label: "Stage 0 — Introduction to Computing",
     to: "/intro-1-binary-to-programming",
   },
   {

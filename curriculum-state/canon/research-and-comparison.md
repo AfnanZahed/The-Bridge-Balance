@@ -1,6 +1,8 @@
 # Canon — research and comparison before anything is written
 
-**Nothing in this project is written from memory, from instinct, or from a blank page.** Every lesson, every chapter, every heading, every feature, every option, every button is derived from studied external practice and then deliberately transformed. This is a core platform policy, not a preference, and it binds the content track and the platform track equally.
+**No claim in this project is made from memory or guesswork.** Every lesson, every chapter, every heading, every feature, every option, every button is grounded in studied external practice and then deliberately taken further. This is a core platform policy, not a preference, and it binds the content track and the platform track equally.
+
+> **Scope, clarified 2026-09-20.** This rule governs **what is true** — the facts, the sequencing, the design decisions. It does not govern **how the writing sounds**. A warm opening, a reassurance, a well-chosen everyday analogy and the ordinary human rhythm of a good teacher come from the writer, not from a source, and requiring a citation for them is what turned this policy into a date-generator. Research the substance. Write the sentences.
 
 This file is the authoritative statement. `CLAUDE.md`, `chapter-production`, and `lesson-spine-authoring` each bind the obligation and point here rather than restating it, so there is one wording to keep true.
 
@@ -26,7 +28,7 @@ The routine, in order:
 1. **The owner studies multiple real sources** on the topic — courses, tutorials, documentation, competing implementations.
 2. **The owner pastes their own learnings**, along with the specific points they want carried into our version. These are their notes and their judgment, not a transcript dump.
 3. **We extract the major and minor teaching points together**, from what was pasted — what each source does well, what it assumes, where it loses a reader, what it leaves out.
-4. **We innovate on top of it.** The point of studying four sources is not to average them. It is to see what all four missed.
+4. **We learn everything there is to learn, then go further.** Take what each source does well, how it orders its material, how it sounds, the shape of its examples, what it assumes, where it loses a reader — *and* what all of them missed. All of it is material. The goal is to beat every one of them, which needs both halves: what they got right, and the gap none of them filled.
 5. **We adjust it** — see the transformation rule below.
 6. **Then, and only then, we write.**
 
@@ -52,9 +54,10 @@ Every external source studied under this policy is aimed at producing a programm
 The owner flagged this and it is absolute. **Pasted material is input to understanding. It is never a source to reproduce.**
 
 - **Never reproduce.** No verbatim passages, no lightly-reworded paragraphs, no lifted sequence of explanations, no copied exercises, problem sets, or assessment items. Not from a transcript, not from a paid course, not from an open one.
-- **Learn the point, then write it yourself.** What survives from a source is an understanding of what matters and where readers stumble. What does not survive is its wording, its structure, or its examples.
-- **Examples are ours.** This project already requires real, named examples rather than toys. It also requires that they are not the source's examples.
-- **Attribute where an idea is genuinely owed.** A specific framing, coinage, or finding that came from a named source is named in the prose, the way every other citation in this book works. Attribution is not a substitute for transformation — both are required, and neither buys the other.
+- **Learn everything, then write it yourself.** A source's *structure*, its ordering, its tone, the kind of example it reaches for, its interface decisions and its pacing may all be studied and adopted. What may not cross over is its **expression**: its sentences, verbatim or lightly reworded. A skeleton is not a sentence, and a pattern is not a paragraph.
+- **Where the owner supplies a reference and asks for its pattern, use its pattern.** That instruction is not in tension with this policy — see `corrections.md` §2 and §15, and the rule that used to sit in this bullet (*"what does not survive is its wording, its structure, or its examples"*), which is withdrawn.
+- **Examples are ours, and may be invented.** An everyday example a reader can picture is as legitimate as a real named one, and often teaches better. What we do not do is lift the source's own example wholesale.
+- **Attribute where an idea is genuinely owed**, and where naming it helps the reader. A specific framing, coinage or finding from a named source is credited — placed so it supports the sentence rather than interrupting it, and never as a reflex that turns a teaching page into a bibliography.
 - **A paid or licensed course is studied, never redistributed.** The owner's access to a course is not the reader's, and nothing in a chapter may function as a way around paying for it.
 
 **The Stage 2 integrity floor overrides this policy wherever they touch.** `integrity-floor.md` is absolute: CS50P and CS50W material may inform how we teach reading literacy, and may never be adapted into anything that produces or completes graded CS50 work. When studying CS50 as a source under this policy, that boundary is checked first and the conflict is surfaced rather than worked around.
@@ -63,7 +66,7 @@ The owner flagged this and it is absolute. **Pasted material is input to underst
 
 The policy is not content-only. **A new page, a new feature, a new setting, a new button, a new label** gets the same two passes: how do the best products in the world handle this interaction and why, and what did the owner find when they compared ours against the alternatives. A button added because it seemed reasonable is exactly the failure this policy exists to stop.
 
-For platform work, Pass 1's "international standard" means established interface conventions, accessibility practice, and the named products that solve the same problem well. The transformation rule still applies in spirit: we adopt the reasoning, not the pixels.
+For platform work, Pass 1's "international standard" means established interface conventions, accessibility practice, and the named products that solve the same problem well. Adopt their reasoning, their patterns and their structure freely — what stays ours is the visual language (Constitution Principle VII) and the words.
 
 ## Worked example — Stage 1, starting Python
 
@@ -84,6 +87,7 @@ Four courses studied, none reproduced, and a chapter that does something none of
 - [ ] Pass 2 supplied by the owner, or the work stopped and asked for it
 - [ ] Major and minor points extracted from what was supplied, and what every source missed is named
 - [ ] The transformation rule applied — the result teaches reading and judgment, not writing the core logic
-- [ ] Nothing reproduced: no verbatim text, no reworded paragraphs, no borrowed structure, no copied exercises or examples
+- [ ] Everything learnable learned — structure, ordering, tone and example-shape included — and then taken further
+- [ ] No expression reproduced: no verbatim text, no lightly-reworded paragraphs, no copied exercises
 - [ ] Specific ideas genuinely owed to a named source are attributed in the prose
 - [ ] Where a CS50 source was studied, `integrity-floor.md` checked first and no adaptation touches graded work

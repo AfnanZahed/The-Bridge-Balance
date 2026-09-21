@@ -1,6 +1,6 @@
 ---
 name: chapter-production
-description: The Bridge Balance's chapter production line — takes a topic and ends with a live, gate-passing MDX chapter at edu-site/docs/. It does NOT write the teaching. It owns everything around it — the CS50 integrity check, required inputs, research and verification, the four ledgers read and written back, scope and its reason, frontmatter and file assembly, the gate, and the handback check. The lesson itself — shape, the name, the stations, the spine, footholds, depth blocks, and every sentence — belongs to the peer skill lesson-spine-authoring, which this skill loads at step 3 and stays inside through step 5 without duplicating or second-guessing it. TEXT ONLY — it never makes images, diagrams, SVG or Mermaid; images are the project owner's, generated externally. On explicit request it writes image PROMPTS, never images. Every chapter ships as one continuous read. Reached through bridge-balance-project-guide; it does not trigger on its own.
+description: The Bridge Balance's chapter production line — takes a topic and ends with a live, gate-passing MDX chapter at edu-site/docs/. It does NOT write the teaching. It owns everything around it — the CS50 integrity check, required inputs, research and verification, the four ledgers read and written back, scope and its reason, frontmatter and file assembly, the gate, and the handback check. The lesson itself — shape, the name, the stations, the spine, footholds, depth blocks, and every sentence — belongs to the peer skill lesson-spine-authoring, which this skill loads at step 3 and stays inside through step 5 without duplicating or second-guessing it. Text is the default; on explicit request it can also write image PROMPTS for the owner's generator or build a diagram itself via a diagramming connector, delivered as a static image file — never inline Mermaid/SVG/JSX in the chapter body. Every chapter ships as one continuous read. Reached through bridge-balance-project-guide; it does not trigger on its own.
 ---
 
 # Chapter production
@@ -20,7 +20,7 @@ The standard has not changed: **one chapter, written well enough that a reader w
 | The CS50 integrity check | The lesson shape — Concept, Tool, Practice, Procedure |
 | Stage, sequence position, the prerequisite graph | Station 0: the name, its register, the prediction it opens |
 | Research, verification, the evidence trail | The station sheet, and which stations carry the weight |
-| The four ledgers, read and written back | The both-audience list, and the spine built from it |
+| The four ledgers, read and written back | The beginner-landing set, and the spine built from it |
 | `scope_multiplier` and `scope_reason` | Footholds, depth blocks, the delete test |
 | Frontmatter, file path, MDX assembly | Every sentence — `language-register.md` governs all of them |
 | The gate, and reaching a clean pass | The retrieval prompt that ends the chapter |
@@ -41,19 +41,22 @@ Not preferences. Each of these is `lesson-spine-authoring`'s job, and doing it h
 
 If prose for this book is being written and `lesson-spine-authoring` is not open, the process has already failed — whatever the prose looks like.
 
-## This skill is text-only. It does not make images.
+## Images and diagrams — on request only, and by the right method
 
-Not a preference — a settled boundary. Repeated attempts to have Claude Code produce genuinely professional imagery did not reach the standard this book needs; externally generated images did. **Every image in this book is the project owner's**, made in ChatGPT or MiniMax. So this skill does not draw diagrams, write figure modules, emit SVG or Mermaid, or generate images in any form, for any reason, however small or convenient it would be.
+Reopened 2026-09-16 (Constitution Principle III, step 3), reversing the earlier text-only restriction. **Every atmospheric or photographic image in this book is still the project owner's**, made in ChatGPT or MiniMax — that has not changed, because the underlying reason has not: image generators cannot render legible text (`reference/image-prompts.md` explains why), so anything needing a label, an arrow, or an axis was never a fit for them.
 
-The one image-adjacent thing it does, **and only when explicitly asked**, is write the image *prompt* — a precise brief the owner pastes into a generator. That is writing, which is why it stays. Everything else about images is out of scope: `reference/image-prompts.md` covers it, and loads only on request.
+That is exactly why a structural or conceptual diagram is a **different tool for a different job**: built via a diagramming connector (Eraser, Excalidraw, draw.io, or Mermaid rendered to a static image), which renders legible labels natively. On explicit request, this skill can now build that diagram directly, export it as a static image, save it under `edu-site/static/img/<chapter-slug>/`, and reference it as a plain markdown image — exactly how an owner-supplied image is referenced. **Never as inline Mermaid, SVG, or JSX inside the chapter body** — a diagram is a file, not markup (Constitution Principle III, step 3, as amended in v3.0.1).
 
-This has a consequence worth stating plainly: **a chapter that would be clearer with a labelled diagram ships without one, and says so.** Name the gap for the owner rather than filling it with something weaker. The prose carries every precise claim on its own — that is the constraint, and writing well against it is the job.
+The one other image-adjacent thing this skill does, **on request**, is write the image *prompt* — a precise brief the owner pastes into ChatGPT or MiniMax for an atmospheric or photographic image. That option didn't go away; it's for the case a diagram tool can't serve (mood, scene, texture), not the case it can.
+
+**Unasked, produce neither.** A chapter that would be clearer with a diagram and wasn't asked for one still ships without it, naming the gap — this didn't change, only the menu of options once asked did.
 
 **The deliverable is a file on disk that passes the gate.** Not prose in a chat reply, not a draft awaiting a human's assembly pass. A run that ends without a gate-clean file at `edu-site/docs/…` has not finished, however good the prose is.
 
 ## Before anything: what to read, and when
 
 Read now, in full — they're short and they change the shape of everything:
+- `curriculum-state/canon/corrections.md` — **first.** Standing rules the owner has already had to give more than once. Both repeats happened because nothing in a reading list like this one named it
 - `curriculum-state/canon/thesis.md` — the five stages, the two extremes, the safety floor
 - `curriculum-state/canon/audience.md` — who reads this and under what conditions
 - `curriculum-state/canon/voice.md` — the house voice, its six commitments, and its banned-phrase list
@@ -64,7 +67,7 @@ Load the rest **only when the workflow reaches the step that needs it.** Reading
 |---|---|
 | `reference/research.md` | Step 2, and not before |
 | **`lesson-spine-authoring` (the whole skill)** | **Step 3, and stay in it through step 5** |
-| `reference/image-prompts.md` | **Only when the user explicitly asks for image prompts.** Never by default |
+| `reference/image-prompts.md` | Only when the user explicitly asks for an image prompt or a diagram. Never by default |
 | `reference/gate.md` | Step 7, when you actually run it |
 | `reference/ledgers-protocol.md` | Steps 1 and 8 — the read half, then the write half |
 
@@ -86,7 +89,9 @@ How to think while running the workflow, not a preamble to skip past. Every one 
 
 **4. Length is judged, then recorded — never looked up.** There is no word band and no target reading time. How long a chapter runs depends on the topic, chapter to chapter, as the material needs. What replaces the number is `scope_reason`: one specific clause saying what about *this* topic sets its size. The gate enforces the reason, never the number — and the reason is what stops "judged length" quietly becoming "whatever came out."
 
-**5. Record the omissions too.** With no counts to hit, the path of least effort is thin evidence, one worked example, and silence about why. A record that lists only what was included makes under-generation invisible. If a chapter is sparse, the record has to say a reader wouldn't have gained from more.
+**5. Record the omissions too.** A record that lists only what was included makes under-generation invisible. If a chapter is sparse, the record has to say a reader wouldn't have gained from more.
+
+*(The old wording of this principle — "the path of least effort is thin evidence" — framed light sourcing as laziness, and pushed drafts toward more citations in the prose. Research stays thorough; what reaches the reader is a separate judgment. `corrections.md` §11.)*
 
 ## Workflow
 
@@ -127,11 +132,11 @@ Load `.claude/skills/lesson-spine-authoring/SKILL.md` and work inside it. **Foll
 
 **Three things must come back, and this skill checks each one** — they are Bridge Balance canon rather than general teaching craft, which is why they are checked here rather than there:
 
-1. **The curriculum invariants are present** (`canon/thesis.md`): thesis tie-in, the problem, the two extremes made concrete to this topic, the solution, stage placement, and a safety-floor statement if the topic touches execution, deployment, credentials, or anything a reader could ship without checking.
+1. **The right invariants are present — not all six by default** (`canon/thesis.md`). *(Changed 2026-09-20: the six are stage-level commitments, not a per-chapter checklist. `corrections.md` §10.)* Ask which of the six **this** chapter is the right home for, then check those. Per chapter: the misconception it corrects, placed where the reader would otherwise form the wrong idea; its stage named in plain words; and a safety-floor statement **if** the topic touches execution, deployment, credentials, or anything a reader could ship without checking — in the plain Stage 0–2 wording where that applies. The thesis, the two extremes and the SDE move belong in the chapters that are actually about the work. **Forcing them into a chapter that is not is a defect, not compliance** — it is how AI-agent vocabulary landed on page one of a beginner's first chapter.
 
-2. **One worked example, and it was ledger-checked before it was invented.** `example-ledger.yaml` holds `reserved` entries that are pre-approved and waiting; a design that invented a new example without checking has skipped a step, and the fix is to check now. Chosen for legibility, not for how impressive it looked in research.
+2. **One worked example the reader can picture, and the ledger was checked first.** `example-ledger.yaml` holds `reserved` entries that are pre-approved and waiting, and it records every example already used — read it and decide deliberately whether a new example or a return to a familiar one teaches better here. **An invented everyday example is fully legitimate**; what is not is an empty placeholder. Chosen for legibility, never for how impressive it looked in research. *A chapter that claims its subject is its own example has almost always skipped this step.*
 
-3. **The signature contribution is named, in one sentence, and it is real.** Per `canon/voice.md`'s anti-commodity test: if the top search result replaced this chapter with no loss to the reader, it has not earned its place. It has to be something the prose *does* — a frame, a decision rule, a worked comparison, a failure taxonomy that did not exist in this form. `lesson-spine-authoring` does not ask for this; this skill does. If nothing qualifies, the design is not finished — send it back rather than shipping a competent synthesis with a label bolted on.
+3. **The signature contribution is named, in one sentence, and it is real.** Per `canon/voice.md`'s anti-commodity test: if the top search result replaced this chapter with no loss to the reader, it has not earned its place. A frame, a decision rule, a worked comparison, a failure taxonomy — **or, in Stages 0–2, an explanation an absolute beginner genuinely understands afterwards.** Clarity for this reader is the harder achievement and counts as the contribution; most of the internet fails at it. What does not count is a competent restatement of the same explanation everyone else gives, in the same order, at the same difficulty.
 
 Also returning: the lesson shape and the station sheet, with every dropped station carrying its one-clause reason. Both go into the step 9 report, where they are read by whoever decides the chapter ships. Do not evaluate them against criteria of your own — `lesson-spine-authoring` owns those, and checking someone's work against a standard they were never given is not a check.
 
@@ -143,8 +148,8 @@ Assign `scope_multiplier` (see `curriculum-state/contracts/calibration.md` for t
 
 Its workflow owns the drafting from the first sentence to the last. Stay in it. This skill contributes three things on top, because they are contract obligations rather than teaching ones:
 
-- **`canon/voice.md`'s two tests**, run as you go rather than afterward: find-and-replace per paragraph, anti-commodity per chapter.
-- **No image, in any form.** Where a labelled diagram would genuinely teach better, name the gap in your step 9 report and leave it for the owner. Do not draw it, do not approximate it in ASCII, and do not write a prompt for it unasked — image generators cannot render legible text, so a labelled diagram is not something a prompt can buy either.
+- **`canon/voice.md`'s two tests**, run as you go rather than afterward: find-and-replace per **teaching** paragraph, anti-commodity per chapter. *The find-and-replace test does not apply to an opening, a welcome, a bridge, a reassurance or a closing* — those are meant to be transferable in shape, and testing them is what drove openings toward names and dates.
+- **Recommend images; never build or reference one unasked.** Where an image or a labelled diagram would genuinely teach better, recommend it in your step 9 report: the section it belongs in, what it should show, and why it helps a beginner. How each one is made is the owner's choice, every time (`corrections.md` §28), so building one waits for that choice (see the images-and-diagrams section above). Never inline Mermaid/SVG/JSX in the chapter body, and never a placeholder image reference.
 - **Alt text is prose.** If the chapter references an image the owner already supplied, write its alt text properly. The gate checks it.
 
 Nothing else. If you find yourself adjusting pace, glossing, layering or sentence length, you have left this skill's territory — that work belongs to `lesson-spine-authoring` and should happen there, under its rules, not here under improvised ones.
@@ -187,7 +192,7 @@ Per `reference/ledgers-protocol.md`, all four. A chapter that finishes without t
 
 ### Step 9 — Present
 
-The file path. The gate output, pasted rather than summarised. The signature contribution in one sentence. Any deviation from this protocol with its one-line reason. Anything you judged *out* of the chapter and why (Principle 5). Then emit a PHR per `CLAUDE.md`'s governance.
+The file path. The gate output, pasted rather than summarised. The signature contribution in one sentence. **Both audit findings logs — comprehension and beginner-experience.** Any deviation from this protocol with its one-line reason. Anything you judged *out* of the chapter and why (Principle 5). Then emit a PHR per `CLAUDE.md`'s governance.
 
 ## Anti-patterns this skill forbids
 
@@ -203,7 +208,7 @@ The file path. The gate output, pasted rather than summarised. The signature con
 
 **Treating a number in any reference file as a target.** Every count in this protocol is a worked illustration. The obligation that replaces the number is the recorded reason.
 
-**Making an image, in any form, for any reason.** No SVG, no Mermaid, no figure module, no ASCII diagram, no "quick sketch to illustrate the point." This is the boundary and it has no small exceptions. If showing would beat telling, name the gap and write better prose.
+**Making an unrequested image or diagram, in any form.** The default is still no images and no diagrams — asked-for is the only path in, same as it has always been for image prompts. And whether asked or not, an inline Mermaid fence, raw SVG, a `.fig.mjs` module, or ASCII art inside the chapter body is never the delivery mechanism — a diagram is always a static image file, exported from a connector, referenced by a plain markdown image.
 
 **Referencing an image that doesn't exist yet.** A chapter ships with the images it actually has. No `![…](/img/…)` pointing at a file nobody made, and no image TODOs in prose.
 

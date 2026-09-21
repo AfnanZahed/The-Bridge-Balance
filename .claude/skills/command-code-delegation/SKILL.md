@@ -43,6 +43,14 @@ What each answer means for you:
 
 Regardless of how Step 1 resolved, the shape of execution doesn't change: Claude breaks the task (or the plan) into concrete steps, decides what each step needs, and orchestrates. This is the part Claude should keep doing itself — it's judgment-heavy and low-volume, which is exactly what an expensive model is for.
 
+## Step 2b — Check that delegating really saves tokens
+
+*The owner's rule, 21 September 2026: “you must verify if it will cost less tokens and deepseek will verify if the verification will cost more tokens.”*
+
+Before you delegate a step, weigh it honestly. Delegating costs Claude tokens too: writing the prompt, reading the trace, and checking the result. If that adds up to more than doing the step directly, do it directly and say so. A short edit, a single read or a small lookup is almost always cheaper to do yourself.
+
+Then write every delegated prompt so that the result is cheap to check: ask for exact quotes with line numbers, so a script can verify them, and ask for a short final answer. Where checking would still cost more than the job itself, use a second DeepSeek call to do the checking, and spot-check what it reports. *(This is Claude's reading of the owner's sentence. If it is wrong, correct it here.)*
+
 ## Step 3 — Delegate the token-heavy steps to Command Code + DeepSeek
 
 For each step that would cost real tokens to do directly — reading and understanding a large file or several files, drafting a nontrivial change, researching a topic, running a first-pass check — call out to Command Code instead of doing it in-context:
@@ -58,7 +66,7 @@ command-code -p "<precise description of this one step>" \
 Three details here are load-bearing, not stylistic — see `references/command-code-cli.md` for the full mechanics, but at minimum:
 
 - **Always pass `--output-format json`.** Plain text mode gives back a short prose summary and nothing else — there's nothing in it to verify against. The JSON stream carries the actual tool calls: real diffs, real command output.
-- **Always pass `--effort` at the maximum level the CLI accepts for the model in use, unless there's a concrete reason a specific step doesn't need it — not just by default inattention, but by deliberately deciding effort isn't needed here.** This matters more than it might look like: DeepSeek is the cheap side of this whole arrangement, so spending more of *its* reasoning tokens is a trade that's almost always worth making — a few extra cents of DeepSeek effort buying a materially better first-pass result is still far cheaper than Claude having to catch and fix a shallow one, or worse, redo the work itself. Economizing on Claude's own tokens while also economizing on DeepSeek's effort defeats the "maximum quality" half of the goal for essentially no savings that matter. The bias should run the opposite way from how you'd think about your own token budget: max effort is the default, and dropping it takes a real reason (e.g. a trivial, mechanical, low-stakes step where more reasoning can't change the outcome) — not the absence of one.
+- **Pass `--effort high`. Never `max` unless the owner asks for it for a specific job.** *(The owner's standing rule, 20 September 2026: “do with the deepseek's high effort, never max.” It reverses this skill's earlier default of maximum effort.)* Effort is the owner's setting, not something to raise when a run disappoints. If a run at `high` stalls — the trace shows a great deal of reasoning and few or no tool calls — split the task into smaller calls instead: one topic each, each required to append its results to disk after every unit of work, each with a hard time limit. Do not answer a stall by raising the effort. *(21 September 2026: the owner asked for `max` on one careful two-file page edit. That was their call for that job. The default stayed `high`.)* `references/command-code-cli.md` has the detail.
 - **`--yolo` is currently the only confirmed way to let DeepSeek actually write files or run shell commands in headless mode.** `--tools-enable` looks like a narrower alternative from its help text, but real testing showed it doesn't cover `edit_file`/`write_file`/`shell_command` at all — those stay blocked regardless, and DeepSeek was observed routing around the block via a different, ungated tool anyway when it needed to. So don't reach for `--tools-enable` expecting it to scope anything write-related; it doesn't. For a read-only step (research, analysis), skip `--yolo` entirely — nothing needs unblocking. For a step that writes, `--yolo` is the tradeoff to make consciously, which is exactly why Step 4's verification matters more than the flag: whatever path DeepSeek took to write something, you check the actual result, not the permission model.
 
 If the task is a multi-step conversation with DeepSeek rather than one shot, reuse the session: the JSON result's `nextState.sessionId` can be passed back via `--session`/`--resume`/`-c` on the next call, so DeepSeek isn't re-discovering context (and burning tokens re-reading things) on every step.
@@ -66,6 +74,8 @@ If the task is a multi-step conversation with DeepSeek rather than one shot, reu
 ## Step 4 — Verify from the actual trace, not the summary
 
 The JSON stream's `tool_use`/`tool_result` events carry the real work product: `edit_file` calls show the literal `old_string`/`new_string`, `shell_command` calls show real stdout. Read *that* to confirm the step succeeded — the final `finalText` line is a one-sentence gloss and shouldn't be the basis for saying something is done. If a step touches something you'd normally double check by re-reading the file yourself, a quick targeted read is still fine — the point is to avoid re-deriving DeepSeek's work from scratch, not to never look at a file again.
+
+**This cuts both ways — also verify when you did NOT pass `--yolo`.** A read-only step deserves the same trace check as a write step, not less: `grep -ao '"name":"[a-z_]*"' <output-file> | sort | uniq -c` immediately after any call, before trusting anything else about the run. Confirmed for real on 2026-09-16 (see `references/command-code-cli.md`): a call deliberately run without `--yolo` still had DeepSeek write two files into the project, via an ungated `powershell` tool that `--yolo`'s absence never touched. Gating one write tool is not evidence another is gated — check the trace, don't infer from the flag.
 
 ## Step 5 — Loop, and know when to go back to Step 1
 

@@ -12,13 +12,17 @@
  * - `<Callout />` is registered globally so authors can write
  *   `<Callout type="tip">...</Callout>` in any MDX file.
  *
- * The components exported at the bottom of this file are the only ones
- * available inside a chapter body. Anything else an author writes fails the
- * build, which is the intended guard.
+ * The components exported at the bottom of this file are the ones available
+ * inside a chapter body. Docusaurus fails the build on an unregistered
+ * component; that is a framework mechanic, not a limit on the palette. This
+ * file is a registry and it is expected to grow (ADR-0008, Constitution
+ * v3.0.1): add a component here, with its author docs, its gate allowance and
+ * a changelog line.
  *
- * `<Figure />` and the compiled-figure pipeline were deleted on 2026-09-06.
- * Claude Code authors text only; images are the project owner's, generated
- * externally and referenced as ordinary markdown images.
+ * What stays closed is a component that draws. No `<Figure />`, no inline SVG
+ * or Mermaid in a chapter body. `<Figure />` and the compiled-figure pipeline
+ * were deleted on 2026-09-06. A diagram ships as a static image file under
+ * `static/img/`, referenced as an ordinary markdown image.
  */
 
 import { useDoc, useDocsSidebar } from "@docusaurus/plugin-content-docs/client";

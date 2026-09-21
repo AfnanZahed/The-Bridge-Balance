@@ -38,7 +38,11 @@ Four mechanisms, all well-established, and worth knowing because they tell you w
 
 **Generation beats reception.** Material a reader produces is retained better than identical material handed to them. Decomposing a term is generation, which is why it feels different from reading a glossary.
 
-**Terminology anxiety is real, and this dissolves it.** Beginners experience technical vocabulary as a wall of arbitrary tokens signalling that they do not belong. Decomposition turns the wall into doors. For many readers the affective payoff exceeds the cognitive one.
+**Terminology anxiety is real, and this can dissolve it.** Beginners experience technical vocabulary as a wall of arbitrary tokens signalling that they do not belong. Decomposition can turn the wall into doors.
+
+**It can also build a second wall, and in Stages 0–2 that is the likelier outcome.** *(Added 2026-09-20.)* Explaining *idempotent* through *idem* and *potent*, or *binary* through *bini*, hands a reader who has never programmed two unfamiliar Latin words in place of one unfamiliar English one. **Decompose only when the parts are words the reader already owns.** *Frontend* = the end at the front works. *Poly* + *morphē* does not, unless the lesson is willing to teach both roots properly first — and in a beginner stage it usually should not be.
+
+When the decomposition would need its own explanation, skip Station 0's morphology and go straight to a plain sentence saying what the thing is and why it is called that.
 
 **The honest limit:** meaning is determined by use, not origin. Treating origin as authority is the etymological fallacy, and computing is unusually full of terms whose origin and current use have divorced. Station 0 produces a *hypothesis*, not an answer. That is exactly why Station 4 must score it.
 
@@ -80,7 +84,7 @@ The name encodes a false or expired model.
 
 **Handling: invert the question.** Do not ask what the name means. Ask **"why is it called that when it isn't that?"** The answer is usually the best available account of the thing. "Why does serverless have servers" answers itself with *the product removes server management, not servers* — which is a better statement of the value proposition than most definitions.
 
-**Register 4 is the most valuable register for this curriculum**, for two reasons. First, the mismatch is load-bearing: it marks where a field's marketing, history, or politics leaked into its vocabulary. Second, it is the best mixed-audience material that exists, because the confusion is genuinely universal — a senior engineer is as likely as a beginner to have absorbed the wrong model from the name. A Register 4 term makes the room equal.
+**Register 4 is the most valuable register for this curriculum**, for two reasons. First, the mismatch is load-bearing: it marks where a field's marketing, history, or politics leaked into its vocabulary. Second, the confusion is genuinely universal: almost everyone who meets the name takes the wrong model from it, so a beginner who guessed wrong is in good company and the correction lands without embarrassment.
 
 **When a lesson's topic is Register 4, the lesson is fundamentally a correction.** Structure it as one: the misconception is the subject, not a preamble to it.
 
@@ -95,6 +99,8 @@ Folk etymologies are endemic in software, and shipping one to thousands of learn
 2. **Two independent non-circular sources for any origin claim.** Software-etymology blog posts copy each other; three sites repeating the same story is one source. Prefer the original paper, the language's own documentation, a maintainer's own account, or a standard dictionary.
 
 3. **Treat charming stories as suspect in proportion to their charm.** The best-known example: the 1947 moth taped into the Harvard Mark II logbook is real, but it did not originate "bug" — Edison was using the word for technical faults in the 1870s, which is why the logbook entry is written as a joke about finding an actual one.
+
+   > **Do not open a page with this story.** It is kept here as a *verification* example — a case where the charming version is wrong — and it is **retired as an opening device**. Calling it "a good verification lesson" in this file is the traceable source of a Stage 0 introduction that opened on a moth and a 1947 logbook, which the owner rejected on sight. `curriculum-state/canon/corrections.md` §1. The same applies to any myth-busting anecdote used as a hook: correcting a reader before welcoming them is the wrong first move.
 
 4. **When it can't be verified, teach the decomposition and drop the history.** "*Idem* + *potent* — same power" stands on its own without a coinage claim.
 
@@ -146,7 +152,7 @@ Safe to use without re-verification. Anything not on this list runs §4.
 | robot | Czech *robota*, forced labour — Karel Čapek's *R.U.R.*, 1920 | S9 |
 | spam | the Monty Python sketch | S9 |
 | Python | Monty Python, not the snake | S9 |
-| bug | in technical use by Edison in the 1870s; the 1947 Harvard Mark II moth is a joke about the existing term | S9 — and a good verification lesson |
+| bug | in technical use by Edison in the 1870s; the 1947 Harvard Mark II moth is a joke about the existing term | S9. **Retired as a teaching example — see the note below.** |
 
 **Register 4 — Misleading**
 
@@ -180,7 +186,17 @@ Safe to use without re-verification. Anything not on this list runs §4.
 
 ## 7. Staging the prediction for a reader
 
-A private learner can guess silently. A book has to *stage* the guess, or it does not happen.
+> **Scope, added 2026-09-20.** The staged guess is **off entirely on any front
+> door or welcome page**, and is used **rarely** inside teaching chapters — at
+> most once every few chapters, never in an opening. The owner has rejected it
+> twice as performative: asking a reader to answer before they have any footing
+> is a quiz, not a welcome. `curriculum-state/canon/corrections.md` §1.
+>
+> Register 4's invert-the-question form — *why is it called that, when it is not
+> that* — with **no staged guess beat and no reveal beat** is the permitted
+> substitute, and it does the same work without the performance.
+
+A private learner can guess silently. Where a book does stage a guess, it has to stage it deliberately, or it does not happen.
 
 The example prompts below are written the way they should ship — short sentences, plain words, no idiom. Hold that register; see `language-register.md`.
 
@@ -192,4 +208,4 @@ The example prompts below are written the way they should ship — short sentenc
 
 **Do not stage more than one per lesson.** The move works because it is a small surprise. Three of them is a format, and a format is skimmable.
 
-**Mixed-audience note:** the staged guess is one of the few devices that lands identically for both readers. A senior guessing at *idempotent* is doing the same cognitive work as a beginner, and neither is being condescended to. When a lesson needs a moment that levels the room, this is the cheapest one available.
+*(The "levels the room" argument for this device is withdrawn with the two-reader model — `corrections.md` §8. There is no room to level: Stages 0–2 have one reader, and what that reader needs is footing, not a test.)*

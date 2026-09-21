@@ -6,7 +6,7 @@
  * as a "chip" against the rest of the page. The wrapper preserves the
  * original `StageIcon` API so consumers do not need to change.
  *
- *   0 Orientation   → Sparkle (fill)     — orientation
+ *   0 Intro to Computing → Sparkle (fill)
  *   1 Foundations    → Blueprint (duotone) — plans, foundations
  *   2 Credentials   → Certificate (fill)  — official recognition
  *   3 Mastery       → Atom (duotone)      — atomic-level skill
@@ -36,7 +36,7 @@ type StageMeta = {
 };
 
 const STAGE_META: Record<StageNumber, StageMeta> = {
-  0: { color: "var(--tbb-text)", tint: "color-mix(in srgb, var(--tbb-text) 14%, transparent)", label: "Stage 0 — Orientation" },
+  0: { color: "var(--tbb-text)", tint: "color-mix(in srgb, var(--tbb-text) 14%, transparent)", label: "Stage 0 — Introduction to Computing" },
   1: { color: "var(--tbb-stage-1)", tint: "color-mix(in srgb, var(--tbb-stage-1) 14%, transparent)", label: "Stage 1 — Foundations" },
   2: { color: "var(--tbb-stage-2)", tint: "color-mix(in srgb, var(--tbb-stage-2) 14%, transparent)", label: "Stage 2 — Credentials" },
   3: { color: "var(--tbb-stage-3)", tint: "color-mix(in srgb, var(--tbb-stage-3) 14%, transparent)", label: "Stage 3 — Mastery" },

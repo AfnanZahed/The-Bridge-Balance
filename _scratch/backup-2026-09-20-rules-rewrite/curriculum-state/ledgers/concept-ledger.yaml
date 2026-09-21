@@ -1,0 +1,1264 @@
+# Concept ledger — every term, defined once, tracked forever.
+#
+# Purpose: stop a later chapter redefining what an earlier one established, and
+# stop a term being used before it has ever been glossed.
+#
+# Schema per entry:
+#   term:            the term as it appears in prose
+#   status:          defined | used-undefined | proposed
+#   canonical:       the one definition. Reused verbatim wherever it appears.
+#   registers:       optional alternative wordings of the SAME definition, for
+#                    a different context - never a different meaning
+#   first_defined:   chapter path where it is introduced
+#   used_in:         chapters that rely on it (append as the book grows)
+#   notes:           anything an author needs to know before touching it
+#
+# Rules:
+#   - One canonical definition per term. Register variants live under it, never
+#     as a second entry.
+#   - Every term is sorted by the two-minute test at first use, in EVERY
+#     chapter, every time - first use is counted per chapter, because a reader
+#     arriving from a search result has no earlier chapter. A term a reader
+#     can hold within two minutes is glossed inline in twelve words or fewer;
+#     one that needs longer cannot be glossed at all and is taught in a
+#     passage of its own before it is used. A term used without either is a
+#     defect. Record it as status: used-undefined so it gets fixed, not
+#     forgotten. See lesson-spine-authoring/reference/mixed-audience.md §4.
+
+version: 1
+seeded: 2026-08-23
+seeded_from: edu-site/docs/intro-5-spec-driven-engineering.md
+# REPOINTED 2026-09-10: every `first_defined` / `used_in` that named
+# docs/intro.md now names docs/intro-5-spec-driven-engineering.md, its
+# merge-and-rewrite successor in the intro resequence. The content moved; no
+# definition changed. See
+# curriculum-state/proposals/stage-00-intro-resequence-2026-09-10.md.
+
+concepts:
+
+  - term: Spec-Driven Engineering
+    status: defined
+    canonical: >-
+      The discipline in which the engineer specifies intent and boundaries, the
+      AI implements within them, and a human verifies before taking ownership.
+    first_defined: docs/intro-5-spec-driven-engineering.md
+    used_in: [docs/intro-5-spec-driven-engineering.md, docs/welcome.md, docs/ch00-introduction.md]
+    notes: >-
+      Curriculum-coined. Must be defined once on first use in EVERY chapter
+      that uses it, however late in the book - field expertise does not cover
+      this project's own vocabulary.
+      REMOVED 2026-09-10: docs/intro-spine-experiment.md (a lesson-spine-
+      authoring pilot that additionally decomposed this name at Station 0 -
+      spec + driven + engineering, verified against etymonline-spec-
+      engineer-roots) was deleted after the pilot succeeded, ahead of
+      applying the same treatment to intro.md itself. See
+      prerequisite-graph.yaml's progress note.
+      USED 2026-09-15 by docs/welcome.md, which now precedes intro-5 in reading
+      order and glosses the term to the twelve-word limit ("write the intent and
+      the limits down before code is generated") without carrying the canonical
+      definition above. first_defined stays intro-5: Welcome glosses, it does not
+      define properly.
+      GLOSSED 2026-09-17 by docs/ch00-introduction.md, the new Stage 0 front
+      door, which now sits ahead of everything else in the stage. It glosses to
+      twelve words ("state what you want and what can't change, then check the
+      result"), links the glossary anchor, and names Stage 0's last chapter as
+      where the practice actually gets taught rather than teaching it here. Same
+      pattern as Welcome again, so first_defined stays intro-5 and no second
+      entry is created.
+      RE-ALIGNED 2026-09-17 (full Name-First pass on ch00): the file as found
+      carried only the four bare steps, unglossed and unlinked, while this
+      note described the gloss, the anchor and the last-chapter pointer. The
+      bullet was brought back into line with the note, so text and ledger
+      agree again; the /glossary#spec-driven-engineering anchor was
+      re-validated by check-references after the restore.
+
+  - term: Development (vs. Engineering)
+    status: defined
+    canonical: >-
+      Development is producing the implementation - the syntax, the working
+      code. Engineering is the judgment around it: specify, bound, verify,
+      and own. AI has made Development cheap; it has not made Engineering
+      cheap. The reader's own stage is Engineering; AI's stage is wider, but
+      it never owns Engineering's judgment.
+    first_defined: curriculum-state/canon/thesis.md
+    used_in: [docs/intro-5-spec-driven-engineering.md]
+    notes: >-
+      Canon-level distinction (added 2026-09-09), not chapter-coined -
+      defined in canon/thesis.md itself since it must never drift, then made
+      explicit in docs/intro-5-spec-driven-engineering.md. Maps onto the Specify/Design/Implement/
+      Verify table intro.md already uses: Implement = Development; Specify,
+      Design, Verify = Engineering. Gloss at first use per the usual rule
+      even though these are common English words - in this book they carry a
+      specific, capitalized, technical meaning that differs from generic use
+      of "development." REMOVED 2026-09-10: docs/intro-spine-experiment.md
+      (the other chapter that made this explicit) was deleted after its
+      lesson-spine-authoring pilot succeeded - see prerequisite-graph.yaml.
+
+  - term: vibe coding
+    status: defined
+    canonical: >-
+      Building software entirely through iterative AI prompts without
+      understanding the underlying code. Coined by Andrej Karpathy, February
+      2025; Collins Dictionary Word of the Year 2025.
+    first_defined: docs/intro-5-spec-driven-engineering.md
+    used_in: [docs/intro-5-spec-driven-engineering.md]
+    notes: Always attributed. Never presented as this project's own coinage.
+
+  - term: agent
+    status: defined
+    canonical: >-
+      A program that can read your files, write new code, edit existing code,
+      and run commands on a computer — on its own, in a sequence, without
+      asking you to approve every single step.
+    registers:
+      analogy: >-
+        A very fast, very capable helper — not an architect, and not the owner
+        of the result. It can read your files, write new code, edit what's
+        already there, and run commands, all without you approving every
+        single step.
+      coding-agent: >-
+        A program that reads your files, writes and edits code, and runs
+        commands — in sequence, without asking you to approve each step.
+    first_defined: docs/intro-5-spec-driven-engineering.md
+    used_in: [docs/intro-1-binary-to-programming.md, docs/intro-5-spec-driven-engineering.md]
+    notes: >-
+      Canonical wording above is what shipped. Gloss it at first use in every
+      chapter that uses it - no exceptions by stage.
+      UPDATE 2026-09-10: intro-1 introduces the term as "coding agent" and
+      glosses it inline, so a reader meets it before intro-5 defines it fully.
+      The "coding-agent" register variant above is intro-1's shipped wording -
+      the same concept, not a second entry.
+
+  - term: specification (spec)
+    status: defined
+    canonical: >-
+      A written statement of what you want built and what shouldn't change,
+      agreed before you start.
+    first_defined: docs/intro-5-spec-driven-engineering.md
+    used_in: [docs/intro-5-spec-driven-engineering.md]
+    notes: >-
+      Glossed inline on
+      first use ("Not a full specification — a written statement of what you
+      want built and what shouldn't change, agreed before you start — just a
+      plain sentence..."). Wording is a light simplification of the earlier
+      framework-draft proposal, adapted to read naturally inline rather than as
+      a standalone definition; substance is unchanged (intent + boundaries,
+      agreed before implementation starts).
+
+  - term: blast radius
+    status: defined
+    canonical: >-
+      How much can break, and how far the damage reaches, if a change goes
+      wrong.
+    first_defined: docs/intro-5-spec-driven-engineering.md
+    used_in: [docs/intro-5-spec-driven-engineering.md]
+    notes: >-
+      Introduced in the tool-calling worked example, glossed inline on first
+      use ("the blast radius of an error ... how much can break, and how far
+      the damage reaches"), then reused unglossed later in the same chapter
+      ("every system's blast radius") - acceptable reuse once a term has been
+      glossed once in that chapter. The intro also covers adjacent ground
+      (the four-criteria experiment-to-system transition) in different
+      vocabulary; that was deliberate, not an oversight.
+      RESET 2026-09-17: Stage 1's six chapters were reverted to placeholder
+      (owner instruction) and their re-glosses removed from used_in. This
+      entry, and all Stage 1 reuse below, is preserved as a record only - the
+      terms are no longer live on the site.
+
+  - term: verification gate
+    status: proposed
+    canonical: >-
+      The check a change must pass before a human accepts ownership of it.
+    first_defined: null
+    used_in: []
+    notes: >-
+      Not shipped anywhere yet. The concept it names is present throughout the
+      intro ("verify before ownership transfers," the three-surface contract
+      architecture) but never coined as this specific standalone term.
+      Available for whichever future lesson names it first.
+
+  - term: RAG (Retrieval-Augmented Generation)
+    status: used-undefined
+    canonical: null
+    first_defined: null
+    used_in: [docs/intro-5-spec-driven-engineering.md]
+    notes: >-
+      Stage 4 material appearing in the intro. Acceptable there
+      (that reader has it). UPDATE 2026-08-24: the acronym is now expanded on
+      first use, via the "Surface 1 — Retrieval-augmented generation" heading
+      immediately preceding the first bare use of "RAG" - so the
+      first-use-expansion requirement is now satisfied. Status stays
+      used-undefined because no formal one-sentence canonical definition has
+      shipped yet; that full definition is still Stage 4's job.
+
+  # FIRST DEFINED 2026-09-10 by docs/intro-1-binary-to-programming.md, the real
+  # spine treatment that succeeded the deleted intro-2 pilot. The pilot's terms
+  # (previously recorded as "defined nowhere") are now live and canonical here.
+  # Their canonical wording is the shipped prose of intro-1; reuse it verbatim.
+
+  - term: program
+    status: defined
+    canonical: >-
+      A written plan set down in advance for something else to follow. In
+      computing, the set of instructions a machine carries out, with nothing
+      left open to interpretation.
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md]
+    notes: >-
+      From Greek programma (a written public notice), via Late Latin. The
+      etymology is verified against Etymonline and Wiktionary
+      (evidence-ledger: etymonline-program) and is the chapter's Station 0.
+      Distinguish from "programme", the British spelling for a printed schedule.
+
+  - term: programming
+    status: defined
+    canonical: >-
+      Writing down a set of instructions precise enough that a machine with no
+      judgement can carry them out. The written plan is the program;
+      programming is the act of making that plan exact.
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md]
+    notes: >-
+      Carries the chapter's problem statement: the reader's likely misconception
+      is that programming means typing code quickly. The canonical wording is
+      deliberately about precision, not production.
+
+  - term: transistor
+    status: defined
+    canonical: "A tiny electrical switch with exactly two stable states: on or off."
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md, docs/ch01-foundations.md]
+    notes: >-
+      REUSED 2026-09-16 by docs/ch01-foundations.md, the new Stage 0 ladder's
+      chapter 1 (see prerequisite-graph.yaml's ch01-foundations row). Re-glosses
+      per chapter via the name's actual etymology (Pierce's "transresistance",
+      not the folk "transfer + resistor" story) rather than restating the
+      functional definition above - both are true, different emphasis, per the
+      register-variant rule. intro-1 stays first_defined until the owner decides
+      whether/when to retire it; see ch02-programming-is-born's notes below for
+      the open retirement question.
+
+  - term: bit
+    status: defined
+    canonical: >-
+      One switch's state, on or off; short for binary digit. The smallest unit
+      of information a machine can hold.
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md, docs/ch01-foundations.md]
+    notes: >-
+      REUSED 2026-09-16 by docs/ch01-foundations.md, which re-glosses it inline
+      via Tukey's January 1947 memo and adds the 2003 Belgian election bit-flip
+      as a concrete illustration of what one flipped bit actually costs.
+
+  - term: byte
+    status: defined
+    canonical: "Eight bits grouped together, able to hold 256 distinct patterns."
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md]
+
+  - term: ASCII
+    status: defined
+    canonical: >-
+      An agreed scheme giving every letter, digit, and punctuation mark on a
+      keyboard its own byte pattern. First standardised as ASA X3.4-1963.
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md]
+    notes: >-
+      The prose makes the agreement (not the pattern) the point. The 1963 date
+      is not stated in the chapter body; it is recorded here from
+      evidence-ledger: ascii-1963-standardisation.
+
+  - term: machine code
+    status: defined
+    canonical: >-
+      The raw binary a processor executes directly; the only language the
+      processor reads natively.
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md, docs/ch02-programming-is-born.md]
+    notes: >-
+      REUSED 2026-09-16 by docs/ch02-programming-is-born.md, the new Stage 0
+      ladder's chapter 2, which re-glosses it through the pain of writing and
+      reading numeric operation codes by hand rather than restating the
+      definition above.
+
+  - term: register (processor)
+    status: defined
+    canonical: "A small storage slot inside a processor holding a value it is working on."
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md]
+
+  - term: x86
+    status: defined
+    canonical: "The processor family used by Intel and AMD chips."
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md]
+
+  - term: ARM
+    status: defined
+    canonical: "The processor family used in most phones and in Apple's own chips."
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md]
+
+  - term: punched card
+    status: defined
+    canonical: >-
+      A stiff paper card with holes at set positions, used to feed early
+      computers one instruction pattern at a time.
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md, docs/ch01-foundations.md]
+    notes: >-
+      REUSED 2026-09-16 by docs/ch01-foundations.md, which pushes the term's
+      own history earlier and wider than intro-1 did - Jacquard's loom (1801),
+      Babbage's design (1837) and Hollerith's census tabulator (1890) - rather
+      than re-defining it from scratch.
+
+  - term: assembly language
+    status: defined
+    canonical: >-
+      Short human-readable commands that map almost one-to-one onto a
+      processor's machine instructions.
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md, docs/ch02-programming-is-born.md]
+    notes: >-
+      First written, with its assembler, by Kathleen Booth and colleagues at
+      Birkbeck College in the late 1940s (evidence-ledger:
+      kathleen-booth-assembly-1947).
+      REUSED 2026-09-16 by docs/ch02-programming-is-born.md, which names Booth
+      and the 1947 date explicitly (intro-1 did not) and re-glosses via the
+      `ADD`/`LOAD`/`STORE` example.
+
+  - term: assembler
+    status: defined
+    canonical: >-
+      The program that translates assembly language into the machine code of
+      one specific processor family.
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md, docs/ch02-programming-is-born.md]
+
+  - term: high-level language
+    status: defined
+    canonical: >-
+      A programming language written to be read by people rather than machines,
+      and not tied to one chip family.
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md]
+
+  - term: compiler
+    status: defined
+    canonical: >-
+      A program that translates a whole program into machine code before any of
+      it runs. C and Java work this way.
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md, docs/ch02-programming-is-born.md]
+    notes: >-
+      The first was Grace Hopper's A-0 system, completed 1952
+      (evidence-ledger: a0-system-hopper-compiler-nuance).
+      REUSED 2026-09-16 by docs/ch02-programming-is-born.md, which re-glosses it
+      through FORTRAN (April 1957) specifically, including the same careful
+      wording that A-0 was "more like a loader" than a full modern compiler -
+      consistent with, not duplicating, the a0-system-hopper-compiler-nuance
+      evidence-ledger caveat.
+
+  - term: interpreter
+    status: defined
+    canonical: >-
+      A program that translates and runs source code line by line as it goes.
+      Python and JavaScript work this way.
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md]
+
+  - term: abstraction
+    status: defined
+    canonical: >-
+      Hiding one layer's complexity so the layer above it can be reasoned about
+      without knowing what is underneath.
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md]
+
+  - term: framework
+    status: defined
+    canonical: "Pre-written code you build on instead of writing from scratch."
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md]
+
+  # ---------------------------------------------------------------------------
+  # FIRST DEFINED 2026-09-10 by docs/intro-2-architecture-map.md, authored in
+  # the Phase 2 parallel run (four chapters drafted by sub-agents, then
+  # verified, gated and written back by the orchestrator). This chapter carries
+  # the heaviest gloss load in the book - roughly forty first-use terms in one
+  # causal chain - so the entries below are the chapter's whole vocabulary, in
+  # the order the prose introduces it. Canonical wording is the shipped prose;
+  # reuse it verbatim.
+  # ---------------------------------------------------------------------------
+
+  - term: platform
+    status: defined
+    canonical: "The environment a piece of software actually runs inside."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: browser
+    status: defined
+    canonical: "The program you open web pages in."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md, docs/intro-3-editors-and-ides.md]
+
+  - term: HTML (HyperText Markup Language)
+    status: defined
+    canonical: "The layer that arranges the structure - this is a heading, this is a button, this is a list."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: CSS (Cascading Style Sheets)
+    status: defined
+    canonical: "The layer that decides how it looks - this button is blue, this list has space between its items."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: JavaScript
+    status: defined
+    canonical: "The layer that makes it respond - when this button is clicked, do this."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md, docs/intro-3-editors-and-ides.md]
+    notes: >-
+      Glossed here for its browser role. intro-3 relies on it without
+      re-glossing, which is a defect to fix if intro-3 is revised - the
+      per-chapter first-use rule applies.
+
+  - term: frontend
+    status: defined
+    canonical: "The part of the software that runs on the user's own device and faces them."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md, docs/intro-5-spec-driven-engineering.md]
+    notes: >-
+      The chapter's Station 0 term, run on both halves of the name (front +
+      end). The prediction it stages - that the rule belongs in the half
+      facing the student - is scored in the "trap" section.
+
+  - term: backend
+    status: defined
+    canonical: "The part of the software that runs on a machine you control, away from the user."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md, docs/intro-5-spec-driven-engineering.md]
+    notes: >-
+      Second half of the Station 0 pair. intro-5 re-glosses it inline
+      ("the part of the system that enforces rules on a machine you control"),
+      satisfying the per-chapter rule.
+
+  - term: component
+    status: defined
+    canonical: "One reusable piece of interface, built once and used wherever it is needed."
+    registers:
+      architectural: "One part of the system that does a single job." 
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+    notes: >-
+      TWO SENSES, one word, recorded here rather than as a second entry per the
+      one-definition rule. intro-2 uses the INTERFACE sense (a reusable piece
+      of UI); a later architectural sense (any part of a system doing one job)
+      was used by s1-01. A chapter using the word must disambiguate on first
+      use.
+      RESET 2026-09-17: s1-01 and s1-03 reverted to placeholder (owner
+      instruction); removed from used_in. The two-senses note is kept for
+      whichever chapter reuses the architectural sense next.
+
+  - term: DOM (Document Object Model)
+    status: defined
+    canonical: "A live, in-memory model of the page, assembled by the browser from HTML, CSS and JavaScript."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: responsiveness
+    status: defined
+    canonical: "The interface reshaping itself correctly for whatever screen it lands on."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: breakpoint
+    status: defined
+    canonical: "A size threshold where the layout deliberately changes shape rather than only shrinking."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+    notes: >-
+      RESET 2026-09-17: s1-03 reverted to placeholder (owner instruction);
+      removed from used_in. It had re-glossed this term ("a screen width where
+      the layout deliberately changes shape") and added the mechanism the
+      intro left standing - the media query underneath, Tailwind's five named
+      defaults (640/768/1024/1280/1536 px), and that all of them are MINIMUMS.
+      That material is no longer live; a future chapter re-teaching breakpoints
+      should still cover the mobile-first MINIMUMS point.
+
+  - term: Next.js
+    status: used-undefined
+    canonical: "The framework this curriculum builds the frontend with, made by Vercel."
+    first_defined: null
+    used_in: [docs/intro-2-architecture-map.md]
+    notes: >-
+      STAGED INTRODUCTION, incomplete again. intro-2 named it only,
+      deliberately, saying "worth knowing the name now even though what it
+      does belongs to its own chapter." s1-03 was that chapter and had moved
+      this to status: defined.
+      RESET 2026-09-17: s1-03 reverted to placeholder (owner instruction).
+      status and first_defined reverted to used-undefined / null until a
+      chapter defines it again. Version claims live in the evidence ledger
+      (nextjs-2026) and expire on a 90-day clock - do not restate a version
+      here.
+
+  - term: client-side
+    status: defined
+    canonical: "Checks that run on the user's own device."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: server-side
+    status: defined
+    canonical: "Checks that run on a machine you control."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: client
+    status: defined
+    canonical: "The program making the request, seen from the server's side."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: never trust the client
+    status: defined
+    canonical: >-
+      The frontend can never be trusted to enforce anything, because you do not
+      control the device it runs on.
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+    notes: >-
+      The chapter's spine sentence and its signature contribution - every
+      remaining box in the chapter exists as a consequence of it. Traced to
+      Saltzer and Schroeder's 1975 "complete mediation" principle
+      (evidence-ledger: saltzer-schroeder-1975).
+
+  - term: developer tools
+    status: defined
+    canonical: "Panels, built for debugging, that let anyone inspect and edit the page's code live."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+    notes: >-
+      The mechanism that makes the trap concrete - right-click, Inspect, edit,
+      delete the check. Cited by intro-5 as the reason a frontend rule is a
+      decoration.
+
+  - term: Node.js
+    status: defined
+    canonical: "A runtime that lets JavaScript, a language born for browsers, run outside one."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: server
+    status: defined
+    canonical: "An ordinary computer, always switched on and reachable, in a data centre or a provider's warehouse."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: statelessness
+    status: defined
+    canonical: "A backend keeping no memory between requests."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+    notes: >-
+      Introduced as a convenience ("what lets many copies of the same backend
+      run at once"), then re-used as a problem in "the goldfish problem" - the
+      chapter's deliberate two-pass structure.
+      RESET 2026-09-17: s1-04 reverted to placeholder (owner instruction);
+      removed from used_in.
+
+  - term: API (Application Programming Interface)
+    status: defined
+    canonical: >-
+      An agreed way for two programs to talk: a fixed set of questions one
+      promises to answer, in a fixed shape.
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: HTTP (HyperText Transfer Protocol)
+    status: defined
+    canonical: "The language those requests travel in."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: method (HTTP)
+    status: defined
+    canonical: "The kind of thing being asked - GET reads, POST creates, PUT or PATCH changes, DELETE removes."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: status code
+    status: defined
+    canonical: "A number saying what happened - 200 success, 403 not allowed, 404 not found, 500 something broke."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: endpoint
+    status: defined
+    canonical: "The address naming exactly which thing at the API is being asked for."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md, docs/intro-5-spec-driven-engineering.md]
+    notes: >-
+      intro-5 re-glosses it ("one address the backend answers at") per the
+      per-chapter first-use rule.
+      RESET 2026-09-17: s1-04 reverted to placeholder (owner instruction);
+      removed from used_in. It had re-glossed the term further, extending it
+      materially: an endpoint is "a method and a path that a server promises
+      to answer", and the promise includes every named refusal - the address
+      PLUS its contract. Kept here as a pointer for whoever re-authors the
+      chapter.
+
+  - term: REST (Representational State Transfer)
+    status: defined
+    canonical: "One common house style for arranging that menu of questions and answers consistently."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+    notes: >-
+      Named by Roy Fielding in his 2000 doctoral dissertation
+      (evidence-ledger: fielding-rest-2000).
+
+  - term: validation
+    status: defined
+    canonical: "The checking itself - is this a real name, is there still room."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: middleware
+    status: defined
+    canonical: "Code that sits in a request's path, running a checklist of jobs before the real logic runs."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+    notes: >-
+      RESET 2026-09-17: s1-04 reverted to placeholder (owner instruction);
+      removed from used_in. It had re-glossed the term and taken it further
+      than the intro could: which attached values may be trusted, and what
+      order middleware must run in - a rate limiter placed before
+      authentication counts a school's shared address as one caller.
+
+  - term: logging
+    status: defined
+    canonical: "Keeping a written trail of what actually happened - which request came in, when, what it did."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: database
+    status: defined
+    canonical: "A dedicated system whose whole job is storing information reliably and handing it back later, exactly as it was left."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md, docs/intro-5-spec-driven-engineering.md]
+
+  - term: SQL (Structured Query Language)
+    status: defined
+    canonical: "A database family that stores data in strict tables - rows and columns, like a very disciplined spreadsheet."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: relationship (database)
+    status: defined
+    canonical: "How one table points at another, instead of repeating the same data on every row."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: NoSQL
+    status: defined
+    canonical: "A database family that stores looser, more flexible bundles called documents."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: Redis
+    status: defined
+    canonical: "A database built purely for speed; it holds data in memory rather than on disk."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: cache
+    status: defined
+    canonical: "A fast copy that saves a slower trip."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md, docs/intro-5-spec-driven-engineering.md]
+    notes: >-
+      intro-5 re-glosses it ("a stored copy of data kept close by"), per the
+      per-chapter rule.
+
+  - term: authentication
+    status: defined
+    canonical: "Proving who you are - logging in, usually with a password."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: authorization
+    status: defined
+    canonical: "What you are allowed to do once the system knows who you are."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: hashing
+    status: defined
+    canonical: "A one-way scramble that produces a code you cannot turn back into the password."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+    notes: >-
+      The chapter's Station 7 magnitude lives here - OWASP's Argon2id baseline
+      of about 19 MB per hash and two passes (evidence-ledger:
+      owasp-password-storage-cheatsheet).
+
+  - term: OAuth
+    status: defined
+    canonical: "A way to let one site confirm who you are through another, without your password being shared."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: token
+    status: defined
+    canonical: "A signed piece of data proving who you are, checked a moment ago."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: Git
+    status: defined
+    canonical: "The tool that keeps a complete history of every change ever made to a project."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md, docs/intro-4-terminals-and-cli-agents.md]
+
+  - term: repository
+    status: defined
+    canonical: "The folder holding a project's complete history of saved changes."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md, docs/intro-3-editors-and-ides.md, docs/intro-4-terminals-and-cli-agents.md]
+    notes: >-
+      RESET 2026-09-17: s1-06 reverted to placeholder (owner instruction);
+      removed from used_in. It had re-glossed the term more precisely as "the
+      folder Git watches", separating the working tree (the files on disk now)
+      from the record - the split its staging-area material rested on.
+
+  - term: commit
+    status: defined
+    canonical: "A labelled, timestamped record of exactly what changed and why."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+    notes: >-
+      RESET 2026-09-17: s1-06 reverted to placeholder (owner instruction);
+      removed from used_in. It had re-glossed the term ("one recorded
+      snapshot, with a written reason and a link to the commit before it") and
+      added the mechanism the intro left out: the author field is free text
+      Git does not verify.
+
+  - term: GitHub
+    status: defined
+    canonical: "Where a project's history lives online, so more than one person or agent can see it."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: branch
+    status: defined
+    canonical: "A separate copy of the work, so two people or agents do not collide."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+    notes: >-
+      RESET 2026-09-17: s1-06 reverted to placeholder (owner instruction);
+      removed from used_in. It had corrected the intro's framing, and the
+      correction matters: a branch is not a copy of the work. It is one small
+      file holding one hash, naming one commit, which is why branching is
+      cheap. The intro's "separate copy" is a usable first approximation; a
+      later chapter must not build on it as though files are duplicated.
+
+  - term: pull request
+    status: defined
+    canonical: "A formal 'here is what I changed, please review it before it joins the real project'."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md, docs/intro-5-spec-driven-engineering.md]
+    notes: >-
+      intro-5 re-glosses it ("the formal proposal to merge a change") per the
+      per-chapter rule, and asks it a different question - the reviewer's three
+      questions, not what a pull request is.
+      RESET 2026-09-17: s1-06 reverted to placeholder (owner instruction);
+      removed from used_in. It had examined the NAME itself, as a MISLEADING
+      name (register 4): the pull is the maintainer's action, per the git
+      request-pull documentation, and the name omits the review conversation
+      the feature exists for. Worth reusing that Station-0 decomposition
+      whenever this chapter is re-authored.
+
+  - term: merge conflict
+    status: defined
+    canonical: "When two branches change the same lines in incompatible ways, Git asks a human to decide which version wins. It will not guess."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+    notes: >-
+      RESET 2026-09-17: s1-06 reverted to placeholder (owner instruction);
+      removed from used_in. It had re-glossed the term in three words ("Git
+      declining to guess") and added the part the intro could not: the marker
+      syntax a reader actually meets, and that resolving one is a normal step
+      rather than an error.
+
+  - term: deployment
+    status: defined
+    canonical: "Taking the frontend and the backend and putting them on machines that are always on and always reachable."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: DNS (Domain Name System)
+    status: defined
+    canonical: "The infrastructure that points a human-readable address at the machines running a site."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: domain
+    status: defined
+    canonical: "The human-readable address itself."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: production
+    status: defined
+    canonical: "The environment real users touch."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: staging (environment)
+    status: defined
+    canonical: "Where changes are tried first, so a mistake never lands in front of a real user."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: operating system
+    status: defined
+    canonical: "The software that manages a computer's hardware and its programs."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md, docs/intro-4-terminals-and-cli-agents.md]
+    notes: >-
+      DEFECT CARRIED FROM intro-1: intro-1 uses "operating systems" and
+      "device drivers" unglossed, and intro-1 comes FIRST in the sequence, so
+      the definition here does not rescue that reader. intro-1 needs an inline
+      gloss on first use, or the term should be dropped from it.
+
+  - term: blockchain
+    status: defined
+    canonical: "An application built on a shared record that many independent computers keep in step."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: smart contract
+    status: defined
+    canonical: "Code that runs identically on thousands of independent computers at once, instead of one server you control."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: IoT (Internet of Things)
+    status: defined
+    canonical: "A device such as a smart thermostat or fitness tracker, where a small sensor plays the frontend's role and a tiny chip or cloud service plays the backend's."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+
+  - term: cybersecurity
+    status: defined
+    canonical: "The question 'what happens if someone lies to this box', asked at every box on the map."
+    first_defined: docs/intro-2-architecture-map.md
+    used_in: [docs/intro-2-architecture-map.md]
+    notes: >-
+      Deliberately introduced as a cross-cutting lens rather than a separate
+      box - the chapter names three places it already appeared (the deleted
+      seat check, plain-text passwords, the auth/authz split).
+
+  # ---------------------------------------------------------------------------
+  # FIRST DEFINED 2026-09-10 by docs/intro-3-editors-and-ides.md.
+  # ---------------------------------------------------------------------------
+
+  - term: text editor
+    status: defined
+    canonical: "A program for changing text files - letters, numbers and symbols, with no meaning attached."
+    first_defined: docs/intro-3-editors-and-ides.md
+    used_in: [docs/intro-3-editors-and-ides.md]
+
+  - term: IDE (integrated development environment)
+    status: defined
+    canonical: "One program where the editor and every other tool you need sit together, and where those tools share what they know about your code."
+    first_defined: docs/intro-3-editors-and-ides.md
+    used_in: [docs/intro-3-editors-and-ides.md, docs/intro-4-terminals-and-cli-agents.md]
+    notes: >-
+      The chapter's Station 0. The load-bearing word is *integrated*, and the
+      prediction gap the chapter stages is that readers describe an IDE as a
+      fancier text editor. Scored explicitly: "A fancier editor is a nicer box.
+      An IDE is the same box with the walls between it and its neighbours
+      removed."
+
+  - term: terminal
+    status: defined
+    canonical: "A program where you type commands as text."
+    first_defined: docs/intro-3-editors-and-ides.md
+    used_in: [docs/intro-3-editors-and-ides.md, docs/intro-4-terminals-and-cli-agents.md]
+    notes: >-
+      First glossed here, in passing, as one of the five separate programs that
+      preceded the IDE. intro-4 gives it the full Station 0 treatment
+      (etymology, ATM anchor, terminal emulator) and re-glosses it per the
+      per-chapter rule. intro-3 is the true first_defined.
+
+  - term: debugger
+    status: defined
+    canonical: "A program that stops your code at chosen points so you can see the values inside it."
+    first_defined: docs/intro-3-editors-and-ides.md
+    used_in: [docs/intro-3-editors-and-ides.md]
+
+  - term: language server
+    status: defined
+    canonical: "A second program running alongside the editor, that reads your code the way the compiler will."
+    first_defined: docs/intro-3-editors-and-ides.md
+    used_in: [docs/intro-3-editors-and-ides.md]
+
+  - term: open source
+    status: defined
+    canonical: "Source code is public, so anyone may read it or build on it."
+    first_defined: docs/intro-3-editors-and-ides.md
+    used_in: [docs/intro-3-editors-and-ides.md, docs/intro-4-terminals-and-cli-agents.md]
+
+  - term: Electron
+    status: defined
+    canonical: "A framework that lets a program be assembled from the same building blocks a web page is made from, then run as an ordinary desktop application."
+    first_defined: docs/intro-3-editors-and-ides.md
+    used_in: [docs/intro-3-editors-and-ides.md, docs/intro-2-architecture-map.md]
+
+  - term: fork (of code)
+    status: defined
+    canonical: "Code you take and then take in your own direction."
+    first_defined: docs/intro-3-editors-and-ides.md
+    used_in: [docs/intro-3-editors-and-ides.md]
+
+  - term: Rust
+    status: defined
+    canonical: "A programming language built for speed and safety."
+    first_defined: docs/intro-3-editors-and-ides.md
+    used_in: [docs/intro-3-editors-and-ides.md, docs/intro-4-terminals-and-cli-agents.md]
+
+  - term: AI-assisted
+    status: defined
+    canonical: "The tool suggests and you decide, one small piece at a time; the accept-or-reject decision stays local to each suggestion and the plan stays in your head."
+    first_defined: docs/intro-3-editors-and-ides.md
+    used_in: [docs/intro-3-editors-and-ides.md]
+
+  - term: AI-driven
+    status: defined
+    canonical: "You state intent in plain language, the tool plans and edits several files, and you review the change set at the end; the plan moves into the tool."
+    first_defined: docs/intro-3-editors-and-ides.md
+    used_in: [docs/intro-3-editors-and-ides.md]
+
+  - term: diff
+    status: defined
+    canonical: "A view of exactly which lines were added and removed."
+    first_defined: docs/intro-3-editors-and-ides.md
+    used_in: [docs/intro-3-editors-and-ides.md, docs/intro-5-spec-driven-engineering.md]
+    notes: >-
+      intro-5 re-glosses it ("the exact list of what changed") per the
+      per-chapter rule.
+
+  - term: model (AI)
+    status: defined
+    canonical: "The program that does the work, running on someone else's computer."
+    first_defined: docs/intro-3-editors-and-ides.md
+    used_in: [docs/intro-3-editors-and-ides.md, docs/intro-4-terminals-and-cli-agents.md]
+
+  # ---------------------------------------------------------------------------
+  # FIRST DEFINED 2026-09-10 by docs/intro-4-terminals-and-cli-agents.md.
+  # ---------------------------------------------------------------------------
+
+  - term: shell
+    status: defined
+    canonical: "The program that reads the line you typed and runs it."
+    first_defined: docs/intro-4-terminals-and-cli-agents.md
+    used_in: [docs/intro-4-terminals-and-cli-agents.md]
+
+  - term: CLI (command-line interface)
+    status: defined
+    canonical: "An interface you drive by typing lines of text instead of clicking."
+    first_defined: docs/intro-4-terminals-and-cli-agents.md
+    used_in: [docs/intro-4-terminals-and-cli-agents.md]
+    notes: >-
+      Decomposed at Station 0 as compositional - "a command, on a line,
+      through an interface. Nothing is hidden inside it" - and contrasted with
+      *terminal*, which is the borrowed, misleading half of the title.
+
+  - term: GUI (graphical user interface)
+    status: defined
+    canonical: "An interface you drive by pointing and clicking."
+    first_defined: docs/intro-4-terminals-and-cli-agents.md
+    used_in: [docs/intro-4-terminals-and-cli-agents.md]
+
+  - term: terminal emulator
+    status: defined
+    canonical: "A program that pretends to be a physical terminal. It has no paper, no cable, and no computer at the far end unless you connect to one."
+    first_defined: docs/intro-4-terminals-and-cli-agents.md
+    used_in: [docs/intro-4-terminals-and-cli-agents.md]
+    notes: >-
+      The scored half of the Station 0 prediction: "right about the object on
+      your screen and wrong about the name."
+
+  - term: prompt
+    status: defined
+    canonical: "The shell telling you it is ready for a command."
+    first_defined: docs/intro-4-terminals-and-cli-agents.md
+    used_in: [docs/intro-4-terminals-and-cli-agents.md]
+
+  - term: directory
+    status: defined
+    canonical: "A folder."
+    first_defined: docs/intro-4-terminals-and-cli-agents.md
+    used_in: [docs/intro-4-terminals-and-cli-agents.md]
+
+  - term: Command Prompt (cmd.exe)
+    status: defined
+    canonical: "Microsoft's older shell, inherited from MS-DOS, which still opens on every Windows machine."
+    first_defined: docs/intro-4-terminals-and-cli-agents.md
+    used_in: [docs/intro-4-terminals-and-cli-agents.md]
+
+  - term: PowerShell
+    status: defined
+    canonical: "Microsoft's newer shell, built as a cross-platform automation tool that passes objects between commands rather than plain text."
+    first_defined: docs/intro-4-terminals-and-cli-agents.md
+    used_in: [docs/intro-4-terminals-and-cli-agents.md]
+
+  - term: Bash (Bourne Again SHell)
+    status: defined
+    canonical: "The shell of the Unix world, released by Brian Fox in 1989 for the GNU Project as a free replacement for the earlier Bourne shell."
+    first_defined: docs/intro-4-terminals-and-cli-agents.md
+    used_in: [docs/intro-4-terminals-and-cli-agents.md]
+
+  - term: Git Bash
+    status: defined
+    canonical: "Bash compiled to run on Windows, shipped inside Git for Windows; nothing else on a Windows machine brings it."
+    first_defined: docs/intro-4-terminals-and-cli-agents.md
+    used_in: [docs/intro-4-terminals-and-cli-agents.md]
+
+  - term: WSL (Windows Subsystem for Linux)
+    status: defined
+    canonical: "A real Linux system running inside Windows."
+    first_defined: docs/intro-4-terminals-and-cli-agents.md
+    used_in: [docs/intro-4-terminals-and-cli-agents.md]
+
+  - term: Windows Terminal
+    status: defined
+    canonical: "A window that can hold several shells in tabs. It is not a shell itself."
+    first_defined: docs/intro-4-terminals-and-cli-agents.md
+    used_in: [docs/intro-4-terminals-and-cli-agents.md]
+
+  - term: coding agent
+    status: defined
+    canonical: "A program that reads your files, writes and edits code, and runs commands, mostly without stopping to ask you about each step."
+    first_defined: docs/intro-1-binary-to-programming.md
+    used_in: [docs/intro-1-binary-to-programming.md, docs/intro-4-terminals-and-cli-agents.md, docs/welcome.md, docs/ch00-introduction.md]
+    notes: >-
+      Distinct from the `agent` entry above - this is the term intro-1 coins and
+      intro-4 re-glosses. Both point at the same concept; keep the two canonical
+      wordings as they shipped rather than merging them, because the entries
+      carry different registers (intro-1's ladder framing vs intro-4's
+      operational framing).
+      USED 2026-09-15 by docs/welcome.md, which now sits before intro-1 in
+      reading order and glosses it ("a program that writes and edits code for
+      you") without the full canonical wording above. first_defined stays
+      intro-1: Welcome glosses, it does not define properly.
+      GLOSSED 2026-09-17 by docs/ch00-introduction.md, which is now the book's
+      first chapter. It needs the term before the safety-floor callout, because
+      the floor's fixed wording says "the agent" and the book's first page
+      cannot use a word it has never introduced; the chapter glosses it in the
+      paragraph immediately before the callout ("software that writes and edits
+      code and runs commands for you"). The link points at the `agent` anchor,
+      because that is the heading docs/glossary.md actually carries - the link
+      is to the entry's anchor, not to a second entry. Third chapter to gloss
+      this term without defining it; first_defined stays intro-1.
+
+  - term: CLI agent
+    status: defined
+    canonical: "A coding agent you drive from the terminal."
+    first_defined: docs/intro-4-terminals-and-cli-agents.md
+    used_in: [docs/intro-4-terminals-and-cli-agents.md]
+
+  - term: harness
+    status: defined
+    canonical: "The part of an agent system that touches your machine, as distinct from the model that thinks."
+    first_defined: docs/intro-4-terminals-and-cli-agents.md
+    used_in: [docs/intro-4-terminals-and-cli-agents.md]
+    notes: >-
+      Load-bearing for the chapter's trust argument: "The harness is the part
+      that touches your machine. That is the part you are deciding to trust."
+
+  - term: scope (agent)
+    status: defined
+    canonical: "The set of places an agent is allowed to touch, set by the directory you launched it from."
+    first_defined: docs/intro-4-terminals-and-cli-agents.md
+    used_in: [docs/intro-4-terminals-and-cli-agents.md]
+    notes: >-
+      The chapter's central safety mechanism and the thing a permission prompt
+      never asks about.
+
+  - term: token (AI billing)
+    status: defined
+    canonical: "Chunks of text, roughly three quarters of a word in English, and the unit every language model is priced in."
+    first_defined: docs/intro-4-terminals-and-cli-agents.md
+    used_in: [docs/intro-4-terminals-and-cli-agents.md]
+    notes: >-
+      Distinct sense from the `token` entry above (an auth token). Same word,
+      different meaning, different chapter - deliberately a second entry
+      because the concept differs, not the register.
+
+  # ---------------------------------------------------------------------------
+  # FIRST DEFINED 2026-09-10 by docs/intro-5-spec-driven-engineering.md, whose
+  # Phase 2 merge-and-rewrite drew the SDD-vs-SDE line by name for the first
+  # time (previously left open - see prerequisite-graph.yaml's intro-5 notes).
+  # ---------------------------------------------------------------------------
+
+  - term: Spec-Driven Development (SDD)
+    status: defined
+    canonical: >-
+      The current, tool-adopted workflow in which specifications, not prompts,
+      govern what AI generates. Adopted by GitHub's Spec Kit, Amazon's Kiro and
+      Anthropic's Claude Code from 2025, and formalised in a February 2026 paper.
+    first_defined: docs/intro-5-spec-driven-engineering.md
+    used_in: [docs/intro-5-spec-driven-engineering.md]
+    notes: >-
+      NOT this project's coinage and never to be presented as such. The chapter
+      draws the line explicitly: SDD is the shorter sibling that came first, and
+      Spec-Driven Engineering is its successor, not SDD renamed. Introduced in
+      the chapter where the Station 0 prediction is scored - the reader's guess
+      ("write the specification first, then the agent writes the code") turns out
+      to describe SDD, which is exactly why the last word of the title is
+      *Engineering*.
+
+  - term: specification poverty
+    status: defined
+    canonical: >-
+      The inability to write a good specification, because the engineer lacks
+      the vocabulary, the system-design literacy and the requirements reasoning
+      to say precisely what they mean.
+    first_defined: docs/intro-5-spec-driven-engineering.md
+    used_in: [docs/intro-5-spec-driven-engineering.md]
+    notes: >-
+      The gap SDD leaves, and the chapter's answer to why a tooling workflow
+      cannot close it. Taken from the official solution statement's framing;
+      attributed there rather than presented as a neutral industry term. Framing
+      source: evidence-ledger: bcms-sdd-guide-2026 (still needs-url-verification).
+      The chapter's position, stated as a position: no specification format and
+      no tool closes this gap, because a tool can hold a specification but
+      cannot build the judgment that writes one.
+
+  - term: specify - design - implement - verify
+    status: defined
+    canonical: >-
+      The four stages any piece of software work moves through: specify what
+      needs to happen, design how it will happen, implement the design, verify
+      that what was built does what was specified.
+    first_defined: docs/intro-5-spec-driven-engineering.md
+    used_in: [docs/intro-5-spec-driven-engineering.md]
+    notes: >-
+      NAMING RECONCILED 2026-09-10. The retired intro.md carried this framework
+      under two names ("specify-delegate-inspect-verify" and
+      "specify-design-implement-verify"); the merge landed on
+      specify-design-implement-verify throughout, including the table and both
+      worked examples. The governing claim is "contribution is not ownership" -
+      an agent can contribute at every stage and can own none of them. A failed
+      check returns the work to Specify, not Implement.
+
+  - term: queue
+    status: defined
+    canonical: "A waiting line that holds requests until the backend is ready to handle them."
+    first_defined: docs/intro-5-spec-driven-engineering.md
+    used_in: [docs/intro-5-spec-driven-engineering.md]
+
+  - term: schema
+    status: defined
+    canonical: "The written list of every field a set of data holds."
+    first_defined: docs/intro-5-spec-driven-engineering.md
+    used_in: [docs/intro-5-spec-driven-engineering.md]
+
+  - term: CSV
+    status: defined
+    canonical: "A plain text file holding data one line per row."
+    first_defined: docs/intro-5-spec-driven-engineering.md
+    used_in: [docs/intro-5-spec-driven-engineering.md]
+
+  - term: rate-limited
+    status: defined
+    canonical: "Capped in how often one user may call it."
+    first_defined: docs/intro-5-spec-driven-engineering.md
+    used_in: [docs/intro-5-spec-driven-engineering.md]
+
+  # ---------------------------------------------------------------------------
+  # UPDATED 2026-09-10 (Phase 2): the terms below were the old pilot set's
+  # "defined nowhere" list. Every one EXCEPT instruction set architecture is now
+  # defined above by intro-1, and only instruction set architecture (and code,
+  # and just-in-time compilation) remains uncoined - intro-1 teaches the x86/ARM
+  # split without naming the term, so it stays available for a later chapter.
+  # The pilot's evidence sources are re-added as proposed entries in
+  # evidence-ledger.yaml under the same ids.
+  # ---------------------------------------------------------------------------
+
+
+  # === STAGE 1 (REMOVED 2026-09-17) ==========================================
+  # All Stage 1 concept entries were deleted here. The six Stage 1 chapters
+  # (docs/stage-01-spec-aware-vibe-engineering/*.md) were reverted to
+  # chapter_state: placeholder on 2026-09-17 (owner instruction - see
+  # prerequisite-graph.yaml's progress note for the full record), so none of
+  # the terms they defined are live on the site any more. Deleting the block
+  # rather than leaving it marks the terms genuinely undefined again, so a
+  # future author does not skip defining one on the strength of a stale entry
+  # here. Re-add these entries fresh when Stage 1 is re-authored; do not
+  # restore this exact block from history and assume it still matches the
+  # eventual prose.
+  # ---------------------------------------------------------------------------
+  # ===========================================================================
+  # NEW STAGE 0 LADDER — added 2026-09-16, chapters 1-2 of the chronological
+  # 20-chapter Stage 0 redesign approved in
+  # curriculum-state/proposals/whole-book-redesign-record-2026-09-14.md §18 and
+  # planned in full in curriculum-state/stage-0-drafting-plan.md. These two
+  # chapters coexist on disk with the OLD intro-1..intro-5 sequence, which the
+  # drafting plan marks for full retirement but which has not been retired yet -
+  # see prerequisite-graph.yaml's new rows for the open question this leaves.
+  # Terms these two chapters share with intro-1 (transistor, bit, punched card,
+  # machine code, assembly language, assembler, compiler) were NOT re-entered
+  # here — see the notes appended to each of those entries above instead, per
+  # the one-canonical-definition rule.
+  # ===========================================================================
+
+  - term: binary
+    status: defined
+    canonical: >-
+      A system built entirely from two states, on or off — the fewest states
+      that still survive being sent down a long or noisy wire.
+    first_defined: docs/ch01-foundations.md
+    used_in: [docs/ch01-foundations.md]
+    notes: >-
+      From Latin bini, "two together" (evidence-ledger: etymonline-binary).
+      Curiously, intro-1's title names "binary" but the concept-ledger shows no
+      prior entry defining the word itself - only its consequences (bit, byte,
+      transistor). This chapter is the first to define the word properly.
+
+  - term: relay (electromechanical)
+    status: defined
+    canonical: >-
+      A switch worked by an electromagnet pulling a metal contact open or
+      shut - the first physical body the two-state switch idea wore.
+    first_defined: docs/ch01-foundations.md
+    used_in: [docs/ch01-foundations.md]
+
+  - term: vacuum tube
+    status: defined
+    canonical: >-
+      A switch made of glass and a controlled beam of electrons instead of
+      metal contacts - faster than a relay, with nothing to wear down, but
+      prone to burning out from its own heat.
+    first_defined: docs/ch01-foundations.md
+    used_in: [docs/ch01-foundations.md]
+
+  - term: FORTRAN
+    status: defined
+    canonical: >-
+      Short for Formula Translation - the first widely used high-level
+      language, delivered by John Backus's team at IBM in April 1957, letting
+      a scientist write something close to ordinary algebra and have a
+      compiler turn it into machine code automatically.
+    first_defined: docs/ch02-programming-is-born.md
+    used_in: [docs/ch02-programming-is-born.md]
+    notes: >-
+      Chapter 2 deliberately does not survey languages after FORTRAN - that is
+      Chapter 3's ("One Language Was Never Enough") job per
+      stage-0-drafting-plan.md. Do not extend this entry's canonical wording to
+      cover later languages; add separate entries for those when that chapter
+      drafts.

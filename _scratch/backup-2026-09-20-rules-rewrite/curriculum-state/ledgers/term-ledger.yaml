@@ -1,0 +1,65 @@
+# Term ledger — every term the glossary exposes, its anchor, and the chapter
+# that introduces it first.
+#
+# Purpose: the concept ledger answers "what does this term mean"; this file
+# answers "where may it appear". A chapter may link any term the glossary
+# carries, but a `major` term must not be USED by a chapter that sits before
+# the chapter recorded here as introducing it. check-references.mjs
+# (check:refs, the second gate in the build chain) enforces both halves: every
+# `/glossary#<slug>` a chapter links must resolve to a real heading anchor on
+# the glossary page, and a major term must not appear too early.
+#
+# Schema per entry:
+#   term:             the display name, as the glossary heading shows it
+#   slug:             the glossary anchor a chapter links to — what
+#                     `/glossary#<slug>` must resolve to. Docusaurus slugs a
+#                     heading by lowercasing it, dropping punctuation and
+#                     turning spaces into hyphens, so the heading
+#                     "Specification (spec)" anchors at specification-spec
+#   weight:           major | minor. Only `major` terms are order-checked;
+#                     every term is anchor-checked
+#   first_introduced: the chapter `id` from prerequisite-graph.yaml that
+#                     introduces the term, or null while that chapter has not
+#                     been decided. `null` is a real state, not a hole — the
+#                     ordering check skips the term and reports nothing
+#
+# Rules:
+#   - first_introduced is a chapter id, never a file path. An id that names no
+#     chapter in prerequisite-graph.yaml is reported by check-references.mjs,
+#     because a dangling id would silently disable the ordering check for that
+#     term rather than fail it.
+#   - Every entry below starts `minor` with `first_introduced: null`, seeded
+#     from the five headings docs/glossary.md exposes today. Which chapter
+#     actually introduces each term is a content-authoring judgment made when
+#     that chapter is written; this file does not guess it.
+
+version: 1
+seeded: 2026-09-14
+seeded_from: edu-site/docs/glossary.md (every heading on the page, 2026-09-14)
+
+terms:
+
+  - term: Agent
+    slug: agent
+    weight: minor
+    first_introduced: null
+
+  - term: Blast radius
+    slug: blast-radius
+    weight: minor
+    first_introduced: null
+
+  - term: Specification (spec)
+    slug: specification-spec
+    weight: minor
+    first_introduced: null
+
+  - term: Spec-Driven Engineering
+    slug: spec-driven-engineering
+    weight: minor
+    first_introduced: null
+
+  - term: Vibe coding
+    slug: vibe-coding
+    weight: minor
+    first_introduced: null

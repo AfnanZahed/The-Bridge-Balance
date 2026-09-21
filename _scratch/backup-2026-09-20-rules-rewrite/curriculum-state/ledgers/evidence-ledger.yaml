@@ -1,0 +1,938 @@
+# Evidence ledger - every canonical source, and which question each chapter
+# asks of it.
+#
+# Purpose:
+#   1. Reuse is allowed; paraphrase is not. Two chapters may cite the same
+#      incident only if each asks a genuinely different question of it. This
+#      file is where that is checked.
+#   2. When a number is updated or retracted, this turns "which chapters
+#      mention it" from a memory problem into a lookup.
+#
+# Rules:
+#   - No cap on reuse. The test is whether a NEW question is being asked. If
+#     you reach for a source again and cannot name a question no other chapter
+#     is asking, you have over-used it - at the second reuse or the fifth.
+#   - Rotate through: what happened -> why it happened -> what changed because
+#     of it -> what would you do differently knowing it.
+#   - expires: Stage 3/4 tool claims get 90 days. Industry reports get 12
+#     months. Named historical incidents do not expire but their framing does.
+#   - status (optional field, per source): absent means canonical - confirmed,
+#     citable normally, which is why none of the entries seeded below carry it.
+#     `chapter-production` sets `status: proposed` on any NEW entry
+#     it adds during research, since that skill proposes sources for an editor
+#     (human or the sibling skill) to confirm, not to add unilaterally. A
+#     human or the chapter-shipping skill promotes a proposed source to
+#     canonical by deleting the status field once it's actually cited in a
+#     shipped chapter - do not leave `status: proposed` sitting on a source a
+#     chapter already cites, since that would make an already-shipped citation
+#     look unconfirmed to the next author who reads this file.
+#   - A passage that only points backward ("the METR and Veracode findings
+#     elsewhere in this curriculum") without restating the evidence or asking
+#     it a fresh question is NOT a new use and gets no questions_asked row
+#     here - it is deferring to the chapter where the citation lives.
+
+version: 1
+seeded: 2026-08-23
+seeded_from: edu-site/docs/intro-5-spec-driven-engineering.md
+# REPOINTED 2026-09-10: every `questions_asked` row that named docs/intro.md
+# now names docs/intro-5-spec-driven-engineering.md, its merge-and-rewrite
+# successor in the intro resequence. The questions are unchanged; only the
+# chapter they are filed against moved. See
+# curriculum-state/proposals/stage-00-intro-resequence-2026-09-10.md.
+
+sources:
+
+  - id: replit-lemkin
+    name: Replit agent production-database deletion (Jason Lemkin / SaaStr)
+    url: https://arstechnica.com/information-technology/2025/07/ai-coding-assistants-chase-phantoms-destroy-real-user-data/
+    also: https://www.pcmag.com/news/vibe-coding-fiasco-replite-ai-agent-goes-rogue-deletes-company-database
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Can capability outrun accountability?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does the full anatomy of an unenforced instruction look like, told as a story rather than analyzed as a boundary?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does an environment boundary failure look like?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does the surrender pole look like as a concrete instance, not just a description?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Which criterion (durable data) does this incident make concrete, and what made the loss recoverable that time?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Where exactly did the authority boundary fail?"}
+    notes: >-
+      Each logged use asks a different question, per the no-cap-on-reuse rule
+      above. Bare backward callbacks ("the Enrichlead pattern discussed
+      elsewhere") are not new uses and get no row.
+
+  - id: veracode-genai
+    name: Veracode GenAI Code Security Report
+    url: https://www.veracode.com/blog/genai-code-security-report
+    last_verified: 2026-08-20
+    expires: 2027-03-01
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Why is a checklist without verification decoration?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What share of AI-generated code carries a security vulnerability, and what does that mean for a leader who hasn't changed how rigorously the team specifies or verifies?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does the density figure imply for gate design?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the measured cost of treating verification as optional?"}
+    notes: >-
+      RESOLVED 2026-09-08: figure drift reconciled against primary source. The
+      2025 report's 45% (100+ models, 80 tasks, Java/Python/C#/JS, Java worst
+      at 72%) and the Spring 2026 update's 44% task-failure rate / 56% average
+      pass rate (was 55%) are sequential readings of the same flat trend, not
+      contradictory figures - cite both with their year, not one in isolation.
+      A bare backward callback is not a new use and gets no row.
+
+  - id: stackoverflow-survey-2025
+    name: Stack Overflow Developer Survey 2025 (84% adoption / 29% trust)
+    url: https://survey.stackoverflow.co/2025/ai
+    last_verified: 2026-08-20
+    expires: 2026-12-01
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Does refusing AI actually buy safety, or just fall behind for no offsetting benefit?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Is opting out of AI tools entirely still a defensible choice, adoption-wise?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does the adoption/trust gap reveal about the two poles?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the cultural fingerprint of unowned responsibility?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Where does the gap surface first?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does the adoption/trust gap signal about where organizational judgment hasn't kept pace with tool adoption?"}
+      - {chapter: docs/intro-3-editors-and-ides.md, question: "Which editors do working developers actually use, and are the new AI editors a majority or a minority?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the shape of the two extremes in one year of data - adopted and distrusted at once?"}
+    notes: >-
+      Superseded when the 2026 survey lands. Check before Stage 3 authoring.
+      REUSED 2026-09-10 and asked two new questions: intro-3 reads it for
+      editor market share (VS Code first for the fifth year, about 49,000
+      respondents; Cursor 18 per cent, Claude Code 10 per cent, Windsurf 5 per
+      cent), and intro-5 reads the same 84/29 split as the shape of the
+      adoption/trust gap rather than as an adoption argument. Both differ from
+      the six existing questions; neither is a bare backward callback.
+      NOTE: Stack Overflow's content-moderation policy is a DIFFERENT source -
+      see stackoverflow-ai-policy below. The two are not to be conflated even
+      though both cite "Stack Overflow."
+
+  - id: metr-productivity
+    name: METR AI productivity study (19% slower on complex tasks; 63% debug more)
+    url: https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/
+    also: https://arxiv.org/abs/2507.09089
+    last_verified: 2026-09-08
+    expires: 2026-12-01
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What happens when implementation crosses a boundary uncontrolled?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Where has the scarce capability moved to?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Is verifying someone else's reasoning a harder skill than producing your own, and is that skill measurably atrophying?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Does the measured effect of AI on experienced developers match how fast the work felt, and does the study still describe current tools?"}
+    notes: >-
+      RESOLVED 2026-09-08: direct paper link found and verified (16 developers,
+      246 tasks, Feb-June 2025 AI frontier, forecast -24%/felt -20%/measured
+      +19% slower) - the org-root-only issue flagged above is fixed. A bare
+      backward callback is not a new use and gets no row.
+
+  - id: karpathy-vibe-coding
+    name: Andrej Karpathy, origin of "vibe coding" (Feb 2025)
+    url: https://threadreaderapp.com/thread/1886192184808149383.html
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is this pattern actually called, and by whom?"}
+
+  - id: collins-woty-2025
+    name: Collins Dictionary Word of the Year 2025 - "vibe coding"
+    url: https://www.collinsdictionary.com/word-of-the-year/2025
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "How mainstream has this become?"}
+
+  - id: enrichlead-acevedo
+    name: Leonel Acevedo / Enrichlead - browser-side authorization and secrets
+    url: https://www.indiehackers.com/post/tech/vibe-coding-has-a-security-problem-vLxyPTrTlZVwDo76oqvr
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does a quieter, design-level failure look like, next to Replit's loud one?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does leaving authority in the client cost?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What marks the money threshold of an experiment becoming a system?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is a trust boundary failure specifically?"}
+    notes: >-
+      The intro's "two stories" narrative pairs this with Replit. A bare
+      backward callback is not a new use and gets no row.
+
+  - id: samsung-leak
+    name: Samsung confidential source-code leak and generative-AI ban (2023)
+    url: https://www.bloomberg.com/news/articles/2023-05-02/samsung-bans-chatgpt-and-other-generative-ai-use-by-staff-after-leak
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the confidentiality version of this lesson?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "When can strong restriction be the correct engineering answer?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is a data-classification boundary failure?"}
+
+  - id: stackoverflow-ai-policy
+    name: Stack Overflow generative-AI content policy
+    url: https://meta.stackoverflow.com/questions/421831/policy-generative-ai-e-g-chatgpt-is-banned
+    last_verified: 2026-08-20
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What happens to the apprenticeship pipeline?"}
+
+  - id: aws-tool-sprawl
+    name: AWS research on AI-tool switching costs (40% less completed work, 2x defect rate)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Why does switching tools specifically erode the verify-stage habit?"}
+    notes: >-
+      No independently verified URL found - locate the primary AWS report
+      before the next new use.
+
+  - id: stanford-canaries-2025
+    name: Stanford Digital Economy Lab, "Canaries in the Coal Mine" (Brynjolfsson et al., Nov 2025)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Does the labor market confirm the cost of missing the experiment-to-system transition?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: dice-linkedin-2025
+    name: Dice Tech Job Report 2025 / LinkedIn Workforce Report 2025 (entry-level postings -40%, 57% hiring managers trust AI over interns)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does the labor market say about missing the four criteria?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: dice-report-jul-2026
+    name: Dice Tech Job Report, July 2026 edition (traditional dev postings -22% YoY Q1 2026; AI-titled postings +173% YoY)
+    url: https://www.ciodive.com/news/dice-report-tech-hiring-AI/824893/
+    last_verified: 2026-09-09
+    expires: 2026-12-01
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Does the hiring market back up the claim that producing syntax fast is no longer the scarce skill?"}
+    notes: >-
+      NEW 2026-09-09. Verified via CIO Dive's 9 July 2026 write-up of the Dice
+      report (Dice analysed 7 million US tech job postings). Distinct from
+      dice-linkedin-2025 above, which is a different (2025) report edition
+      covering different figures (entry-level postings, hiring-manager trust)
+      and remains needs-url-verification - do not conflate the two. This
+      entry replaces an earlier draft intention to cite a "10% to 50% AI/ML
+      role share" figure attributed to Dice via
+      The Bridge Balance/Official docs/solution_statement.md - that specific
+      figure could not be verified against any live Dice report during this
+      session's research and was dropped in favour of this independently
+      verified one. Proposed by the 2026-09-09 canon + intro "Development
+      versus Engineering" addition; an editor should confirm before wider
+      reuse, per this file's usual proposed -> canonical promotion rule.
+
+  - id: fortune50-security-findings
+    name: Fortune 50 enterprise security-finding growth, Dec 2024-Jun 2025 (~10x), via SecurityWeek/Apiiro
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does crossing the secrets criterion cost at enterprise scale?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Is the strategic mistake's cost measured, or merely argued?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does skipping governance actually cost, at a scale that dwarfs the up-front investment?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Is unconstrained agent risk a hypothetical concern, or already measured?"}
+    notes: >-
+      URL not reverified. Check it before the next new use.
+
+  - id: sp-global-jan-2026
+    name: S&P Global AI Strategy Insights, January 2026 ("option paralysis is real"; 30+ model releases in March 2026)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Is the velocity problem structural, or a temporary immaturity that resolves on its own?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: anthropic-2026-trends
+    name: Anthropic, 2026 Agentic Coding Trends Report
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the implementation-layer vs. engineering-layer distinction, stated by a frontier lab?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: deloitte-state-of-ai-2026
+    name: Deloitte, State of AI 2026 (one in five companies has mature autonomous-agent governance)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the regulatory/governance maturity gap across the four boundaries?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the governance gap this architecture pattern actually closes?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: eu-ai-act-2026
+    name: EU AI Act compliance timeline (obligations from 2026-08-02; penalties EUR 15m or 3% global turnover)
+    url: null
+    last_verified: null
+    expires: null
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What legal weight now sits behind treating a specification as evidentiary?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What legal weight now sits behind the contract-per-surface pattern?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: ibm-cisco-tech-debt
+    name: IBM and Cisco technical-debt budget allocation (20-30% of IT budget toward AI-generated technical debt)
+    url: null
+    last_verified: null
+    expires: 2026-12-01
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does the strategic mistake of chasing implementation speed actually cost?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What does the IBM/Cisco technical-debt figure add to the Fortune 50 finding-rate data as a second, independent cost signal?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the measured downstream cost of unconstrained agent architecture?"}
+    notes: >-
+      URL not reverified. Check it before the next new use.
+
+  - id: bcms-sdd-guide-2026
+    name: BCMS, Definitive 2026 Guide to Spec-Driven Development (three SDD failure modes; "specification poverty")
+    url: null
+    last_verified: null
+    expires: null
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What failure mode sits upstream of intent drift, context decay, and unverifiable output?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Why can no specification format close the gap, if the format is not the problem?"}
+    notes: URL not reverified. Check it before the next new use.
+
+  - id: github-spec-kit-2025
+    name: GitHub Blog, Spec Kit launch 2025 ("code is the source of truth" -> "intent is the source of truth")
+    url: https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai-get-started-with-a-new-open-source-toolkit/
+    last_verified: 2026-09-08
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "How has the industry itself articulated the code-to-intent inversion?"}
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the shortest statement of the SDD position, in the words of the people who shipped the tooling?"}
+    notes: >-
+      RESOLVED 2026-09-08: verified. Published 2 September 2025, author Den
+      Delimarsky (Principal PM, GitHub). Names it "Spec-Driven Development,"
+      not this curriculum's "Spec-Driven Engineering" - a deliberate wording
+      difference (Development = writing it; Engineering = also answering for
+      it), worth stating explicitly rather than treating the two terms as
+      interchangeable.
+
+  # ADDED 2026-09-10 by the docs/intro-1-binary-to-programming.md authoring
+  # run (the real spine treatment of the retired intro-2 pilot). Canonical
+  # because the chapter is gate-passing and cites them - per the usual rule
+  # that a proposed source is promoted once a shipped chapter relies on it.
+
+  - id: etymonline-program
+    name: Etymonline / Wiktionary - origin of "program" (Greek programma, "a written public notice")
+    url: https://www.etymonline.com/word/program
+    also: https://en.wiktionary.org/wiki/program
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-1-binary-to-programming.md, question: "What did the word 'program' mean before computing, and does the origin predict what programming is?"}
+    notes: >-
+      Establishes that "program" entered English in the 1630s from Late Latin
+      programma, from Greek programma (a written public notice), from
+      prographein "to write publicly" (pro- "forth" + graphein "to write") -
+      nothing already on the list covers word origins. Two independent
+      non-circular sources (Etymonline and Wiktionary) agree, satisfying the
+      name-registers verification protocol. Historical claim, does not expire.
+
+  - id: kathleen-booth-assembly-1947
+    name: Kathleen Booth - first assembly language and assembler (Birkbeck ARC, late 1940s)
+    url: https://en.wikipedia.org/wiki/Kathleen_Booth
+    also: https://www.computinghistory.org.uk/det/32489/Kathleen-Booth/
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-1-binary-to-programming.md, question: "Who wrote the first assembly language and assembler, and why did the idea spread?"}
+      - {chapter: docs/ch02-programming-is-born.md, question: "What did assembly language let a programmer read back that raw machine code did not, and what limit did it not remove?"}
+    notes: >-
+      Establishes the named origin of assembly, which nothing else on the list
+      covers. Sources say Booth co-wrote the first assembly language and
+      co-designed the assembler for the ARC at Birkbeck College; the chapter
+      says "Kathleen Booth and her colleagues", which matches "co-wrote".
+
+  - id: a0-system-hopper-compiler-nuance
+    name: Grace Hopper - A-0 System, 1952 (first automatic translation of a written notation into machine code)
+    url: https://en.wikipedia.org/wiki/Grace_Hopper
+    also: https://www.computinghistory.org.uk/det/5487/GraceHoppercompletestheA-0compiler
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-1-binary-to-programming.md, question: "What was the first program that turned a written notation into machine code automatically, and who built it?"}
+      - {chapter: docs/ch02-programming-is-born.md, question: "What cost problem, not a technical one, made translating notation automatically worth pursuing further after A-0?"}
+    notes: >-
+      Establishes the named origin of the compiler. Careful wording: Hopper's
+      A-0 (1952) is the first automatic translation system, but it was a
+      linker/compiler in the 1950s sense and Hopper did not originate the idea
+      of compilation - the chapter says "the first program that turned a
+      written notation into machine code automatically", which is accurate and
+      avoids the popular-lore claim that she invented the compiler outright.
+
+  - id: apple-m4-newsroom-2024
+    name: Apple Newsroom - M4 chip, 2024 (28 billion transistors)
+    url: https://www.apple.com/newsroom/2024/05/apple-introduces-m4-chip/
+    last_verified: 2026-09-10
+    expires: 2026-12-10
+    questions_asked:
+      - {chapter: docs/intro-1-binary-to-programming.md, question: "How many transistors does a current laptop processor actually hold?"}
+    notes: >-
+      Establishes a dated real magnitude for the chapter's Station 7. The
+      chapter says "north of ten billion", which the M4's 28 billion supports
+      with margin - deliberately conservative so it does not rot. Hardware
+      figure; re-check before the next use.
+
+  - id: ascii-1963-standardisation
+    name: ASCII first edition, ASA X3.4-1963 (approved 17 June 1963)
+    url: https://www.computinghistory.org.uk/det/5942/First-edition-of-the-ASCII-standard-was-published/
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-1-binary-to-programming.md, question: "How did the byte-to-character mapping come to be fixed, and by whom?"}
+    notes: >-
+      Supports the chapter's claim that the letter-to-byte mapping exists "by
+      agreement" rather than by nature. The chapter does not state the 1963
+      date in prose; it is recorded here.
+
+  # STILL REMOVED 2026-09-10: scott-logic-spec-kit-critique-2025,
+  # cui-et-al-genai-field-experiments-2025, etymonline-spec-engineer-roots,
+  # etymonline-code-binary-roots, and rosetta2-apple-silicon-2020 were
+  # proposed exclusively by the two deleted lesson-spine-authoring pilot
+  # chapters and are still cited nowhere in the live book. apple-m4-newsroom-
+  # 2024, ascii-1963-standardisation, kathleen-booth-assembly-1947, and
+  # a0-system-hopper-compiler-nuance were also introduced by the
+  # intro-2 pilot and are now re-added above, cited for real by intro-1. The
+  # remaining five stay recoverable by re-running the same lookups when a
+  # chapter needs them. See prerequisite-graph.yaml's progress note.
+
+  # ADDED 2026-09-10 (Phase 2) by the parallel authoring run that shipped
+  # docs/intro-2 through docs/intro-5. Canonical, because each chapter is
+  # gate-passing and cites them - per the usual rule that a source is promoted
+  # once a shipped chapter relies on it. Expiry follows this file's rule: 90
+  # days for tool-behaviour and pricing claims (2026-12-09), 12 months for
+  # industry reports and surveys (2027-09-10), null for named historical facts.
+
+  - id: crux-round-trip-2026
+    name: Chrome UX Report - median network round-trip time, aggregated August 2026 (92 ms desktop / 145 ms mobile / 270 ms Pakistan)
+    url: https://developer.chrome.com/docs/crux
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-2-architecture-map.md, question: "What does a check that runs on the user's own device actually save, measured?"}
+    notes: >-
+      Supplies intro-2's Station 7 magnitude for the client-side/server-side
+      split. Aggregated across the top 50,000 websites for August 2026. The
+      Pakistan median is cited deliberately - it is the anchor region for this
+      curriculum's audience, and it is roughly three times the desktop figure,
+      which is the point. Network figures drift; re-measure before the next use.
+
+  - id: owasp-password-storage-cheatsheet
+    name: OWASP Password Storage Cheat Sheet (Argon2id baseline)
+    url: https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-2-architecture-map.md, question: "Why does a hash have to be slow and memory-hungry, and what does that cost per login?"}
+    notes: >-
+      The chapter's hashing magnitude: Argon2id baseline about 19 MB per hash
+      and two passes, single hash under one second. The chapter explicitly
+      tells the reader to check this page rather than trust the fixed number in
+      the prose, which is the right framing for advice that changes over time.
+
+  - id: upstash-redis-free-tier
+    name: Upstash Redis free tier (256 MB, 500,000 commands/month), 2026
+    url: https://upstash.com/pricing
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-2-architecture-map.md, question: "What does a cache cost, concretely, when it is the shortcut in front of the main store?"}
+    notes: >-
+      A real free-tier limit for the cache discussion. Prices and limits in
+      this category change often; re-check before reuse.
+
+  - id: saltzer-schroeder-1975
+    name: Saltzer and Schroeder, "The Protection of Information in Computer Systems" (1975) - complete mediation
+    url: https://web.mit.edu/Saltzer/www/publications/protection/
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-2-architecture-map.md, question: "Where does the rule that a client cannot be trusted actually come from?"}
+    notes: >-
+      Establishes the lineage of intro-2's spine sentence - "never trust the
+      client" - through the 1975 design principle of complete mediation (every
+      access checked for authority). Named historical source; framing may age,
+      the fact does not.
+
+  - id: fielding-rest-2000
+    name: Roy Fielding, doctoral dissertation (2000) - Representational State Transfer
+    url: https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-2-architecture-map.md, question: "Who named REST, and when?"}
+    notes: >-
+      Attribution for the REST house style. The same dissertation is the
+      origin of HTTP's design vocabulary the chapter uses.
+
+  - id: vscode-announcement-2015
+    name: Visual Studio Code announcement, Microsoft (29 April 2015)
+    url: https://code.visualstudio.com/blogs/2015/04/29/introducing-visual-studio-code
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-3-editors-and-ides.md, question: "When did the editor that became the default appear, and from whom?"}
+    notes: >-
+      Also supports the chapter's claim that VS Code's core is open source and
+      that it is built on Electron and uses the Monaco editor.
+
+  - id: atom-end-of-life-2022
+    name: GitHub - sunsetting Atom (announced 8 June 2022, archived 15 December 2022)
+    url: https://github.blog/news-insights/product-news/github-sunsetting-atom/
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-3-editors-and-ides.md, question: "Can an editor a beginner learns today be gone in three years, and what does that imply about dating a tool?"}
+    notes: >-
+      The chapter's cautionary example, used to teach that the date on a tool
+      matters as much as the tool. Named historical incident.
+
+  - id: zed-1-0-2026
+    name: Zed 1.0 release (29 April 2026), Zed Industries
+    url: https://zed.dev/blog/zed-1-0
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-3-editors-and-ides.md, question: "What does a deliberate rejection of the Electron foundation look like, and who is making that argument?"}
+    notes: >-
+      Supports the Zed section - not built on VS Code or Electron, written in
+      Rust, drawn with the graphics card, made by people who built Atom.
+
+  - id: anthropic-claude-code-costs
+    name: Anthropic - Claude Code cost documentation (~$13/developer/active day; $150-250/developer/month)
+    url: https://docs.anthropic.com/en/docs/claude-code/costs
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "What does a CLI coding agent actually cost per developer, and what does a subscription buy instead?"}
+    notes: >-
+      Enterprise-deployment estimate; 90 per cent of users stay below $30 per
+      active day. The chapter records that this replaced an earlier ~$6/day
+      estimate the company raised in April 2026, which is itself the reason the
+      date is stated inline. Read 10 September 2026.
+
+  - id: claude-code-release-2025
+    name: Claude Code - research preview 24 February 2025, generally available 22 May 2025 (Anthropic)
+    url: https://www.anthropic.com/news/claude-3-7-sonnet
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "When did the CLI-agent category begin, and which tool arrived first?"}
+    notes: >-
+      Also establishes that it is not open source and is distributed as a
+      closed npm package.
+
+  - id: claude-code-permissions
+    name: Claude Code settings and permissions documentation (allow / ask / deny; scope; bypassPermissions)
+    url: https://docs.anthropic.com/en/docs/claude-code/settings
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "How does a CLI agent decide what it may do without asking, and where is the boundary the human actually controls?"}
+    notes: >-
+      The chapter's permission system, worked as a concrete example: reads
+      inside the launch folder run without asking, file changes ask first, deny
+      beats ask beats allow. Anthropic's own documentation says
+      `--dangerously-skip-permissions` is for isolated environments only -
+      cited as the maker's own warning, not the chapter's opinion.
+
+  - id: codex-cli-release-2025
+    name: Codex CLI, OpenAI (16 April 2025)
+    url: https://openai.com/index/introducing-codex/
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "What is the second of the three tools that defined the category, and is it open source?"}
+    notes: >-
+      Open source under Apache 2.0; later rewritten in Rust. Also ships as an
+      editor extension and a non-open-source desktop app.
+
+  - id: gemini-cli-antigravity-2025-2026
+    name: Gemini CLI (Google, 25 June 2025) and its 2026 fold into Antigravity CLI
+    url: https://developers.googleblog.com/en/introducing-gemini-cli-open-source-ai-agent/
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "What does it look like when a tool's status changes under the people using it, and why must a reader check the current landscape?"}
+    notes: >-
+      THE reason intro-4's "Current as of writing" callout is not decorative:
+      Google announced on 19 May 2026 that it was folding the tool into a new
+      closed-source Antigravity CLI, and stopped serving Gemini CLI to
+      individual developers on 18 June 2026. It began open source under Apache
+      2.0 with a generous free tier (60 requests/minute, 1,000/day). The
+      open-source-to-closed reversal is the chapter's live-disagreement case.
+
+  - id: jetbrains-devecosystem-2026
+    name: JetBrains Developer Ecosystem Survey 2026 (15,000+ professional developers, May-July 2026)
+    url: https://www.jetbrains.com/lp/devecosystem-2026/
+    last_verified: 2026-09-10
+    expires: 2027-09-10
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "Which coding agent is actually most widely used, and can that be answered without inventing a market-share figure?"}
+    notes: >-
+      Weighted survey. 90 per cent of professional developers using AI coding
+      agents at work at least weekly, 68 per cent daily. Claude Code most
+      widely adopted at about 39 per cent (up from 18 per cent in January 2026;
+      about 47 per cent in the United States); Codex 3 per cent to 16 per cent;
+      GitHub Copilot 21 per cent and falling. The chapter explicitly refuses to
+      state a market-share figure and labels this as current practice with a
+      date attached - the correct handling for an unaudited market.
+
+  - id: powershell-monad-manifesto
+    name: Jeffrey Snover, Monad Manifesto (the design argument behind PowerShell)
+    url: https://www.jsnover.com/Docs/MonadManifesto.pdf
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "Why do PowerShell's commands look unlike Bash's?"}
+    notes: >-
+      Supports the chapter's lineage section - a shell should pass objects
+      rather than text.
+
+  - id: etymonline-terminal
+    name: Online Etymology Dictionary - "terminal" (1831 last letter or sound; 1838 electrical sense; Latin terminus)
+    url: https://www.etymonline.com/word/terminal
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "What did the word 'terminal' mean before computing, and does the origin predict what a reader is looking at?"}
+    notes: >-
+      intro-4's Station 0 and its verification-protocol case - the name points
+      at a position (the end of a line), not at a computer. The chapter also
+      records the computing sense by 1954. Companion to the computing-history
+      sources for the Teletype Model 33 and the DEC VT100 (1978), whose escape
+      sequences programs still speak today. Historical; does not expire.
+
+  - id: bash-release-1989
+    name: Bash (Bourne Again SHell) - Brian Fox for the GNU Project, 1989; Bourne shell 1979
+    url: https://www.gnu.org/software/bash/
+    last_verified: 2026-09-10
+    expires: null
+    questions_asked:
+      - {chapter: docs/intro-4-terminals-and-cli-agents.md, question: "Where does the shell of the Unix world come from, and what is it a replacement for?"}
+    notes: >-
+      Also supports the Windows-default material: a fresh Windows machine has
+      no Bash, which is why a tutorial written on a Mac fails with
+      "'ls' is not recognized as an internal or external command". Apple's
+      switch of its own macOS default to zsh in 2019 is recorded in the chapter
+      prose; treat as current practice.
+
+  - id: sd-paper-feb-2026
+    name: "Spec-Driven Development: From Code to Contract in the Age of AI Coding Assistants (February 2026)"
+    url: null
+    last_verified: null
+    expires: 2026-12-09
+    status: needs-url-verification
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What gave the SDD movement its academic form, and when?"}
+    notes: >-
+      Cited by intro-5 as the formalisation of SDD, with its February 2026 date
+      stated inline. No URL reverified in this session - locate the paper
+      before the next new use. Note this is a DIFFERENT work from the BCMS 2026
+      guide (bcms-sdd-guide-2026), which is a practitioner guide; do not
+      conflate the two.
+
+  - id: aws-kiro-2025
+    name: Amazon Kiro - spec-driven AI IDE, 2025
+    url: https://kiro.dev/
+    last_verified: 2026-09-10
+    expires: 2026-12-09
+    questions_asked:
+      - {chapter: docs/intro-5-spec-driven-engineering.md, question: "Which tools had already adopted the specification-first workflow, alongside Spec Kit and Claude Code?"}
+    notes: >-
+      Named alongside GitHub's Spec Kit and Anthropic's Claude Code as the
+      tools that adopted SDD from 2025. Product status moves; re-check before
+      reuse.
+
+  # ---------------------------------------------------------------------------
+  # REUSED 2026-09-10 (Phase 2). Existing canonical sources, each asked a
+  # genuinely new question by a newly-shipped chapter - the test this file
+  # applies is whether a NEW question is being asked, not whether the source has
+  # been used before.
+  # ---------------------------------------------------------------------------
+
+  # stackoverflow-survey-2025 gains two new questions from intro-3 and intro-5.
+  # Both differ from the six adoption/trust questions already filed: intro-3 asks
+  # it about editor market share, intro-5 asks it about the adoption/trust gap as
+  # the shape of the two extremes.
+  #
+  # github-spec-kit-2025 gains intro-5's question about the intent quote.
+  # veracode-genai, metr-productivity and dice-report-jul-2026 are reused by
+  # intro-5 as recorded on those entries below.
+
+
+# ---------------------------------------------------------------------------
+# STAGE 1 SOURCES (REMOVED 2026-09-17) — all citations for the six Stage 1
+# chapters were deleted here. The chapters were reverted to
+# chapter_state: placeholder on 2026-09-17 (owner instruction - see
+# prerequisite-graph.yaml's progress note for the full record). None of these
+# sources were reused by a non-Stage-1 chapter (each id appeared exactly
+# once), so deleting the whole block is clean. Re-verify and re-add sources
+# fresh when Stage 1 is re-authored rather than restoring this block from
+# history - a source's freshness clock (last_verified / expires) will have
+# moved on by then.
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# NEW STAGE 0 LADDER SOURCES — added 2026-09-16 by ch01-foundations.md and
+# ch02-programming-is-born.md, drawn from curriculum-state/research/stage-0/
+# cluster-1-foundations.md (researched 2026-09-16 via DeepSeek/Command Code,
+# --effort high, per the owner's standing instruction that this session use
+# the already-completed research rather than re-running it). Every URL below
+# is copied directly from that dossier's own Sources section, not re-searched.
+# ---------------------------------------------------------------------------
+
+  - id: boole-1854
+    name: George Boole, "An Investigation of the Laws of Thought" (1854)
+    url: https://www.britannica.com/topic/history-of-logic/Boole-and-De-Morgan
+    last_verified: 2026-09-16
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch01-foundations.md, question: "Who first wrote true-and-false reasoning down as algebra, and did anyone at the time think it would touch a machine?"}
+    notes: >-
+      Dossier flags Boole's 1847 pamphlet as the work with the deeper impact on
+      contemporaries, versus the more commonly cited 1854 book. The chapter
+      cites the 1854 book without claiming it was his first or only work on the
+      subject, which stays accurate either way.
+
+  - id: shannon-1937-thesis
+    name: Claude Shannon, "A Symbolic Analysis of Relay and Switching Circuits" (MIT master's thesis, submitted 10 Aug 1937)
+    url: https://en.wikipedia.org/wiki/A_Symbolic_Analysis_of_Relay_and_Switching_Circuits
+    also: https://historyofinformation.com/detail.php?id=622
+    last_verified: 2026-09-16
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch01-foundations.md, question: "Who first showed that a switch behaves exactly like one of Boole's true-or-false values, and when?"}
+    notes: >-
+      The chapter calls this "one of the most consequential student papers of
+      the century" as a hedged, reputational framing ("now remembered as"), not
+      as a claim of an actual prize - the dossier flags "most important
+      master's thesis of the 20th century" as popular attribution, not an
+      award, and the chapter does not name the real 1939 Alfred Noble Prize at
+      all, avoiding the conflation risk entirely.
+
+  - id: jacquard-babbage-lovelace-hollerith
+    name: Jacquard's punch-card loom (1801), Babbage's card-fed engines (1837), Lovelace's 1843 program, and Hollerith's census tabulator (1890)
+    url: https://www.computerhistory.org/storageengine/punched-cards-control-jacquard-loom/
+    also: https://en.wikipedia.org/wiki/Jacquard_machine
+    last_verified: 2026-09-16
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch01-foundations.md, question: "When did an instruction first become a physical, storable, shareable object, and where did that idea go next?"}
+    notes: >-
+      The chapter deliberately does not state a specific hand-tallying-versus-
+      Hollerith speedup figure or an 1890 population count, since neither
+      appears in cluster-1's own dossier text and the session's standing
+      instruction was to use the completed research rather than verify new
+      numbers - the claim stays qualitative ("cutting that count down
+      dramatically") rather than asserting an unverified statistic.
+
+  - id: transistor-1947-bardeen-brattain-pierce
+    name: Transistor invention (Bardeen and Brattain, Bell Labs, 16 December 1947) and its naming (John Pierce)
+    url: https://www.computerhistory.org/siliconengine/invention-of-the-point-contact-transistor/
+    also: https://www-tc.pbs.org/transistor/album1/pierce/naming.html
+    last_verified: 2026-09-16
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch01-foundations.md, question: "Which date is correct for the transistor's invention, and what did the name 'transistor' actually point at?"}
+    notes: >-
+      Dossier explicitly confirms 16 December (first working device) over the
+      more commonly cited 23 December (management demonstration) as the correct
+      date for "invention" in this chapter's sense. On naming: the dossier
+      flags the popular "transfer + resistor" gloss as a simplification Pierce
+      did not actually give: he described the device's transresistance,
+      paired with the tube's transconductance. The chapter's final wording
+      avoids restating the folk version by naming the property Pierce pointed
+      at ("the electrical property it controlled") without asserting the
+      transresistance/transconductance jargon itself, which would have been an
+      unglossed heavy term for a Stage 0 reader.
+
+  - id: belgian-2003-bitflip
+    name: 2003 Belgian election single-event upset (Schaerbeek, candidate Maria Vindevoghel, +4,096 votes)
+    url: https://en.wikipedia.org/wiki/Single-event_upset
+    also: https://en.wikipedia.org/wiki/Electronic_voting_in_Belgium
+    last_verified: 2026-09-16
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch01-foundations.md, question: "What does one flipped switch actually cost, made concrete rather than abstract?"}
+    notes: >-
+      Dossier flags the cosmic-ray mechanism as a documented FINDING (presented
+      by Bhuva at AAAS 2017), not a proof. The chapter's wording ("a 2017
+      presentation suggested... could, in rare cases") preserves that hedge
+      rather than stating cosmic-ray causation as settled fact.
+
+  - id: eniac-1945-and-programmers
+    name: ENIAC (finished 1945, ~17,468 vacuum tubes) and its six original programmers
+    url: https://en.wikipedia.org/wiki/ENIAC
+    also: https://eniacprogrammers.org/
+    last_verified: 2026-09-16
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch01-foundations.md, question: "How many switches did the machine that closes this chapter's hardware thread actually run on, and how reliable were they?"}
+      - {chapter: docs/ch02-programming-is-born.md, question: "Who physically did the work called 'programming' before any language existed, and what did that work actually involve?"}
+    notes: >-
+      Dossier explicitly flags the popular "a tube failed every few minutes"
+      legend as FALSE (real rate closer to one every two days, per Eckert's own
+      1989 interview) - both chapters avoid restating that legend; ch01 says
+      only that the crew "spent real time most weeks" on failures, which is
+      compatible with the correct rate and does not repeat the debunked one.
+      Programmers named in the primary source: Kay McNulty, Betty Jennings,
+      Betty Snyder, Marlyn Wescoff, Fran Bilas, Ruth Lichterman - used by name
+      in ch02, without the later married surnames (Bartik, Holberton) the
+      dossier also lists, since the chapter refers to them as they'd have been
+      known at the time.
+
+  - id: von-neumann-edvac-1945
+    name: John von Neumann, "First Draft of a Report on the EDVAC" (distributed 30 June 1945)
+    url: https://en.wikipedia.org/wiki/First_Draft_of_a_Report_on_the_EDVAC
+    last_verified: 2026-09-16
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch01-foundations.md, question: "Who first described a machine that could hold its own instructions in the same memory as its data?"}
+    notes: >-
+      Dossier records a real credit dispute (the report bore von Neumann's name
+      alone; Eckert and Mauchly's contribution was erased and the open
+      circulation helped void their patent). The chapter deliberately does not
+      litigate this dispute - it says von Neumann "circulated a report
+      describing" the idea, which does not claim sole invention and stays
+      accurate without importing a controversy this early chapter has no room
+      to handle responsibly.
+
+  - id: tukey-bit-1947
+    name: John Tukey coins "bit" (Bell Labs memo, 9 January 1947)
+    url: https://en.wikipedia.org/wiki/Bit
+    last_verified: 2026-09-16
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch01-foundations.md, question: "Who coined the word 'bit', and is it the same person usually credited with putting it into print?"}
+    notes: >-
+      Dossier distinguishes Tukey (coiner, Jan 1947 memo) from Shannon (put it
+      in print in 1948, crediting Tukey by name) - a common conflation. The
+      chapter correctly attributes coinage to Tukey alone.
+
+  - id: relay-computers-z3-mark1
+    name: Konrad Zuse's Z3 (1941, ~2,300-2,600 relays) and Harvard Mark I (1944)
+    url: https://en.wikipedia.org/wiki/Z3_(computer)
+    also: https://www.computerhistory.org/timeline/1941/
+    last_verified: 2026-09-16
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch01-foundations.md, question: "What did a computer actually look like when it was built from relays rather than tubes or transistors, and at what scale?"}
+    notes: >-
+      Dossier flags that sources differ on the Z3's exact relay count
+      (~2,300-2,600); the chapter uses the rounded, hedged "around 2,500" rather
+      than a false-precise figure. Mark I's own relay count is not asserted by
+      the chapter (only "thousands more"), since no specific figure for it
+      appears in the dossier text this session worked from.
+
+  - id: wheeler-edsac-1949
+    name: David Wheeler, EDSAC "Initial Orders" (completed May 1949)
+    url: https://www.cl.cam.ac.uk/~mr10/edsacposter.pdf
+    also: https://royalsocietypublishing.org/rspa/article/202/1071/573/8294/Programme-organization-and-initial-orders-for-the
+    last_verified: 2026-09-16
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch02-programming-is-born.md, question: "What was the first system that let a machine translate short symbolic commands into its own numeric codes, sparing a person that translation?"}
+    notes: >-
+      Dossier describes this as "the first assembler-like system" - the chapter
+      does not call it "assembly language" itself (that credit stays with
+      Kathleen Booth, 1947, in the following section) and instead frames
+      Wheeler's contribution as the translation mechanism, which is the
+      accurate reading.
+
+  - id: fortran-1957-backus
+    name: FORTRAN, delivered by John Backus's team at IBM, April 1957
+    url: https://www.ibm.com/history/fortran
+    also: https://en.wikipedia.org/wiki/Fortran
+    last_verified: 2026-09-16
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch02-programming-is-born.md, question: "What was the real argument for a compiled high-level language, and how was the doubt that it could ever be fast enough actually resolved?"}
+    notes: >-
+      Dossier's structural recommendation frames the argument as economic, not
+      aesthetic (programmer cost exceeded computer cost by the mid-1950s), and
+      supplies Backus's own "hand-to-hand combat with the machine" quote, which
+      the chapter uses. The chapter does not assert a specific benchmark
+      percentage for how compiled code compared to hand-written code - no such
+      figure appears in the dossier text this session worked from - and instead
+      says only that it "held up well enough to change most doubters' minds",
+      a qualitative claim the dossier's framing supports without inventing a
+      number.
+
+  - id: bug-edison-not-the-moth
+    name: The engineering sense of "bug" predates the 1947 Harvard Mark II moth — Edison, 1870s
+    url: https://en.wikipedia.org/wiki/Bug_(engineering)
+    also: https://www.juncture-digital.org/edisonpapers/edison-and-the-bug
+    last_verified: 2026-09-17
+    expires: null
+    questions_asked:
+      - {chapter: docs/ch00-introduction.md, question: "Where does the word 'bug' actually come from, and why does the moth story survive when it isn't the origin?"}
+    notes: >-
+      Verified FOR ch00-introduction and NOT CURRENTLY USED BY IT - recorded so
+      the check is not repeated and the source is not lost. The chapter's first
+      draft staged this as its Station 0 demonstration, and the owner rejected
+      that draft's whole structure before any of it shipped (see
+      prerequisite-graph.yaml's ch00-introduction row for the rebuild). The
+      claim itself stands and is available to whichever chapter wants a worked
+      example of checking a confident story against the record. Two independent
+      non-circular sources
+      support the correction: Wikipedia's Bug (engineering) entry traces the
+      defect sense to engineering jargon "at least as far back as the 1870s"
+      and quotes Edison's own 1878 letter; the Edison Papers project records
+      Edison's laboratory using it in fall 1878, including his nephew's
+      notebook. The Mark II logbook caption - "first actual case of a bug being
+      found" - is real, is dated 9 September 1947, and is held by the
+      Smithsonian; the caption's own wording is what marks it as a joke about an
+      existing term rather than a coinage.
+      DELIBERATE HEDGE, recorded so it is not later "corrected": the chapter
+      says Edison was writing about bugs "in the 1870s" rather than naming 1878.
+      Sources place the usage across the decade and disagree on which single
+      document is first, so a specific year would be false precision of exactly
+      the kind cluster-1 flags elsewhere (see the `ed`-circa-1969 row and the
+      transistor's two real dates).
+      REJECTED SOURCE, recorded because it is the top search result for this
+      question: IEEE Spectrum's "Did You Know? Edison Coined the Term 'Bug'"
+      presents the 1947 moth as the origin, which is the claim the chapter
+      exists to correct. It is a charming story, and name-registers.md §4
+      already flags that class as suspect in proportion to its charm. Do not
+      cite it here.
+
+# ---------------------------------------------------------------------------
+# Unresolved citations - none outstanding.
+# ---------------------------------------------------------------------------
+# Every claim in the five shipped intro chapters is now a proper `sources:`
+# entry above and is cited inline in the prose. Several still carry
+# `status: needs-url-verification` - check those before the next new use.
+# Kept as an explicit empty list rather than deleted, so the next author can
+# see the check exists and was run.
+#
+# STAGE 1: removed 2026-09-17 along with its whole source block above - see
+# the note there. No longer applicable to unresolved_citations below.
+#
+# NEW STAGE 0 LADDER (2026-09-16): the same check was run for ch01-foundations
+# and ch02-programming-is-born. Nothing is unresolved - every claim traces to a
+# URL already present in cluster-1-foundations.md's own Sources section, and
+# every number the dossier itself flagged as disputed, unverified, or a popular
+# misconception (the Z3's exact relay count, the transistor's "invention" date,
+# the "transfer + resistor" folk etymology, the ENIAC tube-failure-rate legend,
+# the Belgian bit-flip's causal mechanism) was either hedged in the prose to
+# match the dossier's own caveat, or left out where no safely citable figure
+# existed - see each new source's notes above for the specific handling.
+#
+# ch00-introduction (2026-09-17): the same check was run for the new Stage 0
+# front door. Its one historical claim is recorded above as
+# bug-edison-not-the-moth, including the source it rejects and why. Nothing is
+# unresolved.
+unresolved_citations: []

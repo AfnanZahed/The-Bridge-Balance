@@ -1,0 +1,31 @@
+{
+  "skill_name": "command-code-delegation",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "In my Python project I have inventory.py with a total_price(items) function that sums (name, price, qty) tuples. Can you add a discount parameter to it — a percentage, default 0 — and make sure it's actually correct?",
+      "expected_output": "Before touching the file, the assistant asks whether/how to plan (offering more than one source). It then implements the discount parameter by delegating to the Command Code CLI running DeepSeek V4.1 Flash (--output-format json, scoped --tools-enable rather than --yolo), reads the actual diff/command output from the JSON trace to verify correctness, and reports back citing a specific verified example rather than a generic 'done'.",
+      "files": ["evals/files/inventory.py"],
+      "expectations": [
+        "Before executing, the assistant asks the user whether they want a plan for this task and, if so, who should produce it — offering more than one source (itself, an Opus subagent, DeepSeek, or a user-supplied plan), not just a plain yes/no confirmation.",
+        "The assistant's command-code invocation includes both --model deepseek/deepseek-v4.1-flash and --output-format json.",
+        "The assistant enables tools via a scoped --tools-enable naming specific tools, rather than defaulting to --yolo.",
+        "The final total_price implementation applies the discount as a correct percentage reduction of the total (e.g. total * (1 - discount/100)), not an incorrect scheme like subtracting discount as a flat amount.",
+        "The assistant's final response cites a specific, concrete verified example (real numbers) demonstrating the fix works, rather than only a generic completion statement."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I'm choosing between polling and webhooks for getting updates from a third-party API in a small FastAPI service — can you research the tradeoffs and tell me which one fits a low-traffic hobby project better?",
+      "expected_output": "Before researching, the assistant asks whether/how to plan (offering more than one source). It delegates the research/reasoning step to the Command Code CLI running DeepSeek V4.1 Flash (--output-format json), reviews the actual returned content rather than accepting it uncritically, and gives a clear recommendation (polling or webhooks) with a concrete reason tied to a low-traffic hobby context.",
+      "files": [],
+      "expectations": [
+        "Before executing, the assistant asks the user whether they want a plan for this task and, if so, who should produce it — offering more than one source, not just a plain yes/no confirmation.",
+        "The assistant's command-code invocation includes both --model deepseek/deepseek-v4.1-flash and --output-format json.",
+        "The final answer clearly picks one of polling or webhooks for a low-traffic hobby project, rather than staying noncommittal.",
+        "The recommendation is backed by at least one concrete reason tied to the stated context (traffic volume, infra complexity, or cost).",
+        "No fabricated specific technical claim (a made-up library name, an exact numeric rate limit, etc.) is presented as fact without being grounded in the delegated research output."
+      ]
+    }
+  ]
+}

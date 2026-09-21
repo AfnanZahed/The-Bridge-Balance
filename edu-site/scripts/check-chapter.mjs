@@ -77,17 +77,43 @@ const REQUIRED_FM = [
  */
 const NON_CHAPTERS = new Set(["glossary.md", "perf-targets.md"]);
 
+/**
+ * The pre-redesign Stage 0 sequence. These five shipped before
+ * canon/corrections.md existed, and they are scheduled for replacement by the
+ * chronological Stage 0 (see curriculum-state/proposals/
+ * whole-book-redesign-record-2026-09-14.md), so repairing their openings and
+ * their date density would be work thrown away. They are exempt from the
+ * orientation, date-density, bold-lead and heading-no-why checks below and
+ * from nothing else.
+ * Delete an entry the moment its file is replaced - and note that
+ * assertExemptionsExist() already fails the run if a name here goes stale.
+ *
+ * OPEN QUESTION for the owner (2026-09-20): these five are still live in the
+ * sidebar and are the densest, coldest, most bold-led pages in the book
+ * (intro-4 runs 6.5 years per 1,000 words and 80% bold-led paragraphs). While
+ * they stay published they model a house style the new rules reject. Retire,
+ * hide, or rewrite - it is a content decision, not a gate one.
+ */
+const LEGACY_STAGE0 = new Set([
+  "intro-1-binary-to-programming.md",
+  "intro-2-architecture-map.md",
+  "intro-3-editors-and-ides.md",
+  "intro-4-terminals-and-cli-agents.md",
+  "intro-5-spec-driven-engineering.md",
+]);
+
 /** canon/voice.md — "banned outright, not discouraged." */
+// Three entries were REMOVED on 2026-09-20 because the owner asked for exactly
+// the phrasings they banned - "in this chapter we will learn x", "let's start",
+// and speaking to a beginner directly. They were a main cause of cold chapter
+// openings. See canon/corrections.md §7 and §13 before re-adding any of them.
 const VOICE_TELLS = [
-  [/\bin this (lesson|chapter),? we('| wi)ll\b/i, 'open on the actual question, not "in this lesson we will"'],
   [/\bit'?s important to (understand|note) that\b/i, "just say the thing"],
-  [/\blet'?s (dive in|get started)\b/i, "start"],
   [/\bin today'?s fast-paced world\b/i, "delete the sentence"],
   [/\bat its core,? \w+ is\b/i, '"X is…", not "at its core, X is…"'],
   [/\bit'?s worth noting that\b/i, "note it"],
   [/\b(simply put|put simply)\b/i, "put it simply the first time"],
   [/\bthe key takeaway is\b/i, "the takeaway should already be obvious"],
-  [/\bwhether you'?re a (beginner|newcomer|seasoned|experienced)\b/i, "write for this chapter's actual reader"],
   [/\bdelve\b/i, "plain words"],
   [/\b(leverages|leveraged|leveraging|to leverage)\b/i, 'plain words — "leverage" as a verb (the noun is fine)'],
   [/\butilis[ez](s|d|ing)?\b/i, 'plain words — "use"'],
@@ -302,6 +328,136 @@ async function checkChapter(file) {
     if (hit) push(warnings, "voice-tell", `"${hit[0]}" — ${fix}`);
   }
 
+  // --- warnings: an opening that never addresses the reader ----------------
+  // The failure this catches, recorded in canon/corrections.md §1: a chapter
+  // opening on a date, a proper noun or an artifact without once speaking to
+  // the person reading it. Every chapter in this book is written in the second
+  // person, so a chapter that gets through its first three paragraphs without
+  // saying "you" has usually opened on its own subject instead of on the
+  // reader. A warning rather than an error because the opening block is a
+  // judgment, and because a check nobody can act on trains people to ignore
+  // the warnings that matter.
+  const bodyNoHeadings = noCode.replace(/^#{1,6}\s+.*$/gm, "");
+  const openingParas = bodyNoHeadings
+    .split(/\n\s*\n/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .slice(0, 3);
+  if (openingParas.length > 0 && !/\byou\b|\byour\b/i.test(openingParas.join(" "))) {
+    push(
+      warnings,
+      "opening-not-addressed-to-reader",
+      "the first three paragraphs never say \"you\" — check this opening against canon/corrections.md §1",
+    );
+  }
+
+  // --- opening, date density, bold rhythm ---------------------------------
+  // canon/corrections.md §7 (every chapter welcomes the reader, links back,
+  // says what it covers AND why, then teaches), §4 (historical material stays
+  // light in reader-facing prose) and §14 (bold marks meaning, never position).
+  // All three shipped inside text-ready chapters while this gate reported
+  // clean, which is why they are checked mechanically rather than left to a
+  // read. None of these is a style preference: each has a rejected draft
+  // behind it.
+  const isLegacy = LEGACY_STAGE0.has(path.basename(file));
+  const h1Match = noCode.match(/^# .+$/m);
+  if (h1Match && !isLegacy) {
+    const afterH1 = noCode.slice(noCode.indexOf(h1Match[0]) + h1Match[0].length);
+    const nextSection = afterH1.search(/^##\s/m);
+    const preamble = (nextSection === -1 ? afterH1 : afterH1.slice(0, nextSection)).trim();
+    const preWords = (preamble.match(/[A-Za-z0-9'\u2019-]+/g) ?? []).length;
+    const preBullets = /^\s*[-*]\s+\S/m.test(preamble);
+    if (preWords === 0) {
+      push(
+        errors,
+        "cold-open",
+        "the h1 is followed straight by a section heading - every chapter carries an orientation first (canon/corrections.md §7)",
+      );
+    } else if (preWords < 40 || !preBullets) {
+      const why = preBullets ? `only ${preWords} words` : `no bullet list`;
+      push(
+        warnings,
+        "orientation-thin",
+        `the opening orientation has ${why} - §7 asks for a greeting, a link back, what the chapter covers as grouped bullets, and why it matters`,
+      );
+    } else if (!/\b(because|why|so that|matters?|helps? you|you(?:'ll| will) be able|lets? you|need(?:s)? this)\b/i.test(preamble)) {
+      // §7's half that every rejected draft was missing: the WHY, not just the
+      // WHAT. A list of topics is half an opening.
+      push(
+        warnings,
+        "orientation-no-why",
+        "the opening lists what the chapter covers but never says why it matters or what it unlocks (canon/corrections.md §7)",
+      );
+    }
+  }
+
+  const bodyWordCount = (noCode.match(/[A-Za-z0-9'\u2019-]+/g) ?? []).length;
+  if (!isLegacy && bodyWordCount > 300) {
+    const yearCount = (noCode.match(/\b(?:1[6-9]\d\d|20\d\d)\b/g) ?? []).length;
+    const per1k = (yearCount * 1000) / bodyWordCount;
+    if (per1k > 4) {
+      push(
+        warnings,
+        "date-density",
+        `${yearCount} years in ${bodyWordCount} words (${per1k.toFixed(1)} per 1,000) - corrections.md §4 keeps a date only where it is load-bearing`,
+      );
+    }
+  }
+
+  const proseParas = noCode
+    .split(/\n\s*\n/)
+    .map((p) => p.trim())
+    .filter((p) => p && !p.startsWith("#"));
+  if (!isLegacy && proseParas.length >= 8) {
+    const boldLed = proseParas.filter((p) => p.startsWith("**")).length;
+    const pct = (boldLed * 100) / proseParas.length;
+    if (pct > 40) {
+      push(
+        warnings,
+        "bold-lead",
+        `${boldLed} of ${proseParas.length} paragraphs open on a bolded sentence (${pct.toFixed(0)}%) - bold is wanted, but on what matters wherever it falls, never assigned by position (canon/corrections.md §14)`,
+      );
+    }
+  }
+
+  // --- warning: a heading that names a what with no why --------------------
+  // canon/naming.md Rule 3 and corrections.md §18, set by the owner on
+  // 20 September 2026: a reader meets a heading with no context around it - in
+  // a sidebar, in a search result, in a contents list - so the heading has to
+  // carry both what this is and why they would want it, inside three seconds.
+  //
+  // Only the clearest failure is mechanisable: a heading that is a bare noun
+  // phrase, with no question word and no verb anywhere in it. "Short Words
+  // Instead of Numbers" fires. "Why a Computer Only Says Yes or No" and "The
+  // Same Switch, Built Three Different Ways" do not. Passing this is NOT proof
+  // a heading has a why - only that it is not obviously missing one.
+  //
+  // In particular this CANNOT catch the wrong KIND of why, which is the more
+  // common failure: a name carrying the subject's own significance ("The Switch
+  // That Made Computers Small Enough to Own") instead of the curriculum's
+  // reason for teaching it. That why is supplied by the owner per topic
+  // (corrections.md §18) and no regex can know it. The real check is the
+  // three-second test in lesson-adversarial-review, and it is a human one.
+  if (!isLegacy) {
+    const HEADING_HAS_WHY =
+      /\b(why|how|what|when|where|who|which|because|so|can|could|will|would|should|must|may|might|is|are|was|were|be|been|do|does|did|has|have|had|makes?|made|lets?|let|gets?|got|goes|went|stops?|stopped|starts?|started|keeps?|kept|holds?|held|turns?|turned|works?|worked|breaks?|broke|builds?|built|reads?|writes?|wrote|tells?|told|says?|said|means?|meant|needs?|need|wants?|want|helps?|help|knows?|knew|learns?|learn|sees?|saw|\w+ing|\w+ed)\b/i;
+    const bare = [...noCode.matchAll(/^#{2,3}\s+(.+?)\s*$/gm)]
+      .map((m) => m[1].replace(/[*`_]/g, "").trim())
+      .filter((h) => h && !HEADING_HAS_WHY.test(h));
+    if (bare.length) {
+      const shown = bare
+        .slice(0, 3)
+        .map((h) => `"${h}"`)
+        .join(", ");
+      const more = bare.length > 3 ? ` (+${bare.length - 3} more)` : "";
+      push(
+        warnings,
+        "heading-no-why",
+        `${bare.length} heading(s) name a subject with no why - ${shown}${more}. canon/naming.md Rule 3: a heading carries what this is AND why someone learning spec-driven AI engineering is reading it. That why comes from the owner, per topic (corrections.md §18)`,
+      );
+    }
+  }
+
   // --- warnings: an unattributed statistic ---------------------------------
   // A statistic is a percentage or a multiplier — NOT any bold text that
   // happens to contain a digit, which would flag "**Stage 1**" forever and
@@ -365,6 +521,7 @@ async function assertExemptionsExist(names, label, dir) {
 
 async function main() {
   await assertExemptionsExist(NON_CHAPTERS, "NON_CHAPTERS", DOCS);
+  await assertExemptionsExist(LEGACY_STAGE0, "LEGACY_STAGE0", DOCS);
 
   const files = [];
 

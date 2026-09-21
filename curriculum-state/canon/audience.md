@@ -11,54 +11,76 @@ every sentence-level language rule (`reference/language-register.md`). Read both
 before drafting. Nothing here is repeated there, and nothing there is repeated
 here.
 
-## The two readers
+> **Revised 2026-09-20.** The two-reader model below was replaced by the owner.
+> Stages 0, 1 and 2 are written for absolute beginners and for nobody else. The
+> senior-engineer reader, and every rule that existed to keep them rewarded, is
+> out of the project for now. `corrections.md` §8 carries the record.
 
-Every chapter is read by a senior engineer and by someone who last week
-struggled to finish a signup form. There is no separate
-edition. Both readers get the same document, and the writing has to be good
-enough that neither is insulted.
+## The reader
 
-**Neither may be failed, and they fail for different reasons:**
+**Stages 0, 1 and 2: absolute beginners, and only them.** Someone who has never
+programmed, does not know what Python is, and may not be sure what a terminal
+is for. They are not a second audience sharing the page with an expert. They
+are *the* audience. Every sentence in those three stages is written for them.
 
-- **The senior quits at unrewarded sentences** — paragraphs that give them
-  nothing they did not already have. They will read a plain explanation of
-  something they know well, without irritation, as long as it carries one thing
-  they lacked: a number, an origin, a failure mode, a reason. **The variable is
-  pace, not level.**
-- **The beginner quits at the first silent assumption** — a term, a symbol, or a
-  leap that assumed something they lack and did not say so. They will read
-  genuinely advanced material, with effort and without quitting, as long as
-  nothing was skipped over their head. **The variable is continuity, not
-  difficulty.**
+**Stages 3 and 4: not yet decided.** The audience for the later stages is an
+open question the owner will settle later. Until it is settled, no rule in this
+repo may assume a senior reader is present, and no draft may be shaped around
+one. Do not re-derive a two-reader model from anything in here.
 
-These constrain different things, so both can be satisfied at once. The
-three-layer architecture that makes that achievable rather than aspirational is
-in `mixed-audience.md`. Do not improvise a substitute for it.
+**What withdrawing the senior reader changed.** These rules are gone, not
+softened, because each one converted "keep an expert reading" into dense,
+name-and-date prose that lost the beginner:
 
-## The five named groups
+- *"The senior quits at unrewarded sentences"* — the rule that made a warm or
+  gentle sentence count as waste, since it taught an expert nothing.
+- *"…as long as it carries one thing they lacked: a number, an origin, a failure
+  mode, a reason"* — the recipe that attached a year or a proper noun to
+  paragraph after paragraph.
+- *"Every paragraph must carry something a senior did not already have."*
 
-The founding brief names five readers, and they are genuinely different people.
-They sit along one spine. They are not five editions.
+**What the beginner actually needs.** They quit for more reasons than a silent
+assumption, and all of them count:
 
-| Reader | What they need most |
-|---|---|
-| CS undergraduate | Vocabulary that connects coursework to industry practice |
-| Junior developer | A rule they can apply on Monday without asking permission |
-| Working professional | Trade-offs, and what changes about their existing judgment |
-| Career-switcher | An honest map of the distance still to cover |
-| **Real beginner, just starting** | Every term defined, nothing assumed, one safe action |
+- **Continuity** — nothing skipped, nothing assumed, no leap taken over their
+  head. Still the first thing to get right.
+- **Difficulty that matches them.** The old rule said the beginner tolerates
+  genuinely advanced material as long as nothing is skipped — "the variable is
+  continuity, not difficulty". That was wrong for this reader, and it is
+  withdrawn. Difficulty is a variable too. A hard word explained is still a hard
+  word, and ten of them in a page is a wall.
+- **Speed.** Beginners read to get somewhere, not to admire the scenery.
+  Length that a specialist would call thorough reads to them as a stall.
+- The full list is the ten-angle beginner check in
+  `lesson-spine-authoring/reference/beginner-experience-audit.md`, which every
+  Stage 0–2 draft passes before it is presented.
 
-That last row is named explicitly in the founding brief and is the one most
-easily lost. A Stage 1 chapter that assumes a reader already knows what a
-repository is has failed them silently.
+**In Stages 0–2, a hard word or a named person must earn its place. If the idea
+works without it, leave it out.**
+
+## The named groups
+
+The founding brief names five readers. They sit along one spine; they are not
+five editions. Only the last row is in scope today.
+
+| Reader | What they need most | In scope now? |
+|---|---|---|
+| **Real beginner, just starting** | Every term defined, nothing assumed, one safe action | **Yes — Stages 0–2 are written for this reader alone** |
+| Career-switcher | An honest map of the distance still to cover | Later stages, undecided |
+| CS undergraduate | Vocabulary that connects coursework to industry practice | Later stages, undecided |
+| Junior developer | A rule they can apply on Monday without asking permission | Later stages, undecided |
+| Working professional | Trade-offs, and what changes about their existing judgment | Later stages, undecided |
+
+That first row is the one most easily lost. A Stage 1 chapter that assumes a
+reader already knows what a repository is has failed them silently.
 
 ## Where they read, and what each condition obliges
 
 Pakistani learners reading in English, plus international readers. English is a
-medium of instruction across Pakistani secondary and tertiary education,
-especially in CS — these are **not** beginning foreign-language learners, and
-writing down to them is its own failure. But they are reading a second language
-about an unfamiliar subject, often on a phone, often on paid data.
+medium of instruction across Pakistani secondary and tertiary education — these
+readers are literate in English, but they are reading a second language about an
+unfamiliar subject, often on a phone, often on paid data. Write plainly because
+the subject is new, not because the reader is slow.
 
 **Mobile-dominant.** A paragraph is whatever fits before the reader has to
 scroll mid-thought — two to four lines on a phone viewport. Wide code is the
@@ -71,32 +93,62 @@ image is the project owner's, generated externally and dropped into
 `static/img/`; a page of oversized raster art undermines exactly the reader the
 150 wpm baseline exists to serve.
 
-**Lookups while reading.** Terms get an inline gloss at first use, not a
-footnote — a phone reader will not scroll to find one. **First use is counted
-per chapter, independently, every time.** A reader arriving from a search result
-or a shared link has no earlier chapter, so a term glossed in Stage 1 is glossed
-again in Stage 4.
+**Lookups while reading.** A term gets an inline explanation the first time the
+reader meets it, not a footnote — a phone reader will not scroll to find one.
 
-**That repetition is only safe because the glossary never repeats.** One term,
-one entry, one canonical wording, one anchor, for the whole book — a term
-introduced in Stage 1 gets no second entry when Stage 4 returns to it at depth.
-Repeating the inline gloss costs a reader one clause and buys continuity;
-repeating the *entry* would split a term's meaning across two places, and the
-moment those drift the book teaches two things under one word. Re-glossing is a
-chapter habit and never a glossary one. `term-ledger.yaml` holds the anchors and
-`check-references.mjs` fails a link that does not resolve to one.
+**How long the inline explanation keeps appearing — the 2-to-3-use rule.** A
+term is explained inline for roughly its **first two or three appearances in the
+book**. After that it appears as a glossary link alone — `[*term*](/glossary#slug)`
+— with no inline explanation. Re-glossing the same term forever is what made
+pages read like a dictionary, and it is not required any more.
 
-**Not every term can be glossed.** A term a newcomer cannot hold within two
-minutes is taught before it is used, not compressed into a clause — and in
-Stages 0, 1 and 2 that binds absolutely, because those stages assume a reader
-who has never programmed and has no way to tell whether the confusion is the
-book's fault or their own. The working rule, the ledger weights that make the
-ordering enforceable, and the marked-term link form live in
-`lesson-spine-authoring/reference/mixed-audience.md` §4.
+**The glossary never repeats.** One term, one entry, one canonical wording, one
+anchor, for the whole book. Repeating the *entry* would split a term's meaning
+across two places, and the moment those drift the book teaches two things under
+one word. `term-ledger.yaml` holds the anchors and `check-references.mjs` fails
+a link that does not resolve to one.
 
-**Interruption.** The first screenful of every chapter must alone deliver the
-thesis-linked claim and the one action. A reader who leaves after one paragraph
-still leaves with something usable.
+**Not every term can be explained in passing — the one-minute test.** If an
+absolute beginner can hold a term inside **one minute**, it is explained inline
+in twelve words or fewer and linked to the glossary. If it needs longer, it
+**cannot be glossed at all** — it is taught in a passage of its own, before it
+is used. The old threshold was two minutes and was measured against a reader who
+had programmed before; one minute, measured against a true beginner, is the
+rule now. `lesson-spine-authoring/reference/mixed-audience.md` §4 has the
+mechanics and the marked-term link form.
+
+**Hard English words are handled like technical terms.** These readers are reading a second language, so a hard ordinary word can stop them as surely as a technical one. Choose the easy word first (`language-register.md` §3). If a hard English word cannot be replaced, it is explained inline and linked to the glossary, under the same rules as any term: the one-minute test, the 2-to-3-use rule, and one glossary entry per word. *(Added 21 September 2026, on the owner's instruction: `corrections.md` §27.)*
+
+**Interruption.** The first screenful of every chapter tells the reader **what
+this chapter is, why it comes now, and what they will have at the end.** A
+reader who leaves after one screen still leaves knowing where they were.
+
+*(This replaces "the first screenful must alone deliver the thesis-linked claim
+and the one action", which reserved the top of every chapter for the book's
+AI-engineering argument and left no room for an ordinary welcome.)*
+
+## Formatting is part of the teaching
+
+A page that looks heavy reads as heavy, whatever the sentences say. Formatting
+is not decoration here and it is not optional — it is how a beginner finds their
+footing on a screen.
+
+- **Bullets, tables, short sections and callouts are first-class.** Reach for
+  them before a long paragraph, not after one has failed.
+- **Bold marks what matters, wherever it sits** — a key phrase mid-sentence, a
+  rule, a warning, the answer to the question the section asked. It is **not**
+  the first sentence of every paragraph. That convention (applied book-wide on
+  16 September, reversed on 20 September) turns emphasis into wallpaper: when
+  every paragraph opens bold, no bold means anything.
+- Italics for a term being introduced, for gentle emphasis, and for the reader's
+  own inner voice.
+- Keep sections short enough to see the end of. A wall of text with no visual
+  landmark is where a beginner stops.
+- Decent, professional emoji and icons are allowed where they help — never the
+  AI-slop set (🚀 and its family). `voice.md` §"Enthusiasm, exclamation marks
+  and emoji" has the rule.
+- **The target is not "well formatted". It is beautiful.** A chapter should look
+  like something a reader wants to sit with.
 
 ## Language — the two decisions canon makes
 
@@ -110,9 +162,17 @@ the norm in Pakistani education and it is already the majority usage in
 `color: red` stays `color`. Mixed spelling inside the book is a defect, not a
 preference.
 
-**Urdu glosses are permitted, never required.** A single Urdu word for a
-genuinely hard term, where it actually helps a reader over a hump. Not
-sprinkled for flavour, and never for a term the English already makes plain.
+**English only — no Urdu, anywhere.** The permission to gloss a hard term with a
+single Urdu word was removed on 2026-09-20. This book is being written for an
+international market as well as a Pakistani one, and a bilingual habit
+established now would have to be unpicked across thousands of paragraphs later.
+Plain English carries every idea in this book. If a term is hard, the fix is a
+simpler English sentence, not a second language.
+
+**Examples must land on both sides at once.** Every analogy and everyday example
+is chosen so that a reader in Pakistan and a reader anywhere else both
+understand it without extra explanation. Not two versions — one example that
+works for both. `language-register.md` §4 has the anchor tiers.
 
 ## Accessibility
 

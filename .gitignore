@@ -104,3 +104,10 @@ audit-summary.json
 .tmp/
 CLEANUP-RUN-ME.bat
 FINISH-RUN-ME.bat
+
+.vercel
+# NOTE: the Vercel CLI appended a bare `.env*» here on first link. That glob
+# overrode the `!.env.example» negation above — a later gitignore pattern wins —
+# so it silently dropped .env.example from version control. The explicit entries
+# in the "Environment / secrets" block already cover .env and .env.local, which
+# is all the CLI actually needed. Do not re-add a wildcard here.

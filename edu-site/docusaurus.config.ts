@@ -6,14 +6,20 @@ const config: Config = {
   tagline: "Spec-Driven AI Agent Engineering for Students",
   favicon: "img/favicon.svg",
 
-  // Placeholder until the real deploy target is picked — the owner has
-  // confirmed this is NOT locked (2026-09-14): it may launch on a free
-  // Vercel subdomain (e.g. thebridgebalance.vercel.app) before ever
-  // becoming thebridgebalance.com/.ai/.app. Swapping this one line is the
-  // whole migration; nothing else in the repo hardcodes a domain. Don't
-  // treat the current value as a real commitment — same spirit as D5's
+  // The live deploy target, as of 2026-09-16: the free Vercel subdomain that
+  // the placeholder described below this comment's previous draft. It is no
+  // longer a placeholder, because this value drives canonical URLs, the
+  // sitemap and og:url — all of which must name a domain that actually serves
+  // the site. Deployed and verified the same day
+  // (history/prompts/general/0095-vercel-deploy.general.prompt.md).
+  //
+  // Still NOT locked (owner, 2026-09-14 and again 2026-09-16): the real domain
+  // may yet become thebridgebalance.com/.ai/.app, or thebridgebalance.vercel.app
+  // — note the live subdomain is hyphenated, and the previous draft of this
+  // comment guessed the un-hyphenated form. Swapping this one line is the whole
+  // migration; nothing else in the repo hardcodes a domain. Same spirit as D5's
   // no-fixed-count rule, applied to the domain instead of the chapter count.
-  url: "https://thebridgebalance.app",
+  url: "https://the-bridge-balance.vercel.app",
   baseUrl: "/",
 
   organizationName: "the-bridge-balance",
@@ -44,8 +50,6 @@ const config: Config = {
       {
         docs: {
           sidebarPath: "./sidebars.ts",
-          editUrl:
-            "https://github.com/the-bridge-balance/the-bridge-balance/edit/main/edu-site/",
           routeBasePath: "/",
         },
         blog: false,
@@ -101,11 +105,6 @@ const config: Config = {
           type: "search",
           position: "right",
         },
-        {
-          href: "https://github.com/the-bridge-balance/the-bridge-balance",
-          label: "GitHub",
-          position: "right",
-        },
       ],
     },
     footer: {
@@ -119,12 +118,6 @@ const config: Config = {
             { label: "Stage 2 — CS50 Certs", to: "/stage-02-cs50-certification/" },
             { label: "Stage 3 — AI Coding Agents", to: "/stage-03-mastering-ai-coding-agents/" },
             { label: "Stage 4 — Autonomous Agents", to: "/stage-04-engineering-autonomous-ai-agents/" },
-          ],
-        },
-        {
-          title: "Reference",
-          items: [
-            { label: "GitHub", href: "https://github.com/the-bridge-balance/the-bridge-balance" },
           ],
         },
       ],

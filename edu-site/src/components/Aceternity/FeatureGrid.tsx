@@ -1,19 +1,30 @@
 /**
- * FeatureGrid — a 2x2 grid of feature cards with cursor-tracked spotlights.
+ * FeatureGrid — a 2x2 grid of specimen plates.
  *
- * Adapted from Aceternity UI's CardSpotlight pattern
- * (https://ui.aceternity.com). Each card tracks the pointer via inline
- * CSS custom properties (`--tbb-spot-x`, `--tbb-spot-y`) and renders a
- * radial gradient overlay that follows the cursor. The overlay fades in
- * on hover and out on leave.
+ * Each card is one machined surface, built from the site's own specular set
+ * (`--tbb-metal-face` / `--tbb-metal-rim` / `--tbb-shadow-*`) rather than a
+ * flat fill, so the four pillars read as four plates cut from the same stock
+ * as the hero CTAs and the table headers.
  *
- * The card itself uses Framer Motion's `whileHover` for a coordinated
- * spring lift + slight scale, so the hover state has both the spotlight
- * (cursor-tracked, CSS) and the lift (Framer Motion spring) — two
- * separate channels working in tandem.
+ * The four anatomy parts, in painting order:
+ *   1. `__rail`      — a 2px light-catch along the top edge, in the card's own
+ *                      ramp step, fading out to the right. The card's identity
+ *                      mark; decorative only (`aria-hidden`).
+ *   2. `__spotlight` — a soft radial bloom that tracks the pointer via the
+ *                      `--tbb-spot-x` / `--tbb-spot-y` custom properties set on
+ *                      mousemove. Aceternity UI's CardSpotlight pattern
+ *                      (https://ui.aceternity.com), kept because it is direct
+ *                      manipulation — the surface answers the hand — and not an
+ *                      animation, so it costs nothing under reduced motion.
+ *   3. `__head`      — the icon chip (left) and the ordinal (right).
+ *   4. `__title` / `__body` — the reading block.
  *
- * Respects prefers-reduced-motion: no spring scale, no cursor tracking;
- * the spotlight overlay is hidden entirely.
+ * `accent` is a RAMP STEP, not a hue: each card descends the silver ramp the
+ * way the stages do (ADR-0003 scopes `--tbb-accent` away from cards entirely).
+ * Rank is carried by the ordinal and the title, never by colour alone.
+ *
+ * Respects `prefers-reduced-motion`: no spring lift, no cursor tracking, and
+ * the spotlight overlay is hidden outright.
  */
 
 import React from "react";
@@ -25,7 +36,10 @@ export interface FeatureItem {
   icon: React.ReactNode;
   title: string;
   body: string;
-  /** Optional accent color override (defaults to brand primary). */
+  /**
+   * The card's ramp step — a named silver/stage token, never a hue.
+   * Defaults to brand primary.
+   */
   accent?: string;
 }
 
@@ -61,12 +75,15 @@ function FeatureCard({ item, index }: { item: FeatureItem; index: number }): Rea
             }
       }
     >
+      <div className="tbb-feature-card__rail" aria-hidden="true" />
       <div className="tbb-feature-card__spotlight" aria-hidden="true" />
-      <div className="tbb-feature-card__index" aria-hidden="true">
-        {String(index + 1).padStart(2, "0")}
-      </div>
-      <div className="tbb-feature-card__icon" aria-hidden="true">
-        {item.icon}
+      <div className="tbb-feature-card__head">
+        <div className="tbb-feature-card__chip" aria-hidden="true">
+          {item.icon}
+        </div>
+        <div className="tbb-feature-card__index" aria-hidden="true">
+          {String(index + 1).padStart(2, "0")}
+        </div>
       </div>
       <h3 className="tbb-feature-card__title">{item.title}</h3>
       <p className="tbb-feature-card__body">{item.body}</p>

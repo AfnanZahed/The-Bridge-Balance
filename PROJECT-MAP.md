@@ -8,7 +8,8 @@ This map covers `Book/` only — the one live curriculum-and-platform repo. A se
 
 | If the task is… | Read first | Then act via |
 |---|---|---|
-| Writing, researching, or revising a chapter | `curriculum-state/README.md`, then the relevant `curriculum-state/canon/*.md` | The matching skill below |
+| Writing, researching, or revising a chapter | **`curriculum-state/canon/corrections.md` first, always**, then `curriculum-state/README.md` and the rest of `canon/` | The matching skill below |
+| Drafting any Stage 0 chapter | `curriculum-state/stage-0-drafting-plan.md` (read its warning box first) + the dossier in `curriculum-state/research/stage-0/` | `chapter-production` |
 | Planning a stage, sequencing lessons, scoping a brief | `curriculum-state/ledgers/prerequisite-graph.yaml` | `curriculum-architect` |
 | Reviewing one finished chapter | nothing extra — the skill reads what it needs | `lesson-adversarial-review` |
 | Checking the whole book for drift or contradictions | nothing extra | `book-coherence-audit` |
@@ -24,17 +25,21 @@ Book/
 ├── PROJECT-MAP.md         this file
 ├── README.md              human-facing overview, current phase status table
 ├── stack.md               the stack, phased rollout, free-tier ceilings, do-not-add list
-├── INSTALL.md             how the curriculum-state + quality-gate pieces were installed
-├── The Bridge Balance - Platform Spec.docx   original platform spec (reference)
+├── design-reference/      standalone design-token exports, made for reuse outside this repo
+├── reference-material/    non-code reference artifacts — recordings, mockups, the original
+│                       platform-spec docx, old screenshots
+├── _scratch/              harmless stray tool output, not part of the project
 ├── curriculum-state/      the book's shared memory — canon, contracts, ledgers, proposals
 ├── .claude/skills/        bridge-balance-project-guide (+ 4 bundled protocols)
 │                       and lesson-spine-authoring (peer skill, the teaching framework)
 ├── edu-site/              the actual website: textbook frontend + FastAPI backend
 ├── specs/<NNN-feature>/   Spec-Kit Plus feature specs (spec.md, plan.md, tasks.md)
 ├── history/prompts/       Prompt History Records, routed by feature (or general/constitution)
-├── history/adr/           Architecture Decision Records (0001–0003 so far)
-├── .specify/              Spec-Kit Plus templates, scripts, and memory/constitution.md
-└── _to_delete/            leftover files staged for manual deletion — safe to ignore
+├── history/adr/           Architecture Decision Records (0001–0005 so far)
+├── history/reports/       one-off plain-English write-ups of past work — not a PHR, not an ADR
+├── vercel.json            Vercel config — the project root is Book/, so it cd's into edu-site
+├── .vercelignore          what Vercel must not upload (node_modules, build, .git). Keep it minimal
+└── .specify/              Spec-Kit Plus templates, scripts, and memory/constitution.md
 ```
 
 ## Content & curriculum system
@@ -42,13 +47,19 @@ Book/
 | Path | What it is | Read it when… |
 |---|---|---|
 | `curriculum-state/README.md` | Index of the whole shared-memory layer | Starting any content task |
-| `curriculum-state/canon/thesis.md` | Core thesis + the five-stage table | Writing anything that states what a stage covers |
-| `curriculum-state/canon/audience.md` | The two readers, their reading conditions, and the two language decisions canon makes (British spelling; Urdu glosses permitted, never required). Defers the audience architecture to `lesson-spine-authoring` | Starting any content task |
-| `curriculum-state/canon/voice.md` | Voice, the two tests, banned phrases. One voice for every chapter, every stage | Drafting any prose |
+| **`curriculum-state/canon/corrections.md`** | **Every mistake the owner has had to correct more than once, in their own words. §§8–17 were added 2026-09-20 and reverse a large part of the older rules** | **Before anything else, on every content task** |
+| `curriculum-state/canon/thesis.md` | Core thesis, the five-stage table, the six invariants (stage-level, not per chapter), the safety floor in both its wordings, and how statistics reach a reader | Writing anything that states what a stage covers |
+| `curriculum-state/canon/audience.md` | Who the reader is — Stages 0–2 are absolute beginners only — their reading conditions, the formatting rules, and the language decisions canon makes (British spelling; English only, no Urdu) | Starting any content task |
+| `curriculum-state/canon/voice.md` | Voice and persona, the two tests, banned phrases, and the register rules. Warmth is the house register in every stage | Drafting any prose |
+| `curriculum-state/canon/naming.md` | How every stage, chapter, lesson, part and section is named | Naming or renaming anything a reader sees |
+| `curriculum-state/canon/course-structure.md` | The shape of the course: who it is for, the levels and how they nest, what kind of name each gets, learner-level labels, the stages. Changes often; other files point to it | Planning, naming, renaming or splitting any stage, course, chapter or lesson, or describing who the book is for |
 | `curriculum-state/canon/integrity-floor.md` | The CS50 academic-integrity hard stop | Any Stage 2 work, even structural planning |
+| `curriculum-state/canon/research-and-comparison.md` | The two research passes, and what may be learned from a studied source | Before drafting anything, content or platform |
+| `curriculum-state/stage-0-drafting-plan.md` | The approved 20-chapter Stage 0 ladder. **Read its warning box first** — its Anchors columns are backstage research, not chapter content | Drafting any Stage 0 chapter |
+| `curriculum-state/research/stage-0/cluster-{1..7}-*.md` | The DeepSeek research dossiers behind Stage 0. §2 of each (how strong sources teach this) matters more than §1 (the dated facts) | Drafting any Stage 0 chapter |
 | `curriculum-state/contracts/calibration.md` | The 150 wpm reading baseline and the `scope_multiplier` anchor. The chapter output contract lives in `chapter-production/SKILL.md` step 6 (frontmatter) and its `reference/gate.md` (what's enforced). | Estimating chapter length |
-| `curriculum-state/ledgers/*.yaml` | Four ledgers: concept, evidence, example, prerequisite-graph | Before drafting — the skills do this automatically |
-| `curriculum-state/proposals/` | Non-binding stage/lesson proposals | Planning only; never treat as committed |
+| `curriculum-state/ledgers/*.yaml` | Five ledgers: concept, evidence, example, prerequisite-graph, term | Before drafting — the skills do this automatically |
+| `curriculum-state/proposals/` | Non-binding stage/lesson proposals. **Nothing here binds anything** — when the owner agrees to something in here, promote it into `canon/` the same day | Planning only; never treat as committed |
 
 ## The four protocols — `.claude/skills/bridge-balance-project-guide/reference/<name>/SKILL.md`
 
@@ -72,7 +83,7 @@ Owns **content creation, end to end**: what the reader meets and in what order. 
 | `SKILL.md` | The Name-First workflow: classify shape, run Station 0, fill the station sheet, draft the spine, layer footholds and depth blocks, close on retrieval | Any teaching prose, for this book or not |
 | `reference/stations.md` | The twelve stations — 5W2H reordered for learning, split, and extended at both ends. Their weighting by lesson shape | **In full, before drafting anything** |
 | `reference/name-registers.md` | Station 0's four registers and the etymology verification protocol, with a pre-verified term bank | Before Station 0, on any topic with a name worth decomposing |
-| `reference/mixed-audience.md` | The two disengagement conditions, both-audience content, spine / footholds / depth blocks, the delete test | Before drafting prose, first time in a session |
+| `reference/mixed-audience.md` | The four reasons a beginner stops reading, what carries a chapter for a beginner, spine / footholds / optional depth blocks, the delete test | Before drafting prose, first time in a session |
 | `reference/language-register.md` | Every sentence in the book: length, idioms, phrasal verbs, Latinate padding, anchors, dates and currency | Before drafting prose, first time in a session |
 
 This skill writes the lesson, start to finish. `chapter-production` delegates to it and does not duplicate, summarise or second-guess it.
@@ -101,7 +112,7 @@ This skill writes the lesson, start to finish. `chapter-production` delegates to
 
 - The Stage 0 sequence at the docs root — `intro-1-binary-to-programming.md` through `intro-5-spec-driven-engineering.md` — is `text-ready` today (all five authored and gate-clean), but mid-redesign into an officially-promoted, from-scratch chronological Stage 0, so its current text should not be treated as final (see `curriculum-state/proposals/whole-book-redesign-record-2026-09-14.md`).
 - `docs/perf-targets.md` — a reference doc, not a chapter.
-- `stage-01-spec-aware-vibe-engineering/` — index + 6 chapters, all `text-ready`: foundations, core-programming, frontend, backend, databases, git-github.
+- `stage-01-spec-aware-vibe-engineering/` — index + 6 chapters, all `placeholder`: foundations, core-programming, frontend, backend, databases, git-github. (Shipped `text-ready` 2026-09-11, reverted 2026-09-17 on owner instruction — see CLAUDE.md's "Real stage folders today" line.)
 - `stage-02-cs50-certification/` — index + 2 placeholder shells: cs50p, cs50w.
 - `stage-03-mastering-ai-coding-agents/` — index + 4 placeholder shells: claude-code, context-engineering, prompt-engineering, skills-and-mcp.
 - `stage-04-engineering-autonomous-ai-agents/` — index + 3 placeholder shells: evaluations, multi-agent-systems, rag-and-tool-calling.

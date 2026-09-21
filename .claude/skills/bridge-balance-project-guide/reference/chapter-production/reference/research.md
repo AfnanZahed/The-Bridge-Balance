@@ -13,7 +13,7 @@ Loaded at SKILL.md step 2. This is the front half of the chapter: finding out wh
 - **Pass 1 — standards research.** Not only "what is true about this topic," but **how the strongest sources in the world actually teach or build it, and what reasoning sits underneath that choice.** International practice and its philosophy, both. A convention adopted without its reason is cargo. Around 95% of this is delegated to DeepSeek v4.1 Flash through `command-code-delegation` — Claude decides what to ask and judges what returns, DeepSeek does the reading — and results are read from the actual tool trace, never from the summary line.
 - **Pass 2 — the owner's comparative study.** The project owner works through several real courses or implementations and hands over their own learnings plus the points they want carried in. **It blocks step 3, not step 2**, so research runs first and drafting waits. It is not substitutable by your own search results.
 
-**What comes back is not averaged.** Several sources are studied so that what *all of them missed* becomes visible, and naming that gap is where the chapter earns its place — which is the same test as the signature contribution below, reached from the other side.
+**What comes back is not averaged, and it is not filtered either.** Study each source for everything it can teach — its structure, its ordering, its tone, the kind of example it reaches for, where it loses a reader — **and** for what all of them missed. Adopt what is good, then go further. `canon/research-and-comparison.md` and `corrections.md` §15.
 
 **Then it is transformed.** Almost every external source teaches a learner to *write* the thing; this curriculum teaches them to **read and judge** it. That conversion is the adjustment step, and it is also what makes the derivation a new work rather than a reproduction with fresh sentences. **Nothing studied is ever reproduced** — no verbatim text, no reworded paragraphs, no borrowed structure, no lifted examples or exercises, from a free course or a paid one. Where a specific framing is genuinely owed to a named source, attribute it in the prose the way every other citation works here.
 
@@ -26,7 +26,7 @@ Loaded at SKILL.md step 2. This is the front half of the chapter: finding out wh
 2. **Treat memory as a hypothesis for Stage 3 and Stage 4 topics.** These tools update often enough that a chapter written from what you already "know" will describe a version that no longer exists. If search isn't available for such a topic, stop — a hedged claim written from memory about a monthly-changing tool isn't a smaller version of a verified claim, it's a claim this protocol has no business making.
 
 3. **Look for three specific things:**
-   - The single best real, current, citable statistic or incident — *best* meaning it most precisely supports **this** chapter's claim, not the most impressive one available.
+   - The single best real, current, citable statistic or incident — *best* meaning it most precisely supports **this** chapter's claim, not the most impressive one available. **Finding it is required; printing it is not.** It may end up shaping a plain sentence and living only in the ledger.
    - At least one primary or official source, preferred over secondary summaries.
    - Evidence of what learners actually get wrong. This often means searching discussion, support, or postmortem sources: docs describe correct behaviour and rarely describe how people misread it. This is raw material for `lesson-spine-authoring`, not a diagnosis made here.
 
@@ -59,7 +59,13 @@ Research is deliberately broader than the citation set, because the point of res
 - **Proposed** — newly found and genuinely warranted. Cite it, add one clause on why it earns inclusion, and add it to the ledger with `status: proposed` — a proposal for the editor to confirm, not a unilateral addition.
 - **Background** — informed your understanding but isn't load-bearing enough to cite. Paraphrase what you learned without attributing it to a source that isn't earning a permanent place in the project's citation set.
 
-**How citations appear in the finished chapter:** inline, named, in the prose itself — *"Veracode's 2025 GenAI Code Security Report found that AI-generated code introduces a vulnerability in 45% of cases"*. Not footnotes, and not a separate reference section. The source's name and year sit in the sentence that uses it, where a reader can weigh it without leaving the paragraph. The gate warns on a bolded percentage with no source or study named in its paragraph or the one before.
+**How citations appear in the finished chapter.** *(Rewritten 2026-09-20 — the old rule here said "inline, named, in the prose itself", and it is the most direct single cause of the citation density the owner rejected. `corrections.md` §11.)*
+
+- **The prose carries the plain sentence.** *"Nearly half of AI-written code ships with a security flaw."*
+- **The source travels with it, attached at the end of the sentence**, or in a Source chip once that component ships (`canon/thesis.md` §"Statistics and their sources"). Never wedged into the middle of a sentence a beginner is trying to read.
+- **Every source, with its year and its link, goes in `evidence-ledger.yaml` regardless.** Nothing is unverifiable; the verification simply is not the reading experience.
+- **Where the source *is* the teaching** — the chapter is about that report, that incident, that person — it belongs in the prose, named.
+- The gate warns on a bolded percentage with no source named nearby.
 
 ## What to hand over, and what comes back
 
@@ -71,7 +77,7 @@ What comes back is carried into the chapter and into the ledgers at step 8. The 
 
 ## Worked example — "What an AI coding agent actually is"
 
-**This is this skill's half only.** The design half of the same chapter — Station 0, the register, the both-audience list, the layering — is worked through in `lesson-spine-authoring/reference/mixed-audience.md` §6. Two halves of one chapter, one owner each, deliberately not duplicated.
+**This is this skill's half only.** The design half of the same chapter — Station 0, the register, the beginner-landing set, the layering — is worked through in `lesson-spine-authoring/reference/mixed-audience.md` §6. Two halves of one chapter, one owner each, deliberately not duplicated.
 
 **Step 0.** Cleared immediately — no external credential involved.
 

@@ -1,33 +1,61 @@
 # Language register
 
-*Governs every sentence in the book. Pairs with `mixed-audience.md`, which governs which reader each sentence serves.*
+*Governs every sentence in the book. Pairs with `mixed-audience.md`, which governs how each sentence serves a beginner.*
 
-The reader is fluent in English. English is usually not their first language.
+> **Revised 2026-09-20.** This file used to describe its reader as "a Pakistani
+computer science graduate" who "knows what a mutex is", and told the writer that
+"simple English is what you write for a child". Both were wrong for this book's
+actual reader and both made plain language feel like a failure. See
+`curriculum-state/canon/corrections.md` §12.
 
-Most readers of this curriculum are in Pakistan. They studied in English-medium schools or universities, they read technical documentation in English every day, and they think in Urdu, Punjabi, Pashto, Sindhi, Saraiki, or Balochi. Many read the book from outside Pakistan.
+**The reader has never programmed.** In Stages 0, 1 and 2 they do not know what
+Python is and may not be sure what a terminal is for. They are literate in
+English and they are not less intelligent than anyone else — they simply have
+none of the context, and no way to tell whether their confusion is the book's
+fault or their own.
 
-This produces one specific rule, and getting it exactly right matters more than any other language decision in the book.
+Most readers of this curriculum are in Pakistan. They studied in English-medium
+schools or universities and read English every day. Many read the book from
+outside Pakistan, and the book is being written to travel.
+
+This produces one specific rule, and getting it exactly right matters more than
+any other language decision in the book.
 
 ---
 
 ## 1. The rule, stated precisely
 
-**Simplify the sentences. Never simplify the engineering.**
-
-The reader is not less capable. They are reading in a second or third language. Those are completely different problems, and confusing them insults a reader who can already read a linker error faster than most people read a menu.
+**Simplify the sentence and the vocabulary. Never simplify the truth.**
 
 What that means in practice:
 
 | Keep at full strength | Make plain |
 |---|---|
-| Technical vocabulary — *idempotent*, *polymorphism*, *blast radius*, *reconciliation loop* | Sentence structure |
-| Real numbers, real incidents, real trade-offs | Idioms and cultural references |
-| Depth, nuance, honest uncertainty | Ornamental or Latinate word choice |
-| Named disagreements and open problems | Long chains of clauses |
+| Accuracy — never make a claim vaguer, softer or wronger to make it simpler | Sentence structure |
+| Depth, nuance, honest uncertainty | Idioms and cultural references |
+| The real magnitude, in a form the reader can feel | Ornamental or Latinate word choice |
+| Everything the reader needs in order to understand | Long chains of clauses |
+| | **Technical vocabulary, wherever a plain word is equally true** |
 
-A Pakistani computer science graduate knows what a mutex is. What slows them down is a thirty-five word sentence with three subordinate clauses, or an idiom borrowed from American baseball. Fix the second. Never touch the first.
+Note the last row, which moved sides on 2026-09-20. The old rule kept technical
+vocabulary at full strength always, and in Stage 0 that produced *"a switch
+built from a sliver of treated germanium, named the way thermistor and varistor
+already named devices by the property they controlled"* for a reader who has
+never programmed. The sentence a beginner needed was *"they built it from a tiny
+piece of crystal, and called it the transistor."*
 
-**Plain English is not simple English.** Simple English is what you write for a child. Plain English is what you write for a professional who is busy, reading in a second language, and deserves not to have their attention wasted on decoding your sentence structure.
+**Both extremes are failures.** *"Early computers used switches that clicked open
+and shut"* is so general it teaches nothing. The target is the plain, true,
+specific middle — and finding it is the actual work.
+
+**When is a hard word allowed?** When the reader will meet it again and needs to
+own it, or when no plain word is accurate. Then it is taught properly, not
+squashed into a gloss. **In Stages 0–2 a hard word must earn its place: if the
+idea works without it, it goes.** A hard word that stays, technical or ordinary, is explained inline and linked to the glossary (`audience.md`, *Hard English words are handled like technical terms*; `corrections.md` §27).
+
+**Plain English is not baby English.** It is the same thinking, said in words the
+reader already has. Writing plainly for a beginner is not condescension — it is
+the whole job.
 
 ---
 
@@ -116,7 +144,7 @@ These are good anchors. Use them freely. The test is that a reader in Toronto st
 
 **Tier 3 — avoid.** Anything needing local knowledge the sentence does not supply, and anything from §3's cultural list.
 
-Technical examples stay real and named, as always: real tools, real companies, real incidents, real numbers. That rule does not change here.
+Examples follow `SKILL.md` step 7: concrete, not necessarily real, never a placeholder. Where an example does name a real tool, company, incident or number, that claim is checked like any other (`SKILL.md`, the fifth hard constraint).
 
 ---
 
@@ -155,19 +183,25 @@ Machine cadence is not a vague feeling. It is a short list of specific moves, an
 | **The em-dash aside in every paragraph** | "The agent — which runs in a loop — writes…" | One is punctuation. Five is a verbal tic the reader starts hearing. |
 | **The portentous closer** | A short weighty line at the end of a section | The lesson closes on retrieval. Nothing else earns that position. |
 | **Signposting** | "Let's break this down." "Here's the thing." "The truth is…" | Announces thinking instead of doing it. |
-| **The riddle opening** | Asking the reader to guess, then telling them they guessed wrong | Performs cleverness at the reader's expense before they have footing. |
+| **The riddle opening** | Asking the reader to guess, then telling them they guessed wrong | Performs cleverness at the reader's expense before they have footing. Rejected twice by the owner. |
+| **A sentence that needs a second read** | "Everything in this book runs on a machine that can hold a number and act on an instruction. Neither of those was obvious, and neither arrived first." | An abstract pronoun standing in for something the reader has not been given yet. However elegant, it has failed. `corrections.md` §16. |
+| **A rule explained to the reader** | "Every technical word is defined where you first meet it, in every chapter…" | The reader never learns how the book is built. `corrections.md` §9. |
 | **Stacked metaphor** | A second image arriving before the first has landed | Two half-seen pictures are worse than one clear one. |
 | **Symmetry everywhere** | Every paragraph the same length, every sentence the same shape | Human writing is uneven because thinking is uneven. |
+| **Bold assigned by position** | Paragraph after paragraph opening on a bolded sentence, by convention rather than by meaning | Bold marks what matters. Assigned to every paragraph's first sentence it marks nothing. **Bold itself is wanted, and wanted often** — on the key phrase, the rule, the warning, the answer, wherever in the paragraph those fall. `canon/corrections.md` §14. |
 
 ### What "humanised" actually requires
 
 Naming the tics is only half of it. Removing them leaves prose that is clean and still lifeless. The other half is positive and has to be written in deliberately:
 
 - **Uneven rhythm.** A four-word sentence next to a twenty-four-word one. Read the paragraph aloud; if the beat never changes, the paragraph is not finished.
-- **One specific detail no summary would keep.** The actual error message. The real number. The thing that happened at 2 a.m. Specificity is the single strongest human signal available.
+- **One specific detail no summary would keep.** The actual error message. The thing that happened at 2 a.m. The detail of a scene the reader can picture.
+
+  **Not a date, a full name and an institution.** This bullet was read as a licence for citation apparatus, and it is a main reason Stage 0 chapters filled with dated proper nouns. The human signal is a *concrete picture*, not a footnote — and an invented everyday example carries it just as well as a historical one. `corrections.md` §4 and §11.
 - **Willingness to be plain and unclever.** The plainest true sentence beats a clever one almost every time. Reach for the clever one only when it is *also* the clearest.
 - **A real position.** Say which way you would go and why. Balanced non-answers are the most reliable marker of text with no author.
-- **Warmth without performance.** Address the reader directly, respect their time, do not perform enthusiasm. No exclamation marks doing emotional work.
+- **Real warmth.** Address the reader directly, tell them when something is hard, tell them when they have already understood the difficult part. **Exclamation marks are allowed** where a real person would use one, and so are decent, professional emoji — never the AI-slop set (🚀 and family). The old rule here banned both as "performed enthusiasm", and it cost this book the ordinary human warmth of the sources it admires. `canon/voice.md` and `corrections.md` §13.
+- **Say hello, and say why.** Every chapter opens by welcoming the reader and showing what is coming and why it matters. No opening phrase is banned. `corrections.md` §7.
 
 **Ultra-creative does not mean ornamental.** The creativity goes into finding the anchor that makes an abstract thing land, the example nobody else would have chosen, the order that makes a hard idea feel inevitable. It never goes into the sentence's decoration. A page that is inventive about *explanation* and plain about *wording* is the target; the reverse is exactly the slop this rule exists to stop.
 
@@ -191,7 +225,7 @@ Any sentence that fails the third test gets rewritten, not softened.
 
 **This is not condescension.** Never write down to the reader. Every rule in this file is about removing obstacles between a capable reader and hard material, not about reducing the hardness of the material.
 
-**This is never announced.** No "written in simple English for our readers," no note about language level. That is an audience label, and audience labels are banned everywhere in this curriculum for the same reason: they tell a reader which parts of the book were not written for them. See `mixed-audience.md` §5.
+**This is never announced.** No "written in simple English for our readers," no note about language level. A note about how the book was written is not teaching, so there is no reason to add one. *(The reason once given here — that it is an audience label, and audience labels are banned — is withdrawn. Audience labels are allowed and often right: “if you have never programmed, nothing here assumes you have” is a good sentence. `corrections.md` §13, `mixed-audience.md` §5.)*
 
 **This does not license vagueness.** Plain words, precise claims. "It uses a lot of memory" is plain and useless. "It holds the whole file in memory, so a 2 GB log file needs 2 GB of RAM" is plain and exact. Always choose the second.
 

@@ -77,9 +77,27 @@ exam question, a problem-set specification, or substantial course text.
 
 **No claim about a person or organisation without a source.** Named incidents in
 this curriculum involve real companies and real people. Every one is cited to
-the canonical source list, described as the source describes it, and never
-embellished for narrative effect.
+the canonical source list and described as the source describes it.
+
+**Telling it as a scene is allowed. Inventing detail is not.** *(Clarified
+2026-09-20.)* "Never embellished for narrative effect" was being read as "retell
+the source's sentence", which produced dry summaries where the owner asked for
+story. Setting a real, sourced fact in a scene the reader can picture is good
+teaching and is encouraged. What stays forbidden is adding facts the source does
+not support — a detail, a quote, a motive or a number that nobody recorded.
 
 **Uncertainty is disclosed, not smoothed.** Where the evidence is contested or
 the practice is unsettled, the lesson says so. Manufacturing false consensus is
 a form of the same failure this curriculum exists to name.
+
+**In Stages 0–2, disputes mostly stay backstage.** *(Added 2026-09-20, owner's
+instruction: "no disputes please, and if it is must to be told, the dispution
+also should be discussed.")* A beginner does not benefit from learning that two
+historians disagree about a date. So:
+
+- If the dispute does not change the point being taught, it stays in
+  `evidence-ledger.yaml` and the prose simply avoids asserting the contested
+  detail.
+- If it does change the point, it is **taught properly** — what the two
+  positions are and why it matters — not dropped in as a hedging clause.
+- What is never acceptable is stating a contested thing as settled.

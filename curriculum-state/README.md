@@ -12,21 +12,32 @@ however many there turn out to be. This directory is the book's memory for
 that, not a table of contents fixed in advance.
 
 **Every authoring skill reads this directory before drafting and writes to it
-before finishing.** A skill that skips the read will redefine terms already
-defined, reuse an example already spent, and open on an incident that already
-opened other chapters. That is how a book becomes a pile of disconnected
-essays that don't know about each other, and this layer is the only thing
-preventing it — regardless of how many chapters it ends up being.
+before finishing.** A skill that skips the read will redefine a term another
+chapter already defined, repeat an example without meaning to, and contradict a
+decision made two chapters ago. That is how a book becomes a pile of
+disconnected essays that don't know about each other, and this layer is the only
+thing preventing it.
+
+> **Note, 2026-09-20.** The sentence above used to end "…and open on an incident
+> that already opened other chapters", which quietly told every reader of this
+> file that chapters open on dated incidents and that the only risk is repeating
+> one. They do not. See `canon/corrections.md` §7 for how a chapter actually
+> opens.
 
 ## Layout
 
 ```
 curriculum-state/
 ├── canon/           Facts about the project that never change per lesson.
+│   ├── corrections.md       Mistakes already made once, with the owner's own words. READ FIRST, ALWAYS.
 │   ├── thesis.md            Thesis, the stages, two extremes, reading and understanding literacy, safety floor.
 │   ├── audience.md          Who reads this and under what conditions.
 │   ├── voice.md             How the book sounds.
-│   └── integrity-floor.md   Rules that outrank the curriculum docs.
+│   ├── naming.md            How every stage, chapter, lesson and part is named.
+│   ├── course-structure.md  The shape of the course: the reader, the levels, how they are named, the stages. Changes often; change it here first.
+│   ├── integrity-floor.md   Rules that outrank the curriculum docs.
+│   └── research-and-comparison.md  What is researched before anything is
+│                            written, and what may be learned from a source.
 ├── contracts/       Machine-checkable output rules.
 │   └── calibration.md       Reading-time baseline and the scope_multiplier
 │                            anchor.
@@ -34,8 +45,10 @@ curriculum-state/
 │   ├── concept-ledger.yaml      Every term: where first defined, how.
 │   ├── evidence-ledger.yaml     Every source: what each chapter asks of it.
 │   ├── example-ledger.yaml      Worked examples already spent.
-│   └── prerequisite-graph.yaml  Lesson order and dependencies — a snapshot of
-│                                what's decided so far, never a fixed plan.
+│   ├── prerequisite-graph.yaml  Lesson order and dependencies — a snapshot of
+│   │                            what's decided so far, never a fixed plan.
+│   └── term-ledger.yaml      Every glossary term, its anchor, and the chapter
+│                            allowed to introduce it first.
 └── proposals/       Non-binding planning output from `curriculum-architect`.
                      Stage-level structure sketches; nothing here is decided
                      until a human reviews it and, if they agree, acts on it.
@@ -43,12 +56,12 @@ curriculum-state/
 
 ## Reading order for a skill
 
-1. `canon/` — all four files. Small, and they change the shape of everything.
+1. `canon/` — all seven files, `corrections.md` first. Small, and they change the shape of everything.
 2. `contracts/calibration.md` — before estimating any length.
 3. The ledgers relevant to the task — this varies by which protocol is running,
    not a fixed subset:
-   - `chapter-production` and `lesson-adversarial-review` — all four.
-   - `book-coherence-audit` — all four, corpus-wide rather than one lesson.
+   - `chapter-production` and `lesson-adversarial-review` — all five.
+   - `book-coherence-audit` — all five, corpus-wide rather than one lesson.
    - `curriculum-architect` — `prerequisite-graph.yaml` always; `concept-` and
      `evidence-ledger.yaml` when producing a lesson brief (Mode 2).
 
@@ -61,6 +74,13 @@ curriculum-state/
   second entry.
 - **Record the omission too.** An entry saying an example was considered and
   rejected is worth as much as one saying it was used.
+- **An example is logged, not spent.** *(Changed 2026-09-20.)* Every example used
+  goes in `example-ledger.yaml`. Before choosing one, read what is already there
+  and decide deliberately: is a new example better here, or is returning to one
+  the reader already knows better? Reuse is often the stronger teaching choice,
+  and an idea a reader already has a picture for costs them nothing to pick up.
+  What the old "spent" rule caused was a slow drift toward rarer and rarer
+  examples — which, in a history stage, means named historical ones.
 - **Update before handoff, not after.** A skill that finishes a lesson and does
   not update the ledgers has not finished the lesson.
 

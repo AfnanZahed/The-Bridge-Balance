@@ -1,4 +1,143 @@
 <!--
+Sync Impact Report — v3.0.1 (PATCH: Principle III's registry enumeration removed)
+
+Version change: 3.0.0 → 3.0.1 (PATCH — clarification/wording refinement; no
+principle added, removed or redefined)
+Amended 2026-09-20, on the owner's instruction to complete the amendment
+flagged by ADR-0008.
+
+Modified principles:
+  III. Co-Authored Text, Video-Second Delivery — step 3's closing clause no
+       longer enumerates `MDXComponents.tsx`'s registered set. The enumeration
+       existed to explain why inline Mermaid/SVG/JSX fails the build; it was
+       read instead as fixing the component palette at three entries, and in
+       that stronger form it propagated to `CLAUDE.md` and two skills. The rule
+       itself is unchanged: a diagram ships as a static image file, never as
+       inline markup in a chapter body. The registry is open and expected to
+       grow (ADR-0008).
+
+Added principles: none. Added sections: none. Removed sections: none.
+
+Correction carried in the same pass (not a constitutional change):
+  Three files asserted that the 2026-09-06 “Claude never draws” restriction was
+  still untouched. It was reversed on 2026-09-16 by v2.3.0 of this document,
+  which reopened structural/conceptual diagrams to Claude via a diagramming
+  connector. Corrected in `history/adr/0008-chapter-component-palette-is-open.md`,
+  `curriculum-state/canon/corrections.md` §21, and
+  `curriculum-state/proposals/chapter-component-palette-2026-09-20.md`.
+  Root cause: those three were drafted against a stale copy of `CLAUDE.md` in a
+  git worktree that predates the 2026-09-16 amendment.
+
+Templates requiring updates:
+  ✅ history/adr/0008-chapter-component-palette-is-open.md — decision point 2
+     corrected; an `## Amendment` section records what was wrong and why.
+  ✅ curriculum-state/canon/corrections.md §21 — “what stays closed” bullet
+     restated as a delivery-mechanism rule.
+  ✅ curriculum-state/proposals/chapter-component-palette-2026-09-20.md — the
+     constraint row restated to match.
+  ✅ edu-site/src/theme/MDXComponents.tsx (comment), .claude/skills/bridge-balance-
+     project-guide/SKILL.md (rules 4 and 6, and the tree comment) and
+     .claude/skills/bridge-balance-project-guide/reference/chapter-production/
+     SKILL.md (image section) — all described the registry as a cap. Missed in the
+     first pass of this amendment and corrected the same day, after a repo-wide
+     search for the enumeration.
+  ✅ CLAUDE.md (line 55) and chapter-production/reference/image-prompts.md (line
+     34) — both still said the registry was a fixed set. Corrected in the
+     same pass. The live CLAUDE.md already carried the 2026-09-16 reopening; the
+     stale copy of it lives only in the git worktree.
+
+Follow-up TODOs:
+  - None outstanding for Principle III.
+
+--- previous report, v3.0.0 (MAJOR: Principle IX redefined; Principle VIII's
+reproduction clause narrowed; Principle III's chapter-section list corrected)
+
+Version change: 2.3.0 → 3.0.0 (MAJOR — a principle is redefined in kind)
+Ratified by the project owner on 2026-09-20, in a line-by-line review of every
+rule file governing content in this repository.
+
+Modified principles:
+  IX. Mixed-Audience Content Integrity → renamed **Beginner-First Content
+      Integrity**. The two-reader model is WITHDRAWN. Stages 0, 1 and 2 are
+      written for absolute beginners and for nobody else; the audience for
+      Stages 3–4 is undecided and no rule may assume a senior reader. The
+      two-minute term test becomes a ONE-minute test, and the inline gloss
+      stops after a term's first two or three appearances in the book instead
+      of repeating in every chapter forever. A second mandatory audit is added:
+      the ten-angle beginner-experience audit.
+  VIII. Research-Backed Origination — the blanket "no borrowed structure"
+      clause is narrowed. A studied source's STRUCTURE, ordering, tone and
+      example-shape may now be learned from and adopted; what may not be
+      reproduced is its EXPRESSION (its sentences, verbatim or lightly
+      reworded) and its exercises. Three owner instructions to copy a supplied
+      reference's pattern were refused under the old wording.
+  III. Co-Authored Text — step 2's fixed four-section chapter list
+      ("outline, lecture content, worked example, check-your-understanding")
+      is replaced: it described a structure the book stopped using, and two
+      shipped chapters violated it silently.
+
+Rationale: every one of these changes removes a rule that was producing cold,
+dense, name-and-date-heavy prose the owner rejected across four separate
+drafts. Full record and the owner's own words: curriculum-state/canon/
+corrections.md §§8–17.
+
+Follow-up: an ADR should be raised for this amendment. Not auto-created — it
+requires the owner's consent per CLAUDE.md.
+
+--- previous report, v2.3.0 (MINOR: Principle III's image/diagram step reopened to Claude) ---
+
+Version change: 2.2.0 → 2.3.0 (MINOR — existing principle materially expanded;
+no principle removed or redefined in kind, only its scope changed)
+
+Modified principles:
+  III. Co-Authored Text, Video-Second Delivery — step 3 ("Image integration")
+       renamed "Image and diagram production" and reopened: diagrams may now
+       be produced by Claude Code (via a diagramming connector — Eraser,
+       Excalidraw, draw.io, or Mermaid rendered to a static image) as well as
+       by the project owner, not by the owner alone. Delivery mechanism is
+       unchanged: a static image file under edu-site/static/img/<chapter-slug>/,
+       referenced by a plain markdown image — never inline Mermaid/SVG/JSX in
+       the chapter body, which stays outside MDXComponents.tsx's registered
+       set (Callout, StageBanner, ChapterState) and would fail the build.
+       Steps 1, 2 and 4 of Principle III are unchanged.
+
+Added principles: none.
+Added sections: none.
+Removed sections: none.
+
+Rationale for the reversal: the 2026-09-06 restriction (CLAUDE.md; the
+  deleted edu-site/figures/ pipeline) existed because repeated attempts at
+  Claude-authored imagery did not reach a usable quality bar at the time.
+  The owner decided Claude should produce diagrams again, this time via
+  connector-based diagramming tools rather than hand-authored figure code —
+  a genuinely different mechanism, since a connector renders legible labels
+  natively while an image generator cannot. Confirmed directly 2026-09-16.
+
+Templates requiring updates:
+  ✅ CLAUDE.md — the "Claude Code writes text, not images" standing rule
+     rewritten to match; the deleted-pipeline note kept as history, not as
+     an active prohibition.
+  ✅ .claude/skills/bridge-balance-project-guide/SKILL.md — Step 0 rule #6
+     rewritten to match.
+  ✅ .claude/skills/bridge-balance-project-guide/reference/chapter-production/SKILL.md
+     — its own copies of the rule (frontmatter description, the dedicated
+     images section, Step 5, and the anti-patterns list) rewritten to match.
+  ✅ .claude/skills/bridge-balance-project-guide/reference/chapter-production/reference/image-prompts.md
+     — rewritten so it covers both prompt-writing (for the owner's AI image
+     generator) and connector-built diagrams (for Claude), and no longer
+     states that images are the only image-adjacent output.
+
+Follow-up TODOs:
+  - None outstanding. A worked example of a Claude-produced diagram (which
+    connector, what the actual output looks like integrated into a real
+    chapter) has not shipped yet — worth a fast follow-up once one exists,
+    to confirm the delivery mechanism holds up in practice, not just on paper.
+
+Previous Sync Impact Report (v2.2.0):
+  MINOR — Principles VIII and IX added. See the block below.
+-->
+
+<!--
 Sync Impact Report — v2.2.0 (MINOR: Principles VIII and IX added)
 
 Version change: 2.1.1 → 2.2.0 (MINOR — two new principles added; "New
@@ -187,8 +326,8 @@ Every external service MUST be accessed through a thin interface owned by this c
 The textbook content is **co-authored** by the project owner and Claude Code, in this order, for each chapter:
 
 1. **Co-research** — the project owner and Claude Code jointly research the topic and sub-topics. Inputs include the platform spec, prior chapters, and any external references the project owner provides.
-2. **Text writing** — Claude Code writes the detailed text lecture into the chapter's MDX file. The chapter becomes `text-ready` once the four sections (outline, lecture content, worked example, check-your-understanding) are filled.
-3. **Image integration** — the project owner produces diagrams and explanatory visuals (often with AI image tools), saves them under `edu-site/static/img/<chapter-slug>/`, and hands them to Claude Code, who integrates them into the MDX with alt text.
+2. **Text writing** — Claude Code writes the chapter's text into its MDX file. The chapter becomes `text-ready` once it is a complete, continuous read: an opening that welcomes the reader and shows what is coming and why, the teaching itself, and a close that hands the reader forwards. *(Amended 2026-09-20. This step used to require four fixed sections — "outline, lecture content, worked example, check-your-understanding" — a structure the book stopped using, which two shipped chapters violated while every check reported clean. A chapter's shape is decided by `lesson-spine-authoring`; a worked example a beginner can picture is required by `canon/corrections.md`, and a retrieval prompt by the spine's Station 10 — but not as a fixed heading list.)*
+3. **Image and diagram production** — diagrams and explanatory visuals are produced either by the project owner (photos, screen captures, AI-generated images) or by Claude Code (structural/conceptual diagrams, built via a diagramming connector — Eraser, Excalidraw, draw.io, or Mermaid rendered to a static image), saved under `edu-site/static/img/<chapter-slug>/`, and integrated into the MDX with alt text. A diagram is delivered as a static image file referenced by a plain markdown image — never as inline Mermaid/SVG/JSX in the chapter body. *(Amended 2026-09-20, v3.0.1. This clause used to end “which stays outside `MDXComponents.tsx`'s registered set (`Callout`, `StageBanner`, `ChapterState`) and would fail the build”. That enumeration was written to explain why inline markup fails, but it was read as fixing the component registry at three entries, and it reached `CLAUDE.md` and the skills in that stronger form. It never decided that. `MDXComponents.tsx` is a **registry, not a cap**, and it is expected to grow. What this step rules out is a drawing delivered as inline markup in a chapter body — whatever the registry happens to contain at the time. See [ADR-0008](../../history/adr/0008-chapter-component-palette-is-open.md).)*
 4. **Video recording** — the project owner records the video lecture against the now-complete text and adds the video URL to the chapter. The chapter becomes `video-published`.
 
 A chapter has one of three explicit states visible to the reader:
@@ -253,22 +392,37 @@ Nothing is authored from memory or instinct — no lesson, chapter, heading, pla
 
 Findings from both passes are never averaged into a synthesis of what already exists elsewhere; they are read for what every studied source **missed**, and that gap is what the new chapter or feature has to address.
 
-What both passes produce is then **transformed, never reproduced**. External sources typically teach a learner to write the thing; this curriculum teaches a reader to **read it and judge it** — Reading and Understanding Literacy, per `curriculum-state/canon/thesis.md`. No verbatim text, reworded paragraph, borrowed structure, or lifted example or exercise survives from a studied source into the book, whether the source is free or paid. A specific framing genuinely owed to a named source is attributed in the prose; attribution never substitutes for transformation.
+What both passes produce is then **learned from completely, and taken further.** External sources typically teach a learner to write the thing; this curriculum teaches a reader to **read it and judge it** — Reading and Understanding Literacy, per `curriculum-state/canon/thesis.md`.
+
+**What may be learned and adopted:** a source's structure, its ordering, its tone, the kind of example it reaches for, its interface decisions, what it assumes, where it loses a reader, and what it left out. All of it. Where the project owner supplies a reference and asks for its pattern to be used, **use its pattern.**
+
+**What may never be reproduced:** a source's **expression** — its sentences, verbatim or lightly reworded — and its exercises, problem sets and assessment items, whether the source is free or paid. A structure is not expression and a pattern is not a paragraph. A specific framing genuinely owed to a named source is attributed where naming it helps the reader.
+
+*(Amended 2026-09-20. This clause used to read "no verbatim text, reworded paragraph, borrowed structure, or lifted example or exercise survives from a studied source." Because this document supersedes everything else in the repo, that wording defeated three explicit owner instructions to copy a supplied reference's structure — no lower-tier fix could have worked. `canon/corrections.md` §15.)*
 
 - **Platform scope.** A new page, feature, setting, or button undergoes the same two passes: established interface and accessibility conventions stand in for "international standard," and the owner's own comparison against real products is still the blocking second pass. Adopt the reasoning a strong product embodies, never its exact pixels.
 - **Overridden by the Stage 2 integrity floor** (`curriculum-state/canon/integrity-floor.md`) wherever CS50P/CS50W material is the source under study — that floor is checked first, and nothing in this principle licenses working around it.
 - **Rationale:** a lesson or a feature built from unverified instinct reproduces whatever its author already happened to believe, correct or not. Two independent passes — verified external practice, and the owner's own comparative judgment — are what the platform trusts instead. The owner's pass is named the more important of the two because it is the harder half to fake or automate away.
 - **Authoritative detail:** `curriculum-state/canon/research-and-comparison.md`.
 
-### IX. Mixed-Audience Content Integrity
+### IX. Beginner-First Content Integrity
 
-Every chapter is read by a senior engineer and by a reader who has never programmed, in the same document, with no separate edition. Three disciplines make that possible, and each is checked, not assumed:
+*(Renamed and redefined 2026-09-20, from "Mixed-Audience Content Integrity".)*
 
-- **The two-minute term test.** Every technical term MUST be sorted before it reaches a draft. A term a newcomer can hold within two minutes is glossed inline at first use — every chapter, every time — and marked once as a glossary link (`[*term*](/glossary#slug)`, italic, never code-formatted). A term that needs longer MUST NOT be glossed at all; it MUST be taught in full before its first use. Stages 0–2 hold a **hard, zero-knowledge floor** — nothing is assumed of a reader who has never programmed. Stages 3–4 hold a **soft floor** that discounts effort, never continuity. The glossary carries exactly one entry per term for the whole book; an inline gloss repeats every chapter, the canonical entry never does.
+**Stages 0, 1 and 2 are written for absolute beginners and for nobody else** — a reader who has never programmed, does not know what Python is, and may not be sure what a terminal is for. The audience for Stages 3–4 is undecided; until the owner settles it, **no rule, draft or review may assume a senior reader is present.**
+
+The two-reader model this principle used to state — *"every chapter is read by a senior engineer and by a reader who has never programmed, in the same document"* — is **withdrawn**, along with every rule built on it, because each of those rules made a warm, gentle or reassuring sentence count as waste. `curriculum-state/canon/corrections.md` §8 carries the record.
+
+Five disciplines make beginner-first real, and each is checked, not assumed:
+
+- **The one-minute term test.** Before sorting a term, ask whether the lesson needs it at all: in Stages 0–2 a hard word MUST earn its place, and if the idea works without it, it goes. Every surviving term MUST be sorted before it reaches a draft. A term a beginner can hold within **one minute** is explained inline at first use in twelve words or fewer and marked as a glossary link (`[*term*](/glossary#slug)`, italic, never code-formatted) — and that inline explanation runs for roughly the term's **first two or three appearances in the book, then stops**, leaving the link alone. A term that needs longer MUST NOT be glossed at all; it MUST be cut, or taught in full before its first use. Stages 0–2 hold a **hard, zero-knowledge floor**. The glossary carries exactly one entry per term for the whole book.
+- **Plain vocabulary, unchanged truth.** Sentences AND vocabulary are simplified; accuracy never is. Where a plain word is equally true, the plain word MUST be used. Vagueness is equally a failure — the target is the plain, true, specific middle. **Every sentence MUST make sense on the first read**, and this outranks specificity, concision and elegance.
+- **Warmth, everywhere.** Every chapter MUST open by welcoming the reader, linking back, and saying what it covers **and why it matters**. Warmth is the house register in every stage and every position, not a front-door permission, and the register MAY get gentler where the material gets harder.
 - **The comprehension audit.** Every finished draft MUST be swept by ten distinct comprehension angles, one angle at a time across the whole draft, before it is presented — closing with a mindmap test: whether the chapter's shape can be redrawn from memory after a single read. A sweep returning zero findings on a first draft is treated as unrun, not as clean.
+- **The beginner-experience audit.** Every Stage 0–2 draft MUST additionally be swept by the ten beginner angles in `lesson-spine-authoring/reference/beginner-experience-audit.md` — ease, speed, welcome, why-before-what, dignity, something to picture, continuity, the page itself, payoff, and retention. The comprehension audit asks whether a reader would *understand*; this one asks whether they would *stay*. Two drafts passed the first and were rejected on sight.
 - **Humanised prose.** Every sentence MUST read as though a specific person wrote it for this reader, on this page. Named machine-cadence tics — the dramatic fragment, the false pivot, the answered rhetorical question, the triad, the over-used em-dash aside, the portentous closer, signposting, the riddle opening, stacked metaphor, flat symmetry — are checked for by name and removed, and the finished draft is read aloud before it ships.
 
-- **Rationale:** a chapter can be gate-clean, ledger-correct, and voice-compliant by the letter and still fail an actual reader — an early full draft of this book's own Welcome page passed every mechanical check that existed at the time and was still rejected by the project owner as unreadable. Mechanical compliance and real comprehension are different properties; only one of them had a verification step before this principle.
+- **Rationale:** a chapter can be gate-clean, ledger-correct, and voice-compliant by the letter and still fail an actual reader — four drafts of this book have now done exactly that. Mechanical compliance, real comprehension, and a reader actually wanting to keep reading are three different properties, and each needs its own verification step.
 - **Authoritative detail:** `.claude/skills/lesson-spine-authoring/reference/mixed-audience.md` §4, `reference/comprehension-audit.md`, and `reference/language-register.md` §6; canon statement in `curriculum-state/canon/audience.md`.
 
 ## Stack Constraints
@@ -316,4 +470,4 @@ The technology stack is the source of truth in `stack.md`. Any addition to the s
 - **Compliance review:** every PR MUST verify alignment with the principles in this constitution. A change that violates a principle MUST either (a) be amended to comply, or (b) trigger an ADR that amends the constitution.
 - **Runtime guidance:** `CLAUDE.md` carries the agent's execution contract; `stack.md` carries the stack reference; `history/adr/` carries the architectural decision log.
 
-**Version**: 2.2.0 | **Ratified**: 2026-08-17 | **Last Amended**: 2026-09-15
+**Version**: 3.0.1 | **Ratified**: 2026-08-17 | **Last Amended**: 2026-09-20

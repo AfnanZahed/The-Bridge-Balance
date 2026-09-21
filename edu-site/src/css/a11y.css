@@ -163,19 +163,9 @@
   box-shadow: none;
 }
 
-/* "Edit this page" + theme / search toggle buttons. */
-.theme-edit-this-page:focus-visible,
+/* Theme / search toggle buttons. */
 .navbar__items .clean-btn:focus-visible,
 button[class*="colorModeToggle"]:focus-visible {
-  outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
-  outline-offset: 2px;
-  border-radius: var(--tbb-radius-md);
-  box-shadow: none;
-}
-
-/* Right-group action parity: GitHub link shares the same focus ring
-   (offset, radius, width, color) as the theme toggle. */
-.navbar__items--right > .navbar__link:focus-visible {
   outline: var(--tbb-a11y-focus-width) solid var(--tbb-a11y-focus-color);
   outline-offset: 2px;
   border-radius: var(--tbb-radius-md);
@@ -332,7 +322,6 @@ a[class*="backToTop"]:focus-visible {
   .footer__social-link,
   .menu__caret,
   .pagination-nav__link,
-  .theme-edit-this-page,
   .theme-back-to-top-button,
   .clean-btn
 ) {
@@ -488,8 +477,17 @@ a[class*="backToTop"]:focus-visible {
   /* Cancel translate-on-hover effects (they cause vestibular issues). */
   .tbb-hero__cta-primary:hover,
   .tbb-hero__cta-secondary:hover,
-  .tbb-stage-card:hover {
+  .tbb-stage-card:hover,
+  .tbb-feature-card:hover {
     transform: none;
+  }
+
+  /* The feature plates' cursor-tracked bloom is the one hover effect that is
+   * motion rather than a state change — it slides across the surface as the
+   * pointer moves. Removed outright; the rail, the border and the ordinal
+   * still answer the hover, so nothing is lost but the movement. */
+  .tbb-feature-card__spotlight {
+    display: none;
   }
 
   /* Stop the indicator pulses. */
@@ -540,10 +538,18 @@ a[class*="backToTop"]:focus-visible {
 
   /* Borders double up on cards. */
   .tbb-stage-card,
+  .tbb-feature-card,
   .tbb-hero__cta-primary,
   .tbb-hero__cta-secondary,
   .pagination-nav__link {
     border-width: 2px;
+  }
+
+  /* The plates' ordinal is a 16% wash by design. In high-contrast mode a wash
+   * that faint stops being perceivable, so it is promoted to solid ink — it is
+   * the card's rank, and rank should not be the thing that disappears. */
+  .tbb-feature-card__index {
+    color: var(--tbb-text);
   }
 
   /* ChapterState: thicker border so the state is unmistakable. */
@@ -567,7 +573,8 @@ a[class*="backToTop"]:focus-visible {
 
   .tbb-hero__cta-primary,
   .tbb-hero__cta-secondary,
-  .tbb-stage-card {
+  .tbb-stage-card,
+  .tbb-feature-card {
     border: 1px solid CanvasText;
   }
 
@@ -653,12 +660,6 @@ article a {
     var(--ifm-color-primary) 50%,
     transparent
   );
-}
-
-/* Ensure the "edit this page" link has a target size. */
-.theme-edit-this-page {
-  padding-inline: 0.625rem;
-  border-radius: var(--tbb-radius-sm);
 }
 
 /* Ensure all `<details>` / `<summary>` elements — used in Docusaurus TOC —

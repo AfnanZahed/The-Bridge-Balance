@@ -50,11 +50,6 @@ const NAV_ENTRIES: NavEntry[] = [
   // The five stages come from the shared list (src/lib/stages.ts) that the
   // home Spotlight's shortcut circles also read — one source, no drift.
   ...STAGE_LINKS.map((stage) => ({ to: stage.to, label: stage.label })),
-  {
-    href: "https://github.com/the-bridge-balance/the-bridge-balance",
-    label: "GitHub",
-    keepWithTree: true,
-  },
 ];
 
 function isActive(currentPath: string, target: string): boolean {
