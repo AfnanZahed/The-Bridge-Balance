@@ -40,7 +40,7 @@ Four mechanisms, all well-established, and worth knowing because they tell you w
 
 **Terminology anxiety is real, and this can dissolve it.** Beginners experience technical vocabulary as a wall of arbitrary tokens signalling that they do not belong. Decomposition can turn the wall into doors.
 
-**It can also build a second wall, and in Stages 0–2 that is the likelier outcome.** *(Added 2026-09-20.)* Explaining *idempotent* through *idem* and *potent*, or *binary* through *bini*, hands a reader who has never programmed two unfamiliar Latin words in place of one unfamiliar English one. **Decompose only when the parts are words the reader already owns.** *Frontend* = the end at the front works. *Poly* + *morphē* does not, unless the lesson is willing to teach both roots properly first — and in a beginner stage it usually should not be.
+**It can also build a second wall, and in Stages 0–1 that is the likelier outcome.** *(Added 2026-09-20.)* Explaining *idempotent* through *idem* and *potent*, or *binary* through *bini*, hands a reader who has never programmed two unfamiliar Latin words in place of one unfamiliar English one. **Decompose only when the parts are words the reader already owns.** *Frontend* = the end at the front works. *Poly* + *morphē* does not, unless the chapter is willing to teach both roots properly first — and in a beginner stage it usually should not be.
 
 When the decomposition would need its own explanation, skip Station 0's morphology and go straight to a plain sentence saying what the thing is and why it is called that.
 
@@ -86,7 +86,7 @@ The name encodes a false or expired model.
 
 **Register 4 is the most valuable register for this curriculum**, for two reasons. First, the mismatch is load-bearing: it marks where a field's marketing, history, or politics leaked into its vocabulary. Second, the confusion is genuinely universal: almost everyone who meets the name takes the wrong model from it, so a beginner who guessed wrong is in good company and the correction lands without embarrassment.
 
-**When a lesson's topic is Register 4, the lesson is fundamentally a correction.** Structure it as one: the misconception is the subject, not a preamble to it.
+**When a chapter's topic is Register 4, the chapter is fundamentally a correction.** Structure it as one: the misconception is the subject, not a preamble to it.
 
 ---
 
@@ -100,7 +100,7 @@ Folk etymologies are endemic in software, and shipping one to thousands of learn
 
 3. **Treat charming stories as suspect in proportion to their charm.** The best-known example: the 1947 moth taped into the Harvard Mark II logbook is real, but it did not originate "bug" — Edison was using the word for technical faults in the 1870s, which is why the logbook entry is written as a joke about finding an actual one.
 
-   > **Do not open a page with this story.** It is kept here as a *verification* example — a case where the charming version is wrong — and it is **retired as an opening device**. Calling it "a good verification lesson" in this file is the traceable source of a Stage 0 introduction that opened on a moth and a 1947 logbook, which the owner rejected on sight. `curriculum-state/canon/corrections.md` §1. The same applies to any myth-busting anecdote used as a hook: correcting a reader before welcoming them is the wrong first move.
+   > **Retired as an opening device.** It is kept here as a *verification* example — a case where the charming version is wrong. Calling it "a good verification lesson" in this file is the traceable source of a Stage 0 introduction that opened on a moth and a 1947 logbook, which the owner rejected on sight. Front doors and opening pages — what one must say first and what it may not open on — follow `curriculum-state/canon/corrections.md`, "1. A front door is not a chapter". Open it before writing any opening. The same applies to any myth-busting anecdote used as a hook: correcting a reader before welcoming them is the wrong first move.
 
 4. **When it can't be verified, teach the decomposition and drop the history.** "*Idem* + *potent* — same power" stands on its own without a coinage claim.
 
@@ -178,7 +178,7 @@ Safe to use without re-verification. Anything not on this list runs §4.
 
 **Overclaiming a partial hit.** "Frontend = the end at the front" is correct and tells the reader nothing about rendering, hydration, bundle size, or the event loop. The name is a label on a door; it is not the room. State the win at its actual size.
 
-**Etymology as the lesson.** A reader who decomposes a hundred terms in an afternoon will feel expert in a field they cannot operate in, and that state is more dangerous than plain ignorance because it stops the search. Station 0 is the cheapest station, not the most important one.
+**Etymology as the chapter.** A reader who decomposes a hundred terms in an afternoon will feel expert in a field they cannot operate in, and that state is more dangerous than plain ignorance because it stops the search. Station 0 is the cheapest station, not the most important one.
 
 **The unscored prediction.** Guessing and then reading the answer without registering the gap builds confidence. Guessing, committing, and confronting the error builds calibration. Only the second one is what this technique is for, and the difference is entirely whether S4 closes the loop.
 
@@ -186,15 +186,13 @@ Safe to use without re-verification. Anything not on this list runs §4.
 
 ## 7. Staging the prediction for a reader
 
-> **Scope, added 2026-09-20.** The staged guess is **off entirely on any front
-> door or welcome page**, and is used **rarely** inside teaching chapters — at
-> most once every few chapters, never in an opening. The owner has rejected it
-> twice as performative: asking a reader to answer before they have any footing
-> is a quiz, not a welcome. `curriculum-state/canon/corrections.md` §1.
->
-> Register 4's invert-the-question form — *why is it called that, when it is not
-> that* — with **no staged guess beat and no reveal beat** is the permitted
-> substitute, and it does the same work without the performance.
+> **Scope, added 2026-09-20.** The staged guess is off entirely on any front
+> door or welcome page, and used sparingly inside teaching chapters. The full
+> rule, including the permitted substitute, is in
+> `curriculum-state/canon/corrections.md`, "1. A front door is not a chapter".
+> Open it before staging one. This file's own limits: at most once every few
+> chapters, never in an opening, and **no reveal beat** in the
+> invert-the-question form.
 
 A private learner can guess silently. Where a book does stage a guess, it has to stage it deliberately, or it does not happen.
 
@@ -206,6 +204,6 @@ The example prompts below are written the way they should ship — short sentenc
 
 **Do not force it where the register does not support it.** A Register 3 term has nothing to guess at, and staging a prediction that cannot pay off trains the reader to skip the device.
 
-**Do not stage more than one per lesson.** The move works because it is a small surprise. Three of them is a format, and a format is skimmable.
+**Do not stage more than one per chapter.** The move works because it is a small surprise. Three of them is a format, and a format is skimmable.
 
-*(The "levels the room" argument for this device is withdrawn with the two-reader model — `corrections.md` §8. There is no room to level: Stages 0–2 have one reader, and what that reader needs is footing, not a test.)*
+*(The "levels the room" argument for this device is withdrawn with the two-reader model — the rule is in `curriculum-state/canon/corrections.md` §8. There is no room to level: Stages 0–1 have one reader, and what that reader needs is footing, not a test.)*

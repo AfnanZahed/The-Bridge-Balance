@@ -181,6 +181,28 @@ The last three rows are deliberately unresolved. **A name cannot be finished
 without the owner's why**, and filling those cells with a confident guess is the
 precise failure this rule exists to stop.
 
+## Rule 1's one deliberate exception — Code Literacy
+
+*Set by the owner on 23 September 2026.*
+
+The skill this project calls **Reading and Understanding Literacy** internally
+(`thesis.md`) has a public name: **Code Literacy**. At its first use on any page
+a reader meets it as **Code Literacy: reading and judging code**; after that,
+**Code Literacy** alone. It means the ability to read code — whoever or whatever
+wrote it — and judge it well enough to verify it and own it.
+
+**The word "literacy" is kept deliberately, and this is the only exception to
+Rule 1.** Everywhere else, a word a beginner does not already own fails the
+Rule 1 test. Here the owner chose it because it carries **understanding and
+evaluating**, not merely recognising: the OECD's PISA definition of reading
+literacy is *"understanding, using, evaluating, reflecting on and engaging with
+texts"*.
+
+The exception covers this one name. It does not soften Rule 1 for any other
+stage, chapter, lesson, part or section heading, and Rules 2 and 3 still apply
+to it — it still reads like a serious course, and it still has to carry why the
+reader is meeting it.
+
 ## Supporting conventions
 
 - **A date range after a Stage 0 chapter title is kept** — "1 — Foundations ·
@@ -188,8 +210,9 @@ precise failure this rule exists to stop.
   one thing about Stage 0 a reader benefits from seeing up front. It does not
   license dates inside the prose (`corrections.md` §4).
 - **Never put an internal label in a name.** No *station*, *spine*, *register*,
-  *shape*, *front door*, *invariant*, *Reading and Understanding Literacy*.
-  `corrections.md` §9.
+  *shape*, *front door*, *invariant*, *Reading and Understanding Literacy*
+  (whose public name is **Code Literacy** — the exception in its own section
+  above). `corrections.md` §9.
 - **A name is not a promise of a count.** No "Chapter 7 of 20" in a title.
 
 ## When a name changes
@@ -218,6 +241,6 @@ in prose, the sidebar, the chapter header, the ledgers and every cross-link.
 
 | Where | Proposed | Status |
 |---|---|---|
-| Stage 0 | **Introduction to Computing: From Switches to AI Agents** | Applied 2026-09-20 in `thesis.md` to remove "Orientation". Owner may replace it with one line. |
-| Stages 1–4 | Official-doc titles, unchanged | Re-check against both rules before each stage opens. "Spec-Aware Vibe Engineering Foundations" and "Credible Validation Through International Certification" both fail Rule 1 for a beginner. |
+| Stage 0 | **Introduction to Computing: From Switches to AI Agents** | Applied 2026-09-20 in `thesis.md` to remove "Orientation". **Superseded 2026-09-22** by *Introduction to SDE* (`course-structure.md` CS-5). |
+| Stages 1–4 | Official-doc titles, unchanged | **Superseded 2026-09-22.** The four stage names are now *Introduction to SDE*, *SDE Mastery (AI-Driven)*, *Credentials*, and *SDE Mastery (AI-Native; Agentic AI)* — `course-structure.md` section 5. The two that failed Rule 1 ("Spec-Aware Vibe Engineering Foundations", "Credible Validation Through International Certification") went with them. **Superseded again the same day, 2026-09-22**, by the Agentic-inside-SE decision (`course-structure.md` CS-12 to CS-16): the stages are now *Introduction to SDE* (Stage 0), *SDE Mastery (AI-Driven)* (Stage 1) and *SDE Mastery (AI-Native)* (Stage 2) — there is no Stage 3 — and *Credentials* is a parallel track, not a stage, disabled for now. |
 | Existing Stage 0 chapter and section titles | Unchanged | Re-check during the Stage 0 rewrite. |

@@ -23,10 +23,10 @@ edu-site/
 │   ├── intro-3-editors-and-ides.md
 │   ├── intro-4-terminals-and-cli-agents.md
 │   ├── intro-5-spec-driven-engineering.md
-│   ├── stage-01-spec-aware-vibe-engineering/  # Stage 1 (6 chapters)
-│   ├── stage-02-cs50-certification/           # Stage 2 (2 chapters)
-│   ├── stage-03-mastering-ai-coding-agents/   # Stage 3 (4 chapters)
-│   └── stage-04-engineering-autonomous-ai-agents/  # Stage 4 (3 chapters)
+│   ├── stage-01-sde-mastery-ai-driven/        # Stage 1 (index + 10 chapters)
+│   └── stage-02-sde-mastery-ai-native/        # Stage 2 (index + 3 chapters)
+├── parked/
+│   └── credentials-track/                     # the Credentials track (not a stage; disabled)
 ├── src/
 │   ├── css/custom.css                         # brand color tokens
 │   └── pages/index.tsx                        # homepage (hero + stage cards)

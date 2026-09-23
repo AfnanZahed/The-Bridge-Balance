@@ -1,0 +1,398 @@
+<title>Bridge Balance Agenda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  
+  --bg: oklch(0.965 0.002 250);
+  --sheet: oklch(1 0 0);
+  --sheet-alt: oklch(0.965 0.002 250);
+  --ink: oklch(0.15 0.004 250);
+  --ink-muted: oklch(0.53 0.008 250);
+  --ink-subtle: oklch(0.68 0.008 250);
+  --hairline: oklch(0 0 0 / 0.1);
+  --accent: oklch(0.40 0.08 245);
+  --accent-soft: oklch(0.40 0.08 245 / 0.08);
+  --ok: oklch(0.5 0.17 155);
+  --ok-soft: oklch(0.5 0.17 155 / 0.1);
+  --lift: 0 24px 48px -12px oklch(0 0 0 / 0.16), 0 10px 24px -8px oklch(0 0 0 / 0.1), inset 0 1px 0 0 oklch(1 0 0 / 1);
+  --rest: 0 1px 2px -1px oklch(0 0 0 / 0.12), inset 0 1px 0 0 oklch(1 0 0 / 1);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, "Helvetica Neue", system-ui, sans-serif;
+  --font-display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { color-scheme: dark; 
+  --bg: oklch(0 0 0);
+  --sheet: oklch(0.15 0.004 250);
+  --sheet-alt: oklch(0.27 0.006 250);
+  --ink: oklch(0.965 0.002 250);
+  --ink-muted: oklch(0.68 0.008 250);
+  --ink-subtle: oklch(0.53 0.008 250);
+  --hairline: oklch(1 0 0 / 0.1);
+  --accent: oklch(0.75 0.085 245);
+  --accent-soft: oklch(0.75 0.085 245 / 0.14);
+  --ok: oklch(0.75 0.15 155);
+  --ok-soft: oklch(0.75 0.15 155 / 0.14);
+  --lift: 0 24px 48px -12px oklch(0 0 0 / 0.6), 0 10px 24px -8px oklch(0 0 0 / 0.5), inset 0 1px 0 0 oklch(1 0 0 / 0.08);
+  --rest: inset 0 1px 0 0 oklch(1 0 0 / 0.06);
+ }
+}
+:root[data-theme="dark"] { color-scheme: dark; 
+  --bg: oklch(0 0 0);
+  --sheet: oklch(0.15 0.004 250);
+  --sheet-alt: oklch(0.27 0.006 250);
+  --ink: oklch(0.965 0.002 250);
+  --ink-muted: oklch(0.68 0.008 250);
+  --ink-subtle: oklch(0.53 0.008 250);
+  --hairline: oklch(1 0 0 / 0.1);
+  --accent: oklch(0.75 0.085 245);
+  --accent-soft: oklch(0.75 0.085 245 / 0.14);
+  --ok: oklch(0.75 0.15 155);
+  --ok-soft: oklch(0.75 0.15 155 / 0.14);
+  --lift: 0 24px 48px -12px oklch(0 0 0 / 0.6), 0 10px 24px -8px oklch(0 0 0 / 0.5), inset 0 1px 0 0 oklch(1 0 0 / 0.08);
+  --rest: inset 0 1px 0 0 oklch(1 0 0 / 0.06);
+ }
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 1rem/1.6 var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  padding-inline: clamp(16px, 5vw, 32px);
+  padding-block: clamp(40px, 8vw, 88px) 72px;
+}
+.page { max-width: 44rem; margin-inline: auto; }
+code, pre { font-family: var(--font-mono); }
+code { font-size: 0.86em; background: var(--sheet-alt); padding: 0.1em 0.4em; border-radius: 6px; }
+
+/* masthead */
+.eyebrow {
+  display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; margin: 0 0 1.25rem;
+  font: 500 0.75rem/1.4 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted);
+}
+h1 {
+  margin: 0; font: 400 clamp(3.25rem, 12vw, 5.5rem)/0.95 var(--font-display);
+  letter-spacing: -0.01em; text-wrap: balance;
+}
+.lede { margin: 1.25rem 0 0; max-width: 34rem; font-size: 1.125rem; line-height: 1.55; color: var(--ink-muted); text-wrap: pretty; }
+.tally { margin: 1.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; padding: 0; list-style: none;
+  font: 500 0.8125rem/1.4 var(--font-mono); color: var(--ink-muted); }
+.tally b { color: var(--ink); font-weight: 500; }
+
+/* sections */
+.block { margin-top: clamp(3rem, 8vw, 4.5rem); }
+.block__head { display: flex; align-items: baseline; gap: 0.75rem; margin: 0 0 0.5rem; }
+h2 { margin: 0; font: 400 clamp(1.9rem, 5vw, 2.4rem)/1.1 var(--font-display); text-wrap: balance; }
+.count { font: 500 0.75rem/1 var(--font-mono); color: var(--ink-muted); letter-spacing: 0.06em; }
+.block__intro { margin: 0 0 1.25rem; color: var(--ink-muted); max-width: 34rem; text-wrap: pretty; }
+
+/* the one lifted surface: what needs the owner */
+.sheet--quiet { padding: 0; }
+
+/* rows */
+.rows { list-style: none; margin: 0; padding: 0; }
+.row {
+  display: grid; grid-template-columns: 1.5rem minmax(0, 1fr) auto; column-gap: 1rem; row-gap: 0.5rem;
+  padding-block: 1.25rem; border-top: 1px solid var(--hairline);
+}
+.rows > .row:first-child { border-top: 0; }
+.row__mark { grid-row: 1; padding-top: 0.2rem; }
+.row__main { grid-column: 2; min-width: 0; }
+.row__side { grid-column: 3; grid-row: 1; display: flex; flex-direction: column; align-items: flex-end; gap: 0.375rem; }
+h3 { margin: 0; font: 600 1.0625rem/1.35 var(--font-sans); letter-spacing: -0.005em; text-wrap: balance; }
+.row p { margin: 0.375rem 0 0; color: var(--ink-muted); font-size: 0.9375rem; max-width: 40rem; text-wrap: pretty; }
+.wakes { display: block; margin-top: 0.625rem; font: 500 0.75rem/1.4 var(--font-mono); letter-spacing: 0.04em; color: var(--ink-muted); }
+.wakes span { color: var(--ink-subtle); }
+
+/* status pill + mark: colour is never the only signal - the words are always there */
+.pill {
+  display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap;
+  font: 500 0.75rem/1 var(--font-sans); padding: 0.4rem 0.7rem; border-radius: 999px;
+  background: var(--sheet-alt); color: var(--ink-muted);
+}
+.pill--wait { background: var(--accent-soft); color: var(--accent); }
+.pill--run { background: var(--accent-soft); color: var(--accent); }
+.pill--done { background: var(--ok-soft); color: var(--ok); }
+.tag { font: 500 0.6875rem/1.3 var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-muted); text-align: right; }
+
+.mark { display: block; width: 1.125rem; height: 1.125rem; border-radius: 50%; border: 2px solid var(--ink-subtle); position: relative; }
+.mark--wait { border-color: var(--accent); }
+.mark--run { border-color: var(--accent); }
+.mark--run::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--accent); }
+.mark--queue { border-style: dotted; border-color: var(--ink-muted); }
+.mark--park { border-style: dashed; border-color: var(--ink-subtle); }
+.mark--done { border-color: var(--ok); background: var(--ok); }
+.mark--done::after { content: ""; position: absolute; left: 4px; top: 1px; width: 5px; height: 9px; border: solid var(--sheet); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+@media (prefers-reduced-motion: no-preference) {
+  .mark--run::after { animation: breathe 2.6s ease-in-out infinite; }
+  @keyframes breathe { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+}
+
+/* the format the owner is asked for */
+.format { margin: 0.875rem 0 0; padding: 0.875rem 1rem; background: var(--sheet-alt); border-radius: 12px; display: grid; gap: 0.625rem; }
+.format__label { font: 500 0.6875rem/1.3 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); margin: 0; }
+.format__line { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.625rem; font: 400 0.875rem/1.5 var(--font-mono); color: var(--ink); }
+.format__line b { font-weight: 500; color: var(--accent); }
+.blank { flex: 1 1 8rem; min-width: 8rem; height: 1em; border-bottom: 1.5px solid var(--ink-subtle); }
+
+/* commands */
+pre { margin: 0.75rem 0 0; padding: 0.75rem 1rem; background: var(--sheet-alt); border-radius: 12px; overflow-x: auto; font-size: 0.8125rem; line-height: 1.55; color: var(--ink); }
+pre code { background: none; padding: 0; font-size: inherit; }
+
+/* the explainer: the one lifted surface on this page */
+.explain { background: var(--sheet); border-radius: 20px; box-shadow: var(--lift); padding: clamp(20px, 4vw, 32px); }
+.explain__kicker { margin: 0 0 0.75rem; font: 500 0.75rem/1.4 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.claim { margin: 0; font: 400 clamp(1.6rem, 5vw, 2.25rem)/1.15 var(--font-display); text-wrap: balance; }
+.plain { margin: 0.75rem 0 0; color: var(--ink-muted); font-size: 0.9375rem; max-width: 38rem; text-wrap: pretty; }
+.explain h3.sub { margin: 2rem 0 0; }
+.scroller { overflow-x: auto; margin-top: 1.25rem; }
+.levels { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+.levels th { text-align: left; padding: 0 1rem 0.5rem 0; font: 500 0.6875rem/1.3 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); }
+.levels td { padding: 0.75rem 1rem 0.75rem 0; border-top: 1px solid var(--hairline); vertical-align: top; color: var(--ink-muted); }
+.levels td b { color: var(--ink); font-weight: 600; }
+.levels td.word { font: 500 0.875rem/1.5 var(--font-mono); white-space: nowrap; }
+.levels tr.hot td { background: var(--accent-soft); border-top-color: transparent; }
+.levels tr.hot td:first-child { padding-left: 0.875rem; border-radius: 10px 0 0 10px; }
+.levels tr.hot td:last-child { padding-right: 0.875rem; border-radius: 0 10px 10px 0; color: var(--accent); }
+.hl { background: var(--accent-soft); color: inherit; padding: 0.05em 0.3em; border-radius: 4px; }
+.quote { margin: 0.875rem 0 0; padding: 0.875rem 1rem; background: var(--sheet-alt); border-radius: 12px; }
+.quote p { margin: 0; font: 400 0.9375rem/1.55 var(--font-sans); color: var(--ink); text-wrap: pretty; }
+.quote cite { display: block; margin-top: 0.5rem; font: 500 0.75rem/1.4 var(--font-mono); font-style: normal; letter-spacing: 0.03em; color: var(--ink-muted); }
+.why { margin: 0.5rem 0 0; padding-left: 1.1rem; color: var(--ink-muted); font-size: 0.9375rem; max-width: 38rem; }
+.why li { margin-top: 0.4rem; text-wrap: pretty; }
+.opts { list-style: none; margin: 0.75rem 0 0; padding: 0; display: grid; gap: 0.75rem; }
+.opt { display: grid; grid-template-columns: 1.75rem minmax(0, 1fr); column-gap: 0.5rem; padding: 0.875rem 1rem; background: var(--sheet-alt); border-radius: 12px; }
+.opt--pick { background: var(--accent-soft); }
+.opt__letter { font: 500 0.9375rem/1.4 var(--font-mono); color: var(--accent); }
+.opt h4 { margin: 0; font: 600 0.9375rem/1.4 var(--font-sans); text-wrap: balance; }
+.opt p { margin: 0.25rem 0 0; color: var(--ink-muted); font-size: 0.9375rem; text-wrap: pretty; }
+.rec { display: inline-block; margin-left: 0.625rem; font: 500 0.6875rem/1 var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+/* before / after wording */
+.wording { display: grid; gap: 0.625rem; margin: 0.875rem 0 0; }
+.wording__box { padding: 0.75rem 1rem; border-radius: 12px; background: var(--sheet-alt); }
+.wording__box--new { background: var(--accent-soft); }
+.wording__label { margin: 0 0 0.25rem; font: 500 0.6875rem/1.3 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); }
+.wording__box--new .wording__label { color: var(--accent); }
+.wording__box p { margin: 0; color: var(--ink); font-size: 0.9375rem; line-height: 1.55; max-width: none; }
+.wording__box p + p { margin-top: 0.5rem; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.row p b { color: var(--ink); font-weight: 600; }
+
+/* legend + footer */
+.legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin: 2rem 0 0; padding: 0; list-style: none; font: 400 0.8125rem/1.4 var(--font-sans); color: var(--ink-muted); }
+.legend li { display: inline-flex; align-items: center; gap: 0.5rem; }
+.legend .mark { width: 0.875rem; height: 0.875rem; border-width: 1.5px; }
+.legend .mark--run::after { inset: 2px; }
+.legend .mark--done::after { left: 3px; top: 0; width: 4px; height: 7px; border-width: 0 1.5px 1.5px 0; }
+.foot { margin-top: clamp(3rem, 8vw, 4.5rem); padding-top: 1.25rem; border-top: 1px solid var(--hairline);
+  font: 500 0.75rem/1.5 var(--font-mono); letter-spacing: 0.04em; color: var(--ink-muted); }
+
+/* phone: the pill drops under the title so long titles keep their width */
+@media (max-width: 34rem) {
+  .row { grid-template-columns: 1.5rem minmax(0, 1fr); }
+  .row__side { grid-column: 2; grid-row: auto; flex-direction: row; align-items: center; flex-wrap: wrap; justify-content: flex-start; }
+  .tag { text-align: left; }
+}
+
+/* v4 additions: same tokens, no new visual language */
+.starts { display: block; margin-top: 0.625rem; font: 500 0.75rem/1.4 var(--font-mono); letter-spacing: 0.04em; color: var(--ink-muted); }
+.starts span { color: var(--ink-subtle); }
+.row a, .explain a, .defs a { color: var(--accent); text-underline-offset: 0.15em; }
+.decided { list-style: none; margin: 0.75rem 0 0; padding: 0; display: grid; gap: 0.625rem; }
+.decided li { display: grid; grid-template-columns: 1.125rem minmax(0, 1fr); column-gap: 0.75rem; color: var(--ink-muted); font-size: 0.9375rem; text-wrap: pretty; }
+.decided .mark { margin-top: 0.2rem; }
+.decided b { color: var(--ink); font-weight: 600; }
+.defs { margin: 0; display: grid; gap: 1.125rem; }
+.defs div { border-top: 1px solid var(--hairline); padding-top: 1rem; }
+.defs div:first-child { border-top: 0; padding-top: 0; }
+.defs dt { font: 600 1.0625rem/1.35 var(--font-sans); }
+.defs dd { margin: 0.375rem 0 0; color: var(--ink-muted); font-size: 0.9375rem; max-width: 40rem; text-wrap: pretty; }
+.sample { margin: 0.875rem 0 0; padding: 0.875rem 1rem 1rem; background: var(--sheet-alt); border: 1px dashed var(--ink-subtle); border-radius: 12px; }
+.sample__label { margin: 0 0 0.5rem; font: 500 0.6875rem/1.3 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); }
+.sample h4 { margin: 0; font: 600 0.9375rem/1.4 var(--font-sans); }
+.sample p { margin: 0.375rem 0 0; color: var(--ink); font-size: 0.9375rem; text-wrap: pretty; }
+.block > h3.sub { margin: 2rem 0 0.25rem; }
+.tree { margin-top: 0.625rem; }
+.small { font-size: 0.8125rem; color: var(--ink-muted); margin: 0.5rem 0 0; }
+.levels td.num { white-space: nowrap; font: 500 0.875rem/1.5 var(--font-mono); color: var(--ink); }
+</style>
+
+<main class="page">
+  <header>
+    <p class="eyebrow"><span>The Bridge Balance</span><span>Updated 22 September 2026, 14:04</span></p>
+    <h1>Work list</h1>
+    <p class="lede">Everything that is open, in one place. First the tasks, one at a time. Then the questions waiting for you, then what is done. Nothing new starts until you say so. I update this page after every step.</p>
+    <ul class="tally" aria-label="Counts">
+      <li><b>0</b> in progress</li>
+      <li><b>8</b> tasks in the queue</li>
+      <li><b>0</b> questions for you</li>
+      <li><b>26</b> done today</li>
+    </ul>
+    <ul class="legend" aria-label="Status key"><li><span class="mark mark--wait" role="img" aria-label="Waiting on you"></span><span>Waiting on you</span></li><li><span class="mark mark--run" role="img" aria-label="In progress"></span><span>In progress</span></li><li><span class="mark mark--queue" role="img" aria-label="Queued"></span><span>Queued</span></li><li><span class="mark mark--park" role="img" aria-label="Parked"></span><span>Parked</span></li><li><span class="mark mark--done" role="img" aria-label="Done"></span><span>Done</span></li></ul>
+  </header>
+
+  <section class="block" aria-labelledby="h-where">
+    <div class="block__head"><h2 id="h-where">Where we are</h2></div>
+    <p class="block__intro">This morning you decided that agentic AI is taught inside software engineering, and that the course has three stages: Stage 0 Introduction to SDE, Stage 1 SDE Mastery (AI-Driven) and Stage 2 SDE Mastery (AI-Native). Credentials becomes a separate track, switched off for now. The project’s files are being brought in line with that decision, in five steps. All five are done.</p>
+    <div class="sheet--quiet"><ol class="rows">
+      <li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><p><b>Done.</b> The record: the decision, the three stages and the Stages 0–1 floor are written into the canon files.</p></div></li>
+      <li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><p><b>Done.</b> The rules the agents follow: <code>CLAUDE.md</code>, the project map, the skills and the constitution now describe three stages.</p></div></li>
+      <li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><p><b>Done.</b> The rest of curriculum-state, and the task list for this second pass (T013 to T020 in <code>specs/011</code>).</p></div></li>
+      <li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><p><b>Done.</b> The website’s structure: the stage folders, the sidebar, the five stage lists and the icons. You confirmed the other session was finished, so it ran.</p></div></li>
+      <li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><p><b>Done.</b> The facts on the reader pages, and one changelog entry.</p></div></li>
+    </ol></div>
+    <p class="small">After these five steps, the redesign itself goes on: see “Redesign the whole curriculum” below.</p>
+  </section>
+
+  <section class="block" aria-labelledby="h-queue">
+    <div class="block__head"><h2 id="h-queue">One by one</h2><span class="count">8 tasks</span></div>
+    <p class="block__intro">You said to work on these one at a time. Each one says when it can start. The five steps are done (see “Done today”), so nothing here waits on a step before it. The redesign holds the rest together. The palette, the logo and the persona are all here, as you asked.</p>
+    <div class="sheet--quiet"><ul class="rows"><li class="row"><div class="row__mark"><span class="mark mark--queue" role="img" aria-label="Queued"></span></div><div class="row__main"><h3>Redesign the whole curriculum</h3><p>You are changing the stages, the order of topics and the levels, not only the names. On 22 September you decided the direction: agentic AI is taught inside SE, in three stages, with Credentials as a parallel track beside them. <a href="#h-shape">The plain record is below.</a> Next comes the redesign of Stage 0, the thesis page and the welcome page, then authoring with the two-parameter method — the next SE topic, plus its agentic twin. Everything else that depends on the words “stage”, “course” and “chapter” waits for this.</p><span class="starts"><span>Starts:</span> when you say start</span></div><div class="row__side"><span class="pill pill--queue">Queued</span><span class="tag">The big one</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--queue" role="img" aria-label="Queued"></span></div><div class="row__main"><h3>The component palette</h3><p>34 candidates in seven groups; none are built. <b>Two questions are now on its list:</b> depth blocks (does one get built, and how does it look?) and the <code>Source</code> chip (it decides how a chapter may state a number). Each component needs both research passes first, and you choose the model for each one (§19).</p><span class="starts"><span>Starts:</span> when you say start</span></div><div class="row__side"><span class="pill pill--queue">Queued</span><span class="tag">ADR-0008</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--queue" role="img" aria-label="Queued"></span></div><div class="row__main"><h3>The WHY for ch00, ch01 and ch02</h3><p>One line each, in your own words. Every stage, chapter and heading name waits for these.</p><span class="starts"><span>Starts:</span> after the redesign, as you said</span></div><div class="row__side"><span class="pill pill--queue">Queued</span><span class="tag">After the redesign</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--queue" role="img" aria-label="Queued"></span></div><div class="row__main"><h3>The logo</h3><p>You said the logo will be designed later, and the work can start without it. You also said you would share the site you found for icons and logos.</p><span class="starts"><span>Starts:</span> when you send that site</span></div><div class="row__side"><span class="pill pill--queue">Queued</span><span class="tag">Later</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--queue" role="img" aria-label="Queued"></span></div><div class="row__main"><h3>The researched writing persona</h3><p>You said you will bring it later. The writing rules wait for it.</p><span class="starts"><span>Starts:</span> when you bring it</span></div><div class="row__side"><span class="pill pill--queue">Queued</span><span class="tag">Later</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--queue" role="img" aria-label="Queued"></span></div><div class="row__main"><h3>Rename the two skill folders?</h3><p>The words inside my writing instructions now say chapter. The two folder names still say lesson: <code>lesson-spine-authoring</code> and <code>lesson-adversarial-review</code>. Renaming means changing many files, and it could break the other session you have open in Desktop\Book. <b>I suggest</b> doing it in one script pass at the end of the redesign, when no other session is open.</p><span class="starts"><span>Starts:</span> when the other session is closed</span></div><div class="row__side"><span class="pill pill--queue">Queued</span><span class="tag">Small</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--queue" role="img" aria-label="Queued"></span></div><div class="row__main"><h3>What is left of the rule move</h3><p><b>All four phases have run, and the repeated rules are finished (22 September).</b> What is left is small: the two skill folder names still say lesson. <b>My idea:</b> rename them at the end of the redesign, because no other session is open then.</p><span class="starts"><span>Starts:</span> after the redesign, or now if you say so</span></div><div class="row__side"><span class="pill pill--queue">Queued</span><span class="tag">Close-out</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--queue" role="img" aria-label="Queued"></span></div><div class="row__main"><h3>The 64 lint errors that were already there</h3><p><code>npm run lint</code> reports 64 errors and 3 warnings. All of them were there before today’s work, and the build does not run lint, so nothing is blocked.</p><span class="starts"><span>Starts:</span> when you say start</span></div><div class="row__side"><span class="pill pill--queue">Queued</span></div></li></ul></div>
+  </section>
+
+  <section class="block" aria-labelledby="h-wait">
+    <div class="block__head"><h2 id="h-wait">Waiting for you</h2><span class="count">0 questions</span></div>
+    <p class="block__intro">Nothing needs an answer from you right now. When something does, it appears here.</p>
+    <div class="sheet--quiet"><ul class="rows"></ul></div>
+  </section>
+
+  <section class="block" aria-labelledby="h-shape">
+    <div class="block__head"><h2 id="h-shape">The shape of the course</h2><span class="count">for the redesign</span></div>
+    <p class="block__intro">You said you are changing the whole curriculum, the order of topics and the levels. This section shows what you have decided, including your answers to questions A, B and C and the direction you set on 22 September. The full record is <code>curriculum-state/canon/course-structure.md</code> (CS-12 to CS-30), with the philosophy in <code>thesis.md</code>.</p>
+
+    <div class="explain">
+      <p class="explain__kicker">What you have decided</p>
+      <ul class="decided">
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>One reader.</b> A beginner who starts from zero. The book takes them to expert level. “Beginner” is where they start, not a limit. There is no separate senior reader.</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>The levels:</b> Stage → Course → Chapter → Lesson → Part (only when needed). A stage can hold more than one subject.</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>Learning happens together, not one thing after another.</b> Programming, AI-agent skills and tools such as Git are learned in the same chapters. Your reason: “if we first learn git and then the AI, what’s the difference between us and others?”</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>Four stages, not five.</b> The old Stage 1 and Stage 3 merge. <i>Superseded the same day:</i> the count is now three, with agentic AI inside SE. See “Decided today” below.</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>Stage 0 teaches theory and the first practical basics:</b> the terminal, an editor, and the first programming. It is named “Introduction to SDE”, and that name belongs to Stage 0 only.</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>A Course is a difficulty band, not a subject.</b> Every subject at that band is matched for difficulty, so several subjects share one chapter. Question A below has your example.</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>One page opens the book, before Stage 0.</b> A 30-minute read on the problem, the solution, and “development” versus “engineering”. Its exact name is still being checked. Question C below has the detail.</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>Learning-first names.</b> Stage and course names say what is learned, never the reader’s level.</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>Level labels are allowed.</b> Beginner, Intermediate and Advanced go on the chapters and sub-chapters of a subject. <i>A correction from me:</i> I told you the rules still banned audience labels. That was wrong. The ban was removed on 20 September. I read it from an old copy of the rules.</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>Examples are Pakistani first,</b> and still clear to a reader elsewhere.</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>The whole curriculum will be rethought,</b> not only the names. Decisions like these are written in one file and changed there first.</span></li>
+      </ul>
+
+      <h3 class="sub">Decided today, 22 September: agentic AI is taught inside SE</h3>
+      <p class="plain">You settled the direction today. It changes the stage count and the shape of everything that follows.</p>
+      <ul class="decided">
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>Agentic AI is taught inside SE, never as its own stage.</b> An agentic application is added where a concept genuinely pairs with it, in the same chapter where that concept is learned.</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>Three stages.</b> Stage 0, Introduction to SDE. Stage 1, SDE Mastery (AI-Driven): basic to intermediate software engineering with basic to intermediate agentic applications. Stage 2, SDE Mastery (AI-Native): advanced software engineering with advanced agentic applications.</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>Credentials is a parallel track, not a stage.</b> CS50P, CS50W and future certifications sit beside the stages. It is switched off for now, and its design is postponed.</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>Navigation happens at Course level</b> — a difficulty band inside each stage. SE comes first, at full depth, and the agentic twin follows only where it genuinely pairs.</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>Students write code by hand first, then with a coding agent.</b> Real agents run on free providers (Groq, OpenRouter). The scope is building with models, not building models: no ML, DL or NLP for now.</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>Substrate, Surface and Practice pairings are now a main philosophy of the book.</b> Every Substrate and Surface pairing names its delta — what is genuinely new in the agentic version. There are no separate SDK-specific Parts.</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>The zero-knowledge floor now names Stages 0–1.</b></span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Decided"></span><span><b>The 27-row topic sketch is a very rough idea, not a plan.</b> Deployment and cloud are in it, but each topic is placed in Stage 1 or 2 when it is authored, and the topics and sub-topics are designed then.</span></li>
+      </ul>
+
+      <h3 class="sub">The levels, drawn</h3>
+      <pre class="tree"><code>Stage
+  Course
+    Chapter          one sitting, one file
+      Lesson         only when a chapter is too big or too mixed
+        Part         only when a Lesson is too</code></pre>
+
+      <h3 class="sub">Question A: how does a Course work when one chapter teaches several things? — you answered, 22 September</h3>
+      <p class="plain">A Course is a difficulty band inside a stage, not one subject. Every subject taught at that band is matched for how hard it is, so they can sit in the same chapters. Your own example: a <b>Beginner</b> Course pairs basic Python, basic terminal use and a basic editor, and the first AI ideas — what a prompt is, what context and tokens mean, what an LLM and an agent are — with a few starting Claude Code commands such as <code>/compact</code> and <code>/clear</code>. Once that band is done, the next Course moves every subject up together: advanced Python or JavaScript and their frameworks, advanced Git and GitHub, deployment, full AI-tool use, and the harder Claude Code and OpenCode commands, with advanced prompt, context and loop engineering.</p>
+      <p class="plain"><b>Not fixed yet:</b> the exact topics above are your own examples, not the final list. Which subjects go in which Course, for each stage, is chosen when that part of the book is written.</p>
+
+      <h3 class="sub">Question B: where does “Introduction to SDE” stop? — you answered, 22 September</h3>
+      <p class="plain">The name belongs to Stage 0 only, as I leaned. You also gave the full stage list. Earlier on 22 September that was four stages; later the same day it became three, with Credentials beside them, not inside them:</p>
+      <div class="scroller" tabindex="0" role="group" aria-label="The three stages">
+        <table class="levels">
+          <thead><tr><th scope="col">Stage</th><th scope="col">Name</th><th scope="col">What it covers</th></tr></thead>
+          <tbody>
+            <tr><td>0</td><td><b>Introduction to SDE</b></td><td>Theory and the first practical basics</td></tr>
+            <tr><td>1</td><td><b>SDE Mastery (AI-Driven)</b></td><td>Basic to intermediate software engineering, with basic to intermediate agentic applications</td></tr>
+            <tr><td>2</td><td><b>SDE Mastery (AI-Native)</b></td><td>Advanced software engineering, with advanced agentic applications</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="plain">Credentials is not a stage. CS50P, CS50W and future certifications are a parallel track beside the stages, switched off for now, their design postponed. The earlier answer here had Credentials as Stage 2 and agentic AI as Stage 3; these three stages replaced it the same day.</p>
+
+      <h3 class="sub">Question C: what is the front part of the book called? — you answered, 22 September</h3>
+      <p class="plain">One page, before Stage 0. <b>Its name waits on one small check:</b> the exact dictionary meaning of “Welcome” against “Thesis”, so the word is chosen on purpose. I will bring back a name, not another question.</p>
+      <p class="plain">The page itself: about a 30-minute read, with real facts and figures — not written down to a beginner. It covers the problem this book solves and how; a summary of the curriculum that does not lock in exact stage names, since the shape keeps changing; how to read and understand programming; and the real difference between “spec-driven development” and “spec-driven engineering” — the same kind of difference as “development” has from “engineering” in general. A reader who cannot follow it yet is pointed to finish Stage 0 first, then come back.</p>
+
+      <h3 class="sub">How well-known programs do it</h3>
+      <p class="plain">DeepSeek read each program’s own pages on 21 September. I checked every fact against the pages it fetched.</p>
+      <div class="scroller" tabindex="0" role="group" aria-label="How eight programs name their levels">
+        <table class="levels">
+          <thead><tr><th scope="col">Program</th><th scope="col">Levels, biggest to smallest</th><th scope="col">Level label</th><th scope="col">Earned progress</th></tr></thead>
+          <tbody>
+            <tr><td><b>Harvard CS50</b></td><td>Course → problem sets</td><td>None</td><td>Certificates</td></tr>
+            <tr><td><b>freeCodeCamp</b></td><td>Certification → module → lesson</td><td>None</td><td>A free certification</td></tr>
+            <tr><td><b>The Odin Project</b></td><td>Path → course → section → project</td><td>None</td><td>None; readers tick off their own</td></tr>
+            <tr><td><b>Khan Academy</b></td><td>Course → unit → lesson → practice</td><td>None</td><td>Mastery levels on each skill</td></tr>
+            <tr><td><b>Coursera</b></td><td>Specialization → course → module</td><td>“Beginner level” on the course</td><td>Certificates</td></tr>
+            <tr><td><b>Microsoft Learn</b></td><td>Learning path → module → unit</td><td>Beginner, Intermediate, Advanced</td><td>Points, badges, trophies</td></tr>
+            <tr><td><b>Codecademy</b></td><td>Career path → skill path → course → unit → lesson</td><td>“Skill level Beginner” on the path</td><td>Badges, streaks, points</td></tr>
+            <tr><td><b>MDN Learn</b></td><td>Learn → module groups → modules → articles</td><td>Tiers by group</td><td>None</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="why">
+        <li><b>The top names say what is taught.</b> That supports your learning-first rule.</li>
+        <li><b>The number of levels runs from three to five.</b> Three is normal, four is common.</li>
+        <li><b>Where a Beginner / Intermediate / Advanced label exists, it sits on the whole course or path,</b> not on every small unit.</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <section class="block" aria-labelledby="h-explain">
+    <div class="block__head"><h2 id="h-explain">Lesson or Chapter: fixed</h2><span class="count">done</span></div>
+    <p class="block__intro">You told me: a lesson is a lesson, and a chapter is a chapter. My writing instructions used the word “lesson” for what your book calls a chapter. I fixed that today.</p>
+    <div class="explain">
+      <p class="explain__kicker">What changed</p>
+      <ul class="decided">
+        <li><span class="mark mark--done" role="img" aria-label="Done"></span><span><b>234 words changed from “lesson” to “chapter”</b> in 20 files: my writing skill, the project guide and its four protocols, <code>CLAUDE.md</code>, the project map and five rules files.</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Done"></span><span><b>DeepSeek (high effort) only decided</b> what each word means. A script made the exact replacements. Two separate passes of DeepSeek agreed on almost all of them, and I read every disagreement and every risky place myself.</span></li>
+        <li><span class="mark mark--done" role="img" aria-label="Done"></span><span><b>Where a swap would have been wrong, I fixed it by hand.</b> “Lesson chapters” (chapters that teach, as against index pages) became “teaching chapters”, not “chapter chapters”.</span></li>
+      </ul>
+      <p class="explain__kicker">What stayed on purpose</p>
+      <ul class="decided">
+        <li><span class="mark mark--park" role="img" aria-label="Left as it is"></span><span>Your book’s own <b>Lesson</b>, the level inside a chapter.</span></li>
+        <li><span class="mark mark--park" role="img" aria-label="Left as it is"></span><span>The <b>two folder names</b> (<code>lesson-spine-authoring</code>, <code>lesson-adversarial-review</code>). Renaming is a small question in the queue.</span></li>
+        <li><span class="mark mark--park" role="img" aria-label="Left as it is"></span><span>Trigger phrases you may type, like “write a lesson on X”, and old records such as past decisions.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="h-words">
+    <div class="block__head"><h2 id="h-words">These words, in plain English</h2><span class="count">7</span></div>
+    <p class="block__intro">Words I used that you asked about.</p>
+    <dl class="defs"><div><dt>Moving the writing rules for real</dt><dd>This is <b>not</b> copying files from the old copy to your real folder. It means the “migration plan”: my writing instructions and your rules folder say some rules twice, and the plan gives each rule one home. The other copy becomes a short pointer. It was run on the evening of 21 September (see “Done today”). Your work of this session was already in the real folder (Desktop\Book) all the time.</dd></div><div><dt>Tombstone and pointer</dt><dd>A <b>pointer</b> is a short sentence in my writing instructions that says “this rule lives in that file”. A <b>tombstone</b> is the same idea in your rules folder: the heading stays, and the old text is replaced by one line saying where the rule lives now. Old links still work.</dd></div><div><dt>Thread</dt><dd>A small tag on a chapter that names a subject it teaches, for example “Python” or “Git”. It is part of my idea for question A, not decided.</dd></div><div><dt>Depth block</dt><dd>An optional box inside a chapter. It answers “why does it work like this?” for a reader who is curious. Nothing in the chapter depends on it: delete every depth block and the chapter still stands. You decided on 20 September to keep it as an optional extra for a curious beginner. No chapter has one yet, and whether to build one is now on the palette list.<div class="sample" role="group" aria-label="An example depth block, not from a chapter"><p class="sample__label">Optional · example only, not from a chapter</p><h4>Why a computer counts in 0s and 1s</h4><p>A switch has two states, on and off, so it is easy to build billions of them and trust every one. Two states are enough to write any number, and that is why the machine counts in 0s and 1s.</p></div></dd></div><div><dt>The 198 rules</dt><dd>Your rules folder holds 324 rules. 198 were written in both places (the rules folder and my writing instructions). Now each one has one home. In my writing instructions, most copies are short pointers to your rules folder. In your rules folder, every one of them is now a short “moved to” note. Nothing was lost.</dd></div><div><dt>Reader-facing pages</dt><dd>Pages a reader sees on the website, like <code>welcome.md</code> and the FAQ. They are not chapters. Both said the book has two kinds of reader. Both are fixed, and so are two more sentences.</dd></div><div><dt>This page</dt><dd>The live task page. You also call it the artifact or the list page. I keep it up to date. It only shows things; you answer in chat.</dd></div></dl>
+  </section>
+
+  <section class="block" aria-labelledby="h-done">
+    <div class="block__head"><h2 id="h-done">Done today</h2><span class="count">26</span></div>
+    <div class="sheet--quiet"><ul class="rows"><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>Students’ update message drafted</h3><p>Rewritten to match the three-stage decisions of 21 and 22 September. Waiting for you to send it.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>Changelog page redesigned</h3><p>37 dated entries audited claim by claim: 4 wrong claims fixed, 9 claims that could not be confirmed taken out, and the page rebuilt on the strongest public changelog patterns. Build green, type check clean, lint unchanged at 64 errors.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>Small fixes after the site pass</h3><p>The changelog now says Credentials is no longer a stage (it was Stage 2 until today). Warning callouts have their own colour again, and the homepage pillars look as they did. ADR-0010 is in the ADR index.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>The website shows three stages now</h3><p>The CS50 pages moved off the site to <code>edu-site/parked/credentials-track/</code>, and the AI-Native folder is now <code>stage-02-sde-mastery-ai-native/</code>. <b>31 files changed</b>: the sidebar, the footer, the homepage cards, both charts, the stage icons, the stage colours and the four ledgers. The build was failing before this, on four dead stage links from the FAQ; it is green now. Backup: <code>_scratch/backup-2026-09-22-agentic-inside-se-6/</code>.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>The reader pages tell the three-stage story</h3><p><b>Eight files:</b> the welcome page, the FAQ, the Stage 0 introduction, the two Stage 0 chapters that still pointed at an old Stage 3, the code of conduct, and the repository’s own <code>README.md</code>. Every CS50 promise was kept word for word; only the stage facts changed.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>One changelog entry</h3><p>Dated 22 September, in <code>edu-site/docs/changelog.md</code>: the three stages named, agentic AI taught inside software engineering, and the CS50 pages off the site while the Credentials track is redesigned. Nothing else, and no promise withdrawn.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>The final gate</h3><p>Build green, type check clean, and lint exactly as it was before (64 errors, all of them older than today). The chapter gate reports 0 errors. A search of the whole repository for the old stage names leaves only dated records, CS50 promises and the parked path. <b>T017 to T020 are marked done in the task list</b>, each with an evidence line.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>The ADR for agentic AI inside SE is written</h3><p>ADR-0010, accepted. It records the three stages, agentic AI taught inside SE, the Credentials track and the options you turned down.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>The rules the agents follow now describe three stages</h3><p>21 files: <code>CLAUDE.md</code>, <code>PROJECT-MAP.md</code>, <code>stack.md</code>, <code>edu-site/README.md</code>, the project-guide skill with its four protocols, and the writing skill with six of its reference files. The constitution is now version 3.1.0 (a MINOR change, amended 22 September): Principle IX’s floor says Stages 0–1, and the CS50 integrity floor is now labelled the Credentials track, with every word of the floor kept. CS50 promises and folder paths were left alone on purpose. I read the <code>CLAUDE.md</code> changes line by line, and its new chapter-status line matches the files on disk. Backup: <code>_scratch/backup-2026-09-22-agentic-inside-se-3/</code>.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>The rest of curriculum-state</h3><p>The README now says three stages. The integrity floor’s seven “Stage 2” labels now say the Credentials track, and not a word of the floor itself changed. The research-and-comparison policy, the calibration contract and §8 of <code>corrections.md</code> are fixed, each with a dated note, and one research note has a dated note at the top. Backup: <code>_scratch/backup-2026-09-22-agentic-inside-se-4/</code>.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>The task list for this second pass</h3><p>T013 to T020, at the end of <code>specs/011-curriculum-redesign/tasks.md</code>. All eight are done now, each with an evidence line.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>Command Code updated itself during three runs</h3><p>It moved from version 1.62.1 to 1.63.0 in the middle of the work. Nothing was lost. Two runs had already finished, and I recovered their full record from Command Code’s own logs. The third stopped at Command Code’s 100-turn limit and is carrying on from where it stopped. The runner now waits out an update, allows 300 turns, and can resume a stopped run.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>The canon follow-up</h3><p>The zero-knowledge floor now says Stages 0–1 in six canon files: <code>course-structure</code>, <code>thesis</code>, <code>audience</code>, <code>voice</code>, <code>integrity-floor</code> and <code>corrections</code>. The old wording stays visible, marked as superseded. Three new decisions are recorded: CS-31 (the floor), CS-32 (every pairing names what is new in its agentic version) and CS-33 (no separate SDK-specific Parts). Questions CS-Q7 and CS-Q9 are marked answered. Backup: <code>_scratch/backup-2026-09-22-agentic-inside-se-2/</code>.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>Your four messages from today, recorded word for word</h3><p>Prompt records 0135 to 0138. Three duplicate records were moved to <code>_scratch/removed-2026-09-22/</code>, not deleted.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>The inventory of old stage structures</h3><p>About 500 lines, in <code>_scratch/job-briefs/2026-09-22/job5-inventory.md</code>, sorted into six groups. It found five hand-written stage lists in the site code that must change together, so the site pass changes them in one go.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>Your work is all in the real folder, Desktop\Book</h3><p>I compared the old worktree with your real folder by script. <b>Nothing in the worktree changed after it was made</b> (0 files), and it holds older text, for example the Stage 1 chapters you reverted on 17 September. So there is nothing to move, and copying from it would do harm. Your snapshot commit on GitHub matched what I had written.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>Lesson → Chapter fixed in the writing rules</h3><p>234 words changed in 20 files. The two folder names stay for now (a small question in the queue). Details are in the section below.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>Plan phase 1 done: the four contradictions are gone</h3><p>The model is now asked every time, research included (§30), in six places. <b>The constitution is now version 3.0.2</b>: that change, and the one-reader wording. The nine small fixes are applied. You said yes to all of them.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>The rule move (phases 2 and 3)</h3><p>DeepSeek at max effort did the move. It made <b>104 edits</b> in my seven writing files and <b>9 merges</b> in your rules folder. A check then found that in 24 of 38 places in your rules folder the new home did not hold all the words, so I <b>put the old text back</b>. Only 22 short “moved to” notes stayed. Reviewers found four other small problems, and all four are fixed. Then a read-only dry run followed my writing skill on a sample topic and found <b>10 more old leftovers</b> (for example, the old image rule and the old “undecided” reader of Stages 3–4). Eight are fixed, and two wait for the redesign. A last sweep of 30 rule files (five DeepSeek sessions, high effort) found <b>28 more places</b>. 26 were real and are fixed, one was a false alarm and one waits for the redesign. A plain word search then found <b>3 more</b> that the sweep had missed. Each check found things the one before had missed, so I cannot promise that nothing is left. <b>My writing files did not get shorter</b> (7.5% more words), because a pointer costs words too. <code>check-references</code> passes and <code>check-chapter</code> shows 0 errors. The full story is in the ADR-0007 log, section 8.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>Two sentences fixed on the website pages</h3><p><code>faq.md</code> line 52 and <code>glossary.md</code> line 34 no longer promise that every word is explained everywhere. The other three from the sweep needed no change.</p><div class="wording"><div class="wording__box"><p class="wording__label">Before</p><p>“The book is self-paced. The stages are built to lead into one another, but each chapter is written as one continuous read that defines its own terms, so a chapter can be read on its own without the one before it.”</p><p class="small">faq.md, line 52</p></div><div class="wording__box wording__box--new"><p class="wording__label">After</p><p>“The book is self-paced. The stages lead into one another, and each chapter is one continuous read. A new word is explained when you meet it and later becomes a glossary link, so you can start in the middle and still look any word up in one tap.”</p></div></div></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>Two rules written down</h3><p>§29: examples are Pakistani-first. §30: “ask which model, every time” includes research. <code>audience.md</code>, <code>voice.md</code>, the language register and the audit are changed to match.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>The palette list has your two questions</h3><p>Depth blocks and the <code>Source</code> chip are now numbers 6 and 7 in the palette proposal, so they are decided together with the palette.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>The course-shape file is up to date, and one mistake of mine is corrected</h3><p>Your second round of answers is in <code>course-structure.md</code> (CS-8 to CS-11). I had written that the rules still banned audience labels. That was wrong: the ban was removed on 20 September. I read it from an old copy of the rules, which is the trap the old worktree sets. It is fixed, and I saved a note so it does not happen again.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>Agentic AI moves inside SE, and the decision is recorded</h3><p>The three-stage shape, with agentic AI taught inside SE and Credentials as a parallel track, is now in canon: <code>course-structure.md</code> (CS-12 to CS-30), <code>thesis.md</code> (the philosophy and the three-stage table) and <code>naming.md</code>. Backups are in <code>_scratch/backup-2026-09-22-agentic-inside-se/</code>. Prompt records PHR 0135 to 0137 cover the discussion.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>The four-stage restructure landed, then was superseded the same day</h3><p>The folder restructure (specs/011, tasks T001 to T006) went in, and the three-stage direction replaced it within the day. T007 to T012 are halted.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>The working model is confirmed</h3><p>Claude plans and verifies. DeepSeek V4.1 Flash, through Command Code, does all execution, reading and research.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li></ul></div>
+    <h3 class="sub">Done earlier</h3>
+    <div class="sheet--quiet"><ul class="rows"><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>Course-shape decisions (first round)</h3><p>CS-1 to CS-7 in <code>course-structure.md</code>, three rules in <code>corrections.md</code> (§26 to §28), two reader pages fixed by DeepSeek at max effort, the plan proofread (19 fixes), and both outside skill copies fixed.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>The migration plan was written</h3><p>It names every file that changes and gives each of the 324 rules its old home and what happens to it.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>Depth blocks stay, as optional extras</h3><p>Written up as §25 in your corrections file, and the rule is reworded in the skill and six other files.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>A second check on the 198 duplicated rules</h3><p>DeepSeek (high effort, seven calls) compared the full passages. 130 are identical in effect, and 18 needed a detail merged before one copy could go. I read every one of its tool calls.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>A fourth disagreement, found and fixed</h3><p>The skill still called drawing a “hard prohibition”, five days after the constitution reopened diagrams. It now points at the constitution.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>Six more senior-reader phrases removed</h3><p>From the writing skill and the project guide.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>A last sweep of the rule files</h3><p>Five DeepSeek sessions (high effort) read 30 files and found 28 places that still stated an old rule. 26 were real and are fixed. A plain word search found 3 more.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>The 40 repeated rules — finished</h3><p>You said do it now. The real count was 36. DeepSeek (high effort, 6 jobs) added any missing words to my writing files first, then shrank each rule in your rules folder to a short note. All three checks still pass.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>Four small changes — confirmed</h3><p>You checked the real files yourself and confirmed all four correct (22 September): the constitution version, the two page sentences, the nine small fixes, and Pakistani-first examples.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li></ul></div>
+  </section>
+
+  <section class="block" aria-labelledby="h-parked">
+    <div class="block__head"><h2 id="h-parked">Parked on purpose</h2><span class="count">6</span></div>
+    <p class="block__intro">Postponed by decision, not forgotten. Each one says what wakes it.</p>
+    <div class="sheet--quiet"><ul class="rows"><li class="row"><div class="row__mark"><span class="mark mark--park" role="img" aria-label="Parked"></span></div><div class="row__main"><h3>The design of the Credentials track</h3><p>Postponed by you on 22 September. Until you pick it up again, the CS50 promises on the reader pages stay exactly as they are. The ledger rows for its three pages still say stage 2, because the ledger’s stage field only takes a number. The track’s design decides how to mark them.</p><span class="wakes"><span>Wakes:</span> when you pick Credentials up again</span></div><div class="row__side"><span class="pill pill--park">Parked</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--park" role="img" aria-label="Parked"></span></div><div class="row__main"><h3>The welcome-page wording</h3><p>The sentence you flagged (“every chapter is written for someone who has never programmed”), and the matching line in your rules folder, are not being fixed separately. The whole front page is being redesigned from scratch as part of Question C, so this folds into that instead.</p><span class="wakes"><span>Wakes:</span> with the redesign</span></div><div class="row__side"><span class="pill pill--park">Parked</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--park" role="img" aria-label="Parked"></span></div><div class="row__main"><h3>Who reads Stages 3–4</h3><p>Not needed any more. You said the whole curriculum will be redesigned, and the reader is the same beginner, further along the road. <i>22 September:</i> with three stages, the same answer holds for Stages 1–2.</p><span class="wakes"><span>Wakes:</span> never, unless you ask</span></div><div class="row__side"><span class="pill pill--park">Parked</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--park" role="img" aria-label="Parked"></span></div><div class="row__main"><h3>The five lesson shapes</h3><p>Concept, Tool, Practice, Procedure and FrontDoor are provisional (§23). They are now part of the curriculum redesign.</p><span class="wakes"><span>Wakes:</span> with the redesign</span></div><div class="row__side"><span class="pill pill--park">Parked</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--park" role="img" aria-label="Parked"></span></div><div class="row__main"><h3>intro-1 to intro-5</h3><p>You said to keep them as they are. They stay live until a check shows the new Stage 0 covers every topic in them (§20).</p><span class="wakes"><span>Wakes:</span> when that coverage check passes</span></div><div class="row__side"><span class="pill pill--park">Parked</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--park" role="img" aria-label="Parked"></span></div><div class="row__main"><h3>Warnings on welcome.md and ch00</h3><p>Both still show gate warnings. You said to ignore them.</p><span class="wakes"><span>Wakes:</span> when you ask</span></div><div class="row__side"><span class="pill pill--park">Parked</span></div></li></ul></div>
+  </section>
+
+  <section class="block" aria-labelledby="h-chores">
+    <div class="block__head"><h2 id="h-chores">Small chores for you</h2><span class="count">4</span></div>
+    <p class="block__intro">A few minutes each. None of them blocks the work above.</p>
+    <div class="sheet--quiet"><ul class="rows"><li class="row"><div class="row__mark"><span class="mark mark--wait" role="img" aria-label="Waiting on you"></span></div><div class="row__main"><h3>Send the students’ update on WhatsApp</h3><p>The message is ready in <code>_scratch/job-briefs/2026-09-22/student-message-2026-09-22.txt</code>. Plain text, ready to paste, with the video clip marked where it goes.</p></div><div class="row__side"><span class="pill pill--wait">Waiting on you</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--wait" role="img" aria-label="Waiting on you"></span></div><div class="row__main"><h3>Replace or switch off the old writing skill in the Claude app</h3><p>Open the app’s skills settings and find <code>lesson-spine-authoring</code> (the one dated 7 September). Switch it off, or replace it with the project’s current folder. This makes my fix last. I did not change your account settings myself.</p></div><div class="row__side"><span class="pill pill--wait">Waiting on you</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--wait" role="img" aria-label="Waiting on you"></span></div><div class="row__main"><h3>Close this session, start the next one in Desktop\Book, then delete the old worktree</h3><p>This session ran inside an old copy of the project (a git worktree made on 17 September). That copy is why I read out-of-date rules and made one mistake today. It holds none of today’s work, and it holds older text, so <b>never copy files out of it</b>. When you are ready I can delete it with the app’s clean-up tool. Say yes.</p></div><div class="row__side"><span class="pill pill--wait">Waiting on you</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--done" role="img" aria-label="Done"></span></div><div class="row__main"><h3>Push the snapshot to GitHub</h3><p>Done by you on 21 September: branch <code>full-backup-2026-09-21</code>, commit c7b1d00.</p></div><div class="row__side"><span class="pill pill--done">Done</span></div></li><li class="row"><div class="row__mark"><span class="mark mark--wait" role="img" aria-label="Waiting on you"></span></div><div class="row__main"><h3>Save the later work of 21 September to GitHub</h3><p>The snapshot above was taken before the vocabulary fix, the rule move and the constitution change. When you are ready, run these three commands again. I cannot run <code>git push</code> myself. Everything from 22 September is not saved there yet either.</p><pre><code>git -C "C:\Users\Dell\Desktop\Book" add -A</code></pre><pre><code>git -C "C:\Users\Dell\Desktop\Book" commit -m "21 Sep 2026 (later): lesson to chapter fix, constitution v3.0.2, rule move (four phases), course-shape decisions"</code></pre><pre><code>git -C "C:\Users\Dell\Desktop\Book" push origin main:full-backup-2026-09-21b</code></pre></div><div class="row__side"><span class="pill pill--wait">Waiting on you</span></div></li></ul></div>
+  </section>
+
+  <p class="foot">Kept up to date by Claude as we work. Last updated 22 September 2026.</p>
+</main>

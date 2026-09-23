@@ -1,9 +1,9 @@
 /**
- * CurriculumDonut — The five curriculum stages at a glance (Recharts
+ * CurriculumDonut — The three curriculum stages at a glance (Recharts
  * `PieChart` with `innerRadius`).
  *
- * Five equal slices, one per stage. Equal is honest here: the curriculum's
- * five-stage shape is fixed and real, so no slice is weighted by size. Each
+ * Three equal slices, one per stage. Equal is honest here: the curriculum's
+ * three-stage shape is fixed and real, so no slice is weighted by size. Each
  * slice carries its stage's own accent color — the same color that stage's
  * card uses on the homepage — and the tooltip names the stage, its status and
  * its one-line description. Status is supporting information, never the value
@@ -50,7 +50,7 @@ export interface DonutDatum {
   fill: string;
 }
 
-/** One unit per stage keeps the five slices equal (20% each). */
+/** One unit per stage keeps the three slices equal (33% each). */
 const SLICE_WEIGHT = 1;
 
 function statusLabel(status: StageStatus): string {
@@ -59,16 +59,16 @@ function statusLabel(status: StageStatus): string {
 
 export const DONUT_DATA: DonutDatum[] = [
   {
-    name: "Introduction to Computing: From Switches to AI Agents",
+    name: "Introduction to SDE",
     short: "Stage 0",
     status: "live",
     description:
-      "The history of computing and software, read in the order it happened — binary through today's AI-coding-agent era — plus the Spec-Driven Engineering and Reading & Understanding Literacy philosophy Stage 1 depends on.",
+      "The history of computing and software, read in the order it happened — binary through today's AI-coding-agent era — plus Spec-Driven Engineering and Code Literacy: reading and judging code — the philosophy Stage 1 depends on.",
     sliceWeight: SLICE_WEIGHT,
     fill: "var(--tbb-text)",
   },
   {
-    name: "Spec-Aware Vibe Engineering",
+    name: "SDE Mastery (AI-Driven)",
     short: "Stage 1",
     status: "in-development",
     description:
@@ -77,31 +77,13 @@ export const DONUT_DATA: DonutDatum[] = [
     fill: "var(--tbb-stage-1)",
   },
   {
-    name: "Credible Validation",
+    name: "SDE Mastery (AI-Native)",
     short: "Stage 2",
-    status: "in-development",
-    description:
-      "Two Harvard certificates — CS50P (Python) and CS50W (web) — as internationally recognized proof of skill, paired with your GitHub portfolio.",
-    sliceWeight: SLICE_WEIGHT,
-    fill: "var(--tbb-stage-2)",
-  },
-  {
-    name: "Mastering AI Coding Agents",
-    short: "Stage 3",
-    status: "in-development",
-    description:
-      "Claude Code, OpenCode, and other coding-agent CLIs. Prompt, context, and loop engineering. Skills, MCP servers, and workflows.",
-    sliceWeight: SLICE_WEIGHT,
-    fill: "var(--tbb-stage-3)",
-  },
-  {
-    name: "Engineering Autonomous Agents",
-    short: "Stage 4",
     status: "in-development",
     description:
       "RAG, tool calling, multi-agent systems, evaluations. Ship full autonomous agentic systems with OpenAI Agents SDK, Claude Agents SDK, LangGraph.",
     sliceWeight: SLICE_WEIGHT,
-    fill: "var(--tbb-stage-4)",
+    fill: "var(--tbb-stage-2)",
   },
 ];
 

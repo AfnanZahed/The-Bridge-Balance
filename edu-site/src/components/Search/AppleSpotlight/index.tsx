@@ -19,7 +19,7 @@
  *     the overlay, listbox/option semantics with ArrowUp/ArrowDown + Enter,
  *     and a reduced-motion guard on every entrance
  *
- * The four shortcut circles are the four curriculum stages, from the same
+ * The three shortcut circles are the three curriculum stages, from the same
  * `STAGE_LINKS` list the SiteMenu drawer renders.
  */
 

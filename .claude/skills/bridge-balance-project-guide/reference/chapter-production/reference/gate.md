@@ -13,7 +13,7 @@ npm run build
 
 Both exit 0, or the chapter is not `text-ready`. Drop `--chapter` to check every shipped chapter at once.
 
-**Nothing in this gate asks you to make or rebuild a picture.** Images are the project owner's, generated externally and referenced as ordinary markdown images. The gate checks that a referenced image exists and that its alt text is real prose — nothing more.
+**Nothing in this gate asks you to make or rebuild a picture.** How each image is made is the owner's choice (`corrections.md` §28), and every image is referenced as an ordinary markdown image. The gate checks that a referenced image exists and that its alt text is real prose — nothing more.
 
 **The gate does not police length.** There is no word band and no target reading time — chapter length is judged per topic, as the material needs. What the gate does instead is make length *visible and attributed*: it prints the measured word count and reading time, and it fails only when `scope_reason` is missing or generic. The number is reported; the **reason** is enforced. That's the whole design, and softening it in either direction — adding a band, or dropping the reason — breaks it.
 
@@ -45,7 +45,7 @@ Warnings never fail the build, and are not therefore optional-by-default:
 | `voice-tell` | A phrase `canon/voice.md` bans outright. Rewrite it. It's a warning only because a quotation may legitimately contain one. **The list shrank on 2026-09-20** — "in this chapter we will…" and "let's get started" are no longer tells, because the owner asked for exactly those natural lead-ins |
 | `cold-open` | **Error.** The chapter goes from its title straight into a section heading, with no welcome and no orientation. `canon/corrections.md` §7: every chapter greets the reader, links backwards, says what it covers and why, then teaches |
 | `orientation-thin` | The opening block is present but does less than the four things §7 asks for — typically no bullets, or under 40 words. Check it carries the **why**, not just the what |
-| `date-density` | Years per thousand words above the Stage 0–2 threshold. Not every date is wrong; the check asks you to look. For each one: is it load-bearing to the sentence carrying it? `corrections.md` §4 |
+| `date-density` | Years per thousand words above the Stages 0–1 threshold. Not every date is wrong; the check asks you to look. For each one: is it load-bearing to the sentence carrying it? `corrections.md` §4 |
 | `bold-lead` | More than 40% of paragraphs open on a bolded sentence. Bold is wanted and wanted often — but on what matters, wherever it falls, never assigned by position. `corrections.md` §14 |
 | `heading-no-why` | A section heading names a subject and nothing else — no question, no verb, no payoff. `canon/naming.md` Rule 3 and `corrections.md` §18: a heading is met with no context around it, so it carries **what this is** and **why the reader would want it**. The check is deliberately blunt and only catches bare noun phrases; passing it is not proof the heading has a why, only that it is not obviously missing one |
 | `stat-unattributed` | A percentage or multiplier with no source or study named in its paragraph or the one before. **Attach the source at the end of the sentence, not inside it** — and record the full entry in `evidence-ledger.yaml` either way (`canon/thesis.md` §"Statistics and their sources") |

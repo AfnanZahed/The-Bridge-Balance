@@ -217,4 +217,4 @@ Close the page and answer from memory.
 
 **Name the shell you would type into on a Windows laptop you unboxed this morning, and name what you would not have on it without installing anything.** Then describe the loop a CLI agent runs, in three sentences, and name the one setting that decides what it is allowed to touch. Finally, say which layer a permission prompt protects, and which layer it does not.
 
-**Those answers are the working knowledge this chapter was for.** **Next:** the chapter that names the discipline all of this sits inside — who specifies the work, who verifies it, and who owns what an agent produces. Everything here sits ahead of **Stage 1**, the first stage of the course, and the agents return at greater depth in **Stage 3**.
+**Those answers are the working knowledge this chapter was for.** **Next:** the chapter that names the discipline all of this sits inside — who specifies the work, who verifies it, and who owns what an agent produces. Everything here sits ahead of **Stage 1**, the first stage of the course, and the agents return at greater depth there.

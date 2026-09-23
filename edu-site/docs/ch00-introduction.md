@@ -12,7 +12,7 @@ scope_reason: "The stage's own welcome and nothing more: what it covers, grouped
 
 # Introduction to Stage 0
 
-Welcome to the first of five stages, **where you'll build a solid foundation in how a computer actually works**, including:
+Welcome to the first of three stages, **where you'll build a solid foundation in how a computer actually works**, including:
 
 - **The Machine**
   - What is actually switching inside a computer, and how did two states turn out to be enough?
@@ -39,7 +39,7 @@ After exploring all of it, **you'll be able to say what a computer is actually d
 
 **Your own computer is the worked example.** By the last few chapters you'll be able to point at each tool on it, say what it is, and name what it replaced.
 
-**There is no quiz at the end of this stage, and no certificate.** The credentials this book leads to are real ones. CS50P and CS50W are Harvard's two introduction courses, in programming and in web development. Both sit in Stage 2, and both are free to complete.
+**There is no quiz at the end of this stage, and nothing to hand in when you finish it.**
 
 **You'll also learn why checking an AI's work can't be handed to the machine.** A [*coding agent*](/glossary#agent) — software that writes and edits code and runs commands for you — sounds exactly as confident when it is wrong as when it is right. That steadiness is the real risk, more than any single mistake it makes.
 

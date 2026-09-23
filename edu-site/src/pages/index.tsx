@@ -4,7 +4,7 @@
  * Sections (each wrapped in <RevealOnScroll> for entrance reveal only — Framer
  * Motion collapse-under-reduced-motion is wired in motion/RevealOnScroll):
  *   1. Hero (HomepageHero) — static CSS hero (no WebGL, no R3F, no Lenis)
- *   2. Stages grid — 5 stage cards with muted Apple-grade accent chips
+ *   2. Stages grid — 3 stage cards with muted Apple-grade accent chips
  *   3. Marquee — chip strip showing what students will build
  *   4. Why-this-book — 4-pillar FeatureGrid
  *   5. Co-authoring in action — 4-step Timeline
@@ -29,84 +29,66 @@ import { BookOpen, Zap, Sparkles, ArrowRight, GitBranch, Check } from "../compon
 const STAGES = [
   {
     number: "00",
-    title: "Introduction to Computing: From Switches to AI Agents",
+    title: "Introduction to SDE",
     description:
-      "The history of computing and software, read in the order it happened — binary through today's AI-coding-agent era — plus the Spec-Driven Engineering and Reading & Understanding Literacy philosophy Stage 1 depends on.",
+      "The history of computing and software, read in the order it happened — binary through today's AI-coding-agent era — plus Spec-Driven Engineering and Code Literacy: reading and judging code — the philosophy the rest of the book depends on.",
     href: "/intro-1-binary-to-programming",
     accentColor: "var(--tbb-text)",
     accentLabel: "Ink",
   },
   {
     number: "01",
-    title: "Spec-Aware Vibe Engineering",
+    title: "SDE Mastery (AI-Driven)",
     description:
-      "Foundations. Architecture, programming, frontend, backend, databases, Git. Learn to lead AI coding agents with engineering judgment, not blind prompt-and-hope.",
-    href: "/stage-01-spec-aware-vibe-engineering/",
+      "Architecture, programming, frontend, backend, databases and Git, learned side by side with prompt, context and loop engineering, Claude Code, skills and MCP — the engineering and the agent growing together.",
+    href: "/stage-01-sde-mastery-ai-driven/",
     accentColor: "var(--tbb-stage-1)",
     accentLabel: "Teal",
   },
   {
     number: "02",
-    title: "Credible Validation",
+    title: "SDE Mastery (AI-Native)",
     description:
-      "Two Harvard certificates — CS50P (Python) and CS50W (web) — as internationally recognized proof of skill, paired with your GitHub portfolio.",
-    href: "/stage-02-cs50-certification/",
+      "RAG, tool calling, multi-agent systems, evaluations. Ship complete agentic systems with the OpenAI Agents SDK, Claude Agents SDK and LangGraph.",
+    href: "/stage-02-sde-mastery-ai-native/",
     accentColor: "var(--tbb-stage-2)",
-    accentLabel: "Ochre",
-  },
-  {
-    number: "03",
-    title: "Mastering AI Coding Agents",
-    description:
-      "Claude Code, OpenCode, and other coding-agent CLIs. Prompt, context, and loop engineering. Skills, MCP servers, and workflows.",
-    href: "/stage-03-mastering-ai-coding-agents/",
-    accentColor: "var(--tbb-stage-3)",
     accentLabel: "Lilac",
-  },
-  {
-    number: "04",
-    title: "Engineering Autonomous Agents",
-    description:
-      "RAG, tool calling, multi-agent systems, evaluations. Ship full autonomous agentic systems with OpenAI Agents SDK, Claude Agents SDK, LangGraph.",
-    href: "/stage-04-engineering-autonomous-ai-agents/",
-    accentColor: "var(--tbb-stage-4)",
-    accentLabel: "Dusty rose",
   },
 ];
 
 // 4-pillar feature grid — label-first identity. The accent is a RAMP STEP, not
-// a hue: the four plates descend the silver ramp exactly as the five stages do,
-// so the visual metaphor holds across the page. Card 3 previously read
+// a hue: the four plates step down the silver ramp the way the stages do, so
+// the visual metaphor holds across the page. Card 3 previously read
 // `--tbb-accent`, which ADR-0003 scopes to a named list of surfaces that does
-// not include cards — a stage step is the token that belongs here.
+// not include cards — a ramp step is the token that belongs here.
 const FEATURE_PILLARS: FeatureItem[] = [
   {
     icon: <BookOpen size={22} aria-hidden="true" />,
     title: "Video + text, paired",
     body:
-      "Every chapter ships twice: a video lecture from the project owner and a detailed text companion co-authored with Claude Code. Neither stands alone.",
-    accent: "var(--tbb-stage-1)",
+      "Every chapter is written as a detailed text companion first, co-authored with Claude Code. A video lecture from the project owner follows each part of it.",
+    accent: "var(--tbb-feature-1)",
   },
   {
     icon: <Check size={22} aria-hidden="true" />,
-    title: "Two Harvard certificates",
+    title: "One continuous read",
     body:
-      "CS50P (Python) and CS50W (web) — internationally recognized credentials that pair naturally with the GitHub portfolio your lecture notes produce.",
-    accent: "var(--tbb-stage-2)",
+      "Every chapter is one continuous read. You open a single page and work from the top of it to the end in one sitting — the whole chapter lives in one file.",
+    accent: "var(--tbb-feature-2)",
   },
   {
     icon: <Zap size={22} aria-hidden="true" />,
     title: "Free-tier, forever",
     body:
       "Docusaurus on Vercel. Neon Postgres, Qdrant Cloud, Resend, Stripe, R2 — all on their free tiers. The textbook never charges for content.",
-    accent: "var(--tbb-stage-3)",
+    accent: "var(--tbb-feature-3)",
   },
   {
     icon: <GitBranch size={22} aria-hidden="true" />,
     title: "Specs, not prompts",
     body:
       "Every chapter opens with a spec.md that defines contracts, interfaces, and acceptance criteria before any code is generated. Engineering judgment first.",
-    accent: "var(--tbb-stage-4)",
+    accent: "var(--tbb-feature-4)",
   },
 ];
 
@@ -122,7 +104,7 @@ const MARQUEE_CHIPS = [
   "MCP servers",
   "Skills & plugins",
   "GitHub portfolio",
-  "Two Harvard certificates",
+  "Prompt & context engineering",
   "Zero cost, forever",
 ];
 
@@ -154,7 +136,7 @@ export default function Home(): React.ReactElement {
   return (
     <Layout
       title="The Bridge Balance — Spec-Driven AI Agent Engineering for Students"
-      description="A 5-stage curriculum with 2 Harvard certificates, teaching students to lead AI coding agents with engineering judgment. 100% free."
+      description="A free, three-stage curriculum teaching students to lead AI coding agents with engineering judgment — from zero background to autonomous AI agents."
     >
       <Head>
         <script type="application/ld+json">
@@ -163,7 +145,7 @@ export default function Home(): React.ReactElement {
             "@type": "Course",
             name: "The Bridge Balance",
             description:
-              "A free, five-stage curriculum teaching spec-driven AI agent engineering, from computing fundamentals through autonomous multi-agent systems, anchored by two Harvard CS50 certificates.",
+              "A free, three-stage curriculum teaching spec-driven AI agent engineering, from computing fundamentals through autonomous multi-agent systems.",
             url: "https://thebridgebalance.app/",
             isAccessibleForFree: true,
             provider: {
@@ -182,7 +164,7 @@ export default function Home(): React.ReactElement {
               <div className="tbb-section-heading">
                 <div className="tbb-section-heading__eyebrow">The curriculum</div>
                 <h2 className="tbb-section-heading__title">
-                  Five stages, one bridge from student to engineer.
+                  Three stages, one bridge from student to engineer.
                 </h2>
                 <p className="tbb-section-heading__subtitle">
                   Each stage unlocks the next. Skip ahead, jump back, follow the
@@ -297,15 +279,13 @@ export default function Home(): React.ReactElement {
                       lineHeight: 1.6,
                     }}
                   >
-                    Open Stage 1 and start with Foundations. Two Harvard
-                    certificates wait at the end. Everything is free.
+                    Start with the Welcome page: what the book is, the three
+                    stages, and where to begin. It assumes no prior programming
+                    at all. Everything is free.
                   </p>
-                  <Link
-                    to="/stage-01-spec-aware-vibe-engineering/"
-                    className="tbb-hero__cta-primary"
-                  >
+                  <Link to="/welcome" className="tbb-hero__cta-primary">
                     <BookOpen size={18} aria-hidden="true" />
-                    Begin Stage 1
+                    Start reading
                     <ArrowRight
                       size={16}
                       aria-hidden="true"

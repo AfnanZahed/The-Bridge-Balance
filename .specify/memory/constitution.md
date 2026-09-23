@@ -1,5 +1,89 @@
 <!--
-Sync Impact Report — v3.0.1 (PATCH: Principle III's registry enumeration removed)
+Sync Impact Report — v3.1.0 (MINOR: the curriculum is three stages; the zero-knowledge floor now names Stages 0–1)
+
+Version change: 3.0.2 → 3.1.0 (MINOR — an existing principle is materially expanded:
+the zero-knowledge floor now covers old Stage 3's material, which is taught inside
+Stage 1, and the stage structure this document describes changed)
+Amended 2026-09-22, on the Agentic-inside-SE decision of that day
+(`curriculum-state/canon/course-structure.md` CS-12 onward; the floor renumbering is
+CS-31). Governance steps: written proposal = that file's CS-12 to CS-31 and
+`_scratch/job-briefs/2026-09-22/agentic-inside-se-decisions.md`; owner consent = the
+decisions recorded there; migration plan = the same-day canon and agent-document pass.
+
+Modified principles:
+  IX. Beginner-First Content Integrity — the zero-knowledge floor now names
+      **Stages 0–1**, where it named Stages 0, 1 and 2. Stage 0 and Stage 1 assume a
+      reader who has never programmed; Stage 2 builds on Stage 1. Old Stage 3's
+      material (coding agents, prompt and context engineering) is Stage 1's working
+      medium, so it falls under the floor. The one-minute term test, the two audits
+      and the humanised-prose rule are unchanged; only the stages they name changed.
+  VIII. Research-and-Comparison Discipline — its override clause now names the
+      Credentials-track integrity floor, where it named "the Stage 2 integrity
+      floor". Credentials (CS50P, CS50W, future third-party credentials) is a
+      parallel track, not a stage, and is disabled for now. The floor itself is
+      unchanged, word for word.
+
+Stage structure: the curriculum fixes three stages, not five — Stage 0 Introduction
+  to SDE; Stage 1 SDE Mastery (AI-Driven); Stage 2 SDE Mastery (AI-Native). There is
+  no Stage 3 and no Stage 4. Agentic AI is taught inside software engineering, across
+  Stages 1 and 2, never as its own stage.
+
+Added principles: none. Added sections: none. Removed sections: none.
+
+Templates requiring updates:
+  ✅ CLAUDE.md, PROJECT-MAP.md, stack.md, edu-site/README.md, `.claude/skills/**` —
+     the same stage numbers and floor wording, corrected in the same pass
+     (2026-09-22).
+  ✅ curriculum-state/canon/audience.md, voice.md, integrity-floor.md, corrections.md,
+     thesis.md, course-structure.md — canon first, in the same pass.
+
+Follow-up TODOs:
+  - None outstanding for Principle IX. The v3.0.2 TODO waiting on the curriculum
+    redesign is closed: the stage numbers are final, and the floor names Stages 0–1.
+  - Reader-facing promises of CS50 and Harvard credentials while the Credentials
+    track is disabled stay open (CS-Q8), postponed with the Credentials design.
+
+--- previous report, v3.0.2 (PATCH: the model is chosen every time, research included; one reader in every stage)
+
+Version change: 3.0.1 → 3.0.2 (PATCH — clarification of two principles; no principle
+added, removed or redefined)
+Amended 2026-09-21, on the owner's answers of that day: "yes, it covers the
+research" (question K3 of the ADR-0007 migration plan) and "yes, one reader, but
+make it expert. it will be beginner -> Expertise, gradually."
+Governance steps: written proposal = section 4 of
+`history/reports/spine-migration-2026-09-20/migration-plan.md` (K3) and
+`curriculum-state/canon/course-structure.md` CS-1, CS-2 (the reader); owner
+consent = the two answers above; migration plan = the ADR-0007 plan itself.
+
+Modified principles:
+  VIII. Research-and-Comparison Discipline — pass 1's "delegated to DeepSeek ...
+        in the large majority of cases" now reads "usually delegated ... after the
+        owner has been asked which model does it, every time". The old wording
+        disagreed with `corrections.md` §19 (no default; ask every time).
+        `corrections.md` §30 records the ruling.
+  IX. Beginner-First Content Integrity — "The audience for Stages 3–4 is
+      undecided" is replaced: there is one reader in every stage, a beginner at
+      the start and an expert at the end (`corrections.md` §26;
+      `course-structure.md` CS-1, CS-2). The rule for the first stages is unchanged.
+
+Added principles: none. Added sections: none. Removed sections: none.
+
+Templates requiring updates:
+  ✅ CLAUDE.md, .claude/skills/bridge-balance-project-guide/SKILL.md,
+     .claude/skills/lesson-spine-authoring/SKILL.md,
+     .claude/skills/bridge-balance-project-guide/reference/chapter-production/reference/research.md,
+     curriculum-state/canon/research-and-comparison.md — the same "around 95%"
+     wording, corrected in the same pass.
+  ✅ curriculum-state/canon/audience.md — the reader statement.
+  ✅ curriculum-state/canon/corrections.md §29 and §30.
+
+Follow-up TODOs:
+  - The stage numbers in Principle IX ("Stages 0, 1 and 2") wait for the
+    curriculum redesign (`course-structure.md` CS-6 and CS-10).
+    *(Closed 2026-09-22: the redesign landed, the floor names Stages 0–1, and the
+    stage numbers are final — see the v3.1.0 report above.)*
+
+--- previous report, v3.0.1 (PATCH: Principle III's registry enumeration removed)
 
 Version change: 3.0.0 → 3.0.1 (PATCH — clarification/wording refinement; no
 principle added, removed or redefined)
@@ -65,6 +149,9 @@ Modified principles:
       stops after a term's first two or three appearances in the book instead
       of repeating in every chapter forever. A second mandatory audit is added:
       the ten-angle beginner-experience audit.
+      *(Renumbered 2026-09-22: the zero-knowledge floor now names Stages 0–1, and
+      the curriculum has three stages — see the v3.1.0 report at the top of this
+      file.)*
   VIII. Research-Backed Origination — the blanket "no borrowed structure"
       clause is narrowed. A studied source's STRUCTURE, ordering, tone and
       example-shape may now be learned from and adopted; what may not be
@@ -159,6 +246,8 @@ Added principles:
         zero-knowledge floor in Stages 0–2), the ten-angle comprehension
         audit plus mindmap test on every finished draft, and the humanised-
         prose rule against named machine-cadence tics.
+        *(Renumbered 2026-09-22: the floor is Stages 0–1 — see the v3.1.0
+        report at the top of this file.)*
 
 Added sections: none new at top level; both principles are fully
   self-contained, following Principle IV's pattern rather than Principle
@@ -387,7 +476,7 @@ The platform's visual identity models **Apple's design language** at the level t
 
 Nothing is authored from memory or instinct — no lesson, chapter, heading, platform feature, setting, or button — before two research passes complete, for the content track and the platform track alike:
 
-1. **Standards research.** How the strongest sources in the world actually teach or build this, and the reasoning underneath that choice — not only what is true about the topic. Delegated to DeepSeek v4.1 Flash via Command Code (the `command-code-delegation` skill) in the large majority of cases; Claude Code decides what to ask and verifies what comes back from the actual tool trace, never a one-line summary.
+1. **Standards research.** How the strongest sources in the world actually teach or build this, and the reasoning underneath that choice — not only what is true about the topic. Usually delegated to DeepSeek v4.1 Flash via Command Code (the `command-code-delegation` skill), after the owner has been asked which model does it, every time; Claude Code decides what to ask and verifies what comes back from the actual tool trace, never a one-line summary.
 2. **The project owner's own comparative study.** For content work, the owner personally works through multiple real courses or platforms on the topic and hands over their own learnings and the specific points they want carried in. This is a **blocking input** — drafting MUST NOT begin until it is supplied, and Claude Code's own research is not a substitute for it.
 
 Findings from both passes are never averaged into a synthesis of what already exists elsewhere; they are read for what every studied source **missed**, and that gap is what the new chapter or feature has to address.
@@ -401,7 +490,7 @@ What both passes produce is then **learned from completely, and taken further.**
 *(Amended 2026-09-20. This clause used to read "no verbatim text, reworded paragraph, borrowed structure, or lifted example or exercise survives from a studied source." Because this document supersedes everything else in the repo, that wording defeated three explicit owner instructions to copy a supplied reference's structure — no lower-tier fix could have worked. `canon/corrections.md` §15.)*
 
 - **Platform scope.** A new page, feature, setting, or button undergoes the same two passes: established interface and accessibility conventions stand in for "international standard," and the owner's own comparison against real products is still the blocking second pass. Adopt the reasoning a strong product embodies, never its exact pixels.
-- **Overridden by the Stage 2 integrity floor** (`curriculum-state/canon/integrity-floor.md`) wherever CS50P/CS50W material is the source under study — that floor is checked first, and nothing in this principle licenses working around it.
+- **Overridden by the Credentials-track integrity floor** (`curriculum-state/canon/integrity-floor.md`) wherever CS50P/CS50W material is the source under study — that floor is checked first, and nothing in this principle licenses working around it.
 - **Rationale:** a lesson or a feature built from unverified instinct reproduces whatever its author already happened to believe, correct or not. Two independent passes — verified external practice, and the owner's own comparative judgment — are what the platform trusts instead. The owner's pass is named the more important of the two because it is the harder half to fake or automate away.
 - **Authoritative detail:** `curriculum-state/canon/research-and-comparison.md`.
 
@@ -409,17 +498,17 @@ What both passes produce is then **learned from completely, and taken further.**
 
 *(Renamed and redefined 2026-09-20, from "Mixed-Audience Content Integrity".)*
 
-**Stages 0, 1 and 2 are written for absolute beginners and for nobody else** — a reader who has never programmed, does not know what Python is, and may not be sure what a terminal is for. The audience for Stages 3–4 is undecided; until the owner settles it, **no rule, draft or review may assume a senior reader is present.**
+**Stages 0 and 1 are written for absolute beginners and for nobody else** *(the zero-knowledge floor, renumbered to Stages 0–1 on 2026-09-22 — `curriculum-state/canon/course-structure.md` CS-31; Stage 2 builds on Stage 1)* — a reader who has never programmed, does not know what Python is, and may not be sure what a terminal is for. **There is one reader in every stage: a beginner when they start, an expert when they finish** (`curriculum-state/canon/course-structure.md` CS-1 and CS-2, decided 2026-09-21). **No rule, draft or review may assume a separate senior reader is present.**
 
 The two-reader model this principle used to state — *"every chapter is read by a senior engineer and by a reader who has never programmed, in the same document"* — is **withdrawn**, along with every rule built on it, because each of those rules made a warm, gentle or reassuring sentence count as waste. `curriculum-state/canon/corrections.md` §8 carries the record.
 
 Five disciplines make beginner-first real, and each is checked, not assumed:
 
-- **The one-minute term test.** Before sorting a term, ask whether the lesson needs it at all: in Stages 0–2 a hard word MUST earn its place, and if the idea works without it, it goes. Every surviving term MUST be sorted before it reaches a draft. A term a beginner can hold within **one minute** is explained inline at first use in twelve words or fewer and marked as a glossary link (`[*term*](/glossary#slug)`, italic, never code-formatted) — and that inline explanation runs for roughly the term's **first two or three appearances in the book, then stops**, leaving the link alone. A term that needs longer MUST NOT be glossed at all; it MUST be cut, or taught in full before its first use. Stages 0–2 hold a **hard, zero-knowledge floor**. The glossary carries exactly one entry per term for the whole book.
+- **The one-minute term test.** Before sorting a term, ask whether the lesson needs it at all: in Stages 0–1 a hard word MUST earn its place, and if the idea works without it, it goes. Every surviving term MUST be sorted before it reaches a draft. A term a beginner can hold within **one minute** is explained inline at first use in twelve words or fewer and marked as a glossary link (`[*term*](/glossary#slug)`, italic, never code-formatted) — and that inline explanation runs for roughly the term's **first two or three appearances in the book, then stops**, leaving the link alone. A term that needs longer MUST NOT be glossed at all; it MUST be cut, or taught in full before its first use. Stages 0–1 hold a **hard, zero-knowledge floor**. The glossary carries exactly one entry per term for the whole book.
 - **Plain vocabulary, unchanged truth.** Sentences AND vocabulary are simplified; accuracy never is. Where a plain word is equally true, the plain word MUST be used. Vagueness is equally a failure — the target is the plain, true, specific middle. **Every sentence MUST make sense on the first read**, and this outranks specificity, concision and elegance.
 - **Warmth, everywhere.** Every chapter MUST open by welcoming the reader, linking back, and saying what it covers **and why it matters**. Warmth is the house register in every stage and every position, not a front-door permission, and the register MAY get gentler where the material gets harder.
 - **The comprehension audit.** Every finished draft MUST be swept by ten distinct comprehension angles, one angle at a time across the whole draft, before it is presented — closing with a mindmap test: whether the chapter's shape can be redrawn from memory after a single read. A sweep returning zero findings on a first draft is treated as unrun, not as clean.
-- **The beginner-experience audit.** Every Stage 0–2 draft MUST additionally be swept by the ten beginner angles in `lesson-spine-authoring/reference/beginner-experience-audit.md` — ease, speed, welcome, why-before-what, dignity, something to picture, continuity, the page itself, payoff, and retention. The comprehension audit asks whether a reader would *understand*; this one asks whether they would *stay*. Two drafts passed the first and were rejected on sight.
+- **The beginner-experience audit.** Every Stage 0–1 draft MUST additionally be swept by the ten beginner angles in `lesson-spine-authoring/reference/beginner-experience-audit.md` — ease, speed, welcome, why-before-what, dignity, something to picture, continuity, the page itself, payoff, and retention. The comprehension audit asks whether a reader would *understand*; this one asks whether they would *stay*. Two drafts passed the first and were rejected on sight.
 - **Humanised prose.** Every sentence MUST read as though a specific person wrote it for this reader, on this page. Named machine-cadence tics — the dramatic fragment, the false pivot, the answered rhetorical question, the triad, the over-used em-dash aside, the portentous closer, signposting, the riddle opening, stacked metaphor, flat symmetry — are checked for by name and removed, and the finished draft is read aloud before it ships.
 
 - **Rationale:** a chapter can be gate-clean, ledger-correct, and voice-compliant by the letter and still fail an actual reader — four drafts of this book have now done exactly that. Mechanical compliance, real comprehension, and a reader actually wanting to keep reading are three different properties, and each needs its own verification step.
@@ -470,4 +559,4 @@ The technology stack is the source of truth in `stack.md`. Any addition to the s
 - **Compliance review:** every PR MUST verify alignment with the principles in this constitution. A change that violates a principle MUST either (a) be amended to comply, or (b) trigger an ADR that amends the constitution.
 - **Runtime guidance:** `CLAUDE.md` carries the agent's execution contract; `stack.md` carries the stack reference; `history/adr/` carries the architectural decision log.
 
-**Version**: 3.0.1 | **Ratified**: 2026-08-17 | **Last Amended**: 2026-09-20
+**Version**: 3.1.0 | **Ratified**: 2026-08-17 | **Last Amended**: 2026-09-22

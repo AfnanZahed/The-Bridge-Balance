@@ -71,7 +71,7 @@ Stop on that, because it is the most reusable idea in this chapter:
 
 > **Write a small program whose only job is the boring translation — and nobody ever has to do that translation by hand again.**
 
-Every remaining step in this chapter is that same trick, applied at a larger scale. So is a great deal of what you will meet in Stages 3 and 4.
+Every remaining step in this chapter is that same trick, applied at a larger scale. So is a great deal of what you will meet in Stages 1 and 2.
 
 Assembly language genuinely helped. A programmer could now read a program back and roughly see what it did, from the words themselves. But it did not fix everything: each command still matched exactly one machine instruction, in one particular machine's own numbering. Move that program to a different machine and somebody had to rewrite every line of it.
 

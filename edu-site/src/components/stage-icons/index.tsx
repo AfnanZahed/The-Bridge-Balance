@@ -6,25 +6,21 @@
  * as a "chip" against the rest of the page. The wrapper preserves the
  * original `StageIcon` API so consumers do not need to change.
  *
- *   0 Intro to Computing → Sparkle (fill)
- *   1 Foundations    → Blueprint (duotone) — plans, foundations
- *   2 Credentials   → Certificate (fill)  — official recognition
- *   3 Mastery       → Atom (duotone)      — atomic-level skill
- *   4 Autonomy      → TreeStructure (duotone) — multi-agent orchestration
+ *   0 Introduction to SDE     → Sparkle (fill)
+ *   1 SDE Mastery (AI-Driven) → Blueprint (duotone) — plans, foundations
+ *   2 SDE Mastery (AI-Native) → Atom (duotone)      — atomic-level skill
  *
- * Props: stage (0|1|2|3|4) selects the icon; all other SVG props
+ * Props: stage (0|1|2) selects the icon; all other SVG props
  * (size, className, style, aria-*, color) are forwarded to the <svg>.
  */
 import React from "react";
 import {
   Blueprint,
-  Certificate,
   Atom,
   Sparkle,
-  TreeStructure,
 } from "@phosphor-icons/react";
 
-export type StageNumber = 0 | 1 | 2 | 3 | 4;
+export type StageNumber = 0 | 1 | 2;
 
 type StageMeta = {
   /** Phosphor accent color (resolves to the stage's Radix color). */
@@ -36,11 +32,9 @@ type StageMeta = {
 };
 
 const STAGE_META: Record<StageNumber, StageMeta> = {
-  0: { color: "var(--tbb-text)", tint: "color-mix(in srgb, var(--tbb-text) 14%, transparent)", label: "Stage 0 — Introduction to Computing" },
-  1: { color: "var(--tbb-stage-1)", tint: "color-mix(in srgb, var(--tbb-stage-1) 14%, transparent)", label: "Stage 1 — Foundations" },
-  2: { color: "var(--tbb-stage-2)", tint: "color-mix(in srgb, var(--tbb-stage-2) 14%, transparent)", label: "Stage 2 — Credentials" },
-  3: { color: "var(--tbb-stage-3)", tint: "color-mix(in srgb, var(--tbb-stage-3) 14%, transparent)", label: "Stage 3 — Mastery" },
-  4: { color: "var(--tbb-stage-4)", tint: "color-mix(in srgb, var(--tbb-stage-4) 14%, transparent)", label: "Stage 4 — Autonomy" },
+  0: { color: "var(--tbb-text)", tint: "color-mix(in srgb, var(--tbb-text) 14%, transparent)", label: "Stage 0 — Introduction to SDE" },
+  1: { color: "var(--tbb-stage-1)", tint: "color-mix(in srgb, var(--tbb-stage-1) 14%, transparent)", label: "Stage 1 — SDE Mastery (AI-Driven)" },
+  2: { color: "var(--tbb-stage-2)", tint: "color-mix(in srgb, var(--tbb-stage-2) 14%, transparent)", label: "Stage 2 — SDE Mastery (AI-Native)" },
 };
 
 export type StageIconProps = Omit<React.SVGProps<SVGSVGElement>, "viewBox" | "children"> & {
@@ -50,7 +44,7 @@ export type StageIconProps = Omit<React.SVGProps<SVGSVGElement>, "viewBox" | "ch
 };
 
 /**
- * The bare stage glyph — same five Phosphor icons, no chip, no tint, no
+ * The bare stage glyph — same three Phosphor icons, no chip, no tint, no
  * label. Consumers that supply their own surface (the Spotlight shortcut
  * circles, search-result rows) use this; `StageIcon` wraps it in the tinted
  * chip for the stage cards.
@@ -58,9 +52,7 @@ export type StageIconProps = Omit<React.SVGProps<SVGSVGElement>, "viewBox" | "ch
 export function StageGlyph({ stage, size = 48, ...rest }: StageIconProps) {
   if (stage === 0) return <Sparkle size={size} weight="fill" {...rest} />;
   if (stage === 1) return <Blueprint size={size} weight="duotone" {...rest} />;
-  if (stage === 2) return <Certificate size={size} weight="fill" {...rest} />;
-  if (stage === 3) return <Atom size={size} weight="duotone" {...rest} />;
-  return <TreeStructure size={size} weight="duotone" {...rest} />;
+  return <Atom size={size} weight="duotone" {...rest} />;
 }
 
 export function StageIcon({

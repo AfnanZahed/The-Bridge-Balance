@@ -1,7 +1,7 @@
 /**
  * StageCard — a single curriculum stage tile.
  *
- * Numbered (01-04), muted Apple-grade accent chip, hover lift with soft
+ * Numbered (00-02), muted Apple-grade accent chip, hover lift with soft
  * elevation + border-color shift. Hover is CSS-only (R-003 / motion contract:
  * "The ONLY retained animation is RevealOnScroll"; entrance-only Framer
  * Motion is the retained budget).

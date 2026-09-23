@@ -1,0 +1,11 @@
+﻿{
+  "targets": { "center": [960, 540] },
+  "scenes": [
+    { "id": "t1", "start": 0, "actions": [
+      { "type": "move", "to": [960, 540], "dur": 0.5 },
+      { "type": "wheel", "ticks": 3, "interval": 0.12 },
+      { "type": "pause", "dur": 0.6 },
+      { "type": "shot", "name": "wheel-test" }
+    ] }
+  ]
+}

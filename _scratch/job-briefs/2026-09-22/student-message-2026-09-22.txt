@@ -1,0 +1,54 @@
+Dear Students,
+
+The video below shows the website on which the course and its materials are currently being developed.
+
+[VIDEO CLIP HERE]
+
+Format of Course Delivery
+
+The course was originally planned as video lectures, followed by supporting documents, images, and notes shared manually within WhatsApp groups. This format has been revised. All learning material will now be published first, in complete written form, on the course website. Detailed video lectures will follow for each part of that material. This is intended to make the course easier to track, reference, and learn from.
+
+Curriculum Updates
+
+The course is being rebuilt in full, with research behind each structural decision. The two biggest decisions came on 21 and 22 September. SDE means spec-driven engineering: you write down what you want built, the AI writes the code, and you check it before you accept it.
+
+There are now three stages.
+
+• Stage 0, *Introduction to SDE*, is where everyone begins, with no programming experience at all. It gives you the history of computing and the first practical basics: the terminal, an editor, and your first program.
+• Stage 1, *SDE Mastery (AI-Driven)*, is basic and intermediate software engineering, taught with AI coding agents, software that writes and runs code for you. Your first simple AI agents are built here too.
+• Stage 2, *SDE Mastery (AI-Native)*, is advanced software engineering and advanced AI agents, which use tools, keep memory, and work with other agents.
+
+Agentic AI is now taught inside software engineering, not as a stage of its own. An AI agent is software engineering with a large language model as one component. The rest of it is the same functions, loops, databases, and deployment that any other application uses. So each idea is learned first, by hand, and then built again inside a real agent.
+
+Stage 0 and Stage 1 both start from zero, and Stage 2 builds on Stage 1.
+
+Where a topic can be used inside an agent, you will build it twice: once by hand, then with a coding agent. The agents are real and working from day one, on free AI services, so no paid key is needed.
+
+The two Harvard certificates, CS50P and CS50W, are unchanged. Both courses are free to complete, and the optional verified certificate from edX is the paid part. They now sit in a separate track, Credentials, beside the three stages, switched off on the website for now while it is redesigned.
+
+Ongoing Transparency
+
+Every change made to the course is recorded, with its date, on the website's changelog page. This record is publicly available at all times.
+
+New Feature: Learning Assistant
+
+An AI based learning assistant is being built for the website. It is not ready yet and cannot answer questions today.
+
+The assistant is being built to:
+
+• research a topic thoroughly before providing an answer
+• work through complex questions in a structured manner
+• produce written notes and documents on request
+• explain material from within the course, or from outside it
+
+A preview of this feature will be shared in due course.
+
+Access at No Cost
+
+The learning assistant, the examinations, and several related features were originally planned as part of a paid subscription, priced at twenty dollars per month. For students in this community, these features will be provided at no cost.
+
+Development Timeline
+
+The website is currently in an early stage of development, referred to in the software industry as Alpha. This indicates that the site is functional but still undergoing active development and testing. It is expected to reach the next stage, Beta, within one week. Once the website reaches the Beta stage, the link will be shared here so that reading can begin. Within two weeks, the website is expected to move to a permanent domain.
+
+A further message will follow once the course's learning material is ready for release.

@@ -1,7 +1,7 @@
 # Curriculum State Layer
 
 The Bridge Balance has no fixed chapter list and no fixed count. The official
-curriculum sets five stages (0 through 4); it does not fix how many chapters each stage
+curriculum sets three stages (0 through 2); it does not fix how many chapters each stage
 becomes, what each one is titled, or what it covers — that is decided per
 topic, at the time it's actually researched and authored, and it changes as
 understanding changes. What's fixed is that a chapter ships as one continuous read. `prerequisite-graph.yaml` below is a snapshot of what's been decided *so far*, not a plan the rest of the book is
@@ -10,6 +10,11 @@ entries retitled or rescoped as chapters actually get written. No single
 authoring session can hold everything every other chapter has already decided,
 however many there turn out to be. This directory is the book's memory for
 that, not a table of contents fixed in advance.
+
+> **Note, 22 September 2026.** The sentence above used to read "sets five stages
+> (0 through 4)". Under the Agentic-inside-SE decision the curriculum sets three
+> stages (0 through 2), and CS50 is a parallel Credentials track rather than a
+> stage. See `canon/course-structure.md` CS-12 to CS-16.
 
 **Every authoring skill reads this directory before drafting and writes to it
 before finishing.** A skill that skips the read will redefine a term another
@@ -28,7 +33,7 @@ thing preventing it.
 
 ```
 curriculum-state/
-├── canon/           Facts about the project that never change per lesson.
+├── canon/           Facts about the project that never change per chapter.
 │   ├── corrections.md       Mistakes already made once, with the owner's own words. READ FIRST, ALWAYS.
 │   ├── thesis.md            Thesis, the stages, two extremes, reading and understanding literacy, safety floor.
 │   ├── audience.md          Who reads this and under what conditions.
@@ -45,7 +50,7 @@ curriculum-state/
 │   ├── concept-ledger.yaml      Every term: where first defined, how.
 │   ├── evidence-ledger.yaml     Every source: what each chapter asks of it.
 │   ├── example-ledger.yaml      Worked examples already spent.
-│   ├── prerequisite-graph.yaml  Lesson order and dependencies — a snapshot of
+│   ├── prerequisite-graph.yaml  Chapter order and dependencies — a snapshot of
 │   │                            what's decided so far, never a fixed plan.
 │   └── term-ledger.yaml      Every glossary term, its anchor, and the chapter
 │                            allowed to introduce it first.
@@ -56,14 +61,14 @@ curriculum-state/
 
 ## Reading order for a skill
 
-1. `canon/` — all seven files, `corrections.md` first. Small, and they change the shape of everything.
+1. `canon/` — every file in `canon/`, `corrections.md` first. Small, and they change the shape of everything.
 2. `contracts/calibration.md` — before estimating any length.
 3. The ledgers relevant to the task — this varies by which protocol is running,
    not a fixed subset:
    - `chapter-production` and `lesson-adversarial-review` — all five.
-   - `book-coherence-audit` — all five, corpus-wide rather than one lesson.
+   - `book-coherence-audit` — all five, corpus-wide rather than one chapter.
    - `curriculum-architect` — `prerequisite-graph.yaml` always; `concept-` and
-     `evidence-ledger.yaml` when producing a lesson brief (Mode 2).
+     `evidence-ledger.yaml` when producing a chapter brief (Mode 2).
 
 ## Writing rules
 
@@ -81,8 +86,8 @@ curriculum-state/
   and an idea a reader already has a picture for costs them nothing to pick up.
   What the old "spent" rule caused was a slow drift toward rarer and rarer
   examples — which, in a history stage, means named historical ones.
-- **Update before handoff, not after.** A skill that finishes a lesson and does
-  not update the ledgers has not finished the lesson.
+- **Update before handoff, not after.** A skill that finishes a chapter and does
+  not update the ledgers has not finished the chapter.
 
 ## Provenance
 

@@ -2,7 +2,7 @@
 
 **Read at SKILL.md step 1, before research begins. Write at step 8, after the gate is clean.**
 
-Four files in `curriculum-state/ledgers/`: `concept-`, `evidence-`, `example-ledger.yaml`, and `prerequisite-graph.yaml`.
+Five files in `curriculum-state/ledgers/`: `concept-`, `evidence-`, `example-` and `term-ledger.yaml`, and `prerequisite-graph.yaml`.
 
 This skill both reads *and* confirms, because it is the skill that ships the chapter. **When the gate is clean, entries get confirmed, not proposed.** `status: proposed` is reserved for the genuinely different case where a chapter *considered* something and didn't use it.
 
@@ -24,6 +24,8 @@ A missing entry is a sequencing question this skill does not resolve unilaterall
 
 The graph is **a snapshot of what's decided so far, never a plan to execute against.** If this run legitimately retitled or rescoped the chapter, update the graph to match what got authored. Never bend the chapter to match a stale row.
 
+**5. `term-ledger.yaml`.** Check which glossary terms this chapter will link and which it will teach. Every term the glossary carries has an entry with the anchor a link must resolve to, and a `major` term (a Tier 2 term, one that needs longer than a minute to teach) must not be used before the chapter recorded as introducing it. `check-references.mjs`, the second build gate, enforces both; the file's own header has the schema.
+
 ## Writing, after the gate is clean
 
 **`concept-ledger.yaml`** — for every term this chapter is the first to define properly, move it to `defined` with this chapter's path as `first_defined` and the canonical wording as it actually appears in the shipped prose. One canonical definition per term, reused verbatim wherever it appears; the surrounding prose may change, the definition may not. If this chapter *used* a term it didn't define, and nothing defines it yet, add it as `used-undefined` so a later chapter can pick it up.
@@ -33,6 +35,8 @@ The graph is **a snapshot of what's decided so far, never a plan to execute agai
 **`example-ledger.yaml`** — a `reserved` example actually used becomes `spent`, with this chapter's path. A new example used becomes a normal entry. An example considered and rejected is worth recording as `status: proposed` with the reason — a rejection is worth as much to the next author as a use, and this is the only place that survives.
 
 **`prerequisite-graph.yaml`** — update this chapter's row to what actually shipped: the real title, the real `teaches` list, and `chapter_state` matching the file. If the run changed the scope, say so in `notes`.
+
+**`term-ledger.yaml`** — for every glossary term this chapter defines or newly links, make sure an entry exists with the right `slug` (the glossary heading's anchor) and `weight`. Where this chapter is the first to teach a Tier 2 term, set `weight: major` and `first_introduced` to this chapter's `id` from `prerequisite-graph.yaml`, never a file path (`mixed-audience.md`, "4. Terms: the one-minute test"). The gate fails a link that resolves to no anchor and a `major` term used too early.
 
 ## Writing rules
 

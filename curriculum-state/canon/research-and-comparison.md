@@ -1,6 +1,6 @@
 # Canon — research and comparison before anything is written
 
-**No claim in this project is made from memory or guesswork.** Every lesson, every chapter, every heading, every feature, every option, every button is grounded in studied external practice and then deliberately taken further. This is a core platform policy, not a preference, and it binds the content track and the platform track equally.
+**No claim in this project is made from memory or guesswork.** Every lesson, every chapter, every heading, every feature, every option, every button is grounded in studied external practice and then deliberately taken further. **What comes back from that study is not averaged, and it is not filtered either** — each source is read on its own terms, and all of it is material. This is a core platform policy, not a preference, and it binds the content track and the platform track equally.
 
 > **Scope, clarified 2026-09-20.** This rule governs **what is true** — the facts, the sequencing, the design decisions. It does not govern **how the writing sounds**. A warm opening, a reassurance, a well-chosen everyday analogy and the ordinary human rhythm of a good teacher come from the writer, not from a source, and requiring a citation for them is what turned this policy into a date-generator. Research the substance. Write the sentences.
 
@@ -17,7 +17,7 @@ Find out how the best practice in the world actually handles this, and why.
 - **International standard.** How is this taught, named, sequenced, or built by the strongest sources available — recognised courses, primary documentation, established curricula, the tools' own authors? Not "what is a reasonable approach," but "what do the people who do this best actually do."
 - **Philosophical standard.** What is the reasoning underneath it? Which first principle does the practice serve, what problem produced it, and what does it cost? A convention adopted without its reason is cargo, and it breaks the first time the situation differs.
 
-**Who runs it.** Claude, or — around 95% of the time — **Command Code's DeepSeek v4.1 Flash**, per the `command-code-delegation` skill: Claude decides what to ask and judges what comes back, DeepSeek does the reading and searching. Delegating the labour never delegates the judgment, and a research result is read from its actual trace, never from its summary line.
+**Who runs it.** Claude, or — usually — **Command Code's DeepSeek v4.1 Flash**, per the `command-code-delegation` skill, after the owner has been asked which model does it (`corrections.md` §19 and §30): Claude decides what to ask and judges what comes back, DeepSeek does the reading and searching. Delegating the labour never delegates the judgment, and a research result is read from its actual trace, never from its summary line.
 
 ### Pass 2 — The owner's comparative study
 
@@ -60,7 +60,12 @@ The owner flagged this and it is absolute. **Pasted material is input to underst
 - **Attribute where an idea is genuinely owed**, and where naming it helps the reader. A specific framing, coinage or finding from a named source is credited — placed so it supports the sentence rather than interrupting it, and never as a reflex that turns a teaching page into a bibliography.
 - **A paid or licensed course is studied, never redistributed.** The owner's access to a course is not the reader's, and nothing in a chapter may function as a way around paying for it.
 
-**The Stage 2 integrity floor overrides this policy wherever they touch.** `integrity-floor.md` is absolute: CS50P and CS50W material may inform how we teach reading literacy, and may never be adapted into anything that produces or completes graded CS50 work. When studying CS50 as a source under this policy, that boundary is checked first and the conflict is surfaced rather than worked around.
+**The Credentials-track (CS50) integrity floor overrides this policy wherever they touch.** `integrity-floor.md` is absolute: CS50P and CS50W material may inform how we teach reading literacy, and may never be adapted into anything that produces or completes graded CS50 work. When studying CS50 as a source under this policy, that boundary is checked first and the conflict is surfaced rather than worked around.
+
+> **Renamed 22 September 2026.** The rule above read "The Stage 2 integrity
+> floor". CS50 is not a stage — it is the Credentials track, a parallel track
+> that is disabled for now (`canon/course-structure.md` CS-16). The rule itself
+> is unchanged.
 
 ## This applies to the platform too
 
@@ -83,7 +88,7 @@ Four courses studied, none reproduced, and a chapter that does something none of
 ## Self-check
 
 - [ ] Pass 1 run — international practice and its underlying reasoning both established, not just the first
-- [ ] Pass 1 delegated to DeepSeek via `command-code-delegation` unless there was a reason not to; results read from the actual trace
+- [ ] Pass 1 run by the model the owner chose when asked (usually DeepSeek via `command-code-delegation`; `corrections.md` §30); results read from the actual trace
 - [ ] Pass 2 supplied by the owner, or the work stopped and asked for it
 - [ ] Major and minor points extracted from what was supplied, and what every source missed is named
 - [ ] The transformation rule applied — the result teaches reading and judgment, not writing the core logic
@@ -91,3 +96,5 @@ Four courses studied, none reproduced, and a chapter that does something none of
 - [ ] No expression reproduced: no verbatim text, no lightly-reworded paragraphs, no copied exercises
 - [ ] Specific ideas genuinely owed to a named source are attributed in the prose
 - [ ] Where a CS50 source was studied, `integrity-floor.md` checked first and no adaptation touches graded work
+
+**The draft is presented with the findings log, the logged omissions, and any deviations listed at the end**, so an editor sees them without hunting.

@@ -119,10 +119,10 @@ examples:
       agent, and (6) the five-agent production pipeline were DROPPED - the
       re-authoring judged the four safety boundaries, the experiment-to-system
       transition, the agent governance boundaries and the multi-agent ownership
-      architecture to be Stage 3-4 territory rather than finale material, now
+      architecture to be Stage 2 territory rather than finale material, now
       that the sequence runs binary -> architecture -> editors -> terminals ->
       SDE. Those four scenarios are therefore UNSPENT again and available, but
-      they have no reservation - if a Stage 3 or Stage 4 lesson wants one, it
+      they have no reservation - if a Stage 1 or Stage 2 lesson wants one, it
       is free to take it, and should log which questions it asks. The CSV
       export is now genuinely re-spent by a shipped chapter, and it kept the
       same break the deleted pilot used (a field filter that leaks an
@@ -211,7 +211,7 @@ examples:
     chapter: null
     object: "A real feature-add ticket: write a 3-line spec, prompt, review the diff against it"
     status: reserved
-    reserved_for: a Stage 1 or Stage 3 lesson
+    reserved_for: a Stage 1 or Stage 2 lesson
     notes: >-
       Framework draft example. Unspent. Not used by the intro
       - the intro's own rate-limiting/CSV-export scenarios cover similar
@@ -251,15 +251,15 @@ examples:
       courier tracking page, with the point where the comparison breaks named
       explicitly - rather than a worked example in this project's technical
       sense. No reserved entry fits it: todo-app-trace is reserved for a Stage 1
-      agent lesson, feature-add-ticket for Stage 1/3, repo-permission-contract
-      for Stage 3/4, and spending one here would rob the lesson it is reserved
+      agent lesson, feature-add-ticket for Stage 1/2, repo-permission-contract
+      for Stage 2, and spending one here would rob the lesson it is reserved
       for. A reader would not have gained from more.
 
   - id: repo-permission-contract
     chapter: null
     object: "Designing a permission and verification contract for an agent on a real repository"
     status: reserved
-    reserved_for: a Stage 3 or Stage 4 lesson
+    reserved_for: a Stage 2 lesson
     notes: >-
       Too heavy for Stage 1. Not used by the intro revision - the intro used a
       five-agent pipeline example instead (see intro-worked-examples), which
@@ -338,7 +338,7 @@ examples:
       bearable; given FORTRAN it gets pleasant - and they still have no
       judgment, which is the chapter's real closing point.
       DELIBERATELY BUILT TO CARRY FORWARD. This is the same helper a reader
-      will meet again as an AI coding assistant in Stages 3-4: fast, tireless,
+      will meet again as an AI coding assistant in Stages 1 and 2: fast, tireless,
       confident, no judgment. Seeded here on purpose so the later chapters can
       call back to something the reader already owns rather than arguing from
       scratch. Do not spend it on a minor point in between.

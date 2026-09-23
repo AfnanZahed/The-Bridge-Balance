@@ -64,16 +64,16 @@ function statusLabel(status: StageStatus): string {
 
 export const BAR_CHART_DATA: CurriculumBarDatum[] = [
   {
-    stage: "Introduction to Computing: From Switches to AI Agents",
+    stage: "Introduction to SDE",
     short: "Stage 0",
     status: "live",
     statusWeight: LIVE_WEIGHT,
     description:
-      "The history of computing and software, read in the order it happened — binary through today's AI-coding-agent era — plus the Spec-Driven Engineering and Reading & Understanding Literacy philosophy Stage 1 depends on.",
+      "The history of computing and software, read in the order it happened — binary through today's AI-coding-agent era — plus Spec-Driven Engineering and Code Literacy: reading and judging code — the philosophy Stage 1 depends on.",
     fill: "var(--tbb-accent, oklch(0 0 0))",
   },
   {
-    stage: "Spec-Aware Vibe Engineering",
+    stage: "SDE Mastery (AI-Driven)",
     short: "Stage 1",
     status: "in-development",
     statusWeight: IN_DEVELOPMENT_WEIGHT,
@@ -82,26 +82,8 @@ export const BAR_CHART_DATA: CurriculumBarDatum[] = [
     fill: "var(--tbb-accent, oklch(0 0 0))",
   },
   {
-    stage: "Credible Validation",
+    stage: "SDE Mastery (AI-Native)",
     short: "Stage 2",
-    status: "in-development",
-    statusWeight: IN_DEVELOPMENT_WEIGHT,
-    description:
-      "Two Harvard certificates — CS50P (Python) and CS50W (web) — as internationally recognized proof of skill, paired with your GitHub portfolio.",
-    fill: "var(--tbb-accent, oklch(0 0 0))",
-  },
-  {
-    stage: "Mastering AI Coding Agents",
-    short: "Stage 3",
-    status: "in-development",
-    statusWeight: IN_DEVELOPMENT_WEIGHT,
-    description:
-      "Claude Code, OpenCode, and other coding-agent CLIs. Prompt, context, and loop engineering. Skills, MCP servers, and workflows.",
-    fill: "var(--tbb-accent, oklch(0 0 0))",
-  },
-  {
-    stage: "Engineering Autonomous Agents",
-    short: "Stage 4",
     status: "in-development",
     statusWeight: IN_DEVELOPMENT_WEIGHT,
     description:

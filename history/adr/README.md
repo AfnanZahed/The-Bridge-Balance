@@ -16,9 +16,10 @@ Each ADR is a single Markdown file in this directory, named `NNNN-slug.md` and f
 | 0004 | [Two-skill content split — chapter contract vs teaching framework](./0004-two-skill-content-split.md) | Accepted · **amended 2026-09-07** · **superseded in part by 0007** |
 | 0005 | [Search experience split — home Spotlight + chapter bar on one client-side engine](./0005-search-experience-split.md) | Accepted |
 | 0006 | [Beginner-first content integrity — Constitution v3.0.0](./0006-beginner-first-content-integrity.md) | Accepted |
-| 0007 | [`lesson-spine-authoring` becomes Bridge Balance-specific](./0007-lesson-spine-becomes-book-specific.md) | Accepted · **migration in progress** |
+| 0007 | [`lesson-spine-authoring` becomes Bridge Balance-specific](./0007-lesson-spine-becomes-book-specific.md) | Accepted · **migration closed** (22 September 2026: the skill matches, and the repeated canon rules are merged and tombstoned) |
 | 0008 | [The chapter component palette is open](./0008-chapter-component-palette-is-open.md) | Accepted · **corrected 2026-09-20** |
 | 0009 | [Owner input gates — decisions the pipeline must stop for](./0009-owner-input-gates.md) | Accepted |
+| 0010 | [Agentic AI Taught Inside Software Engineering: the Three-Stage Structure](./0010-agentic-ai-inside-se.md) | Accepted |
 
 An **amended** ADR is still current. The original body records what was decided at
 the time and is left as written; an `## Amendment` section at the end carries what

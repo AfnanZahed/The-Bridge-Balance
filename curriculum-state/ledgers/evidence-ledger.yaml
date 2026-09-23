@@ -14,7 +14,7 @@
 #     is asking, you have over-used it - at the second reuse or the fifth.
 #   - Rotate through: what happened -> why it happened -> what changed because
 #     of it -> what would you do differently knowing it.
-#   - expires: Stage 3/4 tool claims get 90 days. Industry reports get 12
+#   - expires: Stage 2 tool claims get 90 days. Industry reports get 12
 #     months. Named historical incidents do not expire but their framing does.
 #   - status (optional field, per source): absent means canonical - confirmed,
 #     citable normally, which is why none of the entries seeded below carry it.
@@ -93,7 +93,7 @@ sources:
       - {chapter: docs/intro-3-editors-and-ides.md, question: "Which editors do working developers actually use, and are the new AI editors a majority or a minority?"}
       - {chapter: docs/intro-5-spec-driven-engineering.md, question: "What is the shape of the two extremes in one year of data - adopted and distrusted at once?"}
     notes: >-
-      Superseded when the 2026 survey lands. Check before Stage 3 authoring.
+      Superseded when the 2026 survey lands. Check before Stage 2 authoring.
       REUSED 2026-09-10 and asked two new questions: intro-3 reads it for
       editor market share (VS Code first for the fifth year, about 49,000
       respondents; Cursor 18 per cent, Claude Code 10 per cent, Windsurf 5 per

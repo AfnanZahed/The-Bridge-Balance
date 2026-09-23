@@ -1,8 +1,10 @@
 # The beginner-experience audit — ten angles
 
-*Required on every Stage 0, 1 and 2 draft, after the comprehension audit and
-before the draft is presented. Added 20 September 2026 on the owner's
-instruction.*
+*Required on every Stage 0 and 1 draft, after the comprehension audit and
+before the draft is presented, under the ten-angle beginner check rule in
+`curriculum-state/canon/audience.md`, "The reader". Open it before running this
+audit. Added 20 September 2026 on the owner's instruction; the floor was
+renumbered to Stages 0–1 on 2026-09-22 (`course-structure.md` CS-31).*
 
 **Why this exists.** `comprehension-audit.md` asks one question ten ways: *would
 a reader understand this?* It never asks whether a reader will **stay**. Both
@@ -30,10 +32,12 @@ Log every finding, what you did about it, and any you deliberately left.
 
 Sweep for the reading cost of the words themselves.
 
-- Any sentence that needs a second read? Read it aloud; if you stumble, they stop.
+- Two canon rules govern the reading cost: a sentence that needs a second read
+  has failed, and no subject may be abstract and unnamed before the reader
+  knows what it refers to. Both, with the read-aloud test, are in
+  `curriculum-state/canon/corrections.md`, "16. Every sentence must make plain
+  sense on the first read". Open it before this sweep.
 - Any word a beginner does not own, that the idea did not actually need?
-- Any sentence with an abstract subject before the reader knows what it refers
-  to? *"Neither of those was obvious, and neither arrived first."*
 - Stacked clauses, over 28 words, more than one subordinate clause.
 
 **Fail looks like:** technically glossed, still unreadable.
@@ -59,8 +63,10 @@ A beginner is reading to get somewhere. Thorough reads to them as stalling.
 - Does it say what is coming, in bullets?
 - **Does it say why it matters?** This is the half most drafts miss.
 - Is the welcome style different from the last four chapters'?
-- Does the move from the opening into the first section feel gradual, or does a
-  bare heading and a cold sentence arrive?
+- The opening rule — greet and place, connect backwards, what this one covers,
+  why it matters, then a gradual move into the teaching — is in
+  `curriculum-state/canon/corrections.md`, "7. Every chapter opens by welcoming
+  the reader and showing the shape". Open it before this sweep.
 
 **Fail looks like:** a title, a heading, and straight into the subject.
 **Fix:** `corrections.md` §7.
@@ -71,7 +77,10 @@ Sweep for reasons, not just content.
 
 - Before each new idea, does the reader know why it is worth having?
 - Does the chapter ever teach something because it is next in the sequence,
-  without saying what it unlocks?
+  without saying what it unlocks? The why rule behind that check — why it
+  matters, for each item or for the set, and the why is not optional — is in
+  `curriculum-state/canon/corrections.md`, "7. Every chapter opens by welcoming
+  the reader and showing the shape". Open it before this sweep.
 - Is the problem shown before the solution?
 
 **Fail looks like:** an accurate explanation of something the reader never asked
@@ -106,10 +115,14 @@ The one that loses readers permanently and silently.
 
 ## 7. Continuity — is anything assumed in silence?
 
-The original beginner failure, and still the most important.
+The continuity rule — the original beginner failure, and still the first
+thing to get right: nothing skipped, nothing assumed, no leap taken over the
+reader's head — is in `curriculum-state/canon/audience.md`, "The reader", under
+"What the beginner actually needs". Open it before this sweep.
 
 - Read as someone who knows nothing. Mark every point where you would have to
-  already know something.
+  already know something. A Stage 1 chapter that assumes a reader already knows
+  what a repository is has failed them silently.
 - Does every term appear after it is taught, not before?
 - Does the chapter depend on a chapter the reader may not have read?
 - Do links go where the reader would need them, at the moment they need them?
@@ -123,12 +136,18 @@ The original beginner failure, and still the most important.
   every paragraph's first sentence?
 - Are there visual landmarks often enough that a scrolling reader never sees an
   undifferentiated screen?
-- On a phone: any wide code, any wide table, any paragraph over four lines?
+- On a phone: any code line over roughly 60 characters, where the language
+  allows (the gate warns past 80), any wide table not wrapped in a horizontal scroll
+  container, any paragraph over four lines?
+- Is total chapter weight under 1.5 MB including images? Every image is a plain
+  file in `static/img/`; a page of oversized raster art undermines exactly the
+  reader the 150 wpm baseline exists to serve.
 - Is it *beautiful*, not merely tidy?
 
 **Fail looks like:** "visually flat".
-**Fix:** `canon/audience.md` §"Formatting is part of the teaching",
-`corrections.md` §14.
+**Fix:** `curriculum-state/canon/audience.md`, "Formatting is part of the
+teaching"; `curriculum-state/canon/corrections.md`, "14. Bold marks what
+matters, never the first sentence by rule".
 
 ## 9. Payoff — does the reader finish each section holding something?
 

@@ -47,14 +47,14 @@ type NavEntry = {
 
 const NAV_ENTRIES: NavEntry[] = [
   { to: "/", label: "Home", keepWithTree: true },
-  // The five stages come from the shared list (src/lib/stages.ts) that the
+  // The three stages come from the shared list (src/lib/stages.ts) that the
   // home Spotlight's shortcut circles also read — one source, no drift.
   ...STAGE_LINKS.map((stage) => ({ to: stage.to, label: stage.label })),
 ];
 
 function isActive(currentPath: string, target: string): boolean {
   if (target === "/") return currentPath === "/";
-  // Parent-route match: `/stage-01-spec-aware-vibe-engineering/intro`
+  // Parent-route match: `/stage-01-sde-mastery-ai-driven/intro`
   // should still highlight the Stage 1 entry.
   return currentPath === target || currentPath.startsWith(target);
 }

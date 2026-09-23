@@ -67,7 +67,7 @@ const config: Config = {
 
   themeConfig: {
     // No default social-share image. The previous og-image.svg was stale
-    // (named "Four stages" — the curriculum has five, Stage 0 included) and
+    // (named "Four stages" — the curriculum has three, Stage 0 included) and
     // was deleted rather than patched: per CLAUDE.md, Claude Code writes
     // text, not images — a real replacement is the owner's, made in ChatGPT
     // or MiniMax. Until one exists, pages simply carry no social-card image
@@ -113,11 +113,9 @@ const config: Config = {
         {
           title: "Curriculum",
           items: [
-            { label: "Stage 0 — Orientation", to: "/intro-1-binary-to-programming" },
-            { label: "Stage 1 — Foundations", to: "/stage-01-spec-aware-vibe-engineering/" },
-            { label: "Stage 2 — CS50 Certs", to: "/stage-02-cs50-certification/" },
-            { label: "Stage 3 — AI Coding Agents", to: "/stage-03-mastering-ai-coding-agents/" },
-            { label: "Stage 4 — Autonomous Agents", to: "/stage-04-engineering-autonomous-ai-agents/" },
+            { label: "Stage 0 — Introduction to SDE", to: "/intro-1-binary-to-programming" },
+            { label: "Stage 1 — SDE Mastery (AI-Driven)", to: "/stage-01-sde-mastery-ai-driven/" },
+            { label: "Stage 2 — SDE Mastery (AI-Native)", to: "/stage-02-sde-mastery-ai-native/" },
           ],
         },
       ],

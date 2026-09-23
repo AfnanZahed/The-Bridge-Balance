@@ -40,12 +40,21 @@ build/
 
 # ─── Environment / secrets ──────────────────────────────────────────────────
 .env
+.env.*
 .env.local
 .env.development
 .env.production
 .env.test
 .env.*.local
+*.local
 !.env.example
+
+# ─── Feature 012 — chatbot tutor: local services & generated artefacts ──────
+edu-site/api/.venv/
+edu-site/api/.qdrant-local/
+edu-site/.rag/
+**/__pycache__/
+edu-site/api/evals/reports/
 
 # ─── IDE / editor ───────────────────────────────────────────────────────────
 .idea/

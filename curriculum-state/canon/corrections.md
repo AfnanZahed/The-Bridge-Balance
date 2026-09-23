@@ -36,7 +36,7 @@
 4. What the stage uses as its worked object.
 5. Practical honesty — no quiz, no certificate here, and where the real credentials actually are.
 6. The one real risk, named plainly.
-7. The safety-floor callout, in the plain Stage 0–2 wording (`thesis.md`).
+7. The safety-floor callout, in the plain Stage 0–1 wording (`thesis.md`).
 8. Why this stage comes first and why it is ordered as it is — short, and late, not first.
 9. How to read it: order, pace, coming back.
 10. One call to action, last, naming the first chapter and what it opens on.
@@ -48,7 +48,7 @@
 - **One call to action, at the true end, once.** An early "start reading now" was called *"a very bad move"*.
 - **Where a front door states the platform's own what and why, ground it in `The Bridge Balance/Official docs/`** — `problem_statement.md` and `solution_statement.md`. These are pre-approved shared source material under `CLAUDE.md`'s carve-out.
 - **Merge sections that answer one underlying question** into one section with subheadings, rather than several top-level headings each answering a fragment of it.
-- **A guess-the-word device stays off a front door entirely, not merely out of the opening.** The objection is the device's performative feel, not its position.
+- **A guess-the-word device stays off a front door entirely, not merely out of the opening.** The objection is the device's performative feel, not its position. The device is used sparingly inside teaching chapters, and Register 4's invert-the-question form — *why is it called that when it is not that* — with no staged guess beat is the permitted substitute.
 
 **What is not a fix.** Copying the warmth and leaving the structure. The second draft of the Stage 0 introduction was rebuilt on the supplied reference's own skeleton, slot for slot, and that is the standard — see §2.
 
@@ -172,6 +172,12 @@ Then move into the teaching.
 
 *Recorded as [ADR-0006](../../history/adr/0006-beginner-first-content-integrity.md) — Constitution v3.0.0, amending Principles IX, VIII and III together.*
 
+*Renumbered 2026-09-22 (`course-structure.md` CS-31). Every stage number in this
+entry predates the Agentic-inside-SE decision. Read "Stages 0–2" as **Stages
+0–1**, the zero-knowledge floor, and "Stages 3 and 4" as **Stage 2**, the one
+stage left open. The heading keeps its original wording because other files cite
+it by name.*
+
 **Decided:** 20 September 2026.
 
 **Owner's words:** *"Exclude this rule entirely from the project. as of now, nothing to do with the seniors."* And: *"just the stage 0,1 and 2's audience is confirmed, and that are very beginners, new comers and freshers to this tech world and AI world, and about the stage 4 and 5, nothing confirmed yet."*
@@ -186,7 +192,9 @@ Then move into the teaching.
 
 **Why it mattered so much.** Each of those rules turned an ordinary warm sentence into waste, because a warm sentence teaches an expert nothing. Together they are the reason a beginner's first chapter reads like a briefing.
 
-**Stages 3 and 4 stay open.** No rule may assume a senior reader is present until the owner decides. Do not quietly rebuild the two-reader model.
+**Stage 2 stays open.** No rule may assume a senior reader is present until the owner decides. Do not quietly rebuild the two-reader model. *(The owner decided on 21 September, in §26 and in Constitution Principle IX: there is one reader in every stage. Stage 2 has the same reader, further along; how it is written waits for the redesign.)*
+
+*(Renumbered 2026-09-22, `course-structure.md` CS-31: this paragraph read "**Stages 3 and 4 stay open**" and "Stages 3 and 4 have the same reader, further along". There is no Stage 3 or Stage 4; Stage 2 holds what old Stage 4 held.)*
 
 ## 9. Never explain the book's internal rules or internal names to the reader
 
@@ -231,7 +239,7 @@ Then move into the teaching.
 
 **Owner's words:** *"Oh!, that is very bad for a beginner. it should be like this easy: 'They built it from a tiny piece of crystal, and called it the transistor.' Especially for the initial stages that are just for beginners (Stage 0, 1, and 2)."*
 
-**The rule, for Stages 0–2.**
+**The rule, for Stages 0–1.**
 
 - **Choose the simplest accurate word.** If a plain word is true, use the plain word.
 - **The engineering stays true. The vocabulary does not stay fixed.** Never make a claim less correct to make it simpler; do drop a technical term the sentence does not need.
@@ -244,7 +252,7 @@ Then move into the teaching.
 
 **What is withdrawn**, in the owner's words *"remove it"*, *"that is very very lethal and dangerous and bad"*:
 
-- `voice.md`'s *"There is no register that varies by stage"* — the register varies by reader, and Stages 0–2 have a different reader.
+- `voice.md`'s *"There is no register that varies by stage"* — the register varies by reader, and Stages 0–1 have a different reader.
 - Warmth as a front-door-only permission (it appeared in `CLAUDE.md`, `corrections.md` §1, `voice.md`, `stations.md` and `lesson-spine-authoring/SKILL.md`).
 - *"The register must not shift when the material gets easier."* It may, and it should get gentler where the material gets harder.
 - *"Writing down to a beginner is the one failure this book does not forgive."* The failure this book does not forgive is leaving a beginner behind.
@@ -589,7 +597,7 @@ requires finding the layer that produced it.
 ## 25. A depth block is an optional extra for a curious beginner
 
 **Decided:** 20 September 2026, recorded 21 September 2026. **Owner's words:**
-asked whether depth blocks should be removed from the Stage 0–2 rules or kept,
+asked whether depth blocks should be removed from the Stage 0–1 rules or kept,
 the owner chose *"Keep them as optional extras."* The option read: *"A curious
 beginner can still read a 'why does it work like this?' box. It must never be
 needed to follow the chapter, and it is named for what it explains."*
@@ -657,10 +665,10 @@ a reader who is not in this book.
 
 1. **"Beginner" is where the reader starts.** The book's output is an expert. The content is as deep as the subject needs, and the writing makes it reachable (§8, §12).
 2. **There is one reader.** No separate senior or experienced reader exists in any stage. The person who reads the last stage is the person who read the first, further along the road.
-3. **Stages 0 to 2 keep the zero-knowledge floor** (§8). **Stages 3 and 4 stay parked**, as decided on 20 September.
+3. **Stages 0 to 1 keep the zero-knowledge floor** (§8). **Stage 2 stays parked**, as decided on 20 September. *(Renumbered 2026-09-22, `course-structure.md` CS-31: this rule read "Stages 0 to 2 keep the zero-knowledge floor" and "Stages 3 and 4 stay parked". Old Stage 3's material now sits in Stage 1, under the floor; Stage 2 holds what old Stage 4 held, and the owner's 20 September parking decision is otherwise unchanged.)*
 4. **When a word in a decision can mean two things, ask which one before recording it.**
 
-**Where the live wording sits.** `curriculum-state/canon/course-structure.md`, decisions CS-1 and CS-2. Two places still describe other readers and wait for the redesign: the *"named groups"* table in `audience.md` (rows 2 to 5, *"Later stages, undecided"*), and Constitution Principle IX, which needs an amendment to say this in its own words.
+**Where the live wording sits.** `curriculum-state/canon/course-structure.md`, decisions CS-1 and CS-2. Two places still describe other readers and wait for the redesign: the *"named groups"* table in `audience.md` (rows 2 to 5, *"Later stages, undecided"*), and Constitution Principle IX, which needs an amendment to say this in its own words. *(Both were brought into line on 21 September: the table rows now say "Not a separate audience", and Principle IX says it in v3.0.2.)*
 
 **What does not count as a fix.** Adding *"and experts"* to a sentence in one file. The decision lives in `course-structure.md`, and other files point to it.
 
@@ -676,7 +684,7 @@ a reader who is not in this book.
 
 1. **The first reader served is a Pakistani learner reading English as a second language** (`audience.md`, *"Where they read"*). Easy words come first, and a hard word must earn its place (`language-register.md` §1).
 2. **A hard English word that stays is treated exactly like a technical term.** It is explained inline and linked to the glossary, under the same rules: the one-minute test, the 2-to-3-use rule, and one glossary entry per word.
-3. **Nothing else changes.** *"English only, no Urdu"* and *"examples must land on both sides at once"* stand as they are, until the owner says otherwise.
+3. **Nothing else changes.** *"English only, no Urdu"* and *"examples must land on both sides at once"* stand as they are, until the owner says otherwise. *(The owner said otherwise for examples on 21 September: §29.)*
 
 **Where the live wording sits.** `audience.md`, the paragraph *"Hard English words are handled like technical terms"*, and the last sentence of `language-register.md` §1's *"When is a hard word allowed?"*.
 
@@ -702,6 +710,43 @@ a reader who is not in this book.
 **Where the live wording sits.** `chapter-production/SKILL.md`, the line *"Recommend images; never build or reference one unasked"*, and the opening list in `reference/image-prompts.md`.
 
 **The check.** The step 9 report lists each recommendation. The gate already rejects a placeholder image.
+
+---
+
+## 29. Examples are Pakistani-first
+
+**Decided:** 21 September 2026. **Owner's words**, asked whether examples should change now that the readers are Pakistani first: *"Yes, the pakistani first examples..."*
+
+**What was wrong.** The old rule said examples must land for a Pakistani reader and an international reader at the same time (`audience.md`, `voice.md`, and `language-register.md` §4, which ranked universal examples first). §27 kept it "until the owner says otherwise". The owner has now said otherwise: the reader is Pakistani first, so the examples come from that reader's daily life first.
+
+**The rule.**
+
+1. **The first choice is a concrete, everyday example from life in Pakistan:** a bank token number, a load-shedding schedule, an Easypaisa or JazzCash transfer, a cricket score, a rickshaw fare, prices in rupees.
+2. **A universal example is the second choice**, used when no Pakistani one fits the idea better.
+3. **A reader outside Pakistan must still be able to follow it.** The sentence around the example carries any context it needs. Where the two readers pull apart, the Pakistani reader wins.
+4. **Unchanged:** an example must be concrete and may be invented; the empty placeholder (`foo`, Acme Corp, the generic to-do app) is still banned; a foreign daily-life reference that needs outside knowledge (a 401(k), the DMV) is still avoided; and no example is built on alcohol, pork, gambling or dating.
+
+**Where the live wording sits.** `audience.md`, the paragraph *"Examples are Pakistani-first"*; `voice.md`, "Analogies, examples and stories"; `language-register.md` §4, where the tiers are reordered.
+
+**The check.** Angle 5 of the comprehension audit (*"The unanchored abstraction"*) now asks whether each anchor is Pakistani-first.
+
+**What does not count as a fix.** Putting Pakistani names into an example that was not about daily life, or leaving out the context a reader elsewhere needs.
+
+---
+
+## 30. "Ask which model, every time" includes standards research
+
+**Decided:** 21 September 2026. **Owner's words**, asked whether §19 covers standards research too: *"yes, it covers the research."*
+
+**What was wrong.** §19 says the owner picks the model for every piece of content, every time, with no default. Five places said something else about research: that it is delegated to DeepSeek "around 95% of the time" or "in the large majority of cases" (`CLAUDE.md`, the project guide, the writing skill, `research.md`, and Constitution Principle VIII). A session reading one of those sentences could start research on DeepSeek without asking.
+
+**The rule.** Before any standards research starts, ask the owner which model does it, and wait for the answer. DeepSeek stays the usual choice for research, but it is never assumed. §19 applies to research exactly as it applies to drafting. Asking once does not cover the next task.
+
+**Where the live wording sits.** All five places now say *"usually delegated to DeepSeek, after asking the owner which model does it (§19)"*: `CLAUDE.md`, the project guide's `SKILL.md`, the writing skill's `SKILL.md`, `chapter-production/reference/research.md`, and Constitution Principle VIII (amended to v3.0.2 on 21 September).
+
+**The check.** A search of the live rule files for the old wording ("95%", "large majority of cases") must find nothing. `command-code-delegation` Step 1 already asks about planning every time.
+
+**What does not count as a fix.** Changing the five sentences without reading §19, or asking once per session instead of once per task.
 
 ---
 

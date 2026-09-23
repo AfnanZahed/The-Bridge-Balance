@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Stage 4 — Autonomy">
+  <title>Stage 4 — Autonomy</title>
+  <desc>Multi-agent constellation: connected nodes forming an emergent network.</desc>
+  <defs>
+    <linearGradient id="s4-bg" x1="0" y1="0" x2="400" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#fdf2f8"/>
+      <stop offset="100%" stop-color="#fce7f3"/>
+    </linearGradient>
+    <linearGradient id="s4-stroke" x1="0" y1="0" x2="0" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#be185d"/>
+    </linearGradient>
+    <radialGradient id="s4-node" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="60%" stop-color="#fbcfe8"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </radialGradient>
+    <radialGradient id="s4-halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ec4899" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ec4899" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="s4-grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M20 0H0V20" fill="none" stroke="#ec4899" stroke-opacity="0.10" stroke-width="0.6"/>
+    </pattern>
+  </defs>
+
+  <!-- background card -->
+  <rect x="0" y="0" width="400" height="300" rx="14" fill="url(#s4-bg)"/>
+  <rect x="0" y="0" width="400" height="300" rx="14" fill="url(#s4-grid)"/>
+
+  <!-- soft halo -->
+  <circle cx="200" cy="150" r="135" fill="url(#s4-halo)"/>
+
+  <!-- faint outer ring -->
+  <circle cx="200" cy="150" r="110" fill="none" stroke="#ec4899" stroke-opacity="0.18" stroke-width="1" stroke-dasharray="2 4"/>
+
+  <!-- connections (network edges) -->
+  <g stroke="#ec4899" fill="none">
+    <!-- strong primary connections -->
+    <line x1="200" y1="150" x2="118" y2="92"  stroke-width="1.6" stroke-opacity="0.7"/>
+    <line x1="200" y1="150" x2="296" y2="100" stroke-width="1.6" stroke-opacity="0.7"/>
+    <line x1="200" y1="150" x2="305" y2="208" stroke-width="1.6" stroke-opacity="0.7"/>
+    <line x1="200" y1="150" x2="106" y2="210" stroke-width="1.6" stroke-opacity="0.7"/>
+
+    <!-- secondary connections -->
+    <line x1="118" y1="92"  x2="208" y2="60"  stroke-width="1.1" stroke-opacity="0.55"/>
+    <line x1="208" y1="60"  x2="296" y2="100" stroke-width="1.1" stroke-opacity="0.55"/>
+    <line x1="296" y1="100" x2="305" y2="208" stroke-width="1.1" stroke-opacity="0.55"/>
+    <line x1="305" y1="208" x2="240" y2="248" stroke-width="1.1" stroke-opacity="0.55"/>
+    <line x1="240" y1="248" x2="106" y2="210" stroke-width="1.1" stroke-opacity="0.55"/>
+    <line x1="106" y1="210" x2="118" y2="92"  stroke-width="1.1" stroke-opacity="0.55"/>
+
+    <!-- tertiary cross-links (emergence) -->
+    <line x1="118" y1="92"  x2="296" y2="100" stroke-width="0.9" stroke-opacity="0.4" stroke-dasharray="3 3"/>
+    <line x1="208" y1="60"  x2="305" y2="208" stroke-width="0.9" stroke-opacity="0.4" stroke-dasharray="3 3"/>
+    <line x1="106" y1="210" x2="200" y2="150" stroke-width="0.9" stroke-opacity="0.4" stroke-dasharray="3 3"/>
+    <line x1="305" y1="208" x2="200" y2="150" stroke-width="0.9" stroke-opacity="0.4" stroke-dasharray="3 3"/>
+  </g>
+
+  <!-- nodes (agents) -->
+  <g>
+    <!-- central orchestrator node -->
+    <g transform="translate(200 150)">
+      <circle cx="0" cy="0" r="14" fill="url(#s4-node)" stroke="url(#s4-stroke)" stroke-width="1.8"/>
+      <circle cx="0" cy="0" r="6"  fill="#ffffff"/>
+      <circle cx="0" cy="0" r="3"  fill="#be185d"/>
+    </g>
+
+    <!-- primary agents (4 cardinal-ish) -->
+    <g transform="translate(118 92)">
+      <circle cx="0" cy="0" r="10" fill="url(#s4-node)" stroke="url(#s4-stroke)" stroke-width="1.6"/>
+      <circle cx="0" cy="0" r="3.5" fill="#be185d"/>
+    </g>
+    <g transform="translate(296 100)">
+      <circle cx="0" cy="0" r="10" fill="url(#s4-node)" stroke="url(#s4-stroke)" stroke-width="1.6"/>
+      <circle cx="0" cy="0" r="3.5" fill="#be185d"/>
+    </g>
+    <g transform="translate(305 208)">
+      <circle cx="0" cy="0" r="10" fill="url(#s4-node)" stroke="url(#s4-stroke)" stroke-width="1.6"/>
+      <circle cx="0" cy="0" r="3.5" fill="#be185d"/>
+    </g>
+    <g transform="translate(106 210)">
+      <circle cx="0" cy="0" r="10" fill="url(#s4-node)" stroke="url(#s4-stroke)" stroke-width="1.6"/>
+      <circle cx="0" cy="0" r="3.5" fill="#be185d"/>
+    </g>
+
+    <!-- secondary agents (4 ring) -->
+    <g transform="translate(208 60)">
+      <circle cx="0" cy="0" r="7" fill="url(#s4-node)" stroke="url(#s4-stroke)" stroke-width="1.4"/>
+      <circle cx="0" cy="0" r="2.4" fill="#be185d"/>
+    </g>
+    <g transform="translate(240 248)">
+      <circle cx="0" cy="0" r="7" fill="url(#s4-node)" stroke="url(#s4-stroke)" stroke-width="1.4"/>
+      <circle cx="0" cy="0" r="2.4" fill="#be185d"/>
+    </g>
+
+    <!-- tertiary ambient agents (small) -->
+    <g fill="#ec4899" fill-opacity="0.85">
+      <circle cx="64"  cy="148" r="3"/>
+      <circle cx="340" cy="148" r="3"/>
+      <circle cx="200" cy="42"  r="2.6"/>
+      <circle cx="200" cy="262" r="2.6"/>
+      <circle cx="58"  cy="64"  r="2.2"/>
+      <circle cx="346" cy="68"  r="2.2"/>
+      <circle cx="58"  cy="246" r="2.2"/>
+      <circle cx="346" cy="246" r="2.2"/>
+    </g>
+  </g>
+</svg>

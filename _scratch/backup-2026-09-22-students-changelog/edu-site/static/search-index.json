@@ -1,0 +1,346 @@
+[
+  {
+    "title": "Accessibility Statement",
+    "route": "/accessibility",
+    "headings": [
+      "Accessibility Statement",
+      "The standard this site targets: WCAG 2.2, Level AA",
+      "The two automated checks that run against this site",
+      "What the site does, in specific terms",
+      "Keyboard: you can always see where you are",
+      "Images must carry real alt text — and the build enforces it",
+      "Color is never the only way to read a state",
+      "Motion, contrast, and Windows high contrast",
+      "Touch targets are big enough to hit",
+      "What this page does not claim",
+      "Reporting an accessibility problem"
+    ],
+    "content": "Accessibility Statement Some readers move through a page with a mouse and read it on a bright screen. Others use a screen reader — software that reads a page aloud, or sends it to a braille display, for people who cannot see the screen. Others rely on keyboard navigation, moving around a page with Tab, Shift+Tab, Enter, and Space instead of a mouse. Others turn on operating-system settings that cut down motion or raise contrast. This page says, in plain words, what this site actually does to work for those readers, and what it does not do yet. Every claim below is tied to a real file in this project, named next to it. The standard this site targets: WCAG 2.2, Level AA WCAG stands for the Web Content Accessibility Guidelines — a widely used international standard for making websites usable by people with disabilities. 2.2 is the version of the guidelines. WCAG defines three levels of conformance, from A at the minimum upward, and AA is the middle level: the one most organisations and public-sector sites are held to. This site's accessibility stylesheet records its baseline as WCAG 2.2 Level AA. Read that as a target the project works against, not a badge: an outside body has not verified it. (Source: , whose header states the baseline and the date it was last revised.) The two automated checks that run against this site The site has two automated checks wired in as project scripts in . \"Automated\" means a program does the checking, rather than a person reading the page. - axe (). axe is an automated accessibility testing engine: it inspects pages and reports the accessibility problems it can detect by rule — for example, a control with no accessible name, or text and a background color that do not contrast enough behind it. - Lighthouse (). Lighthouse is an audit tool built into Chrome. It scores a page against several categories, including performance and accessibility, and reports what it found. Automated tools matter, but they have a hard limit worth stating plain",
+    "excerpt": "Accessibility Statement Some readers move through a page with a mouse and read it on a bright screen. Others use a screen reader — software that reads a page aloud, or sends it to a braille display,…"
+  },
+  {
+    "title": "Introduction to Stage 0",
+    "route": "/ch00-introduction",
+    "headings": [
+      "Introduction to Stage 0"
+    ],
+    "content": "Introduction to Stage 0 Welcome to the first of three stages, where you'll build a solid foundation in how a computer actually works, including: - The Machine - What is actually switching inside a computer, and how did two states turn out to be enough? - How did a machine learn to hold a number and take an instruction, instead of being rewired for every job? - Languages, and Why One Was Never Enough - How instructions stopped being physical wiring and became something you can write. - Why every new kind of job pulled a new language into existence. - Sharing a Machine - Where the terminal, the file and the screen came from, and what each one replaced. - How one machine became many machines, and how they learned to reach each other. - Where the web came from, and the split between what runs on your machine and what runs on someone else's. - The Toolbox You'll Actually Open - What is on your own machine right now, and what every piece of it was built to replace. - The six command lines that look alike and are not the same thing. - The AI, and the Workflow: - The long road AI research took before it reached ordinary programming. - Spec-Driven Engineering — the workflow the rest of this book builds on. State what you want and what can't change, then check the result: Specify → Design → Implement → Verify. The last chapter of this stage teaches it in full. After exploring all of it, you'll be able to say what a computer is actually doing while it runs something. You'll also understand why every tool on it is shaped the way it is. Nothing in this stage is code you have to write. It is the ground that code stands on. Your own computer is the worked example. By the last few chapters you'll be able to point at each tool on it, say what it is, and name what it replaced. There is no quiz at the end of this stage, and no certificate. The credentials this book leads to are real ones. CS50P and CS50W are Harvard's two introduction courses, in programming and in web development. Bo",
+    "excerpt": "Introduction to Stage 0 Welcome to the first of three stages, where you'll build a solid foundation in how a computer actually works, including: - The Machine - What is actually switching inside a…"
+  },
+  {
+    "title": "How a Machine Learned to Hold a Number",
+    "route": "/ch01-foundations",
+    "headings": [
+      "How a Machine Learned to Hold a Number",
+      "Why a Computer Only Says Yes or No",
+      "From flashing a message to answering a question",
+      "Instructions You Can Hold in Your Hand",
+      "The Same Switch, Built Three Different Ways",
+      "One switch is never nothing",
+      "What the 1940s ended with"
+    ],
+    "content": "How a Machine Learned to Hold a Number Welcome to the first real chapter of the book. You have just read what this stage is for; now we start building, and we start from nothing at all. Here is what we are going to work out together, and why each piece matters: - Why a computer only ever says yes or no. Everything else a computer does is built on top of this one answer, so it is the right place to begin. - How an instruction became something you could hold in your hand. This is the moment \"telling a machine what to do\" became possible at all. - The same switch, built three different ways. Knowing this is why the phrase \"the computer got faster\" will stop sounding like magic to you. By the end you will have a machine that can hold a number — and still no way to tell it what to do with one. Closing that gap is the whole of the next chapter. Let's start with something you already know how to do. Why a Computer Only Says Yes or No Imagine you want to send a message to a friend across the street, at night, and all you have is a torch. You cannot shout. You can only switch the light on or off. It does not feel like much. But you and your friend can agree in advance what the flashes mean — and the moment you do, that torch can send any message you like. One flash for yes, two for no. A longer code for letters, if you are patient. Two states, agreed in advance, are enough to carry anything. Now here is the part worth slowing down for. Why only two? Why not use the torch's brightness — dim for A, medium for B, bright for C — and send messages far faster? Try it and you will see the problem immediately. Your friend is across a street, in the dark, possibly in the rain. Dim and medium start to look the same. A car goes past and its headlights wash out the difference. But on and off survive all of it. Even a weak, flickering light is unmistakably light, and darkness is unmistakably darkness. That is the entire reason a computer works on two states rather than ten. Not because t",
+    "excerpt": "How a Machine Learned to Hold a Number Welcome to the first real chapter of the book. You have just read what this stage is for; now we start building, and we start from nothing at all. Here is what…"
+  },
+  {
+    "title": "From Wires to Words: How Programming Began",
+    "route": "/ch02-programming-is-born",
+    "headings": [
+      "From Wires to Words: How Programming Began",
+      "A Helper Who Does Exactly What You Say",
+      "When Programming Meant Moving Cables",
+      "Writing the Instructions as Numbers",
+      "Short Words Instead of Numbers",
+      "Something You Could Read as a Sentence",
+      "What did not change"
+    ],
+    "content": "From Wires to Words: How Programming Began Good — you have a machine. The last chapter left you with one that can hold its own instructions in memory, and nobody had yet told it what to do with them. This chapter is about the people who first tried, and how badly it went before it went well. We will cover four steps, each one solving the problem the step before it created: - Programming by plugging in cables. Worth seeing, because it shows what the word \"programming\" had to be invented away from. - Writing instructions as plain numbers. The first real fix — and it made programs unreadable to humans. - Short words standing in for those numbers. A small idea with enormous consequences, which you will meet again in every later stage. - Something a person could read as a sentence. The first true programming language, and the thing it never made any easier. Why this matters to you specifically: every tool you will use later in this book — every editor, every language, every AI coding assistant — exists somewhere on this ladder. Knowing which rung each one sits on is how you judge what it can and cannot do for you. One thing to carry with you first. A Helper Who Does Exactly What You Say Imagine a helper who will do absolutely anything you ask, tirelessly, at enormous speed — and who has no judgment whatsoever. Ask them to fetch milk from the shop and they will. Ask them to fetch milk from the shop, and say the shop is left when it is actually right, and they will walk left until they reach the sea. They will not stop. They will not wonder. They were told left. That helper is a computer, and every step in this chapter is somebody trying to find a less painful way to talk to them. The speed is real. The absence of judgment never goes away — not in this chapter, and not in the last chapter of this book. Keep the helper in mind. We are about to watch four generations of people work out how to give them directions. When Programming Meant Moving Cables Before the stored-instru",
+    "excerpt": "From Wires to Words: How Programming Began Good — you have a machine. The last chapter left you with one that can hold its own instructions in memory, and nobody had yet told it what to do with them.…"
+  },
+  {
+    "title": "Changelog",
+    "route": "/changelog",
+    "headings": [],
+    "content": "Changelog A dated record of what actually shipped — a chapter going , a stage being promoted, a real platform feature landing. Internal work (refactors, lint fixes, a retried build) doesn't appear here; this page is for changes a reader would notice or care about. 2026-09-22 - The course has three stages now: Stage 0 Introduction to SDE, Stage 1 SDE Mastery (AI-Driven), and Stage 2 SDE Mastery (AI-Native). Agentic AI is taught inside software engineering rather than as a stage of its own, so directing coding agents is learned alongside the engineering and building them properly is what Stage 2 is for. Every stage list on the site — the sidebar, the footer, the stage cards on the homepage, the Welcome page and the FAQ — now says the same three things in the same order. - The CS50 credential pages are off the site while the Credentials track is redesigned. Credentials is no longer a stage: it is now a separate track that runs alongside the three stages, and it is switched off for now. Everything the two Harvard certificates are, what they cost, and what they are worth to you is still answered in the FAQ. 2026-09-21 - The Welcome page now names the five stages exactly as the site does, and it carries the safety floor in plain words. The stage names on the page matched the book but not the sidebar or footer — \"Foundations\" here, \"Spec-Aware Vibe Engineering Foundations\" there. All of them now agree, so the stage you see on the Welcome page is the stage you see in the menu. The plain-words safety-floor box the chapters carry now sits on the Welcome page too: whatever the AI writes for you is not finished until you have checked it yourself. One note under \"How to read this book\" was rewritten in plain words, and the closing section is now titled \"Start reading\" instead of \"Ready?\". 2026-09-20 - The four \"why this book\" cards on the homepage are cards now. They had no styling at all, so the four headings and the four paragraphs under them ran together as one long column of",
+    "excerpt": "Changelog A dated record of what actually shipped — a chapter going , a stage being promoted, a real platform feature landing. Internal work (refactors, lint fixes, a retried build) doesn't appear…"
+  },
+  {
+    "title": "Code of Conduct",
+    "route": "/code-of-conduct",
+    "headings": [
+      "Code of Conduct",
+      "What the standard is",
+      "What counts as a violation",
+      "What this covers, and what it does not",
+      "Reporting, honestly",
+      "What happens when the standard is broken"
+    ],
+    "content": "Code of Conduct The Bridge Balance is a free, three-stage curriculum that people read today and will discuss together later. This page states the standard of behaviour for anyone who interacts on a Bridge Balance surface. It governs how people treat each other, and it never governs what the book teaches. It is short on purpose. Nothing in it depends on a process that does not exist yet, and nothing in it invents a channel that nobody is watching. What the standard is Everyone interacting on a Bridge Balance surface is expected to: - Be respectful. Argue with an idea as forcefully as you like, but aim at the idea and not the person. Read a message in the way its author intended before assuming the worst. - Give no ground to harassment. No insults, threats, intimidation, stalking, or unwanted sexual attention. This holds in public and in private, and it follows you to other platforms when a disagreement starts here. - Refuse discrimination. No slurs and no hostility aimed at anyone's race, ethnicity, nationality, religion, caste, gender, gender identity, sexual orientation, disability, age, or experience level. A curriculum written for a wide range of readers has no room for it. - Engage honestly. Cite what you borrow and do not pass off someone else's work as your own. Do not spread claims you know to be false, and do not claim to speak for The Bridge Balance. Respect is the idea the other three rest on. The list below is what breaking it looks like in practice. What counts as a violation A violation is any behaviour that breaks the standard above. The examples below are the common ones, not an exhaustive list: - Mocking or belittling another person instead of answering their argument. - Continuing to contact someone after they have asked you to stop. - Sexual comments, images, or attention that were clearly unwanted. - Slurs, or jokes built on someone's identity, even when they are framed as humour. - Threatening violence, or publishing another person's private deta",
+    "excerpt": "Code of Conduct The Bridge Balance is a free, three-stage curriculum that people read today and will discuss together later. This page states the standard of behaviour for anyone who interacts on a…"
+  },
+  {
+    "title": "Frequently Asked Questions",
+    "route": "/faq",
+    "headings": [],
+    "content": "Frequently Asked Questions Short, direct answers to what readers ask before they start. Nothing here is aspirational: if something is not built yet, it says so. What is The Bridge Balance? A free, three-stage curriculum that takes a student from zero to spec-driven AI-agent engineering. Spec-driven means you write down what you want built and what must not change before any code is generated; the agent implements inside those boundaries, and you verify the result and take ownership of it. The curriculum is anchored by two Harvard CS50 credentials — CS50P (Python) and CS50W (web) — earned partway through. The textbook is free forever. The business that funds it is a separate, optional catalogue of Claude Code sub-agents, skills, MCP servers, and plugins. Those are paid products. The curriculum itself never charges for content. Who is it for? Anyone who has never programmed. The book starts from zero: nothing is skipped, and nothing is left for you to guess. No experience is needed to begin. A new word is explained the first two or three times you meet it. After that it becomes a link to the glossary, so a reminder is one tap away. A word that is too big for one sentence gets a short passage of its own before it is used. Is it really free? Yes. The textbook is free with no paywall, no locked chapter, and no email gate, and that holds across the whole curriculum. It is a standing project principle, not a launch offer. The only paid surfaces are the optional digital products sold alongside the book — Claude Code sub-agents, skills, MCP servers, and plugins. You can complete every stage without buying any of them. What does the CS50 certification cost? The Credentials track is built on two Harvard courses: CS50P (Introduction to Programming with Python) and CS50W (Web Programming with Python and JavaScript). Both courses are free to audit. You can watch every lecture and do the work at no cost. The certificate is the separate part: a verified certificate, issued through ",
+    "excerpt": "Frequently Asked Questions Short, direct answers to what readers ask before they start. Nothing here is aspirational: if something is not built yet, it says so. What is The Bridge Balance? A free,…"
+  },
+  {
+    "title": "Glossary",
+    "route": "/glossary",
+    "headings": [],
+    "content": "Glossary This page is generated from — specifically, from every entry whose is . A term still marked or in that ledger is a known debt, not a settled definition, and does not appear here yet. If a later chapter reuses one of the words below, it reuses this exact wording — that consistency is the entire point of tracking terms in one place. Agent A program that can read your files, write new code, edit existing code, and run commands on a computer — on its own, in a sequence, without asking you to approve every single step. First met in Spec-Driven Engineering. Put another way: a very fast, very capable helper — not an architect, and not the owner of the result. Blast radius How much can break, and how far the damage reaches, if a change goes wrong. First met in Spec-Driven Engineering. Specification (spec) A written statement of what you want built and what shouldn't change, agreed before you start. First met in Spec-Driven Engineering. Spec-Driven Engineering The discipline in which the engineer specifies intent and boundaries, the AI implements within them, and a human verifies before taking ownership. First met in Spec-Driven Engineering. This is the book's own name for the idea at its centre, not a standard industry term. It is explained the first few times you meet it. After that, it links back to this page. Vibe coding Building software entirely through iterative AI prompts without understanding the underlying code. Coined by Andrej Karpathy, February 2025; named Collins Dictionary's Word of the Year for 2025. First met in Spec-Driven Engineering. The term is not ours — it is credited to whoever coined it wherever it appears.",
+    "excerpt": "Glossary This page is generated from — specifically, from every entry whose is . A term still marked or in that ledger is a known debt, not a settled definition, and does not appear here yet. If a…"
+  },
+  {
+    "title": "Binary: The One Fact a Machine Never Doubts",
+    "route": "/intro-1-binary-to-programming/01-binary",
+    "headings": [
+      "Binary: The One Fact a Machine Never Doubts",
+      "The word, taken apart",
+      "The wall that made two the only option",
+      "What is actually switching",
+      "Watching one switch fail",
+      "Nothing above a bit checks a bit",
+      "When the floor under a number is not exact",
+      "Where this comes from",
+      "Before you move to the next switch pattern"
+    ],
+    "content": "Binary: The One Fact a Machine Never Doubts The word, taken apart *Binary comes from the Late Latin binarius, \"consisting of two.\" It is built from bini, \"two by two, two apiece,\" which traces back to bis, \"twice.\" Strip away the Latin, and the word is telling you something plain: whatever it names comes in exactly two. Take a guess before reading on. If binary means \"built from exactly two of something,\" what does a computer hold two of? Most people guess correctly: the digits 0 and 1. Most people also stop there, treating 0 and 1 as a smaller, stranger way to count than 0 through 9. Hold that guess. It is not wrong. It is also not the interesting half of the answer. The wall that made two the only option Picture an engineer in the 1940s building a machine from physical switches — valves and relays then, transistors now. Each switch has to report its state correctly. It has to do that billions of times a second, without ever once being misread. Two states, held far apart, are easy to tell apart even at enormous speed. Engineers tried three and five states too, on paper and in early machines, because more states per switch means more information in the same hardware. The idea fails on one ordinary fact: real electrical signals carry noise, and noise blurs whatever sits nearby. Two widely separated states survive that blur. Three or five closely packed ones do not. A signal meant to say \"state three\" drifts just far enough to read as \"state two,\" and the machine never knows it happened. So the choice of two was not elegance. It was surrender to a wall nobody could build around. Two is the largest number of states a switch can hold and still read reliably, at the speed and scale a computer needs. Everything else in this chapter follows from that one compromise. What is actually switching A transistor is a tiny electrical switch with exactly two stable states — a higher voltage or a lower one, nothing meaningful between them. Apple's own published specification for its",
+    "excerpt": "Binary: The One Fact a Machine Never Doubts The word, taken apart *Binary comes from the Late Latin binarius, \"consisting of two.\" It is built from bini, \"two by two, two apiece,\" which traces back to…"
+  },
+  {
+    "title": "From Electricity to Programming: Binary, Assembly, and High-Level Languages",
+    "route": "/intro-1-binary-to-programming",
+    "headings": [
+      "From Electricity to Programming: Binary, Assembly, and High-Level Languages",
+      "The word is older than the machine",
+      "One switch, two states",
+      "The wall you hit doing it by hand",
+      "Giving the numbers names",
+      "What programming actually is",
+      "A language built for you, not the machine",
+      "The idea doing the work underneath",
+      "Before you turn the page"
+    ],
+    "content": "From Electricity to Programming: Binary, Assembly, and High-Level Languages You are here to learn programming — writing the instructions that make a machine do something. Before that gets defined properly, stop and look at the word itself. The word is older than the machine *Program did not begin as a computing term. It entered English in the 1630s, borrowed from the Greek programma — a written public notice, something set down in writing so everyone could see it. The parts are pro-, meaning forth or in front, and gramma, meaning something written. A printed programme at a wedding, or a list of pieces at a concert, keeps that first sense exactly: a plan written down in advance, for other people to follow. So take a guess before reading on. If program means a plan written down in advance, what would programming be? Most people, asked cold, describe typing. Fast typing, usually — fingers moving, code appearing, competence measured by how quickly the syntax comes out. Hold that guess. This chapter is going to test it, and the distance between it and the truth is the reason the next four rungs exist at all. The nearer thing you already hold is a printed exam timetable. That is a program in the original sense. Someone decided what happens when, fixed the order, and wrote it down. The timetable does not explain itself, does not negotiate, and does not care whether you agree. It states, in advance, what will happen. A computer program is that, with one difference that changes everything: the follower is a machine with no judgement at all. One switch, two states The machine is built from transistors — tiny electrical switches, each with exactly two stable states. As of 2026, a processor in an ordinary laptop holds somewhere north of ten billion of them, each holding a clear on or off, switching billions of times a second. Engineers could have tried switches with three or five reliable states instead of two. Building that to work at this scale is not possible, because electr",
+    "excerpt": "From Electricity to Programming: Binary, Assembly, and High-Level Languages You are here to learn programming — writing the instructions that make a machine do something. Before that gets defined…"
+  },
+  {
+    "title": "Let's Build One Thing Together: The Complete Architecture Story",
+    "route": "/intro-2-architecture-map",
+    "headings": [
+      "Let's Build One Thing Together: The Complete Architecture Story",
+      "Two words worth taking apart",
+      "Where does this thing even live?",
+      "What the student actually sees and touches",
+      "The trap",
+      "Something the student can't see or touch",
+      "How the two even talk",
+      "The goldfish problem",
+      "Who's allowed to do what",
+      "More than one builder",
+      "From your laptop to the real world",
+      "What just got built",
+      "The same map, wearing different clothes",
+      "Two ways to hold the map wrong"
+    ],
+    "content": "Let's Build One Thing Together: The Complete Architecture Story You are about to build something — not on a laptop, not yet, in your head, one decision at a time. By the end, the whole shape of Stage 1 will have assembled itself in front of you, one wall at a time, in the order Stage 1 itself teaches it. The thing you are building is small on purpose: a page where students sign up for a club. The AI club, capped at thirty seats. Two words worth taking apart Before a single box is built, look at the two words that name its halves. Frontend splits into front and end. Backend splits into back and end. Both are no more than a direction word plus the word end — the end at the front, the end at the back. That is a real win, and it is a small one. The name tells you a split exists, and that the split is about facing. It does not tell you whose computer each half runs on, and that missing half turns out to be the whole chapter. The nearest thing you already hold is a bank branch. The counter faces the street, with a clerk behind it; the strongroom sits behind a wall you never see. You can stand at the counter all morning. You cannot walk into the strongroom, because the clerk controls that door, not you. That is the front-and-back split exactly: one part facing you, one part facing away. Here is where the comparison breaks, and the break matters. In a bank, the counter and the strongroom belong to the same organisation, and the clerk is an employee who can be corrected. In software, the part facing the user is a program running on a computer the user owns — one they can open, read and change. The counter is not a clerk. It is a machine you handed to the visitor. Before reading on, take the guess those two words invite. The club has thirty seats, and the rule is that no thirty-first student gets in. Which half would you put that rule in — the half facing the student, or the half facing away? Most people choose the half facing the student, because that is where the sign-up fo",
+    "excerpt": "Let's Build One Thing Together: The Complete Architecture Story You are about to build something — not on a laptop, not yet, in your head, one decision at a time. By the end, the whole shape of Stage…"
+  },
+  {
+    "title": "From Text Editors to AI-Integrated IDEs",
+    "route": "/intro-3-editors-and-ides",
+    "headings": [
+      "From Text Editors to AI-Integrated IDEs",
+      "Two words, and the gap between them",
+      "The nearest thing you already hold",
+      "Why anyone needed this",
+      "Who makes these tools, and whether they are alive",
+      "What \"integrated\" actually buys you",
+      "From an editor that completes to one that acts",
+      "Assisted, or driven: the difference that matters",
+      "The smallest thing that works",
+      "Where it sits, and what it can reach",
+      "What it costs",
+      "When to reach for which",
+      "Where this thread leads",
+      "Before you turn the page"
+    ],
+    "content": "From Text Editors to AI-Integrated IDEs The difference — between a program that holds text and a program that understands it — is the story of this chapter. Code has to be written somewhere, and that somewhere has changed twice in living memory. It began as a plain text editor. It became one program that put the editor, the terminal, the debugger and the language tools in a single window. Now it is becoming a program that writes code alongside you. Each of those is a rung, and the last one forks in two. Two words, and the gap between them Start with the word editor. A text editor is a program for changing text files — letters, numbers and symbols, with no meaning attached. Notepad on Windows is one. To a text editor, a line of code is a string of characters. It can count them and colour them. It has no idea that the line is a program. Now the longer phrase: IDE, short for integrated development environment. Three words, and most readers read past the first one. *Integrated means joined into a single program. Development means building software, not writing prose. Environment means everything around the code: the place you run it, the place you watch it fail, the place you read the error. Put together, an IDE is one program where the editor and every other tool you need sit together, and where those tools share what they know about your code. Here is a guess worth making before you read on. Asked what an IDE is, most people describe a bigger and fancier text editor — the same box, with more buttons and a nicer colour scheme. Hold that guess. The gap between it and the truth is small in words and large in effect, and the exact word it misses is integrated. The point was never the editor. The point is that in an IDE, the editor, the terminal, the debugger, the build tools and the language understanding are wired to each other. One shared understanding of your code reaches all of them at once. The nearest thing you already hold The nearest thing you already own is the p",
+    "excerpt": "From Text Editors to AI-Integrated IDEs The difference — between a program that holds text and a program that understands it — is the story of this chapter. Code has to be written somewhere, and that…"
+  },
+  {
+    "title": "The Terminal and the Rise of CLI Coding Agents",
+    "route": "/intro-4-terminals-and-cli-agents",
+    "headings": [
+      "The Terminal and the Rise of CLI Coding Agents",
+      "A screen at the end of a wire",
+      "What a terminal actually is",
+      "CMD, PowerShell, Bash, Git Bash — and what your machine already has",
+      "Picking one, on purpose",
+      "Why you cannot skip this one",
+      "The smallest command that works, then the same one broken",
+      "Coding agents that live in the terminal",
+      "How a CLI agent uses the terminal to write code",
+      "Which one is used most",
+      "What it costs",
+      "Who should open an IDE instead",
+      "The failure conditions, and their early symptoms",
+      "Where this line of tools came from",
+      "Before you turn the page"
+    ],
+    "content": "The Terminal and the Rise of CLI Coding Agents A terminal is the text window where you type commands instead of clicking. Before you meet it properly, look at the word itself, because the name carries a history that changes what you think you are looking at. A screen at the end of a wire The Online Etymology Dictionary records the noun terminal in 1831, meaning the last letter or sound of a word. By 1838 it had a second sense, in electricity, for the metal posts at the end of a battery. The word comes from the Latin terminus — an end, or a boundary line. Before reading on, take a guess. If a terminal is an end, what would a computer terminal be? Most people answer that it is the window they type into. Hold that guess. This chapter marks it a few paragraphs from here. The nearest thing you already hold is an ATM. You type a number on its keypad, and it prints your balance. Your money is not inside it. The account sits in a bank's computer somewhere else, and the machine in front of you is the end of the wire that reaches it. A computer terminal was exactly that, for text. The computer at the other end was a mainframe or a minicomputer — a machine the size of a wardrobe, shared by many people at once. The terminal was a keyboard and a screen at the end of a single cable. It held nothing on its own and remembered nothing. The earliest terminals were typewriters. A Teletype Model 33 printed letters onto paper and sent them down the cable, and it existed for telegraphy long before it existed for computing. Screens arrived later, and one of them set the standard everyone copied: the DEC VT100, shipped in 1978. Programs still speak its dialect today, which is why a key on your keyboard sends an arrow cursor and not a letter. What a terminal actually is A terminal is a window that sends characters to another program and shows the characters that come back. The mechanism is that thin. The terminal does not understand your command. It draws it, sends it, and prints the reply.",
+    "excerpt": "The Terminal and the Rise of CLI Coding Agents A terminal is the text window where you type commands instead of clicking. Before you meet it properly, look at the word itself, because the name carries…"
+  },
+  {
+    "title": "Two Ways to Fail, and the Bridge Between Them: Spec-Driven Engineering",
+    "route": "/intro-5-spec-driven-engineering",
+    "headings": [
+      "Two Ways to Fail, and the Bridge Between Them: Spec-Driven Engineering",
+      "Read the name before the explanation",
+      "The written order a builder cannot guess",
+      "Who named this, and what it grew out of",
+      "The problem: speed you can feel, cost you cannot",
+      "What it actually is: four stages, with a line through them",
+      "The guess, scored",
+      "Development is not Engineering",
+      "The smallest version that works",
+      "The same loop, with one stage cut",
+      "Two changes, run through the loop",
+      "The CSV export",
+      "A refactor that passes every test",
+      "Where this sits, and what breaks without it",
+      "When you are the reviewer, not the author",
+      "What it costs",
+      "When to reach for it, and when it fails",
+      "Where the idea comes from, and who to read next",
+      "Before you turn the page"
+    ],
+    "content": "Two Ways to Fail, and the Bridge Between Them: Spec-Driven Engineering Read the name before the explanation The discipline this chapter is about is called Spec-Driven Engineering. Before the explanation, read the name in three parts and make a guess. Spec is short for specification — what you want built, written down before work starts. *Driven means the specification leads: the code follows it, not the other way round. Read together, spec-driven predicts a workflow you can already picture. You write down what you want. The agent builds it. So hold the guess the name has already formed: Spec-Driven Engineering is a way of working where you write the specification first, and the agent writes the code. That guess is close. It is close enough to write down, because the part it misses is the reason this chapter exists. Hold it, and come back to it once the mechanism is on the page. The written order a builder cannot guess You met the core of this in the first chapter, From Electricity to Programming. You cannot tell a machine to \"make the checkout faster\". You tell it to \"reject a request when the account has more than 100,000 rows pending\". A wish is not an instruction, because the machine cannot ask what you meant. The everyday version is a written order you hand a builder. \"Build me a wall\" is a wish. A page that says how long, how high, what load the wall must carry, and what to do if the ground turns soft is an order. The builder works from the page. There is one difference between that builder and your agent, and the whole chapter turns on it. A builder who does not understand your page stops and asks you a question. An agent does not stop. It fills the gap with something plausible, and keeps going. Who named this, and what it grew out of Spec-Driven Engineering is this book's own name for its discipline. There is no product by that name to install. The practice underneath it grew out of something real and current: GitHub shipped a specification toolkit called Spe",
+    "excerpt": "Two Ways to Fail, and the Bridge Between Them: Spec-Driven Engineering Read the name before the explanation The discipline this chapter is about is called Spec-Driven Engineering. Before the…"
+  },
+  {
+    "title": "Performance & Accessibility Targets",
+    "route": "/perf-targets",
+    "headings": [
+      "Performance & Accessibility Targets",
+      "Performance and accessibility targets, explained",
+      "Commands and fixed thresholds"
+    ],
+    "content": "Performance & Accessibility Targets Performance and accessibility targets, explained The Bridge Balance runs a quality gate on every pull request so regressions are caught before they reach students. The gate has two tools. Lighthouse scores four categories: Performance (≥ 90), Accessibility (≥ 95), Best Practices (≥ 95), and SEO (≥ 95). The first covers the loading experience; the second covers WCAG 2.1 AA conformance; the third covers HTTPS, console health, deprecated APIs, and image sizing; the fourth covers discoverability. axe-core supplies rule-level accessibility findings: the blocking rule is zero serious or critical violations, while moderate and minor findings are recorded but do not block. Running locally is straightforward: Understanding variance matters. Simulated throttling and paint timing make scores drift by a few points. Re-run a borderline gate before acting on it; a consistent failure is a real regression. The common fixes are stable across projects: ensure colour contrast, add image alt text, give links accessible names, keep heading order, use semantic landmarks, and set explicit image dimensions to avoid layout shift. Content authors usually prevent most failures by adding a page description, describing images, and keeping the layout simple. When a PR must legitimately ship below target, update the thresholds in both and , and document the rationale. Never change only one copy or the two will drift. Commands and fixed thresholds Thresholds: Performance ≥ 90 · Accessibility ≥ 95 · Best Practices ≥ 95 · SEO ≥ 95 · axe-core zero serious/critical (/ recorded, non-blocking). Local audit commands: Reports produced: , , (uploaded as CI artifacts, 90-day retention). Threshold locations: () and (). Update both together when a threshold changes.",
+    "excerpt": "Performance & Accessibility Targets Performance and accessibility targets, explained The Bridge Balance runs a quality gate on every pull request so regressions are caught before they reach students.…"
+  },
+  {
+    "title": "Foundations",
+    "route": "/stage-01-sde-mastery-ai-driven/01-foundations",
+    "headings": [],
+    "content": "Foundations",
+    "excerpt": "Foundations"
+  },
+  {
+    "title": "Core Programming",
+    "route": "/stage-01-sde-mastery-ai-driven/02-core-programming",
+    "headings": [],
+    "content": "Core Programming",
+    "excerpt": "Core Programming"
+  },
+  {
+    "title": "Frontend",
+    "route": "/stage-01-sde-mastery-ai-driven/03-frontend",
+    "headings": [],
+    "content": "Frontend",
+    "excerpt": "Frontend"
+  },
+  {
+    "title": "Backend",
+    "route": "/stage-01-sde-mastery-ai-driven/04-backend",
+    "headings": [],
+    "content": "Backend",
+    "excerpt": "Backend"
+  },
+  {
+    "title": "Databases",
+    "route": "/stage-01-sde-mastery-ai-driven/05-databases",
+    "headings": [],
+    "content": "Databases",
+    "excerpt": "Databases"
+  },
+  {
+    "title": "Git & GitHub",
+    "route": "/stage-01-sde-mastery-ai-driven/06-git-github",
+    "headings": [],
+    "content": "Git & GitHub",
+    "excerpt": "Git & GitHub"
+  },
+  {
+    "title": "Claude Code (and other coding-agent CLIs)",
+    "route": "/stage-01-sde-mastery-ai-driven/claude-code",
+    "headings": [],
+    "content": "Claude Code (and other coding-agent CLIs)",
+    "excerpt": "Claude Code (and other coding-agent CLIs)"
+  },
+  {
+    "title": "Context Engineering",
+    "route": "/stage-01-sde-mastery-ai-driven/context-engineering",
+    "headings": [],
+    "content": "Context Engineering",
+    "excerpt": "Context Engineering"
+  },
+  {
+    "title": "Stage 1 — SDE Mastery (AI-Driven)",
+    "route": "/stage-01-sde-mastery-ai-driven/",
+    "headings": [],
+    "content": "Stage 1 — SDE Mastery (AI-Driven) This stage is SDE Mastery (AI-Driven). It merges what used to be two separate stages — Stage 1, Spec-Aware Vibe Engineering Foundations, and Stage 3, Mastering AI Coding Agents — into one, so the engineering foundations and the AI coding agents are learned together rather than one after the other. The placeholder chapters from both former stages were carried over into this folder unchanged; the redesigned chapter list is still to come. > Detailed chapter content to be added when the Stage 1 video series is recorded.",
+    "excerpt": "Stage 1 — SDE Mastery (AI-Driven) This stage is SDE Mastery (AI-Driven). It merges what used to be two separate stages — Stage 1, Spec-Aware Vibe Engineering Foundations, and Stage 3, Mastering AI…"
+  },
+  {
+    "title": "Prompt Engineering",
+    "route": "/stage-01-sde-mastery-ai-driven/prompt-engineering",
+    "headings": [],
+    "content": "Prompt Engineering",
+    "excerpt": "Prompt Engineering"
+  },
+  {
+    "title": "Skills, MCP Servers, and Workflows",
+    "route": "/stage-01-sde-mastery-ai-driven/skills-and-mcp",
+    "headings": [],
+    "content": "Skills, MCP Servers, and Workflows",
+    "excerpt": "Skills, MCP Servers, and Workflows"
+  },
+  {
+    "title": "Evaluations",
+    "route": "/stage-02-sde-mastery-ai-native/evaluations",
+    "headings": [],
+    "content": "Evaluations",
+    "excerpt": "Evaluations"
+  },
+  {
+    "title": "Stage 2 — SDE Mastery (AI-Native)",
+    "route": "/stage-02-sde-mastery-ai-native/",
+    "headings": [],
+    "content": "Stage 2 — SDE Mastery (AI-Native) This stage is the shift from \"one agent, one task\" to \"many agents, one workflow.\" You learn to build RAG pipelines, wire tool calling, design multi-agent systems, and measure whether your agents actually work. Chapters - RAG and Tool Calling - Multi-Agent Systems - Evaluations > Detailed chapter content to be added when this stage's video series is recorded.",
+    "excerpt": "Stage 2 — SDE Mastery (AI-Native) This stage is the shift from \"one agent, one task\" to \"many agents, one workflow.\" You learn to build RAG pipelines, wire tool calling, design multi-agent systems,…"
+  },
+  {
+    "title": "Multi-Agent Systems",
+    "route": "/stage-02-sde-mastery-ai-native/multi-agent-systems",
+    "headings": [],
+    "content": "Multi-Agent Systems",
+    "excerpt": "Multi-Agent Systems"
+  },
+  {
+    "title": "RAG and Tool Calling",
+    "route": "/stage-02-sde-mastery-ai-native/rag-and-tool-calling",
+    "headings": [],
+    "content": "RAG and Tool Calling",
+    "excerpt": "RAG and Tool Calling"
+  },
+  {
+    "title": "Welcome",
+    "route": "/welcome",
+    "headings": [],
+    "content": "Welcome Welcome to The Bridge Balance — a free curriculum from zero programming background to engineering autonomous AI agents of your own. Two genuine Harvard credentials sit inside that arc, midway through it. One discipline carries you the whole way: Spec-Driven Engineering, software engineering plus AI. You use an AI coding agent — AI software that writes and runs code for you, mostly unsupervised — to build. Later, you learn to build AI agents yourself. What is Spec-Driven Engineering? Software engineering, with AI on both sides of it. You direct an AI coding agent to build faster today. Later in this book, you learn to design AI agents of your own. Neither half works without the other. The problem it solves The industry has split into two failing habits. One refuses AI coding agents outright and falls behind. The other lets an agent write everything without checking it — a habit real enough now to have a name: vibe coding, Collins Dictionary's 2025 Word of the Year. A 2025 METR study found AI tools made experienced developers 19% slower on complex tasks, even though the work felt faster to them. Spec-Driven Engineering is the discipline between both failures. Decide what to build, and its limits, in writing, before the agent starts. Let the agent write the code — that part, it does faster than you. Then check what it produced before you own it as yours. Why the checking can't move to the machine A travel agent decides where you fly. A real-estate agent decides which listings to show you. The word agent borrows that same sense of independent judgment. What actually runs is bounded software — its independence is a setting you control, not a trait it has. An AI coding agent's confidence never wavers, right or wrong. That steadiness is the real risk, more than any single mistake it makes. Compare it to a courier's tracking page. That page checks your parcel from outside — a scanner, a database, a system independent of the delivery itself. An AI coding agent's answ",
+    "excerpt": "Welcome Welcome to The Bridge Balance — a free curriculum from zero programming background to engineering autonomous AI agents of your own. Two genuine Harvard credentials sit inside that arc, midway…"
+  }
+]

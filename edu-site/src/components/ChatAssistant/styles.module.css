@@ -1,0 +1,665 @@
+/*
+ * ChatAssistant styles.
+ *
+ * Everything here reads the existing token layer — no new colour, no new
+ * elevation, no new easing. The two surfaces use the house glass recipe
+ * (`--tbb-surface-glass` + `--tbb-apple-frost`, a hairline border, the
+ * `--tbb-shadow-*` stack) with the `@supports` fallback to
+ * `--tbb-surface-solid` that the Spotlight already carries, so a browser with
+ * no `backdrop-filter` gets an opaque surface instead of an unreadable one.
+ *
+ * Dark mode is the same rules with the tokens swapped, declared through
+ * `:global(:root[data-theme="dark"])` exactly as `BrandMark` does — the tokens
+ * already invert the ramp, so only the few values with no token of their own
+ * are restated.
+ *
+ * Layering, against the values this site actually uses (Infima's fixed layer is
+ * `--ifm-z-index-fixed: 200`, which is where the navbar's 200 comes from; the
+ * SiteMenu drawer owns 199 / 201 / 202; the reading-progress line is 1000 and
+ * the skip link 10000):
+ *
+ *   - the trigger sits at 140 — under the Spotlight's 150, because an open
+ *     search modal should cover it, and under the drawer's backdrop at 199, so
+ *     opening the menu dims it the way it dims the rest of the page
+ *   - the panel sits at 260 — above the navbar and above every drawer layer,
+ *     because a modal that dims the page must not have navigation chrome
+ *     cutting through it. The hamburger ends up beneath the dim, which is the
+ *     correct thing for a modal to do. It stays under the reading-progress
+ *     line and the skip link.
+ *
+ * TWO SURFACES, TWO CONTRAST BUDGETS. The panel is 72% glass over a dimmed
+ * page, which tops out around 3.9:1 for anything on the muted half of the
+ * ramp — so small text does not live there. The composer sits on `--tbb-surface`,
+ * which is opaque, and is where every small label in this component actually
+ * goes. That is why the mode description is a caption inside the composer
+ * rather than a line on the panel.
+ *
+ * Motion budget: entrance only. Once the panel has arrived, hover is a state
+ * change — colour, border, surface — with no travel. Everything is removed
+ * under `prefers-reduced-motion: reduce`, the same things `a11y.css` removes
+ * from the feature plates.
+ */
+
+/* ─── Floating trigger ───────────────────────────────────────────────────── */
+
+.trigger {
+  position: fixed;
+  right: clamp(1rem, 2.5vw, 1.75rem);
+  bottom: calc(clamp(1rem, 2.5vw, 1.75rem) + env(safe-area-inset-bottom, 0px));
+  z-index: 140;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-block-size: 3.25rem;
+  padding: 0 1.375rem 0 1.25rem;
+  border: 1px solid var(--tbb-border);
+  border-radius: var(--tbb-radius-pill);
+  background: var(--tbb-surface-glass);
+  backdrop-filter: var(--tbb-apple-frost);
+  -webkit-backdrop-filter: var(--tbb-apple-frost);
+  box-shadow: var(--tbb-shadow-lg);
+  color: var(--tbb-text);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  cursor: pointer;
+  /* Clips the specular sweep to the pill. The element's own focus outline is
+     outside its border box, so it is not clipped by this. */
+  overflow: hidden;
+  transition:
+    border-color var(--tbb-duration-fast) var(--tbb-ease),
+    box-shadow var(--tbb-duration) var(--tbb-ease);
+}
+
+@supports not (
+  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+) {
+  .trigger {
+    background: var(--tbb-surface-solid);
+  }
+}
+
+/* BrandMark paints itself from `--ifm-color-primary`, so the accent hover is a
+   local token swap rather than a rule reaching into the mark's internals. Scoped
+   to the trigger: nothing else inside it reads that token. */
+.trigger:hover,
+.trigger:focus-visible {
+  --ifm-color-primary: var(--tbb-accent);
+
+  border-color: color-mix(in srgb, var(--tbb-accent) 40%, var(--tbb-border));
+  box-shadow: var(--tbb-shadow-xl);
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--tbb-accent);
+  outline-offset: 3px;
+  box-shadow: var(--tbb-focus-ring);
+}
+
+.triggerMark {
+  display: inline-flex;
+  flex: none;
+}
+
+.triggerSweep {
+  position: absolute;
+  inset: -40% -70%;
+  background: var(--tbb-metal-sheen);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-45%);
+  transition:
+    opacity var(--tbb-duration) var(--tbb-ease),
+    transform var(--tbb-duration-slow) var(--tbb-ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .trigger:hover .triggerSweep {
+    opacity: 1;
+    transform: translateX(45%);
+  }
+}
+
+/* Below ~30rem the word drops and the trigger becomes the mark alone. The
+   accessible name is the button's own `aria-label`, which is why the visible
+   text is aria-hidden rather than load-bearing. */
+@media (max-width: 30rem) {
+  .trigger {
+    padding: 0;
+    inline-size: 3.25rem;
+    justify-content: center;
+  }
+
+  .triggerLabel {
+    display: none;
+  }
+}
+
+.triggerLabel {
+  display: inline-block;
+}
+
+/* ─── Overlay + panel ────────────────────────────────────────────────────── */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 260;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.5rem, 2.4vw, 2.25rem);
+  /* The dim is pure black at alpha — the one neutral that is not on the ramp,
+     because a dim is a light condition rather than a surface. */
+  background: oklch(0 0 0 / 0.42);
+  /* Motion animates the blur radius from 0, so the backdrop pulls focus
+     gradually rather than snapping the page out of view. */
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+}
+
+:global(:root[data-theme="dark"]) .overlay {
+  background: oklch(0 0 0 / 0.66);
+}
+
+.panelOuter {
+  /* The trigger's corner. The panel unfolds from it, so opening reads as the
+     button becoming the surface. */
+  transform-origin: 100% 100%;
+  inline-size: min(68rem, 100%);
+  block-size: min(52rem, 100%);
+}
+
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+  block-size: 100%;
+  border: 1px solid var(--tbb-border);
+  border-radius: var(--tbb-radius-xl);
+  background: var(--tbb-surface-glass);
+  backdrop-filter: var(--tbb-apple-frost);
+  -webkit-backdrop-filter: var(--tbb-apple-frost);
+  box-shadow: var(--tbb-shadow-xl);
+  overflow: hidden;
+}
+
+@supports not (
+  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+) {
+  .panel {
+    background: var(--tbb-surface-solid);
+  }
+}
+
+/* The specular sweep runs behind the content, not over it — light passing
+   through the surface rather than a wash laid on the text. */
+.sweep {
+  position: absolute;
+  inset: -30% -45%;
+  z-index: 0;
+  background: var(--tbb-metal-sheen);
+  pointer-events: none;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+
+.head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem clamp(1.25rem, 3vw, 1.75rem);
+  border-bottom: 1px solid var(--tbb-border);
+}
+
+.headBrand {
+  display: inline-flex;
+  flex: none;
+}
+
+/* Geist Mono, because this reads as a machine readout: the surface's own build
+   state, stated before anyone types into it. Inked with the reading ink rather
+   than a muted step — at 12px on 72% glass, muted cannot clear 4.5:1, and a
+   crisp technical label is the better look for this anyway. */
+.readout {
+  margin: 0 auto 0 0;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  color: var(--tbb-ink);
+}
+
+.close {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  margin-inline-start: auto;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--tbb-radius-md);
+  background: transparent;
+  color: var(--tbb-text-muted);
+  cursor: pointer;
+  transition:
+    color var(--tbb-duration-fast) var(--tbb-ease),
+    background var(--tbb-duration-fast) var(--tbb-ease),
+    border-color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.close:hover {
+  color: var(--tbb-text);
+  background: var(--tbb-surface-emphasis);
+  border-color: var(--tbb-border);
+}
+
+.close:focus-visible {
+  outline: 2px solid var(--tbb-accent);
+  outline-offset: 2px;
+  box-shadow: var(--tbb-focus-ring);
+}
+
+@media (pointer: coarse) {
+  .close {
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+  }
+}
+
+/* ─── Views ──────────────────────────────────────────────────────────────── */
+
+.body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-block-size: 0;
+}
+
+.view {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-block-size: 0;
+}
+
+.scroll {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-block-size: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Centres the headline when the panel is taller than its content, and collapses
+   to plain flow when it is not — which is why this is an auto margin rather
+   than `justify-content: center` on the scroller (that clips the top). */
+.hero {
+  margin-block: auto;
+  padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 4vw, 3.5rem);
+}
+
+/* ─── The one display moment ─────────────────────────────────────────────── */
+
+/* Now the panel's only content above the composer, so it carries the whole
+   hero: bigger than it was when six cards shared the space. */
+.title {
+  margin: 0;
+  font-family: var(--tbb-font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--tbb-heading-ink);
+  text-wrap: balance;
+}
+
+/* ─── The composer ───────────────────────────────────────────────────────── */
+
+.foot {
+  padding: clamp(1rem, 2.4vw, 1.5rem) clamp(1.25rem, 4vw, 3.5rem)
+    clamp(1.25rem, 2.6vw, 1.75rem);
+}
+
+/* One instrument, two parts. The field on top, the control bar under a hairline
+   — the shape every assistant surface this reader already uses has taught them.
+   No `overflow: hidden` here on purpose: it would clip the focus rings of the
+   mode pills inside the bar. */
+.composer {
+  display: flex;
+  flex-direction: column;
+  /* The control bar's own height. The site's a11y layer floors every
+     `button[type="button"]` at 44px (a11y.css §6), which is a *touch* figure;
+     the same file already carved out a documented fine-pointer exception for
+     the sidebar and ToC rows for exactly this reason. These are compact
+     controls on one of six segments, so they follow that precedent: 36px on a
+     mouse, the full 44px restored on a coarse pointer below. */
+  --tbb-mode-height: 2.25rem;
+
+  border: 1px solid var(--tbb-border);
+  border-radius: var(--tbb-radius-lg);
+  background: var(--tbb-surface);
+  box-shadow: var(--tbb-shadow-sm);
+  transition:
+    border-color var(--tbb-duration-fast) var(--tbb-ease),
+    box-shadow var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+/* The ring lives on the shell, not the textarea, so the whole instrument reads
+   as the focused control. The field autofocuses when the panel opens, which is
+   why this is `:focus-within` rather than a one-shot state. */
+.composer:focus-within {
+  border-color: color-mix(in srgb, var(--tbb-accent) 45%, var(--tbb-border));
+  outline: 2px solid var(--tbb-accent);
+  outline-offset: 2px;
+  box-shadow: var(--tbb-focus-ring);
+}
+
+.composerField {
+  padding: 1.0625rem 1.125rem 0.875rem;
+}
+
+.input {
+  display: block;
+  inline-size: 100%;
+  max-block-size: 148px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--tbb-text);
+  font-family: inherit;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  resize: none;
+  /* The shell above carries the visible ring; a ring on the textarea itself
+     would draw a second box inside the first. */
+  outline: none;
+}
+
+.input::placeholder {
+  /* Muted, not subtle. The subtle step is a surface tint, and at these sizes it
+     fails contrast against the glass — it reads as decoration rather than as a
+     prompt. */
+  color: var(--tbb-text-muted);
+}
+
+.composerBar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.6875rem;
+  border-top: 1px solid var(--tbb-border);
+}
+
+/* Six modes in one row. It scrolls sideways rather than wrapping, so a phone
+   gets the same single-row control the desktop does instead of a column of
+   pills taller than the field. The bleed gives the pills' focus rings room
+   inside a clipping box: without it the ring is cut off top and bottom. The
+   fieldset's own chrome is reset — it is here for the grouping, not the box. */
+.modes {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  flex: 1;
+  min-inline-size: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  margin: 0;
+  border: 0;
+  padding-block: 5px;
+  margin-block: -5px;
+  padding-inline: 3px;
+  margin-inline-start: -3px;
+  scrollbar-width: none;
+}
+
+.modes::-webkit-scrollbar {
+  display: none;
+}
+
+.mode {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  flex: none;
+  min-block-size: var(--tbb-mode-height);
+  padding: 0 0.6875rem;
+  border: 1px solid transparent;
+  border-radius: var(--tbb-radius-pill);
+  background: transparent;
+  color: var(--tbb-text-muted);
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color var(--tbb-duration-fast) var(--tbb-ease),
+    background var(--tbb-duration-fast) var(--tbb-ease),
+    border-color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.mode:hover {
+  color: var(--tbb-text);
+  background: var(--tbb-surface-emphasis);
+  border-color: var(--tbb-border);
+}
+
+/* Selected mode — the second and last place the accent is allowed here.
+   `aria-pressed` is the hook, so the visual and the accessible state are the
+   same fact rather than two that can drift. */
+.mode[aria-pressed="true"] {
+  color: var(--tbb-accent);
+  background: var(--tbb-accent-subtle);
+  border-color: color-mix(in srgb, var(--tbb-accent) 45%, transparent);
+}
+
+.mode:focus-visible {
+  outline: 2px solid var(--tbb-accent);
+  outline-offset: 2px;
+  box-shadow: var(--tbb-focus-ring);
+}
+
+.modeGlyph {
+  display: inline-flex;
+  flex: none;
+  opacity: 0.85;
+}
+
+.mode[aria-pressed="true"] .modeGlyph {
+  opacity: 1;
+}
+
+.send {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--tbb-radius-md);
+  /* The single loudest accent on the surface, and the only filled one. Its ink
+     is `--tbb-text-inverse` — white in light mode over the dark accent, black
+     in dark mode over the bright one — so one declaration holds contrast in
+     both. */
+  background: var(--tbb-accent);
+  color: var(--tbb-text-inverse);
+  cursor: pointer;
+  transition: background var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.send:hover {
+  background: var(--tbb-accent-hover);
+}
+
+.send:focus-visible {
+  outline: 2px solid var(--tbb-accent);
+  outline-offset: 3px;
+  box-shadow: var(--tbb-focus-ring);
+}
+
+/* The active mode's one line of plain language. Inside the composer because
+   `--tbb-surface` is opaque — on the panel's glass this size of text cannot
+   reach 4.5:1. Always present so selecting a mode never moves the layout. */
+.caption {
+  margin: 0;
+  padding: 0 1.125rem 0.8125rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--tbb-text-muted);
+}
+
+/* ─── The honest reveal ──────────────────────────────────────────────────── */
+
+.reveal {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* Capped so the measure stays inside the 45–75ch band the rest of the site
+     holds prose to; at 17px this lands around 71ch. */
+  max-inline-size: 38rem;
+  margin-block: auto;
+  padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 4vw, 3.5rem);
+}
+
+/* Deliberately NOT the display face. Instrument Serif is spent on the opening
+   line, and the reveal is a plain, warm statement rather than a second
+   flourish. */
+.revealTitle {
+  margin: 0;
+  font-size: clamp(1.375rem, 2.6vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: -0.018em;
+  color: var(--tbb-text);
+}
+
+.revealTitle:focus-visible {
+  outline: 2px solid var(--tbb-accent);
+  outline-offset: 4px;
+  border-radius: var(--tbb-radius-sm);
+}
+
+.revealLead {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  color: var(--tbb-text);
+}
+
+/* Reading ink, not muted: this sits on the panel's glass, where muted cannot
+   clear 4.5:1 at body size. */
+.revealBody {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.62;
+  color: var(--tbb-ink);
+}
+
+.revealReadout {
+  margin: 0.25rem 0 0;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--tbb-ink);
+}
+
+.revealActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin-block-start: 0.75rem;
+}
+
+.primary {
+  min-block-size: 2.875rem;
+  padding: 0 1.375rem;
+  border: 0;
+  border-radius: var(--tbb-radius-md);
+  background: var(--tbb-accent);
+  color: var(--tbb-text-inverse);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.primary:hover {
+  background: var(--tbb-accent-hover);
+}
+
+.primary:focus-visible {
+  outline: 2px solid var(--tbb-accent);
+  outline-offset: 3px;
+  box-shadow: var(--tbb-focus-ring);
+}
+
+.quiet {
+  min-block-size: 2.875rem;
+  padding: 0 0.25rem;
+  border: 0;
+  background: transparent;
+  color: var(--tbb-ink);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.quiet:hover {
+  color: var(--tbb-text);
+}
+
+.quiet:focus-visible {
+  outline: 2px solid var(--tbb-accent);
+  outline-offset: 3px;
+  border-radius: var(--tbb-radius-sm);
+}
+
+/* ─── Coarse pointers ────────────────────────────────────────────────────── */
+
+@media (pointer: coarse) {
+  /* The site's 44px touch floor, restored where it is actually about touch —
+     see the note on `--tbb-mode-height`. */
+  .composer {
+    --tbb-mode-height: 2.75rem;
+  }
+
+  .send {
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+  }
+
+  .mode {
+    padding: 0 0.8125rem;
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  /* The one thing here that is movement rather than a state change: the
+     specular sweep sliding across the trigger. Removed outright, the same way
+     `a11y.css` removes the feature plates' bloom. The colour, border and
+     surface still answer the hover, so nothing but the travel is lost. */
+  .trigger:hover .triggerSweep {
+    display: none;
+  }
+}

@@ -18,7 +18,7 @@
 import Link from "@docusaurus/Link";
 import React from "react";
 import BrandMark from "../BrandMark";
-import { ArrowRight, Award, BookOpen, Zap } from "../icons";
+import { ArrowRight, BookOpen, Server, Zap } from "../icons";
 import GatewayFlowCanvas from "./GatewayFlowCanvas";
 import styles from "./styles.module.css";
 
@@ -51,11 +51,11 @@ export default function HomepageHero(): React.ReactElement {
           </span>
           <span className="tbb-hero__eyebrow-divider" aria-hidden="true" />
           <span className="tbb-hero__eyebrow-item">
-            <strong>5</strong> stages
+            <strong>3</strong> stages
           </span>
           <span className="tbb-hero__eyebrow-divider" aria-hidden="true" />
           <span className="tbb-hero__eyebrow-item">
-            <strong>2</strong> Harvard certificates
+            <strong>Zero</strong> background needed
           </span>
         </span>
 
@@ -66,19 +66,19 @@ export default function HomepageHero(): React.ReactElement {
 
         <p id="tbb-hero-subtitle" className="tbb-hero__subtitle">
           The Bridge Balance is the textbook for students learning spec-driven
-          AI agent engineering — a complete 5-stage curriculum with two Harvard
-          certificates (CS50P + CS50W), built so you ship agents, not chase
-          prompts.
+          AI agent engineering — a complete 3-stage curriculum from zero
+          programming background to autonomous AI agents, built so you ship
+          agents, not chase prompts.
         </p>
 
         <div className="tbb-hero__cta-row">
           <Link
-            to="/stage-01-spec-aware-vibe-engineering/"
+            to="/welcome"
             className="tbb-hero__cta-primary"
-            aria-label="Start with Stage 1: Foundations (skip to the first stage of the curriculum)"
+            aria-label="Start reading: open the Welcome page, the book's front door"
           >
             <BookOpen size={18} aria-hidden="true" />
-            Start with Stage 1
+            Start reading
             <ArrowRight
               size={16}
               aria-hidden="true"
@@ -86,26 +86,26 @@ export default function HomepageHero(): React.ReactElement {
             />
           </Link>
           <Link
-            to="/stage-03-mastering-ai-coding-agents/"
+            to="/welcome"
             className="tbb-hero__cta-secondary"
-            aria-label="Jump to Stage 3: Mastering AI Coding Agents (skip ahead in the curriculum)"
+            aria-label="See the three stages (open the Welcome page and its stage table)"
           >
             <Zap size={18} aria-hidden="true" />
-            Jump to AI agents
+            See the three stages
           </Link>
         </div>
 
         <div className="tbb-hero__meta">
           <span className="tbb-hero__meta-item">
             <Zap className="tbb-hero__meta-icon" aria-hidden="true" />
-            Built for working developers
-          </span>
-          <span className="tbb-hero__meta-item">
-            <Award className="tbb-hero__meta-icon" aria-hidden="true" />
-            CS50P + CS50W credentials
+            From zero to expert
           </span>
           <span className="tbb-hero__meta-item">
             <BookOpen className="tbb-hero__meta-icon" aria-hidden="true" />
+            Video + text, paired
+          </span>
+          <span className="tbb-hero__meta-item">
+            <Server className="tbb-hero__meta-icon" aria-hidden="true" />
             Free-tier stack, forever
           </span>
         </div>

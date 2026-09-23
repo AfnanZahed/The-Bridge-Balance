@@ -1,4 +1,4 @@
-# Lesson brief format
+# Chapter brief format
 
 ### Bundled reference for `curriculum-architect` — Mode 2 writes exactly this shape
 
@@ -12,22 +12,22 @@ The brief exists so a `chapter-production` run can start from something sharper 
 
 ```
 TOPIC:                 [Working title — specific enough to research, not a stage name]
-STAGE & POSITION:       [0-4, and a rough sequence position. If this doesn't have a
+STAGE & POSITION:       [0-2, and a rough sequence position. If this doesn't have a
                         prerequisite-graph.yaml entry yet, say so explicitly rather than
                         implying one exists]
-SCOPE / ANGLE:          [One or two sentences: what this lesson is actually about,
+SCOPE / ANGLE:          [One or two sentences: what this chapter is actually about,
                         specific enough that a researcher isn't left guessing what the
-                        lesson is for from a bare noun. A lesson does not need a
+                        chapter is for from a bare noun. A chapter does not need a
                         thesis tie-in to be valid — the six invariants are stage-level
                         (canon/thesis.md). This is the part a bare topic
-                        name ("databases") always lacks and a lesson ("choosing between
+                        name ("databases") always lacks and a chapter ("choosing between
                         PostgreSQL and MongoDB for a first backend") always has]
-LIKELY PREREQUISITES:  [What this lesson probably assumes, cross-checked against
+LIKELY PREREQUISITES:  [What this chapter probably assumes, cross-checked against
                         prerequisite-graph.yaml — named as "likely," because confirming
                         it for real is the authoring run's job, not this brief's]
-CONCEPTS ALREADY DEFINED: [Anything from concept-ledger.yaml this lesson will need and
+CONCEPTS ALREADY DEFINED: [Anything from concept-ledger.yaml this chapter will need and
                         should reuse verbatim rather than redefine]
-EVIDENCE RISK NOTE:     [Optional. Only if a source this lesson will obviously reach for
+EVIDENCE RISK NOTE:     [Optional. Only if a source this chapter will obviously reach for
                         is already heavily used per evidence-ledger.yaml — a heads-up to
                         look for a different angle or source, not a restriction]
 WHY THIS ORDER:         [One sentence on why this position, if it's not obvious —
@@ -43,8 +43,8 @@ WHY IT IS IN THE CURRICULUM:
                         canon/naming.md Rule 3, canon/corrections.md §18]
 WHY IT MATTERS:         [REQUIRED. The line above, turned into the words the chapter's
                         own opening will use. canon/corrections.md §7]
-EVERYDAY EXAMPLE:       [REQUIRED for Stages 0-2. The concrete thing a beginner can
-                        picture, that this lesson can return to. Real or invented —
+EVERYDAY EXAMPLE:       [REQUIRED for Stages 0-1. The concrete thing a beginner can
+                        picture, that this chapter can return to. Real or invented —
                         both are legitimate. Check example-ledger.yaml first and say
                         whether reusing a familiar one beats introducing a new one.
                         "The subject is its own example" is not an answer]
@@ -63,8 +63,8 @@ STATUS:                 PROPOSAL — not a commitment. Written by curriculum-arc
 
 ## What this is not
 
-Not a chapter. Not a research record. Not a substitute for the design work `lesson-spine-authoring` does at `chapter-production`'s step 3 — a brief gives that work somewhere to start, it doesn't pre-empt it. A brief with a confidently-stated `SCOPE / ANGLE` is still just this skill's best guess at what would make a good lesson; the research run may find a better angle once it actually looks at the topic; that's a valid outcome, not a deviation to justify.
+Not a chapter. Not a research record. Not a substitute for the design work `lesson-spine-authoring` does at `chapter-production`'s step 3 — a brief gives that work somewhere to start, it doesn't pre-empt it. A brief with a confidently-stated `SCOPE / ANGLE` is still just this skill's best guess at what would make a good chapter; the research run may find a better angle once it actually looks at the topic; that's a valid outcome, not a deviation to justify.
 
-## If the lesson has no graph entry yet
+## If the chapter has no graph entry yet
 
-Add exactly one row to `prerequisite-graph.yaml`, `status: "planned"`, using this brief's `TOPIC`, `STAGE & POSITION`, and `LIKELY PREREQUISITES` as the row's `title`, `stage`/`position`, and `requires`. The row also needs an `id` (short and unique, since other rows' `requires:` arrays will reference it directly once anything depends on it) and a `path` (where the file would live once authored, following the site's existing `docs/stage-0N-<stage-slug>/<NN>-<lesson-slug>.md` naming, even though nothing is written there yet) — a row missing either has no real place in the graph's structure. Nothing else changes status. A `planned` row, `id` and `path` included, is exactly as revisable as this brief is — the same STATUS line applies to all of it by extension.
+Add exactly one row to `prerequisite-graph.yaml`, `status: "planned"`, using this brief's `TOPIC`, `STAGE & POSITION`, and `LIKELY PREREQUISITES` as the row's `title`, `stage`/`position`, and `requires`. The row also needs an `id` (short and unique, since other rows' `requires:` arrays will reference it directly once anything depends on it) and a `path` (where the file would live once authored, following the site's existing `docs/stage-0N-<stage-slug>/<NN>-<chapter-slug>.md` naming, even though nothing is written there yet) — a row missing either has no real place in the graph's structure. Nothing else changes status. A `planned` row, `id` and `path` included, is exactly as revisable as this brief is — the same STATUS line applies to all of it by extension.

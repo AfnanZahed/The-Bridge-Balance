@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+  <title>Stage 1 — Foundations background (waves in cyan)</title>
+  <defs>
+    <linearGradient id="s1-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ecfeff" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="s1-wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#06b6d4" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#06b6d4" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#06b6d4" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="s1-wave-2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#22d3ee" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="s1-dots" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
+      <circle cx="24" cy="24" r="1.2" fill="#06b6d4" fill-opacity="0.18"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#s1-bg)"/>
+  <rect width="1600" height="900" fill="url(#s1-dots)"/>
+  <g opacity="0.85">
+    <path d="M0 760 C 200 660, 400 880, 600 760 S 1000 660, 1200 760 S 1600 880, 1600 760 L 1600 900 L 0 900 Z" fill="url(#s1-wave)" opacity="0.45"/>
+    <path d="M0 800 C 220 720, 420 900, 620 800 S 1020 720, 1220 800 S 1600 900, 1600 800 L 1600 900 L 0 900 Z" fill="url(#s1-wave-2)" opacity="0.55"/>
+    <path d="M0 700 C 240 580, 440 820, 640 700 S 1040 580, 1240 700 S 1600 820, 1600 700 L 1600 900 L 0 900 Z" fill="url(#s1-wave)" opacity="0.25"/>
+  </g>
+  <g stroke="#06b6d4" stroke-opacity="0.12" stroke-width="1" fill="none">
+    <path d="M0 720 C 200 620, 400 840, 600 720 S 1000 620, 1200 720 S 1600 840, 1600 720"/>
+    <path d="M0 740 C 210 650, 410 860, 610 740 S 1010 650, 1210 740 S 1600 860, 1600 740"/>
+    <path d="M0 780 C 220 700, 420 880, 620 780 S 1020 700, 1220 780 S 1600 880, 1600 780"/>
+  </g>
+  <g fill="#06b6d4" fill-opacity="0.4">
+    <circle cx="220" cy="240" r="3"/>
+    <circle cx="380" cy="180" r="2"/>
+    <circle cx="548" cy="300" r="2.5"/>
+    <circle cx="780" cy="220" r="3"/>
+    <circle cx="980" cy="160" r="2"/>
+    <circle cx="1180" cy="280" r="2.5"/>
+    <circle cx="1360" cy="200" r="3"/>
+  </g>
+</svg>

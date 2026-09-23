@@ -73,7 +73,11 @@ mistake - it has made a judgment, and the judgment it must record is its
 | 0.7 | One concept with a couple of supporting ideas. Most sub-topics. | ×0.7 |
 | **1.0** | **Reference scope. A full chapter with its own arc.** | **×1.0** |
 | 1.5 | Multiple interacting concepts; a system with parts. | ×1.5 |
-| 2.2 | Stage 3–4 architecture: many concepts with real dependency structure. | ×2.2 |
+| 2.2 | Stage 2 (AI-native) architecture: many concepts with real dependency structure. | ×2.2 |
+
+*(22 September 2026: this row read "Stage 3–4 architecture". There is no Stage 3
+or Stage 4 — the advanced, agentic work is Stage 2
+(`canon/course-structure.md` CS-12 to CS-15). The multiplier is unchanged.)*
 
 **There is no word band.** The gate does not police length — `check-chapter.mjs`
 prints the measured word count and reading time and fails only when `scope_reason`

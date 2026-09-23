@@ -1,0 +1,3730 @@
+/**
+ * The Bridge Balance — Design System
+ *
+ * "Silver & Black" token layer (monochrome migration 2026-09-03, replacing
+ * the earlier Apple Pro Blue accent system entirely). Industrial premium:
+ * pure silver/black backgrounds, OKLCH color space, hairline borders,
+ * frosted glass, a neutral atmospheric mesh, platinum text gradients, and a
+ * ten-step metallic silver ramp (`--tbb-silver-0..9`, white to black) as the
+ * base palette for nearly everything. Two deliberate chromatic exceptions
+ * exist, both narrow: status feedback (`--tbb-danger`/`--tbb-success`, see
+ * the note beside those tokens) and a single scoped accent hue (ADR-0003,
+ * `--tbb-accent`) confined to links, active sidebar/TOC items, the focus
+ * ring, and a handful of named navigation surfaces — see the token-table
+ * comment above the light-mode block for the exact scope. Everything else
+ * — surfaces, text, callouts, code, cards, charts, the homepage — reads
+ * `--ifm-color-primary` or a named silver/stage step and stays strictly
+ * neutral; that token no longer aliases `--tbb-accent`.
+ *
+ * This file is the single source of truth for design tokens. Components
+ * consume them via CSS custom properties.
+ *
+ * Token architecture:
+ *   1. PRIMITIVE  — the silver ramp + retained Radix `--gray-*` scale,
+ *                   loaded by `radix.css`.
+ *   2. SEMANTIC   — `--tbb-*` tokens expressing intent (surface, text,
+ *                   accent, border, stage) and `--ifm-*` Infima overrides.
+ *   3. COMPONENT  — Infima/`--ifm-*` values consumed by Docusaurus built-ins
+ *                   plus the Apple Pro utility classes defined below.
+ *
+ * Dark mode (:root[data-theme="dark"]) mirrors the same tokens inverted.
+ *
+ * Typography: SF Pro-first stack (native on Apple) with Inter as the
+ * cross-platform webfont stand-in, Instrument Serif for display italics, Geist
+ * Mono for code. Headings use that same stack as the body. All loaded via
+ * Google Fonts in `docusaurus.config.ts`.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500;600&display=swap");
+
+/* ─── The ten-step ramp, given explicit jobs ────────────────────────────────
+   Every step below is meant to be visibly doing real work somewhere in the
+   docs chrome — not just the two ends. Dark mode is the same ramp read in
+   the opposite direction (raised = lighter, per how light actually falls on
+   a surface), not a separate palette.
+
+   Step │ Light-mode job                          │ Dark-mode job
+   ─────┼─────────────────────────────────────────┼──────────────────────────
+     0  │ Raised surfaces, specular highs          │ Display text, highlights
+     1  │ Table/callout ground (--tbb-bg-alt)      │ Body/display text (alt)
+     2  │ Surface-emphasis, code-block ground      │ Secondary/caption text
+     3  │ Raised-card gradient base                │ Muted text, strong hairline
+     4  │ Text-subtle, stage-1 (dark variant)       │ Stage-4 surface, raised tint
+     5  │ Text-muted, stage-1                       │ Stage-3 surface
+     6  │ Stage-2                                    │ Code ground, surface-emphasis
+     7  │ Stage-3, sidebar collapsed-category tone  │ Raised surface (--tbb-surface-raised)
+     8  │ Stage-3-dark, deep metal gradient stop    │ bg-alt, surface (unchanged)
+     9  │ Text, display text, stage-4, ink          │ Page ground (unchanged)
+
+   Three grounds sit deliberately OFF the ladder, so they appear in no row
+   above: the light reading column at silver-0.75, the light docs panels at
+   silver-1.5, and the dark docs panels at silver-7.85. Each is written as a
+   color-mix() of the two steps either side rather than as a new fractional
+   primitive, so the ladder stays closed at ten and each follows the ramp if
+   the ramp is ever re-tuned. See the notes at their definitions below.
+
+   Hairlines stay alpha-over-background (oklch(0 0 0 / 0.1) etc.) rather than
+   a discrete step — that's the deliberate, correct technique since it
+   adapts to whatever ground it's drawn over. The ramp's job here is fills
+   and text, not borders.
+
+   Accent token scope (ADR-0003): --tbb-accent is a real hue again, but it is
+   NOT a general-purpose brand color. Permitted consumers ONLY: article
+   links, active sidebar/TOC item (leaf + category), the focus ring, footer
+   link hover, the active search-result row, the top-nav active-section
+   pill, the mobile drawer's active link, and the reading-progress bar.
+   Everything else — callouts, inline code, pagination, the chapter-state
+   badge, stage cards, the homepage hero/timeline — reads --ifm-color-primary
+   or a named silver/stage step, which stays strictly neutral. */
+
+/* ─── Apple Pro token layer (light mode) ─────────────────────────────────── */
+:root {
+  --radius: 1rem;
+  /* Reserve the scrollbar gutter so theme transitions cannot change the
+     viewport width and shift centered content. */
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+
+  /* Brand — a single scoped accent hue (ADR-0003), steel-blue at chroma
+     0.08 (roughly half of real Apple system blue's), scoped to a short,
+     named list of surfaces — see the token-table comment above. Everything
+     that isn't in that list reads --ifm-color-primary, which no longer
+     aliases this token, so it stays neutral regardless of what this value is. */
+  --tbb-accent: oklch(0.40 0.08 245);
+  --tbb-accent-hover: oklch(0.32 0.075 245);
+  --tbb-accent-subtle: oklch(0.40 0.08 245 / 0.08);
+  --tbb-focus-ring: 0 0 0 3px oklch(0.40 0.08 245 / 0.35);
+
+  --ifm-color-primary: var(--tbb-silver-9); /* neutral; no longer aliases --tbb-accent — ADR-0003 */
+  --ifm-color-primary-dark: var(--tbb-silver-9);
+  --ifm-color-primary-darker: var(--tbb-silver-9);
+  --ifm-color-primary-darkest: var(--tbb-silver-9);
+  --ifm-color-primary-light: var(--tbb-silver-7);
+  --ifm-color-primary-lighter: var(--tbb-silver-6);
+  --ifm-color-primary-lightest: var(--tbb-silver-5);
+
+  /* Stage identity — no longer hue-coded. The three stages read as a descent
+     down the ramp (Foundations lightest → the AI-Native stage darkest), so the
+     curriculum's progression is the visual metaphor. Differentiation is
+     label-first (R-001, R-005); lightness only reinforces it. All three
+     steps clear AA on white. */
+  --tbb-stage-1: var(--tbb-silver-5);  /* Foundations  */
+  --tbb-stage-2: var(--tbb-silver-7);  /* AI-Native   */
+
+  /* Stage dark variants (for text-on-light contexts) */
+  --tbb-stage-1-dark: var(--tbb-silver-6);
+  --tbb-stage-2-dark: var(--tbb-silver-8);
+
+  /* Surfaces — the page ground is silver-0.75, not pure white. White is now
+     reserved for the specular end of the ramp (raised surfaces, the 0% stop
+     of the metal gradients, inverse ink), which keeps a pure white from
+     glaring behind a 4,000-word chapter and leaves the raised direction
+     something to rise to. Everything raised or receded still sits on a
+     genuinely different step (previously bg/surface/raised were all
+     silver-0 — the light-mode flatness bug this table fixes). */
+  --tbb-bg: color-mix(in oklab, var(--tbb-silver-0) 25%, var(--tbb-silver-1) 75%);
+  --tbb-bg-alt: var(--tbb-silver-1);
+  --tbb-surface: var(--tbb-silver-1);
+  --tbb-surface-raised: var(--tbb-silver-0);
+  --tbb-surface-emphasis: var(--tbb-silver-2);
+  --tbb-surface-glass: oklch(1 0 0 / 0.72);
+  --tbb-surface-solid: var(--tbb-silver-0);
+  --tbb-navbar-glass: oklch(1 0 0 / 0.8);
+  --tbb-apple-frost: saturate(140%) blur(24px);
+
+  /* Docs-chrome grounds — both panels recede behind the reading column and
+     share one tone: silver-1.5, the midpoint of silver-1 and silver-2. The
+     dark block puts both on silver-7.85 for the same reason — see the note
+     there. Code gets its own tone, distinct from callouts and tables, which
+     both stay on --tbb-bg-alt. */
+  --tbb-sidebar-bg: color-mix(in oklab, var(--tbb-silver-1) 50%, var(--tbb-silver-2) 50%);
+  --tbb-toc-bg: color-mix(in oklab, var(--tbb-silver-1) 50%, var(--tbb-silver-2) 50%);
+  --tbb-code-bg: var(--tbb-silver-2);
+
+  /* Borders — hairline first, strong variant for emphasis */
+  --hairline: oklch(0 0 0 / 0.1);
+  --tbb-border: color-mix(in srgb, var(--hairline) 90%, transparent);
+  --tbb-border-strong: oklch(0 0 0 / 0.2);
+
+  /* Text — pure black ink down the ramp */
+  --tbb-text: var(--tbb-silver-9);
+  --tbb-text-muted: var(--tbb-silver-5);
+  --tbb-text-subtle: var(--tbb-silver-4);
+  --tbb-text-inverse: var(--tbb-silver-0);
+
+  /* Long-form reading ink — a touch softer than pure black so a 4,000-word
+     chapter does not glare; still ~12:1 on white (AAA). */
+  --tbb-ink: oklch(0.22 0.006 250);
+
+  /* Heading ink — the display faces read a silver-blue rather than pure black:
+     50% of the sidebar accent (the hue) + 30% silver + 20% neutral grey (the
+     lightness and the desaturation). Nested rather than one three-stop mix
+     because color-mix() takes exactly TWO stops: the three-stop form is
+     unsupported, which silently invalidates the whole declaration and drops
+     the headings back to inherited black. 50:30 over 80 normalises to
+     62.5/37.5, so this is the same colour:
+       (62.5% accent + 37.5% silver-7) 80%  +  silver-8 20%.
+     Deepened once by dropping BOTH silver steps two rungs (5→7, 6→8), which
+     takes the lightness down ~30% without touching the hue: chroma stays near
+     0.04, inside the faint 250° cast the silver ramp already carries, so it
+     still reads as a tinted ink rather than as a second accent surface —
+     ADR-0003's scoping of --tbb-accent is untouched. */
+  --tbb-heading-ink: color-mix(
+    in oklab,
+    color-mix(in oklab, var(--tbb-accent) 62.5%, var(--tbb-silver-7) 37.5%) 80%,
+    var(--tbb-silver-8) 20%
+  );
+
+  /* Status — the ONLY chromatic exception in the system. Kept because an
+     error rendered in silver is not recognisable as an error; removing hue
+     here would be an accessibility regression, not a purity win. Used for
+     state feedback only, never for decoration or emphasis. */
+  --tbb-danger: oklch(0.55 0.22 25);
+  --tbb-success: oklch(0.5 0.17 155);
+
+  /* Charts — five ramp steps, spaced far enough apart to separate as series
+     without hue. Consumed by Recharts via resolved values. */
+  --chart-1: var(--tbb-silver-9);
+  --chart-2: var(--tbb-silver-7);
+  --chart-3: var(--tbb-silver-5);
+  --chart-4: var(--tbb-silver-4);
+  --chart-5: var(--tbb-silver-3);
+
+  /* ── Specular set — what makes a surface read as machined metal ──────────
+     A flat ramp fill looks like paint. Metal needs a vertical light ramp,
+     a bright top rim where the bevel catches light, and a diagonal sheen.
+     Compose: background: var(--tbb-metal-face); box-shadow: var(--tbb-metal-rim). */
+  --tbb-metal-face: linear-gradient(
+    180deg,
+    var(--tbb-silver-0) 0%,
+    var(--tbb-silver-1) 42%,
+    var(--tbb-silver-3) 100%
+  );
+  --tbb-metal-face-deep: linear-gradient(
+    180deg,
+    var(--tbb-silver-6) 0%,
+    var(--tbb-silver-8) 55%,
+    var(--tbb-silver-9) 100%
+  );
+  --tbb-metal-rim: inset 0 1px 0 0 oklch(1 0 0 / 0.9),
+    inset 0 -1px 0 0 oklch(0 0 0 / 0.06);
+  --tbb-metal-rim-deep: inset 0 1px 0 0 oklch(1 0 0 / 0.18),
+    inset 0 -1px 0 0 oklch(0 0 0 / 0.5);
+  --tbb-metal-sheen: linear-gradient(
+    105deg,
+    transparent 28%,
+    oklch(1 0 0 / 0.5) 47%,
+    transparent 63%
+  );
+  /* Fine anisotropic grain — brushed, not polished. Overlay at low alpha. */
+  --tbb-metal-brush: repeating-linear-gradient(
+    92deg,
+    oklch(1 0 0 / 0.05) 0px,
+    oklch(0 0 0 / 0.035) 1px,
+    oklch(1 0 0 / 0.05) 2px
+  );
+
+  /* Typography — SF Pro first (native/silent on Apple), Inter webfont stand-in */
+  --ifm-font-family-base: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "SF Pro", Inter, "Helvetica Neue", system-ui, sans-serif;
+  --ifm-font-family-monospace: "Geist Mono", ui-monospace, SFMono-Regular,
+    Menlo, Consolas, monospace;
+  --ifm-heading-font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "SF Pro", Inter, "Helvetica Neue", system-ui, sans-serif;
+  --ifm-heading-font-weight: 700;
+  --ifm-font-weight-semibold: 600;
+  --ifm-font-weight-bold: 700;
+  --tbb-font-display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  /* One face for every heading level — the same stack the interface chrome
+     uses, so a chapter title never has to be reconciled with the text beneath
+     it. Rank is carried by size and stroke weight rather than by a second
+     typeface, which is what lets a long, multi-line title hold together. */
+  --tbb-font-heading: var(--ifm-heading-font-family);
+  --ifm-code-font-size: 90%;
+  --ifm-line-height-base: 1.65;
+  --ifm-heading-line-height: 1.15;
+
+  /* Text scale — ONE dial for every NON-heading size on the reading page (body
+     prose, code, tables, callouts, the state/kicker chrome, the
+     sidebar, the ToC). Headings are deliberately excluded, in both directions:
+     they are the rank system, and this token exists so the reading text can be
+     tuned against them without touching them.
+
+     0.94 is a −6% cut on the original sizes: enough to take the edge off the
+     authored scale, not enough to drop the reading text under 16px or the nav
+     chrome under its legibility floor. Every consumption site multiplies its
+     own authored value by this — `calc(1.0625rem * var(--tbb-text-scale))` —
+     so the pre-cut size stays legible in the source and the dial stays one
+     line. --tbb-prose-measure scales with it, because lowering the body size
+     inside a fixed measure would widen the line past the 60–75ch reading band:
+     scaling both keeps characters-per-line exactly constant. */
+  --tbb-text-scale: 0.94;
+
+  /* Heading scale — the rank system's own dial, the sibling of
+     --tbb-text-scale. Headings carry rank, so they are scaled from their own
+     authored clamp()/rem values rather than from the reading dial, which keeps
+     the two independent: the reading text can still be tuned against the
+     headings without redrawing them, which is the whole reason two dials
+     exist. Size is mode-invariant, so this lives in :root only and
+     :root[data-theme="dark"] does not restate it. */
+  --tbb-heading-scale: 1.1;
+
+  /* Vertical rhythm — ONE spacing ladder for the prose block, replacing the
+     unrelated ad-hoc margins it used to step by (p 1.25rem, h2 3.5/1.75,
+     h3 2.5/0.75, h4 2/0.5, blockquote 1.75, table 1.75, code 1.5, hr 2.5).
+     Every step below is consumed by a rule in the Chapter-prose block; none is
+     declared speculatively. Mode-invariant, so :root only. */
+  --tbb-rhythm-1: 0.5rem;  /* tight — heading underline padding, li gap */
+  --tbb-rhythm-2: 0.75rem; /* label gap — h3 to its body */
+  --tbb-rhythm-3: 1.25rem; /* paragraph gap — p, h2 to its body */
+  --tbb-rhythm-4: 2rem;    /* block gap — code, table, h2 padding-top */
+  --tbb-rhythm-5: 3rem;    /* section gap — h3 top, blockquote, hr */
+  --tbb-rhythm-6: 4rem;    /* chapter gap — h2 top */
+
+  /* Spacing & layout */
+  --ifm-spacing-horizontal: 1.5rem;
+  --ifm-container-width: 1180px;
+  --ifm-container-width-xl: 1320px;
+
+  /* Radii — Apple Pro */
+  --ifm-global-radius: var(--radius);
+  --tbb-radius-sm: calc(var(--radius) - 6px);
+  --tbb-radius-md: calc(var(--radius) - 3px);
+  --tbb-radius-lg: var(--radius);
+  --tbb-radius-xl: calc(var(--radius) + 4px);
+  --tbb-radius-pill: 999px;
+
+  /* Motion */
+  --tbb-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --tbb-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --tbb-duration-fast: 150ms;
+  --tbb-duration: 250ms;
+  --tbb-duration-slow: 450ms;
+
+  /* Infima overrides */
+  --docusaurus-highlight-navbar-bg: oklch(0 0 0 / 0.05);
+
+  /* Surface shadows — inset top-highlight + drop stack. With hue gone, depth
+     is the whole vocabulary, so these run deeper than the old Pro scale:
+     a tight contact shadow reads the bevel, a wide ambient one reads the lift. */
+  --tbb-shadow-xs: inset 0 1px 0 0 oklch(1 0 0 / 1);
+  --tbb-shadow-sm: inset 0 1px 0 0 oklch(1 0 0 / 1),
+    0 1px 2px -1px oklch(0 0 0 / 0.14);
+  --tbb-shadow-md: 0 2px 4px -2px oklch(0 0 0 / 0.16),
+    0 1px 1px -0.5px oklch(0 0 0 / 0.1),
+    inset 0 1px 0 0 oklch(1 0 0 / 1);
+  --tbb-shadow-lg: 0 8px 16px -4px oklch(0 0 0 / 0.18),
+    0 3px 6px -3px oklch(0 0 0 / 0.14),
+    inset 0 1px 0 0 oklch(1 0 0 / 1);
+  --tbb-shadow-xl: 0 24px 48px -12px oklch(0 0 0 / 0.26),
+    0 10px 24px -8px oklch(0 0 0 / 0.18),
+    inset 0 1px 0 0 oklch(1 0 0 / 1);
+  --tbb-shadow-glow: 0 0 0 1px oklch(0 0 0 / 0.22),
+    0 10px 36px -10px oklch(0 0 0 / 0.4);
+
+  color-scheme: light;
+}
+
+/* ─── Apple Pro dark mode ────────────────────────────────────────────────── */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Mirror Radix dark-mode gray scale — the only Radix scale still in use
+     (indigo/teal/amber/plum/red were removed with the blue accent system;
+     see the note in radix.css). */
+  --gray-1: #111111;
+  --gray-2: #191919;
+  --gray-3: #222222;
+  --gray-4: #2a2a2a;
+  --gray-5: #313131;
+  --gray-6: #3a3a3a;
+  --gray-7: #484848;
+  --gray-8: #606060;
+  --gray-9: #6e6e6e;
+  --gray-10: #7b7b7b;
+  --gray-11: #b4b4b4;
+  --gray-12: #eeeeee;
+
+  /* Brand — the same scoped steel-blue accent (ADR-0003), lightened/brightened
+     so it holds the same ~9:1+ contrast against a near-black ground that the
+     light-mode value holds against near-white. */
+  --tbb-accent: oklch(0.75 0.085 245);
+  --tbb-accent-hover: oklch(0.82 0.08 245);
+  --tbb-accent-subtle: oklch(0.75 0.085 245 / 0.14);
+  --tbb-focus-ring: 0 0 0 3px oklch(0.75 0.085 245 / 0.45);
+
+  --ifm-color-primary: var(--tbb-silver-0); /* neutral; no longer aliases --tbb-accent — ADR-0003 */
+  --ifm-color-primary-dark: var(--tbb-silver-2);
+  --ifm-color-primary-darker: var(--tbb-silver-3);
+  --ifm-color-primary-darkest: var(--tbb-silver-4);
+  --ifm-color-primary-light: var(--tbb-silver-0);
+  --ifm-color-primary-lighter: var(--tbb-silver-0);
+  --ifm-color-primary-lightest: var(--tbb-silver-0);
+
+  /* Stage identity — the same descent, inverted: Foundations sits mid-ramp,
+     the AI-Native stage resolves to near-white. Label-first differentiation
+     holds. */
+  --tbb-stage-1: var(--tbb-silver-4);
+  --tbb-stage-2: var(--tbb-silver-2);
+
+  --tbb-stage-1-dark: var(--tbb-silver-4);
+  --tbb-stage-2-dark: var(--tbb-silver-2);
+
+  /* Surfaces — pure black ground so raised metal genuinely floats off it.
+     Four distinct dark steps, not a wash: bg → surface → raised → emphasis. */
+  --tbb-bg: var(--tbb-silver-9);
+  --tbb-bg-alt: var(--tbb-silver-8);
+  --tbb-surface: var(--tbb-silver-8);
+  --tbb-surface-raised: var(--tbb-silver-7);
+  --tbb-surface-emphasis: var(--tbb-silver-6);
+  --tbb-surface-glass: oklch(0.15 0.004 250 / 0.72);
+  --tbb-surface-solid: var(--tbb-silver-8);
+  --tbb-navbar-glass: oklch(0 0 0 / 0.8);
+  --tbb-apple-frost: saturate(140%) blur(24px);
+
+  /* Docs-chrome grounds — mirrors the light-mode intent (sidebar/TOC recede
+     from the page) but "recede" means lighter in dark mode, matching how
+     the rest of this block already separates bg(9)/surface(8)/raised(7).
+
+     Both panels now sit on one tone, silver-7.85 — the ramp point 85% of the
+     way from silver-7 down to silver-8, so L 0.27 → 0.15 lands at L 0.168.
+     That darkens the sidebar from silver-7 and lightens the TOC from
+     silver-8, removing the tonal step that used to separate the two in dark
+     mode (they are already equal in light mode, both silver-1). Written as a
+     mix of the two real steps rather than a new fractional primitive, so it
+     tracks the ramp if the ramp is ever re-tuned and the ladder stays closed
+     at ten. Mixing in `oklab` is exact here rather than approximate, because
+     OKLCH's L *is* OKLab's L and both steps share hue 250 — the mix
+     reproduces oklch(0.168 0.0043 250) precisely. */
+  --tbb-sidebar-bg: color-mix(in oklab, var(--tbb-silver-7) 15%, var(--tbb-silver-8) 85%);
+  --tbb-toc-bg: color-mix(in oklab, var(--tbb-silver-7) 15%, var(--tbb-silver-8) 85%);
+  --tbb-code-bg: var(--tbb-silver-6);
+
+  --hairline: oklch(1 0 0 / 0.1);
+  --tbb-border: color-mix(in srgb, var(--hairline) 90%, transparent);
+  --tbb-border-strong: oklch(1 0 0 / 0.2);
+
+  --tbb-text: var(--tbb-silver-0);
+  --tbb-text-muted: var(--tbb-silver-4);
+  --tbb-text-subtle: var(--tbb-silver-5);
+  --tbb-text-inverse: var(--tbb-silver-9);
+
+  /* Dark mirror of the reading ink: soft white, not pure white. ~13:1 on the
+     near-black ground (AAA). */
+  --tbb-ink: oklch(0.93 0.003 250);
+
+  /* Dark mirror of the heading ink: the same 50/30/20 mix read against the
+     inverted ramp, so the silver-blue stays a soft light tint instead of
+     flipping to a dark one. Nested for the same two-stop reason as the light
+     block; deepened by the same two-rung drop (2→4, 4→6).
+     The drop is a smaller proportional step here than in light mode on
+     purpose: taking it the full 30% would land the ink at ~4.3:1 on the black
+     ground — legal for large text, but visibly muddy. This keeps it at ~6.7:1. */
+  --tbb-heading-ink: color-mix(
+    in oklab,
+    color-mix(in oklab, var(--tbb-accent) 62.5%, var(--tbb-silver-4) 37.5%) 80%,
+    var(--tbb-silver-6) 20%
+  );
+
+  /* Status — the only chromatic exception; see the light block. */
+  --tbb-danger: oklch(0.68 0.22 25);
+  --tbb-success: oklch(0.72 0.18 155);
+
+  --chart-1: var(--tbb-silver-0);
+  --chart-2: var(--tbb-silver-2);
+  --chart-3: var(--tbb-silver-4);
+  --chart-4: var(--tbb-silver-5);
+  --chart-5: var(--tbb-silver-6);
+
+  /* Specular set inverts: the face darkens, the rim stays the light catch */
+  --tbb-metal-face: var(--tbb-metal-face-deep);
+  --tbb-metal-rim: var(--tbb-metal-rim-deep);
+  --tbb-metal-sheen: linear-gradient(
+    105deg,
+    transparent 28%,
+    oklch(1 0 0 / 0.16) 47%,
+    transparent 63%
+  );
+
+  --tbb-shadow-xs: inset 0 1px 0 0 oklch(1 0 0 / 0.07);
+  --tbb-shadow-sm: inset 0 1px 0 0 oklch(1 0 0 / 0.07),
+    0 1px 2px -1px oklch(0 0 0 / 0.8);
+  --tbb-shadow-md: 0 2px 6px -2px oklch(0 0 0 / 0.85),
+    0 1px 1px -0.5px oklch(0 0 0 / 0.7),
+    inset 0 1px 0 0 oklch(1 0 0 / 0.07);
+  --tbb-shadow-lg: 0 10px 22px -6px oklch(0 0 0 / 0.9),
+    0 4px 8px -4px oklch(0 0 0 / 0.8),
+    inset 0 1px 0 0 oklch(1 0 0 / 0.07);
+  --tbb-shadow-xl: 0 28px 56px -12px oklch(0 0 0 / 0.95),
+    0 12px 28px -10px oklch(0 0 0 / 0.85),
+    inset 0 1px 0 0 oklch(1 0 0 / 0.08);
+  --tbb-shadow-glow: 0 0 0 1px oklch(1 0 0 / 0.24),
+    0 10px 36px -10px oklch(1 0 0 / 0.12);
+
+  --ifm-background-color: var(--tbb-bg);
+  --ifm-background-surface-color: var(--tbb-surface);
+  --ifm-toc-border-color: var(--tbb-border);
+  --docusaurus-highlight-navbar-bg: oklch(1 0 0 / 0.08);
+}
+
+/* ─── Apple Pro Mesh — monochrome atmospheric gradients ────────────────────
+   Frosted-glass + hairline surfaces sit over this. Applied to hero + stages */
+.tbb-apple-mesh {
+  background-image:
+    radial-gradient(at 12% 8%, oklch(0.5 0.01 250 / 0.04) 0px, transparent 45%),
+    radial-gradient(at 88% 12%, oklch(0.45 0.01 250 / 0.03) 0px, transparent 45%),
+    radial-gradient(at 50% 100%, oklch(0.4 0.01 250 / 0.04) 0px, transparent 55%);
+}
+
+:root[data-theme="dark"] .tbb-apple-mesh {
+  background-image:
+    radial-gradient(at 12% 8%, oklch(0.5 0.01 250 / 0.15) 0px, transparent 45%),
+    radial-gradient(at 88% 12%, oklch(0.45 0.01 250 / 0.12) 0px, transparent 45%),
+    radial-gradient(at 50% 100%, oklch(0.4 0.01 250 / 0.18) 0px, transparent 55%),
+    radial-gradient(at 50% 50%, oklch(0 0 0 / 0.4) 0px, transparent 70%);
+}
+
+/* ─── Global typography ──────────────────────────────────────────────────── */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-feature-settings: "ss01", "cv11", "rlig" 1, "calt" 1;
+  letter-spacing: -0.011em;
+  background: var(--tbb-bg);
+  color: var(--tbb-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.022em;
+  font-weight: 700;
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--ifm-font-family-monospace);
+  font-feature-settings: "ss03", "cv11";
+}
+
+::selection {
+  background: color-mix(in srgb, var(--ifm-color-primary) 24%, transparent);
+}
+
+/* ─── Type scale ─────────────────────────────────────────────────────────────
+   Hierarchy comes from tone + weight + size together, never size alone.
+   Each level below is defined at its real consuming selector (article h1-h4,
+   the lead paragraph, sidebar/TOC items, code, table cells) rather than as
+   unused utility classes — this table is the reference; grep the tone column
+   to find where each one lives.
+
+   ● marks a level that is multiplied by --tbb-text-scale (0.94 today). The Size
+   column is the AUTHORED value; the browser renders 94% of it. Headings are
+   unmarked and unscaled BY THAT DIAL on purpose — rank belongs to them, and
+   that dial exists so the reading text can be tuned against them without
+   redrawing the scale. Headings are instead multiplied by --tbb-heading-scale
+   (1.1 today), so every heading Size below is also an authored value: the
+   rendered size is 1.1x it. The two dials are independent by design; do not
+   fold one into the other. All headings now sit at weight 700 and carry a
+   block-width hairline underline (border-bottom + --tbb-rhythm-1).
+   The unmarked micro-chrome (kicker, section marker, h4+ labels) also holds at
+   its authored size: those already sit at the ~11–12px legibility floor, and
+   shrinking them further costs the reader without buying any hierarchy.
+
+   Level              │ Face          │ Size               │ Wt  │ Line │ Track   │ Tone
+   ───────────────────┼───────────────┼────────────────────┼─────┼──────┼─────────┼──────
+   h1 main chapter    │ Inter         │ clamp(1.62-1.92rem)│ 700 │ 1.25 │ -.02em  │ h-ink
+   h1 subchapter      │ Inter         │ clamp(1.52-1.82rem)│ 700 │ 1.22 │ -.02em  │ h-ink
+   h2 subtopic        │ Inter         │ clamp(1.24-1.52rem)│ 700 │ 1.25 │ -.018em │ h-ink
+   h3 subtopic        │ Inter         │ 1.2rem             │ 700 │ 1.35 │ -.015em │ h-ink
+   h4 sub-label       │ Inter         │ 0.6875rem, upper   │ 400 │ 1.45 │ .1em    │ 5
+   chapter kicker     │ Inter         │ 0.6875rem, upper   │ 650 │ 1.4  │ .1em    │ 5 + mark
+   section marker     │ Geist Mono    │ 0.75rem            │ 500 │ 1.3  │ .14em   │ 5 + ◆
+ ● body (p/li)       │ Inter         │ 1rem               │ 400 │ 1.7  │ -.011em │ ink
+ ● emphasis (strong) │ Inter         │ 1rem (inherit)     │ 650 │ 1.7  │ -.011em │ 9
+ ● secondary (cards, │ Inter         │ 0.9375rem          │ 400 │ 1.55 │ -.011em │ 6
+     table cells)    │               │                    │     │      │         │
+   caption (eyebrows) │ Inter         │ 0.6875rem, upper   │ 650 │ 1.3  │ .06em   │ 5
+ ● code              │ Geist Mono    │ 0.875rem block     │ 400 │ 1.65 │ 0       │ 8 on code-bg
+ ● sidebar-item(leaf)│ Inter         │ 0.9375rem          │ 500 │ 1.4  │ -.005em │ 7, 9 active
+ ● sidebar-category  │ Inter         │ 0.9375rem          │ 700 │ 1.3  │ -.01em  │ 9
+ ● toc-item          │ Inter         │ 0.8125rem          │ 400 │ 1.5  │ 0       │ 6, 9/accent
+
+   Tone 9 = --tbb-text, ink = --tbb-ink, h-ink = --tbb-heading-ink. Headings
+   read 700 in the interface face, so rank comes from size plus stroke weight;
+   the h4 is the exception, set as a 400 uppercase label rather than as a
+   heading size. h5/h6 share the h4 label treatment and, like it, have no
+   instances anywhere in the content today.
+
+   ─── Spacing scale ──────────────────────────────────────────────────────────
+   The prose block steps by ONE ladder (--tbb-rhythm-*, above) instead of the
+   eight unrelated margins it used to carry. Same rule as the type table: grep
+   the consumer column, so no step can quietly become dead.
+
+   Step            │ Value   │ Consumer
+   ────────────────┼─────────┼─────────
+   --tbb-rhythm-1  │ 0.5rem  │ li gap; every heading's underline padding; h4 gap
+   --tbb-rhythm-2  │ 0.75rem │ h3 → its body; pull-quote rule → its text
+   --tbb-rhythm-3  │ 1.25rem │ p gap; h2 → its body; ul/ol gap
+   --tbb-rhythm-4  │ 2rem    │ code + table gaps; h2 padding-top; h4 top
+   --tbb-rhythm-5  │ 3rem    │ h3 top; blockquote; hr
+   --tbb-rhythm-6  │ 4rem    │ h2 top (the chapter-level break) */
+
+h4 {
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+}
+
+h5 {
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+
+h6 {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Navbar — frosted glass ─────────────────────────────────────────────── */
+.navbar {
+  border-bottom: 1px solid var(--tbb-border);
+  background: var(--tbb-navbar-glass);
+  backdrop-filter: var(--tbb-apple-frost, saturate(180%) blur(24px));
+  -webkit-backdrop-filter: var(--tbb-apple-frost, saturate(180%) blur(24px));
+  padding: 0.875rem 0;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .navbar {
+    background: var(--tbb-surface-solid);
+  }
+}
+
+/* ─── Navbar alignment + parity (T003-T005) ─────────────────────────────── */
+/* Force shared baseline: brand, left items, right items all inline-flex centered */
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+/* Centered-brand arrangement (005 T004, FR-001, FR-012) — the brand floats
+   dead-center over the inner container; left nav and right actions split the
+   remaining space symmetrically via auto margins. Removed from flow so it
+   never collides with either group. */
+.navbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(196.25px, 48vw);
+  box-sizing: border-box;
+  max-width: 48vw;
+  justify-content: center;
+}
+.theme-layout-navbar-left {
+  margin-right: auto;
+}
+.navbar__items,
+.navbar__items--right {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+/* Color-mode toggle wrapper is a block div — align it with the flex row */
+.navbar__items--right [class*="colorModeToggle"] {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Color-mode + search trigger share one action geometry (FR-004).
+   The chapter-side ExpandableSearchBar is deliberately NOT in this list: its
+   40px collapsed circle is the reference component's own look (007). */
+.navbar__items--right [class*="colorModeToggle"] > .clean-btn,
+.navbar__items--right > .tbb-search-trigger {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--tbb-a11y-touch-target);
+  min-block-size: var(--tbb-a11y-touch-target);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--tbb-radius-md);
+  background: var(--tbb-surface-glass);
+  backdrop-filter: var(--tbb-apple-frost, saturate(180%) blur(16px));
+  -webkit-backdrop-filter: var(--tbb-apple-frost, saturate(180%) blur(16px));
+}
+
+/* Home search trigger (007) — the same 44px pill as the theme toggle
+   (it is in the FR-004 list above); clicking it opens the Spotlight overlay.
+   The overlay, the chapter bar, and the results cards own their surfaces and
+   rings in their CSS modules, where CSS-module hashing cannot orphan them. */
+.tbb-search-trigger {
+  border: 0;
+  color: var(--tbb-text);
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.tbb-search-trigger:focus-visible {
+  outline: 2px solid var(--tbb-accent);
+  outline-offset: 2px;
+  border-radius: var(--tbb-radius-md);
+  box-shadow: var(--tbb-focus-ring);
+}
+
+/* Active-state indication (T017, SC-009) — the Curriculum link in the
+   left group gets a distinct pill treatment when its route is active. */
+.theme-layout-navbar-left > .navbar__link[aria-current="page"],
+.theme-layout-navbar-left > .navbar__link--active,
+.theme-layout-navbar-left > a.navbar__item.navbar__link.navbar__link--active {
+  color: var(--tbb-accent);
+  font-weight: 600;
+}
+.theme-layout-navbar-left > .navbar__link[aria-current="page"]::before,
+.theme-layout-navbar-left > .navbar__link--active::before {
+  content: "";
+  display: inline-block;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 999px;
+  background: var(--tbb-accent);
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tbb-accent) 18%, transparent);
+}
+
+@media (max-width: 996px) {
+  .navbar__brand {
+    max-width: 48vw;
+  }
+}
+
+/* Title truncation: ellipsis without pushing/wrapping (FR-010) */
+.navbar__inner .navbar__brand {
+  min-width: 0;
+}
+.navbar__inner .navbar__title {
+  min-width: 0;
+  max-width: 28ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Single hairline border — no double render across themes (FR-009) */
+.navbar {
+  border-bottom: 1px solid var(--tbb-border);
+}
+
+/* Theme transition no-reflow guard: prevent dimension changes during toggle (FR-008) */
+.navbar *,
+.navbar__brand,
+.navbar__link,
+.navbar__items .clean-btn {
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Mobile drawer: hamburger aligns to brand baseline and meets the full
+   44×44 target (FR-006, FR-007) */
+.navbar__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: var(--tbb-a11y-touch-target);
+}
+
+/* ─── Hero ───────────────────────────────────────────────────────────────── */
+.tbb-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 7rem 0 6rem;
+  text-align: center;
+  background: var(--tbb-bg);
+}
+
+.tbb-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(at 12% 8%, oklch(0.5 0.01 250 / 0.05) 0px, transparent 45%),
+    radial-gradient(at 88% 12%, oklch(0.45 0.01 250 / 0.04) 0px, transparent 45%),
+    radial-gradient(at 50% 100%, oklch(0.4 0.01 250 / 0.05) 0px, transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+:root[data-theme="dark"] .tbb-hero::before {
+  background-image:
+    radial-gradient(at 12% 8%, oklch(0.5 0.01 250 / 0.15) 0px, transparent 45%),
+    radial-gradient(at 88% 12%, oklch(0.45 0.01 250 / 0.12) 0px, transparent 45%),
+    radial-gradient(at 50% 100%, oklch(0.4 0.01 250 / 0.18) 0px, transparent 55%),
+    radial-gradient(at 50% 50%, oklch(0 0 0 / 0.4) 0px, transparent 70%);
+}
+
+.tbb-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.tbb-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.375rem;
+  border-radius: var(--tbb-radius-pill);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--tbb-surface-glass) 100%, transparent) 0%,
+    color-mix(in srgb, var(--tbb-surface-glass) 92%, var(--tbb-bg-alt)) 100%
+  );
+  backdrop-filter: var(--tbb-apple-frost);
+  -webkit-backdrop-filter: var(--tbb-apple-frost);
+  border: 1px solid var(--tbb-border);
+  box-shadow: var(--tbb-shadow-md), 0 6px 16px -10px oklch(0.13 0.002 250 / 0.35);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--tbb-text-muted);
+  letter-spacing: -0.01em;
+  margin-bottom: 2rem;
+}
+
+:root[data-theme="dark"] .tbb-hero__eyebrow {
+  box-shadow: var(--tbb-shadow-md), 0 6px 20px -10px oklch(0 0 0 / 0.6);
+}
+
+.tbb-hero__eyebrow-item {
+  padding: 0 0.75rem;
+  white-space: nowrap;
+}
+
+.tbb-hero__eyebrow-item strong {
+  /* Neutral, not the scoped accent (ADR-0003) — the homepage stays strictly
+     monochrome; the accent is a docs-chrome wayfinding signal only. */
+  color: var(--ifm-color-primary);
+  font-weight: 700;
+}
+
+.tbb-hero__eyebrow-divider {
+  width: 1px;
+  height: 0.75rem;
+  flex: none;
+  background: var(--tbb-border-strong);
+}
+
+@media (max-width: 480px) {
+  .tbb-hero__eyebrow {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 0.375rem;
+  }
+
+  .tbb-hero__eyebrow-divider {
+    display: none;
+  }
+}
+
+.tbb-hero__title {
+  font-family: var(--ifm-heading-font-family);
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  margin: 0 auto 1.5rem;
+  max-width: 18ch;
+  color: var(--tbb-text);
+}
+
+.tbb-hero__title-accent {
+  font-family: var(--tbb-font-display);
+  font-style: italic;
+  font-weight: 400;
+  background: linear-gradient(135deg, var(--tbb-silver-9) 0%, var(--tbb-silver-6) 55%, var(--tbb-silver-4) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+:root[data-theme="dark"] .tbb-hero__title-accent {
+  background: linear-gradient(135deg, var(--tbb-silver-0) 0%, var(--tbb-silver-2) 55%, var(--tbb-silver-4) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tbb-hero__subtitle {
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--tbb-text-muted);
+  max-width: 38rem;
+  margin: 0 auto 2.5rem;
+}
+
+.tbb-hero__cta-row {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3.5rem;
+}
+
+.tbb-hero__cta-primary,
+.tbb-hero__cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--tbb-radius-md);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+  transition: transform var(--tbb-duration) var(--tbb-ease),
+    box-shadow var(--tbb-duration) var(--tbb-ease),
+    border-color var(--tbb-duration) var(--tbb-ease);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Primary CTA — a machined billet. Light mode mills it from black stock,
+   dark mode from white; either way it is the single highest-contrast object
+   on the page, which is what the accent used to buy with hue. */
+.tbb-hero__cta-primary {
+  background: var(--tbb-metal-face-deep);
+  color: var(--tbb-silver-0);
+  border: 1px solid oklch(0 0 0 / 0.85);
+  box-shadow:
+    var(--tbb-metal-rim-deep),
+    0 8px 18px -6px oklch(0 0 0 / 0.45);
+}
+
+.tbb-hero__cta-primary:hover {
+  background: linear-gradient(
+    180deg,
+    var(--tbb-silver-5) 0%,
+    var(--tbb-silver-7) 55%,
+    var(--tbb-silver-8) 100%
+  );
+  border-color: oklch(0 0 0 / 0.85);
+  color: var(--tbb-silver-0);
+  transform: translateY(-1px);
+  box-shadow:
+    var(--tbb-metal-rim-deep),
+    0 12px 26px -6px oklch(0 0 0 / 0.55);
+  text-decoration: none;
+}
+
+:root[data-theme="dark"] .tbb-hero__cta-primary {
+  background: linear-gradient(
+    180deg,
+    var(--tbb-silver-0) 0%,
+    var(--tbb-silver-2) 55%,
+    var(--tbb-silver-3) 100%
+  );
+  color: var(--tbb-silver-9);
+  border-color: oklch(1 0 0 / 0.55);
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 0.9),
+    inset 0 -1px 0 0 oklch(0 0 0 / 0.14),
+    0 8px 22px -6px oklch(0 0 0 / 0.9);
+}
+
+:root[data-theme="dark"] .tbb-hero__cta-primary:hover {
+  background: linear-gradient(
+    180deg,
+    var(--tbb-silver-0) 0%,
+    var(--tbb-silver-1) 55%,
+    var(--tbb-silver-2) 100%
+  );
+  color: var(--tbb-silver-9);
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 0.95),
+    inset 0 -1px 0 0 oklch(0 0 0 / 0.14),
+    0 12px 30px -6px oklch(0 0 0 / 0.95);
+}
+
+.tbb-hero__cta-secondary {
+  background: var(--tbb-metal-face);
+  color: var(--tbb-text);
+  border: 1px solid var(--tbb-border-strong);
+  box-shadow: var(--tbb-metal-rim), 0 2px 5px -2px oklch(0 0 0 / 0.14);
+}
+
+:root[data-theme="dark"] .tbb-hero__cta-secondary {
+  background: linear-gradient(
+    180deg,
+    var(--tbb-silver-6) 0%,
+    var(--tbb-silver-7) 55%,
+    var(--tbb-silver-8) 100%
+  );
+  box-shadow: var(--tbb-metal-rim-deep), 0 4px 12px -4px oklch(0 0 0 / 0.8);
+}
+
+.tbb-hero__cta-secondary:hover {
+  transform: translateY(-1px);
+  color: var(--tbb-text);
+  text-decoration: none;
+}
+
+.tbb-hero__arrow {
+  transition: transform var(--tbb-duration) var(--tbb-ease);
+}
+
+.tbb-hero__cta-primary:hover .tbb-hero__arrow,
+.tbb-hero__cta-secondary:hover .tbb-hero__arrow {
+  transform: translateX(3px);
+}
+
+.tbb-hero__meta {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  color: var(--tbb-text-muted);
+  font-size: 0.875rem;
+}
+
+.tbb-hero__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tbb-hero__meta-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--ifm-color-primary);
+}
+
+/* ─── Section headings ───────────────────────────────────────────────────── */
+.tbb-section-heading {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.tbb-section-heading__eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.75rem;
+}
+
+.tbb-section-heading__title {
+  font-family: var(--ifm-heading-font-family);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  margin: 0 auto 0.75rem;
+  max-width: 22ch;
+  color: var(--tbb-text);
+}
+
+.tbb-section-heading__subtitle {
+  font-size: 1.0625rem;
+  color: var(--tbb-text-muted);
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+/* ─── Stage cards — silver surfaces ──────────────────────────────────────── */
+.tbb-stages {
+  padding: 5rem 0 6rem;
+  position: relative;
+}
+
+.tbb-stage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.tbb-stage-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem 1.5rem 1.5rem;
+  border-radius: var(--tbb-radius-lg);
+  background: linear-gradient(180deg, oklch(1 0 0) 0%, oklch(0.98 0.001 250) 100%);
+  border: 1px solid var(--tbb-border);
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 1),
+    inset 0 -1px 0 0 oklch(0.5 0.005 250 / 0.05);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition:
+    transform var(--tbb-duration) var(--tbb-ease),
+    box-shadow var(--tbb-duration) var(--tbb-ease),
+    border-color var(--tbb-duration) var(--tbb-ease);
+  isolation: isolate;
+}
+
+:root[data-theme="dark"] .tbb-stage-card {
+  background: linear-gradient(180deg, oklch(0.16 0 0) 0%, oklch(0.12 0 0) 100%);
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 0.05),
+    inset 0 -1px 0 0 oklch(0 0 0 / 0.4);
+}
+
+.tbb-stage-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--stage-color, var(--ifm-color-primary)) 0%,
+    transparent 50%
+  );
+  opacity: 0.05;
+  z-index: -1;
+  transition: opacity var(--tbb-duration) var(--tbb-ease);
+}
+
+.tbb-stage-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--tbb-shadow-glow);
+  border-color: var(--stage-color, var(--tbb-border-strong));
+  text-decoration: none;
+  color: inherit;
+}
+
+.tbb-stage-card:hover::before {
+  opacity: 0.12;
+}
+
+.tbb-stage-card__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.tbb-stage-card__num {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stage-color, var(--ifm-color-primary));
+}
+
+.tbb-stage-card__chip {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--tbb-radius-md);
+  background: color-mix(in srgb, var(--stage-color, var(--ifm-color-primary)) 14%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--stage-color, var(--ifm-color-primary));
+  font-weight: 700;
+  font-size: 0.9375rem;
+  font-feature-settings: "tnum";
+}
+
+.tbb-stage-card__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+  color: var(--tbb-text);
+}
+
+.tbb-stage-card__desc {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  /* Darkened from --tbb-text-muted for AA contrast on the card's white
+     surface (axe: 4.5:1). The mix keeps the muted feel while satisfying
+     the 4.5:1 floor for body text. */
+  color: color-mix(in srgb, var(--tbb-text) 75%, transparent);
+  margin: 0 0 1.5rem;
+  flex-grow: 1;
+}
+
+.tbb-stage-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  /* Stage color darkened against --tbb-text so the link text meets AA 4.5:1
+     against the card's white background regardless of which stage token is
+     applied (amber/teal/indigo/plum). */
+  color: color-mix(in srgb, var(--stage-color, var(--ifm-color-primary)) 55%, var(--tbb-text) 45%);
+  margin-top: auto;
+}
+
+.tbb-stage-card__cta-arrow {
+  transition: transform var(--tbb-duration) var(--tbb-ease);
+}
+
+.tbb-stage-card:hover .tbb-stage-card__cta-arrow {
+  transform: translateX(3px);
+}
+
+/* ─── Feature plates — the four "why this book" pillars ────────────────────
+   Four plates cut from the same stock as the hero CTAs and the table headers:
+   the surface is `--tbb-metal-face` (a vertical light ramp, not a flat fill),
+   the edge is `--tbb-metal-rim` (the bevel catching light), and depth is the
+   `--tbb-shadow-*` stack. The Design System Contract asks for exactly this —
+   "depth MUST come from luminance-differentiated surfaces + soft shadows, not
+   hard 1px borders" — so the hairline below is edge definition at 10% alpha,
+   not the source of the lift.
+
+   Identity descends the silver ramp, the way the stages do: each card gets one
+   `--tbb-feature-accent` step (set inline by FeatureGrid), consumed by the top
+   rail and the icon chip. No hue, because ADR-0003 scopes `--tbb-accent` to a
+   named list of surfaces that does not include cards. The ordinal carries the
+   rank; the ramp only reinforces it — so nothing here is colour-only meaning. */
+
+.tbb-feature-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+/* Two columns from 900px: below that a plate is narrower than ~44 characters
+   at 15px, which is under the 45–75 reading band this site holds prose to. */
+@media (min-width: 900px) {
+  .tbb-feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.tbb-feature-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem 1.75rem 1.875rem;
+  border-radius: var(--tbb-radius-xl);
+  background: var(--tbb-metal-face);
+  border: 1px solid var(--tbb-border);
+  box-shadow: var(--tbb-metal-rim), 0 1px 2px -1px oklch(0 0 0 / 0.12),
+    0 8px 24px -14px oklch(0 0 0 / 0.22);
+  transition:
+    box-shadow var(--tbb-duration) var(--tbb-ease),
+    border-color var(--tbb-duration) var(--tbb-ease);
+}
+
+.tbb-feature-card:hover {
+  border-color: color-mix(in srgb, var(--tbb-feature-accent, var(--ifm-color-primary)) 42%, var(--tbb-border));
+  box-shadow: var(--tbb-metal-rim),
+    0 2px 4px -2px oklch(0 0 0 / 0.16),
+    0 22px 44px -18px oklch(0 0 0 / 0.3),
+    0 10px 30px -12px oklch(0 0 0 / 0.16);
+}
+
+/* 1. The rail — a 3px bar along the top edge, in the card's own ramp step,
+   dissolving to the right. This is the plate's identity mark; the ordinal
+   below is what actually names it.
+
+   It runs at full opacity, and the first fifth is held solid so the mark has a
+   defined starting edge rather than trailing off like a smudge; the dissolve
+   then happens across the next two fifths and it is gone by 60%.
+
+   This was strengthened once from a 2px bar at 0.6 alpha, on the grounds that it
+   read as invisible. That reason is not trustworthy and stands corrected: a 3px
+   line cannot be judged in a downsampled screenshot, which is what the first
+   readings were, and a forced-colour test later showed the geometry had been
+   painting correctly all along. The current values are the ones verified to read
+   at 2x and 3x — the earlier values were never isolated and re-tested, so no
+   claim is made here about whether they were adequate. */
+.tbb-feature-card__rail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--tbb-feature-accent, var(--ifm-color-primary)) 0%,
+    var(--tbb-feature-accent, var(--ifm-color-primary)) 22%,
+    color-mix(in srgb, var(--tbb-feature-accent, var(--ifm-color-primary)) 40%, transparent) 38%,
+    transparent 60%
+  );
+}
+
+/* 2. The spotlight — a soft radial bloom that follows the pointer. Light mode
+   reads it as the hand's shadow on a matte white plate; dark mode reads it as
+   the hand's own light on black metal. Same gesture, inverted, because a white
+   bloom on a white face is invisible and a black one on black is too. */
+.tbb-feature-card__spotlight {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    360px circle at var(--tbb-spot-x, 50%) var(--tbb-spot-y, 0%),
+    oklch(0 0 0 / 0.07),
+    transparent 62%
+  );
+  transition: opacity var(--tbb-duration-slow) var(--tbb-ease-out);
+}
+
+:root[data-theme="dark"] .tbb-feature-card__spotlight {
+  background: radial-gradient(
+    360px circle at var(--tbb-spot-x, 50%) var(--tbb-spot-y, 0%),
+    oklch(1 0 0 / 0.1),
+    transparent 62%
+  );
+}
+
+.tbb-feature-card:hover .tbb-feature-card__spotlight {
+  opacity: 1;
+}
+
+/* 3. The head — icon chip left, ordinal right. */
+.tbb-feature-card__head {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* A raised, tinted metal chip: the accent reads as a wash caught in the face
+   rather than as a painted square. */
+.tbb-feature-card__chip {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--tbb-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--tbb-feature-accent, var(--ifm-color-primary)) 10%, transparent),
+      transparent
+    ),
+    var(--tbb-metal-face);
+  box-shadow: var(--tbb-metal-rim), 0 1px 2px -1px oklch(0 0 0 / 0.2);
+  /* Mixed toward --tbb-text so the glyph clears AA on the lightest plate and
+     stays a light mark on the darkest one — the mix inverts with the theme on
+     its own, because --tbb-text does. */
+  color: color-mix(
+    in srgb,
+    var(--tbb-feature-accent, var(--ifm-color-primary)) 72%,
+    var(--tbb-text)
+  );
+  transition: background var(--tbb-duration) var(--tbb-ease);
+}
+
+.tbb-feature-card:hover .tbb-feature-card__chip {
+  background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--tbb-feature-accent, var(--ifm-color-primary)) 18%, transparent),
+      transparent
+    ),
+    var(--tbb-metal-face);
+}
+
+/* The ordinal — Geist Mono, the system's ordinal face, set large and at 16%
+   ink so it reads as a specimen number stamped into the plate rather than as
+   a second label competing with the title. Uniform across all four plates, so
+   the grid reads as one set; the rail above carries the ramp instead. */
+.tbb-feature-card__index {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: clamp(2.25rem, 3.2vw, 3rem);
+  font-weight: 500;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  font-feature-settings: "tnum";
+  color: color-mix(in srgb, var(--tbb-text) 16%, transparent);
+  transition: color var(--tbb-duration) var(--tbb-ease);
+}
+
+.tbb-feature-card:hover .tbb-feature-card__index {
+  color: color-mix(in srgb, var(--tbb-text) 26%, transparent);
+}
+
+/* 4. The reading block. */
+.tbb-feature-card__title {
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.1875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.021em;
+  /* The tinted heading ink, not pure black — the site's standing heading
+     colour (see the token), which keeps a heading from reading as washed out. */
+  color: var(--tbb-heading-ink);
+  margin: 0 0 0.625rem;
+  text-wrap: balance;
+}
+
+.tbb-feature-card__body {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  /* Darkened from --tbb-text-muted for AA on the plate's lightest step, the
+     same mix and the same reason as .tbb-stage-card__desc. */
+  color: color-mix(in srgb, var(--tbb-text) 75%, transparent);
+  /* Capped at 32rem (512px ≈ 65 characters at 15px) so the measure stays inside
+     the 45–75 band at the widest container instead of running to ~75, and the
+     plate keeps a margin of air on its right. */
+  max-width: 32rem;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* Below 480px the plate's own padding would leave under ~28 characters a line
+   at 15px, so the padding steps in to hold the measure where it can. */
+@media (max-width: 480px) {
+  .tbb-feature-card {
+    padding: 1.5rem 1.25rem 1.625rem;
+  }
+
+  .tbb-feature-card__head {
+    margin-bottom: 1.25rem;
+  }
+}
+
+/* ─── Chapter state badge ────────────────────────────────────────────────── */
+/* Spec 013 — Lesson Reading Page Redesign: badge is now a soft-blue rounded
+   card with subtle elevation, no animated dot. The card sits directly above
+   the chapter title. */
+.tbb-chapter-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.95rem;
+  border-radius: var(--tbb-radius-md);
+  font-size: calc(0.8125rem * var(--tbb-text-scale));
+  /* The badge is inline chrome, not prose — it would otherwise inherit the
+     markdown body's 1.8 and end up ~8px taller than the breadcrumb chip it
+     sits under, giving the top of the page two chips at two different
+     heights. 1.2 lands it level with that chip. */
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  margin-bottom: 1.5rem;
+  border: 1px solid transparent;
+  box-shadow: var(--tbb-shadow-sm);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .tbb-chapter-state {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* The quiet tone is scoped rather than read straight off --tbb-text-muted:
+   that token is calibrated against --tbb-surface, but this badge darkens its
+   own ground by 8% gray, which drops the pairing to 4.43:1 in light mode —
+   just under AA, and the state axe flagged. One step down the ramp restores
+   the margin. Dark mode inverts the mix (--gray-9 is light there) and already
+   measures 6.45:1, so it keeps the muted tone. */
+.tbb-chapter-state--placeholder {
+  --tbb-chapter-state-quiet: var(--tbb-silver-6);
+  background: color-mix(in srgb, var(--gray-9) 8%, var(--tbb-surface));
+  color: var(--tbb-chapter-state-quiet);
+  border-color: color-mix(in srgb, var(--gray-9) 16%, transparent);
+}
+
+:root[data-theme="dark"] .tbb-chapter-state--placeholder {
+  --tbb-chapter-state-quiet: var(--tbb-text-muted);
+}
+
+/* Re-homed off --tbb-accent (ADR-0003): a status badge isn't a link, active
+   nav item, or focus ring, so it stays neutral like the other three states. */
+.tbb-chapter-state--text-ready {
+  background: color-mix(in srgb, var(--ifm-color-primary) 10%, var(--tbb-surface));
+  color: var(--tbb-text);
+  border-color: color-mix(in srgb, var(--ifm-color-primary) 24%, transparent);
+}
+
+.tbb-chapter-state--video-published {
+  background: color-mix(in srgb, var(--tbb-stage-2) 10%, var(--tbb-surface));
+  color: var(--tbb-text);
+  border-color: color-mix(in srgb, var(--tbb-stage-2) 24%, transparent);
+}
+
+.tbb-chapter-state--unknown {
+  background: color-mix(in srgb, var(--tbb-danger) 10%, var(--tbb-surface));
+  color: var(--tbb-danger);
+  border-color: color-mix(in srgb, var(--tbb-danger) 24%, transparent);
+}
+
+/* Static status dot (per the reference design) — no animation/pulse per
+   Principle VII's motion restraint; color communicates state at a glance. */
+.tbb-chapter-state__dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Derived from the badge's own text tone rather than --gray-9, which measured
+   2.79:1 against this ground — under the 3:1 floor for non-text UI
+   (WCAG 1.4.11). Tying the two together means the dot can never drift below
+   the floor while the label passes. */
+.tbb-chapter-state--placeholder .tbb-chapter-state__dot {
+  background: var(--tbb-chapter-state-quiet);
+}
+
+.tbb-chapter-state--text-ready .tbb-chapter-state__dot {
+  background: var(--ifm-color-primary);
+}
+
+.tbb-chapter-state--video-published .tbb-chapter-state__dot {
+  background: var(--tbb-stage-2);
+}
+
+.tbb-chapter-state--unknown .tbb-chapter-state__dot {
+  background: var(--tbb-danger);
+}
+
+/* ─── Content kind badge (Theory / Practice) ─────────────────────────────── */
+/* Rendered by ChapterHeading beside the chapter-state badge, and only when a
+   chapter's frontmatter sets `content_kind` — chapters without the key render
+   nothing. Same card as the state badge, same reasoning: re-homed off
+   --tbb-accent (ADR-0003) — this is a content-classification badge, not a
+   link, active nav item, or focus ring, so it stays neutral, matching
+   .tbb-chapter-state--text-ready's exact treatment. Both tones come from
+   tokens, so dark mode needs no override. */
+.tbb-content-kind {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.95rem;
+  border-radius: var(--tbb-radius-md);
+  font-size: calc(0.8125rem * var(--tbb-text-scale));
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  margin-bottom: 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--ifm-color-primary) 24%, transparent);
+  box-shadow: var(--tbb-shadow-sm);
+  background: color-mix(in srgb, var(--ifm-color-primary) 10%, var(--tbb-surface));
+  color: var(--tbb-text);
+}
+
+/* When the state badge is present on the same line, keep the two pills apart. */
+.tbb-chapter-state + .tbb-content-kind {
+  margin-inline-start: 0.5rem;
+}
+
+.tbb-content-kind__dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--ifm-color-primary);
+}
+
+/* ─── Chapter prose ──────────────────────────────────────────────────────── */
+/* The reading column — the one major surface that never got the treatment the
+   navbar, sidebar and TOC did.
+
+   Two mechanics govern everything below.
+
+   1. THE REAL HOOK. Docusaurus renders the chapter body as
+      `<article><nav …/><div class="theme-doc-markdown markdown"><header>
+      <h1>…` — there is no element-level content wrapper, and the h1 sits
+      inside a <header>. So the h1 is NOT a sibling of the first paragraph,
+      and prose must be scoped to `.theme-doc-markdown`.
+
+   2. SPECIFICITY. Infima ships its own heading rhythm at `.markdown>h2`,
+      `.markdown>h3`, `.markdown>p` and `.markdown li+li` — one class plus one
+      element, (0,1,1). A plainer `article h2` is only (0,0,2) and LOSES to
+      that, so its margins fall back to Infima's no matter where this file
+      loads. Matching Infima's selector shape is what makes source order
+      decide it in our favour — the same lesson the sidebar block already
+      records for `.menu__link--active`. */
+
+/* Docusaurus ships the doc breadcrumb at `--ifm-breadcrumb-size-multiplier:
+   0.8` (12.8px) inside a 1.5rem-radius pill padded 0.4rem/0.8rem — a chip
+   rounder and taller than the status badge sitting directly under it. Shaped
+   to that badge so the two read as one row of page chrome instead of two
+   unrelated controls. The size is left where the theme sets it. */
+.theme-doc-breadcrumbs .breadcrumbs__link {
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--tbb-radius-sm);
+}
+
+article {
+  /* One measure for the whole column, so breadcrumbs and pagination line up
+     with the prose instead of drifting wider.
+
+     This used to FILL the doc column, on the reasoning that the 63rem ceiling
+     never bound and the line therefore tracked the column. Measured, that
+     reasoning was wrong on both counts: the column is not 942px (that figure
+     omitted the sidebar), and the line ran long at every wide width. At 15.04px
+     body text the fill produced a MEDIAN of 98.3 characters per line at a
+     1440px viewport (791px column) and 81.6 at 1253px (650px column) — the
+     comfortable band is 45–75, with ~66 the long-standing ideal. Dense prose at
+     98 characters reads as a wall, which is the single largest reason the
+     reading column did not match the chrome around it.
+
+     35rem (560px) was that measured landing point. It is now a FLOOR, and the
+     measure is fluid above it.
+
+     [2026-09-16] A fixed measure cannot do the job it was next asked to do.
+     Two things break it. First, it cannot halve a GAP: the gap is
+     (column - measure) / 2 and the column width varies by viewport, so one rem
+     value leaves 119px of dead space per side at 1440px, 59px at 1280px and
+     none at 1024px. Second, and worse, when a reader collapsed a sidebar the
+     measure stayed pinned at 560px while the column grew — so the collapse
+     added whitespace instead of reclaiming it, which is the exact complaint
+     that prompted this revision.
+
+     Inverting it fixes both: hold the GAP constant and let the measure fill
+     everything else. `100%` resolves against this element's containing block —
+     the same box that already changes when either sidebar collapses — so the
+     prose grows to meet the space with no JavaScript, no state to sync and no
+     transition of its own. It moves in lockstep with the rail's 200ms width
+     transition because its width is a function of that same box.
+
+     5.25rem (84px) is measured, not guessed: it lands a 1440px viewport on ~80
+     characters per line, against 71 before. ~80 was chosen over a literal 50%
+     cut of the gap (~85 characters) to stay clear of the long-line end of the
+     readable band. In the base state the growth is self-limiting anyway —
+     --ifm-container-width caps the column at 1180px, so ~85 characters is as
+     far as it reaches on its own. Only collapsing a rail releases it further,
+     which is a deliberate act by the reader.
+
+     The `max(35rem, ...)` floor is what keeps narrow viewports untouched: it
+     binds below ~1370px, so 1280px keeps its current 560px, and at 1024px and
+     below the `min(100%, ...)` arm wins exactly as it always has. Mobile does
+     not move. `min(100%, ...)` is belt-and-braces against a negative calc on a
+     very narrow column.
+
+     `margin-inline: auto` is what stops this from recreating the one-sided dead
+     strip the fill behaviour was introduced to remove. The leftover it splits
+     is now a constant 84px, which is what makes it read as a deliberate margin
+     rather than as waste. */
+  --tbb-prose-gap: 5.25rem;
+  --tbb-prose-measure: min(
+    100%,
+    max(35rem, calc(100% - (2 * var(--tbb-prose-gap))))
+  );
+  max-width: var(--tbb-prose-measure);
+  margin-inline: auto;
+}
+
+.theme-doc-markdown {
+  /* Reading size. Everything scales off --tbb-text-scale, so the whole prose
+     block stays tunable with one number.
+
+     This sat at 1.0625rem (16px rendered) and read as too large for its own
+     headings: against a 26.7px h1 that is a 1.67 ratio, and a chapter body
+     within 1.7× of its own title makes the title read as emphatic body text
+     rather than as a title. At 1rem it renders at 15px, which puts h1:body at
+     2.0 and leaves the h3 (19.2px) a clear step above the body too. The measure
+     moved with it (see --tbb-prose-measure above) so the characters per line
+     stay put.
+
+     Leading is 1.7 rather than the 1.65 base: dropping the size at a fixed
+     ratio would have closed the lines up, and a chapter is read in long
+     sittings. */
+  font-size: calc(1rem * var(--tbb-text-scale));
+  line-height: 1.7;
+  letter-spacing: -0.011em;
+  /* No measure of its own. It used to repeat `max-width: var(--tbb-prose-measure)`
+     and that was harmless while the measure was a fixed `min(100%, 35rem)` — the
+     value resolved to the same number in both places. It is NOT harmless now: the
+     measure contains `calc(100% - (2 * gap))`, and `--tbb-prose-measure` is
+     declared on `article`, so re-reading it here re-resolves that `100%` against
+     the ALREADY-narrowed article and subtracts the gap a second time. Measured:
+     at a 1440px viewport the article grew to 623px while the text stayed at 560px,
+     i.e. 168px of dead space reappeared inside the box that had just been widened
+     — and because the error scales with the container, nothing looked obviously
+     broken. `article` is the measure, and this block fills it; supplying it again
+     can only ever under-count. */
+  counter-reset: tbb-section;
+}
+
+/* Light-on-dark reads optically thinner and brighter, so it wants more air
+   than the same type on white. */
+:root[data-theme="dark"] .theme-doc-markdown {
+  line-height: 1.85;
+  letter-spacing: -0.006em;
+}
+
+/* ── Chapter masthead ────────────────────────────────────────────────────── */
+/* The chapter title is the one reading-page surface that had no treatment —
+   plain text next to a fully designed sidebar. It now opens with the sidebar's
+   own vocabulary: a mono ordinal, an uppercase tracked eyebrow, a hairline
+   rule, and a small rotated-square mark (the "shape" motif reused at every
+   heading level below, thinning as the levels descend).
+
+   The number is the sidebar's number (see src/lib/chapterLocation.ts), so the
+   chrome and the prose count the same chapter the same way. The kicker is a
+   sibling BEFORE the h1, never inside it: the h1's text — and therefore the
+   generated heading anchor and the ToC entry — is left exactly as authored. */
+
+.tbb-chapter-head {
+  position: relative;
+}
+
+.tbb-chapter-kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.375rem;
+  font-size: 0.6875rem;
+  /* Matches the type-scale table, and keeps the 6px below the kicker meaning
+     6px: at the inherited 1.8 the line box added ~4px of its own. */
+  line-height: 1.4;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tbb-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The accent diamond. One saturated mark, and it sits on the accent hue the
+   sidebar already uses for its rails — the "one focused accent per surface"
+   rule holds, since every other mark below is neutral. */
+.tbb-chapter-kicker__mark {
+  inline-size: 7px;
+  block-size: 7px;
+  rotate: 45deg;
+  border-radius: 1.5px;
+  background: var(--tbb-accent);
+  box-shadow: 0 0 0 3px var(--tbb-accent-subtle);
+  flex-shrink: 0;
+}
+
+.tbb-chapter-kicker__ordinal {
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--tbb-text);
+}
+
+.tbb-chapter-kicker__sep {
+  inline-size: 3px;
+  block-size: 3px;
+  border-radius: 50%;
+  background: var(--tbb-border-strong);
+  flex-shrink: 0;
+}
+
+/* Fills the remaining width to the right edge, then fades out — the same
+   hairline the h2 rule uses, so the two read as one family. */
+.tbb-chapter-kicker__rule {
+  flex: 1;
+  min-inline-size: 1.5rem;
+  block-size: 1px;
+  background: linear-gradient(90deg, var(--tbb-border-strong), transparent);
+}
+
+/* ── Title ───────────────────────────────────────────────────────────────── */
+
+/* Headings speak in the same face as the interface — one voice, no second
+   typeface to reconcile. Three faces have now been tried here (a poster
+   grotesque, then a stencil, then a condensed display cut) and each one read as
+   a foreign object next to the chrome. The problem was never which display face
+   it was: a chapter title runs ten to twelve words and four lines, and a display
+   face is built for two or three words at poster scale. So rank is carried by
+   size and stroke weight, and the face is the one the reader is already
+   reading.
+   - A MAIN chapter (a top-level chapter, a stage index, or the intro/landing
+     page of a chapter that owns subchapters) sets at the full h1 size.
+   - A SUBCHAPTER (nested inside another doc's folder — see getChapterKind in
+     src/data/chapterManifest.ts) steps one notch down.
+
+   Weight: 700, not 400. The old 400 was chosen for the display faces, which are
+   drawn heavy at their only weight; the interface sans is not, so a 400 heading
+   at this size reads as large body text and the rank collapses. 600 → 700 is
+   the owner's "make the headings bold" call. Its cost is that the heading weight
+   now sits ABOVE body emphasis, so .theme-doc-markdown strong was taken down to
+   650 in the same pass and the ladder reads body 400 → emphasis 650 → headings
+   700, with rank still carried by size, the heading ink and the underline.
+
+   Size: every level is multiplied by --tbb-heading-scale (1.1 today) — the
+   owner's "10% bigger". The clamp() bodies below stay at their AUTHORED values
+   so the pre-scale number is still legible in the source, the same pattern
+   --tbb-text-scale uses.
+
+   Mark: the title now carries a block-width hairline underline (border-bottom
+   + --tbb-rhythm-1 padding). It is a BORDER rather than text-decoration on
+   purpose: a title that wraps to three or four lines gets ONE rule under the
+   block instead of one rule under every line. It replaced the short accent
+   signature bar that used to sit below the title — see the note where that rule
+   used to live, further down.
+
+   Leading: 1.25 over a three- to four-line title. The display faces allowed
+   1.14–1.2 because they are condensed and fill less of the em vertically; a
+   normal grotesque does not, and at 1.2 the lines read as cramped against a
+   1.65 body. Tracking is negative to match the body (-0.011em) rather than the
+   positive tracking the condensed face needed to open up its counters.
+
+   Rank: the ladder puts ~1.25–1.55 between every step, so a reader can place
+   any heading at a glance and the body never competes with the title:
+     15 body → 21.1 h3 (1.40) → 21.8-26.8 h2 → 28.5-33.8 h1
+
+   Colour: headings read --tbb-heading-ink (see the token) — a silver-blue
+   keyed to the sidebar rather than pure black, so the headings sit inside the
+   book instead of on top of it. */
+.theme-doc-markdown h1 {
+  font-family: var(--tbb-font-heading);
+  font-weight: 700;
+  font-size: calc(clamp(1.62rem, 2.4vw, 1.92rem) * var(--tbb-heading-scale));
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--tbb-heading-ink);
+  margin-bottom: var(--tbb-rhythm-3);
+  padding-bottom: var(--tbb-rhythm-1);
+  border-bottom: 1px solid var(--tbb-border);
+  text-wrap: balance;
+}
+
+/* Subchapter opener. Sits AFTER the base rule on purpose: both selectors are
+   (0,1,1), so source order is what lets the subchapter step down win. Only the
+   size and leading differ — the family, weight, tracking and colour all
+   inherit from the base h1. */
+.tbb-chapter-head--sub h1 {
+  font-size: calc(clamp(1.52rem, 2.25vw, 1.82rem) * var(--tbb-heading-scale));
+  line-height: 1.22;
+}
+
+/* The title's accent "signature" bar used to live here: a short 3.5rem
+   gradient rule under the h1. It is gone because the h1 now carries a
+   block-width underline (the border-bottom above) and two rules under one
+   title is exactly the competing-line problem the h2 comment below records.
+   The masthead is not left without its accent — the kicker's diamond
+   (.tbb-chapter-kicker__mark) still carries it, one mark per surface. */
+
+/* ── Section headings ─────────────────────────────────────────────────────── */
+/* A section opens with a hairline and is numbered in the same mono ordinal the
+   sidebar uses for its chapters (see `.tbb-sb-link__ordinal`), led by the same
+   rotated-square mark the chapter masthead opens with. Numbering + a shared
+   mark is the point: the chrome counts your position in the book, and this
+   makes the prose count your position in the chapter in the same voice, so the
+   two surfaces read as one system rather than as a designed shell around plain
+   text. The mark thins as the levels descend — filled diamond at h1/h2, a
+   smaller diamond at h3, a bare dash at h4.
+
+   The rule sits ABOVE the heading, opening its section. That position was
+   chosen when it was the section's ONLY rule — a chapter runs 12–14 h2s, and
+   underlining every one of them gives the reader 12–14 competing horizontal
+   lines to scan past. That reasoning is now overridden at the owner's
+   direction: every heading carries a block-width underline (the border-bottom
+   below), so each section head is bracketed by a rule above and one below. The
+   opening rule is deliberately KEPT rather than removed — it is what separates
+   a section from the previous section's closing line, and the underline sits
+   tight under a short run of ink, so the two do not read as the same kind of
+   line. The original argument is recorded rather than deleted because it is
+   still the reason both rules are hairlines (--tbb-border) and not the accent
+   hue: with 12–14 of them per chapter, anything stronger would out-shout the
+   headings it is meant to frame. */
+.theme-doc-markdown > h2 {
+  counter-increment: tbb-section;
+  font-family: var(--tbb-font-heading);
+  font-size: calc(clamp(1.24rem, 1.84vw, 1.52rem) * var(--tbb-heading-scale));
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.018em;
+  color: var(--tbb-heading-ink);
+  margin-top: var(--tbb-rhythm-6);
+  margin-bottom: var(--tbb-rhythm-3);
+  padding-top: var(--tbb-rhythm-4);
+  padding-bottom: var(--tbb-rhythm-1);
+  border-top: 1px solid var(--tbb-border);
+  border-bottom: 1px solid var(--tbb-border);
+  text-wrap: balance;
+}
+
+.theme-doc-markdown > h2::before {
+  content: "◆  " counter(tbb-section, decimal-leading-zero);
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.14em;
+  color: var(--tbb-text-muted);
+}
+
+.theme-doc-markdown > h3 {
+  font-family: var(--tbb-font-heading);
+  font-size: calc(1.2rem * var(--tbb-heading-scale));
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--tbb-heading-ink);
+  margin-top: var(--tbb-rhythm-5);
+  margin-bottom: var(--tbb-rhythm-2);
+  padding-bottom: var(--tbb-rhythm-1);
+  border-bottom: 1px solid var(--tbb-border);
+  text-wrap: balance;
+}
+
+/* h3 carries the same diamond as the masthead and the h2, one notch smaller —
+   the level is legible from the mark's weight alone. */
+.theme-doc-markdown > h3::before {
+  content: "";
+  display: inline-block;
+  inline-size: 6px;
+  block-size: 6px;
+  margin-right: 0.55rem;
+  rotate: 45deg;
+  border-radius: 1px;
+  background: var(--tbb-accent);
+  vertical-align: 0.08em;
+}
+
+/* h4 steps OUT of the size scale deliberately. At its old 1.0625rem it was
+   within a pixel of body text — a heading level that is invisible is worse
+   than not having the level. It takes the eyebrow treatment the chrome already
+   uses for labels (uppercase, tracked, muted, 400), so it reads as a
+   sub-label under a heading rather than as a fourth heading size. Floored at
+   11px: the blanket −20% would land it on 10.4px, which is below what tracked
+   uppercase can hold. It keeps the muted tone rather than the heading
+   silver-blue because it is a label for the heading above it, not a heading. */
+.theme-doc-markdown > h4 {
+  font-family: var(--tbb-font-heading);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.45;
+  color: var(--tbb-text-muted);
+  margin-top: var(--tbb-rhythm-4);
+  margin-bottom: var(--tbb-rhythm-1);
+}
+
+/* The bottom of the shape language: the diamond gives way to a plain hairline
+   dash, so a sub-label still reads as part of the system without competing. */
+.theme-doc-markdown > h4::before {
+  content: "";
+  display: inline-block;
+  inline-size: 1.25rem;
+  block-size: 1px;
+  margin-right: 0.6rem;
+  background: var(--tbb-border-strong);
+  vertical-align: middle;
+}
+
+.theme-doc-markdown > h5 {
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  line-height: 1.45;
+  color: var(--tbb-text-muted);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.theme-doc-markdown > h6 {
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  color: var(--tbb-text-muted);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Body copy ────────────────────────────────────────────────────────────── */
+
+.theme-doc-markdown p,
+.theme-doc-markdown li {
+  color: var(--tbb-ink);
+}
+
+.theme-doc-markdown > p {
+  margin-bottom: var(--tbb-rhythm-3);
+  /* Avoids a lone word on a paragraph's last line. Ignored where unsupported,
+     which is why the margin above carries the rhythm on its own. */
+  text-wrap: pretty;
+}
+
+/* Emphasis, mixed by role. An italic is stress on a word, NOT a font
+   substitution: it stays in the reading face, so it reads as emphasis rather
+   than as a quotation. This is the root fix for the glossary terms — those are
+   authored *italic* by Constitution IX, and swapping them into the display
+   serif made a term look like it had been lifted from somewhere else while the
+   accent underline and the tinted pill were already competing with it. The
+   display serif is not retired; it is narrowed to the surfaces that actually
+   want its voice (the pull-quote below, and the masthead/brand accents). A bold
+   term stays Inter but gains the crisp --tbb-text, so it pops against the
+   softened body ink instead of merely thickening. */
+.theme-doc-markdown em {
+  font-style: italic;
+}
+
+/* 650, not 700. Roughly one sentence in five is now bolded by the topic-
+   sentence pass, and the headings are 700, so a 700 emphasis would collide
+   with the heading weight and leave the ladder with two meanings on one
+   stroke. 650 keeps a legible ladder instead: body 400 → emphasis 650 →
+   headings 700, with rank still carried by size, the heading ink and the
+   heading underline. --tbb-text is kept — it is what makes emphasis pop
+   against the softened --tbb-ink rather than merely thickening. */
+.theme-doc-markdown strong {
+  font-weight: 650;
+  color: var(--tbb-text);
+}
+
+/* Links — one of the few surfaces permitted the scoped accent hue
+   (ADR-0003); everything else in this block stays on --ifm-color-primary,
+   which is neutral. */
+.theme-doc-markdown a {
+  color: var(--tbb-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--tbb-accent) 30%,
+    transparent
+  );
+  transition: color var(--tbb-duration-fast) var(--tbb-ease),
+    text-decoration-color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+/* A glossary term link. A term is prose that happens to carry a definition, so
+   it keeps the READING INK and is marked by ONE thing: a fine dotted accent
+   hairline under the word.
+
+   What this replaced stacked four marks on one word — the display serif (via
+   the em rule), accent-coloured text, a full-strength accent underline AND an
+   accent-tinted pill. Four marks on one word is what made a term read as a
+   foreign object inside its own sentence, and it is the "one telling detail per
+   surface — never all of them together" rule in Principle VII.
+
+   Dotted rather than solid is the whole point: an ordinary link in this block is
+   accent-coloured with a 30% SOLID underline, so a DOTTED rule under INK text
+   cannot be mistaken for one at a glance. The term is additionally italic
+   (Constitution IX mandates the italic marking), so the resting state is italic
+   ink + dotted accent — a recognisable term mark, and a cue that survives
+   without colour, so the link affordance does not depend on hue alone. Hover is
+   where the accent arrives: a reader scanning sees prose, a reader following a
+   term gets the link. Both href forms are covered — the route the site serves,
+   and the /docs/ path form. Specificity (0,2,1) already beats a11y.css's
+   `article a` (0,0,2), so source order does not decide this. Tokens only, so
+   :root[data-theme="dark"] handles dark mode with no twin rule. */
+.theme-doc-markdown a[href^="/glossary#"],
+.theme-doc-markdown a[href^="/docs/glossary#"] {
+  color: var(--tbb-ink);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--tbb-accent) 55%,
+    transparent
+  );
+  background: none;
+  transition: color var(--tbb-duration-fast) var(--tbb-ease),
+    text-decoration-color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.theme-doc-markdown a[href^="/glossary#"]:hover,
+.theme-doc-markdown a[href^="/docs/glossary#"]:hover {
+  color: var(--tbb-accent);
+  text-decoration-color: var(--tbb-accent);
+}
+
+/* A 1px dotted rule is the first thing lost under a forced-contrast mode, so it
+   escalates to solid and thicker there — the same escalation a11y.css already
+   applies to every article link. */
+@media (prefers-contrast: more) {
+  .theme-doc-markdown a[href^="/glossary#"],
+  .theme-doc-markdown a[href^="/docs/glossary#"] {
+    text-decoration-style: solid;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--tbb-accent);
+  }
+}
+
+.theme-doc-markdown a:hover {
+  color: var(--tbb-accent-hover);
+  text-decoration-color: var(--tbb-accent-hover);
+  text-decoration-thickness: 2px;
+}
+
+/* A meaning-carrying underline (`<u>`), not a link: same accent rule as a link
+   but thicker and always full-strength — the text stays in the body ink, so it
+   reads as underlined prose rather than as a hyperlink. */
+.theme-doc-markdown u {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--tbb-accent);
+}
+
+/* A pull-quote inside the prose is the loudest surface in the reading column,
+   so it steps out of the body face entirely and takes the display serif — the
+   one place a second typeface is allowed, now that the em rule no longer spends
+   it on every italic. No left border: the short accent rule above it is the
+   mark, so the block carries one signal rather than a rule plus a border plus a
+   tint. It sets no italic of its own, because the face already carries the
+   voice. */
+.theme-doc-markdown > blockquote {
+  border-left: none;
+  padding: 0 0 0 var(--tbb-rhythm-4);
+  margin: var(--tbb-rhythm-5) 0;
+  font-family: var(--tbb-font-display);
+  font-size: 1.375rem;
+  line-height: 1.45;
+  font-style: normal;
+  color: var(--tbb-heading-ink);
+  text-wrap: pretty;
+}
+
+.theme-doc-markdown > blockquote::before {
+  content: "";
+  display: block;
+  inline-size: 2.25rem;
+  block-size: 2px;
+  margin-bottom: var(--tbb-rhythm-2);
+  border-radius: var(--tbb-radius-pill);
+  background: linear-gradient(90deg, var(--tbb-accent), transparent);
+}
+
+.theme-doc-markdown > ul,
+.theme-doc-markdown > ol {
+  padding-left: 1.5rem;
+  margin-bottom: var(--tbb-rhythm-3);
+}
+
+.theme-doc-markdown li {
+  margin: var(--tbb-rhythm-1) 0;
+  text-wrap: pretty;
+}
+
+/* The marker joins the shape language: the same rotated accent diamond the
+   headings carry, at the TOP LEVEL ONLY — nested lists keep the tinted default,
+   so the motif is spent once per list rather than once per bullet. Native
+   ::marker is kept rather than list-style: none + ::before, so list semantics
+   (and Safari's list announcement) survive. .task-list-item is excluded because
+   Docusaurus draws a checkbox of its own there. */
+.theme-doc-markdown ul > li:not(.task-list-item)::marker {
+  content: "◆  ";
+  font-size: 0.6em;
+  color: var(--tbb-accent);
+}
+
+.theme-doc-markdown ol > li:not(.task-list-item)::marker {
+  color: var(--tbb-accent);
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.theme-doc-markdown li > ul,
+.theme-doc-markdown li > ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+/* Code gets its own surface tone (--tbb-code-bg), distinct from callouts
+   and tables, which both stay on --tbb-bg-alt — three different "structured
+   content" surfaces no longer collide on one shared tint. */
+.theme-doc-markdown code:not(pre code) {
+  background: var(--tbb-code-bg);
+  border: 1px solid var(--tbb-border);
+  padding: 0.125rem 0.375rem;
+  border-radius: var(--tbb-radius-sm);
+  font-size: 0.875em;
+  color: var(--ifm-color-primary);
+  font-family: var(--ifm-font-family-monospace);
+}
+
+:root[data-theme="dark"] .theme-doc-markdown code:not(pre code) {
+  color: var(--ifm-color-primary-lighter);
+  background: var(--tbb-code-bg);
+}
+
+/* A fenced block is NOT a bare <pre> under the reading column. Docusaurus wraps
+   it: `div.theme-code-block > div.codeBlockContent > pre`. So `> pre` matches
+   nothing and the block loses its frame — the shape to target is the container.
+   Its ground comes from Prism's own inline `--prism-background-color`, which is
+   what docusaurus.config.ts now sets to silver-2, so every fence in the book
+   sits on the same neutral step as inline code rather than github's blue-gray. */
+.theme-doc-markdown .theme-code-block {
+  border: 1px solid var(--tbb-border);
+  border-radius: var(--tbb-radius-md);
+  box-shadow: var(--tbb-shadow-sm);
+  margin: var(--tbb-rhythm-4) 0;
+  overflow: hidden;
+}
+
+/* Reset Infima's own 16px radius on the inner pre so the corners follow the
+   container rather than fighting it. */
+.theme-doc-markdown .theme-code-block pre {
+  border-radius: 0;
+  margin: 0;
+}
+
+/* Code is content here, not chrome — a reader is expected to transcribe these
+   commands exactly — so it stays close to the body size rather than dropping to
+   the 13px that Infima's `--ifm-code-font-size: 90%` would give it. 14px on a
+   17px body reads as one document; 13px reads as fine print. */
+.theme-doc-markdown pre code {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: calc(0.875rem * var(--tbb-text-scale));
+  line-height: 1.65;
+}
+
+/* ── Tables ───────────────────────────────────────────────────────────────── */
+/* A table reads as a raised card — the same surface language a callout or a
+   code block already uses — not as a bare browser default sitting loose in
+   the column. `border-collapse: separate` is required for the radius to
+   actually clip the header and rows; `collapse` ignores border-radius in
+   every browser, which is why the old version rendered square. Tabular
+   figures throughout: a comparison table is scanned down a column, and
+   proportional digits make that column wobble. */
+.theme-doc-markdown table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: var(--tbb-rhythm-4) 0;
+  font-size: calc(0.9375rem * var(--tbb-text-scale));
+  font-variant-numeric: tabular-nums;
+  background: var(--tbb-bg-alt);
+  border: 1px solid var(--tbb-border);
+  border-radius: var(--tbb-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--tbb-shadow-sm);
+}
+
+.theme-doc-markdown th,
+.theme-doc-markdown td {
+  text-align: left;
+  padding: 0.875rem 1.125rem;
+  vertical-align: top;
+}
+
+.theme-doc-markdown td {
+  border-top: 1px solid var(--tbb-border);
+}
+
+/* The header reads as a labelled rail, not a bigger row of body text — the
+   same eyebrow treatment (upper, letterspaced, 650 weight) the chapter
+   kicker uses, so a table's header and the page's own chrome speak the same
+   typographic language instead of a generic bold-on-grey default.
+
+   The rail is black chrome, not a tinted row. The flat silver-3 fill this
+   replaced measured only ~2.8:1 against its own muted label in light mode
+   and ~1.9:1 in dark — grey on grey, which is what made it read as paint
+   rather than as a designed surface. --tbb-metal-face-deep (silver-6 → 8 → 9)
+   is the deep specular face, so the rail lands as a fixed dark bar with a lit
+   top edge in BOTH modes; that is why the label is a fixed light ramp step
+   and not a mode-flipping text token (--tbb-text-inverse would go
+   black-on-black in dark mode). Measured label contrast: ≥5.2:1 at the
+   face's lightest point, ~12.6:1 across the band the label actually sits in. */
+.theme-doc-markdown th {
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tbb-silver-2);
+  background: var(--tbb-metal-face-deep);
+  box-shadow: var(--tbb-metal-rim-deep);
+}
+
+/* A row confirms it's being read, not just displayed — the same "where you
+   might go" hover signal the sidebar and TOC already use. */
+.theme-doc-markdown tbody tr {
+  transition: background var(--tbb-duration) var(--tbb-ease);
+}
+
+.theme-doc-markdown tbody tr:hover td {
+  background: var(--tbb-surface-emphasis);
+}
+
+.theme-doc-markdown hr {
+  border: none;
+  height: 1px;
+  background: var(--tbb-border);
+  margin: var(--tbb-rhythm-5) 0;
+}
+
+/* ─── Callouts (custom MDX component) ────────────────────────────────────── */
+.tbb-callout {
+  display: flex;
+  gap: 0.875rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--tbb-radius-md);
+  margin: 1.5rem 0;
+  border: 1px solid;
+  border-left-width: 3px;
+  background: var(--callout-bg);
+  border-color: var(--callout-border);
+  color: var(--tbb-text);
+  /* A callout is its own surface step, same as code/tables — a soft inset
+     highlight is enough to read as "raised" without the heavier specular
+     gradient treatment large cards use, which would fight the tint colors. */
+  box-shadow: var(--tbb-shadow-sm);
+}
+
+.tbb-callout--info {
+  --callout-bg: color-mix(in srgb, var(--ifm-color-primary) 6%, transparent);
+  --callout-border: color-mix(in srgb, var(--ifm-color-primary) 22%, transparent);
+  --callout-border-left: var(--ifm-color-primary);
+}
+
+.tbb-callout--tip {
+  --callout-bg: color-mix(in srgb, var(--tbb-stage-1) 6%, transparent);
+  --callout-border: color-mix(in srgb, var(--tbb-stage-1) 22%, transparent);
+  --callout-border-left: var(--tbb-stage-1);
+}
+
+.tbb-callout--important {
+  --callout-bg: color-mix(in srgb, var(--tbb-stage-2) 8%, transparent);
+  --callout-border: color-mix(in srgb, var(--tbb-stage-2) 28%, transparent);
+  --callout-border-left: var(--tbb-stage-2);
+}
+
+/* Re-homed off --tbb-accent (ADR-0003): warning is not one of the accent's
+   permitted surfaces, so it takes the AI-Native stage's ramp step instead —
+   still strictly neutral. */
+.tbb-callout--warning {
+  --callout-bg: color-mix(in srgb, var(--tbb-stage-2) 8%, transparent);
+  --callout-border: color-mix(in srgb, var(--tbb-stage-2) 26%, transparent);
+  --callout-border-left: var(--tbb-stage-2);
+}
+
+.tbb-callout--danger {
+  --callout-bg: color-mix(in srgb, var(--tbb-danger) 7%, transparent);
+  --callout-border: color-mix(in srgb, var(--tbb-danger) 24%, transparent);
+  --callout-border-left: var(--tbb-danger);
+}
+
+.tbb-callout__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  color: var(--callout-border-left);
+}
+
+.tbb-callout__body {
+  flex-grow: 1;
+}
+
+.tbb-callout__title {
+  font-weight: 700;
+  margin: 0 0 0.375rem;
+  font-size: calc(0.9375rem * var(--tbb-text-scale));
+  color: var(--callout-border-left);
+}
+
+.tbb-callout__body > :last-child {
+  margin-bottom: 0;
+}
+
+.tbb-callout__body p {
+  margin: 0;
+  font-size: calc(0.9375rem * var(--tbb-text-scale));
+  line-height: 1.6;
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────────────── */
+.footer {
+  background: var(--ifm-footer-background-color, var(--tbb-bg));
+  border-top: 1px solid var(--tbb-border);
+  padding: 4rem 0 2rem;
+}
+
+.footer--dark {
+  --ifm-footer-background-color: oklch(0.07 0 0);
+  --ifm-footer-title-color: oklch(0.97 0 0);
+  --ifm-footer-link-color: oklch(0.72 0.005 250);
+  --ifm-footer-link-hover-color: var(--tbb-silver-0);
+  --ifm-footer-color: oklch(0.68 0.005 250);
+  border-top-color: oklch(1 0 0 / 0.08);
+}
+
+.footer__title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ifm-footer-title-color, var(--tbb-text));
+  margin-bottom: 1rem;
+}
+
+.footer__item {
+  font-size: 0.875rem;
+}
+
+.footer__link-item:hover {
+  color: var(--ifm-footer-link-hover-color, var(--ifm-color-primary));
+}
+
+.footer--dark .footer__copyright,
+:root[data-theme="dark"] .footer__copyright {
+  color: oklch(0.82 0.005 250) !important;
+}
+
+.footer__bottom {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--tbb-border);
+  font-size: 0.8125rem;
+  color: var(--ifm-footer-color, var(--tbb-text-muted));
+}
+
+/* ─── Sidebar ────────────────────────────────────────────────────────────── */
+/* The doc sidebar is a designed panel, not a link list: a fixed frosted header
+   over a scrolling tree whose chapter rows read [rail | ordinal | label | state]
+   and whose stage rows read [glyph | eyebrow + title | caret].
+
+   The markup comes from four components ejected into src/theme/DocSidebar* and
+   src/theme/DocSidebarItem* — see each file's header for what was forked from
+   Docusaurus 3.7.0 and why.
+
+   Every rule below is namespaced to `.tbb-sb`, a class carried by both the
+   desktop shell and the mobile drawer, so one system serves both surfaces. */
+
+/* `html:root` (0,1,1) outranks the plain `:root` (0,1,0) in Docusaurus's own
+   DocRoot/Layout/Sidebar module whatever order the two are injected in. */
+html:root {
+  --doc-sidebar-width: 312px;
+
+  /* The rail the panel folds into. Upstream's 30px is narrower than the
+     project's own touch-target constant and too narrow to hold the handle that
+     replaced its blank-strip expand affordance, so it is retargeted at that
+     constant. Docusaurus keeps the reading column in step — DocRoot/Layout/Main
+     reserves `100% - var(--doc-sidebar-hidden-width)`. */
+  --doc-sidebar-hidden-width: var(--tbb-a11y-touch-target);
+
+  /* Chevron-up, deliberately the same orientation as Infima's own glyph, so
+     Infima's collapsed/expanded rotations keep working untouched. Painted via
+     `mask` + `currentColor` rather than Infima's background-image plus an
+     invert() filter, which is what makes it theme cleanly in both modes. */
+  --tbb-sb-caret: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z'/%3E%3C/svg%3E");
+}
+
+/* ─── Layout — pin sidebar flush with the left edge of the screen ──────────── */
+/* Wrapper chain: #__docusaurus > mainWrapper > docsWrapper > docRoot > <aside>  */
+/* Without this, a stray inline-start offset on any link in that chain (e.g.    */
+/* a flex gap, an Infima utility, or a future swizzle) re-introduces a dead      */
+/* strip of body background between the screen edge and the silver-1 sidebar     */
+/* panel. The sidebar items themselves are untouched.                            */
+.mainWrapper,
+.docsWrapper,
+.docRoot {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+/* Receded behind the reading column (--tbb-sidebar-bg = silver-1.5 light /
+   silver-7.85 dark) instead of sharing the page's own ground. */
+.theme-doc-sidebar-container {
+  margin-left: 0;
+  padding-left: 0;
+  background: var(--tbb-sidebar-bg);
+  border-right: 1px solid var(--tbb-border);
+
+  /* ── The handle ──────────────────────────────────────────────────────────
+     The pill at the foot of the open panel and the knob at the head of the
+     collapsed rail are one control in two states, so they read one token pair.
+     Scoped to the container rather than to `.tbb-sb` because the rail knob is a
+     *sibling* of the panel, not a descendant of it — a `.tbb-sb`-scoped token
+     would never reach it.
+
+     Light: the handle is the one genuinely raised surface in the panel —
+     silver-0 against the silver-1 ground — which is the direction the ramp
+     already reads in. Dark has to invert that direction, because the panel
+     ground there is silver-7: "raised" is the *lighter* silver-6, and
+     --tbb-surface-raised would have painted silver-7 on silver-7, an invisible
+     handle.
+
+     Ink is separate from --tbb-sb-quiet on purpose. That token was measured
+     against the panel's own ground (silver-3 on silver-7); the handle sits one
+     step lighter, where silver-3 measures under AA for text — so the handle
+     takes a brighter step and the dark pair is verified independently. */
+  --tbb-sb-handle-bg: var(--tbb-surface-raised);
+  --tbb-sb-handle-ink: var(--tbb-text-muted);
+}
+
+:root[data-theme="dark"] .theme-doc-sidebar-container {
+  --tbb-sb-handle-bg: var(--tbb-surface-emphasis);
+  --tbb-sb-handle-ink: var(--tbb-silver-2);
+}
+
+/* ── Panel shell ─────────────────────────────────────────────────────────── */
+
+.tbb-sb {
+  position: relative;
+
+  /* The panel's "quiet" tone — chapter labels, ordinals, eyebrows, carets,
+     state dots. Panel-scoped rather than plain --tbb-text-muted because the
+     panel ground is not the page ground: the panels sit at silver-1.5 in
+     light and silver-7.85 in dark, so one tone cannot serve both. Light takes
+     silver-5.5, deliberately one half-step darker than --tbb-text-muted —
+     silver-5 measured 4.40:1 on the silver-1.5 ground, under AA, and the
+     half-step carries it to 5.78:1. Dark steps up to silver-3, 10.96:1 on the
+     7.85 ground. Both step-ups are also what keeps small text off
+     --tbb-text-subtle, which measures only 2.38:1 on the light panel ground
+     and 3.62:1 on the dark one. Same pattern BrandMark uses. */
+  --tbb-sb-quiet: color-mix(in oklab, var(--tbb-silver-5) 50%, var(--tbb-silver-6) 50%);
+}
+
+:root[data-theme="dark"] .tbb-sb {
+  --tbb-sb-quiet: var(--tbb-silver-3);
+}
+
+/* Outside the scroll container, so it holds the top of the flex column without
+   needing `position: sticky`. */
+.tbb-sb__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  flex-shrink: 0;
+  padding: 0.875rem 1rem 0.75rem;
+  background: color-mix(in srgb, var(--tbb-sidebar-bg) 72%, transparent);
+  backdrop-filter: var(--tbb-apple-frost);
+  -webkit-backdrop-filter: var(--tbb-apple-frost);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+@supports not (
+  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+) {
+  .tbb-sb__header {
+    background: var(--tbb-surface-solid);
+  }
+}
+
+/* The hairline earns its place only once the tree has scrolled under it.
+   `data-scrolled` is set on the shell by the ejected DocSidebar/Desktop — a
+   plain descendant selector rather than `:has()` on the nav, because Chrome
+   did not reliably re-evaluate the ancestor when that attribute changed. */
+.tbb-sb[data-scrolled] .tbb-sb__header {
+  border-bottom-color: var(--tbb-border);
+}
+
+/* Small text uses --tbb-sb-quiet, never --tbb-text-subtle: on the sidebar
+   ground subtle measures only 2.38:1. Size and weight carry the hierarchy
+   instead of contrast. */
+.tbb-sb__eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tbb-sb-quiet);
+}
+
+.tbb-sb__context {
+  font-size: calc(0.8125rem * var(--tbb-text-scale));
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: var(--tbb-text);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+/* Own the scroll explicitly rather than relying on an ancestor, so the header
+   above stays put and `data-scrolled` has something to observe. */
+.tbb-sb__nav {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /* Symmetric padding. The handle's own block margin supplies the resting gap
+     under the last row, so the old 1.5rem foot would have doubled it up. */
+  padding: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.tbb-sb__nav:hover,
+.tbb-sb__nav:focus-within {
+  scrollbar-color: var(--tbb-border-strong) transparent;
+}
+
+.tbb-sb__nav::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tbb-sb__nav::-webkit-scrollbar-thumb {
+  background: transparent;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: var(--tbb-radius-pill);
+}
+
+.tbb-sb__nav:hover::-webkit-scrollbar-thumb,
+.tbb-sb__nav:focus-within::-webkit-scrollbar-thumb {
+  background: var(--tbb-border-strong);
+  background-clip: padding-box;
+}
+
+/* ── Rows, shared ────────────────────────────────────────────────────────── */
+
+/* Infima ships a 4px top margin on every list item after the first. At a 13px
+   label the row's own 6px padding already supplies the hit area, so the extra
+   margin only stretched the panel; 2px keeps a stage's chapters reading as one
+   group without the tree running long. */
+.tbb-sb .menu__list-item:not(:first-child) {
+  margin-top: 0.125rem;
+}
+
+.tbb-sb .menu__link {
+  font-size: calc(0.9375rem * var(--tbb-text-scale));
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: var(--tbb-sb-quiet);
+  border-radius: var(--tbb-radius-sm);
+  padding: 0.375rem 0.5rem;
+  /* Permanent transparent rail so turning the active colour on never shifts
+     the row's width. */
+  border-left: 3px solid transparent;
+  transition:
+    background var(--tbb-duration-fast) var(--tbb-ease),
+    color var(--tbb-duration-fast) var(--tbb-ease),
+    border-color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.tbb-sb .menu__link:hover {
+  background: var(--tbb-surface-emphasis);
+  color: var(--tbb-text);
+}
+
+/* `:visited` is deliberately NOT styled here. It used to paint a grey rail on
+   every seen link, which accumulated into a wall of bars competing with the
+   accent active rail. The ordinal marker and the state dot carry strictly more
+   information without the noise. */
+
+/* Active chapter (leaf) — full accent treatment: text, weight, rail, tint.
+   `background` must live on the `:not(.menu__link--sublist)` selector, not the
+   bare `.menu__link--active` class: Infima's own default.css ships
+   `.menu__link--active:not(.menu__link--sublist) { background-color:
+   var(--ifm-hover-overlay) }` at two-class specificity, which silently wins
+   over a plain one-class `.menu__link--active` background rule regardless of
+   source order. Matching Infima's selector shape is what makes source order
+   decide it in our favour instead. */
+.tbb-sb .menu__link--active {
+  color: var(--tbb-accent);
+  font-weight: 600;
+}
+
+.tbb-sb .menu__link--active:not(.menu__link--sublist) {
+  background: var(--tbb-accent-subtle);
+  border-left-color: var(--tbb-accent);
+}
+
+/* ── Chapter row: [rail | ordinal | label | state] ───────────────────────── */
+
+.tbb-sb .tbb-sb-link {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr) 0.75rem;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+/* Explicit column placement, so a row without an ordinal (the Reference group)
+   keeps the same gutter and stays aligned with its numbered siblings. */
+.tbb-sb .tbb-sb-link__ordinal {
+  grid-column: 1;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  color: var(--tbb-sb-quiet);
+  transition: color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.tbb-sb .tbb-sb-link__label {
+  grid-column: 2;
+}
+
+.tbb-sb .tbb-sb-link__state {
+  grid-column: 3;
+  justify-self: end;
+  inline-size: 6px;
+  block-size: 6px;
+  box-sizing: border-box;
+  border-radius: var(--tbb-radius-pill);
+}
+
+.tbb-sb .menu__link--active .tbb-sb-link__ordinal {
+  color: var(--tbb-accent);
+}
+
+/* Authoring state (Constitution Principle III). Monochrome by design — the
+   silver ramp, not --tbb-success/--tbb-danger, which would break the
+   no-brand-hue rule in radix.css. Hollow vs filled carries the distinction, so
+   both dots can sit at a tone that clears the 3:1 floor for non-text UI
+   (WCAG 1.4.11); --tbb-text-subtle would not. */
+.tbb-sb [data-chapter-state="placeholder"] .tbb-sb-link__state {
+  border: 1.5px solid var(--tbb-sb-quiet);
+}
+
+.tbb-sb [data-chapter-state="text-ready"] .tbb-sb-link__state {
+  background: var(--tbb-sb-quiet);
+}
+
+.tbb-sb [data-chapter-state="video-published"] .tbb-sb-link__state {
+  background: var(--tbb-text);
+}
+
+/* The eye should land on chapters that actually have text. Done by *promoting*
+   the ready ones rather than dimming the placeholders: dimming to
+   --tbb-text-subtle measured 2.38:1 on this ground, well under AA, and it would
+   have applied to most rows in the book. Every row now sits at 5.78:1 or
+   better, and readiness reads as extra weight plus a filled dot. */
+.tbb-sb
+  .tbb-sb-item[data-chapter-state="text-ready"]
+  > .menu__link:not(.menu__link--active),
+.tbb-sb
+  .tbb-sb-item[data-chapter-state="video-published"]
+  > .menu__link:not(.menu__link--active) {
+  color: var(--tbb-text);
+  font-weight: 600;
+}
+
+/* ── Stage row: [glyph | eyebrow + title | caret] ────────────────────────── */
+
+.tbb-sb .tbb-sb-cat__row {
+  border-radius: var(--tbb-radius-sm);
+  transition: background var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.tbb-sb .tbb-sb-cat__row:hover {
+  background: var(--tbb-surface-emphasis);
+}
+
+.tbb-sb .tbb-sb-cat__link {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  align-items: center;
+  column-gap: 0.5rem;
+  padding-block: 0.5rem;
+}
+
+.tbb-sb .tbb-sb-cat__glyph {
+  grid-column: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tbb-sb-quiet);
+  transition: color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+/* Beats the ejected module's `.categoryLinkLabel` (0,1,0), which sets the
+   -webkit-box line clamp the two-line header must not inherit. */
+.tbb-sb .tbb-sb-cat__text {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+  overflow: visible;
+}
+
+.tbb-sb .tbb-sb-cat__eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--tbb-sb-quiet);
+  transition: color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.tbb-sb .tbb-sb-cat__title {
+  font-size: calc(0.9375rem * var(--tbb-text-scale));
+  font-weight: 600;
+  letter-spacing: -0.011em;
+  line-height: 1.3;
+  color: var(--tbb-text);
+}
+
+/* Collapsed stage recedes, so a glance down the panel shows which stages are
+   open without reading caret rotation. */
+.tbb-sb .menu__list-item--collapsed > .tbb-sb-cat__row .tbb-sb-cat__title {
+  color: var(--tbb-sb-quiet);
+}
+
+.tbb-sb .menu__list-item--collapsed > .tbb-sb-cat__row .tbb-sb-cat__glyph {
+  color: var(--tbb-sb-quiet);
+}
+
+/* Active stage — the header is "active" because a descendant chapter is
+   current. Deliberately lighter than the leaf: a tinted band plus an accent
+   eyebrow, title left neutral. "You're in this stage" reads as related to but
+   distinct from "this is the exact page".
+
+   The band has to sit on the row, not the link: Infima ships
+   `.menu__list-item-collapsible .menu__link--active { background: none
+   !important }`, so a category link can never carry its own background. */
+.tbb-sb
+  .theme-doc-sidebar-item-category-level-1
+  > .menu__list-item-collapsible:has(> .menu__link--active) {
+  background: var(--tbb-accent-subtle);
+}
+
+.tbb-sb
+  .theme-doc-sidebar-item-category-level-1
+  > .menu__list-item-collapsible:has(> .menu__link--active)
+  .tbb-sb-cat__eyebrow,
+.tbb-sb
+  .theme-doc-sidebar-item-category-level-1
+  > .menu__list-item-collapsible:has(> .menu__link--active)
+  .tbb-sb-cat__glyph {
+  color: var(--tbb-accent);
+}
+
+/* ── Caret ───────────────────────────────────────────────────────────────── */
+/* Two shapes exist: a category WITH a link renders a separate `menu__caret`
+   button, one WITHOUT renders a `menu__link--sublist-caret` pseudo-element.
+   Repainting both through the same mask keeps them identical. Rotation is left
+   to Infima, which already flips the glyph on `--collapsed`. */
+
+.tbb-sb .menu__caret {
+  border-radius: var(--tbb-radius-sm);
+  padding-inline: 0.5rem;
+  transition: background var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.tbb-sb .menu__caret:hover {
+  background: var(--tbb-surface-emphasis);
+}
+
+.tbb-sb .menu__caret::before,
+.tbb-sb .menu__link--sublist-caret::after {
+  background: currentColor;
+  -webkit-mask: var(--tbb-sb-caret) center / 13px 13px no-repeat;
+  mask: var(--tbb-sb-caret) center / 13px 13px no-repeat;
+  filter: none;
+  color: var(--tbb-sb-quiet);
+  transition: transform var(--tbb-duration) var(--tbb-ease);
+}
+
+/* ── Nested group spine ──────────────────────────────────────────────────── */
+/* One hairline bracketing a stage's chapters — the cheapest way to make depth
+   legible without indenting the label off the panel. `ul` in the selector beats
+   Infima's own `.menu__list .menu__list` padding at equal class count. */
+
+.tbb-sb ul.tbb-sb-sublist {
+  position: relative;
+  margin-top: 0.125rem;
+  margin-left: 1.25rem;
+  padding-left: 0.5rem;
+}
+
+.tbb-sb ul.tbb-sb-sublist::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  width: 1px;
+  background: var(--tbb-border);
+}
+
+/* ─── TOC ────────────────────────────────────────────────────────────────── */
+/* Shares the sidebar's ground in both modes (--tbb-toc-bg = silver-1.5 light /
+   silver-7.85 dark) — the least important chrome on the page, carried by
+   tone alone rather than by sitting a step deeper than the sidebar. It used
+   to sit a notch below it in dark mode (silver-8); the two panels now read
+   as one surface. */
+.table-of-contents {
+  background: var(--tbb-toc-bg);
+  border-left: 1px solid var(--tbb-border);
+  border-radius: 0 var(--tbb-radius-md) var(--tbb-radius-md) 0;
+  padding: 0.875rem 1rem;
+  font-size: calc(0.8125rem * var(--tbb-text-scale));
+  line-height: 1.5;
+
+  /* This panel's quieter tone, panel-scoped for the same reason the sidebar
+     has one: the panel does not share a ground with the page, so a tone
+     correct on one is wrong on the other. Light takes silver-5.5, one
+     half-step below --tbb-text-muted, because silver-5 measured 4.40:1 on the
+     silver-1.5 ground — under AA — and the half-step carries it to 5.78:1.
+     Dark keeps --tbb-text-muted (silver-4), 6.69:1 on the 7.85 ground. Read
+     by the eyebrow and by the nested links. */
+  --tbb-toc-quiet: color-mix(in oklab, var(--tbb-silver-5) 50%, var(--tbb-silver-6) 50%);
+}
+
+:root[data-theme="dark"] .table-of-contents {
+  --tbb-toc-quiet: var(--tbb-text-muted);
+}
+
+/* Infima ships `margin: 0.5rem` on every TOC item. At a 12px item size that is
+   more air than the list can carry — it read as a column of separate labels
+   rather than one list, and it doubled up with the 44px min-block-size the
+   a11y layer used to force on each link. The horizontal half is left alone: it
+   supplies the indent that nests child headings under their parent. */
+.table-of-contents li {
+  margin: 0.1875rem 0.5rem;
+}
+
+/* Spec 013 — the "ON THIS PAGE" eyebrow used to be a pure-CSS `::before` here,
+   attached to whichever ancestor wrapped a TOC list, precisely so the upgrade
+   path could avoid a swizzle. [2026-09-16] It is now real markup inside the
+   swizzled src/theme/TOC, because the collapse handle needs a row to sit in and
+   a pseudo-element cannot host a button. Its type rules (0.6875rem / 650 /
+   0.06em / uppercase / --tbb-toc-quiet) moved with it to that component's
+   styles.module.css. Nothing else consumed them. */
+
+/* ─── TOC — the collapsed rail ───────────────────────────────────────────── */
+/* State is carried on <html data-tbb-toc-collapsed>, set by the swizzled
+   src/theme/TOC — the same shape as useDrawer's `data-drawer-open`. Plain
+   descendant selectors, deliberately NOT :has(): see the note on
+   .tbb-sb[data-scrolled] above for why this repo stopped trusting :has()
+   against an attribute that changes after paint.
+
+   Desktop only, matching the sidebar's own handles; below 997px Docusaurus
+   renders no right rail at all, and the collapsible mobile TOC takes over.
+
+   The freed width is NOT automatic. theme-classic caps the article column at
+   75% (DocItem/Layout styles.module.css:14) and nothing here can raise that
+   without matching its `!important`. Without the last rule the reclaimed 25% is
+   stranded — the column cannot grow into it and the prose never reaches it — so
+   collapsing the rail would buy whitespace instead of text. */
+@media (min-width: 997px) {
+  /* The COLUMN is what transitions, not the rail inside it. The prose measure
+     is a function of this box, so animating here is what makes the text reflow
+     in lockstep with the rail instead of snapping while the rail slides. Both
+     endpoints are a percentage plus a length term, which is why max-width
+     interpolates 75% -> calc(100% - 44px) rather than jumping. */
+  .row > .col.col--3 {
+    transition:
+      flex-basis var(--ifm-transition-fast) ease,
+      max-width var(--ifm-transition-fast) ease,
+      padding var(--ifm-transition-fast) ease;
+  }
+
+  .row > [class*="docItemCol"] {
+    transition: max-width var(--ifm-transition-fast) ease;
+  }
+
+  html[data-tbb-toc-collapsed="true"] .row > .col.col--3 {
+    --ifm-col-width: var(--tbb-a11y-touch-target);
+    /* `.col` carries --ifm-spacing-horizontal on both edges. Left on, a 44px
+       column would have a negative content box and the rail would crush
+       itself. */
+    padding-inline: 0;
+  }
+
+  html[data-tbb-toc-collapsed="true"] .row > [class*="docItemCol"] {
+    max-width: calc(100% - var(--tbb-a11y-touch-target)) !important;
+  }
+}
+
+.table-of-contents__link {
+  display: block;
+  color: var(--tbb-text);
+  border-left: 2px solid transparent;
+  border-radius: var(--tbb-radius-sm);
+  /* Vertical padding takes the row to 24px on its own, which is the AA target
+     size the link has to hold once the a11y layer stopped forcing 44px on it.
+     The hover/active background now matches the clickable area exactly. */
+  padding: 0.1875rem 0 0.1875rem 0.625rem;
+  margin-left: -0.625rem;
+  transition: color var(--tbb-duration-fast) var(--tbb-ease),
+    background var(--tbb-duration-fast) var(--tbb-ease),
+    border-color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+/* Nesting depth expressed tonally, not just by Infima's existing indent —
+   a nested (child-heading) link dims relative to its top-level parent.
+   (Deliberately no quieter than this: --tbb-toc-quiet is already the lightest
+   tone the panel ground carries — one step up, silver-5, measures 4.40:1,
+   under 4.5:1. Verified.) */
+.table-of-contents ul .table-of-contents__link {
+  color: var(--tbb-toc-quiet);
+}
+
+.table-of-contents__link:hover {
+  background: var(--tbb-surface-emphasis);
+  color: var(--tbb-text);
+}
+
+/* Active heading — scroll-tracked by Docusaurus's built-in TOCHighlight,
+   already wired via `linkActiveClassName` in the default TOC component; this
+   is styling only. Accent text + rail, matching the sidebar's rail language,
+   distinct from the neutral hover above ("where you are" vs "where you
+   might go"). */
+.table-of-contents__link--active {
+  color: var(--tbb-accent);
+  border-left-color: var(--tbb-accent);
+  font-weight: 500;
+}
+
+/* ─── Native Docusaurus admonitions ──────────────────────────────────────── */
+.alert {
+  border: 1px solid var(--tbb-border);
+  border-left-width: 3px;
+  border-radius: var(--tbb-radius-md);
+  background: var(--tbb-surface);
+  box-shadow: var(--tbb-shadow-sm);
+}
+
+.alert--info {
+  border-left-color: var(--ifm-color-primary);
+}
+
+.alert--success {
+  border-left-color: var(--tbb-success);
+}
+
+.alert--warning {
+  border-left-color: var(--tbb-stage-2);
+}
+
+.alert--danger {
+  border-left-color: var(--tbb-danger);
+}
+
+/* ─── Footer columns polish ──────────────────────────────────────────────── */
+.footer__col {
+  margin-bottom: 1.25rem;
+}
+
+.footer__brand {
+  max-width: 24rem;
+}
+
+.footer__brand-tagline {
+  font-size: 0.875rem;
+  color: var(--tbb-text-muted);
+  line-height: 1.6;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.footer__social {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.footer__social-link {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--tbb-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tbb-surface);
+  border: 1px solid var(--tbb-border);
+  color: var(--tbb-text-muted);
+  transition: all var(--tbb-duration-fast) var(--tbb-ease);
+  text-decoration: none;
+}
+
+.footer__social-link:hover {
+  color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+/* ─── Footer wordmark showcase ───────────────────────────────────────────── */
+/* The last thing on every page: a full-bleed band holding the site wordmark
+   over the FooterBackgroundGradient wash. Sits inside <footer> (see the
+   ejected src/theme/Footer/Layout) so it shares the footer's ground and can
+   layer the gradient behind the type.
+
+   This band is the ONE place on the site carrying more than one hue — the
+   hover reveal is a user-approved exception to Principle VII's single-accent
+   rule. Everything structural below (ground, hairline, resting outline) still
+   reads from the silver ramp, so the multi-hue is confined to the letters
+   themselves. */
+
+.tbb-footer-showcase {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin-top: 3rem;
+  padding: 2rem 1.5rem 1rem;
+  /* The footer is configured `style: "dark"` in docusaurus.config.ts, so this
+     ground is near-black in both colour modes and the hairline is a light
+     alpha — matching .footer--dark's own border-top-color above. A light
+     footer style would need this flipped. */
+  border-top: 1px solid oklch(1 0 0 / 0.08);
+}
+
+.tbb-footer-showcase__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.tbb-footer-showcase__mark {
+  position: relative;
+  z-index: 1;
+  /* Full-bleed on purpose: the wordmark is meant to span the band edge to
+     edge, so it carries no max-width and no container. Its size is set by the
+     component's viewBox, which letters the whole width of whatever box this
+     gives it — wider viewports legitimately get larger type. */
+  width: 100%;
+}
+
+/* ─── TextHoverEffect ───────────────────────────────────────────────────── */
+
+.tbb-text-hover {
+  display: block;
+  width: 100%;
+  /* Overrides the element's height="100%" presentation attribute. With a
+     viewBox present the SVG carries an intrinsic aspect ratio, so auto height
+     tracks the viewBox and no ratio is duplicated here — change viewBoxWidth
+     in the component and the box follows. */
+  height: auto;
+  user-select: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-family: Helvetica, Arial, "Helvetica Neue", var(--ifm-font-family-base), sans-serif;
+  font-weight: 700;
+  /* font-size is NOT set here. It is a geometry value and lives with the
+     viewBox and the stroke weight in the component, because the three are
+     coupled: an earlier revision sized the stroke from the viewBox while the
+     type size sat in this file, and the mismatch thinned the stroke until the
+     gradient layer disappeared. */
+}
+
+.tbb-text-hover__outline,
+.tbb-text-hover__draw,
+.tbb-text-hover__reveal {
+  fill: transparent;
+}
+
+/* Resting outline — fades in on hover only. Reads off the ramp rather than
+   the paste's Tailwind neutral pair: its `dark:` variant resolved to
+   neutral-800 on this always-dark ground, which would have made the outline
+   invisible in dark mode. */
+.tbb-text-hover__outline {
+  stroke: var(--tbb-silver-2);
+  transition: opacity var(--tbb-duration) var(--tbb-ease);
+}
+
+/* The one-time 4s stroke-dashoffset draw. Full-strength #3ca2fa rather than
+   the paste's dark-mode #3ca2fa99: the paste branched on colour mode, but this
+   ground is dark in both, and a 0.3-unit stroke at 60% alpha is not legible
+   on near-black. */
+.tbb-text-hover__draw {
+  stroke: #3ca2fa;
+}
+
+/* Below the desktop band the whole mark is only ~330px wide, which scales the
+   hairline down to a 0.19px smudge on a 390px phone — technically drawn,
+   invisible on the glass. Strokes thicken here, in user units, so the weight
+   is preserved on small screens. The rendered line lands between roughly
+   0.6px (390px viewport) and 1.3px (768px) across this breakpoint. */
+@media (max-width: 768px) {
+  .tbb-text-hover__outline,
+  .tbb-text-hover__draw,
+  .tbb-text-hover__reveal {
+    stroke-width: 1.6;
+  }
+}
+
+/* ─── Doc pagination ─────────────────────────────────────────────────────── */
+.pagination-nav__link {
+  border: 1px solid var(--tbb-border);
+  border-radius: var(--tbb-radius-md);
+  padding: 1rem 1.25rem;
+  transition: all var(--tbb-duration) var(--tbb-ease);
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--ifm-color-primary);
+  background: var(--tbb-surface);
+  box-shadow: var(--tbb-shadow-sm);
+  color: var(--ifm-color-primary);
+}
+
+.pagination-nav__sublabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--tbb-text-muted);
+}
+
+.pagination-nav__label {
+  font-weight: 600;
+  color: var(--tbb-text);
+}
+
+/* ─── SiteMenu — rebuilt hamburger drawer ─────────────────────────────────── */
+
+/* The hook toggles this attribute instead of mutating body styles. Keeping
+   scroll lock on the root also works when the body is a Docusaurus wrapper.
+   `data-search-open` is the same pattern for the home Spotlight overlay, and
+   `data-chat-open` for the assistant's expanded surface. */
+html[data-drawer-open="true"],
+html[data-search-open="true"],
+html[data-chat-open="true"] {
+  overflow: hidden;
+}
+
+.site-menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  margin-right: 0.25rem;
+  color: var(--tbb-text);
+  border-radius: var(--tbb-radius-md);
+}
+
+.site-menu-button:hover {
+  color: var(--tbb-accent);
+  background: var(--tbb-accent-subtle);
+}
+
+.site-menu-button:focus-visible,
+.site-drawer__close:focus-visible,
+.site-drawer__link:focus-visible {
+  /* `--tbb-focus-ring` is a box-shadow list, not a color, so it cannot be
+     passed to `outline`. Use a 2 px solid outline in the accent color and
+     add the glow as a box-shadow. */
+  outline: 2px solid var(--tbb-accent);
+  outline-offset: 2px;
+  box-shadow: var(--tbb-focus-ring);
+}
+
+.site-drawer__backdrop {
+  /* This element is mounted outside the filtered navbar, so fixed geometry
+     resolves against the viewport. The open navbar gets a higher stacking
+     context below so its hamburger remains clickable above the backdrop. */
+  position: fixed;
+  inset: 0;
+  z-index: 199;
+  background: color-mix(in srgb, #000 42%, transparent);
+  cursor: pointer;
+  opacity: 1;
+}
+
+.navbar.navbar-sidebar--show {
+  position: relative;
+  z-index: 202;
+}
+
+.site-drawer {
+  position: fixed;
+  left: 0;
+  z-index: 201;
+  display: flex;
+  flex-direction: column;
+  width: min(20rem, 82vw);
+  height: calc(100vh - var(--site-drawer-navbar-height, var(--ifm-navbar-height)));
+  height: calc(100dvh - var(--site-drawer-navbar-height, var(--ifm-navbar-height)));
+  overflow: hidden;
+  color: var(--tbb-text);
+  background: var(--tbb-surface-glass);
+  border-right: 1px solid var(--tbb-border);
+  box-shadow: var(--tbb-shadow-lg);
+  transform: translateX(0);
+  isolation: isolate;
+  backdrop-filter: var(--tbb-apple-frost);
+  -webkit-backdrop-filter: var(--tbb-apple-frost);
+}
+
+.site-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.75rem 0.75rem 0;
+}
+
+.site-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  width: 44px;
+  height: 44px;
+  margin: 0.75rem 0.75rem 0;
+  color: var(--tbb-text-muted);
+  background: transparent;
+  border: 0;
+  border-radius: var(--tbb-radius-md);
+  cursor: pointer;
+}
+
+.site-drawer__close:hover {
+  color: var(--tbb-text);
+  background: var(--tbb-accent-subtle);
+}
+
+.site-drawer__panel {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.75rem 1rem 2rem;
+}
+
+.site-drawer__list {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Site-level entries sitting under the curriculum tree on doc routes — the
+   tree covers every stage, these cover what it can't. */
+.site-drawer__list--secondary {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--tbb-border);
+}
+
+.site-drawer__link {
+  display: block;
+  padding: 0.875rem 1rem;
+  color: var(--tbb-text);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--tbb-radius-md);
+}
+
+.site-drawer__link:hover,
+.site-drawer__link[data-active="true"] {
+  color: var(--tbb-accent);
+  background: var(--tbb-accent-subtle);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-drawer {
+    background: var(--tbb-surface-solid);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-drawer,
+  .site-drawer__backdrop {
+    transition: transform 200ms ease, opacity 200ms ease;
+  }
+}
+
+@media (max-width: 767px) {
+  .site-drawer {
+    width: min(20rem, 88vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-drawer,
+  .site-drawer__backdrop {
+    transition: none;
+  }
+}
+
+
+/* ─── Native form controls ──────────────────────────────────────────────── */
+input[type="checkbox"],
+input[type="radio"],
+input[type="range"] {
+  /* Neutral, not the scoped accent (ADR-0003) — a checked checkbox isn't a
+     link, active nav item, or focus ring. */
+  accent-color: var(--ifm-color-primary);
+}
+
+/* ─── Apple Pro utility classes ─────────────────────────────────────────────
+   Ported 1:1 from the habit-tracker-app theme (pure CSS, no Tailwind). */
+
+/* Screen-reader-only text. Neither Infima nor Docusaurus ships this class, but
+   SiteDrawer's dialog title already relied on it, so the heading was rendering
+   visibly. Clip rather than `display: none`, which would hide it from assistive
+   tech too. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Hairline — ultra-fine 0.5px internal border */
+.tbb-hairline {
+  box-shadow: inset 0 0 0 0.5px var(--hairline);
+}
+
+/* Frosted glass */
+.tbb-frosted {
+  backdrop-filter: saturate(180%) blur(24px);
+  -webkit-backdrop-filter: saturate(180%) blur(24px);
+}
+
+.tbb-frosted-strong {
+  backdrop-filter: saturate(200%) blur(40px);
+  -webkit-backdrop-filter: saturate(200%) blur(40px);
+}
+
+/* Platinum text gradient (editorial moments) */
+.tbb-text-platinum {
+  background: linear-gradient(135deg, oklch(0.25 0.002 250) 0%, oklch(0.55 0.005 250) 50%, oklch(0.78 0.005 250) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+:root[data-theme="dark"] .tbb-text-platinum {
+  background: linear-gradient(135deg, oklch(0.95 0 0) 0%, oklch(0.75 0.005 250) 50%, oklch(0.5 0.005 250) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Graphite surface — hero / dark editorial elements */
+.tbb-surface-graphite {
+  background: linear-gradient(180deg, oklch(0.18 0 0) 0%, oklch(0.1 0 0) 100%);
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 0.08),
+    inset 0 -1px 0 0 oklch(0 0 0 / 0.5);
+}
+
+/* Pro glow — electric-blue aura for active states */
+.tbb-glow-pro,
+.tbb-glow-pro:focus-visible {
+  box-shadow:
+    0 0 0 1px oklch(0 0 0 / 0.35),
+    0 0 24px -4px oklch(0 0 0 / 0.28);
+}
+
+:root[data-theme="dark"] .tbb-glow-pro,
+:root[data-theme="dark"] .tbb-glow-pro:focus-visible {
+  box-shadow:
+    0 0 0 1px oklch(1 0 0 / 0.45),
+    0 0 32px -4px oklch(1 0 0 / 0.18);
+}
+
+/* Silver-shine shimmer */
+@keyframes tbb-silver-shine {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.tbb-animate-silver-shine {
+  background: linear-gradient(
+    110deg,
+    oklch(0.95 0.001 250) 0%,
+    oklch(0.85 0.005 250) 25%,
+    oklch(0.95 0.001 250) 50%,
+    oklch(0.85 0.005 250) 75%,
+    oklch(0.95 0.001 250) 100%
+  );
+  background-size: 200% 100%;
+  animation: tbb-silver-shine 4s linear infinite;
+}
+
+:root[data-theme="dark"] .tbb-animate-silver-shine {
+  background: linear-gradient(
+    110deg,
+    oklch(0.18 0 0) 0%,
+    oklch(0.28 0 0) 25%,
+    oklch(0.18 0 0) 50%,
+    oklch(0.28 0 0) 75%,
+    oklch(0.18 0 0) 100%
+  );
+  background-size: 200% 100%;
+}
+
+/* Scrollbar — thin */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--tbb-border-strong) transparent;
+}
+
+/* ─── Marquee — infinite chip band ───────────────────────────────────────── */
+.tbb-marquee {
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
+  --marquee-gap: 1rem;
+}
+
+.tbb-marquee__track {
+  display: flex;
+  gap: var(--marquee-gap);
+  width: max-content;
+}
+
+.tbb-marquee__group {
+  display: flex;
+  gap: var(--marquee-gap);
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.tbb-marquee--pause-on-hover:hover .tbb-marquee__track {
+  animation-play-state: paused;
+}
+
+.tbb-marquee__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  padding: 0.5rem 1.125rem;
+  border-radius: var(--tbb-radius-pill);
+  background: var(--tbb-surface);
+  border: 1px solid var(--tbb-border);
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 0.6),
+    inset 0 0 0 0.5px var(--hairline);
+  color: var(--tbb-text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color var(--tbb-duration-fast) var(--tbb-ease),
+    border-color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.tbb-marquee__badge svg {
+  color: var(--ifm-color-primary);
+}
+
+.tbb-marquee__badge:hover {
+  color: var(--tbb-text);
+  border-color: var(--tbb-border-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tbb-marquee__track {
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ─── Timeline — static spine, alternating entries ───────────────────────── */
+.tbb-timeline-spine {
+  padding: 1rem 0 0.5rem;
+}
+
+.tbb-timeline {
+  position: relative;
+}
+
+.tbb-timeline__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.tbb-timeline__heading {
+  font-family: var(--ifm-heading-font-family);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  margin: 0 auto 0.75rem;
+  max-width: 22ch;
+  color: var(--tbb-text);
+}
+
+.tbb-timeline__subheading {
+  font-size: 1.0625rem;
+  color: var(--tbb-text-muted);
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.tbb-timeline__track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* This section is homepage-only (MagicUI/Timeline.tsx, used solely by
+   src/pages/index.tsx) — kept strictly neutral, not the scoped docs-chrome
+   accent (ADR-0003), so the homepage's monochrome treatment is undisturbed. */
+.tbb-timeline__spine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--ifm-color-primary) 35%, transparent) 0%,
+    color-mix(in srgb, var(--ifm-color-primary) 12%, transparent) 100%
+  );
+}
+
+.tbb-timeline-entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.tbb-timeline-entry__dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--tbb-surface);
+  border: 2px solid var(--ifm-color-primary);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ifm-color-primary) 15%, transparent);
+}
+
+.tbb-timeline-entry__dot-inner {
+  display: block;
+  width: 6px;
+  height: 6px;
+  margin: 2px;
+  border-radius: 50%;
+  background: var(--ifm-color-primary);
+}
+
+.tbb-timeline-entry__card {
+  border-radius: var(--tbb-radius-lg);
+  border: 1px solid var(--tbb-border);
+  background: var(--tbb-surface);
+  padding: 1.5rem 1.75rem;
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 1),
+    inset 0 0 0 0.5px var(--hairline);
+}
+
+.tbb-timeline-entry--left .tbb-timeline-entry__card {
+  grid-column: 1;
+  text-align: right;
+}
+
+.tbb-timeline-entry--right .tbb-timeline-entry__card {
+  grid-column: 2;
+  text-align: left;
+}
+
+.tbb-timeline-entry__step {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.375rem;
+}
+
+.tbb-timeline-entry__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--tbb-text);
+  margin: 0 0 0.375rem;
+}
+
+.tbb-timeline-entry__body {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--tbb-text-muted);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .tbb-timeline__spine {
+    left: 14px;
+    transform: none;
+  }
+
+  .tbb-timeline-entry {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-left: 2.5rem;
+  }
+
+  .tbb-timeline-entry--left,
+  .tbb-timeline-entry--right {
+    grid-template-columns: 1fr;
+  }
+
+  .tbb-timeline-entry--left .tbb-timeline-entry__card,
+  .tbb-timeline-entry--right .tbb-timeline-entry__card {
+    grid-column: 1;
+    text-align: left;
+  }
+
+  .tbb-timeline-entry__dot {
+    left: 14px;
+    transform: translateY(-50%);
+  }
+}
+
+/* ─── Reading Progress bar ───────────────────────────────────────────────── */
+.tbb-reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+.tbb-reading-progress[data-active="true"] {
+  opacity: 1;
+}
+
+.tbb-reading-progress__bar {
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+  transform: scaleX(0);
+  background: linear-gradient(
+    90deg,
+    var(--tbb-silver-6) 0%,
+    var(--tbb-accent) 100%
+  );
+  box-shadow: 0 0 12px 1px oklch(0 0 0 / 0.3);
+}
+
+/* ─── Reduce motion ──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

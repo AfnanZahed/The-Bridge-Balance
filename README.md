@@ -1,6 +1,6 @@
 # The Bridge Balance
 
-> Student-oriented platform for spec-driven AI agent engineering. 5 stages. 2 Harvard certificates. 100% free.
+> Student-oriented platform for spec-driven AI agent engineering. 3 stages. 100% free.
 
 This repo is the **spec-driven development** workspace for **The Bridge Balance**. The platform itself is a Docusaurus textbook paired with a FastAPI backend and a paid catalog of Claude Code sub-agents, skills, MCP servers, and plugins.
 
@@ -9,7 +9,7 @@ This repo is the **spec-driven development** workspace for **The Bridge Balance*
 ```
 .
 ├── edu-site/              # the textbook (Docusaurus) + the backend (FastAPI)
-│   ├── docs/              # MDX curriculum content (Stages 0–4)
+│   ├── docs/              # MDX curriculum content (Stages 0–2)
 │   ├── src/               # Docusaurus theme + pages
 │   └── api/               # FastAPI app (RAG chat, products, auth)
 ├── specs/                 # Feature specs (Spec-Kit Plus)
@@ -28,7 +28,7 @@ This repo is the **spec-driven development** workspace for **The Bridge Balance*
 
 | Workstream | Status | Notes |
 |---|---|---|
-| Docusaurus book | ✅ scaffolded | 6 Stage 1 chapters as MDX shells; Stages 2–4 indexed |
+| Docusaurus book | ✅ scaffolded | Stage 0 chapters at the docs root; Stages 1 and 2 indexed |
 | FastAPI backend | ✅ scaffolded | `/health` works; Phase B routes return 501 |
 | LLM provider abstraction | ✅ shipped | Default `none` — refuses to spend money |
 | Free-tier services | ✅ documented | Neon + Qdrant + Groq/Gemini + R2 + Inngest |

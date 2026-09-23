@@ -4,7 +4,7 @@
 
 Two different jobs live in this file, for two different tools, because they solve different problems:
 
-- **An atmospheric or photographic image** — a mood, a scene, a texture — is generated externally, by the project owner, from a *prompt* this skill writes on request. **Images are still the project owner's**, made in ChatGPT or MiniMax. Claude Code's contribution here is the prompt, not the picture.
+- **An atmospheric or photographic image** — a mood, a scene, a texture — is generated externally, by the project owner, from a *prompt* this skill writes on request. **How each image is made is the owner's choice, every time** — Claude through a diagramming connector, the owner's own image, or another way. Claude does not assume which.
 - **A structural or conceptual diagram** — boxes, arrows, a labelled sequence, an architecture map — is built by Claude Code directly, on request, via a diagramming connector (Eraser, Excalidraw, draw.io, or Mermaid rendered to a static image), reopened 2026-09-16 (Constitution Principle III, step 3). The reasons these stay two different tools are below.
 
 Two things follow for both, and both matter regardless of which one applies:
@@ -77,7 +77,7 @@ Prompt:
 
 Negative:   no text, no lettering, no numbers, no watermark, no logo, <topic-specific exclusions>
 Alt text:   <the sentence that will ship in the MDX once the image exists>
-Filename:   <lesson-slug>/<image-slug>.png
+Filename:   <chapter-slug>/<image-slug>.png
 ```
 
 Keep prompts to 40–120 words. Shorter loses control of the composition; longer starts contradicting itself, and generators weight early words most heavily — so the subject goes first.
@@ -100,7 +100,7 @@ Where a prompt would differ meaningfully between the two, write the ChatGPT vers
 
 **Delivering a diagram as inline Mermaid, raw SVG, or a `.fig.mjs`/JSX module in the chapter body.** A diagram is a static image file, exported from a connector and referenced by a plain markdown image — always, no exceptions, regardless of how small or convenient the inline version would be.
 
-**A prompt or diagram that would suit any chapter on this topic.** The same test the prose gets: if it could illustrate a different lesson unchanged, it is decoration. An image or diagram earns its place by doing something the paragraph beside it cannot.
+**A prompt or diagram that would suit any chapter on this topic.** The same test the prose gets: if it could illustrate a different chapter unchanged, it is decoration. An image or diagram earns its place by doing something the paragraph beside it cannot.
 
 **Tech-marketing clichés.** Glowing brains, circuit boards, blue holograms, humanoid robots at keyboards, floating binary. They signal the opposite of the credibility this book is built on.
 

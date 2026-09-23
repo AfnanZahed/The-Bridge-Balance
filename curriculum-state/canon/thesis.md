@@ -25,12 +25,12 @@ stage — see "The six invariants" below.
 **Development** is producing the implementation — the syntax, the working
 code. **Engineering** is the judgment around it: specify, bound, verify, own.
 AI has made Development cheap. It has not made Engineering cheap, and no
-lesson may imply otherwise.
+chapter may imply otherwise.
 
 The reader's own stage is Engineering. AI's stage is wider — it contributes
 to Development by implementing, and contributes to Engineering by drafting
 and proposing — but ownership of Engineering's judgment stays with the
-reader, regardless of what a lesson's own framework for the loop looks like.
+reader, regardless of what a chapter's own framework for the loop looks like.
 
 This corrects a specific, common misconception: that competence in this
 field means fast, confident typing at a keyboard. Source:
@@ -38,8 +38,8 @@ field means fast, confident typing at a keyboard. Source:
 Learning Model — Engineering Over Development" — coding syntax is being
 commoditized; specification and system design are not.
 
-A lesson that discusses what the work actually is carries this distinction. A
-lesson about how a switch holds a number does not.
+A chapter that discusses what the work actually is carries this distinction. A
+chapter about how a switch holds a number does not.
 
 ## The two extremes
 
@@ -62,9 +62,16 @@ Of everything this book covers, only **Programming** is where the two extremes a
 
 **Reading and Understanding Literacy** is this book's resolution for that specific fight: the ability to read code — whoever or whatever wrote it — and judge it well enough to verify it and take ownership. It keeps over-trust's real argument (AI implements faster than a human typing) without its failure mode (shipping what was never checked), and it keeps over-caution's real argument (rigor matters) without its failure mode (refusing the leverage AI offers). Spec-Driven Engineering cannot be completed without it: a spec you cannot verify against is a spec you are trusting blindly, which is over-trust wearing a different name.
 
+> **Public name, decided 23 September 2026.** Readers meet this skill as **Code
+> Literacy**, introduced at its first use on a page as *Code Literacy: reading
+> and judging code*, and as **Code Literacy** alone after that. The internal
+> name above is unchanged — do not rename it. The first-use rule and the
+> owner's deliberate exception to `naming.md` Rule 1 are recorded in
+> `naming.md`; the decision is CS-35 in `course-structure.md`.
+
 The literacy has two roots, not one. Source: `The Bridge Balance/Official docs/solution_statement.md`, which already names the traditionalist trap (over-caution) and the vibe-coder trap (over-trust), and names **specification poverty** — lacking the vocabulary and system literacy to articulate intent — as the failure mode upstream of both. Hoare's 1969 axiomatic-basis paper established that a specification is a first-class object code can be checked against; that is the half of this literacy that compares output to stated intent. Parnas's 1972 boundaries paper established that a module's interface, not its internals, is what makes another party's code — a colleague's, or an agent's — comprehensible at all; that is the half that makes reading possible in the first place. Neither stands alone as this literacy's sole ancestor.
 
-Stage 0 introduces both SDE and this literacy as a paired philosophy, before any code is written. Stage 1 is where it is exercised, not re-taught. Stage 2 depends on the same habit to pass certification work that is graded, not merely reviewed.
+Stage 0 introduces both SDE and this literacy as a paired philosophy, before any code is written. Stage 1 is where it is exercised, not re-taught. The Credentials track depends on the same habit to pass certification work that is graded, not merely reviewed.
 
 > **These are internal names, not reader-facing ones.** "Reading and
 > Understanding Literacy", "specification poverty", "Hoare's 1969 axiomatic-basis
@@ -73,7 +80,38 @@ Stage 0 introduces both SDE and this literacy as a paired philosophy, before any
 > deliberately what to call it for them, and asking the owner first.** A chapter
 > that says "it ends there with a second thing beside it: reading and
 > understanding literacy" has handed the reader an internal label and explained
-> nothing. `corrections.md` §9 is the general rule.
+> nothing. `corrections.md` §9 is the general rule. **One of these has since
+> been decided:** this skill's reader-facing name is **Code Literacy** (the note
+> above, 23 September 2026).
+
+## Agentic AI inside SE
+
+*Decided 2026-09-22; the full record is `canon/course-structure.md` section 5
+(CS-12 to CS-30).*
+
+**Agentic AI is not a separate discipline.** It is software engineering with an
+LLM as one component; everything else in an agentic system (functions, loops,
+APIs, databases, auth, async work, deployment) is ordinary SE. So agentic AI is
+taught inside SE, never as its own stage, and it runs through both mastery
+stages.
+
+**SE first, at full depth.** Every SE topic is taught first and to full depth
+and practised in a manual project. An agentic application is added only where
+the concept genuinely pairs; when the two compete for depth, SE wins. This
+serves the post-AI-era triad the book is built on: using AI, building
+foundations, building AI.
+
+**Substrate, Surface and Practice** — a main philosophy of the book, adopted
+2026-09-22 (`canon/course-structure.md` CS-21). A **Substrate** pairing is
+where the SE concept is the machinery an agent is built from: functions become
+tools, loops become the agent loop, databases become memory, authorization
+becomes tool permissions, async work becomes streaming. A **Surface** pairing
+is where the SE concept is what you build around an agent: chat interfaces,
+frontend-backend integration, deployment. A **Practice** pairing has no agentic
+twin: UI/UX, branding, Figma, logos, animation.
+
+**The one exception.** The LLM itself. It is the only component with no SE
+ancestor, so it is taught on its own terms.
 
 ## The stages
 
@@ -81,34 +119,54 @@ Compiled from `The Bridge Balance/Official docs/curriculum_1.md`'s four stage
 sections (`## STAGE_01 // FOUNDATIONS` through `## STAGE_04 // AUTONOMOUS
 SYSTEMS`) — not a single table sitting verbatim anywhere in that file.
 **Name** is each section's own stage title. **Focus** is usually that
-section's `Topics Covered` list, condensed — except Stage 2, whose Focus is
-its `the solution` paragraph (the two Harvard certs), not its own `Topics
-Covered` list (CS50P/CS50W's syllabus items — functions, loops, HTML/CSS, and
-so on — which describe what the certification courses cover, not what this
-stage of *the book* is about). Stage 3 draws from both: the tool list is
-quoted from `the solution`, the discipline list is condensed from `Topics
-Covered`. **Re-derive the table from those sections; do not paraphrase it from
-memory.** An earlier framework listed Stage 3 as "Cursor, Claude Code, Codex,
-Antigravity" — Codex appears nowhere in the official doc and Cursor belongs to
-Stage 1's tooling list.
+section's `Topics Covered` list, condensed — except the Harvard certification
+material (the parallel Credentials track now, not a stage: 22 September 2026),
+whose Focus is its `the solution` paragraph (the two Harvard certs), not its
+own `Topics Covered` list (CS50P/CS50W's syllabus items — functions, loops,
+HTML/CSS, and so on — which describe what the certification courses cover, not
+what this stage of *the book* is about). The stage that holds the tool list
+draws from both: the tool list is quoted from `the solution`, the discipline
+list is quoted from `the solution`, the discipline list is condensed from
+`Topics Covered`. **Re-derive the table from those sections; do not paraphrase
+it from memory.** An earlier framework listed Stage 3 as "Cursor, Claude Code,
+Codex, Antigravity" — Codex appears nowhere in the official doc and Cursor
+belongs to Stage 1's tooling list. **22 September 2026:** the Stage 1 and Stage 2
+cells now lead with the stage's own definition (`canon/course-structure.md`
+CS-14 and CS-15); the topic lists after those definitions are examples of what
+the stage has carried, and the owner places each topic at authoring time (CS-18).
 
 | Stage | Name | Focus |
 |---|---|---|
-| 0 | Introduction to Computing: From Switches to AI Agents | The history of computing and software, read chronologically from binary through today's AI-coding-agent era; Spec-Driven Engineering and Reading & Understanding Literacy as the philosophy Stage 1 depends on. |
-| 1 | Spec-Aware Vibe Engineering Foundations | Architecture, dev environment, core programming, packages, OOP, Git/GitHub, frontend, UI/UX, backend, auth, async/realtime, databases, personal branding |
-| 2 | Credible Validation Through International Certification | Harvard CS50P and CS50W |
-| 3 | Mastering AI Coding Agents | "OpenClaw, coding agents like Claude Code, OpenCode, and AI-first IDEs like Antigravity"; prompt / context / loop engineering; CLAUDE.md, AGENTS.md; skills, MCP servers, workflows |
-| 4 | Engineering Autonomous AI Agents | AI agents, RAG, tool calling, task automation, LLM integration, evaluations, MCP, frameworks (OpenAI Agents SDK, Claude Agents SDK, LangGraph), multi-agent systems |
+| 0 | Introduction to SDE | The history of computing and software, read chronologically from binary through today's AI-coding-agent era; Spec-Driven Engineering and Reading & Understanding Literacy as the philosophy the rest of the book depends on. |
+| 1 | SDE Mastery (AI-Driven) | **Basic to intermediate SE, with basic to intermediate agentic applications** (CS-14). Examples, each placed at authoring time and not a plan (CS-18): architecture, dev environment, core programming, packages, OOP, Git/GitHub, frontend, UI/UX, backend, auth, async/realtime, databases, personal branding — learned together with coding agents like Claude Code and OpenCode, prompt / context / loop engineering, CLAUDE.md and AGENTS.md, skills, MCP servers and workflows. The old Stage 1 and old Stage 3, merged 2026-09-22. |
+| 2 | SDE Mastery (AI-Native) | **Advanced SE, with advanced agentic applications** (CS-15). Examples, each placed at authoring time and not a plan (CS-18): AI agents, RAG, tool calling, task automation, LLM integration, evaluations, MCP, frameworks (OpenAI Agents SDK, Claude Agents SDK, LangGraph), multi-agent systems. The old Stage 4, renumbered 2026-09-22. |
+
+*Credentials is a parallel track, not a stage, and is disabled for now.*
+
+> **Replaced 2026-09-22.** This table replaces the earlier stage table — the
+> four-stage table recorded that morning, and the five-stage table before it —
+> after the Agentic-inside-SE decision: agentic AI is taught inside SE, never
+> as its own stage (`canon/course-structure.md` CS-12 to CS-16).
+
+> **Restructured 2026-09-22.** Five stages became four: old Stage 3 merged into
+> Stage 1, old Stage 4 became Stage 3, and Stage 2 became *Credentials*. The
+> names come from `canon/course-structure.md` section 5, which is where this
+> kind of decision is changed. The table above, and the site, the ledgers and
+> the maps, were brought into line the same day
+> (`specs/011-curriculum-redesign/`).
+>
+> **Superseded the same day, 2026-09-22**, by the Agentic-inside-SE decision
+> (`canon/course-structure.md` CS-12 to CS-16): the three-stage table above is
+> the live one. The four stages in this note are kept as the record.
 
 > **Stage 0 was renamed on 2026-09-20.** It was "Orientation Through Computing
 > History". The owner rejected "Orientation" as too hard a word for a reader who
 > has never programmed, on 14 September; the table kept it anyway and pushed it
 > into chapter prose and into the site's own chapter header. Every stage,
-> chapter and lesson name now obeys `canon/naming.md`. Stages 1–4 keep their
-> official-doc titles for now, and are re-checked against `naming.md` before
-> each stage opens.
+> chapter and lesson name now obeys `canon/naming.md`. The 2026-09-22
+> restructure then replaced the Stage 0 name with *Introduction to SDE*.
 
-A lesson names its stage at least once, in plain words a reader can act on. A
+A chapter names its stage at least once, in plain words a reader can act on. A
 reader arriving from a shared link or a search result has no site chrome to
 orient them.
 
@@ -153,14 +211,14 @@ checking. Fixed component, fixed title, so the gate can prove it survived.
 not a gentler one. Rewriting the *sentence* so the reader actually understands
 it is required, not permitted.
 
-**Stages 0–2 — the plain wording.** Use this, or something equally plain:
+**Stages 0–1 — the plain wording.** Use this, or something equally plain:
 
 > Whatever the AI writes for you, it is not finished until you have checked it
 > yourself. The AI cannot tell whether its answer is right — it can only produce
 > one. And if something breaks later, "the AI wrote it" is not an answer anyone
 > will accept. The work is yours.
 
-**Stages 3–4 — the original wording**, which assumes the vocabulary by then:
+**Stage 2 — the original wording**, which assumes the vocabulary by then:
 
 > Whatever the agent writes, it isn't done until you have checked it. Agent
 > output is unverified by construction, and "the agent generated it" is not an
@@ -170,6 +228,11 @@ it is required, not permitted.
 The old rule froze them into every chapter including the first one a total
 beginner ever reads. The owner approved that wording on the Stage 0 intro
 without noticing it; on review, it is exactly what Stage 0 exists to avoid.*
+
+*Renumbered 2026-09-22 (`canon/course-structure.md` CS-31). The two labels above
+used to read "Stages 0–2" and "Stages 3–4". There is no Stage 3 or 4 now: the
+zero-knowledge floor is Stages 0–1, and Stage 2 — the advanced stage — carries
+the original wording.*
 
 ## Source discipline
 
@@ -214,6 +277,6 @@ From 2026-09-20:
 > work the owner opened on 2026-09-20 (`canon/corrections.md` §21, candidate list at
 > `curriculum-state/proposals/chapter-component-palette-2026-09-20.md`), not a
 > separate task, and it is one of the few candidates that already has a written spec. Until it ships, a statistic
-> in a Stage 0–2 chapter is written as the plain sentence with its source in a
+> in a Stage 0–1 chapter is written as the plain sentence with its source in a
 > short parenthetical at the **end** of the sentence, never mid-sentence — and
 > the full entry goes in `evidence-ledger.yaml` as always.

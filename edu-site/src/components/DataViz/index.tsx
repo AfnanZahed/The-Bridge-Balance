@@ -5,7 +5,7 @@
  *   1. KPIGrid        — headline "big numbers" (stages, free-forever, certs,
  *                       hours, free services, cost) with animated counters.
  *   2. CurriculumBarChart — authoring status per stage (Recharts BarChart, horizontal).
- *   3. CurriculumDonut     — the five stages at a glance (Recharts PieChart).
+ *   3. CurriculumDonut     — the three stages at a glance (Recharts PieChart).
  *
  * All data comes from the platform spec. The two charts show the curriculum by
  * stage and by authoring status; no chapter count and no hour total is ever
@@ -61,7 +61,7 @@ export interface DataVizSectionProps {
 export default function DataVizSection({
   heading = "Curriculum at a glance",
   eyebrow = "The numbers",
-  subtitle = "Real numbers from the platform spec — what each stage covers, how long it takes, and what it costs you. Exactly zero dollars.",
+  subtitle = "Real numbers from the platform spec — what each stage covers, where the writing stands, and what it costs you. Exactly zero dollars.",
 }: DataVizSectionProps): React.ReactElement {
   return (
     <section className="tbb-dataviz-section" aria-labelledby="tbb-dataviz-heading">
@@ -103,17 +103,17 @@ export default function DataVizSection({
           <RevealOnScroll as="div" delay={0.1}>
             <article
               className="tbb-chart-card"
-              aria-label="The five curriculum stages"
+              aria-label="The three curriculum stages"
             >
               <header className="tbb-chart-card__header">
                 <div className="tbb-chart-card__eyebrow">Structure</div>
                 <h3 className="tbb-chart-card__title">
-                  Five stages at a glance
+                  Three stages at a glance
                 </h3>
                 <p className="tbb-chart-card__description">
-                  The five stages that shape the curriculum, from orientation
-                  through autonomy. Equal by design — this is the book's shape,
-                  not a measure of its length.
+                  The three stages that shape the curriculum, from orientation
+                  through AI-native work. Equal by design — this is the book's
+                  shape, not a measure of its length.
                 </p>
               </header>
               <div className="tbb-chart-card__body">

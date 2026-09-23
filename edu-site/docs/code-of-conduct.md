@@ -7,7 +7,7 @@ description: "The behaviour expected on Bridge Balance surfaces, the concrete th
 
 # Code of Conduct
 
-The Bridge Balance is a free, five-stage curriculum that people read today and will discuss together later. This page states the standard of behaviour for anyone who interacts on a Bridge Balance surface. It governs how people treat each other, and it never governs what the book teaches.
+The Bridge Balance is a free, three-stage curriculum that people read today and will discuss together later. This page states the standard of behaviour for anyone who interacts on a Bridge Balance surface. It governs how people treat each other, and it never governs what the book teaches.
 
 It is short on purpose. Nothing in it depends on a process that does not exist yet, and nothing in it invents a channel that nobody is watching.
 

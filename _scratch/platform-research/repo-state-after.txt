@@ -1,0 +1,129 @@
+﻿ M .claude/skills/bridge-balance-project-guide/SKILL.md
+ M .claude/skills/bridge-balance-project-guide/reference/book-coherence-audit/SKILL.md
+ M .claude/skills/bridge-balance-project-guide/reference/chapter-production/SKILL.md
+ M .claude/skills/bridge-balance-project-guide/reference/chapter-production/reference/gate.md
+ M .claude/skills/bridge-balance-project-guide/reference/chapter-production/reference/image-prompts.md
+ M .claude/skills/bridge-balance-project-guide/reference/chapter-production/reference/ledgers-protocol.md
+ M .claude/skills/bridge-balance-project-guide/reference/chapter-production/reference/research.md
+ M .claude/skills/bridge-balance-project-guide/reference/curriculum-architect/SKILL.md
+ M .claude/skills/bridge-balance-project-guide/reference/curriculum-architect/reference/brief-format.md
+ M .claude/skills/bridge-balance-project-guide/reference/lesson-adversarial-review/SKILL.md
+ M .claude/skills/bridge-balance-project-guide/reference/project-map.md
+ M .claude/skills/lesson-spine-authoring/SKILL.md
+ M .claude/skills/lesson-spine-authoring/reference/beginner-experience-audit.md
+ M .claude/skills/lesson-spine-authoring/reference/comprehension-audit.md
+ M .claude/skills/lesson-spine-authoring/reference/language-register.md
+ M .claude/skills/lesson-spine-authoring/reference/mixed-audience.md
+ M .claude/skills/lesson-spine-authoring/reference/name-registers.md
+ M .claude/skills/lesson-spine-authoring/reference/stations.md
+ M .specify/memory/constitution.md
+ M CLAUDE.md
+ M PROJECT-MAP.md
+ M README.md
+ M curriculum-state/README.md
+ M curriculum-state/canon/audience.md
+ M curriculum-state/canon/corrections.md
+ M curriculum-state/canon/course-structure.md
+ M curriculum-state/canon/integrity-floor.md
+ M curriculum-state/canon/naming.md
+ M curriculum-state/canon/research-and-comparison.md
+ M curriculum-state/canon/thesis.md
+ M curriculum-state/canon/voice.md
+ M curriculum-state/contracts/calibration.md
+ M curriculum-state/ledgers/concept-ledger.yaml
+ M curriculum-state/ledgers/evidence-ledger.yaml
+ M curriculum-state/ledgers/example-ledger.yaml
+ M curriculum-state/ledgers/prerequisite-graph.yaml
+ M curriculum-state/proposals/chapter-component-palette-2026-09-20.md
+ M curriculum-state/research/stage-0/cluster-7-language-landscape.md
+ M edu-site/README.md
+ M edu-site/docs/ch00-introduction.md
+ M edu-site/docs/ch02-programming-is-born.md
+ M edu-site/docs/changelog.md
+ M edu-site/docs/code-of-conduct.md
+ M edu-site/docs/faq.md
+ M edu-site/docs/glossary.md
+ M edu-site/docs/intro-3-editors-and-ides.md
+ M edu-site/docs/intro-4-terminals-and-cli-agents.md
+ D edu-site/docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
+ D edu-site/docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
+ D edu-site/docs/stage-01-spec-aware-vibe-engineering/03-frontend.md
+ D edu-site/docs/stage-01-spec-aware-vibe-engineering/04-backend.md
+ D edu-site/docs/stage-01-spec-aware-vibe-engineering/05-databases.md
+ D edu-site/docs/stage-01-spec-aware-vibe-engineering/06-git-github.md
+ D edu-site/docs/stage-01-spec-aware-vibe-engineering/index.md
+ D edu-site/docs/stage-02-cs50-certification/cs50p.md
+ D edu-site/docs/stage-02-cs50-certification/cs50w.md
+ D edu-site/docs/stage-02-cs50-certification/index.md
+ D edu-site/docs/stage-03-mastering-ai-coding-agents/claude-code.md
+ D edu-site/docs/stage-03-mastering-ai-coding-agents/context-engineering.md
+ D edu-site/docs/stage-03-mastering-ai-coding-agents/index.md
+ D edu-site/docs/stage-03-mastering-ai-coding-agents/prompt-engineering.md
+ D edu-site/docs/stage-03-mastering-ai-coding-agents/skills-and-mcp.md
+ D edu-site/docs/stage-04-engineering-autonomous-ai-agents/evaluations.md
+ D edu-site/docs/stage-04-engineering-autonomous-ai-agents/index.md
+ D edu-site/docs/stage-04-engineering-autonomous-ai-agents/multi-agent-systems.md
+ D edu-site/docs/stage-04-engineering-autonomous-ai-agents/rag-and-tool-calling.md
+ M edu-site/docs/welcome.md
+ M edu-site/docusaurus.config.ts
+ M edu-site/sidebars.ts
+ M edu-site/src/components/DataViz/CurriculumBarChart.tsx
+ M edu-site/src/components/DataViz/CurriculumDonut.tsx
+ M edu-site/src/components/DataViz/KPIGrid.tsx
+ M edu-site/src/components/DataViz/index.tsx
+ M edu-site/src/components/HomepageHero/index.tsx
+ M edu-site/src/components/Search/AppleSpotlight/index.tsx
+ M edu-site/src/components/SiteMenu/SiteDrawer.tsx
+ M edu-site/src/components/StageCard/index.tsx
+ M edu-site/src/components/stage-icons/index.tsx
+ M edu-site/src/css/custom.css
+ M edu-site/src/css/radix.css
+ M edu-site/src/data/chapterManifest.ts
+ M edu-site/src/lib/chapterLocation.ts
+ M edu-site/src/lib/stages.ts
+ M edu-site/src/pages/404.tsx
+ M edu-site/src/pages/index.tsx
+ M edu-site/src/theme/DocSidebarItem/Category/index.tsx
+ M edu-site/src/theme/Root.tsx
+ M edu-site/static/search-index.json
+ M history/adr/0007-lesson-spine-becomes-book-specific.md
+ M history/adr/README.md
+ M history/reports/spine-migration-2026-09-20/migration-plan.md
+ M stack.md
+?? _scratch/agenda-rows-to-remove.txt
+?? _scratch/backup-2026-09-22-agentic-inside-se-2/
+?? _scratch/backup-2026-09-22-agentic-inside-se-3/
+?? _scratch/backup-2026-09-22-agentic-inside-se-4/
+?? _scratch/backup-2026-09-22-agentic-inside-se-5/
+?? _scratch/backup-2026-09-22-agentic-inside-se-6/
+?? _scratch/backup-2026-09-22-agentic-inside-se-7/
+?? _scratch/backup-2026-09-22-agentic-inside-se/
+?? _scratch/backup-2026-09-22-stage-rename/
+?? _scratch/backup-2026-09-22-students-changelog/
+?? _scratch/job-briefs/
+?? _scratch/platform-research/
+?? _scratch/removed-2026-09-22/
+?? _scratch/tools/
+?? edu-site/docs/stage-01-sde-mastery-ai-driven/
+?? edu-site/docs/stage-02-sde-mastery-ai-native/
+?? edu-site/parked/
+?? edu-site/src/components/ChatAssistant/
+?? history/adr/0010-agentic-ai-inside-se.md
+?? history/prompts/general/0126-welcome-page-canon-fixes-and-deploy.general.prompt.md
+?? history/prompts/general/0127-rule-migration-run-dry-run-final-sweep.general.prompt.md
+?? history/prompts/general/0128-reuse-deepseek-sessions.general.prompt.md
+?? history/prompts/general/0129-redesign-answers-recorded-dedup-ordered.general.prompt.md
+?? history/prompts/general/0130-welcome-page-continuity-claim-flagged.general.prompt.md
+?? history/prompts/general/0131-artifact-update-deepseek-budget-directive.general.prompt.md
+?? history/prompts/general/0132-welcome-page-wording-parked-into-redesign.general.prompt.md
+?? history/prompts/general/0133-handoff-from-claude-structure-slice-planned.general.prompt.md
+?? history/prompts/general/0134-chat-assistant-preview-component-built.general.prompt.md
+?? history/prompts/general/0135-fold-agentic-ai-into-se-stages.general.prompt.md
+?? history/prompts/general/0136-owner-answers-on-the-agentic-merge.general.prompt.md
+?? history/prompts/general/0137-finalize-the-agentic-inside-se-record.general.prompt.md
+?? history/prompts/general/0138-floor-delta-naming-and-agenda-update.general.prompt.md
+?? history/prompts/general/0139-continue-after-the-command-code-update.general.prompt.md
+?? history/prompts/general/0140-site-pass-go-ahead-and-adr-yes.general.prompt.md
+?? history/prompts/general/0141-open-phases-launch-pass1-research.general.prompt.md
+?? history/prompts/general/0142-students-update-and-changelog-redesign.general.prompt.md
+?? specs/011-curriculum-redesign/

@@ -1,0 +1,376 @@
+# Example ledger - worked examples and scenarios already spent.
+#
+# Purpose: keep a record of every example the book has used, so the next author
+# chooses deliberately instead of blindly. Record rejections too - an example
+# considered and dropped is as useful to the next author as one used.
+#
+# Default rule: ONE worked example carries a chapter, chosen for how much
+# explanatory work it does rather than for how impressive it looked in research.
+#
+# REUSE IS ALLOWED AND OFTEN BETTER (changed 2026-09-20). An example is LOGGED,
+# not SPENT. Before choosing one, read what is already here and decide: would a
+# new example teach better, or would returning to one the reader already has a
+# picture for? An idea the reader already owns costs them nothing to pick up.
+# The old "already spent" rule caused a slow drift toward rarer examples -
+# which, in a history stage, means named historical ones.
+#
+# INVENTED EXAMPLES ARE LEGITIMATE (changed 2026-09-20). "Imagine you can only
+# signal a friend across the street with a torch: on, or off" is a good example.
+# The old rule read "every example is real and named", and it was read as "attach
+# a real person, place and year to everything" - a main source of Stage 0's
+# density. What is still banned is the EMPTY PLACEHOLDER: foo, bar, Acme Corp,
+# the generic to-do app. Examples with nothing in them to picture.
+# canon/voice.md §"Analogies, examples and stories"; corrections.md §4.
+
+version: 1
+seeded: 2026-08-23
+# REPOINTED 2026-09-10: the `intro-no-single-example` and
+# `intro-worked-examples` entries now name
+# docs/intro-5-spec-driven-engineering.md, the merge-and-rewrite successor to
+# docs/intro.md in the intro resequence. The spent examples are unchanged. See
+# curriculum-state/proposals/stage-00-intro-resequence-2026-09-10.md.
+
+examples:
+
+  - id: intro-no-single-example
+    chapter: docs/intro-5-spec-driven-engineering.md
+    object: null
+    status: resolved-by-deviation
+    notes: >-
+      RESOLVED 2026-08-24. The intro uses several distinct named scenarios
+      rather than one traced object - a beginner's first AI-assisted change, a
+      team's CSV export, a five-agent production pipeline - because its job is
+      breadth across the whole curriculum's territory, not depth on one example.
+      A single to-do-app scenario could not also carry the multi-agent
+      architecture material without trivialising it.
+      todo-app-trace stays reserved and unspent - see below - because the
+      intro's re-authoring is the one lesson it was reserved for that has now
+      shipped without it; it remains available for the Stage 1 "What is an AI
+      coding agent?" lesson it was also reserved for.
+      See intro-worked-examples below for the actual set and the
+      question each one answers.
+
+  - id: intro-worked-examples
+    chapter: docs/intro-5-spec-driven-engineering.md
+    object: "Multiple distinct named scenarios rather than one shared object (see intro-no-single-example)"
+    status: spent
+    notes: >-
+      Breakdown, each with the question the chapter asks of it:
+      The opening sections use the two real-world incidents
+      already tracked in evidence-ledger.yaml (Replit, Lemkin) rather than
+      invented scenarios - no new example entry needed for those. From
+      Later sections:
+      (1) rate-limiting an internal API endpoint hammered by a misbehaving
+      client [worked example] - asks: what does the four-part
+      specify/delegate/inspect/verify framework look like applied start to
+      finish on one small, concrete task?
+      (2) adding a CSV data-export endpoint [worked example] - asks:
+      what does the specify/design/implement/verify table look like applied
+      to a request that sounds simple but has real judgment calls hiding in
+      it (which fields, what row-count strategy)?
+      (3) an agent-assisted refactor of a payment-processing function that
+      passes every existing test [second worked
+      example] - asks: what does the verify stage catch that "tests pass"
+      doesn't, when the interesting judgment call is at verify rather than
+      specify or implement?
+      (3b) a relative's small delivery service, and a request to add a
+      cancel-order page [shared across two sections] - the one genuinely shared
+      object in the intro. It is asked two different questions: what is
+      invisible from a page that looks finished (driver notification,
+      confirmation, double-cancel)? and what do the four boundaries -
+      environment, data, authority, verification - actually answer for this
+      specific task, traced start to finish?
+      (4) an admin dashboard that grew from a weekend hack - its CSV export,
+      its login flow, a subscription-cancellation webhook handler
+      [worked inventory] - asks, per feature: has this
+      specific piece crossed the users/money/secrets/durable-data line from
+      experiment into system, and when?
+      (5) an internal support-ticket agent that reads the company wiki and
+      drafts customer responses pending review [worked example] - asks:
+      how do the four governance boundaries (environment, trust, data,
+      apprenticeship) apply to one concrete, currently-plausible agent
+      surface?
+      (6) a five-agent production pipeline (planning, retrieval,
+      implementation, testing, deployment agents) and, within it, a
+      refund-issuing tool call [worked example] - asks: how do
+      role/handoff/failure-domain contracts and a permission/idempotency
+      contract actually get specified across a multi-agent system rather than
+      a single coding agent?
+      None of these six reuses a reserved example below; none is reserved for
+      future use elsewhere, since each is scoped tightly enough to its own
+      teaching point that reuse would likely mean re-litigating the same
+      scenario rather than asking it something new.
+      REMOVED 2026-09-10: docs/intro-spine-experiment.md, a lesson-spine-
+      authoring pilot chapter that had reused example (2) (the CSV-export
+      endpoint), run twice - once clean, once deliberately broken - was
+      deleted after the pilot succeeded, ahead of applying the same treatment
+      to intro.md itself. The CSV-export endpoint is unencumbered by that
+      reuse again now; if the real transformation reuses the same break
+      (internal_notes column leaking past a stale hardcoded field filter),
+      log it here fresh rather than assuming the old note still applies.
+
+      CORRECTED 2026-09-10 (Phase 2): docs/intro-5-spec-driven-engineering.md
+      was merge-and-rewritten through lesson-spine-authoring, and the shipped
+      chapter KEPT only two of the six scenarios above: (2) the CSV data-export
+      endpoint and (3) the agent-assisted payment-refactor that passes every
+      existing test. Examples (1) rate-limiting a hammered internal endpoint,
+      (3b) the relative's delivery-service cancel-order page, (4) the admin
+      dashboard that grew from a weekend hack, (5) the internal support-ticket
+      agent, and (6) the five-agent production pipeline were DROPPED - the
+      re-authoring judged the four safety boundaries, the experiment-to-system
+      transition, the agent governance boundaries and the multi-agent ownership
+      architecture to be Stage 3-4 territory rather than finale material, now
+      that the sequence runs binary -> architecture -> editors -> terminals ->
+      SDE. Those four scenarios are therefore UNSPENT again and available, but
+      they have no reservation - if a Stage 3 or Stage 4 lesson wants one, it
+      is free to take it, and should log which questions it asks. The CSV
+      export is now genuinely re-spent by a shipped chapter, and it kept the
+      same break the deleted pilot used (a field filter that leaks an
+      internal-only column), so that break is now spent too.
+
+  - id: club-signup-shared-object
+    chapter: docs/intro-2-architecture-map.md
+    object: "A school AI club sign-up page, capped at thirty seats"
+    status: spent
+    notes: >-
+      NEW 2026-09-10 (Phase 2), and a change of shape worth flagging: the
+      resequenced intro now has ONE genuinely shared object, where the old
+      intro deliberately had none (see intro-no-single-example above). It is
+      built once in intro-2 ("build one thing together, one wall at a time")
+      and then returned to by every later chapter, each asking it a different
+      question:
+      intro-2 asks: what does each box in a real system exist to fix, and where
+      must a rule be enforced so the user cannot reach it? Beats: the frontend
+      trap (developer tools let any student delete the seat check), the
+      goldfish problem (memory lost on restart), who is allowed to cancel whose
+      signup, two builders colliding on the same code, and the laptop-to-live
+      gap.
+      intro-3 asks: what does an AI-driven tool do to a rule it does not
+      understand? (the deliberately broken diff below).
+      intro-4 asks: how wide is an agent's reach, depending on the folder you
+      launched it from? (the scope example).
+      intro-5 asks: which stage owns the seat cap, and who owes the three
+      stages an agent does not own?
+      Reuse here is deliberate and additive - each chapter asks a question no
+      other asks. Do not add a fifth use without one.
+
+  - id: intro-3-broken-diff
+    chapter: docs/intro-3-editors-and-ides.md
+    object: "An agent removing the thirty-seat check from the club sign-up page"
+    status: spent
+    notes: >-
+      The chapter's deliberately broken example: you ask a driven tool to
+      "refuse a signup when the club is full", and it returns a diff that
+      removes the guard entirely, leaving the club uncapped. Nothing crashes,
+      the page still saves, and the bug is silent until the thirty-first student
+      signs up. Asks: what exactly does an AI-driven tool fail at, and why can
+      it not ask? Answer the chapter gives: it failed at knowing what the code
+      was for, not at writing code. This is the chapter's argument for the
+      review discipline that intro-5 then formalises.
+
+  - id: intro-4-shell-mismatch
+    chapter: docs/intro-4-terminals-and-cli-agents.md
+    object: "`ls` typed into Command Prompt on a fresh Windows machine"
+    status: spent
+    notes: >-
+      The chapter's deliberately broken example, and the most common beginner
+      failure in the field: a tutorial written on a Mac says `ls`, the shell in
+      front of you answers "'ls' is not recognized as an internal or external
+      command". Asks: when a command fails, is the command wrong or is the
+      shell wrong? The message says the shell has never heard of the name,
+      which sends the reader to ask which shell they are in - the chapter's
+      whole point about terminal types. Paired with the working version (`pwd`,
+      then `dir`).
+
+  - id: intro-5-one-stage-cut
+    chapter: docs/intro-5-spec-driven-engineering.md
+    object: "Four short scenarios, one per stage of the specify/design/implement/verify loop, each with that stage skipped"
+    status: spent
+    notes: >-
+      Four miniature failures rather than one traced object: a cache whose
+      time-to-live nobody chose (Specify skipped), a queue whose failure mode
+      nobody decided (Design skipped), a large diff accepted unread (Implement
+      over-delegated), and a change shipped because the obvious case worked
+      (Verify treated as optional). Asks: what does each stage actually
+      prevent, shown by its absence? Recorded as an omission-style entry - the
+      chapter's point is the missing judgment, so these are deliberately
+      negative examples.
+
+  - id: todo-app-trace
+    chapter: null
+    object: "A one-line request ('build me a to-do app') traced end to end"
+    status: reserved
+    reserved_for: "Stage 1 \"What is an AI coding agent?\" (no longer reserved for docs/intro-5-spec-driven-engineering.md - the intro shipped without it; see intro-no-single-example)"
+    notes: >-
+      Named in the founding brief and in framework drafts, never shipped.
+      Reserve it for exactly one lesson. Chosen because it stays legible whether
+      a chapter examines it in one sentence or in a full step-by-step trace.
+      If used, log which questions each chapter asks of it here.
+
+  - id: feature-add-ticket
+    chapter: null
+    object: "A real feature-add ticket: write a 3-line spec, prompt, review the diff against it"
+    status: reserved
+    reserved_for: a Stage 1 or Stage 3 lesson
+    notes: >-
+      Framework draft example. Unspent. Not used by the intro
+      - the intro's own rate-limiting/CSV-export scenarios cover similar
+      ground with different specifics, leaving this one genuinely free rather
+      than redundant.
+
+  # RE-OPENED 2026-09-10: binary-to-language-arithmetic-trace (2 + 2 traced
+  # across all four translation layers, then broken across a chip-architecture
+  # boundary) was spent only by the deleted intro-2 pilot. The real
+  # transformation, docs/intro-1-binary-to-programming.md, chose NOT to use it
+  # - see intro-1-no-worked-example below. It remains unspent.
+
+  - id: intro-1-no-worked-example
+    chapter: docs/intro-1-binary-to-programming.md
+    object: null
+    status: resolved-by-deviation
+    notes: >-
+      Deliberate omission, recorded so it is visible rather than silent.
+      intro-1 is a Concept lesson whose spine is the four-rung ladder itself.
+      It carries one anchor (a printed exam timetable - the literal original
+      sense of "program") and one named mechanism (the bit patterns behind
+      ASCII) instead of a worked example. The reserved
+      binary-to-language-arithmetic-trace was available and was deliberately
+      not spent: the ladder is the chapter's single illustration, and adding a
+      2 + 2 trace would have given the reader two competing pictures of the
+      same idea. A reader would not have gained from more.
+
+  - id: welcome-no-worked-example
+    chapter: docs/welcome.md
+    object: null
+    status: resolved-by-deviation
+    notes: >-
+      Deliberate omission, recorded so it is visible rather than silent. Welcome
+      is a front-door page, not a teaching chapter: its job is to state the
+      book's founding position and point to the first chapter, not to trace a
+      worked example. It carries one rhetorical analogy - an agent's answer as a
+      courier tracking page, with the point where the comparison breaks named
+      explicitly - rather than a worked example in this project's technical
+      sense. No reserved entry fits it: todo-app-trace is reserved for a Stage 1
+      agent lesson, feature-add-ticket for Stage 1/3, repo-permission-contract
+      for Stage 3/4, and spending one here would rob the lesson it is reserved
+      for. A reader would not have gained from more.
+
+  - id: repo-permission-contract
+    chapter: null
+    object: "Designing a permission and verification contract for an agent on a real repository"
+    status: reserved
+    reserved_for: a Stage 3 or Stage 4 lesson
+    notes: >-
+      Too heavy for Stage 1. Not used by the intro revision - the intro used a
+      five-agent pipeline example instead (see intro-worked-examples), which
+      covers multi-agent contract design rather than single-repository
+      permission design; this example stays free for the more targeted lesson
+      it was reserved for.
+      STILL RESERVED after the 2026-09-11 Stage 1 run. None of the six Stage 1
+      chapters reached for it. Its reservation holds.
+
+
+  # =========================================================================
+  # STAGE 1 (REMOVED 2026-09-17) — all worked-example and rejection entries
+  # for the six Stage 1 chapters were deleted here. The chapters were
+  # reverted to chapter_state: placeholder on 2026-09-17 (owner instruction -
+  # see prerequisite-graph.yaml's progress note for the full record), so the
+  # shared club-signup object and its six per-chapter questions are no longer
+  # spent on the live site. Re-add fresh entries when Stage 1 is re-authored -
+  # the shared object is a strong reuse candidate again, not still "spent".
+  # =========================================================================
+  # =========================================================================
+  # NEW STAGE 0 LADDER - added 2026-09-16, ch01-foundations and
+  # ch02-programming-is-born, the first two chapters of the approved
+  # chronological Stage 0 redesign (curriculum-state/stage-0-drafting-plan.md).
+  # =========================================================================
+
+  - id: ch01-torch-across-the-street
+    chapter: docs/ch01-foundations.md
+    object: "A torch signalled across a dark street to a friend"
+    status: in-use
+    introduced: 2026-09-20
+    notes_current: >-
+      THE CHAPTER'S EVERYDAY THREAD, added in the 2026-09-20 rewrite. Invented,
+      not historical, and that is deliberate.
+      It carries three separate jobs in sequence, which is why it was chosen
+      over a new example per section: (1) two agreed states can carry any
+      message; (2) why TWO and not ten - dim and medium blur across a dark
+      street, on and off do not, which is the noise argument made physical;
+      (3) two torches wired so the second lights only when both are on - the
+      move from carrying a signal to working one out.
+      It then hands over deliberately: a torch signal disappears when you let
+      go of the button, a punched card does not. That is the bridge into the
+      chapter's second section.
+      REUSABLE. A later chapter returning to the torch is a good choice, not a
+      repetition - the reader already has the picture.
+    superseded_entry: >-
+      This row replaced `ch01-no-worked-example`, whose reasoning is kept below
+      because the mistake is instructive.
+    notes: >-
+      REVERSED 2026-09-20 - this entry is kept as the record of a decision the
+      owner has since rejected, and ch01 is scheduled for a rewrite that fixes
+      it.
+      The original reasoning was: "Chapter 1 is a Concept-shape history chapter
+      whose spine IS its real named incidents (Jacquard's loom, Babbage and
+      Lovelace, Hollerith's tabulator, the relay/tube/transistor sequence, the
+      2003 Belgian election bit-flip) ... A reader would not have gained from
+      inventing one."
+      Why that was wrong: it treats a chain of named historical people as the
+      thing a beginner holds on to. It is not. A reader who has never
+      programmed needs ONE everyday object they can picture, returned to with a
+      new question each time - the way the old intro chapters used a school
+      sign-up page capped at thirty seats. The history then hangs on that
+      thread instead of being the thread.
+      "The subject is its own example" is not an acceptable answer for a
+      Stage 0-2 chapter. If nothing real fits, invent something concrete.
+
+  - id: ch02-literal-helper
+    chapter: docs/ch02-programming-is-born.md
+    object: "A tireless, very fast helper with no judgment at all"
+    status: in-use
+    introduced: 2026-09-20
+    notes_current: >-
+      THE CHAPTER'S EVERYDAY THREAD, added in the 2026-09-20 rewrite. Invented.
+      Given its own short section before the history starts, then returned to
+      at every step: told the wrong direction they walk until they reach the
+      sea; directed in numeric codes it gets worse; given short words it gets
+      bearable; given FORTRAN it gets pleasant - and they still have no
+      judgment, which is the chapter's real closing point.
+      DELIBERATELY BUILT TO CARRY FORWARD. This is the same helper a reader
+      will meet again as an AI coding assistant in Stages 3-4: fast, tireless,
+      confident, no judgment. Seeded here on purpose so the later chapters can
+      call back to something the reader already owns rather than arguing from
+      scratch. Do not spend it on a minor point in between.
+    superseded_entry: >-
+      This row replaced `ch02-no-worked-example`, whose reasoning is kept below
+      because the mistake is instructive.
+    notes: >-
+      REVERSED 2026-09-20, same as ch01-no-worked-example above, and for the
+      same reason.
+      The original reasoning was that the chapter's spine is four real
+      historical steps (ENIAC's plugboards, machine code, Kathleen Booth's
+      assembly language, Grace Hopper's A-0 and Backus's FORTRAN), each already
+      a concrete named object, so "inventing a separate toy example on top would
+      compete with, not clarify, the real history".
+      Why that was wrong: named and dated is not the same as picturable. A
+      beginner has no image for a plugboard. One everyday thread - something
+      they already understand being given to someone who follows instructions
+      exactly and literally - carries all four steps and makes the history
+      land instead of replacing it.
+
+  - id: ch00-no-worked-example
+    chapter: docs/ch00-introduction.md
+    object: null
+    status: resolved-by-deviation
+    notes: >-
+      Same judgment again, and after the rebuild it is forced rather than
+      chosen: an introduction to a stage has no mechanism to trace and nothing
+      to run, so there is no object it could carry. The chapter names one real
+      object - the reader's own computer, which the last few chapters of the
+      stage actually walk them through - and links out to ch01-foundations
+      rather than opening a worked example of its own. An earlier draft of this
+      chapter used the moth taped into the Harvard Mark II's logbook as its
+      demonstration; that draft's structure was rejected and no longer exists,
+      and evidence-ledger:bug-edison-not-the-moth is retained as unused
+      research.

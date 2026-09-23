@@ -113,17 +113,33 @@ function main() {
   console.log(`Found ${files.length} curriculum documents`);
 
   const records = [];
+  const skipped = [];
 
   for (const file of files) {
     const content = readFileSync(file, "utf-8");
     const fm = extractFrontmatter(content);
+
+    // A page still marked `placeholder` holds no text. Offering it in search
+    // means offering a reader an empty page, so it is left out until its
+    // chapter_state changes.
+    if ((fm.chapter_state || "").trim() === "placeholder") {
+      skipped.push(relative(DOCS_DIR, file));
+      continue;
+    }
+
     const body = content.replace(/^---[\s\S]*?---/, "");
     const plain = stripMarkdown(body);
     const headings = extractHeadings(content);
 
-    // Determine route from file path
-    const rel = relative(DOCS_DIR, file);
-    let route = "/" + rel.replace(/\.(md|mdx)$/i, "").replace(/\\/g, "/");
+    // Determine route from file path. Docusaurus strips a leading numeric
+    // prefix from the file name (`01-foundations.md` -> `.../foundations`),
+    // so the index must do the same or its result opens a route that 404s.
+    // Rule confirmed against scripts/generate-chapter-manifest.mjs, which
+    // reproduces the same doc ids.
+    const rel = relative(DOCS_DIR, file).replace(/\\/g, "/");
+    const segments = rel.replace(/\.(md|mdx)$/i, "").split("/");
+    const name = segments.pop().replace(/^\d+-/, "");
+    let route = `/${[...segments, name].join("/")}`;
     if (route.endsWith("/index")) route = route.slice(0, -5) || "/";
     if (!route.startsWith("/")) route = "/" + route;
 
@@ -160,6 +176,11 @@ function main() {
   const outDir = dirname(OUT_FILE);
   if (!existsSync(outDir)) {
     throw new Error(`Output directory missing: ${outDir}`);
+  }
+
+  if (skipped.length > 0) {
+    console.log(`Skipped ${skipped.length} placeholder page(s):`);
+    for (const file of skipped) console.log(`  - ${file}`);
   }
 
   writeFileSync(OUT_FILE, JSON.stringify(uniq, null, 2), "utf-8");

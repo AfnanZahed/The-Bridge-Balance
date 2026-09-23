@@ -119,7 +119,7 @@ pointer to another file does not carry equal weight in practice.
 ## References
 
 - Feature Spec: none
-- Implementation Plan: [`migration-plan.md`](../reports/spine-migration-2026-09-20/migration-plan.md) (proposed 21 September 2026; nothing has moved), from `curriculum-state/canon/corrections.md` §22
+- Implementation Plan: [`migration-plan.md`](../reports/spine-migration-2026-09-20/migration-plan.md) (written 21 September 2026 and run that evening: section 8), from `curriculum-state/canon/corrections.md` §22
 - Related ADRs: [ADR-0004](./0004-two-skill-content-split.md) (**superseded in part** by this record), [ADR-0006](./0006-beginner-first-content-integrity.md)
 - Evaluator Evidence: [PHR 0113](../prompts/general/0113-file-by-file-walkthrough-of-content-rules.general.prompt.md), [PHR 0117](../prompts/general/0117-component-palette-opened-spine-made-specific.general.prompt.md)
 
@@ -127,8 +127,9 @@ pointer to another file does not carry equal weight in practice.
 
 ## Migration log
 
-**Status: in progress.** The decision is accepted; the repo does not yet fully
-match it. What has landed, in order:
+**Status: in progress, nearly closed.** The decision is accepted, and the skill and
+the pointer layer now match it. What is left is under "Still outstanding". What has
+landed, in order:
 
 ### 1. The generic form is frozen (decision point 5) · 20 September 2026
 
@@ -265,12 +266,62 @@ Three rules were recorded at the same time (`corrections.md` §26 to §28): *"be
 
 **The plan was proofread again**, in four bounded DeepSeek calls at `--effort high`. The first attempt, one call over the whole plan, died of a server error after eleven minutes and wrote nothing. The second found 19 problems, and every quote was verbatim in the plan. I checked each one in place and fixed all 19, including this log's own line that said both outside copies were untouched. The traces were audited: no call wrote anywhere except its own output file.
 
+### 8. The plan was run · 21 September 2026, evening
+
+The owner answered the four open decisions (plan section 0) and wrote *"migration plan: DO IT NOW using deepseek with max effort"* and *"the 198 rule: do them"*. All four phases ran that evening.
+
+| Phase | Result |
+|---|---|
+| 1. Repair | **Done.** K3 was ruled: yes, "ask every time" covers research. `corrections.md` §30 says so, six places are reworded, and the constitution is **v3.0.2** (Principle VIII: the model is asked every time, research included; Principle IX: one reader in every stage). The nine small fixes are applied; D8 and D9 wait for the shape redesign. `faq.md` line 52 and `glossary.md` line 34 no longer promise old rules. |
+| 2. Coverage | **Done.** The eight canon rules a writer never saw now have a home: six in `language-register.md`, one in `SKILL.md` (C7-33), one in `chapter-production/SKILL.md` (C7-25). |
+| 3. Duplication | **Partly done.** Skill side: 104 edits across the seven skill files, each restatement turned into a pointer, a split or a merge. Canon side: 9 merges, and 22 tombstone lines against the 63 the plan counted (`voice.md` 14 of 41, `audience.md` 8 of 22). |
+| 4. Framing | **Done.** `SKILL.md` "Before you start" now says the skill is written for this book and that the project guide loads first. Its title and description name the book. `CLAUDE.md`, the project guide, `PROJECT-MAP.md` and `curriculum-state/README.md` no longer call it general craft. |
+
+**The vocabulary layer** was done the same day, as its own task (the owner: *"fix this problem properly using the deepseek with high effort"*). DeepSeek decided what each "lesson" meant, a script made the swaps, and the risky places were read by hand: 234 words changed in 20 files. The two skill folder names still say "lesson".
+
+**How it ran.** Claude wrote one worksheet per file by script from the plan's Appendix A. DeepSeek V4.1 Flash at `--effort max` (the owner's choice for this job) edited one file per job and could write only to that file and its own log. Jobs were cut to seven items or fewer after connection errors ended the first, larger ones. Four jobs that were resumed after a crash logged "needs a human" for 23 items without editing; the resume message was fixed and those items were re-run in smaller jobs. Every trace was audited by script: reads in scope, writes only to the target and the log. One job (`T-audience-2`) also wrote 11 scratch text files in Command Code's own temp folder and nothing in the project. Per file, scripts checked that the headings are the same, that every path a pointer names exists, that every section title it quotes exists in that file, and that the line endings did not change. `check-references` passes. `check-chapter` reports 0 errors and the same 6 warnings the owner told me to ignore.
+
+**What the checks found.**
+
+- **Two merges copied a withdrawn rule.** The 20 September detail check said all images are made outside; that was reopened later. Both merges were reverted and the stale claim in `audience.md` fixed by hand. Every merge was read after that.
+- **A wrong tombstone.** The persona rule (C2-03) in `voice.md` had been replaced by a pointer to text that does not state it.
+- **The survivor check undid most of the canon tombstones.** For every place where words were removed, it measures how many of the removed three-word runs still appear anywhere else in the skill. It sent 24 of 38 changed places back to their old text: `voice.md` 16 of 23, `audience.md` 8 of 15. It is strict about wording, so some of those may have been fine. Putting text back loses nothing; it only leaves a rule stated twice. It is also blunt: it passed one place at 59% overlap (the exclamation-mark, emoji and "AI-slop" bullets) that a reviewer then showed had lost three details, and that place was restored too.
+- **Independent reviewers** (DeepSeek calls at max effort that read every changed place and open each pointer's target) checked 116 changed places in nine files and found four problems: a lost sentence in `name-registers.md`, the word "lesson" left in one `SKILL.md` pointer, the word "code" lost from the phone check in `beginner-experience-audit.md`, and the `voice.md` place above. All four are fixed. A stale line in `mixed-audience.md` ("no expert assumed in Stages 3–4") the reviewer did not flag; I found it and fixed it by hand.
+
+**The dry run** (plan section 7, item 6). A read-only DeepSeek call at max effort followed the skill's own steps for a sample Stage 0 topic (*"What is a terminal, and why do we type commands?"*). It opened every file and pointer in the order the skill gives and wrote nothing except its findings; the trace shows 26 file reads, 8 searches and no write. It reported 10 problems. I checked each against the files, and all 10 were real. Eight are fixed:
+
+- the anchor-tier order in `stations.md`, which still put universal examples first after `corrections.md` §29 made them Pakistani-first;
+- three places that still said every image is made outside the project (two found by the dry run, one by my search): `CLAUDE.md`, the project guide's folder tree and `gate.md` line 16;
+- three places that still called the Stage 3–4 reader undecided: the project guide, `stations.md` and `mixed-audience.md`;
+- two research checklists that still assumed delegation without asking (`research-and-comparison.md` and `research.md`), a leftover of K3;
+- the ledgers protocol, which listed four ledgers while the folder and the README have five, and never told a drafter to write `term-ledger.yaml`; three files that said "the four ledgers" now say "the ledgers".
+
+The other two wait for the shape redesign (D8): `voice.md` line 278 speaks of a "Theory-classified" chapter, and `corrections.md` §23 is titled with "lesson shapes". Most of the ten were leftovers from earlier decisions that no file-by-file sweep had reached. The dry run found them because it followed the reading order, which is what the ADR asked for.
+
+**The word proofread and the final sweep.** Two more read-only checks ran at high effort after the dry run.
+
+- **The proofread of the lesson-to-chapter word changes** (192 rows) found 2 problems: the two project maps said the skill "does not write the lesson" right after the rename had changed "around the lesson" to "around the chapter". Both are fixed.
+- **The final sweep.** Five DeepSeek sessions each read part of the rule files (30 files in all: the skill, the canon, `CLAUDE.md`, `PROJECT-MAP.md`, the constitution) and looked for any sentence that still states an old rule as if it were current: two readers, banned audience labels, images made only outside the project, universal examples first, DeepSeek as the default for research, "lesson" for "chapter", and counts that had gone stale. They reported 28 places. I checked each one: 26 were real, 1 was a false alarm (`corrections.md` §28 item 3 already has a §29 note directly after the sentence), and 1 waits for D8 (`corrections.md` §23, line 541, "round a lesson to the nearest shape").
+
+**How the fixing ran.** No new DeepSeek jobs were started. Each sweep's own session was resumed (`--session`), so the files it had read were already in its context, and it was told to fix only its own findings, in the listed files only. It made 24 edits. I backed up every file first, audited the five traces (no write outside the listed files; the only shell use was appending to its own log) and read every changed line against the backup. Line endings were unchanged in every file. I edited `corrections.md` by hand because it is the binding rulebook: two dated notes, on §8 (which still said Stages 3 and 4 were open) and on §26 (which still said two places described other readers, when both had been fixed).
+
+**Three of DeepSeek's 24 edits I reworded.** In two places in `CLAUDE.md` it wrote that "drawing inside the chapter body" stays closed. The rule in `corrections.md` §21 is narrower: what stays closed is a drawing delivered as inline markup (`<Figure />`, inline SVG, inline Mermaid), and a drawing made through a connector is allowed as an ordinary image. In the project guide's map it wrote "does not write the chapter" in the same table cell that says the skill takes a topic to a shipped chapter; that now says "the chapter's teaching".
+
+**A plain word search then found 3 more** that the sweep had not flagged, although it had flagged the same phrase in other files: "the seven ratified principles" in the guide's `SKILL.md` and in `PROJECT-MAP.md`, and "the approved 20-chapter Stage 0 ladder" in the guide's own map. All three are fixed. `check-references`, `check-frontmatter` and `check-chapter` pass (0 errors, the same 6 warnings the owner said to ignore).
+
+**Honest results.**
+
+- **The skill did not get shorter.** 4,403 words of restated rules came out and 6,293 went in (pointers, the seven new rules that live in these files, the reading table, the rewritten opening): net +1,890 words on 25,106, or +7.5%. The aim was one home per rule, not fewer words, but a pointer costs words too.
+- **The canon is only partly de-duplicated.** Roughly 40 rules are still written out in full in `voice.md` and `audience.md` and also stated in the skill. The two agree today, and the reviewers checked that, but they can drift apart. To finish a rule, the skill has to gain the missing wording first (the plan's merge-first step, by hand) and only then can the canon get its tombstone. DeepSeek declined two rows for that reason: C1-26 (italics for gentle emphasis and the reader's inner voice) and C2-42 (the banned-phrase table).
+- **The plan's row matching was loose in places.** Some rows matched a different rule that shares topic words, so a tombstone would have pointed at text that does not carry the rule. The jobs' own checks and the reviewers caught it; the plan did not.
+- **The cost rule was judged, not counted.** Doing about 170 careful edits by hand means reading both copies of every rule. Delegated, Claude's part was the worksheets, the audits and reading only the flagged places. I did not count tokens, and the survivor check threw away more than half of the tombstone edits, so part of the max-effort work was wasted.
+- **Every check found something the one before had missed.** The dry run found 10 leftovers, the final sweep 28 places (26 real), and a plain word search 3 more. The sweep flagged some copies of a phrase and not others, so its list was not complete. Nothing known is left except the places that wait for the redesign, but that does not prove that none remain.
+
 ### Still outstanding
 
-- **The plan awaits four decisions** (1, 3, 4 and 6 in [`migration-plan.md`](../reports/spine-migration-2026-09-20/migration-plan.md)). No rule has moved: nothing has been removed from canon and nothing added to the skill.
-- **One contradiction remains: K3.** Whether *"ask which model, every time"* covers standards research needs the owner's ruling, because Constitution Principle VIII states a default. Five places carry the default wording (plan section 4). K1, K2 and K4 are fixed. The constitution change K3 needs (v3.0.2) can also carry the reader decision of `corrections.md` §26 (Principle IX), so the owner should see one proposed wording for both before anything is applied.
-- **The vocabulary layer is untouched, and is now part of a bigger task.** The skill says "lesson" 133 times (counted 21 September) where this book says Chapter or Part, and `CLAUDE.md` still explains the translation. The owner will direct it as a separate whole task, together with the redesign of the curriculum and its stages. The levels and the naming decisions live in `course-structure.md`.
-- **`mixed-audience.md` still carries its old name**, which its own header notes, because a dozen files point at it. Depth blocks stay as optional extras (`corrections.md` §25).
-- **Five sentences on reader-facing pages may still promise old rules.** The sweep found them and plan section 12 lists them. One is a clear problem (`faq.md` line 52). Nothing is changed until the owner says.
-- **The app's copy of the writing skill needs a lasting fix** in the app's skills settings.
-- **The skill still describes itself as general teaching craft** (`SKILL.md` "Before you start", the project guide's line 19, `CLAUDE.md` line 47). That is phase 4 of the plan, and it goes with the vocabulary decision.
+- **The ~40 repeated canon rules: done, 22 September.** The owner ordered it finished now, at DeepSeek high effort, in 6 small jobs. The real count, checked against the live files rather than the old estimate, was 36: 17 needed a short addition to the skill first (the missing wording, copied from the canon's own sentence, not invented), 17 were already fully covered and only needed the canon tombstone, and 2 turned out already done from the first run. Backed up first; every job's trace audited (no write outside its own files); every changed line read against the backup; all three gates still pass (0 errors, the same 6 ignored warnings).
+- **The constitution wording.** v3.0.2 was applied on the owner's yes. The exact sentences in Principles VIII and IX are worth a read.
+- **The two skill folder names still say "lesson"** (`lesson-spine-authoring`, `lesson-adversarial-review`), and `mixed-audience.md` keeps its old name. Renaming is one script pass over many files and could disturb another open session, so it belongs at the end of the redesign.
+- **The app's copy of the writing skill needs a lasting fix** in the app's skills settings. It is the owner's chore.
+- **D8 and D9** (the five lesson shapes and the front-door skeleton) wait for the shape redesign, together with the places that still use the old shape words (`voice.md` line 278, and the title and one sentence, line 541, of `corrections.md` §23). So do the stage names, the levels and the question of what the front of the book is called: `course-structure.md` holds them.
+- **Open items with the owner:** the redesign itself (questions A, B and C in `course-structure.md`), the palette, the WHY lines, the logo and the persona. All are on the live task page.

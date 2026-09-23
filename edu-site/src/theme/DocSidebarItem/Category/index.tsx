@@ -9,11 +9,11 @@
  *
  *     [glyph] [eyebrow / title] [caret]
  *
- * - The label is split on its em dash ("Stage 1 — Spec-Aware Vibe Engineering")
+ * - The label is split on its em dash ("Stage 1 — SDE Mastery (AI-Driven)")
  *   into a small letterspaced eyebrow and a title, because a single line wraps
  *   badly at the sidebar's width. Labels without a dash render as one line.
  * - The glyph is declared per category via `customProps` in sidebars.ts rather
- *   than parsed out of the href. The four stage glyphs mirror
+ *   than parsed out of the href. The three stage glyphs mirror
  *   `src/components/stage-icons/` — keep the two in sync.
  * The caret itself is left untouched: Infima draws it from
  * `--ifm-menu-link-sublist-icon`, and custom.css re-masks that glyph at the
@@ -44,12 +44,7 @@ import {
 } from "@docusaurus/theme-common";
 import { isSamePath } from "@docusaurus/theme-common/internal";
 import useIsBrowser from "@docusaurus/useIsBrowser";
-import {
-  Atom,
-  Blueprint,
-  Certificate,
-  TreeStructure,
-} from "@phosphor-icons/react";
+import { Atom, Blueprint } from "@phosphor-icons/react";
 import { BookOpen, Sparkles } from "@site/src/components/icons";
 import type { Props } from "@theme/DocSidebarItem/Category";
 import DocSidebarItemLink from "@theme/DocSidebarItem/Link";
@@ -168,11 +163,7 @@ function CategoryGlyph({ item }: { item: PropSidebarItemCategory }): ReactNode {
   if (stage === 1) {
     glyph = <Blueprint size={size} weight="duotone" />;
   } else if (stage === 2) {
-    glyph = <Certificate size={size} weight="fill" />;
-  } else if (stage === 3) {
     glyph = <Atom size={size} weight="duotone" />;
-  } else if (stage === 4) {
-    glyph = <TreeStructure size={size} weight="duotone" />;
   } else if (icon === "start") {
     glyph = <Sparkles size={size} />;
   } else if (icon === "reference") {
@@ -189,7 +180,7 @@ function CategoryGlyph({ item }: { item: PropSidebarItemCategory }): ReactNode {
 }
 
 /**
- * Splits "Stage 1 — Spec-Aware Vibe Engineering" into an eyebrow and a title.
+ * Splits "Stage 1 — SDE Mastery (AI-Driven)" into an eyebrow and a title.
  * Degrades to a single line when the label carries no em dash.
  */
 function CategoryLinkLabel({ label }: { label: string }) {

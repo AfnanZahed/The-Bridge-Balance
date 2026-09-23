@@ -21,14 +21,14 @@ import type {
 export type ChapterLocation = {
   /** 1-based position within the category, matching the sidebar row. */
   ordinal: number;
-  /** "Stage 1" for "Stage 1 — Spec-Aware Vibe Engineering"; "" when undashed. */
+  /** "Stage 1" for "Stage 1 — SDE Mastery (AI-Driven)"; "" when undashed. */
   stageEyebrow: string;
-  /** "Spec-Aware Vibe Engineering"; the whole label when undashed. */
+  /** "SDE Mastery (AI-Driven)"; the whole label when undashed. */
   stageTitle: string;
 };
 
 /**
- * Splits "Stage 1 — Spec-Aware Vibe Engineering" into an eyebrow and a title.
+ * Splits "Stage 1 — SDE Mastery (AI-Driven)" into an eyebrow and a title.
  * An em-dash-free label returns an empty eyebrow and the label as the title,
  * mirroring src/theme/DocSidebarItem/Category/index.tsx.
  */

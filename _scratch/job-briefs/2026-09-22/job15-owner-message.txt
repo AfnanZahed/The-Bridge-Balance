@@ -1,0 +1,44 @@
+
+
+<pasted_content id="8ffe">
+using deepseek, write me the update of the last 2 days' decisions and changes that have been done and to tell them to my students. I was going to message this one: ""Dear Students,
+
+The video below shows the website on which the course and its materials are currently being developed.
+
+[VIDEO CLIP HERE]
+
+Format of Course Delivery
+
+The course was originally planned as video lectures, followed by supporting documents, images, and notes shared manually within WhatsApp groups. This format has been revised. All learning material will now be published first, in complete written form, on the course website. Detailed video lectures will follow for each part of that material. This is intended to make the course easier to track, reference, and learn from.
+
+Curriculum Updates
+
+The course is being rebuilt in full, with research supporting each structural decision. The stage that taught programming and software engineering foundations, and the stage that taught how to direct AI coding agents, were previously separate and taught in sequence. These two stages have been merged into one, so that programming skills and the skills required to work with AI coding agents are taught together, reflecting how they are used together in practice. The certification stage is being expanded, with additional free certificates planned over time. A new first stage has been introduced, designed for students with no prior experience in programming.
+
+Ongoing Transparency
+
+Beginning today, every change made to the course will be recorded, with its date, on the website's changelog page. This record will be publicly available at all times.
+
+New Feature: Learning Assistant
+
+An AI based learning assistant is being developed for integration into the website. Its intended functions include:
+
+• researching a topic thoroughly before providing an answer
+• working through complex questions in a structured manner
+• producing written notes and documents on request
+• explaining material from within the course, or from outside it
+
+A preview of this feature will be shared in due course.
+
+Access at No Cost
+
+The learning assistant, the examinations, and several related features were originally planned as part of a paid subscription, priced at twenty dollars per month. For students in this community, these features will be provided at no cost.
+
+Development Timeline
+
+The website is currently in an early stage of development, referred to in the software industry as Alpha. This indicates that the site is functional but still undergoing active development and testing. It is expected to reach the next stage, Beta, within one week. Once the website reaches the Beta stage, the link will be shared here so that reading can begin. Within two weeks, the website is expected to move to a permanent domain.
+
+A further message will follow once the course's learning material is ready for release.""
+
+note that I am also trying the build the chatbot, for MVP, for marketing, for gaining the trust, no real working chatbot as of now, but soon inshallah. but the above message is not update, update the above message and write me the new message, and make sure the changlog in the book deployed version is ultra professional, and highly international standard and very very attractive and 100% accurate. ALL USING THE DEEPSEEK.
+</pasted_content id="8ffe">

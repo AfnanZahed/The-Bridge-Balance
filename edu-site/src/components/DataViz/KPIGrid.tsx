@@ -2,11 +2,13 @@
  * KPIGrid — Displays high-level curriculum headline figures.
  *
  * Real figures from The Bridge Balance platform spec:
- *   - 5 Stages (Intro to Computing, Foundations, Credentials, Coding Agents, Autonomous Systems)
+ *   - 3 Stages (Introduction to SDE, SDE Mastery (AI-Driven), SDE Mastery (AI-Native))
  *   - Free Forever — the textbook costs nothing, forever (Constitution Principle VI).
  *     No chapter count: the curriculum never fixes one (locked decision D5).
- *   - 2 Harvard Certificates (CS50P Python + CS50W Web)
- *   - ~48 Est. Total Hours of structured study & project building
+ *   - Starting point: zero — no prior programming needed, and Stage 0 assumes none.
+ *   - A chapter is one sitting — one file, start to finish. No total hours:
+ *     the book commits to none (the old "~48 Est. Total Hours" figure was
+ *     removed on 2026-09-23 for exactly that reason).
  *   - 15+ Free-tier Services & Open Source tools (0 cost)
  */
 
@@ -27,7 +29,7 @@ export interface KPICardData {
 export const KPI_ITEMS: KPICardData[] = [
   {
     label: "Stages",
-    value: 5,
+    value: 3,
     subtext: "Switches to Autonomy",
     accent: "var(--tbb-accent, oklch(0 0 0))",
   },
@@ -38,16 +40,15 @@ export const KPI_ITEMS: KPICardData[] = [
     accent: "var(--tbb-accent, oklch(0 0 0))",
   },
   {
-    label: "Certificates",
-    value: 2,
-    subtext: "Harvard CS50P & CS50W",
+    label: "Starting point",
+    display: "Zero",
+    subtext: "No prior programming",
     accent: "var(--tbb-accent, oklch(0 0 0))",
   },
   {
-    label: "Est. Hours",
-    value: 48,
-    suffix: "h",
-    subtext: "Self-paced study & labs",
+    label: "A chapter",
+    display: "One sitting",
+    subtext: "One file, start to finish",
     accent: "var(--tbb-accent, oklch(0 0 0))",
   },
   {

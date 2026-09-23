@@ -24,8 +24,8 @@
     "headings": [
       "Introduction to Stage 0"
     ],
-    "content": "Introduction to Stage 0 Welcome to the first of five stages, where you'll build a solid foundation in how a computer actually works, including: - The Machine - What is actually switching inside a computer, and how did two states turn out to be enough? - How did a machine learn to hold a number and take an instruction, instead of being rewired for every job? - Languages, and Why One Was Never Enough - How instructions stopped being physical wiring and became something you can write. - Why every new kind of job pulled a new language into existence. - Sharing a Machine - Where the terminal, the file and the screen came from, and what each one replaced. - How one machine became many machines, and how they learned to reach each other. - Where the web came from, and the split between what runs on your machine and what runs on someone else's. - The Toolbox You'll Actually Open - What is on your own machine right now, and what every piece of it was built to replace. - The six command lines that look alike and are not the same thing. - The AI, and the Workflow: - The long road AI research took before it reached ordinary programming. - Spec-Driven Engineering — the workflow the rest of this book builds on. State what you want and what can't change, then check the result: Specify → Design → Implement → Verify. The last chapter of this stage teaches it in full. After exploring all of it, you'll be able to say what a computer is actually doing while it runs something. You'll also understand why every tool on it is shaped the way it is. Nothing in this stage is code you have to write. It is the ground that code stands on. Your own computer is the worked example. By the last few chapters you'll be able to point at each tool on it, say what it is, and name what it replaced. There is no quiz at the end of this stage, and no certificate. The credentials this book leads to are real ones. CS50P and CS50W are Harvard's two introduction courses, in programming and in web development. Bot",
-    "excerpt": "Introduction to Stage 0 Welcome to the first of five stages, where you'll build a solid foundation in how a computer actually works, including: - The Machine - What is actually switching inside a…"
+    "content": "Introduction to Stage 0 Welcome to the first of three stages, where you'll build a solid foundation in how a computer actually works, including: - The Machine - What is actually switching inside a computer, and how did two states turn out to be enough? - How did a machine learn to hold a number and take an instruction, instead of being rewired for every job? - Languages, and Why One Was Never Enough - How instructions stopped being physical wiring and became something you can write. - Why every new kind of job pulled a new language into existence. - Sharing a Machine - Where the terminal, the file and the screen came from, and what each one replaced. - How one machine became many machines, and how they learned to reach each other. - Where the web came from, and the split between what runs on your machine and what runs on someone else's. - The Toolbox You'll Actually Open - What is on your own machine right now, and what every piece of it was built to replace. - The six command lines that look alike and are not the same thing. - The AI, and the Workflow: - The long road AI research took before it reached ordinary programming. - Spec-Driven Engineering — the workflow the rest of this book builds on. State what you want and what can't change, then check the result: Specify → Design → Implement → Verify. The last chapter of this stage teaches it in full. After exploring all of it, you'll be able to say what a computer is actually doing while it runs something. You'll also understand why every tool on it is shaped the way it is. Nothing in this stage is code you have to write. It is the ground that code stands on. Your own computer is the worked example. By the last few chapters you'll be able to point at each tool on it, say what it is, and name what it replaced. There is no quiz at the end of this stage, and nothing to hand in when you finish it. You'll also learn why checking an AI's work can't be handed to the machine. A coding agent — software that writes and edits ",
+    "excerpt": "Introduction to Stage 0 Welcome to the first of three stages, where you'll build a solid foundation in how a computer actually works, including: - The Machine - What is actually switching inside a…"
   },
   {
     "title": "How a Machine Learned to Hold a Number",
@@ -61,8 +61,8 @@
     "title": "Changelog",
     "route": "/changelog",
     "headings": [],
-    "content": "Changelog A dated record of what actually shipped — a chapter going , a stage being promoted, a real platform feature landing. Internal work (refactors, lint fixes, a retried build) doesn't appear here; this page is for changes a reader would notice or care about. 2026-09-20 - The four \"why this book\" cards on the homepage are cards now. They had no styling at all, so the four headings and the four paragraphs under them ran together as one long column of text with nothing to separate one pillar from the next. Each is now a raised panel with a lit top edge, its number set large and faint in the corner, and its icon in a small raised chip of its own. The number is what identifies a card — the four top edges stepping from light grey to black in order are the same descent down the site's silver ramp the five stages use, so the row reads as one set. Moving the pointer over a panel brings a soft light with it. - How a Machine Holds a Number and How People Told a Machine What to Do have been rewritten. Both now open by welcoming you, saying what the chapter covers and why it matters, and then move into the teaching gradually instead of dropping you into it. Each one is now carried by one everyday thing you can picture the whole way through: a torch signalled across a dark street in the first, and a tireless helper with no judgment at all in the second. Hard words that the ideas did not need are gone — a transistor is \"a tiny piece of specially treated crystal\" now, not \"a sliver of treated germanium.\" The history, the loom, the three kinds of switch, the rewiring of ENIAC and the arrival of FORTRAN are all still there. - Chapter and section titles now say what they are about. \"Yes, No, and Nothing In Between\" is now \"Why a Computer Only Says Yes or No.\" In the sidebar, \"1. Foundations\" is now \"1. How a Machine Holds a Number,\" and \"2. Programming Is Born\" is now \"2. How People Told a Machine What to Do.\" A title should tell you what is inside before you open it. - Stage 0 ",
-    "excerpt": "Changelog A dated record of what actually shipped — a chapter going , a stage being promoted, a real platform feature landing. Internal work (refactors, lint fixes, a retried build) doesn't appear…"
+    "content": "Changelog Newest first, and every change carries its date. Only changes you would notice are here: a chapter going live, a stage being renamed, a page being added, a fix you can see. Small work behind the scenes is left out. The book is written and maintained by one person, Afnan Zahed, and this page is updated whenever something ships. <Callout type=\"info\" title=\"How to read this page\"> Every change sits under one of four words. New is something that did not exist before. Changed is something that works differently now. Fixed is something that was wrong and is right now. Removed is something that is gone. </Callout> 2026-09-23 New - The book's core skill has its public name: Code Literacy: reading and judging code. It is the ability to read code, whoever or whatever wrote it, and judge it well enough to verify it and own it. Every page that names it introduces it that way the first time, then says just Code Literacy. Changed - Every button on the homepage now opens the Welcome page. The two buttons under the headline and the one at the foot of the page used to open a Stage 1 page with nothing on it. All three now open the Welcome page, the book's front door, and the buttons whose words no longer matched where they went were renamed: Start reading and See the three stages. - Three homepage lines stopped saying things that were not true. \"Built for working developers\" is gone, because the reader this book is written for starts at zero and finishes as an expert. So is the \"Est. Hours 48h\" figure: this book never commits to a total, and the card in its place describes how a chapter reads, one file from start to finish. \"Every chapter ships twice\" now says what actually happens: the written text comes first, and a video lecture from the project owner follows each part of it. - Stage 1 and Stage 2 open by saying what they will teach. Stage 1 used to describe itself as a merge of two older stages, one of which no longer exists, and to call its chapters placeholders; Stage",
+    "excerpt": "Changelog Newest first, and every change carries its date. Only changes you would notice are here: a chapter going live, a stage being renamed, a page being added, a fix you can see. Small work behind…"
   },
   {
     "title": "Code of Conduct",
@@ -75,39 +75,22 @@
       "Reporting, honestly",
       "What happens when the standard is broken"
     ],
-    "content": "Code of Conduct The Bridge Balance is a free, five-stage curriculum that people read today and will discuss together later. This page states the standard of behaviour for anyone who interacts on a Bridge Balance surface. It governs how people treat each other, and it never governs what the book teaches. It is short on purpose. Nothing in it depends on a process that does not exist yet, and nothing in it invents a channel that nobody is watching. What the standard is Everyone interacting on a Bridge Balance surface is expected to: - Be respectful. Argue with an idea as forcefully as you like, but aim at the idea and not the person. Read a message in the way its author intended before assuming the worst. - Give no ground to harassment. No insults, threats, intimidation, stalking, or unwanted sexual attention. This holds in public and in private, and it follows you to other platforms when a disagreement starts here. - Refuse discrimination. No slurs and no hostility aimed at anyone's race, ethnicity, nationality, religion, caste, gender, gender identity, sexual orientation, disability, age, or experience level. A curriculum written for a wide range of readers has no room for it. - Engage honestly. Cite what you borrow and do not pass off someone else's work as your own. Do not spread claims you know to be false, and do not claim to speak for The Bridge Balance. Respect is the idea the other three rest on. The list below is what breaking it looks like in practice. What counts as a violation A violation is any behaviour that breaks the standard above. The examples below are the common ones, not an exhaustive list: - Mocking or belittling another person instead of answering their argument. - Continuing to contact someone after they have asked you to stop. - Sexual comments, images, or attention that were clearly unwanted. - Slurs, or jokes built on someone's identity, even when they are framed as humour. - Threatening violence, or publishing another person's private detai",
-    "excerpt": "Code of Conduct The Bridge Balance is a free, five-stage curriculum that people read today and will discuss together later. This page states the standard of behaviour for anyone who interacts on a…"
+    "content": "Code of Conduct The Bridge Balance is a free, three-stage curriculum that people read today and will discuss together later. This page states the standard of behaviour for anyone who interacts on a Bridge Balance surface. It governs how people treat each other, and it never governs what the book teaches. It is short on purpose. Nothing in it depends on a process that does not exist yet, and nothing in it invents a channel that nobody is watching. What the standard is Everyone interacting on a Bridge Balance surface is expected to: - Be respectful. Argue with an idea as forcefully as you like, but aim at the idea and not the person. Read a message in the way its author intended before assuming the worst. - Give no ground to harassment. No insults, threats, intimidation, stalking, or unwanted sexual attention. This holds in public and in private, and it follows you to other platforms when a disagreement starts here. - Refuse discrimination. No slurs and no hostility aimed at anyone's race, ethnicity, nationality, religion, caste, gender, gender identity, sexual orientation, disability, age, or experience level. A curriculum written for a wide range of readers has no room for it. - Engage honestly. Cite what you borrow and do not pass off someone else's work as your own. Do not spread claims you know to be false, and do not claim to speak for The Bridge Balance. Respect is the idea the other three rest on. The list below is what breaking it looks like in practice. What counts as a violation A violation is any behaviour that breaks the standard above. The examples below are the common ones, not an exhaustive list: - Mocking or belittling another person instead of answering their argument. - Continuing to contact someone after they have asked you to stop. - Sexual comments, images, or attention that were clearly unwanted. - Slurs, or jokes built on someone's identity, even when they are framed as humour. - Threatening violence, or publishing another person's private deta",
+    "excerpt": "Code of Conduct The Bridge Balance is a free, three-stage curriculum that people read today and will discuss together later. This page states the standard of behaviour for anyone who interacts on a…"
   },
   {
     "title": "Frequently Asked Questions",
     "route": "/faq",
     "headings": [],
-    "content": "Frequently Asked Questions Short, direct answers to what readers ask before they start. Nothing here is aspirational: if something is not built yet, it says so. What is The Bridge Balance? A free, five-stage curriculum that takes a student from zero to spec-driven AI-agent engineering. Spec-driven means you write down what you want built and what must not change before any code is generated; the agent implements inside those boundaries, and you verify the result and take ownership of it. The curriculum is anchored by two Harvard CS50 credentials — CS50P (Python) and CS50W (web) — earned partway through, in Stage 2. The textbook is free forever. The business that funds it is a separate, optional catalogue of Claude Code sub-agents, skills, MCP servers, and plugins. Those are paid products. The curriculum itself never charges for content. Who is it for? Two readers share one document. One already works as a senior engineer; the other last week struggled to finish a signup form. There is no separate edition and no \"basics\" section, because the two readers quit for different reasons: the senior stops at a paragraph that gives them nothing new, and the other stops at the first term used without being defined. Writing that hands the first something they did not already have, and leaves nothing unexplained for the second, serves both at once. The founding brief names five readers, all on one spine rather than five tracks: a computer-science undergraduate, a junior developer, a working professional, a career-switcher, and someone starting from scratch. No prior programming experience is required to begin. Every technical term is defined where it first appears in a chapter — counted per chapter, not per book — so a reader arriving from a search result is never expected to have read an earlier page. Is it really free? Yes. The textbook is free with no paywall, no locked chapter, and no email gate, and that holds across the whole curriculum. It is a standing project principle,",
+    "content": "Frequently Asked Questions Short, direct answers to what readers ask before they start. Nothing here is aspirational: if something is not built yet, it says so. What is The Bridge Balance? A free, three-stage curriculum that takes a student from zero to spec-driven AI-agent engineering. Spec-driven means you write down what you want built and what must not change before any code is generated; the agent implements inside those boundaries, and you verify the result and take ownership of it. The textbook is free forever. The business that funds it is a separate, optional catalogue of Claude Code sub-agents, skills, MCP servers, and plugins. Those are paid products. The curriculum itself never charges for content. Who is it for? Anyone who has never programmed. The book starts from zero: nothing is skipped, and nothing is left for you to guess. No experience is needed to begin. A new word is explained the first two or three times you meet it. After that it becomes a link to the glossary, so a reminder is one tap away. A word that is too big for one sentence gets a short passage of its own before it is used. Is it really free? Yes. The textbook is free with no paywall, no locked chapter, and no email gate, and that holds across the whole curriculum. It is a standing project principle, not a launch offer. The only paid surfaces are the optional digital products sold alongside the book — Claude Code sub-agents, skills, MCP servers, and plugins. You can complete every stage without buying any of them. What are the stages? - Stage 0 — Introduction to SDE. The history of computing and software, read in the order it happened, from binary through today's AI-coding-agent era, plus Spec-Driven Engineering and Code Literacy: reading and judging code — the two the rest of the book depends on. - Stage 1 — SDE Mastery (AI-Driven). Foundations: architecture, programming, frontend, backend, databases, and Git, learned together with Claude Code, prompt and context engineering, skills an",
     "excerpt": "Frequently Asked Questions Short, direct answers to what readers ask before they start. Nothing here is aspirational: if something is not built yet, it says so. What is The Bridge Balance? A free,…"
   },
   {
     "title": "Glossary",
     "route": "/glossary",
     "headings": [],
-    "content": "Glossary This page is generated from — specifically, from every entry whose is . A term still marked or in that ledger is a known debt, not a settled definition, and does not appear here yet. If a later chapter reuses one of the words below, it reuses this exact wording — that consistency is the entire point of tracking terms in one place. Agent A program that can read your files, write new code, edit existing code, and run commands on a computer — on its own, in a sequence, without asking you to approve every single step. First met in Spec-Driven Engineering. Put another way: a very fast, very capable helper — not an architect, and not the owner of the result. Blast radius How much can break, and how far the damage reaches, if a change goes wrong. First met in Spec-Driven Engineering. Specification (spec) A written statement of what you want built and what shouldn't change, agreed before you start. First met in Spec-Driven Engineering. Spec-Driven Engineering The discipline in which the engineer specifies intent and boundaries, the AI implements within them, and a human verifies before taking ownership. First met in Spec-Driven Engineering. This is the book's own name for the idea at its centre, not a standard industry term — so you will always find it explained where it is used. Vibe coding Building software entirely through iterative AI prompts without understanding the underlying code. Coined by Andrej Karpathy, February 2025; named Collins Dictionary's Word of the Year for 2025. First met in Spec-Driven Engineering. The term is not ours — it is credited to whoever coined it wherever it appears.",
+    "content": "Glossary This page is generated from — specifically, from every entry whose is . A term still marked or in that ledger is a known debt, not a settled definition, and does not appear here yet. If a later chapter reuses one of the words below, it reuses this exact wording — that consistency is the entire point of tracking terms in one place. Agent A program that can read your files, write new code, edit existing code, and run commands on a computer — on its own, in a sequence, without asking you to approve every single step. First met in Spec-Driven Engineering. Put another way: a very fast, very capable helper — not an architect, and not the owner of the result. Blast radius How much can break, and how far the damage reaches, if a change goes wrong. First met in Spec-Driven Engineering. Code Literacy The ability to read code — whoever or whatever wrote it — and judge it well enough to verify it and own it. First met on the Welcome page. This is the book's own name for its core skill, not a standard industry term. It is introduced in full the first time you meet it, and links back here after that. Specification (spec) A written statement of what you want built and what shouldn't change, agreed before you start. First met in Spec-Driven Engineering. Spec-Driven Engineering The discipline in which the engineer specifies intent and boundaries, the AI implements within them, and a human verifies before taking ownership. First met in Spec-Driven Engineering. This is the book's own name for the idea at its centre, not a standard industry term. It is explained the first few times you meet it. After that, it links back to this page. Vibe coding Building software entirely through iterative AI prompts without understanding the underlying code. Coined by Andrej Karpathy, February 2025; named Collins Dictionary's Word of the Year for 2025. First met in Spec-Driven Engineering. The term is not ours — it is credited to whoever coined it wherever it appears.",
     "excerpt": "Glossary This page is generated from — specifically, from every entry whose is . A term still marked or in that ledger is a known debt, not a settled definition, and does not appear here yet. If a…"
-  },
-  {
-    "title": "Binary: The One Fact a Machine Never Doubts",
-    "route": "/intro-1-binary-to-programming/01-binary",
-    "headings": [
-      "Binary: The One Fact a Machine Never Doubts",
-      "The word, taken apart",
-      "The wall that made two the only option",
-      "What is actually switching",
-      "Watching one switch fail",
-      "Nothing above a bit checks a bit",
-      "When the floor under a number is not exact",
-      "Where this comes from",
-      "Before you move to the next switch pattern"
-    ],
-    "content": "Binary: The One Fact a Machine Never Doubts The word, taken apart *Binary comes from the Late Latin binarius, \"consisting of two.\" It is built from bini, \"two by two, two apiece,\" which traces back to bis, \"twice.\" Strip away the Latin, and the word is telling you something plain: whatever it names comes in exactly two. Take a guess before reading on. If binary means \"built from exactly two of something,\" what does a computer hold two of? Most people guess correctly: the digits 0 and 1. Most people also stop there, treating 0 and 1 as a smaller, stranger way to count than 0 through 9. Hold that guess. It is not wrong. It is also not the interesting half of the answer. The wall that made two the only option Picture an engineer in the 1940s building a machine from physical switches — valves and relays then, transistors now. Each switch has to report its state correctly. It has to do that billions of times a second, without ever once being misread. Two states, held far apart, are easy to tell apart even at enormous speed. Engineers tried three and five states too, on paper and in early machines, because more states per switch means more information in the same hardware. The idea fails on one ordinary fact: real electrical signals carry noise, and noise blurs whatever sits nearby. Two widely separated states survive that blur. Three or five closely packed ones do not. A signal meant to say \"state three\" drifts just far enough to read as \"state two,\" and the machine never knows it happened. So the choice of two was not elegance. It was surrender to a wall nobody could build around. Two is the largest number of states a switch can hold and still read reliably, at the speed and scale a computer needs. Everything else in this chapter follows from that one compromise. What is actually switching A transistor is a tiny electrical switch with exactly two stable states — a higher voltage or a lower one, nothing meaningful between them. Apple's own published specification for its",
-    "excerpt": "Binary: The One Fact a Machine Never Doubts The word, taken apart *Binary comes from the Late Latin binarius, \"consisting of two.\" It is built from bini, \"two by two, two apiece,\" which traces back to…"
   },
   {
     "title": "From Electricity to Programming: Binary, Assembly, and High-Level Languages",
@@ -232,143 +215,24 @@
     "excerpt": "Performance & Accessibility Targets Performance and accessibility targets, explained The Bridge Balance runs a quality gate on every pull request so regressions are caught before they reach students.…"
   },
   {
-    "title": "Foundations",
-    "route": "/stage-01-spec-aware-vibe-engineering/01-foundations",
+    "title": "Stage 1 — SDE Mastery (AI-Driven)",
+    "route": "/stage-01-sde-mastery-ai-driven/",
     "headings": [],
-    "content": "Foundations",
-    "excerpt": "Foundations"
+    "content": "Stage 1 — SDE Mastery (AI-Driven) Stage 1 is where the engineering and the AI are learned together. You build real frontend, backend and database work — written by hand first, then built again with a coding agent — and learn prompt, context and loop engineering, Claude Code, skills and MCP while you use them. The chapters are being written now. The menu shows the shape they will take, and each one opens as its text is ready.",
+    "excerpt": "Stage 1 — SDE Mastery (AI-Driven) Stage 1 is where the engineering and the AI are learned together. You build real frontend, backend and database work — written by hand first, then built again with a…"
   },
   {
-    "title": "Core Programming",
-    "route": "/stage-01-spec-aware-vibe-engineering/02-core-programming",
+    "title": "Stage 2 — SDE Mastery (AI-Native)",
+    "route": "/stage-02-sde-mastery-ai-native/",
     "headings": [],
-    "content": "Core Programming",
-    "excerpt": "Core Programming"
-  },
-  {
-    "title": "Frontend",
-    "route": "/stage-01-spec-aware-vibe-engineering/03-frontend",
-    "headings": [],
-    "content": "Frontend",
-    "excerpt": "Frontend"
-  },
-  {
-    "title": "Backend",
-    "route": "/stage-01-spec-aware-vibe-engineering/04-backend",
-    "headings": [],
-    "content": "Backend",
-    "excerpt": "Backend"
-  },
-  {
-    "title": "Databases",
-    "route": "/stage-01-spec-aware-vibe-engineering/05-databases",
-    "headings": [],
-    "content": "Databases",
-    "excerpt": "Databases"
-  },
-  {
-    "title": "Git & GitHub",
-    "route": "/stage-01-spec-aware-vibe-engineering/06-git-github",
-    "headings": [],
-    "content": "Git & GitHub",
-    "excerpt": "Git & GitHub"
-  },
-  {
-    "title": "Stage 1 — Spec-Aware Vibe Engineering",
-    "route": "/stage-01-spec-aware-vibe-engineering/",
-    "headings": [],
-    "content": "Stage 1 — Spec-Aware Vibe Engineering Foundations This stage teaches the foundational engineering vocabulary you need to direct an AI agent confidently. The agent can write the code — your job is to know what to ask for, why, and how to know it's done right. Chapters - Foundations - Core Programming - Frontend - Backend - Databases - Git & GitHub > Detailed chapter content to be added when the Stage 1 video series is recorded.",
-    "excerpt": "Stage 1 — Spec-Aware Vibe Engineering Foundations This stage teaches the foundational engineering vocabulary you need to direct an AI agent confidently. The agent can write the code — your job is to…"
-  },
-  {
-    "title": "CS50P — Introduction to Programming with Python",
-    "route": "/stage-02-cs50-certification/cs50p",
-    "headings": [],
-    "content": "CS50P — Introduction to Programming with Python What this is Harvard's CS50P is the Python track of CS50 — an entry-level, university-grade introduction to programming. Internationally recognized; pairs naturally with Stage 1's core programming chapter. How it pairs with this textbook - Stage 1's Core Programming chapter will cover the same Python fundamentals, framed for AI-agent work. - CS50P adds depth (problem sets, autograded exercises, a final project) and the credential. Resources - CS50P on Harvard's site",
-    "excerpt": "CS50P — Introduction to Programming with Python What this is Harvard's CS50P is the Python track of CS50 — an entry-level, university-grade introduction to programming. Internationally recognized;…"
-  },
-  {
-    "title": "CS50W — Web Programming with Python and JavaScript",
-    "route": "/stage-02-cs50-certification/cs50w",
-    "headings": [],
-    "content": "CS50W — Web Programming with Python and JavaScript What this is Harvard's CS50W is the web-development track — SQL, Django, APIs, frontend, scalability, a final project. Pairs with Stage 1's frontend, backend, and databases chapters. How it pairs with this textbook - Stage 1's Frontend / Backend / Databases chapters will cover the engineering vocabulary. - CS50W adds the end-to-end project work and the credential. Resources - CS50W on Harvard's site",
-    "excerpt": "CS50W — Web Programming with Python and JavaScript What this is Harvard's CS50W is the web-development track — SQL, Django, APIs, frontend, scalability, a final project. Pairs with Stage 1's frontend,…"
-  },
-  {
-    "title": "Stage 2 — Credible Validation (CS50)",
-    "route": "/stage-02-cs50-certification/",
-    "headings": [],
-    "content": "Stage 2 — Credible Validation (CS50) This stage is about pairing the engineering foundation Stage 1 builds with internationally recognized credentials. The certificates live on your résumé; the GitHub portfolio (your lecture notes, exercises, and project work in this textbook) is what gets you the interview. Chapters - CS50P — Introduction to Programming with Python - CS50W — Web Programming with Python and JavaScript > Detailed chapter content to be added when the lecture series for this stage is recorded.",
-    "excerpt": "Stage 2 — Credible Validation (CS50) This stage is about pairing the engineering foundation Stage 1 builds with internationally recognized credentials. The certificates live on your résumé; the GitHub…"
-  },
-  {
-    "title": "Claude Code (and other coding-agent CLIs)",
-    "route": "/stage-03-mastering-ai-coding-agents/claude-code",
-    "headings": [],
-    "content": "Claude Code (and other coding-agent CLIs)",
-    "excerpt": "Claude Code (and other coding-agent CLIs)"
-  },
-  {
-    "title": "Context Engineering",
-    "route": "/stage-03-mastering-ai-coding-agents/context-engineering",
-    "headings": [],
-    "content": "Context Engineering",
-    "excerpt": "Context Engineering"
-  },
-  {
-    "title": "Stage 3 — Mastering AI Coding Agents",
-    "route": "/stage-03-mastering-ai-coding-agents/",
-    "headings": [],
-    "content": "Stage 3 — Mastering AI Coding Agents Stage 3 moves from \"knowing engineering\" to \"directing the agent precisely.\" You learn to write contexts, design loops, and structure skills so the agent does the work you actually want. Chapters - Prompt Engineering - Context Engineering - Claude Code (and other coding-agent CLIs) - Skills, MCP servers, and workflows > Detailed chapter content to be added when the Stage 3 video series is recorded.",
-    "excerpt": "Stage 3 — Mastering AI Coding Agents Stage 3 moves from \"knowing engineering\" to \"directing the agent precisely.\" You learn to write contexts, design loops, and structure skills so the agent does the…"
-  },
-  {
-    "title": "Prompt Engineering",
-    "route": "/stage-03-mastering-ai-coding-agents/prompt-engineering",
-    "headings": [],
-    "content": "Prompt Engineering",
-    "excerpt": "Prompt Engineering"
-  },
-  {
-    "title": "Skills, MCP Servers, and Workflows",
-    "route": "/stage-03-mastering-ai-coding-agents/skills-and-mcp",
-    "headings": [],
-    "content": "Skills, MCP Servers, and Workflows",
-    "excerpt": "Skills, MCP Servers, and Workflows"
-  },
-  {
-    "title": "Evaluations",
-    "route": "/stage-04-engineering-autonomous-ai-agents/evaluations",
-    "headings": [],
-    "content": "Evaluations",
-    "excerpt": "Evaluations"
-  },
-  {
-    "title": "Stage 4 — Engineering Autonomous AI Agents",
-    "route": "/stage-04-engineering-autonomous-ai-agents/",
-    "headings": [],
-    "content": "Stage 4 — Engineering Autonomous AI Agents Stage 4 is the shift from \"one agent, one task\" to \"many agents, one workflow.\" You learn to build RAG pipelines, wire tool calling, design multi-agent systems, and measure whether your agents actually work. Chapters - RAG and Tool Calling - Multi-Agent Systems - Evaluations > Detailed chapter content to be added when the Stage 4 video series is recorded.",
-    "excerpt": "Stage 4 — Engineering Autonomous AI Agents Stage 4 is the shift from \"one agent, one task\" to \"many agents, one workflow.\" You learn to build RAG pipelines, wire tool calling, design multi-agent…"
-  },
-  {
-    "title": "Multi-Agent Systems",
-    "route": "/stage-04-engineering-autonomous-ai-agents/multi-agent-systems",
-    "headings": [],
-    "content": "Multi-Agent Systems",
-    "excerpt": "Multi-Agent Systems"
-  },
-  {
-    "title": "RAG and Tool Calling",
-    "route": "/stage-04-engineering-autonomous-ai-agents/rag-and-tool-calling",
-    "headings": [],
-    "content": "RAG and Tool Calling",
-    "excerpt": "RAG and Tool Calling"
+    "content": "Stage 2 — SDE Mastery (AI-Native) Stage 2 is the advanced stretch: software engineering at depth, with the agentic applications that go with it. You build systems where several agents work together — retrieval, tool calling, evaluation — and learn to measure whether those agents actually work. The chapters are being written now. The menu shows the shape they will take, and each one opens as its text is ready. Chapters - RAG and Tool Calling - Multi-Agent Systems - Evaluations",
+    "excerpt": "Stage 2 — SDE Mastery (AI-Native) Stage 2 is the advanced stretch: software engineering at depth, with the agentic applications that go with it. You build systems where several agents work together —…"
   },
   {
     "title": "Welcome",
     "route": "/welcome",
     "headings": [],
-    "content": "Welcome Welcome to The Bridge Balance — a free curriculum from zero programming background to engineering autonomous AI agents of your own. Two genuine Harvard credentials sit inside that arc, midway through it. One discipline carries you the whole way: Spec-Driven Engineering, software engineering plus AI. You use an AI coding agent — AI software that writes and runs code for you, mostly unsupervised — to build. Later, you learn to build AI agents yourself. What is Spec-Driven Engineering? Software engineering, with AI on both sides of it. You direct an AI coding agent to build faster today. Later in this book, you learn to design AI agents of your own. Neither half works without the other. The problem it solves The industry has split into two failing habits. One refuses AI coding agents outright and falls behind. The other lets an agent write everything without checking it — a habit real enough now to have a name: vibe coding, Collins Dictionary's 2025 Word of the Year. A 2025 METR study found AI tools made experienced developers 19% slower on complex tasks, even though the work felt faster to them. Spec-Driven Engineering is the discipline between both failures. Decide what to build, and its limits, in writing, before the agent starts. Let the agent write the code — that part, it does faster than you. Then check what it produced before you own it as yours. Why the checking can't move to the machine A travel agent decides where you fly. A real-estate agent decides which listings to show you. The word agent borrows that same sense of independent judgment. What actually runs is bounded software — its independence is a setting you control, not a trait it has. An AI coding agent's confidence never wavers, right or wrong. That steadiness is the real risk, more than any single mistake it makes. Compare it to a courier's tracking page. That page checks your parcel from outside — a scanner, a database, a system independent of the delivery itself. An AI coding agent's answ",
-    "excerpt": "Welcome Welcome to The Bridge Balance — a free curriculum from zero programming background to engineering autonomous AI agents of your own. Two genuine Harvard credentials sit inside that arc, midway…"
+    "content": "Welcome Welcome to The Bridge Balance — a free curriculum from zero programming background to engineering autonomous AI agents of your own. One discipline carries you the whole way: Spec-Driven Engineering, software engineering plus AI. You use an AI coding agent — AI software that writes and runs code for you, mostly unsupervised — to build. Later, you learn to build AI agents yourself. What is Spec-Driven Engineering? Software engineering, with AI on both sides of it. You direct an AI coding agent to build faster today. Later in this book, you learn to design AI agents of your own. Neither half works without the other. The problem it solves The industry has split into two failing habits. One refuses AI coding agents outright and falls behind. The other lets an agent write everything without checking it — a habit real enough now to have a name: vibe coding, Collins Dictionary's 2025 Word of the Year. A 2025 METR study found AI tools made experienced developers 19% slower on complex tasks, even though the work felt faster to them. Spec-Driven Engineering is the discipline between both failures. Decide what to build, and its limits, in writing, before the agent starts. Let the agent write the code — that part, it does faster than you. Then check what it produced before you own it as yours. Why the checking can't move to the machine A travel agent decides where you fly. A real-estate agent decides which listings to show you. The word agent borrows that same sense of independent judgment. What actually runs is bounded software — its independence is a setting you control, not a trait it has. An AI coding agent's confidence never wavers, right or wrong. That steadiness is the real risk, more than any single mistake it makes. Compare it to a courier's tracking page. That page checks your parcel from outside — a scanner, a database, a system independent of the delivery itself. An AI coding agent's answer comes from the same process that wrote the code, with nothing indepen",
+    "excerpt": "Welcome Welcome to The Bridge Balance — a free curriculum from zero programming background to engineering autonomous AI agents of your own. One discipline carries you the whole way: Spec-Driven…"
   }
 ]

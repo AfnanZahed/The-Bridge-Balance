@@ -1,0 +1,30 @@
+Moves made by job 11 (site structure pass), 22 September 2026.
+Live repository: C:/Users/Dell/Desktop/Book
+
+MOVED: edu-site/docs/stage-02-credentials/  ->  edu-site/parked/credentials-track/
+Reason: Credentials is a parallel track, not a stage, and is switched off for now.
+It is moved out of the published docs so the site no longer builds it.
+(edu-site/parked/ is outside the Docusaurus docs directory and outside the build.)
+
+  old: edu-site/docs/stage-02-credentials/index.md
+  new: edu-site/parked/credentials-track/index.md
+  old: edu-site/docs/stage-02-credentials/cs50p.md
+  new: edu-site/parked/credentials-track/cs50p.md
+  old: edu-site/docs/stage-02-credentials/cs50w.md
+  new: edu-site/parked/credentials-track/cs50w.md
+
+RENAMED: edu-site/docs/stage-03-sde-mastery-ai-native/  ->  edu-site/docs/stage-02-sde-mastery-ai-native/
+Reason: the AI-Native stage is Stage 2; there is no Stage 3.
+
+  old: edu-site/docs/stage-03-sde-mastery-ai-native/index.md
+  new: edu-site/docs/stage-02-sde-mastery-ai-native/index.md
+  old: edu-site/docs/stage-03-sde-mastery-ai-native/rag-and-tool-calling.md
+  new: edu-site/docs/stage-02-sde-mastery-ai-native/rag-and-tool-calling.md
+  old: edu-site/docs/stage-03-sde-mastery-ai-native/multi-agent-systems.md
+  new: edu-site/docs/stage-02-sde-mastery-ai-native/multi-agent-systems.md
+  old: edu-site/docs/stage-03-sde-mastery-ai-native/evaluations.md
+  new: edu-site/docs/stage-02-sde-mastery-ai-native/evaluations.md
+
+No other file was moved. Backups of every edited or moved file are in
+_scratch/backup-2026-09-22-agentic-inside-se-6/, under the same relative path
+(as it was before the move).

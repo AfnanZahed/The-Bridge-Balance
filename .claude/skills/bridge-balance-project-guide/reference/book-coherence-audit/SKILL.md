@@ -6,19 +6,19 @@ description: Use for a corpus-level pass across every text-ready chapter of The 
 # Book coherence audit
 
 > **Where this fits.** Every chapter ships as ONE continuous read.
-> `chapter-production` owns everything around the lesson (research, ledgers,
+> `chapter-production` owns everything around the chapter (research, ledgers,
 > scope, MDX, the gate); the peer skill `lesson-spine-authoring` writes the
-> lesson itself.
+> chapter itself.
 > This protocol does neither — see its own scope below.
 
 
 `lesson-adversarial-review` checks one chapter against the book's shared state. This skill checks the shared state, and the corpus, against *itself*. Two chapters can each pass their own gate and their own adversarial review and still, read together, contradict each other, lean on one source until it stops feeling like evidence, or hand a reader nine "One rule" labels across nine chapters that all sound like the same rule restated.
 
-**A periodic pass, not a per-chapter one.** Reach for it every few chapters, or when the corpus feels like it's drifted — not automatically after each lesson ships. With one or two text-ready chapters, most checks below have nothing to operate on; say that plainly rather than inventing findings to justify the run.
+**A periodic pass, not a per-chapter one.** Reach for it every few chapters, or when the corpus feels like it's drifted — not automatically after each chapter ships. With one or two text-ready chapters, most checks below have nothing to operate on; say that plainly rather than inventing findings to justify the run.
 
 ## When this does not apply
 
-**Fewer than roughly three *lesson chapters* are `text-ready`** — see Step 1 for what counts as a lesson chapter versus a stage-index page; only the former are counted here. Term drift, tonal monotony, and evidence concentration are corpus properties — with only the intro (or the intro plus one more), there's no real corpus yet, however many stage-index landing pages are also live. Note the count, note that most checks are vacuous at this size, and stop rather than pad a report.
+**Fewer than roughly three *teaching chapters* are `text-ready`** — see Step 1 for what counts as a teaching chapter versus a stage-index page; only the former are counted here. Term drift, tonal monotony, and evidence concentration are corpus properties — with only the intro (or the intro plus one more), there's no real corpus yet, however many stage-index landing pages are also live. Note the count, note that most checks are vacuous at this size, and stop rather than pad a report.
 
 **One specific chapter is in question.** That's `lesson-adversarial-review` — narrower, deeper, cheaper to run than a full corpus pass.
 
@@ -26,10 +26,10 @@ description: Use for a corpus-level pass across every text-ready chapter of The 
 
 Read `curriculum-state/ledgers/prerequisite-graph.yaml` and list every row currently `text-ready` (not `placeholder`, not `planned`). Split the list in two — the file mixes two kinds of row, and treating them the same produces false findings below:
 
-- **Lesson chapters** — a real chapter candidate: `path` doesn't end in `index.md`, and it isn't listed under `non_lessons`.
-- **Stage-index pages** — `path` ending `index.md`. Landing pages, not lessons: `teaches: []` by design, and (check `evidence-ledger.yaml` directly, don't assume) typically no entries in any ledger, because there's nothing lesson-shaped to record.
+- **Teaching chapters** — a real chapter candidate: `path` doesn't end in `index.md`, and it isn't listed under `non_lessons`.
+- **Stage-index pages** — `path` ending `index.md`. Landing pages, not chapters: `teaches: []` by design, and (check `evidence-ledger.yaml` directly, don't assume) typically no entries in any ledger, because there's nothing chapter-shaped to record.
 
-**Steps 2, 3, 4, and 7 apply to lesson chapters only** — an index page has no defined terms, no cited evidence, and no safety floor, so it cannot drift in the ways those steps look for.
+**Steps 2, 3, 4, and 7 apply to teaching chapters only** — an index page has no defined terms, no cited evidence, and no safety floor, so it cannot drift in the ways those steps look for.
 
 ## Step 2 — Term drift
 
@@ -58,13 +58,13 @@ Individually each opening may be fine; the corpus-level problem is a pattern onl
 
 ## Step 5 — Prerequisite sanity
 
-For every **lesson chapter** marked `text-ready`: is every id in `requires` also actually `text-ready`? A lesson can pass individual review while still assuming a foundation that, corpus-wide, doesn't exist yet — for a lesson chapter, this is genuinely structural rather than a matter of feel, and any hit here is a real defect.
+For every **teaching chapter** marked `text-ready`: is every id in `requires` also actually `text-ready`? A chapter can pass individual review while still assuming a foundation that, corpus-wide, doesn't exist yet — for a teaching chapter, this is genuinely structural rather than a matter of feel, and any hit here is a real defect.
 
-For a **stage-index page**, the same check means something different and is *not* automatically a defect: `requires` names what precedes the stage, and a stage-index page going live before every lesson inside its own stage — or before the stage before it is fully authored — is the ordinary state of an in-progress book. Note it only as "this stage is still being authored," never a violation, unless the index page's *body* (not just its graph row) actively claims otherwise.
+For a **stage-index page**, the same check means something different and is *not* automatically a defect: `requires` names what precedes the stage, and a stage-index page going live before every chapter inside its own stage — or before the stage before it is fully authored — is the ordinary state of an in-progress book. Note it only as "this stage is still being authored," never a violation, unless the index page's *body* (not just its graph row) actively claims otherwise.
 
 ## Step 6 — Contradiction detection
 
-Check the six invariants **at stage level, not per chapter** (`canon/thesis.md`, revised 2026-09-20): does each stage satisfy each invariant somewhere, rather than every chapter carrying all six? **A chapter carrying an invariant it has no business carrying is itself a finding.** Then: does every chapter's safety-floor wording match the right variant in `thesis.md` — the plain wording in Stages 0–2, the original in Stages 3–4? Does any chapter state a stage's focus or the five-stage table differently than `thesis.md` quotes it? Does any statistic contradict what `evidence-ledger.yaml` currently records as the latest-verified figure?
+Check the six invariants **at stage level, not per chapter** (`canon/thesis.md`, revised 2026-09-20): does each stage satisfy each invariant somewhere, rather than every chapter carrying all six? **A chapter carrying an invariant it has no business carrying is itself a finding.** Then: does every chapter's safety-floor wording match the right variant in `thesis.md` — the plain wording in Stages 0–1, the original in Stage 2? Does any chapter state a stage's focus or the stage table differently than `thesis.md` quotes it? Does any statistic contradict what `evidence-ledger.yaml` currently records as the latest-verified figure?
 
 ## Step 7 — Read straight through
 

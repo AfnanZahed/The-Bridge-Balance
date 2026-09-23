@@ -1,0 +1,1097 @@
+# Prerequisite graph - lesson order, dependencies, and authoring state.
+#
+# Purpose: an author writing chapter 4 needs to know what chapters 1-3 taught
+# and what chapter 5 will need. This file is that knowledge. It also drives the
+# "you are here" block every chapter carries.
+#
+# Status vocabulary matches the site's own chapter_state frontmatter:
+#   placeholder | text-ready | video-published
+# plus:  planned  (in this graph, no file yet)
+
+version: 1
+seeded: 2026-08-23
+seeded_from: edu-site/docs/ (actual files on disk, 2026-08-23)
+
+# ---------------------------------------------------------------------------
+# THIS FILE IS NOT A PLAN - read before treating any row below as settled.
+#
+# The official curriculum (curriculum_1.md) fixes four STAGES. It does not fix
+# a chapter list. Every `id`, `path`, `title`, and `teaches` value below is a
+# snapshot of what happens to exist on disk right now (placeholder scaffolding
+# from earlier site-building work, mostly) or what has actually shipped - none
+# of it is a commitment to write that chapter, with that title, covering
+# exactly that content. The author decides a chapter's real scope and shape at
+# the moment they sit down to research and write it, per lesson, at runtime -
+# not by reading this file as a syllabus to fulfill. Expect entries to be
+# retitled, split, merged, dropped, or added as that happens. Update this file
+# when it happens; do not treat a mismatch between this file and a freshly-
+# authored chapter as an error in the chapter.
+#
+# Concretely, for Stage 1: it currently has six placeholder files, while the
+# official curriculum's Stage 1 focus line names roughly fifteen distinct topic
+# areas (software architecture, development environment, core programming,
+# packages and project management, OOP and software modeling, Git and GitHub,
+# frontend engineering, UI/UX and branding, visual effects and deployment,
+# backend engineering, authentication and authorization, frontend-backend
+# integration, async and realtime systems, databases, personal branding and
+# earning). That gap is not a to-do list to mechanically fill - it's one
+# example of why this file can only ever describe the current state, never the
+# final one. Reconciling a stage's chapter list against the curriculum's topic
+# areas, when and if that's wanted, is `curriculum-architect`'s eventual job,
+# and even its output there would be a proposal to revise this file, not a
+# fixed target this file is measured against.
+# ---------------------------------------------------------------------------
+
+chapters:
+
+  # --- Front door. Authored 2026-09-15, ahead of Stage 0. position -1 and not 0
+  # so it sorts before intro-1 without renumbering the five existing intro rows.
+  # Its own top-level sidebar entry, deliberately not nested in the Stage 0
+  # category (see notes). -----------------------------------------------------
+  - id: welcome
+    path: docs/welcome.md
+    title: "Welcome"
+    stage: 0
+    position: -1
+    status: text-ready
+    scope_multiplier: 0.7
+    requires: []
+    teaches: []
+    notes: >-
+      The front door, authored 2026-09-15 ahead of Stage 0 so a reader meets the
+      book's founding claim before the first chapter instead of after it. Named
+      "Welcome" deliberately, and wired into sidebars.ts as its own top-level
+      entry rather than nested inside the "Stage 0 - Orientation" category: the
+      owner rejected "Orientation" as difficult, unattractive and meaningless for
+      the book's Pakistani audience on 2026-09-14, and nesting the page one level
+      inside a category still carrying that word would undercut the point. A
+      Concept-shape page: it opens on the over-trust/over-caution tension, states
+      the thesis claim and one forward action inside the first screen,
+      cross-references the FAQ's stage list rather than duplicating it, and names
+      plainly what the book does not have yet (no community, no help chatbot, no
+      certificate of its own). It defines no new technical term, hence teaches: [].
+      789 words, ~5.3 min at the 150 wpm baseline; scope_multiplier 0.7 - one idea
+      (the two failure modes and the discipline between them) with four short
+      supporting beats, a front door rather than a teaching chapter. Executes
+      curriculum-state/proposals/welcome-page-brief-2026-09-14.md.
+
+  # --- Stage 0 (officially promoted 2026-09-14 - see
+  # curriculum-state/proposals/whole-book-redesign-record-2026-09-14.md §6.
+  # `stage: 0` below is now a real, official stage on the same footing as
+  # 1-4, not an internal bucket. The rows below are still the OLD content
+  # (five "intro" chapters, present-day snapshots) awaiting the from-scratch
+  # chronological rewrite the redesign calls for - do not treat them as the
+  # real Stage 0 breakdown; that hasn't been designed yet.) ------------------
+  #
+  # RESEQUENCED 2026-09-10 (Phase 1). The five rows below replace the old
+  # intro / intro-2 / intro-3 / intro-4 set. The sequence is now an
+  # evolutionary ladder - raw binary at rung 1, Spec-Driven Engineering at
+  # rung 5 - where every rung exists because the one below it ran out of
+  # room. Full structure and reasoning:
+  # curriculum-state/proposals/stage-00-intro-resequence-2026-09-10.md.
+  #
+  # Every row starts `placeholder`. None of intro-2..intro-5 has been through
+  # lesson-spine-authoring yet, and intro-5 is a raw concatenation of two old
+  # chapters rather than authored prose. intro-1 was authored and flipped to
+  # `text-ready` on 2026-09-10. The gate lists the rest by name as "not
+  # checked", so a clean build proves nothing about them.
+  - id: intro-1
+    path: docs/intro-1-binary-to-programming.md
+    title: "From Electricity to Programming: Binary, Assembly, and High-Level Languages"
+    stage: 0
+    position: 0
+    status: text-ready
+    scope_multiplier: 1.0
+    requires: []
+    teaches: [what a program is, what programming is, transistors, bits, bytes, ASCII, machine code, registers, x86 versus ARM, punched cards, assembly language, assemblers, high-level languages, compilers, interpreters, abstraction]
+    notes: >-
+      New opener. Migrated the old docs/intro-2-binary-to-language.md
+      content, then took over the position-0 slot the old docs/intro.md held.
+      Spine-treated in full on 2026-09-10; "What Is Programming" is now
+      written, at the placement fixed below.
+
+      Placement, settled and not to be re-litigated at drafting time: the
+      beat goes immediately after the register / assembler material and
+      immediately before high-level language - the historical pivot from
+      talking to the machine in its own terms to talking in a language built
+      for humans. It is NOT a concept-first preface before the binary
+      content. The whole sequence is an evolutionary timeline (0/1 -> ... ->
+      SDE); under that read there is nothing "natural" yet to evolve from at
+      the top of the chapter. See the proposal's "Where 'What Is Programming'
+      goes, and why (corrected second pass)".
+
+      Scope growth judged a non-issue: the concept of a programming language
+      already existed implicitly in the old intro-2, which already ended at
+      high-level language. The new beat makes it explicit for a beginner.
+
+      AUTHORED 2026-09-10: spine-treated in full and gate-checked clean
+      (2,395 words, ~16 min, 0 errors, 0 warnings). It is the first
+      text-ready chapter in the intro sequence, and the first chapter through
+      the real lesson-spine-authoring treatment that the deleted pilots
+      trialled. scope_multiplier 1.0 declared as one continuous ladder rather
+      than measured against the old intro anchor, which is unset
+      (contracts/calibration.md). "What Is Programming" now names the
+      specification-over-syntax distinction that the finale builds on.
+
+      REVISED 2026-09-10 (Phase 2): three unglossed first-use terms were fixed
+      inline - operating system, device driver and traceback - because this
+      chapter is written for an absolute beginner and the per-chapter
+      first-use gloss rule admits no exceptions. Count moved 2,365 -> 2,395 as a
+      result. The three terms also belong to intro-2, which glosses operating
+      system properly; intro-1 now does too, so the sequence reads correctly for
+      a reader who never reaches intro-2.
+      Deliberately carries no worked example - see
+      example-ledger.yaml's intro-1-no-worked-example.
+
+  - id: intro-2
+    path: docs/intro-2-architecture-map.md
+    title: "Let's Build One Thing Together: The Complete Architecture Story"
+    stage: 0
+    position: 1
+    status: text-ready
+    scope_multiplier: 1.5
+    requires: [intro-1]
+    teaches: [platform, browser, HTML, CSS, JavaScript, frontend, component, DOM, responsiveness, breakpoints, Next.js (named only), developer tools, client-side versus server-side, never trust the client, backend, Node.js, servers, statelessness, API, HTTP, methods, status codes, endpoints, REST, validation, middleware, logging, databases, SQL versus NoSQL, relationships, Redis, caching, authentication, hashing, OAuth, authorization, tokens, Git, repositories, commits, GitHub, branches, pull requests, merge conflicts, deployment, DNS, domains, production versus staging, operating systems, blockchain, smart contracts, IoT, cybersecurity]
+    notes: >-
+      AUTHORED 2026-09-10 (Phase 2): spine-treated in full and gate-checked
+      clean (4,500 words, ~30 min, 0 errors, 0 warnings). Same content and
+      scope as the old docs/intro-3-architecture-map.md - all eleven
+      owner-supplied images under /img/lessons/intro-3/ kept exactly in place -
+      but now run through lesson-spine-authoring. The "build one thing
+      together" full-stack tour, sequenced to mirror s1-03/s1-04/s1-05/s1-06
+      so Stage 1 is literally built on this chapter's discussions.
+
+      Station 0 is run on the chapter's two central names, frontend and
+      backend, and the prediction it stages - that the thirty-seat rule belongs
+      in the half facing the student - is scored in "The trap". The signature
+      contribution is the sentence every remaining box follows from: the
+      frontend can never be trusted to enforce anything, because you do not
+      control the device it runs on. This chapter now carries the intro
+      sequence's shared worked object - the club sign-up page, capped at thirty
+      seats - returned to by intro-3, intro-4 and intro-5. See
+      example-ledger.yaml's club-signup-shared-object.
+
+      scope_multiplier 1.5 - multiple interacting concepts forming one system,
+      the calibration table's own description of 1.5. Not a word-count target;
+      contracts/calibration.md fixes no word band.
+
+      REVISED 2026-09-10 for the absolute-beginner exception: these five intro
+      chapters are written for a reader with no prior technical knowledge at
+      all, not the book's usual mixed audience. Every term above is glossed
+      inline at first use in twelve words or fewer.
+
+  - id: intro-3
+    path: docs/intro-3-editors-and-ides.md
+    title: "From Text Editors to AI-Integrated IDEs"
+    stage: 0
+    position: 2
+    status: text-ready
+    scope_multiplier: 1.0
+    requires: [intro-2]
+    teaches: [text editors, IDEs (integrated development environments), language servers, debuggers, open source, Electron, Monaco, forks, Rust, AI-integrated IDEs (Cursor, Windsurf, Zed, Trae, GitHub Copilot), AI-assisted versus AI-driven development, diffs, models]
+    notes: >-
+      AUTHORED 2026-09-10 (Phase 2): authored in full and gate-checked clean
+      (4,132 words, ~27.5 min, 0 errors, 0 warnings). Resequencing rationale:
+      the reader meets the visual tools code gets written in before meeting the
+      terminal-based ones, so the fork between assisted and driven development
+      bridges into intro-4.
+
+      Station 0 decomposes IDE - the load-bearing word is *integrated*, and the
+      prediction gap staged is that readers describe an IDE as a fancier text
+      editor. Scored explicitly: a fancier editor is a nicer box, while an IDE
+      is the same box with the walls between it and its neighbours removed. The
+      real line between the two newest modes is stated in one sentence:
+      assisted keeps the accept-or-reject decision local to each suggestion and
+      keeps the plan in your head; driven moves the decision to the end of a
+      whole task and moves the plan into the tool.
+
+      Carries the pre-agreed "Current as of writing" <Callout> at the point the
+      named tools are introduced, dated 10 September 2026. Tool comparisons date
+      quickly; this is an agreed resolution, not a drafting-time choice.
+
+      NO IMAGES. The topic list once mentioned a VS Code screenshot the owner
+      would supply; none exists on disk, so the chapter ships with no image
+      reference at all rather than a placeholder pointing at a file nobody has
+      made. A screenshot would help here - recorded as a gap for the owner, not
+      drawn.
+
+      scope_multiplier 1.0 - a full chapter with its own arc: one evolution
+      thread plus the assisted/driven fork it ends on.
+
+  - id: intro-4
+    path: docs/intro-4-terminals-and-cli-agents.md
+    title: "The Terminal and the Rise of CLI Coding Agents"
+    stage: 0
+    position: 3
+    status: text-ready
+    scope_multiplier: 1.0
+    requires: [intro-3]
+    teaches: [terminals, terminal emulators, shells, CLIs (command-line interfaces), GUIs, prompts, directories, Command Prompt, PowerShell, Bash, Git Bash, WSL, Windows Terminal, coding agents, CLI agents, harnesses, agent scope, permission rules (allow/ask/deny), tokens and token cost]
+    notes: >-
+      AUTHORED 2026-09-10 (Phase 2): authored in full and gate-checked clean
+      (4,001 words, ~26.7 min, 0 errors, 0 warnings). The more advanced sibling
+      to intro-3: the command line, and the agents that live there.
+
+      Station 0 is run on terminal, and it is handled as a historical and
+      metaphorical register rather than decomposed - the word names a position
+      (the end of a line), and it named a device that was not the computer. The
+      prediction is scored: a reader who said "the program you type into" is
+      right about the object on screen and wrong about the name, because
+      today's terminal is a terminal emulator.
+
+      Carries the same pre-agreed "Current as of writing" <Callout> as intro-3,
+      dated 10 September 2026. Its body earns its place rather than decorating
+      the page: Google announced on 19 May 2026 that it was folding Gemini CLI
+      into a closed-source Antigravity CLI and stopped serving it to individual
+      developers on 18 June 2026 - a live example of why the date matters.
+
+      Station 7 magnitudes: Claude Code at about $13 per developer per active
+      day and $150-250 per month, with the comparison to subscription pricing.
+
+      NO IMAGES. None exists for this chapter and none is referenced.
+
+      scope_multiplier 1.0 - one continuous line from a device at the end of a
+      wire to an agent that drives your shell, where each section is a rung the
+      next one depends on.
+
+  - id: intro-5
+    path: docs/intro-5-spec-driven-engineering.md
+    title: "Two Ways to Fail, and the Bridge Between Them: Spec-Driven Engineering"
+    stage: 0
+    position: 4
+    status: text-ready
+    scope_multiplier: 1.5
+    requires: [intro-4]
+    teaches: [Spec-Driven Engineering, Spec-Driven Development, specification poverty, vibe coding, the two extremes (over-caution and over-trust), the specify-design-implement-verify responsibility loop, contribution is not ownership, the Development versus Engineering distinction, the reviewer's three questions]
+    notes: >-
+      AUTHORED 2026-09-10 (Phase 2): merge-and-rewritten through
+      lesson-spine-authoring and gate-checked clean (3,940 words, ~26.3 min, 0
+      errors, 0 warnings). The finale - the destination of the 0-to-1 journey.
+      It was a raw, unedited concatenation of the old docs/intro.md body
+      followed by the old docs/intro-4-two-extremes-and-sde.md body; it is now
+      one coherent chapter written for an absolute beginner.
+
+      SDD VERSUS SDE - RESOLVED 2026-09-10. Phase 1 deliberately left open
+      whether to draw this line by name. It is now drawn explicitly, in the
+      section where the Station 0 prediction is scored: the reader's guess
+      ("write the specification first, then the agent writes the code")
+      describes Spec-Driven Development, not this chapter - which is exactly
+      why the last word is *Engineering*. SDD is attributed correctly as the
+      tool-adopted method (Spec Kit, Kiro, Claude Code, from 2025) formalised
+      in a February 2026 paper. SDE is stated as its successor, not SDD renamed,
+      and the gap between them is named *specification poverty*. The chapter
+      then states this book's own position as a position rather than as settled
+      fact: no specification format and no tool closes that gap, because a tool
+      can hold a specification but cannot build the judgment that writes one.
+
+      Two inherited naming inconsistencies were reconciled and now read one way
+      throughout, including in the tables and both worked examples: the
+      four-part loop is specify-design-implement-verify (not
+      specify-delegate-inspect-verify), and the two failure modes are
+      over-caution and over-trust (not surrender and resistance), matching
+      canon/thesis.md.
+
+      Cross-chapter pointers were re-pointed for the new sequence: the raw
+      merge had been written when the chapter before it was the architecture map
+      and the one before that binary. Positional callbacks ("the previous
+      chapter") were rewritten as named ones ("the architecture map from the
+      second chapter") so they cannot go stale again.
+
+      The Mermaid fence was removed - no diagram is generated anywhere in this
+      book. What it showed is now prose: a failed verification sends the work
+      back to Specify, not to Implement, because a failed check usually means
+      the requirement was wrong or incomplete rather than the code mistyped.
+
+      SCOPE NARROWED, recorded rather than cut silently. The inherited material
+      carried Stage 3-4 territory - the four safety boundaries, the
+      experiment-to-system transition, agent governance boundaries and the
+      multi-agent ownership architecture. The re-authoring judged these out of
+      scope for a finale now that the sequence runs binary -> architecture ->
+      editors -> terminals -> SDE. The named examples they carried (the
+      five-agent pipeline, the support-ticket agent, the admin dashboard, the
+      relative's delivery service) are unspent again; see
+      example-ledger.yaml's intro-worked-examples correction. Also dropped: the
+      Replit and Enrichlead incidents and the AWS tool-switching figures, all of
+      which belong to the stage that teaches those boundaries.
+
+      LENGTH CHECKED against the other four, per the pre-agreed rule: at 3,940
+      words this is the SHORTEST of the four newly-authored chapters
+      (intro-2 4,500, intro-3 4,122, intro-4 4,001) and is not
+      disproportionately long. It therefore stays ONE FLAT FILE and does not
+      become a sidebar sub-category. The pre-agreed split condition was not
+      met, so the split was not taken - recorded as a judgment, not an
+      oversight. If the owner wants the intro sub-lesson pattern anyway, this
+      chapter has three natural seams: the two failure modes plus the
+      four-stage loop and the SDD/SDE line as an index; the two worked examples
+      (CSV export, payment refactor); and the cost, reviewer and lineage
+      material.
+
+      scope_multiplier 1.5 - multiple interacting concepts forming one system,
+      which is the calibration table's own description.
+
+  # --- NEW Stage 0 ladder (approved 2026-09-16) -----------------------------
+  #
+  # Chapters 1-2 of the chronological, dependency-ordered 20-chapter Stage 0
+  # redesign, per curriculum-state/proposals/whole-book-redesign-record-
+  # 2026-09-14.md §18 and detailed in full in
+  # curriculum-state/stage-0-drafting-plan.md. The plan states plainly that
+  # intro-1 through intro-5 above are the OLD Stage 0 and are being replaced
+  # from scratch - harvest-only for verified citations, never for prose or
+  # structure. These two rows are the first real chapters drafted against that
+  # plan.
+  #
+  # RESOLVED 2026-09-17: the owner asked for the two rows below to be added to
+  # site navigation "without excluding the old ones." edu-site/sidebars.ts now
+  # lists both chapters at the end of the "Stage 0 - Orientation" category's
+  # items array, after intro-5-spec-driven-engineering; intro-1..intro-5 were
+  # not reordered or removed, so both sequences are live in the sidebar at
+  # once. The category's own label ("Stage 0 - Orientation" - the owner
+  # separately flagged "Orientation" as wrong for the welcome page on
+  # 2026-09-14) and the eventual retirement of the old five remain open,
+  # unrelated decisions the owner has not made yet.
+  - id: ch00-introduction
+    path: docs/ch00-introduction.md
+    title: "Introduction to Stage 0"
+    stage: 0
+    position: 9
+    status: text-ready
+    scope_multiplier: 0.7
+    requires: []
+    teaches: []
+    notes: >-
+      AUTHORED 2026-09-17, at the owner's direction: "in the new intro chapter
+      (1st position in stage 0) we will properly tell the students what this
+      stage is about, what we are going to learn here, how and WHY?" It was
+      opened because ch01-foundations was judged to start teaching binary with
+      no bridge into it. This is Stage 0's own front door and it sits at
+      position 0, ahead of ch01-foundations.
+
+      REBUILT THE SAME DAY, STRUCTURE ONLY, AND THE REBUILD IS THE RECORD THAT
+      MATTERS HERE. A first draft opened on a worked demonstration - the 1947
+      Harvard Mark II moth measured against Edison's 1870s use of "bug" - and
+      the owner rejected it outright: "instead of copy the voice and tone of
+      the hugging face's introduction, you coldly started with difficult names,
+      dates, references etc very stupidly. Just copy the hugging face's lesson
+      and just put OUR values in that." The chapter was rewritten to the Hugging
+      Face Agents course's Unit 1 introduction beat for beat, with this
+      curriculum's content in each slot. None of the first draft's structure
+      survives. Its research does: evidence-ledger:bug-edison-not-the-moth is
+      verified and currently unused.
+
+      THE MAPPING, RECORDED SO A LATER EDITOR CAN SEE WHAT WAS DELIBERATE:
+        HF "Welcome to this first unit, where you'll build a solid foundation in
+        the fundamentals of AI Agents including:" -> the same sentence with "how
+        a computer actually works".
+        HF's four bolded topic heads with sub-bullets -> five, because Stage 0
+        genuinely has five stretches; every head is a group of real chapters and
+        every sub-bullet is a question a chapter answers.
+        HF "The Agent Workflow: Think -> Act -> Observe" -> "The AI, and the
+        Workflow: Specify -> Design -> Implement -> Verify", named only, with the
+        teaching left entirely to Chapter 20.
+        HF "you'll build your first Agent using smolagents" -> "you'll be able to
+        say what a computer is actually doing while it runs something". Stage 0
+        builds no software, and promising a build would have been false.
+        HF "Your Agent, named Alfred" -> the reader's own computer, which is the
+        one object this stage genuinely walks them through.
+        HF "publish your Agent on Hugging Face Spaces" -> the verification
+        argument, which is what this book has in place of a shareable artifact.
+        HF's quiz-and-certificate beat -> an honest negative: no quiz, no
+        certificate here, with the real credentials named (Stage 2's CS50P and
+        CS50W) so the slot still tells the reader where the goal is.
+        HF "take your time" and "Ready? Let's dive in!" -> kept in substance,
+        with the send-off turned into the handoff to ch01.
+
+      RESOLVED 2026-09-20 - the owner saw this flag and reversed the rule.
+      This note used to record two deliberate omissions from the source's
+      voice: no emoji and no exclamation marks, "because this book's canon bans
+      performed enthusiasm". THAT BAN IS WITHDRAWN.
+      Exclamation marks are allowed where a real person would use one. Decent,
+      professional emoji are allowed where they make a page clearer or more
+      inviting - never the AI-slop set (rocket, sparkles, fire and family).
+      canon/voice.md §"Enthusiasm, exclamation marks and emoji";
+      corrections.md §13.
+      NOTE FOR THE NEXT AUTHOR: this flag sat inside a YAML note for three
+      days, which is not somewhere the owner reads. A decision that needs the
+      owner goes to the owner, in the reply, not into a ledger comment.
+
+      THREE THINGS THE OLDER SOURCE-VOICE RULES STILL BIND THIS CHAPTER, EVEN
+      THOUGH ITS STRUCTURE IS A WELCOME PAGE RATHER THAN A LESSON: chapters
+      connect backwards and hand forwards (CLAUDE.md; lesson-spine-authoring's
+      sixth hard constraint), no chapter count or finalized contents may appear
+      anywhere (locked decision D5), and the safety floor is never cut where the
+      topic warrants one (canon/thesis.md). All three hold in the rebuilt text,
+      which is why the topic map names groups of chapters rather than twenty
+      numbered stops.
+
+      A SHAPE THE FRAMEWORK HAD NO ROW FOR, recorded rather than hidden.
+      lesson-spine-authoring classifies four shapes (Concept, Tool, Practice,
+      Procedure) and none describes an introduction to a stage. That gap was
+      closed in the framework in the same session: see SKILL.md's sixth hard
+      constraint and reference/stations.md's "Lesson boundaries".
+
+      STATIONS DROPPED, LOGGED, AND THIS IS THE CHAPTER'S LARGEST DEVIATION.
+      S0 (Name) has nothing to decompose - "Introduction" carries no
+      definitional content - and after the rebuild the chapter stages no
+      prediction at all, so S4 has nothing to score. That is a real departure
+      from the framework's second operative principle ("a prediction that is
+      never scored is worse than no prediction"), taken because the owner's
+      instruction was to mirror a welcome page, and a welcome page has no spine
+      to run. S5 (How) has no demonstration arm; there is nothing to run. S6's
+      blast radius is dropped; nothing fails yet at this point in the book. S7's
+      magnitude is the stage's cost to the reader - nothing to install, nothing
+      to buy, no account - stated in the prose as "no quiz, no certificate"
+      rather than as a number. `teaches` is empty on purpose: the chapter glosses
+      the workflow chain and coding agent at first use but defines neither,
+      following the welcome.md precedent, so first_defined for both stays where
+      concept-ledger.yaml already puts it.
+
+      SAFETY FLOOR PRESENT, and the one chapter where it is load-bearing rather
+      than conventional. ch01 and ch02 each carry none by deliberate judgment,
+      because nothing executable exists in their material yet; this chapter is
+      where the reader first meets the agent whose output the floor governs. The
+      paragraph before it glosses "coding agent" so that the floor's "the agent"
+      has an antecedent - without that, the book's first chapter would have used
+      a term it never introduced.
+
+      GATE: node scripts/check-chapter.mjs --chapter docs/ch00-introduction.md
+      reports 0 errors, 0 warnings, 503 words, ~3.4 min - the shortest chapter in
+      the book by design, and short in roughly the proportion the source's own
+      introduction is.
+
+      NAVIGATION: wired into edu-site/sidebars.ts as the first item of the
+      Stage 0 category, and the category's own `link` now points here rather
+      than at intro-1-binary-to-programming, so the stage's front door is its
+      introduction. Two lines, trivially reversible. The old intro-1..intro-5
+      sequence still sits between this chapter and ch01-foundations in the
+      sidebar, which is the same open retirement question the 2026-09-16 note
+      already surfaces for the owner - not resolved here.
+
+      FULL LESSON-SPINE PASS 2026-09-17, RUN AFTER THE CHAPTER HAD SHIPPED -
+      the complete Name-First workflow end to end over the finished draft,
+      not an audit sweep: shape re-confirmed as FrontDoor, station sheet
+      filled and checked row by row against the text, every term re-sorted,
+      the delete test run, the ten-angle comprehension audit as ten separate
+      sweeps, the mindmap test, and the full self-check. It found five
+      defects, all fixed in the prose:
+
+      S2 UNDER-DELIVERED. The FrontDoor row asks which stage this is, of how
+      many; "Welcome to the first stage" never said how many. It now reads
+      "Welcome to the first of five stages". Five stages is locked canon
+      (thesis.md), not a chapter count, so D5 is untouched.
+
+      S3 UNDER-DELIVERED, the largest gap. The stage was never said to be in
+      date order anywhere in the prose, while both the description and the
+      scope_reason claimed the chapter explained it. The "essential starting
+      point" paragraph now carries the ordering argument: "It lays the
+      groundwork for everything after it, and it follows the order in which
+      computing developed. Each idea arrives after the problem that produced
+      it. That is why nothing later in this book asks you to take an earlier
+      idea on faith." The last sentence was previously an unconnected
+      promise; it is now the consequence of the ordering, which is how
+      welcome.md states the same rationale ("Chronological order first is why
+      nothing later asks you to take an earlier idea on faith").
+
+      S8 UNDER-DELIVERED. The row asks for how to read it - in order, at any
+      pace, coming back whenever. Pace and return were there; order was not.
+      The sentence now reads "take your time, read the chapters in order, and
+      come back to any of them from time to time", consistent with
+      welcome.md's "built to be read in order, not sampled."
+
+      A TERM DEFECT AND A TEXT/LEDGER CONTRADICTION, found during the term
+      sort. concept-ledger.yaml records Spec-Driven Engineering as glossed in
+      this chapter (twelve words, exact wording quoted there) and linked to
+      its glossary anchor - but the file as found carried only the four bare
+      steps, unglossed and unlinked. The bullet now reads
+      "[*Spec-Driven Engineering*](/glossary#spec-driven-engineering) - the
+      workflow the rest of this book builds on. State what you want and what
+      can't change, then check the result: *Specify* -> *Design* ->
+      *Implement* -> *Verify*. The last chapter of this stage teaches it in
+      full." The chain stays "named only" as the mapping above requires - the
+      gloss is the standard first-use gloss, not teaching. concept-ledger's
+      note is true of the shipped text again and carries a dated
+      re-alignment line.
+
+      ONE AUDIT FIX. A7/A10: "After exploring all of it, you'll be able to
+      say what a computer is actually doing while it runs something, and why
+      every tool on it is shaped the way it is" ran 32 words against the
+      ~28-word ceiling and was the draft's stall point. Split into two
+      sentences (21 + 11); every sentence added in this pass was re-checked
+      and stays under the ceiling.
+
+      AUDIT LOG - ten separate sweeps over the revised text:
+        A1 cold landing 0 new. Accepted with reasons: the preview names in
+        the topic map (terminal, file, screen, web, command line) - a map
+        names what is coming and each gets its own chapter; "postmortem" in
+        the floor, which is canon-fixed wording (thesis.md).
+        A2 unsorted term 1 FIXED - the Spec-Driven Engineering defect above.
+        Term chains checked: coding agent -> the agent -> Agent output stays
+        one thing across the callout boundary (glossed two lines earlier, a
+        recorded decision); no drift elsewhere.
+        A3 silent step 0. A4 floating referent 0 ("It is the ground that code
+        stands on" resolves to the stage immediately; accepted).
+        A5 unanchored abstraction 1 FIXED - the four-step chain was the
+        page's most abstract passage; the restored gloss anchors it.
+        A6 unmotivated passage 0 (the no-quiz beat's position was corrected
+        in the previous pass and re-verified). A7 second-language load 1
+        FIXED (above). A8 false fluency 0, swept deliberately over the
+        smoothest claims: the stage's ability promise is bounded by "Nothing
+        in this stage is code you have to write", and the date-order claim
+        holds because each chapter with roots older than its position, and
+        the one deliberate rewind, name themselves in their own openings.
+        A9 structural orphan 0. A10 stall point 1, the same sentence.
+        MINDMAP TEST passed from memory: the ground before code at the
+        centre, with the five stretches, the outcome, the method (the
+        reader's own computer), the honest negative, the verification
+        argument and floor, the reading instructions and the ch01 handoff
+        all redrawn.
+
+      STATION SHEET as re-run (FrontDoor weighting; S0/S5/S9/S10 dropped):
+        S1 the reader's own situation - "you'll build a solid foundation",
+        "your own computer is the worked example". S2 first of five. S3 why
+        first and why this order - now delivered. S4 five stretches as
+        groups, no chapter count, no build promised. S6 first of five, Stage
+        2 named, hands the workflow onward, ch01 handoff named with its
+        opening. S7 cost is reading and patience - "Nothing in this stage is
+        code you have to write", courses free to complete. S8 order, pace,
+        return - now delivered. S11 the ch01 handoff, verified accurate
+        against ch01's real opening (the traffic light, the 1870s telegraph
+        operator, and the line "Nobody has yet told such a machine,
+        specifically, what to do with any of it").
+      DROPPED STATIONS (unchanged): S0 (no name to decompose at a welcome),
+      S5 (nothing to run), S9 (no lineage on a book's own front door), S10
+      (replaced by the single next action), S6's blast radius and S7's
+      numeric magnitude (nothing fails yet; the cost is reading time).
+      FOOTHOLDS/DEPTH BLOCKS: none; the delete test is trivially satisfied -
+      nothing is layered, so nothing outside the spine is load-bearing.
+      NO evidence-ledger or example-ledger change: the pass added no sources
+      and spent no examples.
+
+      GATE AFTER THE PASS: node scripts/check-chapter.mjs --chapter
+      docs/ch00-introduction.md - 0 errors, 0 warnings, 606 words (was 551),
+      ~4 min. node scripts/check-references.mjs - passed, including the
+      restored /glossary#spec-driven-engineering anchor. npm run build - all
+      five gates plus the Docusaurus build green.
+
+      TITLE CORRECTED: this row's title read "Why This Stage Starts in the
+      Past" while the shipped file's own title is "Introduction to Stage 0";
+      updated to match what was authored, per chapter-production's rule that
+      the graph follows the chapter.
+
+  - id: ch01-foundations
+    path: docs/ch01-foundations.md
+    title: "How a Machine Learned to Hold a Number"
+    stage: 0
+    position: 10
+    status: text-ready
+    scope_multiplier: 1.0
+    requires: []
+    teaches: [binary, Boolean logic, transistor, relay, vacuum tube, bit, stored program (concept)]
+    notes: >-
+      AUTHORED 2026-09-16 against curriculum-state/stage-0-drafting-plan.md's
+      Chapter 1 block. Gate-clean: node scripts/check-chapter.mjs
+      --chapter docs/ch01-foundations.md reports 0 errors, 1 warning
+      (safety-floor-absent - deliberate; pure pre-1948 hardware history has
+      nothing executable or shippable to warn about).
+
+      Three sections: two-state switches, instructions as a physical object,
+      and the switch's three generations (relay, vacuum tube, transistor).
+      CORRECTED 2026-09-20. This note used to describe the chapter as "matching
+      the plan exactly" and listed what it carried: "Boole 1854, Shannon 1937,
+      Jacquard 1801, Babbage 1837, Lovelace 1843, Hollerith ... Bardeen and
+      Brattain, 16 December 1947 ... von Neumann's stored-program report,
+      Tukey's 'bit'". Most of that was removed from the chapter on 17 September
+      and this note was not updated for three days - so a later session reading
+      it as a description of the live chapter could have put all of it back.
+      Verified 2026-09-20 against the live file: Hollerith, Tukey, von Neumann
+      and the December date appear zero times. All of it remains in
+      evidence-ledger.yaml as backstage research, which is where it belongs.
+      "Matching the plan exactly" is also no longer a virtue - the plan's
+      Anchors column is the thing that made this chapter too dense
+      (corrections.md §4 and §11, stage-0-drafting-plan.md).
+
+      REWRITTEN 2026-09-20 against the revised canon, in the same pass that
+      revised it. What changed:
+      - An everyday thread now carries the chapter: a torch signalled across a
+        dark street (example-ledger: ch01-torch-across-the-street). It does the
+        work the named incidents used to be asked to do.
+      - The opening welcomes the reader, links back to the stage introduction,
+        lists what the chapter covers AND why each piece matters, and ends
+        "Let's start with something you already know how to do."
+      - Every section now opens by connecting to what the reader just read.
+        The old version had a warm block on top and a cold section under it.
+      - The thesis/AI paragraph was REMOVED ("Nothing about that changes later
+        in this book, even when a machine looks like it is thinking for
+        itself..."). The six invariants are stage-level now; a binary chapter
+        is not the place to argue about agents. canon/thesis.md.
+      - Vocabulary simplified: "a sliver of treated germanium" became "a tiny
+        piece of specially treated crystal".
+      - Section titles now explain themselves (canon/naming.md): "Yes, No, and
+        Nothing In Between" became "Why a Computer Only Says Yes or No"; "One
+        Idea, Three Bodies" became "The Same Switch, Built Three Different
+        Ways". sidebar_label became "1. How a Machine Holds a Number".
+      - Bold is by meaning, not paragraph position.
+      Gate: 0 errors, 1 warning (safety-floor-absent, deliberate - this chapter
+      touches nothing executable).
+      Ends exactly where the plan requires: hardware and stored programs exist,
+      nothing has been programmed yet. Chapter 2 owns that entirely.
+
+      Signature contribution: the three hardware generations framed as one
+      idea wearing three different bodies, rather than three separate
+      inventions - directly following cluster-1's own structural
+      recommendation ("Petzold's relay-first approach... teaching the switch
+      abstractly before the device").
+
+      Deliberately no worked example in this project's technical sense, same
+      judgment as intro-1's (see example-ledger.yaml's
+      ch01-no-worked-example) - a Concept-shape history chapter built from real
+      named incidents (Jacquard's loom, the 2003 Belgian election bit-flip)
+      rather than one traced object.
+
+      Ends on a retrieval prompt (S10), not a recap - the reader is asked to
+      reconstruct, from memory, what a 1948 machine's first instruction would
+      have had to look like, rather than being told a summary.
+
+      REVISED 2026-09-17, formatting only: the owner flagged the first draft
+      as visually flat next to welcome.md. Fixed at the time by adding
+      topic-sentence bold (to 64 markers, matching intro-1's density) and one
+      comparison table (relay / vacuum tube / transistor) built from facts
+      already in the chapter's prose.
+      SUPERSEDED 2026-09-17 (later the same day): most of that bold was removed
+      again during the cold-opening repair, and an orientation block was added
+      at the top of the chapter. Neither change was recorded here at the time.
+      SETTLED 2026-09-20 by the owner: the topic-sentence-bold convention is
+      withdrawn book-wide. Bold is wanted, and wanted often - on the key
+      phrase, the rule, the warning, the answer, WHEREVER in the paragraph
+      those fall, never assigned by position. And visual flatness is fixed with
+      structure first: bullets, tables, short sections, callouts, the opening
+      block. corrections.md §14.
+
+  - id: ch02-programming-is-born
+    path: docs/ch02-programming-is-born.md
+    title: "From Wires to Words: How Programming Began"
+    rewritten_2026_09_20: >-
+      Rewritten against the revised canon in the same pass that revised it.
+      An everyday thread now carries the chapter: a tireless, very fast helper
+      with no judgment at all (example-ledger: ch02-literal-helper), given its
+      own short section before the history starts and returned to at every
+      step. It is deliberately the same figure a reader will meet as an AI
+      coding assistant in Stages 3-4.
+      The opening uses a different welcome style from ch01's, per the rule that
+      no welcome style returns until four or five chapters later
+      (corrections.md §7), and states why the chapter matters to the reader
+      specifically. Every section connects to the one before it. Section titles
+      explain themselves (canon/naming.md); sidebar_label became "2. How People
+      Told a Machine What to Do". Bold is by meaning, not position.
+      Gate: 0 errors, 1 warning (safety-floor-absent, deliberate).
+    stage: 0
+    position: 11
+    status: text-ready
+    scope_multiplier: 1.0
+    requires: [ch01-foundations]
+    teaches: [machine code, assembly language, assembler, compiler, FORTRAN]
+    notes: >-
+      AUTHORED 2026-09-16 against curriculum-state/stage-0-drafting-plan.md's
+      Chapter 2 block - the chapter where programming actually enters the
+      book, per the plan's own explicit marker: "Nothing downstream may assume
+      it earlier." Gate-clean: 0 errors, 1 warning (safety-floor-absent,
+      deliberate, same reasoning as ch01).
+
+      Four sections: rewiring ENIAC by hand (the six women who did it - Kay
+      McNulty, Betty Jennings, Betty Snyder, Marlyn Wescoff, Fran Bilas, Ruth
+      Lichterman), raw numeric machine code and David Wheeler's EDSAC Initial
+      Orders (May 1949), Kathleen Booth's assembly language (1947, Birkbeck),
+      and Grace Hopper's A-0 (1952) leading to Backus's FORTRAN (April 1957).
+      Deliberately presents machine code before assembly using "in the same
+      period" framing rather than a false strict date sequence - cluster-1's
+      own dossier flags the language ladder as "conceptual, not temporal"
+      (Booth 1947, Wheeler 1949, Hopper 1952 and FORTRAN 1957 genuinely
+      overlap by a decade), and the plan's approved lesson order already
+      encodes that as a deliberate conceptual sequence, not a claim about which
+      came first in time.
+
+      Ends exactly where the plan requires: FORTRAN exists and works, no other
+      languages are named or surveyed - that is Chapter 3's job
+      ("One Language Was Never Enough").
+
+      Signature contribution: the "ladder is conceptual, not temporal"
+      correction made explicit to the reader, plus the economic argument
+      (programmer time became more expensive than computer time) as the real
+      reason FORTRAN mattered, ahead of any aesthetic one - both taken directly
+      from cluster-1's structural recommendation.
+
+      TERM OVERLAP WITH intro-1, HANDLED VIA REUSE NOT DUPLICATION: this
+      chapter's core vocabulary (machine code, assembly language, assembler,
+      compiler) was already canonically defined by the old, still-live intro-1.
+      Rather than creating a second competing definition, concept-ledger.yaml's
+      existing entries for those four terms were extended with `used_in` and a
+      short reuse note, following the same pattern already established for
+      terms like "blast radius" and "endpoint" being re-glossed per chapter.
+      first_defined stays pointed at intro-1 for now; repointing it is a
+      decision for whenever intro-1 is actually retired, not before.
+
+      Ends on a retrieval prompt (S10): the reader reconstructs, from memory,
+      the four things a program has been across the chapter and what each form
+      still could not do.
+
+      REVISED 2026-09-17, formatting only: same fix as ch01-foundations (see
+      its note above) - added topic-sentence and term-first-use bold (now 50
+      markers, was 0) and one comparison table (rewiring / machine code /
+      assembly language) covering only the first three of the chapter's four
+      forms, deliberately stopping before FORTRAN so the closing retrieval
+      prompt - "name the four things... without looking back" - still
+      requires genuine recall rather than a glance at a table. No facts or
+      wording changed, gate still 0 errors.
+
+  # --- Stage 1 -------------------------------------------------------------
+  #
+  # REVERTED TO PLACEHOLDER 2026-09-17 (owner instruction): all six chapters
+  # plus the stage index were reset from text-ready back to placeholder and
+  # their written content removed. See the progress block's dated note for
+  # the full record. The AUTHORED 2026-09-11 history below - the parallel
+  # authoring run, the shared worked object, the per-chapter notes on scope,
+  # sources and diagram gaps - is kept as a record of what was written and
+  # why, in case the stage is re-authored from a similar brief, but none of
+  # it describes what is live on the site now.
+  #
+  # The stage carried ONE shared worked object, continued from the intro
+  # rather than replaced: the school AI club sign-up page capped at thirty
+  # seats. Each chapter asked it a different question about its own layer, so
+  # the reader watched one real thing get built properly, box by box.
+  - {id: s1-index,    path: docs/stage-01-sde-mastery-ai-driven/index.md,             title: "Stage 1 Overview",                 stage: 1, position: 1, status: placeholder, scope_multiplier: null, requires: [intro-5],     teaches: []}
+
+  - id: s1-01
+    path: docs/stage-01-sde-mastery-ai-driven/01-foundations.md
+    title: "The Boxes and the Walls: Where a Rule Has to Live Before You Write the Code"
+    stage: 1
+    position: 2
+    status: placeholder
+    scope_multiplier: null
+    requires: [intro-5]
+    teaches: []
+    notes: >-
+      REVERTED TO PLACEHOLDER 2026-09-17 (owner instruction). Previously
+      AUTHORED 2026-09-11 (Stage 1, chapter 1): 4,218 words, gate-clean,
+      scope_multiplier 1.5. It decomposed architecture at Station 0 (Greek
+      arkhitekton, chief builder, 1560s) and asked the shared object where
+      each box lives and which boundary the thirty-seat rule must sit behind.
+      Concepts it covered: software architecture, component, boundary,
+      interface, coupling, cohesion, information hiding, monolith, layered
+      architecture, client-server, event-driven architecture, distributed
+      monolith, blast radius, architecture smells, whiteboard test, boundary
+      enforcement. See concept-ledger.yaml, evidence-ledger.yaml and
+      example-ledger.yaml for what else was removed alongside it.
+
+  - id: s1-02
+    path: docs/stage-01-sde-mastery-ai-driven/02-core-programming.md
+    title: "Reading Code You Did Not Write: Variables, Loops, and the Failures That Stay Quiet"
+    stage: 1
+    position: 3
+    status: placeholder
+    scope_multiplier: null
+    requires: [s1-01]
+    teaches: []
+    notes: >-
+      REVERTED TO PLACEHOLDER 2026-09-17 (owner instruction). Previously
+      AUTHORED 2026-09-11 (Stage 1, chapter 2): 4,729 words, gate-clean,
+      scope_multiplier 1.5. Shape was Practice with a Concept core - reading
+      agent-written code and judging it, not a writing tutorial. Concepts it
+      covered: reading code, variables, types, strings, booleans,
+      conditionals, truthiness, loops, iteration, functions, parameters,
+      return values, scope, collections, lists and arrays, dictionaries and
+      objects, index, key, file handling, exceptions, traceback, call stack,
+      syntax errors, runtime errors, debugging, off-by-one, boundary value,
+      Python versus JavaScript.
+
+  - id: s1-03
+    path: docs/stage-01-sde-mastery-ai-driven/03-frontend.md
+    title: "What the Student Actually Clicks: Components, Layouts, and the Limits of the Frontend"
+    stage: 1
+    position: 4
+    status: placeholder
+    scope_multiplier: null
+    requires: [s1-02]
+    teaches: []
+    notes: >-
+      REVERTED TO PLACEHOLDER 2026-09-17 (owner instruction). Previously
+      AUTHORED 2026-09-11 (Stage 1, chapter 3): 4,025 words, gate-clean,
+      scope_multiplier 1.5. Asked the shared object as the form a student
+      actually clicks, in three acts. Concepts it covered: components, props,
+      state, re-render, DOM, server components, client components, hydration,
+      pages, routes, layouts, responsiveness, breakpoints, media queries,
+      container queries, controlled inputs, validation, screen readers, WCAG
+      2.2, contrast ratio, ARIA, design systems, Interaction to Next Paint,
+      component libraries (shadcn/ui, Material UI, daisyUI).
+
+  - id: s1-04
+    path: docs/stage-01-sde-mastery-ai-driven/04-backend.md
+    title: "The Rule Nobody Can Walk Around: Backend, Endpoints, and Trust"
+    stage: 1
+    position: 5
+    status: placeholder
+    scope_multiplier: null
+    requires: [s1-02]
+    teaches: []
+    notes: >-
+      REVERTED TO PLACEHOLDER 2026-09-17 (owner instruction). Previously
+      AUTHORED 2026-09-11 (Stage 1, chapter 4): 6,121 words, gate-clean,
+      scope_multiplier 1.5 - the longest chapter in the book at the time, a
+      length flagged and deliberately not split (natural seam recorded: "The
+      form validates, and the endpoint validates anyway"). Stated the last-
+      seat race precisely and deliberately did not solve it, handing off to
+      s1-05. Concepts it covered: endpoints, statelessness, safe methods,
+      idempotent methods, HTTP methods, HTTP status codes, resources,
+      collections and items, REST, check-then-act race, time-of-check to
+      time-of-use, middleware, rate limiting, fixed window, token bucket,
+      authentication, authorisation, logging, observability, structured
+      logging, request ids, idempotency keys.
+
+  - id: s1-05
+    path: docs/stage-01-sde-mastery-ai-driven/05-databases.md
+    title: "The Last Seat: Databases, Constraints, and Data That Outlives the Page"
+    stage: 1
+    position: 6
+    status: placeholder
+    scope_multiplier: null
+    requires: [s1-04]
+    teaches: []
+    notes: >-
+      REVERTED TO PLACEHOLDER 2026-09-17 (owner instruction). Previously
+      AUTHORED 2026-09-11 (Stage 1, chapter 5): 4,618 words, gate-clean,
+      scope_multiplier 1.5. Closed the stage's arc by resolving the race
+      s1-04 stated: a CHECK constraint plus a conditional UPDATE wrapped in a
+      transaction. Concepts it covered: tables, rows, columns, data types,
+      schema, primary keys, foreign keys, relationships, constraints, NOT
+      NULL, unique constraints, check constraints, SQL, SELECT, INSERT,
+      UPDATE, DELETE, JOIN, transactions, ACID, atomicity, consistency,
+      isolation, durability, isolation levels, row locking, race conditions,
+      indexes, B-trees, sequential scans, query plans, migrations, document
+      stores, key-value stores and caches, graph databases, choosing a
+      database family, query cost.
+
+  - id: s1-06
+    path: docs/stage-01-sde-mastery-ai-driven/06-git-github.md
+    title: "A Journal of Every Change: Git, GitHub, and Reviewing What an Agent Wrote"
+    stage: 1
+    position: 7
+    status: placeholder
+    scope_multiplier: null
+    requires: [s1-02]
+    teaches: []
+    notes: >-
+      REVERTED TO PLACEHOLDER 2026-09-17 (owner instruction). Previously
+      AUTHORED 2026-09-11 (Stage 1, chapter 6): 5,172 words, gate-clean,
+      scope_multiplier 1.5. Station 0 found "pull request" a MISLEADING name
+      and relocated the chapter's centre of gravity from merging to reading -
+      what changes when an agent wrote the diff being reviewed. Concepts it
+      covered: repositories, working tree, commits, blobs, trees, tags,
+      content-addressed storage, hashes, staging area, branches, HEAD,
+      merging, merge conflicts, remotes, force push, protected branches,
+      gitignore, push protection, pull requests, code review, commit hygiene,
+      git log, git blame, git bisect, revert versus reset.
+
+  # --- Stage 2 -------------------------------------------------------------
+  - {id: s2-index,    path: docs/stage-02-credentials/index.md,                      title: "Stage 2 Overview",                 stage: 2, position: 1, status: text-ready,  scope_multiplier: null, requires: [s1-06],       teaches: []}
+  - {id: s2-cs50p,    path: docs/stage-02-credentials/cs50p.md,                      title: "CS50P - Python",                   stage: 2, position: 2, status: placeholder, scope_multiplier: null, requires: [s1-02],       teaches: []}
+  - {id: s2-cs50w,    path: docs/stage-02-credentials/cs50w.md,                      title: "CS50W - JavaScript",               stage: 2, position: 3, status: placeholder, scope_multiplier: null, requires: [s2-cs50p],    teaches: []}
+
+  # --- Stage 1, continued: the four chapters carried over from old Stage 3,
+  # which merged into Stage 1 on 2026-09-22. They hold positions 8-11 there. -
+  - {id: old-s3-index, path: null,             title: "Stage 3 Overview",                 stage: 3, position: 1, status: removed,  scope_multiplier: null, requires: [s2-cs50w],    teaches: [], notes: "Retired 2026-09-22 in the four-stage restructure: the old Stage 3 overview merged into s1-index and its placeholder file was deleted."}
+  - {id: s1-prompt,   path: docs/stage-01-sde-mastery-ai-driven/prompt-engineering.md, title: "Prompt Engineering",               stage: 1, position: 8, status: placeholder, scope_multiplier: null, requires: [intro-5],     teaches: []}
+  - {id: s1-context,  path: docs/stage-01-sde-mastery-ai-driven/context-engineering.md, title: "Context Engineering",             stage: 1, position: 9, status: placeholder, scope_multiplier: null, requires: [s1-prompt],   teaches: []}
+  - {id: s1-cc,       path: docs/stage-01-sde-mastery-ai-driven/claude-code.md,        title: "Claude Code and coding-agent CLIs", stage: 1, position: 10, status: placeholder, scope_multiplier: null, requires: [s1-context, s1-06], teaches: []}
+  - {id: s1-skills,   path: docs/stage-01-sde-mastery-ai-driven/skills-and-mcp.md,     title: "Skills and MCP",                   stage: 1, position: 11, status: placeholder, scope_multiplier: null, requires: [s1-cc],       teaches: []}
+
+  # --- Stage 3 (the old Stage 4, renamed 2026-09-22) ------------------------
+  - {id: s3-index,    path: docs/stage-03-sde-mastery-ai-native/index.md,        title: "Stage 3 Overview",                 stage: 3, position: 1, status: text-ready,  scope_multiplier: null, requires: [s1-skills],   teaches: []}
+  - {id: s3-rag,      path: docs/stage-03-sde-mastery-ai-native/rag-and-tool-calling.md, title: "RAG and Tool Calling",     stage: 3, position: 2, status: placeholder, scope_multiplier: null, requires: [s3-index, s1-05], teaches: [RAG, tool calling]}
+  - {id: s3-multi,    path: docs/stage-03-sde-mastery-ai-native/multi-agent-systems.md,  title: "Multi-Agent Systems",      stage: 3, position: 3, status: placeholder, scope_multiplier: null, requires: [s3-rag],      teaches: []}
+  - {id: s3-evals,    path: docs/stage-03-sde-mastery-ai-native/evaluations.md,  title: "Evaluations",                      stage: 3, position: 4, status: placeholder, scope_multiplier: null, requires: [s3-rag],      teaches: []}
+
+# ---------------------------------------------------------------------------
+# Not a lesson. Listed so a coherence audit does not treat it as one.
+# ---------------------------------------------------------------------------
+non_lessons:
+  - {path: docs/perf-targets.md, note: "Internal performance targets. chapter_state is text-ready but it is not curriculum content."}
+  - {path: docs/glossary.md, note: "Generated reference page (concept-ledger.yaml, status: defined only). No chapter_state - deliberately excluded from the chapter contract; not curriculum content."}
+
+# ---------------------------------------------------------------------------
+# Authoring progress. Update on every completed chapter.
+# ---------------------------------------------------------------------------
+progress:
+  total_lesson_files: 15          # the Stage 1-4 lesson rows; excludes the 4 stage index pages and the 5 intro-sequence rows
+  authored: 5                     # the 5 intro rows only - Stage 1's 6 rows reverted to placeholder 2026-09-17
+  authored_to_current_contract: 5
+  stage_1_authored: 0             # of Stage 1's 6 rows - reverted to placeholder 2026-09-17, see note below
+  remaining_placeholders: 15      # Stage 1 (10) + Stage 2 (2) + Stage 3 (3)
+  note: >-
+    intro.md was re-authored 2026-08-24,
+    so it counted as authored under BOTH the old and current standard.
+    total_lesson_files counts placeholder rows that exist right now - it is
+    a count of this file's current entries, not a target or a promise about
+    the book's eventual size. It will change as chapters are added, split,
+    merged, or dropped; do not cite it as "the number of chapters in the
+    book."
+    REMOVED 2026-09-10: intro-spine-experiment (docs/intro-spine-experiment.md)
+    and intro-2-spine-experiment (docs/intro-2-binary-to-language-spine-
+    experiment.md) were both lesson-spine-authoring pilot chapters, kept
+    side-by-side with intro.md and intro-2-binary-to-language.md for
+    comparison. The pilot succeeded and the owner deleted both experiment
+    files (and their sidebar entries and ledger rows) ahead of applying the
+    same spine treatment to intro-2/intro-3/intro-4 for real, in place.
+    total_lesson_files dropped from 20 to 18 accordingly.
+    RESEQUENCED 2026-09-10 (Phase 1): the four intro rows (intro, intro-2,
+    intro-3, intro-4) were retired and replaced by five (intro-1 through
+    intro-5), per
+    curriculum-state/proposals/stage-00-intro-resequence-2026-09-10.md.
+    Every one of the five is `placeholder`. intro.md no longer exists as a
+    file, so `authored` and `authored_to_current_contract` drop from 1 to 0:
+    its content survives only inside intro-5's raw, unedited merge, which has
+    not been through lesson-spine-authoring and is not text-ready. The
+    flagged two-name inconsistencies in the old intro teaches list (the
+    specify-delegate-inspect-verify framework vs the
+    specify-design-implement-verify loop; the two failure poles vs the two
+    extremes) are resolved on intro-5's row - see its notes.
+    total_lesson_files drops from 18 to 15 not because chapters were lost but
+    because the excluded intro sequence grew from one row to five; the
+    denominator changed, and the number is not a chapter count.
+    AUTHORED 2026-09-10 (Phase 2, chapter 1): docs/intro-1-binary-to-programming.md
+    was spine-treated in full and flipped to text-ready, gate-clean at 2,365
+    words. `authored` and `authored_to_current_contract` rose from 0 to 1. It is
+    the first text-ready chapter in the resequenced intro sequence.
+    AUTHORED 2026-09-10 (Phase 2, chapters 2-5): docs/intro-2 through
+    docs/intro-5 were authored and flipped to text-ready in one parallel run -
+    four chapters drafted concurrently by sub-agents from a shared authoring
+    brief, then verified, gated and written back serially by the orchestrator.
+    All five now pass the gate at 0 errors and 0 warnings, and all five carry
+    `status: text-ready` above. `authored` and
+    `authored_to_current_contract` rose from 1 to 5.
+    MEASURED LENGTHS, taken from the gate's own output on 2026-09-10 and
+    recorded here because this is the only place the whole sequence is visible
+    at once: intro-1 2,395 words (~16 min), intro-2 4,500 (~30 min), intro-3
+    4,132 (~27.5 min), intro-4 4,001 (~26.7 min), intro-5 3,940 (~26.3 min).
+    These are readings, not targets - contracts/calibration.md fixes no word
+    band, and each chapter's size is justified by its own scope_reason.
+    THE SPLIT QUESTION, ANSWERED. The pre-agreed rule was that a chapter coming
+    out disproportionately long becomes its own sidebar sub-category with
+    nested sub-lesson docs rather than one flat file. Applied against the
+    measurements above: no chapter is an outlier. intro-5, the chapter the rule
+    was originally written for, is the SHORTEST of the four newly-authored
+    chapters, so its pre-agreed split condition was not met and it stays a flat
+    file. The whole intro sequence therefore remains flat - five documents, no
+    sub-categories. This is a judgment recorded so it is visible, not a silent
+    omission; if the owner prefers the Stage 1-4 folder pattern for the intro
+    regardless of length, the natural seams are named on intro-5's row above.
+    DEFECT FIXED 2026-09-10: three rows - s1-index, s1-01 and s3-prompt - still
+    carried `requires: [intro]`, a dangling reference to the chapter id retired
+    in the Phase 1 resequence. All three now require `intro-5`, which is where
+    the intro sequence actually ends. Found by inspection while writing this
+    block back; nothing in the gate chain checks requires-reference validity,
+    so this class of staleness survives a clean build and was worth recording
+    as a gap.
+    BEGINNER-ONLY - NO LONGER AN EXCEPTION (updated 2026-09-20). This note used
+    to scope "written for a reader with no prior technical knowledge at all" to
+    the five intro chapters, calling it an owner-directed exception to the
+    book's usual mixed audience, and explicitly said it "does not change the
+    audience contract for Stages 1-4".
+    Both halves are now wrong. The owner extended beginner-only to STAGES 0, 1
+    AND 2 in full, and withdrew the senior-engineer reader from the project;
+    the audience for Stages 3-4 is undecided and no rule may assume one.
+    It is the contract, not an exception. canon/audience.md and
+    corrections.md §8.
+    AUTHORED 2026-09-11 (Stage 1, all six chapters): docs/stage-01-spec-aware-
+    vibe-engineering/01-foundations.md through 06-git-github.md were authored
+    in one parallel run - six chapters drafted concurrently by sub-agents from a
+    shared Stage 1 brief, then verified, gated and written back serially by the
+    orchestrator. Same method as the Phase 2 intro run, and the second time it
+    has been used. `authored` and `authored_to_current_contract` rose from 5 to
+    11; the whole of Stage 1 is now text-ready and the remaining 9 placeholders
+    are Stage 2 (2), Stage 3 (4) and Stage 4 (3).
+    AUDIENCE FOR THIS RUN, stated because it is the opposite of the intro's:
+    Stage 1 is written for the book's standard deliberately MIXED audience - a
+    senior engineer and a real beginner read the same document and neither may
+    be failed. The beginner-only exception above is scoped to the intro
+    sequence and was NOT carried into this run. The brief instructed the
+    foothold/depth-block architecture instead, and that is what shipped.
+    ONE SHARED OBJECT, CONTINUED NOT REPLACED. The stage returns to the school
+    AI club sign-up page capped at thirty seats that the intro's architecture
+    map built, and each chapter asks it one question about its own layer: where
+    the rule can live (s1-01), the rule as readable code (s1-02), the form the
+    student clicks (s1-03), the endpoint that must refuse (s1-04), the row and
+    the thirty-first sign-up (s1-05), and how the work is reviewed (s1-06).
+    No chapter introduced a second teaching object.
+    MEASURED LENGTHS, from the gate's own output on 2026-09-11: s1-01 4,218
+    words (~28.1 min), s1-02 4,729 (~31.5), s1-03 4,025 (~26.8), s1-04 6,121
+    (~40.8), s1-05 4,618 (~30.8), s1-06 5,172 (~34.5). Readings, not targets.
+    THE SPLIT QUESTION, RE-OPENED AND NAMED. The pre-agreed rule is that a
+    chapter coming out disproportionately long becomes its own sidebar
+    sub-category with nested sub-lesson docs. On these measurements the intro
+    answer does not carry over cleanly: s1-04 at 6,121 words IS an outlier, 18
+    per cent above the next longest chapter in the stage and 52 per cent above
+    the shortest. The authoring agent recorded that honestly and named its own
+    natural seam rather than splitting unilaterally - "The form validates, and
+    the endpoint validates anyway" divides the endpoint's own arc from the
+    mechanisms around it. The split was NOT taken, because restructuring a
+    chapter is an editorial decision about the book's shape rather than a
+    mechanical fix, and the precedent from the intro is to record the judgment
+    and surface it. It is surfaced to the owner and recorded here as an open
+    question, not as an oversight.
+    DEFECT FOUND AND FIXED 2026-09-11 (the value of running the chain, not just
+    the chapter gate): s1-03's first draft named two illustrative Next.js page
+    files - paths of the form app/signup/page.tsx and app/thanks/page.tsx -
+    inside backticks. check-references.mjs treats any backticked token ending in
+    a real file extension as a repo path, so the build failed with two dead
+    references. The chapter gate alone passed that chapter cleanly; only the
+    full chain caught it. Reworded to name the route folders instead, and both
+    now resolve. NOTE ON RECORDING IT: writing this very paragraph reproduced
+    the identical failure once, because curriculum-state/ledgers is scanned for
+    references too and the paths were first written here with backticks. They
+    are now written without them. A defect note is itself a document under the
+    same contract it describes.
+    SHIPPED ERROR CORRECTED: s1-04 found that intro-2 draws a full club as
+    `403 Forbidden`, when the correct status for a state conflict is `409`.
+    Recorded rather than quietly changed, because a live text-ready chapter is
+    wrong and the fix belongs to that chapter's next revision.
+    GATE CHAIN STATUS 2026-09-11: frontmatter, references, chapter gate, chapter
+    manifest (20 states), search index (26 documents) and the Docusaurus build
+    all pass. Chapter gate reports 11 chapters checked, 15 skipped, 0 errors,
+    0 warnings.
+    NEW STAGE 0 LADDER STARTED 2026-09-16: ch01-foundations and
+    ch02-programming-is-born were authored against
+    curriculum-state/stage-0-drafting-plan.md, the first two of the approved
+    20-chapter chronological Stage 0 redesign. Both are text-ready and
+    gate-clean. total_lesson_files, authored and authored_to_current_contract
+    above are UNCHANGED by this - those counters track Stage 1-4 rows only, per
+    their own header comment excluding the intro sequence, and these two new
+    rows are Stage 0 on the same footing as that exclusion. They are not
+    counted anywhere as "the size of the book" - consistent with locked
+    decision D5 (no fixed chapter count, ever). Not yet wired into
+    edu-site/sidebars.ts; see the new rows' own notes above for the open
+    navigation and old-chapter-retirement question this leaves for the owner.
+    REVERTED TO PLACEHOLDER 2026-09-17 (owner instruction): all six Stage 1
+    chapters (s1-01 through s1-06) and the stage index (s1-index) were taken
+    back from text-ready to placeholder, and their written content stripped
+    from docs/stage-01-spec-aware-vibe-engineering/. The owner had flagged the
+    2026-09-11 authoring run as unauthorized. `authored` and
+    `authored_to_current_contract` drop from 11 to 5 (the five intro rows
+    only); `stage_1_authored` drops from 6 to 0; `remaining_placeholders`
+    rises from 9 to 15. The AUTHORED 2026-09-11 notes on each row above are
+    kept as a record of what was written, its scope and its sources, not as a
+    description of what is live now. concept-ledger.yaml, evidence-ledger.yaml
+    and example-ledger.yaml had their matching Stage 1 sections removed in the
+    same pass - see each file's own dated note. Cross-references from Stage 0
+    and Stage 2 chapters that pointed at Stage 1 as already-taught material
+    were updated in the same pass; check docs/stage-02-cs50-certification/ and
+    the intro sequence if Stage 1 is re-authored, since they may need
+    re-pointing again.
+
+    2026-09-22: four-stage restructure. Old Stage 1 (6) and old Stage 3 (4) merged into Stage 1 (10); old Stage 4 became Stage 3 (3). Totals unchanged.
+
+# RESTRUCTURE 2026-09-22 (four-stage curriculum, owner-approved). The five
+# stages became four: Stage 1 SDE Mastery (AI-Driven) is the old Stage 1 and
+# old Stage 3 merged; Stage 2 is Credentials (renamed from Credible
+# Validation); Stage 3 SDE Mastery (AI-Native; Agentic AI) is the old Stage 4.
+# Live folders: docs/stage-01-sde-mastery-ai-driven/,
+# docs/stage-02-credentials/, docs/stage-03-sde-mastery-ai-native/. Every file
+# that moved was a placeholder. The retired folders were backed up to
+# _scratch/backup-2026-09-22-stage-rename/ before deletion.

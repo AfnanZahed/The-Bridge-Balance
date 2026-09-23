@@ -103,21 +103,30 @@
   --ifm-color-primary-lighter: var(--tbb-silver-6);
   --ifm-color-primary-lightest: var(--tbb-silver-5);
 
-  /* Stage identity — no longer hue-coded. The four stages read as a descent
-     down the ramp (Foundations lightest → Autonomy pure black), so the
+  /* Stage identity — no longer hue-coded. The three stages read as a descent
+     down the ramp (Foundations lightest → the AI-Native stage darkest), so the
      curriculum's progression is the visual metaphor. Differentiation is
-     label-first (R-001, R-005); lightness only reinforces it. All four
+     label-first (R-001, R-005); lightness only reinforces it. All three
      steps clear AA on white. */
   --tbb-stage-1: var(--tbb-silver-5);  /* Foundations  */
-  --tbb-stage-2: var(--tbb-silver-6);  /* Credentials  */
-  --tbb-stage-3: var(--tbb-silver-7);  /* Mastery      */
-  --tbb-stage-4: var(--tbb-silver-9);  /* Autonomy     */
+  --tbb-stage-2: var(--tbb-silver-7);  /* AI-Native   */
 
   /* Stage dark variants (for text-on-light contexts) */
   --tbb-stage-1-dark: var(--tbb-silver-6);
-  --tbb-stage-2-dark: var(--tbb-silver-7);
-  --tbb-stage-3-dark: var(--tbb-silver-8);
-  --tbb-stage-4-dark: var(--tbb-silver-9);
+  --tbb-stage-2-dark: var(--tbb-silver-8);
+
+  /* Non-stage surfaces held at the ramp step each one showed before the
+     three-stage restructure, so that restructure cannot move them. Purpose-
+     named rather than read off a stage token, because a stage token belongs to
+     the stage identity. The dark block below restates every one. */
+  --tbb-callout-important: var(--tbb-silver-6);   /* was --tbb-stage-2 */
+  --tbb-callout-warning: var(--tbb-silver-7);     /* was --tbb-stage-3 */
+  --tbb-alert-warning: var(--tbb-silver-6);       /* was --tbb-stage-2 */
+  --tbb-chapter-state-video: var(--tbb-silver-9); /* was --tbb-stage-4 */
+  --tbb-feature-1: var(--tbb-silver-5);           /* was --tbb-stage-1 */
+  --tbb-feature-2: var(--tbb-silver-6);           /* was --tbb-stage-2 */
+  --tbb-feature-3: var(--tbb-silver-7);           /* was --tbb-stage-3 */
+  --tbb-feature-4: var(--tbb-silver-9);           /* was --tbb-stage-4 */
 
   /* Surfaces — the page ground is silver-0.75, not pure white. White is now
      reserved for the specular end of the ramp (raised surfaces, the 0% stop
@@ -366,16 +375,23 @@
   --ifm-color-primary-lightest: var(--tbb-silver-0);
 
   /* Stage identity — the same descent, inverted: Foundations sits mid-ramp,
-     Autonomy resolves to pure white. Label-first differentiation holds. */
+     the AI-Native stage resolves to near-white. Label-first differentiation
+     holds. */
   --tbb-stage-1: var(--tbb-silver-4);
-  --tbb-stage-2: var(--tbb-silver-3);
-  --tbb-stage-3: var(--tbb-silver-2);
-  --tbb-stage-4: var(--tbb-silver-0);
+  --tbb-stage-2: var(--tbb-silver-2);
 
   --tbb-stage-1-dark: var(--tbb-silver-4);
-  --tbb-stage-2-dark: var(--tbb-silver-3);
-  --tbb-stage-3-dark: var(--tbb-silver-2);
-  --tbb-stage-4-dark: var(--tbb-silver-0);
+  --tbb-stage-2-dark: var(--tbb-silver-2);
+
+  /* Non-stage surfaces — the dark mirror of the light-block set above. */
+  --tbb-callout-important: var(--tbb-silver-3);
+  --tbb-callout-warning: var(--tbb-silver-2);
+  --tbb-alert-warning: var(--tbb-silver-3);
+  --tbb-chapter-state-video: var(--tbb-silver-0);
+  --tbb-feature-1: var(--tbb-silver-4);
+  --tbb-feature-2: var(--tbb-silver-3);
+  --tbb-feature-3: var(--tbb-silver-2);
+  --tbb-feature-4: var(--tbb-silver-0);
 
   /* Surfaces — pure black ground so raised metal genuinely floats off it.
      Four distinct dark steps, not a wash: bg → surface → raised → emphasis. */
@@ -1464,9 +1480,9 @@ h6 {
 }
 
 .tbb-chapter-state--video-published {
-  background: color-mix(in srgb, var(--tbb-stage-4) 10%, var(--tbb-surface));
+  background: color-mix(in srgb, var(--tbb-chapter-state-video) 10%, var(--tbb-surface));
   color: var(--tbb-text);
-  border-color: color-mix(in srgb, var(--tbb-stage-4) 24%, transparent);
+  border-color: color-mix(in srgb, var(--tbb-chapter-state-video) 24%, transparent);
 }
 
 .tbb-chapter-state--unknown {
@@ -1498,7 +1514,7 @@ h6 {
 }
 
 .tbb-chapter-state--video-published .tbb-chapter-state__dot {
-  background: var(--tbb-stage-4);
+  background: var(--tbb-chapter-state-video);
 }
 
 .tbb-chapter-state--unknown .tbb-chapter-state__dot {
@@ -2299,18 +2315,18 @@ article {
 }
 
 .tbb-callout--important {
-  --callout-bg: color-mix(in srgb, var(--tbb-stage-2) 8%, transparent);
-  --callout-border: color-mix(in srgb, var(--tbb-stage-2) 28%, transparent);
-  --callout-border-left: var(--tbb-stage-2);
+  --callout-bg: color-mix(in srgb, var(--tbb-callout-important) 8%, transparent);
+  --callout-border: color-mix(in srgb, var(--tbb-callout-important) 28%, transparent);
+  --callout-border-left: var(--tbb-callout-important);
 }
 
 /* Re-homed off --tbb-accent (ADR-0003): warning is not one of the accent's
-   permitted surfaces, so it takes the fourth ramp rung instead — distinct
-   from tip (stage-1) and important (stage-2), still strictly neutral. */
+   permitted surfaces, so it takes its own purpose-named ramp step instead —
+   still strictly neutral, and distinct from important above. */
 .tbb-callout--warning {
-  --callout-bg: color-mix(in srgb, var(--tbb-stage-3) 8%, transparent);
-  --callout-border: color-mix(in srgb, var(--tbb-stage-3) 26%, transparent);
-  --callout-border-left: var(--tbb-stage-3);
+  --callout-bg: color-mix(in srgb, var(--tbb-callout-warning) 8%, transparent);
+  --callout-border: color-mix(in srgb, var(--tbb-callout-warning) 26%, transparent);
+  --callout-border-left: var(--tbb-callout-warning);
 }
 
 .tbb-callout--danger {
@@ -2997,7 +3013,7 @@ html:root {
 }
 
 .alert--warning {
-  border-left-color: var(--tbb-stage-2);
+  border-left-color: var(--tbb-alert-warning);
 }
 
 .alert--danger {
@@ -3176,9 +3192,11 @@ html:root {
 
 /* The hook toggles this attribute instead of mutating body styles. Keeping
    scroll lock on the root also works when the body is a Docusaurus wrapper.
-   `data-search-open` is the same pattern for the home Spotlight overlay. */
+   `data-search-open` is the same pattern for the home Spotlight overlay, and
+   `data-chat-open` for the assistant's expanded surface. */
 html[data-drawer-open="true"],
-html[data-search-open="true"] {
+html[data-search-open="true"],
+html[data-chat-open="true"] {
   overflow: hidden;
 }
 
@@ -3722,6 +3740,37 @@ input[type="range"] {
     var(--tbb-accent) 100%
   );
   box-shadow: 0 0 12px 1px oklch(0 0 0 / 0.3);
+}
+
+/* --- Changelog page ------------------------------------------------------ */
+/* A dated page reads as one long list, so it gets three small things the
+   reading block does not need: dates whose figures line up, a group label that
+   sits tight under its date instead of opening a chapter-sized gap, and an
+   entry that lights up under the pointer, so the eye can follow a long one
+   across its lines. Token-only, so it holds in both themes. */
+html.docs-doc-id-changelog .theme-doc-markdown > h3 {
+  font-variant-numeric: tabular-nums;
+}
+
+html.docs-doc-id-changelog .theme-doc-markdown > h3 + h4 {
+  margin-top: var(--tbb-rhythm-2);
+}
+
+html.docs-doc-id-changelog .theme-doc-markdown > ul > li {
+  padding-inline: 0.5rem;
+  margin-inline: -0.5rem;
+  border-radius: var(--tbb-radius-sm);
+  transition: background-color var(--tbb-duration-fast) var(--tbb-ease);
+}
+
+html.docs-doc-id-changelog .theme-doc-markdown > ul > li:hover {
+  background: var(--tbb-accent-subtle);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.docs-doc-id-changelog .theme-doc-markdown > ul > li {
+    transition: none;
+  }
 }
 
 /* ─── Reduce motion ──────────────────────────────────────────────────────── */

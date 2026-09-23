@@ -132,7 +132,7 @@ export default function NotFound(): React.ReactElement {
               Back to home
             </Link>
             <Link
-              to="/stage-01-spec-aware-vibe-engineering/"
+              to="/stage-01-sde-mastery-ai-driven/"
               className="tbb-hero__cta-secondary"
               aria-label="Start Stage 1: Foundations (link)"
             >

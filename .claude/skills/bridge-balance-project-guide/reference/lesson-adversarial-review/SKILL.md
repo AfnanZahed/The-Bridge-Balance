@@ -3,12 +3,14 @@ name: lesson-adversarial-review
 description: Use to hostile-review one already-written, text-ready chapter of The Bridge Balance (thebridgebalance.app) against curriculum-state/ — checking citations against real sources, catching sections that restate each other, softened safety floors, a retrieval prompt the chapter does not equip a reader to answer, terms used without a gloss, and stale or drifted evidence. Trigger on requests like "review this chapter before it goes live," "audit chapter X," "check this against the sources," or "is this chapter any good." Reports findings only — never edits the chapter itself, and never trusts the drafting author's own stated reasoning for why something is fine. Run it with as little memory as possible of how the chapter was drafted; if this environment can spawn an isolated sub-task or subagent, that is the strongest way to run this skill. Do not use this for a chapter still marked chapter_state placeholder (nothing to review yet), and do not use it to fix what it finds — that's a separate authoring action.
 ---
 
-# Lesson adversarial review
+# Chapter adversarial review
+
+*The folder keeps its old name, `lesson-adversarial-review`, because many files point at it. This protocol reviews a chapter.*
 
 > **Where this fits.** Every chapter ships as ONE continuous read.
-> `chapter-production` owns everything around the lesson (research, ledgers,
+> `chapter-production` owns everything around the chapter (research, ledgers,
 > scope, MDX, the gate); the peer skill `lesson-spine-authoring` writes the
-> lesson itself.
+> chapter itself.
 > This protocol does neither — see its own scope below.
 
 
@@ -38,13 +40,13 @@ cd edu-site && node scripts/check-chapter.mjs --chapter docs/<path> && npm run b
 
 It catches frontmatter gaps, a generic `scope_reason`, unregistered components, an image file that does not exist, junk alt text, a malformed safety-floor callout, and broken heading hierarchy. **Do not spend review effort re-checking those by hand** — that is what it is for, and a review that reports them is reporting the gate's work as its own.
 
-What it cannot do is judge whether the chapter is worth reading, whether the misconception is actually dismantled, or whether a senior would feel their time wasted. That is the whole of your job. In the report, separate what the gate found from what you found.
+What it cannot do is judge whether the chapter is worth reading, whether the misconception is actually dismantled, or whether the reader would feel their time wasted. That is the whole of your job. In the report, separate what the gate found from what you found.
 
 ## Step 1 — Read, narrowly
 
-Read, in order: the chapter MDX; **`curriculum-state/canon/corrections.md` — first, and in full** (the standing rules the owner has already had to give more than once; a review that has not read it will pass exactly the chapters that get rejected); then `canon/thesis.md`, `audience.md`, `voice.md`, `naming.md` (what the chapter is supposed to honor); all four `curriculum-state/ledgers/*.yaml` (what the rest of the book has already committed to, that this chapter must not contradict); The ledgers are the evidence trail: `evidence-ledger.yaml` carries each source, what it establishes, and every question already asked of it.
+Read, in order: the chapter MDX; **`curriculum-state/canon/corrections.md` — first, and in full** (the standing rules the owner has already had to give more than once; a review that has not read it will pass exactly the chapters that get rejected); then `canon/thesis.md`, `audience.md`, `voice.md`, `naming.md` (what the chapter is supposed to honor); the `curriculum-state/ledgers/*.yaml` (what the rest of the book has already committed to, that this chapter must not contradict); The ledgers are the evidence trail: `evidence-ledger.yaml` carries each source, what it establishes, and every question already asked of it.
 
-**Do not read:** the master lesson's Reasoning Trace, any PHR or ADR discussion of this chapter, any conversation where it was drafted or discussed. If any of it surfaces anyway, don't let it change a finding — judge the file.
+**Do not read:** the master chapter's Reasoning Trace, any PHR or ADR discussion of this chapter, any conversation where it was drafted or discussed. If any of it surfaces anyway, don't let it change a finding — judge the file.
 
 ## Step 2 — Run what mechanical checking still exists
 
@@ -63,7 +65,7 @@ Straight through, then back over the seams. The question is never "can I see why
 
 **Citations, against the source, not the ledger's description of it.** For every cited claim: does the source itself actually say what the chapter claims? A citation can resolve mechanically and still misrepresent its source — that is this review's catch, and no script has ever been able to make it.
 
-**Self-paraphrase within the chapter.** Read the opening of each major section back to back. Do two of them make the same move in different words? A chapter that restates itself across sections reads as padding to a senior and as confusing repetition to a beginner — check the prose, not the outline.
+**Self-paraphrase within the chapter.** Read the opening of each major section back to back. Do two of them make the same move in different words? A chapter that restates itself across sections reads as padding and as confusing repetition — check the prose, not the outline.
 
 **The safety floor, for force, not presence.** The callout existing (the gate checks that) is not the same as it landing at full force. Does it read as structurally non-negotiable, or has "must" quietly become "should" somewhere no banned-phrase check would catch?
 
@@ -71,7 +73,7 @@ Straight through, then back over the seams. The question is never "can I see why
 
 **Assessment against objective.** Does each cell's Assessment test the same cognitive level its Learning Objective claims — recall, apply, judge? A judge-level objective tested by a recall question is a distinctness failure of a specific, checkable kind.
 
-**Evidence reuse, against the whole ledger, not just this lesson.** For every reused source, does `evidence-ledger.yaml` show this cell's exact question already asked by a different chapter? The incident-sharing rule is book-wide — a chapter can pass its own internal check and still repeat another chapter's question.
+**Evidence reuse, against the whole ledger, not just this chapter.** For every reused source, does `evidence-ledger.yaml` show this cell's exact question already asked by a different chapter? The incident-sharing rule is book-wide — a chapter can pass its own internal check and still repeat another chapter's question.
 
 **Staleness.** Any source past its `evidence-ledger.yaml` `expires` date, cited as current? Any statistic in the prose whose source is not recorded in the ledger with a year?
 
@@ -79,7 +81,7 @@ Straight through, then back over the seams. The question is never "can I see why
 
 **Alt text, as a blind reader needs it.** Not "is it present" (the script checks that) — "does it convey what a sighted reader gets, or just name the image's type ('a diagram')?"
 
-**Integrity floor, if this chapter touches Stage 2 or an external credential.** Does the shipped prose coach a reader toward a conflict `canon/integrity-floor.md` would flag? This can drift in even when Step 0 was cleared honestly at drafting time — check the shipped words, not the intent.
+**Integrity floor, if this chapter touches the Credentials track or an external credential.** Does the shipped prose coach a reader toward a conflict `canon/integrity-floor.md` would flag? This can drift in even when Step 0 was cleared honestly at drafting time — check the shipped words, not the intent.
 
 ## Reporting
 
@@ -106,7 +108,7 @@ If nothing survives hostile scrutiny — genuinely nothing — say so. A review 
 ## The beginner checks — added 2026-09-20
 
 A chapter can pass every check above and still be the chapter the owner rejects.
-These five run on every Stage 0–2 review, and each one has a rejected draft
+These five run on every Stage 0–1 review, and each one has a rejected draft
 behind it.
 
 1. **The opening.** Does the chapter welcome the reader, connect backwards with a

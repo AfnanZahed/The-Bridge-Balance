@@ -10,7 +10,7 @@ Loaded at SKILL.md step 2. This is the front half of the chapter: finding out wh
 
 `curriculum-state/canon/research-and-comparison.md` is a core platform policy and it governs this whole phase. **Nothing is written from memory, from instinct, or from a blank page.** Two passes run before drafting, and this file's protocol is how the first one is executed:
 
-- **Pass 1 — standards research.** Not only "what is true about this topic," but **how the strongest sources in the world actually teach or build it, and what reasoning sits underneath that choice.** International practice and its philosophy, both. A convention adopted without its reason is cargo. Around 95% of this is delegated to DeepSeek v4.1 Flash through `command-code-delegation` — Claude decides what to ask and judges what returns, DeepSeek does the reading — and results are read from the actual tool trace, never from the summary line.
+- **Pass 1 — standards research.** Not only "what is true about this topic," but **how the strongest sources in the world actually teach or build it, and what reasoning sits underneath that choice.** International practice and its philosophy, both. A convention adopted without its reason is cargo. This is usually delegated to DeepSeek v4.1 Flash through `command-code-delegation`, after asking the owner which model does it (`corrections.md` §19 and §30) — Claude decides what to ask and judges what returns, DeepSeek does the reading — and results are read from the actual tool trace, never from the summary line.
 - **Pass 2 — the owner's comparative study.** The project owner works through several real courses or implementations and hands over their own learnings plus the points they want carried in. **It blocks step 3, not step 2**, so research runs first and drafting waits. It is not substitutable by your own search results.
 
 **What comes back is not averaged, and it is not filtered either.** Study each source for everything it can teach — its structure, its ordering, its tone, the kind of example it reaches for, where it loses a reader — **and** for what all of them missed. Adopt what is good, then go further. `canon/research-and-comparison.md` and `corrections.md` §15.
@@ -23,7 +23,7 @@ Loaded at SKILL.md step 2. This is the front half of the chapter: finding out wh
 
 1. **Before writing a single sentence, establish three things by searching, not recalling:** what current authoritative sources actually say about this topic; whether anything about it is time-sensitive; what the official docs for any named tool actually claim. Alongside them, Pass 1's own question: **how the best sources in the world teach or build this, and why** — which is a different search from "what is true," and the one that gets skipped.
 
-2. **Treat memory as a hypothesis for Stage 3 and Stage 4 topics.** These tools update often enough that a chapter written from what you already "know" will describe a version that no longer exists. If search isn't available for such a topic, stop — a hedged claim written from memory about a monthly-changing tool isn't a smaller version of a verified claim, it's a claim this protocol has no business making.
+2. **Treat memory as a hypothesis for Stage 2 topics.** These tools update often enough that a chapter written from what you already "know" will describe a version that no longer exists. If search isn't available for such a topic, stop — a hedged claim written from memory about a monthly-changing tool isn't a smaller version of a verified claim, it's a claim this protocol has no business making.
 
 3. **Look for three specific things:**
    - The single best real, current, citable statistic or incident — *best* meaning it most precisely supports **this** chapter's claim, not the most impressive one available. **Finding it is required; printing it is not.** It may end up shaping a plain sentence and living only in the ledger.
@@ -44,7 +44,7 @@ Research living only in the session can't be audited later and can't be recalibr
 
 - what it establishes that nothing already on the list does, in one clause
 - `last_verified` — the date it was actually opened and read this run
-- `expires` — **90 days** for a Stage 3/4 tool-behaviour claim, **12 months** for an industry report's figures, `null` for a named historical incident, whose facts don't expire even though its framing might
+- `expires` — **90 days** for a Stage 2 tool-behaviour claim, **12 months** for an industry report's figures, `null` for a named historical incident, whose facts don't expire even though its framing might
 - `questions_asked` — the specific question *this* chapter asked of it
 
 **A claim with no source doesn't ship.** That is the mechanism, not a suggestion, and the ledger is where it is enforced.
@@ -85,7 +85,7 @@ What comes back is carried into the chapter and into the ledgers at step 8. The 
 
 **Step 2, research.**
 
-- Searched how the propose → act → observe loop is currently described across Stage 3's named tools, rather than relying on a memorised description. Stage 3 material, so memory was a hypothesis and search settled it.
+- Searched how the propose → act → observe loop is currently described across the AI-native material's named tools, rather than relying on a memorised description. Stage 2 material, so memory was a hypothesis and search settled it.
 - Searched for a current figure on AI-generated code reliability. Found Veracode's GenAI Code Security Report; checked `evidence-ledger.yaml` **first** — already canonical, and already spent on two distinct questions. Reuse here therefore needs a genuinely third question, which the ledger protocol exists to force.
 - Searched postmortem and discussion sources for how people misread agent autonomy. That material was handed over as raw evidence; the diagnosis of what the reader wrongly believes was made at Station 0, not here.
 
@@ -97,13 +97,13 @@ What comes back is carried into the chapter and into the ledgers at step 8. The 
 
 **Step 4, scope.** `scope_multiplier: 1.0` — the anchor. `scope_reason`: one concept, corrected against two competing wrong models, with the loop shown once in full.
 
-**Steps 6–8.** Assembled as the intro chapter at the docs root; gate run and clean; all four ledgers written back, including the rejected example and the third question asked of the Veracode report.
+**Steps 6–8.** Assembled as the intro chapter at the docs root; gate run and clean; the ledgers written back, including the rejected example and the third question asked of the Veracode report.
 
 ## Anti-patterns
 
 **Fabricating or citing unverified facts, statistics, or incidents.** The single most damaging failure a research-backed chapter can have.
 
-**Writing Stage 3/4 tool claims from memory**, or quoting the curriculum's own stage descriptions from memory instead of `canon/thesis.md`. Same failure — reciting instead of checking — on different material.
+**Writing Stage 2 tool claims from memory**, or quoting the curriculum's own stage descriptions from memory instead of `canon/thesis.md`. Same failure — reciting instead of checking — on different material.
 
 **Guessing at an API, a flag, or a version instead of looking it up.** Context7 exists for exactly this and costs a minute. A chapter that tells a reader to run a command that changed two releases ago fails them at the only moment that matters.
 
@@ -120,13 +120,13 @@ What comes back is carried into the chapter and into the ledgers at step 8. The 
 - [ ] Step 0 integrity check run, and cleared or escalated
 - [ ] All required inputs present, or the run stopped and asked rather than inventing them
 - [ ] Pass 1 asked how the best sources teach or build this **and why** — not only what is true about it
-- [ ] Pass 1 delegated via `command-code-delegation` unless there was a reason not to, and read from the actual trace
+- [ ] Pass 1 run by the model the owner chose when asked (usually DeepSeek via `command-code-delegation`; `corrections.md` §30), and read from the actual trace
 - [ ] The owner's comparative study is in hand, or step 3 is blocked and the ask has been made
 - [ ] What every studied source missed is named, not averaged away
 - [ ] Nothing reproduced from any studied source — no text, no structure, no examples, no exercises
 - [ ] Every specific factual claim checked against a real source opened this session
 - [ ] Anything uncertain was looked up — web search for current or contested facts, Context7 for library and CLI documentation — rather than written from memory
-- [ ] Stage 3/4 tool claims verified against current search; stage descriptions quoted from `canon/thesis.md`
+- [ ] Stage 2 tool claims verified against current search; stage descriptions quoted from `canon/thesis.md`
 - [ ] `concept-`, `evidence-`, and `example-ledger.yaml` checked before treating anything as new
 - [ ] Every source bucketed — canonical, proposed with rationale, or background
 - [ ] Any reused source past its `expires` date re-opened and re-verified, not assumed

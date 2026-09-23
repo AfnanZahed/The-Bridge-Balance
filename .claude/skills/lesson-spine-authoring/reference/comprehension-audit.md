@@ -7,9 +7,10 @@
 > it never had one. Both the rejected Stage 0 introduction and the cold
 > `ch01-foundations.md` passed this audit clean and were rejected on sight.
 >
-> **`beginner-experience-audit.md` is the second required pass** — ten more
-> angles, on whether a beginner keeps reading. Required on every Stage 0–2
-> draft. Run this one first, then that one. *(Added 2026-09-20.)*
+> **The second required pass is the ten-angle beginner check in
+> `beginner-experience-audit.md`** — every Stage 0–1 draft passes it before it is
+> presented, and this audit runs first. Full rule:
+> `curriculum-state/canon/audience.md`, "The reader". *(Added 2026-09-20.)*
 
 ## Contents
 
@@ -38,7 +39,7 @@ Not "is this correct." Not "is this covered." **Where does a real person lose it
 
 **No content is exempt.** Not a heading, not a callout, not a link's wording, not a sentence the author is sure is obvious. Obviousness is the author's state, never the reader's, and every silent assumption in the history of this book looked obvious to the person who wrote it.
 
-**And the reader this audit imagines is an absolute beginner.** In Stages 0–2 they have never programmed. Running these angles as a competent reader who merely lacks the topic will pass material that a real beginner cannot use. `canon/audience.md`.
+**And the reader this audit imagines is an absolute beginner — in Stages 0–1, someone who has never programmed.** Running these angles as a competent reader who merely lacks the topic will pass material that a real beginner cannot use. The rule behind it: every word must make sense to an absolute beginner on the first read — `curriculum-state/canon/corrections.md`, "12. Simplify the vocabulary, not only the sentence".
 
 ---
 
@@ -78,7 +79,7 @@ Each angle is a full pass. Each has a question, a target, and a fix.
 
 ### Angle 2 — The unsorted term
 
-**Question:** every term of art on this page — was it first checked for whether the lesson needs it at all, then put through the **one-minute** test, and did it get the treatment that test demands? *(One minute, measured against a reader who has never programmed — `canon/audience.md`.)*
+**Question:** every term of art on this page — was it first checked for whether the chapter needs it at all, then put through the **one-minute** test, and did it get the treatment that test demands? *(One minute, measured against a reader who has never programmed — `canon/audience.md`.)*
 
 **Look for:** a term used with no gloss. A term glossed weakly — buried in a subordinate clause, after a colon, or so far from its use that the reader has to carry it. A heavy term glossed in twelve words when it needed a passage. A Tier 1 term the glossary carries that was never marked and linked. A hard ordinary English word that stayed in the prose and was not explained and linked (`corrections.md` §27).
 
@@ -106,15 +107,19 @@ Each angle is a full pass. Each has a question, a target, and a fix.
 
 **Fix:** name the thing again. Repeating a noun costs two words; a reader re-reading a paragraph to resolve a pronoun costs far more, and some of them do not bother.
 
+**The rule behind this angle:** the canon rule against unnamed subjects and referents — `curriculum-state/canon/corrections.md`, "16. Every sentence must make plain sense on the first read".
+
 ---
 
 ### Angle 5 — The unanchored abstraction
 
 **Question:** is this abstract claim attached to something concrete *before* the reader is asked to hold it?
 
-**Look for:** a definition arriving before an instance. Two abstract sentences in a row. A principle stated in general terms that the reader has never seen operate on anything.
+**Look for:** a definition arriving before an instance. Two abstract sentences in a row. A principle stated in general terms that the reader has never seen operate on anything. Also the anchor itself: is it Pakistani-first (`curriculum-state/canon/corrections.md`, "29. Examples are Pakistani-first", and `curriculum-state/canon/audience.md`, "Language — the two decisions canon makes")? An anchor a Pakistani beginner cannot picture at once is a finding.
 
 **Fix:** concrete first, then the abstraction it supports. A reader can generalise from one clear instance. Almost nobody can instantiate from a clear generalisation.
+
+**The rule behind this angle:** the canon rule that a sentence may not leave its subject abstract and unnamed — `curriculum-state/canon/corrections.md`, "16. Every sentence must make plain sense on the first read".
 
 ---
 
@@ -135,6 +140,8 @@ Each angle is a full pass. Each has a question, a target, and a fix.
 **Look for:** anything past 28 words. An idiom. A phrasal verb that cannot be guessed from its parts. Three or more stacked nouns. A Latinate word with a plain equivalent. A long participial opening. Subject and verb pulled apart.
 
 **Fix:** `language-register.md` §2 and §3. The engineering never changes; only the sentence does.
+
+**The rule behind this angle:** the canon rule against compressed clause chains that have to be unpacked to be parsed — `curriculum-state/canon/corrections.md`, "16. Every sentence must make plain sense on the first read".
 
 ---
 

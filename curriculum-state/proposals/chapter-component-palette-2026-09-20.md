@@ -2,7 +2,7 @@
 
 **Status:** candidate list, nothing decided. Written 20 September 2026 on the
 owner's instruction to widen the palette (`canon/corrections.md` §21).
-**Nothing here is a commitment.** Components are chosen and built one at a time,
+**Nothing here is a commitment.** *(21 September 2026: two pending questions added at the owner's request, numbers 6 and 7 below.)* Components are chosen and built one at a time,
 in a later discussion, each after both research passes.
 
 ---
@@ -121,6 +121,19 @@ for them, not by difficulty.
    each batch.
 5. **Naming.** Every component's reader-facing label obeys `canon/naming.md`,
    including Rule 3, and never shows internal vocabulary (§9).
+6. **Depth blocks: does one get built, and what does it look like?** *(Added 21 September 2026,
+   at the owner's request.)* A depth block is an optional box that answers "why does it work like
+   this?" for a curious beginner. Nothing in the chapter depends on it: delete every depth block and
+   the chapter still stands. That is the delete test (`corrections.md` §25). No shipped chapter uses
+   one. To decide: does it get its own component or reuse `Collapse` / `Details` (section 1); is it
+   closed by default; must its text stay findable by site search when closed (the accessibility rule
+   above says yes); what label does the reader see (`naming.md` Rule 3 applies, so the internal
+   words "depth block" are not shown to readers); and does the delete test become a gate check.
+7. **The `Source` chip.** *(Added 21 September 2026, at the owner's request.)* It is the one
+   candidate with a written spec (`canon/thesis.md`, "Source discipline"), and it decides how a
+   chapter may state a statistic: the plain sentence stays plain, and a small marker after it opens to
+   the figure, the year, the organisation and the link. It waits for the two research passes like every
+   other component. When the palette work starts it belongs in the first batch (question 2).
 
 ## Promotion
 

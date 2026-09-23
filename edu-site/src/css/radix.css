@@ -3,7 +3,7 @@
  *
  * The TBB color system is built on the monochrome silver ramp below: every
  * surface, border, and stage identity is lightness-only. Radix's categorical
- * scales (indigo/teal/amber/plum for the four stages, red for status) were
+ * scales (indigo/teal/amber/plum for the three stages, red for status) were
  * removed with the old blue/violet accent system — stage identity is now a
  * position on the silver ramp. Two narrow chromatic exceptions exist,
  * declared directly in `custom.css`: status color (hand-picked, see the

@@ -14,7 +14,11 @@
  *      session auto-open, ⌘K, focus restore, scroll lock) and the overlay
  *      itself; the navbar's search trigger reads the same context.
  *
- *   4. {children} — the rest of the Docusaurus app tree.
+ *   4. <ChatAssistant /> — the assistant's floating trigger and the surface it
+ *      opens into. A preview: it makes no API call and its only real outcome is
+ *      the "under development" reveal.
+ *
+ *   5. {children} — the rest of the Docusaurus app tree.
  *
  * Note (R-003): the previous Lenis smooth-scroll wrapper and ScrollFX /
  * ScrollTrigger overlays were removed; native browser scroll is used.
@@ -22,6 +26,7 @@
  * See https://docusaurus.io/docs/swizzling#wrapper-your-site-with-root
  */
 
+import ChatAssistant from "@site/src/components/ChatAssistant";
 import ReadingProgress from "@site/src/components/ReadingProgress";
 import SearchUXProvider from "@site/src/components/Search/SearchUXContext";
 import { MotionConfig } from "motion/react";
@@ -49,6 +54,7 @@ export default function Root({
       <ReadingProgress />
       <MotionProvider>
         <SearchUXProvider>{children}</SearchUXProvider>
+        <ChatAssistant />
       </MotionProvider>
     </>
   );

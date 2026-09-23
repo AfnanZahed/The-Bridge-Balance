@@ -15,7 +15,7 @@ seeded_from: edu-site/docs/ (actual files on disk, 2026-08-23)
 # ---------------------------------------------------------------------------
 # THIS FILE IS NOT A PLAN - read before treating any row below as settled.
 #
-# The official curriculum (curriculum_1.md) fixes four STAGES. It does not fix
+# The official curriculum (curriculum_1.md) fixes three STAGES. It does not fix
 # a chapter list. Every `id`, `path`, `title`, and `teaches` value below is a
 # snapshot of what happens to exist on disk right now (placeholder scaffolding
 # from earlier site-building work, mostly) or what has actually shipped - none
@@ -27,7 +27,7 @@ seeded_from: edu-site/docs/ (actual files on disk, 2026-08-23)
 # when it happens; do not treat a mismatch between this file and a freshly-
 # authored chapter as an error in the chapter.
 #
-# Concretely, for Stage 1: it currently has six placeholder files, while the
+# Concretely, for Stage 1: it currently has ten chapter files, while the
 # official curriculum's Stage 1 focus line names roughly fifteen distinct topic
 # areas (software architecture, development environment, core programming,
 # packages and project management, OOP and software modeling, Git and GitHub,
@@ -78,7 +78,7 @@ chapters:
   # --- Stage 0 (officially promoted 2026-09-14 - see
   # curriculum-state/proposals/whole-book-redesign-record-2026-09-14.md §6.
   # `stage: 0` below is now a real, official stage on the same footing as
-  # 1-4, not an internal bucket. The rows below are still the OLD content
+  # 1-2, not an internal bucket. The rows below are still the OLD content
   # (five "intro" chapters, present-day snapshots) awaiting the from-scratch
   # chronological rewrite the redesign calls for - do not treat them as the
   # real Stage 0 breakdown; that hasn't been designed yet.) ------------------
@@ -303,7 +303,7 @@ chapters:
       the requirement was wrong or incomplete rather than the code mistyped.
 
       SCOPE NARROWED, recorded rather than cut silently. The inherited material
-      carried Stage 3-4 territory - the four safety boundaries, the
+      carried Stage 2 territory - the four safety boundaries, the
       experiment-to-system transition, agent governance boundaries and the
       multi-agent ownership architecture. The re-authoring judged these out of
       scope for a finale now that the sequence runs binary -> architecture ->
@@ -476,7 +476,7 @@ chapters:
 
       S2 UNDER-DELIVERED. The FrontDoor row asks which stage this is, of how
       many; "Welcome to the first stage" never said how many. It now reads
-      "Welcome to the first of five stages". Five stages is locked canon
+      "Welcome to the first of three stages". Three stages is locked canon
       (thesis.md), not a chapter count, so D5 is untouched.
 
       S3 UNDER-DELIVERED, the largest gap. The stage was never said to be in
@@ -675,7 +675,7 @@ chapters:
       with no judgment at all (example-ledger: ch02-literal-helper), given its
       own short section before the history starts and returned to at every
       step. It is deliberately the same figure a reader will meet as an AI
-      coding assistant in Stages 3-4.
+      coding assistant in Stages 1 and 2.
       The opening uses a different welcome style from ch01's, per the rule that
       no welcome style returns until four or five chapters later
       (corrections.md §7), and states why the chapter matters to the reader
@@ -757,10 +757,10 @@ chapters:
   # rather than replaced: the school AI club sign-up page capped at thirty
   # seats. Each chapter asked it a different question about its own layer, so
   # the reader watched one real thing get built properly, box by box.
-  - {id: s1-index,    path: docs/stage-01-spec-aware-vibe-engineering/index.md,             title: "Stage 1 Overview",                 stage: 1, position: 1, status: placeholder, scope_multiplier: null, requires: [intro-5],     teaches: []}
+  - {id: s1-index,    path: docs/stage-01-sde-mastery-ai-driven/index.md,             title: "Stage 1 Overview",                 stage: 1, position: 1, status: placeholder, scope_multiplier: null, requires: [intro-5],     teaches: []}
 
   - id: s1-01
-    path: docs/stage-01-spec-aware-vibe-engineering/01-foundations.md
+    path: docs/stage-01-sde-mastery-ai-driven/01-foundations.md
     title: "The Boxes and the Walls: Where a Rule Has to Live Before You Write the Code"
     stage: 1
     position: 2
@@ -782,7 +782,7 @@ chapters:
       example-ledger.yaml for what else was removed alongside it.
 
   - id: s1-02
-    path: docs/stage-01-spec-aware-vibe-engineering/02-core-programming.md
+    path: docs/stage-01-sde-mastery-ai-driven/02-core-programming.md
     title: "Reading Code You Did Not Write: Variables, Loops, and the Failures That Stay Quiet"
     stage: 1
     position: 3
@@ -803,7 +803,7 @@ chapters:
       Python versus JavaScript.
 
   - id: s1-03
-    path: docs/stage-01-spec-aware-vibe-engineering/03-frontend.md
+    path: docs/stage-01-sde-mastery-ai-driven/03-frontend.md
     title: "What the Student Actually Clicks: Components, Layouts, and the Limits of the Frontend"
     stage: 1
     position: 4
@@ -823,7 +823,7 @@ chapters:
       component libraries (shadcn/ui, Material UI, daisyUI).
 
   - id: s1-04
-    path: docs/stage-01-spec-aware-vibe-engineering/04-backend.md
+    path: docs/stage-01-sde-mastery-ai-driven/04-backend.md
     title: "The Rule Nobody Can Walk Around: Backend, Endpoints, and Trust"
     stage: 1
     position: 5
@@ -846,7 +846,7 @@ chapters:
       logging, request ids, idempotency keys.
 
   - id: s1-05
-    path: docs/stage-01-spec-aware-vibe-engineering/05-databases.md
+    path: docs/stage-01-sde-mastery-ai-driven/05-databases.md
     title: "The Last Seat: Databases, Constraints, and Data That Outlives the Page"
     stage: 1
     position: 6
@@ -869,7 +869,7 @@ chapters:
       database family, query cost.
 
   - id: s1-06
-    path: docs/stage-01-spec-aware-vibe-engineering/06-git-github.md
+    path: docs/stage-01-sde-mastery-ai-driven/06-git-github.md
     title: "A Journal of Every Change: Git, GitHub, and Reviewing What an Agent Wrote"
     stage: 1
     position: 7
@@ -889,23 +889,30 @@ chapters:
       gitignore, push protection, pull requests, code review, commit hygiene,
       git log, git blame, git bisect, revert versus reset.
 
-  # --- Stage 2 -------------------------------------------------------------
-  - {id: s2-index,    path: docs/stage-02-cs50-certification/index.md,                      title: "Stage 2 Overview",                 stage: 2, position: 1, status: text-ready,  scope_multiplier: null, requires: [s1-06],       teaches: []}
-  - {id: s2-cs50p,    path: docs/stage-02-cs50-certification/cs50p.md,                      title: "CS50P - Python",                   stage: 2, position: 2, status: placeholder, scope_multiplier: null, requires: [s1-02],       teaches: []}
-  - {id: s2-cs50w,    path: docs/stage-02-cs50-certification/cs50w.md,                      title: "CS50W - JavaScript",               stage: 2, position: 3, status: placeholder, scope_multiplier: null, requires: [s2-cs50p],    teaches: []}
+  # --- Credentials (a parallel track, not a stage; disabled and unpublished)
+  #
+  # Moved out of the published docs on 2026-09-22, to
+  # edu-site/parked/credentials-track/. The rows are kept so the track's pages
+  # cannot be lost track of. `stage: 2` is retained only because the schema's
+  # `stage` field is an integer and these rows sit beside the ladder - the
+  # Credentials track has no stage number of its own.
+  - {id: cred-index,  path: parked/credentials-track/index.md,                       title: "Credentials Overview",             stage: 2, position: 1, status: text-ready,  scope_multiplier: null, requires: [s1-06],       teaches: []}
+  - {id: cred-cs50p,  path: parked/credentials-track/cs50p.md,                       title: "CS50P - Python",                   stage: 2, position: 2, status: placeholder, scope_multiplier: null, requires: [s1-02],       teaches: []}
+  - {id: cred-cs50w,  path: parked/credentials-track/cs50w.md,                       title: "CS50W - JavaScript",               stage: 2, position: 3, status: placeholder, scope_multiplier: null, requires: [cred-cs50p],  teaches: []}
 
-  # --- Stage 3 -------------------------------------------------------------
-  - {id: s3-index,    path: docs/stage-03-mastering-ai-coding-agents/index.md,              title: "Stage 3 Overview",                 stage: 3, position: 1, status: text-ready,  scope_multiplier: null, requires: [s2-cs50w],    teaches: []}
-  - {id: s3-prompt,   path: docs/stage-03-mastering-ai-coding-agents/prompt-engineering.md, title: "Prompt Engineering",               stage: 3, position: 2, status: placeholder, scope_multiplier: null, requires: [intro-5],     teaches: []}
-  - {id: s3-context,  path: docs/stage-03-mastering-ai-coding-agents/context-engineering.md, title: "Context Engineering",             stage: 3, position: 3, status: placeholder, scope_multiplier: null, requires: [s3-prompt],   teaches: []}
-  - {id: s3-cc,       path: docs/stage-03-mastering-ai-coding-agents/claude-code.md,        title: "Claude Code and coding-agent CLIs", stage: 3, position: 4, status: placeholder, scope_multiplier: null, requires: [s3-context, s1-06], teaches: []}
-  - {id: s3-skills,   path: docs/stage-03-mastering-ai-coding-agents/skills-and-mcp.md,     title: "Skills and MCP",                   stage: 3, position: 5, status: placeholder, scope_multiplier: null, requires: [s3-cc],       teaches: []}
+  # --- Stage 1, continued: the four chapters carried over from old Stage 3,
+  # which merged into Stage 1 on 2026-09-22. They hold positions 8-11 there. -
+  - {id: old-s3-index, path: null,             title: "Stage 3 Overview",                 stage: 3, position: 1, status: removed,  scope_multiplier: null, requires: [cred-cs50w],  teaches: [], notes: "Retired 2026-09-22 in the four-stage restructure: the old Stage 3 overview merged into s1-index and its placeholder file was deleted."}
+  - {id: s1-prompt,   path: docs/stage-01-sde-mastery-ai-driven/prompt-engineering.md, title: "Prompt Engineering",               stage: 1, position: 8, status: placeholder, scope_multiplier: null, requires: [intro-5],     teaches: []}
+  - {id: s1-context,  path: docs/stage-01-sde-mastery-ai-driven/context-engineering.md, title: "Context Engineering",             stage: 1, position: 9, status: placeholder, scope_multiplier: null, requires: [s1-prompt],   teaches: []}
+  - {id: s1-cc,       path: docs/stage-01-sde-mastery-ai-driven/claude-code.md,        title: "Claude Code and coding-agent CLIs", stage: 1, position: 10, status: placeholder, scope_multiplier: null, requires: [s1-context, s1-06], teaches: []}
+  - {id: s1-skills,   path: docs/stage-01-sde-mastery-ai-driven/skills-and-mcp.md,     title: "Skills and MCP",                   stage: 1, position: 11, status: placeholder, scope_multiplier: null, requires: [s1-cc],       teaches: []}
 
-  # --- Stage 4 -------------------------------------------------------------
-  - {id: s4-index,    path: docs/stage-04-engineering-autonomous-ai-agents/index.md,        title: "Stage 4 Overview",                 stage: 4, position: 1, status: text-ready,  scope_multiplier: null, requires: [s3-skills],   teaches: []}
-  - {id: s4-rag,      path: docs/stage-04-engineering-autonomous-ai-agents/rag-and-tool-calling.md, title: "RAG and Tool Calling",     stage: 4, position: 2, status: placeholder, scope_multiplier: null, requires: [s4-index, s1-05], teaches: [RAG, tool calling]}
-  - {id: s4-multi,    path: docs/stage-04-engineering-autonomous-ai-agents/multi-agent-systems.md,  title: "Multi-Agent Systems",      stage: 4, position: 3, status: placeholder, scope_multiplier: null, requires: [s4-rag],      teaches: []}
-  - {id: s4-evals,    path: docs/stage-04-engineering-autonomous-ai-agents/evaluations.md,  title: "Evaluations",                      stage: 4, position: 4, status: placeholder, scope_multiplier: null, requires: [s4-rag],      teaches: []}
+  # --- Stage 2 (SDE Mastery, AI-Native; the old Stage 4) ---------------------
+  - {id: s2-index,    path: docs/stage-02-sde-mastery-ai-native/index.md,        title: "Stage 2 Overview",                 stage: 2, position: 1, status: text-ready,  scope_multiplier: null, requires: [s1-skills],   teaches: []}
+  - {id: s2-rag,      path: docs/stage-02-sde-mastery-ai-native/rag-and-tool-calling.md, title: "RAG and Tool Calling",     stage: 2, position: 2, status: placeholder, scope_multiplier: null, requires: [s2-index, s1-05], teaches: [RAG, tool calling]}
+  - {id: s2-multi,    path: docs/stage-02-sde-mastery-ai-native/multi-agent-systems.md,  title: "Multi-Agent Systems",      stage: 2, position: 3, status: placeholder, scope_multiplier: null, requires: [s2-rag],      teaches: []}
+  - {id: s2-evals,    path: docs/stage-02-sde-mastery-ai-native/evaluations.md,  title: "Evaluations",                      stage: 2, position: 4, status: placeholder, scope_multiplier: null, requires: [s2-rag],      teaches: []}
 
 # ---------------------------------------------------------------------------
 # Not a lesson. Listed so a coherence audit does not treat it as one.
@@ -918,11 +925,11 @@ non_lessons:
 # Authoring progress. Update on every completed chapter.
 # ---------------------------------------------------------------------------
 progress:
-  total_lesson_files: 15          # the Stage 1-4 lesson rows; excludes the 4 stage index pages and the 5 intro-sequence rows
+  total_lesson_files: 15          # the Stage 1-2 lesson rows; excludes the 4 stage index pages and the 5 intro-sequence rows
   authored: 5                     # the 5 intro rows only - Stage 1's 6 rows reverted to placeholder 2026-09-17
   authored_to_current_contract: 5
   stage_1_authored: 0             # of Stage 1's 6 rows - reverted to placeholder 2026-09-17, see note below
-  remaining_placeholders: 15      # Stage 1 (6), Stage 2 (2), Stage 3 (4), Stage 4 (3)
+  remaining_placeholders: 15      # Stage 1 (10) + Stage 2 (3) + the Credentials track (2)
   note: >-
     intro.md was re-authored 2026-08-24,
     so it counted as authored under BOTH the old and current standard.
@@ -979,7 +986,7 @@ progress:
     chapters, so its pre-agreed split condition was not met and it stays a flat
     file. The whole intro sequence therefore remains flat - five documents, no
     sub-categories. This is a judgment recorded so it is visible, not a silent
-    omission; if the owner prefers the Stage 1-4 folder pattern for the intro
+    omission; if the owner prefers the Stage 1-2 folder pattern for the intro
     regardless of length, the natural seams are named on intro-5's row above.
     DEFECT FIXED 2026-09-10: three rows - s1-index, s1-01 and s3-prompt - still
     carried `requires: [intro]`, a dangling reference to the chapter id retired
@@ -995,11 +1002,16 @@ progress:
     audience contract for Stages 1-4".
     Both halves are now wrong. The owner extended beginner-only to STAGES 0, 1
     AND 2 in full, and withdrew the senior-engineer reader from the project;
-    the audience for Stages 3-4 is undecided and no rule may assume one.
+    the audience for Stage 2 is undecided and no rule may assume one.
     It is the contract, not an exception. canon/audience.md and
     corrections.md §8.
-    AUTHORED 2026-09-11 (Stage 1, all six chapters): docs/stage-01-spec-aware-
-    vibe-engineering/01-foundations.md through 06-git-github.md were authored
+    RENUMBERED 2026-09-22 (canon/course-structure.md, CS-31): the
+    zero-knowledge floor now names STAGES 0-1, and there is no Stage 3 and no
+    Stage 4 - the AI-Native stage is Stage 2, and Credentials is a parallel
+    track, not a stage. Read this block's "Stage 2" as the stage the
+    beginner-only extension does not reach.
+    AUTHORED 2026-09-11 (Stage 1, all six chapters): docs/stage-01-sde-mastery-
+    ai-driven/01-foundations.md through 06-git-github.md were authored
     in one parallel run - six chapters drafted concurrently by sub-agents from a
     shared Stage 1 brief, then verified, gated and written back serially by the
     orchestrator. Same method as the Phase 2 intro run, and the second time it
@@ -1070,7 +1082,7 @@ progress:
     REVERTED TO PLACEHOLDER 2026-09-17 (owner instruction): all six Stage 1
     chapters (s1-01 through s1-06) and the stage index (s1-index) were taken
     back from text-ready to placeholder, and their written content stripped
-    from docs/stage-01-spec-aware-vibe-engineering/. The owner had flagged the
+    from docs/stage-01-sde-mastery-ai-driven/. The owner had flagged the
     2026-09-11 authoring run as unauthorized. `authored` and
     `authored_to_current_contract` drop from 11 to 5 (the five intro rows
     only); `stage_1_authored` drops from 6 to 0; `remaining_placeholders`
@@ -1080,6 +1092,34 @@ progress:
     and example-ledger.yaml had their matching Stage 1 sections removed in the
     same pass - see each file's own dated note. Cross-references from Stage 0
     and Stage 2 chapters that pointed at Stage 1 as already-taught material
-    were updated in the same pass; check docs/stage-02-cs50-certification/ and
+    were updated in the same pass; check edu-site/parked/credentials-track/ and
     the intro sequence if Stage 1 is re-authored, since they may need
     re-pointing again.
+
+    2026-09-22: four-stage restructure. Old Stage 1 (6) and old Stage 3 (4) merged into Stage 1 (10); old Stage 4 became Stage 3 (3). Totals unchanged.
+
+    2026-09-22, later the same day: the four-stage restructure above was
+    superseded by the three-stage decision (course-structure.md, CS-12 to
+    CS-16). There is no Stage 3 and no Stage 4. The AI-Native stage is
+    Stage 2, at docs/stage-02-sde-mastery-ai-native/. Credentials is a
+    parallel track, not a stage, and is disabled; its pages were moved out of
+    the published docs to edu-site/parked/credentials-track/ and its rows
+    re-id'd cred-*, and the AI-Native rows took the s2-* id space. Totals
+    unchanged: 15 lesson rows.
+
+# RESTRUCTURE 2026-09-22 (four-stage curriculum, owner-approved). The five
+# stages became four: Stage 1 SDE Mastery (AI-Driven) is the old Stage 1 and
+# old Stage 3 merged; Stage 2 is Credentials (renamed from Credible
+# Validation); Stage 3 SDE Mastery (AI-Native; Agentic AI) is the old Stage 4.
+# Live folders: docs/stage-01-sde-mastery-ai-driven/,
+# docs/stage-02-credentials/, docs/stage-03-sde-mastery-ai-native/. Every file
+# that moved was a placeholder. The retired folders were backed up to
+# _scratch/backup-2026-09-22-stage-rename/ before deletion.
+#
+# SUPERSEDED 2026-09-22, later the same day (three-stage structure, CS-12 to
+# CS-16). The four-stage block above is kept as the record. There is no Stage 3
+# and no Stage 4. The live folders are
+# docs/stage-01-sde-mastery-ai-driven/ and
+# docs/stage-02-sde-mastery-ai-native/ (the AI-Native stage, renumbered to
+# Stage 2). Credentials is a parallel track, not a stage - disabled, and its
+# pages moved out of the published docs to edu-site/parked/credentials-track/.

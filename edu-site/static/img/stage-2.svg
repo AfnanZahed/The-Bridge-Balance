@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Stage 2 — Credentials">
-  <title>Stage 2 — Credentials</title>
-  <desc>Badge seal with ribbon tails: rosette representing certification and achievement.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Badge seal with ribbon tails">
+  <title>Badge seal with ribbon tails</title>
+  <desc>Badge seal with ribbon tails.</desc>
   <defs>
     <linearGradient id="s2-bg" x1="0" y1="0" x2="400" y2="300" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#fffbeb"/>

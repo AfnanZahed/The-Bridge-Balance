@@ -159,7 +159,7 @@ Every figure below was checked against the maker's own pricing page on **10 Sept
 
 **Three places will keep you current.** The Stack Overflow Developer Survey, published each year, measures what working developers actually use, and it separates what people use from what they merely want. Each project's own documentation is the only honest account of what it does today. And the release notes of VS Code itself appear every month, which shows how quickly even a settled tool still moves.
 
-This chapter is part of the ground laid ahead of **Stage 1**, and the tools on its last rung return in **Stage 3**, where directing coding agents gets the whole stage to itself. **One quieter tool comes before either.** Every IDE in this chapter is built on top of a text-only window that runs commands, and the newest coding agents have moved out of a window altogether to live there. That is the terminal, and it is next.
+This chapter is part of the ground laid ahead of **Stage 1**, and the tools on its last rung return there, where directing coding agents is learned alongside the engineering. **One quieter tool comes before either.** Every IDE in this chapter is built on top of a text-only window that runs commands, and the newest coding agents have moved out of a window altogether to live there. That is the terminal, and it is next.
 
 ## Before you turn the page
 

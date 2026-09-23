@@ -8,6 +8,14 @@ status: research and structure recommendation only — non-binding, no lesson pr
 
 # Cluster 7 — The Language Landscape: why there are dozens, and what each one is for
 
+> **Note, 22 September 2026.** This is a dated research record, kept as written.
+> Two stage references in it are now out of date. Stage 1 is a ten-chapter
+> stage — the four chapters this pass primes (core programming, frontend,
+> backend, databases) are still those four. And CS50 is not a stage: it is the
+> Credentials track, a parallel track disabled for now
+> (`canon/course-structure.md` CS-16). Read "Stage 2's two certifications" in
+> section 0, and "in Stage 2" in section 3, as that track.
+
 ## 0. What this pass owns, and what it deliberately leaves alone
 
 **The gap this fills.** Cluster 1 ends at FORTRAN (April 1957) and its own boundary note hands COBOL (1959-60), ALGOL 58/60, and LISP forward. Cluster 2's window (1958-74) owns the IC, the methodology era, Unix, and networking — it names COBOL and LISP only as boundary items and never covers the language landscape itself. No pass in this project has yet answered the question this chapter exists for: **once a high-level language was proven possible, why did dozens appear, and what is each one for?**

@@ -213,13 +213,13 @@ concepts:
     first_defined: null
     used_in: [docs/intro-5-spec-driven-engineering.md]
     notes: >-
-      Stage 4 material appearing in the intro. Acceptable there
+      Stage 2 material appearing in the intro. Acceptable there
       (that reader has it). UPDATE 2026-08-24: the acronym is now expanded on
       first use, via the "Surface 1 — Retrieval-augmented generation" heading
       immediately preceding the first bare use of "RAG" - so the
       first-use-expansion requirement is now satisfied. Status stays
       used-undefined because no formal one-sentence canonical definition has
-      shipped yet; that full definition is still Stage 4's job.
+      shipped yet; that full definition is still Stage 2's job.
 
   # FIRST DEFINED 2026-09-10 by docs/intro-1-binary-to-programming.md, the real
   # spine treatment that succeeded the deleted intro-2 pilot. The pilot's terms
@@ -1243,7 +1243,7 @@ concepts:
 
   # === STAGE 1 (REMOVED 2026-09-17) ==========================================
   # All Stage 1 concept entries were deleted here. The six Stage 1 chapters
-  # (docs/stage-01-spec-aware-vibe-engineering/*.md) were reverted to
+  # (docs/stage-01-sde-mastery-ai-driven/*.md) were reverted to
   # chapter_state: placeholder on 2026-09-17 (owner instruction - see
   # prerequisite-graph.yaml's progress note for the full record), so none of
   # the terms they defined are live on the site any more. Deleting the block

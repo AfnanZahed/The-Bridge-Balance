@@ -6,7 +6,7 @@ This stack is based on Panaversity Hackathon I, with surgical additions for runn
 
 | # | Layer | Tech | Role |
 |---|---|---|---|
-| 1 | Textbook frontend | **Docusaurus is 3.10.2** (TypeScript, MDX) | 5-stage curriculum, product catalog pages |
+| 1 | Textbook frontend | **Docusaurus is 3.10.2** (TypeScript, MDX) | 3-stage curriculum, product catalog pages |
 | 2 | Static hosting | **GitHub Pages** or **Vercel** | Serve the Docusaurus build |
 | 3 | Backend API | **FastAPI** (Python 3.12) | RAG chat, product API, checkout, webhooks, license endpoints |
 | 4 | ORM + migrations | **SQLAlchemy 2.x + Alembic** | DB layer for FastAPI |

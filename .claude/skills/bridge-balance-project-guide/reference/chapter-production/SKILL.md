@@ -1,13 +1,13 @@
 ---
 name: chapter-production
-description: The Bridge Balance's chapter production line — takes a topic and ends with a live, gate-passing MDX chapter at edu-site/docs/. It does NOT write the teaching. It owns everything around it — the CS50 integrity check, required inputs, research and verification, the four ledgers read and written back, scope and its reason, frontmatter and file assembly, the gate, and the handback check. The lesson itself — shape, the name, the stations, the spine, footholds, depth blocks, and every sentence — belongs to the peer skill lesson-spine-authoring, which this skill loads at step 3 and stays inside through step 5 without duplicating or second-guessing it. Text is the default; on explicit request it can also write image PROMPTS for the owner's generator or build a diagram itself via a diagramming connector, delivered as a static image file — never inline Mermaid/SVG/JSX in the chapter body. Every chapter ships as one continuous read. Reached through bridge-balance-project-guide; it does not trigger on its own.
+description: The Bridge Balance's chapter production line — takes a topic and ends with a live, gate-passing MDX chapter at edu-site/docs/. It does NOT write the teaching. It owns everything around it — the CS50 integrity check, required inputs, research and verification, the ledgers read and written back, scope and its reason, frontmatter and file assembly, the gate, and the handback check. The teaching itself — chapter shape, the name, the stations, the spine, footholds, depth blocks, and every sentence — belongs to the peer skill lesson-spine-authoring, which this skill loads at step 3 and stays inside through step 5 without duplicating or second-guessing it. Text is the default; on explicit request it can also write image PROMPTS for the owner's generator or build a diagram itself via a diagramming connector, delivered as a static image file — never inline Mermaid/SVG/JSX in the chapter body. Every chapter ships as one continuous read. Reached through bridge-balance-project-guide; it does not trigger on its own.
 ---
 
 # Chapter production
 
 One topic in, one shipped chapter out — and **this skill does not write the chapter.**
 
-That sentence is the whole design. Everything a chapter needs in order to exist, be trusted, and stay consistent with the rest of the book is here: what's true, what backs it, where the file goes, what the book already committed to, and whether it passes. The lesson living inside that container is written by `lesson-spine-authoring`, a peer skill, start to finish.
+That sentence is the whole design. Everything a chapter needs in order to exist, be trusted, and stay consistent with the rest of the book is here: what's true, what backs it, where the file goes, what the book already committed to, and whether it passes. The teaching inside that container is written by `lesson-spine-authoring`, a peer skill, start to finish.
 
 Think of it the way a publisher does. The production editor commissions the work, checks the facts, holds the house style, sets the page, proofs it, and files it in the catalogue. They do not write the book. **This skill is the production editor.**
 
@@ -17,10 +17,10 @@ The standard has not changed: **one chapter, written well enough that a reader w
 
 | This skill owns | `lesson-spine-authoring` owns |
 |---|---|
-| The CS50 integrity check | The lesson shape — Concept, Tool, Practice, Procedure |
+| The CS50 integrity check | The chapter shape — Concept, Tool, Practice, Procedure |
 | Stage, sequence position, the prerequisite graph | Station 0: the name, its register, the prediction it opens |
 | Research, verification, the evidence trail | The station sheet, and which stations carry the weight |
-| The four ledgers, read and written back | The beginner-landing set, and the spine built from it |
+| The ledgers, read and written back | The beginner-landing set, and the spine built from it |
 | `scope_multiplier` and `scope_reason` | Footholds, depth blocks, the delete test |
 | Frontmatter, file path, MDX assembly | Every sentence — `language-register.md` governs all of them |
 | The gate, and reaching a clean pass | The retrieval prompt that ends the chapter |
@@ -32,7 +32,7 @@ The standard has not changed: **one chapter, written well enough that a reader w
 
 Not preferences. Each of these is `lesson-spine-authoring`'s job, and doing it here produces two versions of one decision that drift apart:
 
-- **Do not classify the lesson shape.** Hand the topic over and receive the classification.
+- **Do not classify the chapter shape.** Hand the topic over and receive the classification.
 - **Do not run Station 0, decompose the name, or judge its register.** That includes deciding an etymology is "obvious enough" to state without the verification protocol.
 - **Do not diagnose the misconception separately.** Station 0 locates it. A second diagnosis run here produces a second answer.
 - **Do not decide what goes in the spine versus a foothold or a depth block**, and do not run the delete test.
@@ -57,7 +57,7 @@ The one other image-adjacent thing this skill does, **on request**, is write the
 
 Read now, in full — they're short and they change the shape of everything:
 - `curriculum-state/canon/corrections.md` — **first.** Standing rules the owner has already had to give more than once. Both repeats happened because nothing in a reading list like this one named it
-- `curriculum-state/canon/thesis.md` — the five stages, the two extremes, the safety floor
+- `curriculum-state/canon/thesis.md` — the stages, the two extremes, the safety floor
 - `curriculum-state/canon/audience.md` — who reads this and under what conditions
 - `curriculum-state/canon/voice.md` — the house voice, its six commitments, and its banned-phrase list
 
@@ -83,7 +83,7 @@ How to think while running the workflow, not a preamble to skip past. Every one 
 
 **1. Delegate the teaching completely, then check the handback.** The split only works if it is real in both directions: nothing about what the reader meets gets decided here, and nothing that comes back is waved through unread. Step 3 says exactly what must return and what is checked in it. Partial delegation — handing over the design but "tidying" the prose, or accepting a station sheet without checking the three canon obligations — is the failure this whole structure exists to prevent.
 
-**2. Research like your reputation depends on it.** Don't assert what you haven't checked. For Stage 3 and Stage 4 topics — the agent tools, multi-agent systems, RAG — memory is a hypothesis, not a source; these change monthly and a lesson written from what you already "know" will describe a version that no longer exists. Quote `canon/thesis.md`'s stage descriptions rather than recalling them; an earlier draft of this project's own framework misstated the Stage 3 tool list from memory, and the error shipped in a document meant to be authoritative.
+**2. Research like your reputation depends on it.** Don't assert what you haven't checked. For Stage 2 topics — the agent tools, multi-agent systems, RAG — memory is a hypothesis, not a source; these change monthly and a chapter written from what you already "know" will describe a version that no longer exists. Quote `canon/thesis.md`'s stage descriptions rather than recalling them; an earlier draft of this project's own framework misstated the agent-tool list from memory, and the error shipped in a document meant to be authoritative.
 
 **3. Label what kind of claim you're making.** Settled fact, current practice, or your own synthesis. A reader who can't tell which is which can't tell what to trust — and neither can the next author reading the ledger.
 
@@ -97,19 +97,19 @@ How to think while running the workflow, not a preamble to skip past. Every one 
 
 ### Step 0 — Integrity check, before anything else
 
-If the topic touches an external credential, license, examination, or platform — most concretely, anything under Stage 2 / CS50 — read `curriculum-state/canon/integrity-floor.md` **first**. CS50's own published policy permits its Duck for in-course help and forbids any other AI, Claude included, from producing or completing graded CS50P/CS50W work. If what's asked would author through that conflict, **stop, state the conflict in one paragraph, and offer the compliant framing** — do not proceed "clearly labelled" or softened. Not a judgment call weighed against how far along the request is. Cheap to check before investing in research; expensive to discover after a full draft.
+If the topic touches an external credential, license, examination, or platform — most concretely, anything under the Credentials track / CS50 — read `curriculum-state/canon/integrity-floor.md` **first**. CS50's own published policy permits its Duck for in-course help and forbids any other AI, Claude included, from producing or completing graded CS50P/CS50W work. If what's asked would author through that conflict, **stop, state the conflict in one paragraph, and offer the compliant framing** — do not proceed "clearly labelled" or softened. Not a judgment call weighed against how far along the request is. Cheap to check before investing in research; expensive to discover after a full draft.
 
 ### Step 1 — Establish the inputs, and stop rather than invent
 
 Three things must be real before research starts:
 
 1. **A topic specific enough to research.** "Databases" is a stage; "choosing between PostgreSQL and MongoDB for a first backend" is a chapter.
-2. **A stage (0–4; 0 is the book's own orientation material) and a rough sequence position**, checked against `curriculum-state/ledgers/prerequisite-graph.yaml`. Not listed? That's a sequencing gap — surface it and propose a position with a one-sentence reason rather than silently picking one. Already listed? Treat its `title` and `teaches` as the last-known shape, not a brief to fulfil verbatim; the graph is a snapshot of what's decided so far, and this run may legitimately retitle or rescope it. Update the graph to match what got authored, not the reverse.
+2. **A stage (0–2; 0 is the book's own orientation material) and a rough sequence position**, checked against `curriculum-state/ledgers/prerequisite-graph.yaml`. Not listed? That's a sequencing gap — surface it and propose a position with a one-sentence reason rather than silently picking one. Already listed? Treat its `title` and `teaches` as the last-known shape, not a brief to fulfil verbatim; the graph is a snapshot of what's decided so far, and this run may legitimately retitle or rescope it. Update the graph to match what got authored, not the reverse.
 3. **Enough angle to research meaningfully.** "Write something about Git" forces you to invent the chapter's thesis tie-in from nothing — exactly the fabrication risk Principle 2 exists to prevent.
 
 Missing any of the three: **stop and ask for it precisely.** Then read the ledgers per `reference/ledgers-protocol.md` — what's already defined, what evidence is already spent, which examples are reserved, what this chapter's prerequisites actually are.
 
-**A fourth, mechanical stop:** web search must actually work for a Stage 3 or Stage 4 topic. No working search for a topic that changes monthly is not a green light to proceed from memory with a caveat — **stop and say so.**
+**A fourth, mechanical stop:** web search must actually work for a Stage 2 topic. No working search for a topic that changes monthly is not a green light to proceed from memory with a caveat — **stop and say so.**
 
 **A fifth stop, and it blocks step 3 rather than step 2:** `curriculum-state/canon/research-and-comparison.md` requires the project owner's own comparative study — several real courses or implementations worked through, with their learnings and the points they want carried in handed over — before any drafting begins. Research (step 2) may proceed without it. **Drafting may not.** If it has not been supplied when step 3 comes up, stop and ask for it: it is not replaceable by your own search results, because the comparison is the owner's judgment and it is the input the whole policy exists to capture.
 
@@ -132,17 +132,17 @@ Load `.claude/skills/lesson-spine-authoring/SKILL.md` and work inside it. **Foll
 
 **Three things must come back, and this skill checks each one** — they are Bridge Balance canon rather than general teaching craft, which is why they are checked here rather than there:
 
-1. **The right invariants are present — not all six by default** (`canon/thesis.md`). *(Changed 2026-09-20: the six are stage-level commitments, not a per-chapter checklist. `corrections.md` §10.)* Ask which of the six **this** chapter is the right home for, then check those. Per chapter: the misconception it corrects, placed where the reader would otherwise form the wrong idea; its stage named in plain words; and a safety-floor statement **if** the topic touches execution, deployment, credentials, or anything a reader could ship without checking — in the plain Stage 0–2 wording where that applies. The thesis, the two extremes and the SDE move belong in the chapters that are actually about the work. **Forcing them into a chapter that is not is a defect, not compliance** — it is how AI-agent vocabulary landed on page one of a beginner's first chapter.
+1. **The right invariants are present — not all six by default** (`canon/thesis.md`). *(Changed 2026-09-20: the six are stage-level commitments, not a per-chapter checklist. `corrections.md` §10.)* Ask which of the six **this** chapter is the right home for, then check those. Per chapter: the misconception it corrects, placed where the reader would otherwise form the wrong idea; its stage named in plain words; and a safety-floor statement **if** the topic touches execution, deployment, credentials, or anything a reader could ship without checking — in the plain Stages 0–1 wording where that applies. The thesis, the two extremes and the SDE move belong in the chapters that are actually about the work. **Forcing them into a chapter that is not is a defect, not compliance** — it is how AI-agent vocabulary landed on page one of a beginner's first chapter.
 
 2. **One worked example the reader can picture, and the ledger was checked first.** `example-ledger.yaml` holds `reserved` entries that are pre-approved and waiting, and it records every example already used — read it and decide deliberately whether a new example or a return to a familiar one teaches better here. **An invented everyday example is fully legitimate**; what is not is an empty placeholder. Chosen for legibility, never for how impressive it looked in research. *A chapter that claims its subject is its own example has almost always skipped this step.*
 
-3. **The signature contribution is named, in one sentence, and it is real.** Per `canon/voice.md`'s anti-commodity test: if the top search result replaced this chapter with no loss to the reader, it has not earned its place. A frame, a decision rule, a worked comparison, a failure taxonomy — **or, in Stages 0–2, an explanation an absolute beginner genuinely understands afterwards.** Clarity for this reader is the harder achievement and counts as the contribution; most of the internet fails at it. What does not count is a competent restatement of the same explanation everyone else gives, in the same order, at the same difficulty.
+3. **The signature contribution is named, in one sentence, and it is real.** Per `canon/voice.md`'s anti-commodity test: if the top search result replaced this chapter with no loss to the reader, it has not earned its place. A frame, a decision rule, a worked comparison, a failure taxonomy — **or, in Stages 0–1, an explanation an absolute beginner genuinely understands afterwards.** Clarity for this reader is the harder achievement and counts as the contribution; most of the internet fails at it. What does not count is a competent restatement of the same explanation everyone else gives, in the same order, at the same difficulty.
 
-Also returning: the lesson shape and the station sheet, with every dropped station carrying its one-clause reason. Both go into the step 9 report, where they are read by whoever decides the chapter ships. Do not evaluate them against criteria of your own — `lesson-spine-authoring` owns those, and checking someone's work against a standard they were never given is not a check.
+Also returning: the chapter shape and the station sheet, with every dropped station carrying its one-clause reason. Both go into the step 9 report, where they are read by whoever decides the chapter ships. Do not evaluate them against criteria of your own — `lesson-spine-authoring` owns those, and checking someone's work against a standard they were never given is not a check.
 
 ### Step 4 — Set the scope, and write its reason
 
-Assign `scope_multiplier` (see `curriculum-state/contracts/calibration.md` for the anchor at 1.0) and write `scope_reason` as one specific clause about *this* topic. "Reference scope" and "standard chapter" are not reasons and the gate rejects them. A real one reads like *"one core concept plus two supporting comparisons, and the CS50 boundary needs its own section"*.
+Assign `scope_multiplier` (see `curriculum-state/contracts/calibration.md` for the anchor at 1.0) and write `scope_reason` as one specific clause about *this* topic. "Reference scope" and "standard chapter" are not reasons and the gate rejects them. A real one reads like *"one core concept plus two supporting comparisons, and the CS50 boundary needs its own section"*. **An honest seam in the material becomes a Lesson, or a Part inside a Lesson, rather than one long page** (`curriculum-state/canon/course-structure.md` names the levels). The split is decided here, when the chapter is scoped, and not while drafting. Never compress two subjects into one file to keep a count down, and never invent a seam.
 
 ### Step 5 — Drafting happens inside `lesson-spine-authoring`
 
@@ -188,7 +188,7 @@ Work every error using `gate.md`'s failure-reading table until all of it exits 0
 
 ### Step 8 — Write the ledgers back
 
-Per `reference/ledgers-protocol.md`, all four. A chapter that finishes without this isn't finished, whatever the file on disk looks like — the next chapter's author needs what this one just learned, and the ledgers are the only place that knowledge survives between sessions.
+Per `reference/ledgers-protocol.md`, all of them. A chapter that finishes without this isn't finished, whatever the file on disk looks like — the next chapter's author needs what this one just learned, and the ledgers are the only place that knowledge survives between sessions.
 
 ### Step 9 — Present
 
@@ -196,7 +196,7 @@ The file path. The gate output, pasted rather than summarised. The signature con
 
 ## Anti-patterns this skill forbids
 
-**Writing the lesson here.** The largest failure available, and the one the old name invited. Shape, name, stations, spine, layering, sentences — none of it is decided in this folder. If a run reaches drafting without `lesson-spine-authoring` open, it has skipped the part that makes the chapter worth reading.
+**Writing the chapter here.** The largest failure available, and the one the old name invited. Shape, name, stations, spine, layering, sentences — none of it is decided in this folder. If a run reaches drafting without `lesson-spine-authoring` open, it has skipped the part that makes the chapter worth reading.
 
 **Re-deriving `lesson-spine-authoring`'s workflow, principles, or checks into this folder** so a run "doesn't have to load it." Every copy is a fork that will drift, and the copy is always the one that goes stale.
 

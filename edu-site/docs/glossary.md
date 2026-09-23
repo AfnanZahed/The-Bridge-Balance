@@ -21,6 +21,12 @@ How much can break, and how far the damage reaches, if a change goes wrong.
 
 *First met in [Spec-Driven Engineering](/intro-5-spec-driven-engineering).*
 
+### Code Literacy
+
+The ability to read code — whoever or whatever wrote it — and judge it well enough to verify it and own it.
+
+*First met on the [Welcome](/welcome) page. This is the book's own name for its core skill, not a standard industry term. It is introduced in full the first time you meet it, and links back here after that.*
+
 ### Specification (spec)
 
 A written statement of what you want built and what shouldn't change, agreed before you start.
@@ -31,7 +37,7 @@ A written statement of what you want built and what shouldn't change, agreed bef
 
 The discipline in which the engineer specifies intent and boundaries, the AI implements within them, and a human verifies before taking ownership.
 
-*First met in [Spec-Driven Engineering](/intro-5-spec-driven-engineering). This is the book's own name for the idea at its centre, not a standard industry term — so you will always find it explained where it is used.*
+*First met in [Spec-Driven Engineering](/intro-5-spec-driven-engineering). This is the book's own name for the idea at its centre, not a standard industry term. It is explained the first few times you meet it. After that, it links back to this page.*
 
 ### Vibe coding
 
