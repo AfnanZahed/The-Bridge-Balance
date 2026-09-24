@@ -1,4 +1,29 @@
 <!--
+Sync Impact Report — v3.2.0 (MINOR: the version-control rule now describes a real git workflow)
+
+Version change: 3.1.0 → 3.2.0 (MINOR — an existing Development Workflow rule is materially
+rewritten: "None in the working process" becomes one `main` line pushed to a private GitHub repo)
+Amended 2026-09-23, on the owner's decision of that day (feature 012, step 0.1; build prompt §0.1
+block A). Governance steps: written proposal = `_scratch/platform-research/02-chatbot-1.0-build-prompt.md`
+§0.1 block A; owner consent = the CP0 sign-off of 2026-09-23; migration plan = none needed, no
+existing code is affected.
+
+Modified rules:
+  Development Workflow — **Version control** now reads: one `main` line, pushed to a private
+      GitHub repo; no branches, no worktrees, no rebase, no force-push, no pull requests; commit
+      after each verified step, and push only after the owner's OK. This reverses the previous
+      "None in the working process" rule and removes its contradiction with the **Commits** rule
+      directly below it, which already required atomic, named commits. Spec-Kit Plus discipline
+      (spec → plan → tasks → implement) still structures the work.
+
+Note on the size of this bump: assessed as MINOR because the changed clause is a Development
+Workflow rule, not one of the numbered principles, and because it resolves an internal
+contradiction rather than removing a principle. If the owner reads the removal of a standing rule
+as a backward-incompatible governance change, the correct level is MAJOR (4.0.0), and that is a
+one-line change in the Version field below.
+-->
+
+<!--
 Sync Impact Report — v3.1.0 (MINOR: the curriculum is three stages; the zero-knowledge floor now names Stages 0–1)
 
 Version change: 3.0.2 → 3.1.0 (MINOR — an existing principle is materially expanded:
@@ -543,7 +568,10 @@ The technology stack is the source of truth in `stack.md`. Any addition to the s
 ## Development Workflow
 
 - **Authoring agent:** Claude Code CLI; Spec-Kit Plus slash commands (`/sp.*`).
-- **Version control:** None in the working process. The project is a single working copy of files — no branches, no pull requests, no worktrees. Spec-Kit Plus discipline (spec → plan → tasks → implement) provides the structure instead.
+- **Version control:** One `main` line, pushed to a private GitHub repo (owner, 2026-09-23 —
+  reverses the earlier no-version-control rule). No branches, no worktrees, no rebase, no
+  force-push, no pull requests. Spec-Kit Plus discipline (spec → plan → tasks → implement)
+  still structures the work.
 - **Commits:** atomic, named, reviewable. Commit messages reference the spec or task they implement.
 - **Reviews:** code reviews check (a) alignment with the spec, (b) test coverage, (c) free-tier compliance, (d) no invented APIs, (e) Apple-Design fidelity per Principle VII.
 - **Quality gates:** the textbook MUST build (`npm run build`) and the backend MUST pass `pytest -q` before any phase ships.
@@ -559,4 +587,4 @@ The technology stack is the source of truth in `stack.md`. Any addition to the s
 - **Compliance review:** every PR MUST verify alignment with the principles in this constitution. A change that violates a principle MUST either (a) be amended to comply, or (b) trigger an ADR that amends the constitution.
 - **Runtime guidance:** `CLAUDE.md` carries the agent's execution contract; `stack.md` carries the stack reference; `history/adr/` carries the architectural decision log.
 
-**Version**: 3.1.0 | **Ratified**: 2026-08-17 | **Last Amended**: 2026-09-22
+**Version**: 3.2.0 | **Ratified**: 2026-08-17 | **Last Amended**: 2026-09-23
