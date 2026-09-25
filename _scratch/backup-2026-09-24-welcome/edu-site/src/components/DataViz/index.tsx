@@ -90,9 +90,8 @@ export default function DataVizSection({
                 <div className="tbb-chart-card__eyebrow">Progress</div>
                 <h3 className="tbb-chart-card__title">Stage status</h3>
                 <p className="tbb-chart-card__description">
-                  Where the curriculum stands today. A full bar means a stage's
-                  chapters are live and text-ready; all three stages show the
-                  short stub, because their chapters are still being written.
+                  Where the curriculum stands today. Full bars are live and
+                  text-ready; the short stubs are still in development.
                 </p>
               </header>
               <div className="tbb-chart-card__body">

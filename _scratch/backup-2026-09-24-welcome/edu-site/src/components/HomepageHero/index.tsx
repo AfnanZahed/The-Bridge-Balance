@@ -17,7 +17,6 @@
 
 import Link from "@docusaurus/Link";
 import React from "react";
-import AlphaBadge from "../AlphaBadge";
 import BrandMark from "../BrandMark";
 import { ArrowRight, BookOpen, Server, Zap } from "../icons";
 import GatewayFlowCanvas from "./GatewayFlowCanvas";
@@ -37,11 +36,7 @@ export default function HomepageHero(): React.ReactElement {
 
       <div className="container">
         <div className={styles.markWrap}>
-          <span className={styles.markGlow}>
-            <BrandMark size={76} />
-          </span>
-          {/* The book is unfinished and says so before it says anything else. */}
-          <AlphaBadge size="md" />
+          <BrandMark size={76} />
         </div>
 
         {/* The wrapper is a bare <span>, which maps to the `generic` role — and
@@ -71,9 +66,9 @@ export default function HomepageHero(): React.ReactElement {
 
         <p id="tbb-hero-subtitle" className="tbb-hero__subtitle">
           The Bridge Balance is the textbook for students learning spec-driven
-          AI agent engineering — a 3-stage curriculum from zero programming
-          background to autonomous AI agents, built so you ship agents, not
-          chase prompts.
+          AI agent engineering — a complete 3-stage curriculum from zero
+          programming background to autonomous AI agents, built so you ship
+          agents, not chase prompts.
         </p>
 
         <div className="tbb-hero__cta-row">

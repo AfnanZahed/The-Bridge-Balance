@@ -13,19 +13,6 @@ Newest first, and every change carries its date. Only changes you would notice a
 Every change sits under one of four words. **New** is something that did not exist before. **Changed** is something that works differently now. **Fixed** is something that was wrong and is right now. **Removed** is something that is gone.
 </Callout>
 
-### 2026-09-24
-
-#### New
-
-- **The [Welcome](/welcome) page was rebuilt for the book's Alpha launch, and it now says more than it did.** It names the two failing habits the book was written to replace, explains how the three stages work and how the learning inside them runs in parallel rather than one subject after another, states plainly that the book is in Alpha and what that means today, lists what is coming and calls it planned, and keeps its one call to action to the very end: follow the [changelog](/changelog) and come back for Beta. It points you at no Stage 0 chapter, because that text is being written from scratch.
-- **Two new [glossary](/glossary) entries.** [*MCP server*](/glossary#mcp-server) and [*Agent Skill*](/glossary#agent-skill) are now defined in plain English, because the Welcome page names both when it describes what is coming.
-
-#### Fixed
-
-- **Stage 0 stopped showing as "Live" on the homepage.** The bar chart and the donut both listed Stage 0 as live and text-ready. Both now say "In development", and Stage 0's bar is a short stub like the other two. The caption under the bar chart promised full bars marked live stages, so it now explains what a full bar means.
-- **The headline sentence no longer calls the curriculum "complete".** It is a three-stage curriculum, and two of the three stages are still being written.
-- **The Stage 0 card on the homepage opens the Welcome page's stages section.** It used to open a Stage 0 chapter that is being replaced.
-
 ### 2026-09-23
 
 #### New

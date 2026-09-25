@@ -654,9 +654,14 @@ h6 {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: min(196.25px, 48vw);
+  /* 196.25px was the title's box before the brand carried the Alpha phase
+     badge; the extra ~72px is that badge's width plus its gap, so the title
+     keeps the room it had. The vw ceiling was raised 48 → 56 at the same time:
+     the badge costs ~62px on narrow viewports too, and the right-hand controls
+     leave that much slack clear from 320px up (they begin at 100vw − 62px). */
+  width: min(268px, 56vw);
   box-sizing: border-box;
-  max-width: 48vw;
+  max-width: 56vw;
   justify-content: center;
 }
 .theme-layout-navbar-left {
@@ -734,7 +739,7 @@ h6 {
 
 @media (max-width: 996px) {
   .navbar__brand {
-    max-width: 48vw;
+    max-width: 56vw;
   }
 }
 

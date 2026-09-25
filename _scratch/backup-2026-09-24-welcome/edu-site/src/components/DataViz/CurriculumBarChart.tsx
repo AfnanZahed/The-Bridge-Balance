@@ -2,9 +2,9 @@
  * CurriculumBarChart — Stage authoring status as a horizontal bar chart
  * (Recharts `BarChart`).
  *
- * Bar LENGTH encodes status only. A stage whose chapters are authored and
- * text-ready shows a full-length bar; a stage whose chapters are still being
- * written shows a short stub. The bar's tip label and its tooltip both
+ * Bar LENGTH encodes status only. A stage that is authored and text-ready
+ * shows a full-length bar; a stage whose chapters are still placeholder
+ * scaffolding shows a short stub. The bar's tip label and its tooltip both
  * print the status WORD — "Live" or "In development" — and never a number.
  * There is deliberately no value axis and no numeric label anywhere: this
  * chart communicates state, not magnitude.
@@ -53,7 +53,9 @@ export interface CurriculumBarDatum {
   fill: string;
 }
 
-/** Short stub = a stage whose chapters are still being written. */
+/** Full bar = a live, text-ready stage. */
+const LIVE_WEIGHT = 1;
+/** Short stub = a stage still in placeholder scaffolding. */
 const IN_DEVELOPMENT_WEIGHT = 0.2;
 
 function statusLabel(status: StageStatus): string {
@@ -64,8 +66,8 @@ export const BAR_CHART_DATA: CurriculumBarDatum[] = [
   {
     stage: "Introduction to SDE",
     short: "Stage 0",
-    status: "in-development",
-    statusWeight: IN_DEVELOPMENT_WEIGHT,
+    status: "live",
+    statusWeight: LIVE_WEIGHT,
     description:
       "The history of computing and software, read in the order it happened — binary through today's AI-coding-agent era — plus Spec-Driven Engineering and Code Literacy: reading and judging code — the philosophy Stage 1 depends on.",
     fill: "var(--tbb-accent, oklch(0 0 0))",

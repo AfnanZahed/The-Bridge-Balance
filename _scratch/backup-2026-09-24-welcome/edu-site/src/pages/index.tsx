@@ -32,7 +32,7 @@ const STAGES = [
     title: "Introduction to SDE",
     description:
       "The history of computing and software, read in the order it happened — binary through today's AI-coding-agent era — plus Spec-Driven Engineering and Code Literacy: reading and judging code — the philosophy the rest of the book depends on.",
-    href: "/welcome#the-three-stages-and-how-the-learning-runs-in-parallel",
+    href: "/intro-1-binary-to-programming",
     accentColor: "var(--tbb-text)",
     accentLabel: "Ink",
   },

@@ -356,3 +356,88 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 
 ## Code Standards
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.
+
+
+# Working Rules: Most Important Task First
+
+These rules adapt the ideas in Brian Tracy's *Eat That Frog!* to software work. Here, **the frog** is the single most important task right now: the one that moves the project furthest toward its goal, and often the hardest or most tempting to put off.
+
+## Rule 1: Do the most important task first (overrides everything below)
+
+For any request that involves more than one task (a single small fix can just be done):
+
+1. Before writing code, list every task the request involves.
+2. Pick the frog: the task with the biggest consequences for the goal. When unsure, it is usually one of these:
+   - the core behavior I actually asked for
+   - a bug or gap that breaks the main flow
+   - the piece that unblocks the most other work
+   - the riskiest unknown, which could invalidate the plan
+3. State it in one line before starting: `Frog: <task>, because <reason>`.
+4. Work only on the frog until it is finished and verified: it runs, and the tests or checks pass.
+5. Anything else you notice along the way goes on the task list. Don't do it now.
+6. Then pick the next frog from the list and repeat.
+7. Never work on a lower-priority task while a higher-priority one is unfinished. No polishing, refactoring, renaming, or cleanup ahead of the frog.
+
+If I ask for a specific task, that request is the priority: do it even if you'd rank something else higher, and flag the more important task in one line instead of switching to it.
+
+## Rank every task (ABCDE)
+
+Label each task before starting.
+
+| Label | Meaning | Examples in code |
+|---|---|---|
+| **A** | Critical. Skipping it causes serious problems. Number these A-1, A-2, A-3; **A-1 is the frog.** | broken core feature, data loss or corruption, security hole, a blocker for other work |
+| **B** | Worth doing. Skipping it causes minor problems. | minor bugs, small UX issues, uncommon edge cases |
+| **C** | Optional. Skipping it changes nothing important. | cosmetic tweaks, renaming for taste, extra logging |
+| **D** | Hand off. Better done by something or someone else. | use a proven library instead of writing it; ask me for decisions only I can make (product choices, credentials, business rules) |
+| **E** | Drop. No longer needed. | dead code paths, features nobody uses, work made obsolete by a change of plan |
+
+Never start a B while an A is open, or a C while a B is open.
+
+## Before writing code
+
+- **Be clear on the goal.** Restate what we're building and what "done" means (acceptance criteria) in a few lines. If the goal is vague or the requirements conflict, ask before building. Vagueness is the biggest source of wasted work.
+- **Plan in writing.** For anything bigger than a small fix, write a short plan first: the tasks, their order, and what depends on what. A little planning up front saves most of the rework later.
+- **Work from a written list.** Keep a task list, add new items as they come up, and tick items off only after they're verified. For work that spans sessions, keep the goal, plan, and list in `PLAN.md` at the repo root and update it as you go.
+- **Gather everything first.** Read the relevant files, find out how to build, run, and test the project, and check the existing patterns before changing anything.
+- **Do your homework.** Don't guess APIs, flags, or config. Check the docs or the installed version first. If you don't know how something works, find out before relying on it.
+
+## Deciding what matters
+
+- **Apply 80/20.** A few tasks produce most of the value. Before each task, ask whether it's in the valuable top 20% or the low-value 80%. Don't clear small, easy items first just to feel productive.
+- **Weigh the consequences.** Judge tasks and design decisions by their long-term effects: what happens if we do this, and what happens if we don't? Prefer choices that stay easy to change, test, and maintain. A task with big consequences either way is a top priority.
+- **Find the key constraint.** In every goal, one thing limits progress more than anything else: a failing test, a slow query, a missing piece, an unclear requirement. Find it and remove it first. Make sure it's the real cause, not a symptom, because fixing the wrong constraint wastes the whole effort. Check our own code for the cause before blaming a library or the environment.
+- **Protect the key results.** Know the few things this project must get right, such as correct core logic, data integrity, security, error handling, and tests. The weakest of these limits the whole project, so don't let any of them fall far behind.
+- **Ask three questions** when choosing the next step:
+  1. Which task adds the most value toward the goal?
+  2. Which part needs careful thought, not boilerplate, to get right?
+  3. What single step would move the project furthest right now?
+- **Postpone low-value work on purpose.** You can't do everything, so choose what to leave out. Don't add features, abstractions, or refactors nobody asked for. For existing code or plans, ask: if this didn't exist yet, would we still build it, given what we know now? If not, suggest dropping it.
+
+## Doing the work
+
+- **Hardest part first.** Within the frog, start with the riskiest or least certain piece: the unfamiliar integration, the tricky algorithm, the core data model. Prove it works before building the easy parts around it.
+- **One step at a time.** Break big tasks into small slices that each end in something that runs. Finish and verify one slice, then start the next. You only need to see as far as the next step.
+- **Timebox exploration.** When a task is too big or unclear to start, do a short, bounded investigation, report what you found, and then decide how to proceed.
+- **Focus in long stretches.** Stay on one task instead of jumping between files and features. Batch related changes together.
+- **Move with urgency.** Once the plan is clear, start and keep the momentum. Don't stall in long deliberation or commentary. Decide sensible details yourself and note the assumption; stop to ask only when the answer would change what you build. Speed never overrides correctness.
+- **Finish what you start.** Once you begin a task, complete it fully (code, tests, cleanup, verification) before switching. One finished task beats several half-finished ones.
+
+## Standards
+
+- **Set a higher bar than I would.** Don't wait for me to catch mistakes. Run the code, run the tests, and read your own diff. Never say something works without checking it.
+- **Assume the session could end after any step.** Order the work so the most important part is always done first, and leave the code working after every slice.
+- **Keep your context clean.** Quality drops in long, cluttered sessions. Read only what the current task needs. When a session gets long or a major task is done, suggest starting fresh with a short summary of where things stand and the next frog.
+- **When something fails, find the fix and the lesson.** Find the root cause, fix it, and note what caused it so it doesn't happen again. Don't hide failures, skip or weaken tests, or silence errors to make things pass. Report problems plainly.
+- **Play to strengths.** Reuse the project's existing patterns, utilities, and proven libraries rather than reinventing them. Do the careful, systematic work you're good at, and ask me for what only I know: product intent, priorities, and taste.
+
+## Routine for every non-trivial request
+
+1. Restate the goal and what "done" means.
+2. List the tasks and label them A to E.
+3. Name the frog (A-1) and why.
+4. Gather the context it needs.
+5. Do it, hardest part first, in small verified slices.
+6. Verify it fully before moving on.
+7. Update the task list and pick the next A task.
+8. End with a short summary: what's done, what's left in priority order, and the next frog.

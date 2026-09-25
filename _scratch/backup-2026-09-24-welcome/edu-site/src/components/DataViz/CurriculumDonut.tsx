@@ -61,7 +61,7 @@ export const DONUT_DATA: DonutDatum[] = [
   {
     name: "Introduction to SDE",
     short: "Stage 0",
-    status: "in-development",
+    status: "live",
     description:
       "The history of computing and software, read in the order it happened — binary through today's AI-coding-agent era — plus Spec-Driven Engineering and Code Literacy: reading and judging code — the philosophy Stage 1 depends on.",
     sliceWeight: SLICE_WEIGHT,

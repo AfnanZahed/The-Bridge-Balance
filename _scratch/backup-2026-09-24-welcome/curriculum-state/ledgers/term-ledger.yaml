@@ -44,23 +44,8 @@ terms:
     weight: minor
     first_introduced: null
 
-  - term: Agent Skill
-    slug: agent-skill
-    weight: minor
-    first_introduced: null
-
   - term: Blast radius
     slug: blast-radius
-    weight: minor
-    first_introduced: null
-
-  - term: Code Literacy
-    slug: code-literacy
-    weight: minor
-    first_introduced: null
-
-  - term: MCP server
-    slug: mcp-server
     weight: minor
     first_introduced: null
 

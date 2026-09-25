@@ -54,19 +54,28 @@
 }
 
 /* ── Brand mark ─────────────────────────────────────────────────────────── */
+/* Mark over phase badge: the identity, then the fact that it is unfinished. */
 .markWrap {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   margin-bottom: 1.5rem;
+}
+
+/* The lift shadow belongs to the mark alone — the badge carries its own. */
+.markGlow {
+  display: inline-flex;
   filter: drop-shadow(0 14px 30px oklch(0 0 0 / 0.28));
 }
 
-:global(:root[data-theme="dark"]) .markWrap {
+:global(:root[data-theme="dark"]) .markGlow {
   filter: drop-shadow(0 14px 34px oklch(0 0 0 / 0.6));
 }
 
 @media (max-width: 996px) {
   .markWrap {
+    gap: 0.875rem;
     margin-bottom: 1rem;
   }
 }

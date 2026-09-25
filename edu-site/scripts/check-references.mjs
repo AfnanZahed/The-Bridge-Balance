@@ -96,9 +96,12 @@ const EXTERNAL = new Set([
  * is the first place a real dead reference will try to hide.
  *   vercel.json          - named only to say Docusaurus needs no such file
  *   *-report.json etc.   - CI artifacts, produced by a workflow, never committed
+ *   PLAN.md              - the repo-root work file CLAUDE.md tells the agent to
+ *                          keep across sessions; created on demand, never vendored
  */
 const NOT_IN_REPO = new Set([
   "vercel.json", "audit-summary.json", "lighthouse-report.json", "axe-report.json",
+  "PLAN.md",
 ]);
 
 const FILE_EXT = "md|mdx|yaml|yml|mjs|js|ts|tsx|json|css|py|svg|png|ico";

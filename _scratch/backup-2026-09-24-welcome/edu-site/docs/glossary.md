@@ -15,12 +15,6 @@ A program that can read your files, write new code, edit existing code, and run 
 
 *First met in [Spec-Driven Engineering](/intro-5-spec-driven-engineering).* Put another way: a very fast, very capable helper — not an architect, and not the owner of the result.
 
-### Agent Skill
-
-A set of instructions kept in one folder that an AI agent reads when a task calls for it, so it handles that job the same way every time instead of improvising a new approach each attempt.
-
-*First met on the [Welcome](/welcome) page.* A skill is written once and reused, which is what separates it from a prompt you type fresh each time.
-
 ### Blast radius
 
 How much can break, and how far the damage reaches, if a change goes wrong.
@@ -32,12 +26,6 @@ How much can break, and how far the damage reaches, if a change goes wrong.
 The ability to read code — whoever or whatever wrote it — and judge it well enough to verify it and own it.
 
 *First met on the [Welcome](/welcome) page. This is the book's own name for its core skill, not a standard industry term. It is introduced in full the first time you meet it, and links back here after that.*
-
-### MCP server
-
-A small program that gives an AI agent an ability it does not have on its own — reading your files, searching a database, sending a message — through one agreed connection. The agent asks, and the server does the work and answers.
-
-*First met on the [Welcome](/welcome) page.* **MCP** stands for Model Context Protocol, the standard that connection follows, so a tool written for one agent works with another.
 
 ### Specification (spec)
 
