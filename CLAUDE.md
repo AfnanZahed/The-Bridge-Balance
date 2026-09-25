@@ -1,3 +1,19 @@
+## Goal
+Maximum quality, minimum cost, maximum work done, minimum time.
+When they conflict, choose in this order:
+1. Correct: tests pass, nothing broken
+2. Fewer Claude tokens
+3. Faster
+4. Fewer DeepSeek tokens
+
+## How
+- Plan and decide yourself; send all building work to `ai/run` (DeepSeek).
+- Use REPO_MAP.md and grep first; read line ranges, not whole files.
+- Read only the short result notes, never full logs or diffs.
+- Batch tasks. Don't keep checking "is it done?". Replies to me: under 5 lines.
+- When this chat gets long, update STATE.md and tell me to clear it.
+- Whenever you (Claude) need to read or know anything, locally or from the web, you MUST use DeepSeek for it. Major and most difficult reading, research and exploration tasks go to DeepSeek v4.1 Flash (deep research is also done by DeepSeek v4.1 Flash). Easy-to-difficult reading and web searching (not deep research) goes to `laguna-s-2.1-free`. Even for reading, Claude must not waste its own tokens.
+
 # Claude Code Rules
 
 This file is generated during init for the selected agent.
