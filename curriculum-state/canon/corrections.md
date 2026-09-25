@@ -750,4 +750,20 @@ a reader who is not in this book.
 
 ---
 
+## 31. The redesign is closed, and design happens in realtime
+
+**Decided:** 25 September 2026. **Owner's words:** *"the whole curriculum redesign is already completed, since the stages are now 3, mean the main direction is redesigned"*, and *"the exact chapters, and topics will be being designed in realtime"*.
+
+**What was wrong.** The redesign was still treated as work not yet started: the Agenda listed it first in the queue as "The big one", a session reading only the trackers would call it the next task to do, and `course-structure.md` still said "Not started" (CS-6), "In force until the redesign lands" and "as the redesign continues". A session could schedule a design phase, wait for one, or expect a chapter list before authoring.
+
+**The rule.** The redesign was the direction — three stages, agentic AI taught inside SE (CS-12 to CS-16) — and it is decided and applied. Nothing below the stage level is designed in advance: every chapter, lesson, topic and sub-topic is designed in realtime, at the moment it is authored, as the book grows (D5, CS-28, CS-36). No session waits for a redesign, a replan or a chapter list to arrive before authoring.
+
+**Where the live wording sits.** `course-structure.md` CS-36 (new), and the dated corrections to CS-6, section 2, section 5 and section 7 there; the D5 bullet in `CLAUDE.md` and `AGENTS.md`, which now names that file as D5's own record; the Agenda, which closes the redesign into "Done today" and states the realtime rule.
+
+**The check.** A search of the live rules and the Agenda for the redesign framed as still to come — "Not started" on CS-6, "waits for the redesign", "when it lands", "as the redesign continues", the redesign as a queued task — must find nothing outside dated records.
+
+**What does not count as a fix.** Closing the redesign on the Agenda alone; stating the realtime rule without fixing the files that implied otherwise; or turning it into "there is no plan at all" — the direction (CS-12 to CS-16, the topic sketch as a rough idea) still stands.
+
+---
+
 **Adding an entry.** Append a new `##` section with: what was corrected and when, the owner's own words, what went wrong, the rule, and what does not count as a fix. Keep it short and keep it specific. An entry nobody can act on is not a correction.
