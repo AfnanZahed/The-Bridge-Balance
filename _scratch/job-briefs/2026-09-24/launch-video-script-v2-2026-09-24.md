@@ -1,6 +1,6 @@
 # Launch video script, v2 (24 September 2026). DRAFT FOR DISCUSSION
 
-This rewrites `launch-video-script-2026-09-24.md`. The owner asked for a version "5 times better from each and every angle", with the first and last sentences unchanged. It runs about 640 words, which is roughly 4 to 4.5 minutes. The beats follow the Welcome page's headings in order, so the screen can scroll the page once from top to bottom. It is not final until the owner answers the open decisions below.
+This rewrites `launch-video-script-2026-09-24.md`. The owner asked for a version "5 times better from each and every angle", with the first and last sentences unchanged. On 25 September the owner asked for a more impressive ending, from "And more is coming" onwards, and this file now carries that rewrite. It runs about 720 words, which is roughly 5 minutes. The beats follow the Welcome page's headings in order, so the screen can scroll the page once from top to bottom. It is not final until the owner answers the open decisions below.
 
 AI Studio: Despina, temperature 0.7, one take. Each blank line is a pause. Paste a copy into the text box with two swaps, "Andrew Ing" and "the bridge balance dot com". Keep the clean copy for captions.
 
@@ -11,10 +11,12 @@ A warm, confident narrator introducing something they truly believe in. Sincere 
 
 Pace: unhurried and easy to follow, a little slower than a typical ad, because many listeners speak English as a second language. Pause briefly at every full stop, and a little longer at every blank line. Say numbers clearly and let them land.
 
-Mood: curious and caring on the opening question; firm and reassuring on "It is."; steady and sure while explaining; plain and candid from "Now, where are we today?"; brighter and genuinely excited from "And more is coming"; warm and personal at the end, like inviting a friend. Say the final "The Bridge Balance." slowly, with calm pride.
+Mood: curious and caring on the opening question; firm and reassuring on "It is."; steady and sure while explaining; plain and candid from "Now, where are we today?"; brighter and genuinely excited from "And we're just getting started", with a little suspense before "A book you can talk to." and a playful smile on "And yes, Roman Urdu too."; warm and personal from "You're early". Slow down from "AI can write the code", and say the final "The Bridge Balance." slowly, with calm pride.
 
 Accent: neutral, clear international English, with every word clearly articulated.
 ```
+
+The script:
 
 ```
 Introducing The Bridge Balance.
@@ -47,13 +49,22 @@ Then the book moves to its permanent home, most likely thebridgebalance.com. Got
 
 We're building it all in the open. Every change is logged publicly the day it ships, and announced right here.
 
-And more is coming. Alongside the free book, we're building optional tools for professionals: MCP servers, which connect AI to your apps and data, and Agent Skills, which give AI agents new abilities.
-And an AI tutor inside the book, with more than ten features, like deep research, deep thinking, help with your code, student and professional modes, working with your own documents, and learning from the book and far beyond it. It shows its sources, so you can judge its answers too. And it replies in the language you write in, Urdu and Roman Urdu included.
+And we're just getting started.
 
-Tell us what's missing, what's unclear, and what you'd change. We warmly welcome every critique and suggestion.
+Right now, professionals everywhere are building two new kinds of AI tools: MCP servers, which plug AI into your apps and data, and Agent Skills, which give AI agents new abilities. We'll teach you to build both. And ours are on the way.
 
-Know someone asking if learning to code is still worth it? Send them this video.
+And the thing we're most excited about? A book you can talk to. An AI tutor, on every page.
+It knows the book inside out, and far beyond it. It researches the web in depth, thinks hard problems through, reads your own documents, and helps with your code.
+But in Student mode, it won't just hand you the answer. It teaches you how to find it. Professional mode goes deeper into the code.
+Every answer shows its sources, so you can judge the tutor too. And it replies in the language you write in, including Urdu. And yes, Roman Urdu too.
+
+You're early. The people who are here now get to shape what this becomes. So tell us in the comments: what's missing, what's unclear, what would you change?
+
+Know someone who thinks learning to code is no longer worth it? Send them this video. It might change their mind.
+
 Follow along, and we'll see you at Beta.
+
+AI can write the code. But someone has to know if it's right. Make it you.
 
 The Bridge Balance.
 ```
@@ -63,11 +74,11 @@ The Bridge Balance.
 1. **Domain.** `thebridgebalance.com` was **not registered** when checked on 24 Sept 2026 (the .com registry, Verisign RDAP, returned 404; a control lookup worked). The Welcome page already names it publicly (`welcome.md:119`). Register it before the video goes out, or take the name out of the voice. Once it is registered, the line can say it firmly, and the comment question can move to "What's the one thing you wish someone had taught you about AI and code?"
 2. **"Working experts."** This line is out of v2 until the owner confirms who the experts were. If they were people, it goes back in after "...Irfan Malik.", reading: "Then we spent hours testing every idea with working [engineers / teachers]." If the phrase meant the AI models, it stays out.
 3. **The name.** If "balance" means the balance between refusing AI and trusting it blindly, add this after "...judge everything they build.": "That balance is where our name comes from."
-4. **MCP servers and Agent Skills.** The notes call them a paid catalogue (`faq.md:16`). The Welcome page says "The book will teach both, and the platform will use them." v2 says "optional tools for professionals". The owner picks which is true.
+4. **MCP servers and Agent Skills.** The new ending settles this unless the owner objects. "We'll teach you to build both. And ours are on the way." is true under both readings: the Welcome page's "The book will teach both" and the paid catalogue (`faq.md:16`). It calls neither of them free.
 
-Defaults taken, which the owner may veto: the METR line, "free, forever" (Constitution Principle VI), the tutor's Urdu line (spec 012), and "more than ten features" (kept, but followed by "like" instead of a colon).
+Defaults taken, which the owner may veto: the METR line, "free, forever" (Constitution Principle VI), and the tutor's Urdu line. The ending no longer says "more than ten features". It names eleven of the tutor's capabilities instead.
 
-After approval, a small DeepSeek job adds the new points to the Welcome page so it matches the voice: the tutor's sources and Urdu replies, simple English, and free forever.
+After approval, a small DeepSeek job adds the new points to the Welcome page so it matches the voice: the tutor's sources, Student mode and Urdu replies, simple English, and free forever.
 
 ## Scene guide (Recordly): one scroll, top to bottom
 
@@ -84,9 +95,10 @@ After approval, a small DeepSeek job adds the new points to the Welcome page so 
 | "More than 2.4 billion…" | Same section. Optional caption: "2.4B+ AI tokens" |
 | "Now, where are we today?" | § Where the book stands today. At "this temporary address", zoom on the browser's address bar, then on the thebridgebalance.com line |
 | "We're building it all in the open" | § How the book is built in the open. Optionally cut to `/changelog` for 2 s |
-| "And more is coming" | § What's coming next |
-| "Tell us what's missing" | § Where to send a critique or a suggestion |
-| "Know someone…" to the end | § How to follow the book… End on the homepage logo for "The Bridge Balance." |
+| "And we're just getting started" | § What's coming next |
+| "You're early" | § Where to send a critique or a suggestion |
+| "Know someone…" | § How to follow the book, and what to do until Beta |
+| "AI can write the code" to the end | Back to the homepage hero. Slow zoom on the logo for "The Bridge Balance." |
 
 Skip § Who's behind this, because the video does not mention the founder. As before, keep the homepage section "Built with Claude Code, in the open" off camera.
 
@@ -97,7 +109,8 @@ Skip § Who's behind this, because the video does not mention the founder. As be
 - **More than 2.4 billion tokens.** The measured total was 2,466,918,337 on 24 September. It is a floor (`job24b` §1).
 - **Free, forever.** Constitution Principle VI.
 - **Three stages, and both subjects in the same chapter.** `course-structure.md` CS-13 to CS-16 and CS-9.
-- **The tutor.** Sources shown under every answer, replies in the student's language (Urdu and Roman Urdu included), Student and Professional levels, deep research. Sources: `specs/012-chatbot-tutor/spec.md` and the 23 September decisions. None of it is built yet, so the voice says "coming".
+- **MCP servers and Agent Skills.** "We'll teach you to build both" comes from the Welcome page ("The book will teach both"). "Ours are on the way" refers to the planned catalogue (`faq.md:16`). Neither is called free.
+- **The tutor.** Each point is planned for 1.0: it sits on every page; it answers from the whole book, from general knowledge and from the web (deep research); Student mode teaches and holds back full code; Professional mode goes deeper into syntax; sources appear under every answer; and it replies in the student's language, Urdu and Roman Urdu included. Deep thinking, help with your code and working with your own documents come from the owner's feature list. Sources: `specs/012-chatbot-tutor/spec.md` and `_scratch/platform-research/02-chatbot-1.0-build-prompt.md`. None of it is built yet, so the voice says "we're building" and "on the way".
 - **The experts.** Identities are verified in `job24b` §3. The voice says "studied" and never implies endorsement. The page carries the non-affiliation line.
 
 ## Pronunciation
@@ -106,6 +119,6 @@ If AI Studio says "Andrew N-G", type "Andrew Ing". If it stumbles on the domain,
 
 ## Shorts and YouTube chapters
 
-Shorts (each beat stands alone; start at its first full sentence and drop a leading "And"): (1) "AI now writes code…" through the study; (2) the third road plus Code Literacy; (3) learning both side by side; (4) 2.4 billion tokens, free forever; (5) Alpha plus the web-address question; (6) the AI tutor's sources and Urdu replies.
+Shorts (each beat stands alone; start at its first full sentence and drop a leading "And"): (1) "AI now writes code…" through the study; (2) the third road plus Code Literacy; (3) learning both side by side; (4) 2.4 billion tokens, free forever; (5) Alpha plus the web-address question; (6) "A book you can talk to", the tutor beat ending on "Roman Urdu too"; (7) the last lines, from "AI can write the code", as a 10-second brand short.
 
 YouTube chapters (fill in the times after the edit): Introducing The Bridge Balance · Is learning to code still worth it? · The third road · Code Literacy · Spec-Driven Engineering · Three stages, side by side · Who it's for · How it was built · Where we are today · What's coming · Join us.

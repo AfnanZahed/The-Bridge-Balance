@@ -102,6 +102,14 @@ hero-section.png
 og-check.png
 scale-test.png
 
+# Lesson diagrams are site content, not scratch. edu-site/docs references these
+# by URL, so the extension rules above must not drop them: without this the
+# chapters ship with 11 broken images in any git-based build (Vercel, cloud
+# sessions), even though uploading the local folder still happens to include
+# them. Re-including a file under an ignored extension is fine here because no
+# parent *directory* of these files is excluded — only the extensions are.
+!edu-site/static/img/lessons/**
+
 # Local build/preview scratch
 edu-site/.preview/
 
