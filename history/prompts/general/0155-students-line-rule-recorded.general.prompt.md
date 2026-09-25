@@ -1,5 +1,5 @@
 ---
-id: 0154
+id: 0155
 title: "Students' line recorded as canon: audience-first rule, frog criterion, Agenda front"
 stage: general
 date: 2026-09-25
