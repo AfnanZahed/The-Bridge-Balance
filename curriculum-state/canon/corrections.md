@@ -766,4 +766,22 @@ a reader who is not in this book.
 
 ---
 
+## 32. The students' line: no silent months, no promises without goods
+
+**Decided:** 25 September 2026. **Owner's words:** *"tens of needy students planned their lives for my course, and they are now disappointed, they thanked me for changing their live, and there time is now wasted"* — and then his instruction for this entry: *"record this problem in our internal docs so that next AI sessions will know that we have to MAKE sure our public image is going good and we MUST have to take good business decisions. so that we will indentify the correct frog."*
+
+**What happened.** Through June 2026 the owner promised his students, repeatedly, that the course would start on 1 July 2026. It did not start. Almost three months of silence followed (1 July to 22 September: 83 days). On 22 September he sent an apology that named the failure honestly — and it promised *"a further message will follow today."* That message was written (`_scratch/job-briefs/2026-09-22/student-message-2026-09-22.txt`) and never sent; the group went silent again. By 25 September the gap from the promised start was 86 days. Students had left; the community was quiet; the owner could not open the groups.
+
+**What was wrong.** The silence was the owner's, but the miss was the house's too. The student line sat as one small chore ("Send the students' update on WhatsApp") while sessions worked on canon, the site and video scripts. Nothing in the rules said the community line outranks internal work; nothing made a broken promise to real people a frog criterion; and a drafted message could wait three days without any session treating it as the wound it was. An apology is not a delivery, and a drafted message is not a sent one.
+
+**The rule.** (1) Public image and the community are first-class work, not marketing garnish. (2) No public message without goods: every student- or reader-facing message carries something finished — a link that opens or a video that plays — and no new deadline is written into one; a date may be stated only once the thing exists. (3) Recovery, when a line has gone quiet, is receipts: a flow of finished things; never another apology cycle. (4) Business decisions — money, pricing, certificates, platform, community — are made deliberately, researched and written down in their canon home, never drifted into as mid-task defaults. (5) The frog must weigh the public cost: an open promise to real people outranks internal polish.
+
+**Where the live wording sits.** `CLAUDE.md` and `AGENTS.md`: one new standing rule, and one new frog criterion in the working rules; the Agenda: the students' line at the front of the queue, with the video, the refreshed message and the send as its three pieces.
+
+**The check.** A drafted-but-unsent public message, an announced date, or a stale chore on the community line must be visible on the Agenda until it is sent or retired. Before picking new work, a session checks the students' line for anything open.
+
+**What does not count as a fix.** Sending the message without the video and link; recording without refreshing the draft's dead dates; closing the chore while the group stays silent; writing the rule but leaving the students' line off the front of the work list.
+
+---
+
 **Adding an entry.** Append a new `##` section with: what was corrected and when, the owner's own words, what went wrong, the rule, and what does not count as a fix. Keep it short and keep it specific. An entry nobody can act on is not a correction.
