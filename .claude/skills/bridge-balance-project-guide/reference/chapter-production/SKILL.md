@@ -190,9 +190,11 @@ Work every error using `gate.md`'s failure-reading table until all of it exits 0
 
 Per `reference/ledgers-protocol.md`, all of them. A chapter that finishes without this isn't finished, whatever the file on disk looks like — the next chapter's author needs what this one just learned, and the ledgers are the only place that knowledge survives between sessions.
 
+**Also append this chapter's application entry** to `curriculum-state/ledgers/application-ledger.yaml`: which project(s) this knowledge can be applied to, each with one concrete first application, status `proposed`. The session proposes; the owner applies and then teaches — it is not a gate, and a chapter ships even when nothing fits yet, with the check recorded (`curriculum-state/canon/projects.md`).
+
 ### Step 9 — Present
 
-The file path. The gate output, pasted rather than summarised. The signature contribution in one sentence. **Both audit findings logs — comprehension and beginner-experience.** Any deviation from this protocol with its one-line reason. Anything you judged *out* of the chapter and why (Principle 5). Then emit a PHR per `CLAUDE.md`'s governance.
+The file path. The gate output, pasted rather than summarised. The signature contribution in one sentence. **Both audit findings logs — comprehension and beginner-experience.** Any deviation from this protocol with its one-line reason. Anything you judged *out* of the chapter and why (Principle 5). **The application check** — which project(s) this chapter's knowledge can be applied to, each with one concrete first application, and the ledger entry written in step 8 (`canon/projects.md`). Then emit a PHR per `CLAUDE.md`'s governance.
 
 ## Anti-patterns this skill forbids
 

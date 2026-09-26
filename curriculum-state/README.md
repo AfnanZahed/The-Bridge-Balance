@@ -41,8 +41,12 @@ curriculum-state/
 │   ├── naming.md            How every stage, chapter, lesson and part is named.
 │   ├── course-structure.md  The shape of the course: the reader, the levels, how they are named, the stages. Changes often; change it here first.
 │   ├── integrity-floor.md   Rules that outrank the curriculum docs.
-│   └── research-and-comparison.md  What is researched before anything is
-│                            written, and what may be learned from a source.
+│   ├── research-and-comparison.md  What is researched before anything is
+│   │                        written, and what may be learned from a source.
+│   └── projects.md          The projects this book feeds, and the
+│                            apply-as-you-write rule (owner rule, 2026-09-26):
+│                            every chapter names where its knowledge gets
+│                            applied, the owner applies it, then teaches.
 ├── contracts/       Machine-checkable output rules.
 │   └── calibration.md       Reading-time baseline and the scope_multiplier
 │                            anchor.
@@ -52,8 +56,12 @@ curriculum-state/
 │   ├── example-ledger.yaml      Worked examples already spent.
 │   ├── prerequisite-graph.yaml  Chapter order and dependencies — a snapshot of
 │   │                            what's decided so far, never a fixed plan.
-│   └── term-ledger.yaml      Every glossary term, its anchor, and the chapter
-│                            allowed to introduce it first.
+│   ├── term-ledger.yaml      Every glossary term, its anchor, and the chapter
+│   │                            allowed to introduce it first.
+│   └── application-ledger.yaml   Where each chapter's knowledge gets applied,
+│                            and how far it got (canon/projects.md). Written by
+│                            `chapter-production` at step 9, not read before
+│                            drafting.
 └── proposals/       Non-binding planning output from `curriculum-architect`.
                      Stage-level structure sketches; nothing here is decided
                      until a human reviews it and, if they agree, acts on it.
@@ -69,6 +77,9 @@ curriculum-state/
    - `book-coherence-audit` — all five, corpus-wide rather than one chapter.
    - `curriculum-architect` — `prerequisite-graph.yaml` always; `concept-` and
      `evidence-ledger.yaml` when producing a chapter brief (Mode 2).
+   - The application ledger is the one exception to "read before drafting": it
+     is **written, not read** — `chapter-production` appends one entry at its
+     step 9, per `canon/projects.md`.
 
 ## Writing rules
 

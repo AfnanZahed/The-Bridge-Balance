@@ -44,6 +44,8 @@ Book/
 
 ## Content & curriculum system
 
+**Every chapter here is a step in a long-term plan, not just lesson text.** The owner learns each topic first-hand, applies it on a real project (this site counts, and so do the projects and hackathon blueprints), and then teaches from the book — so a chapter is at once his learning forcing-function, a portfolio built from real applications, the material he teaches from, and part of the storefront for the paid catalog. The projects and the apply-as-you-write rule live in `curriculum-state/canon/projects.md`; every content task keeps that whole plan in mind.
+
 | Path | What it is | Read it when… |
 |---|---|---|
 | `curriculum-state/README.md` | Index of the whole shared-memory layer | Starting any content task |
@@ -55,10 +57,11 @@ Book/
 | `curriculum-state/canon/course-structure.md` | The shape of the course: who it is for, the levels and how they nest, what kind of name each gets, learner-level labels, the stages. Changes often; other files point to it | Planning, naming, renaming or splitting any stage, course, chapter or lesson, or describing who the book is for |
 | `curriculum-state/canon/integrity-floor.md` | The CS50 academic-integrity hard stop | Any Credentials-track work, even structural planning |
 | `curriculum-state/canon/research-and-comparison.md` | The two research passes, and what may be learned from a studied source | Before drafting anything, content or platform |
+| `curriculum-state/canon/projects.md` | The projects this book feeds, and the rule that every chapter names where its knowledge gets applied — learn first-hand, apply on a real project, then teach | Writing or changing any chapter — it is never just lesson text |
 | `curriculum-state/stage-0-drafting-plan.md` | The approved Stage 0 ladder. **Read its warning box first** — its Anchors columns are backstage research, not chapter content | Drafting any Stage 0 chapter |
 | `curriculum-state/research/stage-0/cluster-{1..7}-*.md` | The DeepSeek research dossiers behind Stage 0. §2 of each (how strong sources teach this) matters more than §1 (the dated facts) | Drafting any Stage 0 chapter |
 | `curriculum-state/contracts/calibration.md` | The 150 wpm reading baseline and the `scope_multiplier` anchor. The chapter output contract lives in `chapter-production/SKILL.md` step 6 (frontmatter) and its `reference/gate.md` (what's enforced). | Estimating chapter length |
-| `curriculum-state/ledgers/*.yaml` | Five ledgers: concept, evidence, example, prerequisite-graph, term | Before drafting — the skills do this automatically |
+| `curriculum-state/ledgers/*.yaml` | Six ledgers: concept, evidence, example, prerequisite-graph, term, and the application ledger — where each chapter's knowledge gets applied (written at step 9, not read before drafting) | Before drafting — the skills do this automatically |
 | `curriculum-state/proposals/` | Non-binding stage/chapter proposals. **Nothing here binds anything** — when the owner agrees to something in here, promote it into `canon/` the same day | Planning only; never treat as committed |
 
 ## The four protocols — `.claude/skills/bridge-balance-project-guide/reference/<name>/SKILL.md`

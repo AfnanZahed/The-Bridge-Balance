@@ -4,6 +4,10 @@
 
 This repo is the **spec-driven development** workspace for **The Bridge Balance**. The platform itself is a Docusaurus textbook paired with a FastAPI backend and a paid catalog of Claude Code sub-agents, skills, MCP servers, and plugins.
 
+## The long-term plan
+
+The book is one engine of a larger plan, not a textbook on its own. Everything written here follows one loop — **learn, apply, teach**: the owner learns each topic first-hand, applies it on a real project (this website counts, and so do the projects and hackathon blueprints listed in [`curriculum-state/canon/projects.md`](./curriculum-state/canon/projects.md)), and then teaches from the book while the text ships free to readers. That makes every chapter serve four purposes at once: a learning forcing-function, a portfolio built from real applications, the source material for teaching, and part of the storefront for the paid catalog. New content is never just lesson text; it is a step in that plan, and every chapter names where its knowledge gets applied.
+
 ## What's here
 
 ```

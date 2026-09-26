@@ -1,0 +1,34 @@
+# Application ledger - where each chapter's knowledge gets applied, and how far.
+#
+# Owner rule, 2026-09-26 (curriculum-state/canon/projects.md): the owner learns
+# a topic first-hand, applies it on a real project, and then teaches from the
+# book. So every piece of content written for any stage is checked against the
+# owner's projects and hackathon blueprints, and the check is recorded here.
+#
+# Written by: the authoring session, as part of chapter-production's step 9 -
+# one entry per authored chapter, never batched or backfilled silently.
+# Read when: a session wants to see what earlier chapters were proposed for, or
+# the owner asks where his application work stands.
+#
+# Status vocabulary (strict):
+#   proposed  the session named a target and one concrete first application
+#   applied   the owner has built or used it on the project
+#   taught    the owner has taught from it (a video lecture or a session)
+#   dropped   proposed once, then not taken up; kept as a record, not deleted
+#
+# Append-only. A status change is a new dated line, never a silent rewrite.
+
+version: 1
+seeded: 2026-09-26
+
+# Entry shape (one per authored chapter):
+#
+#   - chapter: "<id or file path>"
+#     date: "YYYY-MM-DD"                # when the chapter shipped
+#     applications:
+#       - target: "<project from canon/projects.md, or the site itself>"
+#         first_application: "one concrete, small, real thing to build first"
+#         status: proposed | applied | taught | dropped
+#         history: []                   # dated status lines, appended
+#
+entries: []
